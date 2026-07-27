@@ -709,11 +709,13 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
       <span class="sub">Sete etapas, nesta ordem</span></span></a></li>
     <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Combate</span>
       <span class="sub">Curto, letal, e cheio de decisão</span></span></a></li>
-    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Criação de habilidades</span>
+    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Condições</span>
+      <span class="sub">Quarenta estados, do corpo preso ao destino selado</span></span></a></li>
+    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Criação de habilidades</span>
       <span class="sub">O motor: pontos, alcance, duração e o que cada ponto compra</span></span></a></li>
-    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Entre aventuras</span>
+    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Entre aventuras</span>
       <span class="sub">Descanso, comida e o tempo em que você vira alguém</span></span></a></li>
-    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Uma ficha pronta</span>
+    <li><a href="#cap8"><span class="alg">VIII</span><span><span class="tit">Uma ficha pronta</span>
       <span class="sub">As sete etapas aplicadas do começo ao fim</span></span></a></li>
   </ol>
 </nav>
@@ -1404,24 +1406,15 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
     </table>
   </div>
 
-  <h3>Condições que você vai ouvir</h3>
-  <div class="rolagem">
-    <table>
-      <thead><tr><th>Condição</th><th>O que significa</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Agarrado</strong></td><td>Movimento zero até se soltar</td></tr>
-        <tr><td><strong>Amedrontado</strong></td><td>Desvantagem em ataques e testes enquanto vir a fonte; não pode se aproximar dela</td></tr>
-        <tr><td><strong>Caído</strong></td><td>Desvantagem nos seus ataques; corpo a corpo contra você tem Vantagem, à distância tem Desvantagem. Levantar custa metade do movimento</td></tr>
-        <tr><td><strong>Cego</strong></td><td>Desvantagem nos seus ataques, Vantagem nos ataques contra você</td></tr>
-        <tr><td><strong>Envenenado</strong></td><td>Desvantagem em ataques e testes de perícia</td></tr>
-        <tr><td><strong>Incapacitado</strong></td><td>Sem ação, sem ação bônus, sem reação</td></tr>
-        <tr><td><strong>Preso</strong></td><td>Movimento zero, Desvantagem em ataques e em Reflexos</td></tr>
-        <tr><td><strong>Atordoado</strong></td><td>Incapacitado, falha automática em Fortitude e Reflexos, Vantagem contra você</td></tr>
-        <tr><td><strong>Paralisado</strong></td><td>Como Atordoado, e todo acerto a até 1,5 m é crítico</td></tr>
-        <tr><td><strong>Inconsciente</strong></td><td>Incapacitado, Caído, sem perceber nada, e crítico a curta distância</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <h3>Condições</h3>
+  <p>Combate impõe condições o tempo todo: Caído, Amedrontado, Preso, Atordoado.
+  Cada uma muda o que você consegue fazer, e todas estão definidas em ordem no
+  <strong><a href="#cap5">Capítulo Cinco</a></strong>, com uma tabela de consulta
+  rápida no fim.</p>
+
+  <p>As três regras que mais aparecem na mesa: condições não se acumulam com elas
+  mesmas, condições médias e fortes permitem um novo Teste de Resistência no fim de
+  cada turno do alvo, e nenhuma condição forte é aplicada automaticamente.</p>
 
   <h3>Quando você chega a 0 PV</h3>
   <p>Você fica <strong>Inconsciente</strong> e <strong>Agonizante</strong>. No início de cada
@@ -1445,10 +1438,361 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   </div>
 </section>
 
-<!-- ==================== V ==================== -->
+<!-- ==================== V — CONDIÇÕES ==================== -->
 <section class="capitulo" id="cap5">
   <div class="abertura">
     <span class="alg">Capítulo Cinco</span>
+    <h2>Condições</h2>
+    <p>O que pode acontecer com o seu corpo, a sua mente e o seu destino</p>
+  </div>
+
+  <p class="abre">Este capítulo é de consulta. Quando o Mestre disser uma palavra e
+  você não souber o que ela faz com o seu personagem, é aqui. Uma condição não é
+  dano: dano tira Pontos de Vida, condição tira <strong>opções</strong>. É por isso
+  que um personagem Paralisado com a vida cheia está em muito mais perigo que um
+  personagem quase morto que ainda pode agir.</p>
+
+  <h3>Quatro regras valem para todas</h3>
+  <ol>
+    <li><strong>Não se acumulam com elas mesmas.</strong> Ficar Cego duas vezes não
+    te deixa mais cego — vale a duração mais longa. As exceções são as que têm grau
+    numerado, como Sangrando e Exausto, que somam.</li>
+    <li><strong>Quase sempre há como resistir.</strong> Se a condição veio de uma
+    habilidade ou de um monstro, você faz um Teste de Resistência para evitar. As
+    mais graves permitem <strong>um novo teste no fim de cada um dos seus
+    turnos</strong>.</li>
+    <li><strong>Nada grave acontece automaticamente.</strong> Se algo te deixaria
+    Paralisado sem teste nenhum, está errado — não importa de onde veio.</li>
+    <li><strong>Anote e avise.</strong> Quem impõe fala o nome, quem sofre escreve na
+    ficha. Metade dos problemas de condição na mesa é gente esquecendo que está sob
+    uma.</li>
+  </ol>
+
+  <div class="nota">
+    <p>Os capítulos de <a href="#cap4">Combate</a> e de
+    <a href="#cap6">Criação de habilidades</a> apontam para cá. Se você quer saber
+    <em>quanto custa</em> aplicar uma condição numa habilidade que você está
+    montando, é no Capítulo Seis. Aqui é o que ela faz quando cai em você.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>O corpo preso</h3>
+  <p>Condições que atrapalham o que o corpo consegue fazer no espaço.</p>
+
+  <h4>Agarrado</h4>
+  <p>Sua movimentação vira zero. Termina se quem te agarra ficar Incapacitado, ou se
+  você for movido para fora do alcance dele. Você pode gastar sua <strong>ação</strong>
+  num teste resistido de Atletismo ou Acrobacia para se soltar.</p>
+
+  <h4>Caído</h4>
+  <p>Desvantagem nas suas rolagens de ataque. Ataques corpo a corpo contra você têm
+  <strong>Vantagem</strong>; ataques à distância têm <strong>Desvantagem</strong> —
+  no chão você é um alvo pior de longe e melhor de perto. Você só se move rastejando,
+  ao dobro do custo, ou gasta metade da movimentação para se levantar.</p>
+
+  <h4>Desarmado</h4>
+  <p>A arma que você empunhava está no chão, a até 3 metros. Recuperá-la custa uma
+  movimentação e uma Interação Simples. Você continua proficiente com seus ataques
+  desarmados, que causam <span class="dado">1 + FOR</span>.</p>
+
+  <h4>Impedido</h4>
+  <p>Você não pode usar reações. Sem ataque de oportunidade, sem Escudo Vínculo, sem
+  Interceptar, sem ação preparada. Costuma passar despercebido e decide combates.</p>
+
+  <h4>Lento</h4>
+  <p>Movimentação reduzida à metade, e você não pode usar a ação Correr.</p>
+
+  <h4>Preso</h4>
+  <p>Movimentação zero, Desvantagem nas suas rolagens de ataque e Desvantagem em
+  Testes de Reflexos. Diferente de Agarrado, não depende de ninguém te segurando: são
+  raízes, gelo, teia, corrente, pedra. Escapar depende do que te prende.</p>
+
+  <h4>Sobrecarregado</h4>
+  <p>Movimentação reduzida em 3 metros, Desvantagem em Acrobacia e Furtividade, e
+  você não pode usar habilidades que dependam de corrida ou grande agilidade. Termina
+  quando você reduz a carga.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Os sentidos fechados</h3>
+
+  <h4>Cego</h4>
+  <p>Você não enxerga e falha automaticamente em qualquer teste que dependa da visão.
+  Desvantagem nos seus ataques; ataques contra você têm Vantagem.</p>
+
+  <h4>Ofuscado</h4>
+  <p>Desvantagem em ataques à distância e em testes de Percepção pela visão. Ataques
+  corpo a corpo não são afetados — você ainda enxerga o que está colado em você. É o
+  clarão, o sol na cara, a fumaça nos olhos.</p>
+
+  <h4>Silenciado</h4>
+  <p>Você não pode falar nem produzir som com a voz. Não avisa ninguém, não usa
+  habilidade que exija palavra, não negocia. A fala breve que o turno normalmente
+  permite deixa de existir.</p>
+
+  <h4>Surdo</h4>
+  <p>Você não ouve e falha automaticamente em testes que dependam da audição. Não
+  recebe aviso falado e não percebe o que se aproxima por trás.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>A mente tomada</h3>
+  <p>Aqui está a diferença que mais confunde: <strong>Enfeitiçado</strong> muda como
+  você <em>vê</em> alguém, <strong>Dominado</strong> muda quem <em>decide</em> por
+  você. Uma é engano; a outra é rédea.</p>
+
+  <h4>Amedrontado</h4>
+  <p>Desvantagem em rolagens de ataque e testes de perícia enquanto a fonte do medo
+  estiver visível. Você não pode se aproximar dela voluntariamente. Fora da linha de
+  visão dela, você age normalmente.</p>
+
+  <h4>Aterrorizado</h4>
+  <p>No seu turno você precisa usar toda a movimentação para se afastar da fonte, e
+  não pode se aproximar por nenhum motivo. Você ainda age — mas longe.</p>
+
+  <h4>Confuso</h4>
+  <p>No início do seu turno role <span class="dado">1d4</span>.
+  <strong>1</strong> — você não age. <strong>2</strong> — você se move numa direção
+  aleatória e não age. <strong>3</strong> — você ataca a criatura mais próxima,
+  aliada ou não. <strong>4</strong> — você age normalmente.</p>
+
+  <h4>Dominado</h4>
+  <p>Quem te dominou escolhe suas ações, seu movimento e seus alvos; você continua
+  fazendo as próprias rolagens. Sofrer dano de um aliado concede um novo Teste de
+  Resistência imediato.</p>
+
+  <h4>Enfeitiçado</h4>
+  <p>Você não pode atacar quem te enfeitiçou nem escolhê-lo como alvo de efeito
+  danoso, e ele tem Vantagem em testes sociais contra você. Você <strong>não</strong>
+  obedece a ordens — só não consegue vê-lo como inimigo.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Fora da luta</h3>
+  <p>Estas tiram seu turno. São as mais perigosas do jogo, e todas permitem novo
+  teste no fim de cada turno seu.</p>
+
+  <h4>Incapacitado</h4>
+  <p>Você não realiza ações, ações bônus nem reações. Ainda percebe tudo, ainda fala,
+  e ainda se move se nada mais impedir.</p>
+
+  <h4>Atordoado</h4>
+  <p><strong>Incapacitado</strong>, sem movimentação, e fala com dificuldade. Falha
+  automaticamente em Testes de Fortitude e de Reflexos. Ataques contra você têm
+  Vantagem.</p>
+
+  <h4>Paralisado</h4>
+  <p>Como Atordoado, e você também não consegue falar. Falha automaticamente em
+  Fortitude e Reflexos, ataques contra você têm Vantagem, e <strong>qualquer acerto a
+  até 1,5 metro é um crítico</strong>.</p>
+
+  <h4>Inconsciente</h4>
+  <p><strong>Incapacitado</strong> e <strong>Caído</strong>. Você solta o que estava
+  segurando e não percebe nada ao redor. Falha automaticamente em Fortitude e
+  Reflexos, ataques contra você têm Vantagem, e qualquer acerto a até 1,5 metro é um
+  <strong>crítico</strong>.</p>
+
+  <h4>Banido</h4>
+  <p>Você desaparece do combate, num lugar sem tempo nem direção, e volta ao mesmo
+  espaço quando termina. Não age, não pode ser atingido, não vê nem ouve nada. Se o
+  espaço estiver ocupado na volta, você aparece no mais próximo que estiver livre.</p>
+
+  <div class="ornamento">❖ ❖ ❖</div>
+
+  <h3>Ferimentos que continuam</h3>
+  <p>Estas não terminam quando o combate termina. É o que faz uma aventura pesar em
+  vez de só acontecer, e o que torna o Kit Médico mais importante que uma arma a mais.</p>
+
+  <h4>Sangramento</h4>
+  <p>Sangramento tem grau, e graus <strong>somam</strong>: cada nova fonte aumenta o
+  grau em 1.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Grau</th><th class="num">PV por turno</th><th>Nome e efeito</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td class="num">1</td><td><strong>Sangrando 1</strong></td></tr>
+        <tr><td class="num">2</td><td class="num">3</td><td><strong>Sangrando 2</strong></td></tr>
+        <tr><td class="num">3+</td><td class="num">5</td><td><strong>Hemorragia</strong> — e você <em>não recupera PV por nenhum meio</em> enquanto durar</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Você perde os PV no <strong>fim de cada um dos seus turnos</strong>. Fora de
+  combate, perde 1 PV por grau a cada minuto — ninguém deveria conseguir esquecer que
+  está sangrando.</p>
+
+  <p><strong>Como parar.</strong> Uma ação e um teste de <strong>Intuição</strong>
+  contra <span class="dado">CD 10 + grau × 2</span> reduz o grau em 1, com Vantagem se
+  houver Kit Médico. Gastar um <em class="termo">Tratamento</em> encerra o sangramento
+  inteiro, de qualquer grau, além de curar os PV normais. Cauterizar com fogo também
+  encerra, ao custo de <span class="dado">1d6</span> de dano.</p>
+
+  <h4>Queimando</h4>
+  <p><span class="dado">1d6</span> de fogo no fim de cada um dos seus turnos. Gastar
+  uma ação para se jogar no chão e rolar, ou qualquer volume de água, encerra sem
+  teste.</p>
+
+  <h4>Envenenado</h4>
+  <p>Desvantagem em rolagens de ataque e em testes de perícia. Veneno de combate passa
+  no fim da cena; <strong>veneno persistente</strong> exige repetir o Teste de
+  Fortitude a cada hora — ou no intervalo que o veneno definir — até passar. Antídoto,
+  Tratamento ou Convalescença encerram.</p>
+
+  <h4>Doente</h4>
+  <p>Você fica <strong>Envenenado</strong> e recupera só metade do normal em Descansos
+  Longos. Repita o Teste de Fortitude a cada Descanso Longo: três sucessos e a doença
+  passa, três falhas e ela piora do jeito que o Mestre definir.</p>
+
+  <h4>Exausto</h4>
+  <p>Três níveis, e cada um soma ao anterior.</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Nível</th><th>Efeito acumulado</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>Desvantagem em testes de perícia</td></tr>
+        <tr><td class="num">2</td><td>Movimentação reduzida à metade</td></tr>
+        <tr><td class="num">3</td><td>Desvantagem em ataques e Testes de Resistência; PV máximos reduzidos à metade</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Um Descanso Longo remove um nível; um Interlúdio remove todos. Passar 24 horas
+  sem comer nem beber concede um nível, e outro a cada 24 horas seguintes.</p>
+
+  <h4>Ferimento Grave</h4>
+  <p>Quem chegou a 0 PV numa cena carrega isto até o próximo Descanso Longo com
+  tratamento: PV máximos reduzidos em um valor igual ao seu nível, e você não recebe
+  Ressonância Elemental. A atividade de <strong>Convalescer</strong> num Interlúdio
+  também remove.</p>
+
+  <h4>Abalado</h4>
+  <p>A versão mental do Ferimento Grave. Depois de uma cena de horror verdadeiro, você
+  tem Desvantagem no primeiro Teste de Vontade de cada combate, até o próximo
+  Interlúdio. Convalescer ou fortalecer um <strong>Vínculo</strong> remove.</p>
+
+  <div class="ornamento">❖ ❖ ❖</div>
+
+  <h3>Condições de destino</h3>
+
+  <div class="destaque">
+    <p>Estas não tiram o seu turno: tiram o seu personagem da história por um tempo,
+    ou para sempre. Nenhuma vem de uma habilidade montada por jogador. Elas chegam por
+    maldição, monstro, deus, artefato — ou por uma escolha que você fez sabendo o
+    risco. O Mestre deve avisar dentro da ficção antes que uma delas seja possível.</p>
+  </div>
+
+  <h4>Petrificado</h4>
+  <p>Você e tudo que carrega viram pedra. Fica <strong>Incapacitado</strong>, não
+  percebe nada, e seu peso multiplica por dez. Não envelhece, não precisa comer nem
+  respirar, é imune a veneno e doença, e tem resistência a todo tipo de dano. Dano
+  suficiente para te destruir <strong>quebra a estátua</strong> — e isso é permanente.</p>
+  <p><strong>Como reverter:</strong> sangue de basilisco aplicado na primeira hora, a
+  intervenção de uma divindade, ou algo específico que o Mestre tenha colocado no mundo
+  como recompensa de aventura. O jardim de estátuas da Medusa é um aviso, não um
+  enfeite.</p>
+
+  <h4>Selado</h4>
+  <p>Você foi preso — numa montanha, num vaso, numa árvore, num juramento. Não age,
+  não pode ser atingido, não percebe a passagem do tempo. Para o mundo, você deixou de
+  existir.</p>
+  <p>Todo Selo tem uma <strong>condição de rompimento</strong>, definida quando ele é
+  criado. Enquanto ela não acontecer, nada rompe.</p>
+
+  <h4>Envelhecido</h4>
+  <p>Anos foram arrancados de você. Por grau: <strong>−1 permanente</strong> em Força,
+  Destreza ou Constituição, conforme o efeito, e um nível de <strong>Exausto que não
+  passa com descanso</strong>.</p>
+  <p>Nenhum descanso, Tratamento ou Interlúdio remove. Só uma divindade devolve tempo,
+  e cobra por isso.</p>
+
+  <h4>Amaldiçoado</h4>
+  <p>Uma regra específica passa a valer contra você, escrita pelo Mestre no momento em
+  que a maldição cai. Ela precisa ser <strong>dita em voz alta na mesa</strong>, ter
+  uma condição de quebra, e ser possível de descobrir.</p>
+  <p>Exemplos: você não consegue mentir · não pode atravessar água corrente · a cada 1
+  natural, algo seu se quebra · nenhum mortal lembra do seu nome.</p>
+
+  <h4>Possuído</h4>
+  <p>Outra coisa está usando seu corpo. Mecanicamente é <strong>Dominado</strong>, mas
+  sem duração: dura até a entidade ser expulsa. O jogador continua na mesa — o Mestre
+  deve dar a ele o que fazer, mesmo que seja narrar o que o personagem grita por dentro.</p>
+
+  <h4>Transformado</h4>
+  <p>Você virou outra coisa: um animal, uma planta, uma estátua de sal. Use a ficha da
+  forma nova, transferindo seus PV atuais. Se a forma nova chegar a 0 PV, você volta à
+  sua com 0 PV e Agonizante.</p>
+
+  <h4>Enlouquecido</h4>
+  <p>Como <strong>Confuso</strong>, mas sem duração e sem novo teste. O jogador
+  continua interpretando: o Mestre define uma obsessão, e o personagem age por ela.
+  Removido por Convalescença prolongada, por um Vínculo forte, ou por quem causou.</p>
+
+  <h4>Morto</h4>
+  <p>Três falhas no Teste de Agonia, ou dano igual aos seus PV máximos depois de chegar
+  a zero. O personagem sai de jogo.</p>
+  <p>Este mundo tem um Mundo Inferior com endereço, um rio que se atravessa e deuses
+  que negociam. Voltar dos mortos não é impossível — é uma <strong>campanha</strong>.
+  E se acontecer barato, a morte para de significar alguma coisa para todo mundo
+  na mesa.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Tabela de consulta</h3>
+  <p>Para achar no meio da mesa sem procurar o parágrafo.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Condição</th><th>Onde dói</th><th>Em uma linha</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Abalado</strong></td><td>continua</td><td>Desvantagem no 1º Teste de Vontade de cada combate</td></tr>
+        <tr><td><strong>Agarrado</strong></td><td>corpo</td><td>Movimento zero; alguém te segurando</td></tr>
+        <tr><td><strong>Amaldiçoado</strong></td><td>destino</td><td>Uma regra própria passa a valer contra você</td></tr>
+        <tr><td><strong>Amedrontado</strong></td><td>mente</td><td>Desvantagem vendo a fonte; não pode se aproximar</td></tr>
+        <tr><td><strong>Aterrorizado</strong></td><td>mente</td><td>Precisa fugir usando toda a movimentação</td></tr>
+        <tr><td><strong>Atordoado</strong></td><td>fora da luta</td><td>Incapacitado; falha Fortitude e Reflexos</td></tr>
+        <tr><td><strong>Banido</strong></td><td>fora da luta</td><td>Fora do combate, intocável, cego e surdo</td></tr>
+        <tr><td><strong>Caído</strong></td><td>corpo</td><td>Vantagem contra você de perto, Desvantagem de longe</td></tr>
+        <tr><td><strong>Cego</strong></td><td>sentidos</td><td>Desvantagem sua, Vantagem contra você</td></tr>
+        <tr><td><strong>Confuso</strong></td><td>mente</td><td>1d4 no início do turno decide o que você faz</td></tr>
+        <tr><td><strong>Desarmado</strong></td><td>corpo</td><td>Sua arma está no chão</td></tr>
+        <tr><td><strong>Doente</strong></td><td>continua</td><td>Envenenado; descanso longo cura metade</td></tr>
+        <tr><td><strong>Dominado</strong></td><td>mente</td><td>Outro escolhe suas ações; você obedece</td></tr>
+        <tr><td><strong>Enfeitiçado</strong></td><td>mente</td><td>Não pode atacar quem te enfeitiçou</td></tr>
+        <tr><td><strong>Enlouquecido</strong></td><td>destino</td><td>Confuso sem duração, movido por uma obsessão</td></tr>
+        <tr><td><strong>Envelhecido</strong></td><td>destino</td><td>−1 em atributo físico e Exausto que não passa</td></tr>
+        <tr><td><strong>Envenenado</strong></td><td>continua</td><td>Desvantagem em ataques e perícias</td></tr>
+        <tr><td><strong>Exausto 1–3</strong></td><td>continua</td><td>Acumula: perícias, movimento, ataques e PV</td></tr>
+        <tr><td><strong>Ferimento Grave</strong></td><td>continua</td><td>PV máximos −nível; sem Ressonância</td></tr>
+        <tr><td><strong>Hemorragia</strong></td><td>continua</td><td>−5 PV por turno e não recupera PV</td></tr>
+        <tr><td><strong>Impedido</strong></td><td>corpo</td><td>Sem reações</td></tr>
+        <tr><td><strong>Incapacitado</strong></td><td>fora da luta</td><td>Sem ação, ação bônus ou reação</td></tr>
+        <tr><td><strong>Inconsciente</strong></td><td>fora da luta</td><td>Incapacitado, Caído, crítico de perto</td></tr>
+        <tr><td><strong>Lento</strong></td><td>corpo</td><td>Metade do movimento, sem Correr</td></tr>
+        <tr><td><strong>Marcado</strong></td><td>corpo</td><td>Desvantagem contra qualquer outro alvo</td></tr>
+        <tr><td><strong>Morto</strong></td><td>destino</td><td>Fora de jogo. Voltar é uma campanha</td></tr>
+        <tr><td><strong>Ofuscado</strong></td><td>sentidos</td><td>Desvantagem à distância e na visão</td></tr>
+        <tr><td><strong>Paralisado</strong></td><td>fora da luta</td><td>Atordoado, mudo, crítico de perto</td></tr>
+        <tr><td><strong>Petrificado</strong></td><td>destino</td><td>Virou pedra: resistente a tudo, e quebrável</td></tr>
+        <tr><td><strong>Possuído</strong></td><td>destino</td><td>Dominado, sem duração</td></tr>
+        <tr><td><strong>Preso</strong></td><td>corpo</td><td>Movimento zero; Desvantagem em ataques e Reflexos</td></tr>
+        <tr><td><strong>Queimando</strong></td><td>continua</td><td>1d6 de fogo por turno; água ou rolar apaga</td></tr>
+        <tr><td><strong>Sangrando 1</strong></td><td>continua</td><td>−1 PV por turno</td></tr>
+        <tr><td><strong>Sangrando 2</strong></td><td>continua</td><td>−3 PV por turno</td></tr>
+        <tr><td><strong>Selado</strong></td><td>destino</td><td>Preso fora do mundo até o Selo ser rompido</td></tr>
+        <tr><td><strong>Silenciado</strong></td><td>sentidos</td><td>Sem voz</td></tr>
+        <tr><td><strong>Sobrecarregado</strong></td><td>corpo</td><td>−3 m; Desvantagem em Acrobacia e Furtividade</td></tr>
+        <tr><td><strong>Surdo</strong></td><td>sentidos</td><td>Não ouve</td></tr>
+        <tr><td><strong>Transformado</strong></td><td>destino</td><td>Usa a ficha da forma nova</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== V ==================== -->
+<section class="capitulo" id="cap6">
+  <div class="abertura">
+    <span class="alg">Capítulo Seis</span>
     <h2>Criação de habilidades</h2>
     <p>O motor: pontos, alcance, duração e o que cada ponto compra</p>
   </div>
@@ -1622,25 +1966,40 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
     causa <span class="dado">3d8 + mod</span>, não 3d8 + 3× mod.</p>
   </div>
 
-  <h4>As três forças de condição</h4>
+  <h4>Os graus de condição</h4>
+  <p>Toda condição do <a href="#cap5">Capítulo Cinco</a> tem um grau, e o grau é o
+  preço dela em pontos.</p>
+
   <div class="rolagem">
     <table>
-      <thead><tr><th>Força</th><th class="num">Pontos</th><th>Condições</th></tr></thead>
+      <thead><tr><th>Grau</th><th class="num">Pontos</th><th>Exemplos</th></tr></thead>
       <tbody>
         <tr><td><strong>Fraca</strong></td><td class="num">1</td>
-            <td>Caído · movimento pela metade · −1 DEF · Desvantagem no próximo ataque ·
-            não pode usar reações · não pode se esconder</td></tr>
+            <td>Caído · Lento · Desprevenido · Impedido · Ofuscado · Surdo ·
+            Desarmado · Sangrando 1</td></tr>
         <tr><td><strong>Média</strong></td><td class="num">2</td>
-            <td>Amedrontado · Cego · Envenenado · Preso · Silenciado · Surdo ·
-            movimento zero · Desvantagem em todos os ataques</td></tr>
+            <td>Amedrontado · Cego · Confuso · Enfeitiçado · Envenenado · Preso ·
+            Queimando · Silenciado · Sangrando 2</td></tr>
         <tr><td><strong>Forte</strong></td><td class="num">4</td>
-            <td>Atordoado · Paralisado · Incapacitado</td></tr>
+            <td>Atordoado · Paralisado · Incapacitado · Dominado · Aterrorizado ·
+            Banido · Hemorragia</td></tr>
+        <tr><td><strong>Destino</strong></td><td class="num">—</td>
+            <td><strong>Não pode ser comprada.</strong> Petrificado · Selado ·
+            Envelhecido · Amaldiçoado · Possuído · Transformado · Morto</td></tr>
       </tbody>
     </table>
   </div>
-  <p>Condição média ou forte <strong>sempre</strong> permite Teste de Resistência para
-  evitar, e um novo teste no fim de cada turno do alvo. Nenhuma condição pode ser aplicada
-  automaticamente.</p>
+
+  <p>Condição média ou forte <strong>sempre</strong> permite Teste de Resistência
+  para evitar, e um novo teste no fim de cada turno do alvo. Nenhuma condição pode
+  ser aplicada automaticamente.</p>
+
+  <div class="destaque">
+    <span class="rotulo">O que você não pode construir</span>
+    <p>As condições de grau <strong>Destino</strong> não têm preço porque não tiram
+    alguém do turno: tiram da campanha. Elas entram em jogo por maldição, monstro,
+    deus ou artefato — nunca por uma habilidade que um jogador montou.</p>
+  </div>
 
   <div class="ornamento">❖</div>
 
@@ -1858,9 +2217,9 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   </ol>
 </section>
 
-<section class="capitulo" id="cap6">
+<section class="capitulo" id="cap7">
   <div class="abertura">
-    <span class="alg">Capítulo Seis</span>
+    <span class="alg">Capítulo Sete</span>
     <h2>Entre aventuras</h2>
     <p>Descanso, comida e o tempo em que você vira alguém</p>
   </div>
@@ -1952,9 +2311,9 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 </section>
 
 <!-- ==================== VII ==================== -->
-<section class="capitulo" id="cap7">
+<section class="capitulo" id="cap8">
   <div class="abertura">
-    <span class="alg">Capítulo Sete</span>
+    <span class="alg">Capítulo Oito</span>
     <h2>Uma ficha pronta</h2>
     <p>As sete etapas aplicadas do começo ao fim</p>
   </div>
