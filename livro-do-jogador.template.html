@@ -1,0 +1,1976 @@
+<title>Ascensão dos Semideuses — Livro do Jogador</title>
+
+<style>
+/* ============================================================
+   ASCENSÃO DOS SEMIDEUSES — Livro do Jogador
+   Este arquivo é um TEMPLATE. Rode build-livro.ps1 para gerar
+   o livro final com as capas embutidas.
+   ============================================================ */
+
+:root {
+  --brasa:      #C63F16;
+  --brasa-viva: #E8632C;
+  --bronze:     #9A6B32;
+  --bronze-luz: #C49A5C;
+
+  --fundo:      #F1ECE3;
+  --papel:      #FBF8F2;
+  --superficie-2:#EAE3D7;
+  --texto:      #221C18;
+  --texto-suave:#6E665C;
+  --borda:      #D8CFC1;
+  --borda-forte:#B8AB97;
+  --acento:     var(--brasa);
+  --acento-fraco:#F2E0D6;
+  --sombra:     rgba(40, 28, 18, .16);
+
+  --serifa-titulo: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+  --serifa-texto:  Charter, "Bitstream Charter", "Sitka Text", Georgia, "Times New Roman", serif;
+  --sans:          "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono:          "Cascadia Mono", "Consolas", "SF Mono", "Roboto Mono", ui-monospace, monospace;
+
+  /* A MANCHA. Uma só medida para o livro inteiro.
+     A largura da página é a mancha mais as margens laterais; nenhum elemento
+     define largura própria, então tudo compartilha a mesma borda esquerda e
+     a mesma borda direita — é isso que faz a página parecer impressa. */
+  --mancha:  34rem;   /* ~68 caracteres */
+  --margem:  clamp(1.4rem, 5vw, 3.2rem);
+  --pagina:  calc(var(--mancha) + var(--margem) * 2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo:       #100D0C;
+    --papel:       #1A1614;
+    --superficie-2:#241F1B;
+    --texto:       #E7E0D4;
+    --texto-suave: #A2978A;
+    --borda:       #352E28;
+    --borda-forte: #4C4038;
+    --acento:      var(--brasa-viva);
+    --acento-fraco:#381C11;
+    --bronze:      var(--bronze-luz);
+    --sombra:      rgba(0, 0, 0, .6);
+  }
+}
+:root[data-theme="dark"] {
+  --fundo:       #100D0C;
+  --papel:       #1A1614;
+  --superficie-2:#241F1B;
+  --texto:       #E7E0D4;
+  --texto-suave: #A2978A;
+  --borda:       #352E28;
+  --borda-forte: #4C4038;
+  --acento:      var(--brasa-viva);
+  --acento-fraco:#381C11;
+  --bronze:      var(--bronze-luz);
+  --sombra:      rgba(0, 0, 0, .6);
+}
+:root[data-theme="light"] {
+  --fundo:       #F1ECE3;
+  --papel:       #FBF8F2;
+  --superficie-2:#EAE3D7;
+  --texto:       #221C18;
+  --texto-suave: #6E665C;
+  --borda:       #D8CFC1;
+  --borda-forte: #B8AB97;
+  --acento:      var(--brasa);
+  --acento-fraco:#F2E0D6;
+  --bronze:      #9A6B32;
+  --sombra:      rgba(40, 28, 18, .16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--serifa-texto);
+  font-size: 17.5px;
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ O LIVRO COMO OBJETO ============ */
+/* Uma coluna única, da capa à contracapa. */
+.livro {
+  max-width: var(--pagina);
+  margin: 0 auto;
+  background: var(--papel);
+  border-left: 1px solid var(--borda);
+  border-right: 1px solid var(--borda);
+}
+@media (max-width: 52rem) {
+  .livro { border-left: none; border-right: none; }
+}
+
+/* A mancha de texto: a única coisa que define as margens laterais. */
+.mancha { padding: 0 var(--margem); }
+
+/* ============ AS CAPAS ============ */
+/* Capa e contracapa sangram até a borda da página, como numa capa impressa,
+   e têm exatamente a largura do livro. */
+.capa-pagina { display: block; background: #0A0808; }
+.capa-pagina img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.capa-pagina.frente { border-bottom: 1px solid var(--borda); }
+.capa-pagina.fundo  { border-top: 1px solid var(--borda); }
+
+/* ============ FOLHA DE ROSTO ============ */
+.rosto {
+  padding: clamp(3.5rem, 12vh, 8rem) 0 clamp(3rem, 9vh, 5.5rem);
+  text-align: center;
+  border-bottom: 1px solid var(--borda);
+}
+.rosto h1 {
+  font-family: var(--serifa-titulo);
+  font-size: clamp(2rem, 6.5vw, 3.4rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: 0 0 1.4rem;
+  text-wrap: balance;
+}
+.rosto h1 span { display: block; color: var(--acento); }
+.rosto .tomo {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .38em;
+  font-size: .78rem;
+  color: var(--texto-suave);
+  padding-left: .38em;
+  margin: 0 0 2.5rem;
+}
+.rosto .epigrafe {
+  font-size: 1.06rem;
+  font-style: italic;
+  color: var(--texto-suave);
+  max-width: 26rem;
+  margin: 0 auto;
+  text-wrap: pretty;
+}
+.rosto .selo { margin: 0 auto 2.5rem; display: block; }
+
+/* ============ SUMÁRIO ============ */
+.sumario { padding: clamp(3rem, 8vh, 5rem) 0; }
+.sumario h2 {
+  font-family: var(--serifa-titulo);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--texto-suave);
+  margin: 0 0 2.5rem;
+  padding-left: .22em;
+}
+.sumario ol { list-style: none; padding: 0; margin: 0; }
+.sumario li { margin: 0; }
+.sumario a {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: .9rem;
+  align-items: baseline;
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--borda);
+  text-decoration: none;
+  color: var(--texto);
+}
+.sumario a:hover, .sumario a:focus-visible { background: var(--superficie-2); }
+.sumario .alg {
+  font-family: var(--serifa-titulo);
+  font-size: 1.1rem;
+  color: var(--acento);
+  text-align: right;
+}
+.sumario .tit { font-family: var(--serifa-titulo); font-size: 1.16rem; }
+.sumario .sub {
+  display: block;
+  font-family: var(--sans);
+  font-size: .76rem;
+  color: var(--texto-suave);
+  margin-top: .15rem;
+}
+
+/* ============ CAPÍTULOS ============ */
+.capitulo { padding: clamp(3rem, 9vh, 6rem) 0 1rem; }
+
+.abertura {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--borda);
+}
+.abertura .alg {
+  font-family: var(--serifa-titulo);
+  font-size: 1rem;
+  letter-spacing: .3em;
+  color: var(--bronze);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1rem;
+  padding-left: .3em;
+}
+.abertura h2 {
+  font-family: var(--serifa-titulo);
+  font-size: clamp(1.9rem, 5.5vw, 2.7rem);
+  line-height: 1.04;
+  margin: 0 0 .5rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  text-wrap: balance;
+}
+.abertura p {
+  font-style: italic;
+  color: var(--texto-suave);
+  max-width: 26rem;
+  margin: 0 auto;
+}
+
+h3 {
+  font-family: var(--serifa-titulo);
+  font-size: 1.42rem;
+  margin: 2.8rem 0 .7rem;
+  text-wrap: balance;
+}
+h4 {
+  font-family: var(--sans);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: var(--acento);
+  margin: 2rem 0 .6rem;
+}
+/* Nenhuma largura própria: a mancha manda. */
+p, li { text-wrap: pretty; }
+p { margin: 0 0 1.1rem; }
+ul, ol { padding-left: 1.2rem; margin: 0 0 1.3rem; }
+li { margin-bottom: .35rem; }
+
+/* Linha de dados centralizada, como a distribuição de atributos. */
+p.linha-dados {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  color: var(--acento);
+  text-align: center;
+  letter-spacing: .1em;
+}
+em.termo { font-style: normal; color: var(--bronze); font-weight: 700; }
+a { color: var(--acento); }
+
+/* capitular */
+p.abre::first-letter {
+  float: left;
+  font-family: var(--serifa-titulo);
+  font-size: 3.9em;
+  line-height: .82;
+  padding: .06em .1em 0 0;
+  color: var(--acento);
+}
+
+.dado {
+  font-family: var(--mono);
+  font-size: .86em;
+  background: var(--acento-fraco);
+  color: var(--acento);
+  padding: .1em .42em;
+  border-radius: 3px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ornamento entre seções */
+.ornamento {
+  text-align: center;
+  margin: 3rem 0;
+  color: var(--bronze);
+  font-size: 1rem;
+  letter-spacing: 1.1em;
+  padding-left: 1.1em;
+  opacity: .7;
+}
+
+/* ============ BLOCOS ============ */
+.destaque {
+  border-top: 2px solid var(--acento);
+  border-bottom: 1px solid var(--borda);
+  background: var(--superficie-2);
+  padding: 1.15rem 1.35rem;
+  margin: 1.8rem 0;
+}
+.destaque p:last-child { margin-bottom: 0; }
+.destaque .rotulo {
+  font-family: var(--sans);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--acento);
+  display: block;
+  margin-bottom: .45rem;
+}
+.destaque .formula {
+  font-family: var(--mono);
+  font-size: 1.12rem;
+  color: var(--acento);
+  margin: 0;
+  text-align: center;
+}
+
+.nota {
+  border-left: 2px solid var(--borda-forte);
+  padding: .3rem 0 .3rem 1.1rem;
+  margin: 1.8rem 0;
+  font-size: .96rem;
+  color: var(--texto-suave);
+}
+.nota strong { color: var(--bronze); }
+.nota p:last-child { margin-bottom: 0; }
+
+/* ============ CARTÕES ============ */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1px;
+  background: var(--borda);
+  border: 1px solid var(--borda);
+  margin: 1.8rem 0;
+}
+.cartao { background: var(--papel); padding: 1.05rem 1.15rem; }
+.cartao h5 {
+  font-family: var(--serifa-titulo);
+  font-size: 1.08rem;
+  margin: 0 0 .1rem;
+}
+.cartao .etiqueta {
+  font-family: var(--sans);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--bronze);
+  margin: 0 0 .55rem;
+}
+.cartao p { font-size: .93rem; margin-bottom: .55rem; }
+.cartao p:last-child { margin-bottom: 0; }
+.cartao .poder {
+  border-top: 1px solid var(--borda);
+  padding-top: .55rem;
+  margin-top: .55rem;
+  font-size: .9rem;
+}
+.cartao .poder b { display: block; color: var(--acento); font-size: .94rem; }
+
+/* ============ CLASSES ============ */
+.classe {
+  border-top: 3px double var(--bronze);
+  border-bottom: 1px solid var(--borda);
+  padding: 1.5rem 0 1.8rem;
+  margin: 2.2rem 0;
+}
+.classe-topo { display: flex; align-items: center; gap: .9rem; }
+.classe-topo h3 { margin: 0; font-size: 1.62rem; }
+.classe .papel {
+  font-family: var(--sans);
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--texto-suave);
+  margin: .3rem 0 1rem;
+}
+.recursos { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1.1rem 0; }
+.recurso {
+  flex: 1 1 6.5rem;
+  border: 1px solid var(--borda);
+  padding: .55rem .6rem;
+  text-align: center;
+  background: var(--superficie-2);
+}
+.recurso b {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+}
+.recurso span {
+  font-family: var(--sans);
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  color: var(--texto-suave);
+}
+
+/* ============ TABELAS ============ */
+.rolagem { overflow-x: auto; margin: 1.6rem 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--sans);
+  font-size: .87rem;
+  font-variant-numeric: tabular-nums;
+}
+th, td {
+  text-align: left;
+  padding: .5rem .7rem;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: top;
+}
+th {
+  font-size: .67rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--texto-suave);
+  border-bottom: 1px solid var(--borda-forte);
+  font-weight: 600;
+}
+td.num, th.num { text-align: right; }
+
+/* ============ CAIXA DE DADOS ============ */
+.rolador {
+  background: #16100E;
+  border: 1px solid #3A2A22;
+  padding: 1.4rem;
+  margin: 2rem 0;
+  color: #EDE4D6;
+}
+.rolador-topo {
+  font-family: var(--sans);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--bronze-luz);
+  margin-bottom: 1rem;
+}
+.rolador-linha { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.rolador-visor {
+  font-family: var(--mono);
+  font-size: 2.9rem;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 3.4ch;
+  text-align: center;
+  color: #F7C77E;
+  font-variant-numeric: tabular-nums;
+}
+.rolador-visor.critico { color: #86D693; }
+.rolador-visor.falha   { color: #E8632C; }
+.rolador-detalhe {
+  flex: 1 1 14rem; font-size: .92rem; color: #C4B8A6;
+  min-height: 3.4em;
+}
+.rolador-detalhe b { color: #F4EDE2; }
+.botoes { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.1rem; }
+button {
+  font-family: var(--sans);
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: .55rem 1rem;
+  border: 1px solid #4E3A2E;
+  background: #241813;
+  color: #E4D6C2;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+button:hover { background: #33211A; border-color: var(--bronze-luz); }
+button:focus-visible { outline: 2px solid var(--brasa-viva); outline-offset: 2px; }
+button.principal { background: var(--brasa); border-color: var(--brasa); color: #FFF3E8; }
+button.principal:hover { background: var(--brasa-viva); border-color: var(--brasa-viva); }
+
+/* ============ ETAPAS ============ */
+.passos { counter-reset: passo; list-style: none; padding: 0; margin: 1.8rem 0; }
+.passos > li {
+  counter-increment: passo;
+  position: relative;
+  padding-left: 3.1rem;
+  margin-bottom: 1.4rem;
+}
+.passos > li::before {
+  content: counter(passo);
+  position: absolute; left: 0; top: -.05rem;
+  width: 2.15rem; height: 2.15rem;
+  display: grid; place-items: center;
+  border: 1px solid var(--bronze);
+  border-radius: 50%;
+  font-family: var(--serifa-titulo);
+  font-size: 1rem;
+  color: var(--bronze);
+}
+.passos > li b { display: block; font-family: var(--serifa-titulo); font-size: 1.14rem; }
+
+/* ============ FICHA ============ */
+.ficha { border: 1px solid var(--borda-forte); margin: 1.8rem 0; background: var(--papel); }
+.ficha-cabeca {
+  background: var(--superficie-2);
+  padding: 1rem 1.3rem;
+  border-bottom: 1px solid var(--borda-forte);
+}
+.ficha-cabeca h4 { margin: 0; color: var(--texto-suave); }
+.ficha-cabeca .nome { font-family: var(--serifa-titulo); font-size: 1.6rem; margin: .1rem 0 0; }
+.ficha-corpo { padding: 1.2rem 1.3rem; }
+.atributos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4.6rem, 1fr));
+  gap: .45rem;
+  margin: 0 0 1.2rem;
+}
+.atributo { text-align: center; border: 1px solid var(--borda); padding: .5rem .3rem; }
+.atributo .sigla {
+  font-family: var(--sans); font-size: .6rem;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--texto-suave); display: block;
+}
+.atributo .valor { font-family: var(--mono); font-size: 1.22rem; font-weight: 700; }
+.atributo .mod { font-family: var(--mono); font-size: .78rem; color: var(--acento); display: block; }
+
+/* ============ COLOFÃO ============ */
+.colofao {
+  border-top: 1px solid var(--borda);
+  margin-top: 4rem;
+  padding: 3rem 0 4rem;
+  font-size: .95rem;
+  color: var(--texto-suave);
+}
+.colofao h3 { margin-top: 0; color: var(--texto); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ============ IMPRESSÃO ============ */
+@media print {
+  body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
+  .rolador, .botoes { display: none !important; }
+  .livro { border: none; max-width: none; background: #fff; }
+  .mancha { padding: 0; }
+  .capa-pagina { background: #fff; page-break-after: always; border: none; }
+  .capa-pagina img { max-width: 100%; height: auto; }
+  .rosto, .sumario { page-break-after: always; }
+  .capitulo { page-break-before: always; padding-top: 0; }
+  .abertura { page-break-after: avoid; }
+  h3, h4 { page-break-after: avoid; }
+  .classe, .cartao, .ficha, .destaque, .grade { page-break-inside: avoid; }
+  .capa-pagina.fundo { page-break-before: always; page-break-after: auto; }
+}
+</style>
+
+<div class="livro">
+
+<!-- ==================== CAPA ==================== -->
+<div class="capa-pagina frente">
+  <img src="{{CAPA}}" alt="Capa de Ascensão dos Semideuses RPG: quatro semideuses de costas, armados, encarando um titã de olhos flamejantes sobre uma cidade em chamas">
+</div>
+
+<div class="mancha">
+
+<!-- ==================== FOLHA DE ROSTO ==================== -->
+<div class="rosto">
+  <svg class="selo" width="76" height="76" viewBox="0 0 100 100" aria-hidden="true">
+    <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="none" stroke="var(--bronze)" stroke-width="1.6"/>
+    <path d="M50 26 L62 50 L50 74 L38 50 Z" fill="none" stroke="var(--acento)" stroke-width="1.5"/>
+    <circle cx="50" cy="50" r="3.5" fill="var(--acento)"/>
+  </svg>
+  <h1>A Ascensão dos <span>Semideuses</span></h1>
+  <p class="tomo">Livro do Jogador</p>
+  <p class="epigrafe">
+    Você descobriu tarde demais que um dos seus pais não era humano.
+    O mundo já sabia. Os monstros também.
+  </p>
+</div>
+
+<!-- ==================== SUMÁRIO ==================== -->
+<nav class="sumario" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#cap1"><span class="alg">I</span><span><span class="tit">Antes de tudo</span>
+      <span class="sub">O que é este jogo e o que você precisa</span></span></a></li>
+    <li><a href="#cap2"><span class="alg">II</span><span><span class="tit">Como se joga</span>
+      <span class="sub">O d20, a dificuldade, e as duas palavras que mais importam</span></span></a></li>
+    <li><a href="#cap3"><span class="alg">III</span><span><span class="tit">Criação de personagem</span>
+      <span class="sub">Sete etapas, nesta ordem</span></span></a></li>
+    <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Combate</span>
+      <span class="sub">Curto, letal, e cheio de decisão</span></span></a></li>
+    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Criação de habilidades</span>
+      <span class="sub">O motor: pontos, alcance, duração e o que cada ponto compra</span></span></a></li>
+    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Entre aventuras</span>
+      <span class="sub">Descanso, comida e o tempo em que você vira alguém</span></span></a></li>
+    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Uma ficha pronta</span>
+      <span class="sub">As sete etapas aplicadas do começo ao fim</span></span></a></li>
+  </ol>
+</nav>
+
+<!-- ==================== I ==================== -->
+<section class="capitulo" id="cap1">
+  <div class="abertura">
+    <span class="alg">Capítulo Um</span>
+    <h2>Antes de tudo</h2>
+    <p>O que é este jogo e o que você precisa</p>
+  </div>
+
+  <p class="abre"><strong>Ascensão dos Semideuses</strong> é um RPG de mesa. Um grupo de
+  pessoas senta junto, cada uma inventa um personagem, e uma delas — o
+  <em class="termo">Mestre</em> — descreve o mundo e interpreta todo o resto: os monstros,
+  os deuses, o cara da lanchonete.</p>
+
+  <p>Você joga um <em class="termo">semideus</em>: filho ou filha de um deus grego com uma
+  pessoa comum. Você cresceu achando que era normal. Não era. Agora criaturas que deveriam
+  existir só em livro de mitologia sabem seu cheiro, e você precisa aprender a lutar, a usar
+  o poder que herdou, e a conviver com o defeito que herdou junto.</p>
+
+  <h3>O que você precisa para jogar</h3>
+  <ul>
+    <li>Um grupo: de dois a cinco jogadores, mais o Mestre.</li>
+    <li>Um jogo de dados de RPG: <span class="dado">d4</span> <span class="dado">d6</span>
+        <span class="dado">d8</span> <span class="dado">d10</span> <span class="dado">d12</span>
+        <span class="dado">d20</span>. Aplicativo de celular serve.</li>
+    <li>Uma ficha de personagem, lápis e borracha. Você vai apagar bastante.</li>
+    <li>Este livro. Só o Mestre precisa do <em>Bestiário</em>.</li>
+  </ul>
+
+  <div class="destaque">
+    <span class="rotulo">A única regra acima das outras</span>
+    <p>Quando uma regra deste livro atrapalhar uma cena boa, a cena boa ganha. O Mestre
+    decide na hora e a mesa segue jogando. Você conserta o texto depois.</p>
+  </div>
+
+  <h3>Como uma sessão acontece</h3>
+  <p>Não existe tabuleiro obrigatório nem ordem fixa. Na prática, o jogo fica girando entre
+  três modos.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Exploração</h5>
+      <p class="etiqueta">A maior parte do tempo</p>
+      <p>Vocês conversam, investigam, viajam, mentem para adultos, procuram um lugar que não
+      deveria existir. O Mestre descreve, vocês dizem o que fazem, e dados só aparecem quando
+      há risco de verdade.</p>
+    </div>
+    <div class="cartao">
+      <h5>Combate</h5>
+      <p class="etiqueta">Rápido e perigoso</p>
+      <p>Quando começa a briga, o jogo passa a contar em <em class="termo">rodadas</em> e
+      <em class="termo">turnos</em>, para que todo mundo tenha vez. Um combate típico dura
+      três ou quatro rodadas. Ele é curto porque é letal.</p>
+    </div>
+    <div class="cartao">
+      <h5>Interlúdio</h5>
+      <p class="etiqueta">Entre uma missão e outra</p>
+      <p>Dias ou semanas de folga. É quando o personagem treina, constrói equipamento, cura
+      ferimentos que não saram sozinhos, aprende magia e cuida das pessoas de quem gosta.
+      É aqui que ele vira alguém.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== II ==================== -->
+<section class="capitulo" id="cap2">
+  <div class="abertura">
+    <span class="alg">Capítulo Dois</span>
+    <h2>Como se joga</h2>
+    <p>O d20, a dificuldade, e as duas palavras que mais importam</p>
+  </div>
+
+  <p class="abre">Quase tudo neste jogo se resolve do mesmo jeito. Você quer fazer alguma
+  coisa que pode dar errado. Você rola um dado de vinte lados, soma um número da sua ficha,
+  e compara com um alvo.</p>
+
+  <div class="destaque">
+    <span class="rotulo">A rolagem básica</span>
+    <p class="formula">1d20 + modificador (+ proficiência)</p>
+  </div>
+
+  <p>Se o resultado for <strong>igual ou maior</strong> que a dificuldade, você conseguiu.
+  Se for menor, não conseguiu — e o Mestre te diz o que aconteceu no lugar.</p>
+
+  <h3>Experimente</h3>
+  <p>Este é um semideus de nível 1 tentando arrombar uma porta trancada. Ele tem
+  <strong>Atletismo +5</strong>, e a porta é <strong>CD 13</strong>.</p>
+
+  <div class="rolador">
+    <div class="rolador-topo">Teste de Atletismo · CD 13 · bônus +5</div>
+    <div class="rolador-linha">
+      <div class="rolador-visor" id="visor">—</div>
+      <p class="rolador-detalhe" id="detalhe">Role o dado para ver como funciona.</p>
+    </div>
+    <div class="botoes">
+      <button class="principal" onclick="rolar('normal')">Rolar 1d20</button>
+      <button onclick="rolar('vantagem')">Com Vantagem</button>
+      <button onclick="rolar('desvantagem')">Com Desvantagem</button>
+    </div>
+  </div>
+
+  <h3>Vantagem e Desvantagem</h3>
+  <p>São as duas palavras que você mais vai ouvir na mesa, e substituem uma pilha de
+  modificadores pequenos.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Vantagem</h5>
+      <p class="etiqueta">A situação está a seu favor</p>
+      <p>Role <strong>dois d20</strong> e use o <strong>maior</strong>. Você tem Vantagem
+      quando ataca alguém caído, quando um aliado te ajuda, quando surge de um esconderijo,
+      quando explora a fraqueza de um monstro.</p>
+    </div>
+    <div class="cartao">
+      <h5>Desvantagem</h5>
+      <p class="etiqueta">A situação está contra você</p>
+      <p>Role <strong>dois d20</strong> e use o <strong>menor</strong>. Você tem Desvantagem
+      no escuro, atirando com um inimigo colado em você, caído no chão, ou carregando
+      peso demais.</p>
+    </div>
+  </div>
+
+  <div class="nota">
+    <p><strong>Elas não se acumulam.</strong> Duas fontes de Vantagem ainda são dois dados.
+    E se você tem Vantagem e Desvantagem ao mesmo tempo, as duas somem e você rola um dado
+    só — não importa quantas fontes existam de cada lado.</p>
+  </div>
+
+  <h3>Quanto é difícil</h3>
+  <p>O Mestre escolhe a dificuldade — a <em class="termo">CD</em>, de Classe de Dificuldade —
+  antes de você rolar.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Dificuldade</th><th class="num">CD</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Fácil</td><td class="num">10</td><td>Pular uma cerca, convencer quem já queria ser convencido</td></tr>
+        <tr><td>Média</td><td class="num">13</td><td>Arrombar uma porta, perceber uma mentira ensaiada</td></tr>
+        <tr><td>Difícil</td><td class="num">16</td><td>Escalar um muro liso, ler uma inscrição antiga</td></tr>
+        <tr><td>Muito difícil</td><td class="num">19</td><td>Saltar um vão largo demais, enganar um deus menor</td></tr>
+        <tr><td>Quase impossível</td><td class="num">22</td><td>Feitos que entram em histórias</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>O Mestre não pede rolagem para tudo.</strong> Se não há como falhar de um
+    jeito interessante, você simplesmente consegue. Se não há como ter sucesso, ele diz isso
+    na cara e você tenta outra coisa. Dado só entra quando os dois lados são possíveis.</p>
+  </div>
+
+  <h3>Crítico e falha crítica</h3>
+  <p>Em um <strong>20 natural</strong> — o dado mostrando 20, antes de somar nada — um ataque
+  acerta e vira <em class="termo">Acerto Crítico</em>: você rola todos os dados de dano duas
+  vezes. Em um <strong>1 natural</strong>, o ataque erra, não importa o bônus.</p>
+  <p>Fora de combate, o Mestre pode tratar 20 e 1 como sucessos e fracassos memoráveis — mas
+  um 1 nunca deve destruir seu equipamento nem te machucar de graça.</p>
+
+  <div class="ornamento">❖ ❖ ❖</div>
+
+  <h3>Os três recursos</h3>
+  <p>Sua ficha tem três reservas. Elas são o motor de quase toda decisão difícil.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>PV · Pontos de Vida</h5>
+      <p>Quanto você aguenta antes de cair. São os mais lentos de recuperar: uma noite
+      inteira de sono devolve só metade. Ferimento pesa.</p>
+    </div>
+    <div class="cartao">
+      <h5>SP · Pontos de Vigor</h5>
+      <p>Fôlego e esforço físico. Pagam técnicas de classe e manobras. Voltam por inteiro
+      em uma hora de descanso — é o recurso para gastar sem medo.</p>
+    </div>
+    <div class="cartao">
+      <h5>MP · Pontos de Mana</h5>
+      <p>A energia sobrenatural que você herdou. Paga habilidades e magia. Só volta
+      dormindo. É o recurso que você guarda para quando importa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== III ==================== -->
+<section class="capitulo" id="cap3">
+  <div class="abertura">
+    <span class="alg">Capítulo Três</span>
+    <h2>Criação de personagem</h2>
+    <p>Sete etapas, nesta ordem</p>
+  </div>
+
+  <p class="abre">Faça na ordem. Cada etapa usa alguma coisa decidida na anterior, e a última
+  amarra tudo. Ao final deste capítulo você tem um semideus pronto para jogar.</p>
+
+  <ol class="passos">
+    <li><b>Atributos</b> Distribua seis números entre as seis capacidades do corpo e da mente.</li>
+    <li><b>Conceito Mortal</b> Quem você era antes de saber. Dá duas perícias e um truque.</li>
+    <li><b>Húbris</b> Seu defeito fatal. Não é enfeite: tem regra.</li>
+    <li><b>Classe</b> Como você luta. Define seus recursos e sua primeira técnica.</li>
+    <li><b>Perícias</b> Seis coisas que você faz melhor que os outros.</li>
+    <li><b>Parente Divino</b> Qual deus. Dá bônus, um elemento e um poder passivo.</li>
+    <li><b>Finalização</b> Nome, cara, história — e as contas finais da ficha.</li>
+  </ol>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 1 · Atributos</h3>
+  <p>Seis atributos descrevem do que você é capaz. Distribua estes seis valores entre eles,
+  um valor para cada:</p>
+
+  <p class="linha-dados">15 · 14 · 13 · 12 · 10 · 8</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Atributo</th><th>O que ele faz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Força · FOR</strong></td><td>Bater, levantar, empurrar, saltar, segurar alguém no lugar</td></tr>
+        <tr><td><strong>Destreza · DES</strong></td><td>Correr, se esquivar, mirar, se equilibrar, andar sem fazer barulho</td></tr>
+        <tr><td><strong>Constituição · CON</strong></td><td>Aguentar dano, veneno, cansaço e noites sem dormir</td></tr>
+        <tr><td><strong>Inteligência · INT</strong></td><td>Saber, investigar, consertar, estudar magia</td></tr>
+        <tr><td><strong>Sabedoria · SAB</strong></td><td>Perceber, intuir, resistir a medo e manipulação</td></tr>
+        <tr><td><strong>Carisma · CAR</strong></td><td>Convencer, mentir, intimidar, ser notado</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>O modificador é o que você realmente usa</h4>
+  <p>O valor do atributo quase nunca entra na conta. O que entra é o
+  <em class="termo">modificador</em>: subtraia 10 e divida por 2, arredondando para baixo.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Valor</th><th class="num">Mod.</th><th class="num">Valor</th><th class="num">Mod.</th><th class="num">Valor</th><th class="num">Mod.</th></tr></thead>
+      <tbody>
+        <tr><td class="num">8–9</td><td class="num">−1</td><td class="num">12–13</td><td class="num">+1</td><td class="num">16–17</td><td class="num">+3</td></tr>
+        <tr><td class="num">10–11</td><td class="num">+0</td><td class="num">14–15</td><td class="num">+2</td><td class="num">18–19</td><td class="num">+4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>Método opcional.</strong> Em vez da distribuição padrão, role
+    <span class="dado">4d6</span>, descarte o menor dado e some os três maiores. Repita seis
+    vezes e distribua os resultados. É mais emocionante e menos equilibrado — combine com o
+    Mestre antes.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 2 · Conceito Mortal</h3>
+  <p>Quem você era antes de descobrir. Cada Conceito dá <strong>duas perícias</strong> e
+  <strong>uma habilidade exclusiva</strong> — e, mais importante, uma vida anterior de que o
+  personagem sinta falta.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Atleta</h5>
+      <p class="etiqueta">Atletismo · Acrobacia</p>
+      <div class="poder"><b>Pique de Adrenalina</b>
+      Ao usar a ação Correr, gaste <strong>2 SP</strong> para ganhar mais 3 metros de
+      movimento naquele turno.</div>
+    </div>
+    <div class="cartao">
+      <h5>Rato de Biblioteca</h5>
+      <p class="etiqueta">Mitologia · Investigação</p>
+      <div class="poder"><b>Conhecimento Aplicado</b>
+      Em um teste de Inteligência, gaste <strong>2 MP</strong> para receber <strong>+5</strong>.</div>
+    </div>
+    <div class="cartao">
+      <h5>Artista de Rua</h5>
+      <p class="etiqueta">Atuação · Prestidigitação</p>
+      <div class="poder"><b>Plateia Cativante</b>
+      Uma vez por sessão, uma apresentação para mortais rende informação básica ou um pouco
+      de dinheiro, com um teste de Atuação.</div>
+    </div>
+    <div class="cartao">
+      <h5>Problemático</h5>
+      <p class="etiqueta">Intimidação · Furtividade</p>
+      <div class="poder"><b>Instinto de Briga</b>
+      Some seu modificador de <strong>Força</strong> à Iniciativa.</div>
+    </div>
+    <div class="cartao">
+      <h5>Sobrevivencialista</h5>
+      <p class="etiqueta">Sobrevivência · Percepção</p>
+      <div class="poder"><b>Um com a Natureza</b>
+      Você sempre sabe onde fica o norte, e acha comida e água para duas pessoas em uma
+      hora, sem teste.</div>
+    </div>
+    <div class="cartao">
+      <h5>Socorrista</h5>
+      <p class="etiqueta">Intuição · Persuasão</p>
+      <div class="poder"><b>Primeiros Socorros</b>
+      Ação e <strong>2 SP</strong> para tocar alguém consciente: recupera
+      <span class="dado">1d6</span> PV. Funciona <em>durante</em> o combate.</div>
+    </div>
+    <div class="cartao">
+      <h5>Cérebro Digital</h5>
+      <p class="etiqueta">Investigação · Manufatura</p>
+      <div class="poder"><b>Familiaridade Tecnológica</b>
+      Use Manufatura no lugar de Prestidigitação com qualquer dispositivo eletrônico.</div>
+    </div>
+    <div class="cartao">
+      <h5>Herdeiro</h5>
+      <p class="etiqueta">Persuasão · Intuição</p>
+      <div class="poder"><b>Recursos da Família</b>
+      Uma vez por missão, suas conexões abrem uma porta no mundo mortal: um lugar, um objeto
+      caro, um transporte, um contato.</div>
+    </div>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 3 · Húbris</h3>
+  <p>Todo semideus tem um <em class="termo">defeito fatal</em>. Não é uma característica de
+  interpretação solta — ele dá e cobra.</p>
+
+  <div class="grade">
+    <div class="cartao"><h5>Arrogância</h5><p>Você se acha melhor, e subestima quem tem na frente.</p></div>
+    <div class="cartao"><h5>Lealdade Excessiva</h5><p>Você coloca as pessoas que ama acima da missão, da lógica e de você.</p></div>
+    <div class="cartao"><h5>Ambição Desmedida</h5><p>Você precisa de poder, glória ou reconhecimento, e paga caro por eles.</p></div>
+    <div class="cartao"><h5>Fúria Incontrolável</h5><p>Provocação, humilhação ou frustração e você perde o controle.</p></div>
+    <div class="cartao"><h5>Ingenuidade Crônica</h5><p>Você acredita nas pessoas mesmo com todos os sinais na sua cara.</p></div>
+    <div class="cartao"><h5>Rancor Obsessivo</h5><p>Você não esquece uma ofensa. Nunca.</p></div>
+  </div>
+
+  <h4>Como a Húbris funciona na mesa</h4>
+  <p>A qualquer momento, o Mestre pode te oferecer uma <em class="termo">Provocação</em>: uma
+  situação em que seu defeito puxa para a decisão pior.</p>
+
+  <div class="destaque">
+    <p><em>"Você pode contornar o guarda em silêncio. Mas ele te chamou de moleque na frente
+    dos outros. <strong>Arrogância.</strong> Quer responder?"</em></p>
+  </div>
+
+  <ul>
+    <li><strong>Aceitar</strong> — seu personagem age conforme o defeito, com as consequências
+    que vierem, e você ganha <strong>1 Ímpeto</strong>.</li>
+    <li><strong>Recusar</strong> — nada acontece. Sem punição, sem custo.</li>
+  </ul>
+
+  <p><em class="termo">Ímpeto</em> é a energia de ser exatamente quem você é, inclusive na
+  parte ruim. Você guarda até <strong>3</strong>, e eles atravessam sessões. Gaste 1 para:</p>
+
+  <ul>
+    <li>receber <strong>Vantagem</strong> em uma rolagem, declarado antes de rolar;</li>
+    <li>somar <span class="dado">1d6</span> a uma rolagem <em>depois</em> de ver o resultado;</li>
+    <li>recuperar <strong>3 SP</strong> ou <strong>3 MP</strong>;</li>
+    <li>transformar uma falha crítica sua em falha comum.</li>
+  </ul>
+
+  <div class="nota">
+    <p><strong>Ruptura.</strong> Uma vez por arco de campanha, num momento de crise real, o
+    Mestre pode declarar que a Húbris tomou a decisão por você. Custa <strong>2 Ímpeto</strong>
+    para resistir — ou um <em>Vínculo</em>, se a pessoa a quem você é ligado estiver ali para
+    te segurar pelo braço.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 4 · Classe</h3>
+  <p>A Classe é como você luta. No nível 1 ela define seus três recursos, suas proficiências
+  e a primeira técnica.</p>
+
+  <div class="classe">
+    <div class="classe-topo">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 L34 9 V21 C34 29 27 34 20 36 C13 34 6 29 6 21 V9 Z"
+              fill="none" stroke="var(--bronze)" stroke-width="2"/>
+        <path d="M20 12 V28 M13 20 H27" stroke="var(--acento)" stroke-width="2"/>
+      </svg>
+      <h3 style="margin:0;">Guardião</h3>
+    </div>
+    <p class="papel">Aguenta o que os outros não aguentariam</p>
+    <p>Combatente defensivo. Fica na frente, segura o inimigo no lugar e recebe o golpe que
+    ia acertar o amigo. É a classe mais fácil de jogar bem: seu trabalho é estar entre o
+    perigo e o resto do grupo.</p>
+
+    <div class="recursos">
+      <div class="recurso"><b>14 + CON</b><span>PV</span></div>
+      <div class="recurso"><b>12 + CON</b><span>SP</span></div>
+      <div class="recurso"><b>6 + DIV</b><span>MP</span></div>
+    </div>
+
+    <p><strong>Proficiências:</strong> armaduras leves e médias, escudos, armas simples e
+    marciais · Resistências de <strong>Fortitude</strong> e <strong>Vontade</strong></p>
+    <p><strong>Perícias da classe</strong> (escolha duas): Atletismo, Intuição, Intimidação,
+    Percepção</p>
+
+    <h4>Escolha uma técnica</h4>
+    <div class="grade">
+      <div class="cartao"><h5>Postura Desafiadora</h5><p>Gaste <strong>2 SP</strong> para
+      marcar um inimigo. Ele ataca qualquer alvo que não seja você com Desvantagem, até o
+      fim do seu próximo turno.</p></div>
+      <div class="cartao"><h5>Escudo Vínculo</h5><p>Ao ser atingido, use sua reação e
+      <strong>2 SP</strong> para somar sua proficiência à DEF contra aquele ataque — e
+      possivelmente transformá-lo em erro.</p></div>
+      <div class="cartao"><h5>Vigor do Sobrevivente</h5><p>Seus PV máximos aumentam em um
+      valor igual ao seu nível. Simples e sempre ligado.</p></div>
+      <div class="cartao"><h5>Interceptar</h5><p>Use sua reação para receber no seu lugar o
+      dano de um ataque que atingiria um aliado adjacente.</p></div>
+    </div>
+  </div>
+
+  <div class="classe">
+    <div class="classe-topo">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 36 V10" stroke="var(--bronze)" stroke-width="2.5"/>
+        <path d="M20 10 C26 4 34 6 34 14 C34 20 26 20 20 16 Z" fill="none" stroke="var(--acento)" stroke-width="2"/>
+        <path d="M20 10 C14 4 6 6 6 14 C6 20 14 20 20 16" fill="none" stroke="var(--acento)" stroke-width="2"/>
+      </svg>
+      <h3 style="margin:0;">Furioso</h3>
+    </div>
+    <p class="papel">Causa mais dano do que consegue evitar</p>
+    <p>Combatente agressivo. Bate mais forte que todo mundo e paga com a própria segurança.
+    Toda escolha sua é entre acertar melhor e acertar mais pesado.</p>
+
+    <div class="recursos">
+      <div class="recurso"><b>12 + CON</b><span>PV</span></div>
+      <div class="recurso"><b>14 + CON</b><span>SP</span></div>
+      <div class="recurso"><b>6 + DIV</b><span>MP</span></div>
+    </div>
+
+    <p><strong>Proficiências:</strong> armaduras leves, armas simples e marciais ·
+    Resistências de <strong>Fortitude</strong> e <strong>Reflexos</strong></p>
+    <p><strong>Perícias da classe</strong> (escolha duas): Atletismo, Intimidação, Percepção,
+    Sobrevivência</p>
+
+    <div class="destaque">
+      <span class="rotulo">Habilidade de classe · Ataque Feroz</span>
+      <p>Uma vez por turno, no seu primeiro ataque, você pode declarar um Ataque Feroz. O
+      ataque é feito com <strong>Vantagem</strong>, e o próximo ataque feito <em>contra
+      você</em> antes do seu próximo turno também tem Vantagem. Não custa nada.</p>
+    </div>
+
+    <h4>Escolha uma técnica</h4>
+    <div class="grade">
+      <div class="cartao"><h5>Ataque Pesado</h5><p>Antes de um ataque corpo a corpo, gaste
+      <strong>1 SP</strong>: <strong>−2</strong> na rolagem e, se acertar, some
+      <strong>mais um dado de dano da arma</strong>.
+      <em>Não pode ser combinado com Ataque Feroz.</em></p></div>
+      <div class="cartao"><h5>Investida Imprudente</h5><p>Depois de correr 6 metros em linha
+      reta até o alvo, gaste <strong>2 SP</strong> e ataque: se acertar, ele é empurrado 3
+      metros e cai, se falhar em Fortitude.</p></div>
+      <div class="cartao"><h5>Grito de Batalha</h5><p>Ação e <strong>2 SP</strong>. Inimigos
+      a até 3 metros fazem Teste de Vontade ou ficam Amedrontados por uma rodada.</p></div>
+      <div class="cartao"><h5>Sede de Sangue</h5><p>Ao reduzir um inimigo a 0 PV, recupere
+      <span class="dado">1d4</span> SP. Recompensa quem termina o serviço.</p></div>
+    </div>
+
+    <div class="nota">
+      <p><strong>A decisão do Furioso.</strong> Ataque Feroz contra alvo ágil e blindado;
+      Ataque Pesado contra alvo lento e mole. O ponto de virada fica por volta de
+      <strong>DEF 14</strong>. Olhe o inimigo antes de escolher.</p>
+    </div>
+  </div>
+
+  <div class="classe">
+    <div class="classe-topo">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 20 C10 11 30 11 36 20 C30 29 10 29 4 20 Z" fill="none" stroke="var(--bronze)" stroke-width="2"/>
+        <circle cx="20" cy="20" r="5.5" fill="none" stroke="var(--acento)" stroke-width="2"/>
+        <circle cx="20" cy="20" r="1.8" fill="var(--acento)"/>
+      </svg>
+      <h3 style="margin:0;">Oráculo</h3>
+    </div>
+    <p class="papel">Mantém todo mundo de pé e vê o que vem</p>
+    <p>Cura, suporte e manipulação do destino. É a classe com mais MP e a única que devolve
+    PV no meio da luta sem gastar o limite diário de tratamentos do grupo. Se ninguém no
+    grupo for Oráculo, todo ferimento vai doer o dobro.</p>
+
+    <div class="recursos">
+      <div class="recurso"><b>10 + CON</b><span>PV</span></div>
+      <div class="recurso"><b>8 + CON</b><span>SP</span></div>
+      <div class="recurso"><b>14 + DIV</b><span>MP</span></div>
+    </div>
+
+    <p><strong>Proficiências:</strong> armaduras leves, armas simples ·
+    Resistências de <strong>Vontade</strong> e <strong>Reflexos</strong></p>
+    <p><strong>Perícias da classe</strong> (escolha duas): Arcanismo, Mitologia, Intuição,
+    Persuasão</p>
+
+    <div class="destaque">
+      <span class="rotulo">Habilidade de classe · Fonte de Mana</span>
+      <p>Ação, toque, <strong>3 SP</strong>: o alvo — inclusive você — recupera
+      <span class="dado">1d4 + SAB</span> em MP. Você é a bateria do grupo.</p>
+    </div>
+
+    <h4>Escolha uma técnica</h4>
+    <div class="grade">
+      <div class="cartao"><h5>Palavra Curativa</h5><p>Ação bônus e <strong>2 MP</strong>: um
+      aliado visível a até 18 metros recupera <span class="dado">1d6 + SAB</span> PV.
+      Não gasta Tratamentos.</p></div>
+      <div class="cartao"><h5>Bênção da Coragem</h5><p>Ação, toque, <strong>2 MP</strong>:
+      até o fim da próxima rodada o aliado fica imune a Amedrontado e soma
+      <span class="dado">1d4</span> às rolagens de ataque.</p></div>
+      <div class="cartao"><h5>Visão do Infortúnio</h5><p>Ação e <strong>1 MP</strong>: um
+      inimigo visível faz Teste de Vontade ou tem Desvantagem na próxima rolagem de ataque.</p></div>
+      <div class="cartao"><h5>Presságio</h5><p>Fora de combate, um ritual de dez minutos e
+      <strong>3 MP</strong>: o Mestre te dá uma visão curta e enigmática sobre um plano que
+      vocês estão fazendo.</p></div>
+    </div>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 5 · Perícias</h3>
+  <p>Você começa com <strong>seis perícias proficientes</strong>: duas do Conceito Mortal,
+  duas da lista da Classe, e duas livres. Se algo vier repetido, escolha outra no lugar.</p>
+
+  <p>Ser proficiente significa somar seu <em class="termo">bônus de proficiência</em> —
+  <strong>+2</strong> no nível 1 — além do modificador de atributo. Sem proficiência, só o
+  modificador.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Força</th><th>Destreza</th><th>Inteligência</th><th>Sabedoria</th><th>Carisma</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Atletismo</td>
+          <td>Acrobacia<br>Furtividade<br>Prestidigitação</td>
+          <td>Arcanismo<br>Investigação<br>Manufatura<br>Mitologia</td>
+          <td>Intuição<br>Lidar com Animais<br>Percepção<br>Sobrevivência</td>
+          <td>Atuação<br>Enganação<br>Intimidação<br>Persuasão</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Testes de Resistência</h4>
+  <p>Três resistências defendem você do que não é um ataque comum. Sua classe te dá
+  proficiência em duas delas.</p>
+
+  <div class="grade">
+    <div class="cartao"><h5>Fortitude · CON</h5><p>Veneno, doença, exaustão, petrificação,
+    tudo que ataca o corpo por dentro.</p></div>
+    <div class="cartao"><h5>Reflexos · DES</h5><p>Explosões, armadilhas, desabamentos,
+    ataques em área — o que dá para desviar.</p></div>
+    <div class="cartao"><h5>Vontade · SAB</h5><p>Medo, ilusão, controle mental, encantamento,
+    manipulação.</p></div>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 6 · Parente Divino</h3>
+  <p>Qual dos deuses. Isso te dá bônus de atributo, uma <em class="termo">Afinidade
+  Elemental</em> — a cara que seus poderes têm — e uma habilidade passiva.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Parente</th><th>Bônus</th><th>Afinidade</th><th>Passiva</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Zeus</strong><br><span style="color:var(--texto-suave)">céus, trovão, justiça</span></td>
+            <td>+2 FOR<br>+1 CAR</td><td>Elétrico ou Ar</td>
+            <td><b>Filho dos Céus.</b> Vantagem em Percepção para notar monstros.</td></tr>
+        <tr><td><strong>Poseidon</strong><br><span style="color:var(--texto-suave)">mares, terremotos, cavalos</span></td>
+            <td>+2 FOR<br>+1 CON</td><td>Água</td>
+            <td><b>Filho do Mar.</b> Respira debaixo d'água e fala com criaturas marinhas e equinos.</td></tr>
+        <tr><td><strong>Hades</strong><br><span style="color:var(--texto-suave)">mortos, riquezas sob a terra</span></td>
+            <td>+2 CON<br>+1 SAB</td><td>Trevas ou Terra</td>
+            <td><b>Afinidade Necrótica.</b> Mortos-vivos menores não te atacam sem ordem. Resistência a dano necrótico.</td></tr>
+        <tr><td><strong>Atena</strong><br><span style="color:var(--texto-suave)">sabedoria, estratégia, artesanato</span></td>
+            <td>+2 INT<br>+1 SAB</td><td>Psíquico</td>
+            <td><b>Mente Estratégica.</b> Uma vez por combate, ação bônus: o Mestre revela uma resistência, vulnerabilidade ou imunidade de um inimigo.</td></tr>
+        <tr><td><strong>Ares</strong><br><span style="color:var(--texto-suave)">guerra, violência, fúria</span></td>
+            <td>+2 FOR<br>+1 CON</td><td>Físico</td>
+            <td><b>Fúria da Batalha.</b> Ao derrubar um inimigo corpo a corpo, ganhe PV temporários iguais à sua proficiência.</td></tr>
+        <tr><td><strong>Apolo</strong><br><span style="color:var(--texto-suave)">sol, música, arco, medicina</span></td>
+            <td>+2 DES<br>+1 CAR</td><td>Luz ou Som</td>
+            <td><b>Dom Artístico.</b> Proficiência em um instrumento e Vantagem em Percepção visual.</td></tr>
+        <tr><td><strong>Hefesto</strong><br><span style="color:var(--texto-suave)">fogo, forja, inventores</span></td>
+            <td>+2 INT<br>+1 CON</td><td>Fogo ou Metal</td>
+            <td><b>Mãos de Ferreiro.</b> Proficiência em Manufatura e, uma vez por dia, conserta um objeto de metal quebrado ao toque.</td></tr>
+        <tr><td><strong>Deméter</strong><br><span style="color:var(--texto-suave)">colheita, estações</span></td>
+            <td>+2 CON<br>+1 SAB</td><td>Natureza</td>
+            <td><b>Toque Verdejante.</b> Vantagem em Sobrevivência para achar comida e, uma vez por dia, cura um aliado em PV iguais à sua proficiência.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Atributo Divino</h4>
+  <p>Agora escolha <strong>como</strong> você controla seu elemento. Essa escolha é
+  <strong>permanente</strong>, define o atributo de todas as suas habilidades e determina seu
+  MP máximo e sua Memória.</p>
+
+  <div class="grade">
+    <div class="cartao"><h5>Inteligência</h5><p>Você controla o elemento por estudo, precisão
+    e compreensão. Você entendeu como funciona.</p></div>
+    <div class="cartao"><h5>Sabedoria</h5><p>Por instinto, sintonia e percepção. Você não
+    sabe explicar; você sente.</p></div>
+    <div class="cartao"><h5>Carisma</h5><p>Por vontade e imposição. O elemento obedece porque
+    você mandou.</p></div>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Etapa 7 · Finalização</h3>
+  <p>Escolha nome, idade, aparência, personalidade — e, o mais importante, <strong>como você
+  descobriu</strong>. Todo semideus tem uma cena em que o mundo virou de cabeça para baixo.
+  Escreva a sua.</p>
+
+  <h4>As contas finais</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>O quê</th><th>Como calcular</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PV / SP / MP máximos</strong></td><td>Da sua classe, somando CON (PV e SP) e o Atributo Divino (MP)</td></tr>
+        <tr><td><strong>DEF</strong></td><td>Da armadura + DES · sem armadura, <span class="dado">10 + DES</span></td></tr>
+        <tr><td><strong>Iniciativa</strong></td><td><span class="dado">1d20 + DES</span></td></tr>
+        <tr><td><strong>Movimento</strong></td><td>9 metros</td></tr>
+        <tr><td><strong>Bônus de ataque</strong></td><td>Modificador do atributo da arma + proficiência</td></tr>
+        <tr><td><strong>CD das suas habilidades</strong></td><td><span class="dado">8 + Atributo Divino + proficiência</span></td></tr>
+        <tr><td><strong>Memória</strong></td><td><span class="dado">2 + Atributo Divino</span> · mínimo 1, máximo 6</td></tr>
+        <tr><td><strong>Tratamentos</strong></td><td>Igual ao bônus de proficiência · 2 no nível 1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ==================== IV ==================== -->
+<section class="capitulo" id="cap4">
+  <div class="abertura">
+    <span class="alg">Capítulo Quatro</span>
+    <h2>Combate</h2>
+    <p>Curto, letal, e cheio de decisão</p>
+  </div>
+
+  <p class="abre">Quando a briga começa, todo mundo rola <span class="dado">1d20 + DES</span> —
+  a <em class="termo">Iniciativa</em> — e age nessa ordem. Uma volta completa é uma
+  <strong>rodada</strong>. Um combate típico dura três ou quatro.</p>
+
+  <h3>O que você faz no seu turno</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Você tem</th><th>Para quê</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Movimentação</strong></td><td>9 metros, divisíveis antes e depois da ação</td></tr>
+        <tr><td><strong>Uma ação</strong></td><td>A coisa principal que você faz</td></tr>
+        <tr><td><strong>Uma ação bônus</strong></td><td>Só se alguma habilidade sua conceder</td></tr>
+        <tr><td><strong>Uma interação simples</strong></td><td>Sacar arma, abrir porta, pegar algo, recarregar</td></tr>
+        <tr><td><strong>Uma fala breve</strong></td><td>Provocar, avisar, dar uma ordem curta</td></tr>
+        <tr><td><strong>Uma reação</strong></td><td>Fora do seu turno, quando um gatilho permitir</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Suas ações</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Atacar</h5><p><span class="dado">1d20 + atributo + proficiência</span>
+    contra a DEF do alvo. Acertou, role o dano da arma e some o atributo.</p></div>
+    <div class="cartao"><h5>Correr</h5><p>Movimento adicional igual ao seu movimento normal.
+    Gasta a ação, então você normalmente não ataca no mesmo turno.</p></div>
+    <div class="cartao"><h5>Desengajar</h5><p>Seu movimento não provoca ataques de
+    oportunidade até o fim do turno. É como se sai de perto de algo grande.</p></div>
+    <div class="cartao"><h5>Esquivar</h5><p>Ataques contra você têm Desvantagem e você tem
+    Vantagem em Reflexos, até o seu próximo turno.</p></div>
+    <div class="cartao"><h5>Ajudar</h5><p>Um aliado ganha Vantagem no próximo ataque contra
+    alguém adjacente a você, ou num teste em que você possa realmente contribuir.</p></div>
+    <div class="cartao"><h5>Esconder</h5><p>Furtividade contra a Percepção passiva
+    (10 + bônus) de quem procura. Precisa de cobertura ou escuridão.</p></div>
+    <div class="cartao"><h5>Preparar</h5><p>Declare um gatilho e uma resposta. Gasta sua
+    reação. <em>"Quando ele passar da porta, eu ataco."</em></p></div>
+    <div class="cartao"><h5>Estabilizar</h5><p>Ação e teste de Intuição CD 10 para impedir
+    que alguém a 0 PV morra. Com Kit Médico, com Vantagem.</p></div>
+    <div class="cartao"><h5>Agarrar ou Empurrar</h5><p>Atletismo contra Atletismo ou
+    Acrobacia do alvo. Sucesso: ele fica Agarrado, ou é empurrado 1,5 m, ou cai.</p></div>
+  </div>
+
+  <h3>Ataques de oportunidade</h3>
+  <div class="destaque">
+    <p>Quando um inimigo que você enxerga <strong>sai do seu alcance corpo a corpo usando o
+    movimento dele</strong>, você pode gastar sua <strong>reação</strong> para dar um ataque
+    nele antes que escape.</p>
+  </div>
+  <p>Não provoca: girar em volta do inimigo sem sair do alcance, usar Desengajar, ser
+  empurrado ou arremessado, e teletransporte.</p>
+
+  <h3>Cobertura</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Cobertura</th><th>Efeito</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Meia</strong> — mureta, carro, outra criatura</td><td>+2 DEF e +2 em Reflexos</td></tr>
+        <tr><td><strong>Três quartos</strong> — seteira, tronco grosso</td><td>+5 DEF e +5 em Reflexos</td></tr>
+        <tr><td><strong>Total</strong></td><td>Não pode ser alvo direto</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Condições que você vai ouvir</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Condição</th><th>O que significa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Agarrado</strong></td><td>Movimento zero até se soltar</td></tr>
+        <tr><td><strong>Amedrontado</strong></td><td>Desvantagem em ataques e testes enquanto vir a fonte; não pode se aproximar dela</td></tr>
+        <tr><td><strong>Caído</strong></td><td>Desvantagem nos seus ataques; corpo a corpo contra você tem Vantagem, à distância tem Desvantagem. Levantar custa metade do movimento</td></tr>
+        <tr><td><strong>Cego</strong></td><td>Desvantagem nos seus ataques, Vantagem nos ataques contra você</td></tr>
+        <tr><td><strong>Envenenado</strong></td><td>Desvantagem em ataques e testes de perícia</td></tr>
+        <tr><td><strong>Incapacitado</strong></td><td>Sem ação, sem ação bônus, sem reação</td></tr>
+        <tr><td><strong>Preso</strong></td><td>Movimento zero, Desvantagem em ataques e em Reflexos</td></tr>
+        <tr><td><strong>Atordoado</strong></td><td>Incapacitado, falha automática em Fortitude e Reflexos, Vantagem contra você</td></tr>
+        <tr><td><strong>Paralisado</strong></td><td>Como Atordoado, e todo acerto a até 1,5 m é crítico</td></tr>
+        <tr><td><strong>Inconsciente</strong></td><td>Incapacitado, Caído, sem perceber nada, e crítico a curta distância</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Quando você chega a 0 PV</h3>
+  <p>Você fica <strong>Inconsciente</strong> e <strong>Agonizante</strong>. No início de cada
+  um dos seus turnos, role <span class="dado">1d20</span> sem somar nada:</p>
+
+  <ul>
+    <li><strong>10 ou mais</strong> — um sucesso.</li>
+    <li><strong>9 ou menos</strong> — uma falha.</li>
+    <li><strong>20 natural</strong> — você acorda com 1 PV.</li>
+    <li><strong>1 natural</strong> — vale por duas falhas.</li>
+  </ul>
+
+  <p><strong>Três sucessos</strong> e você estabiliza. <strong>Três falhas</strong> e o
+  personagem morre. Sofrer dano nesse estado conta como uma falha — duas, se for crítico
+  ou de perto.</p>
+
+  <div class="nota">
+    <p><strong>Ferimento Grave.</strong> Quem chegou a 0 PV numa cena carrega, até o próximo
+    descanso longo com tratamento, PV máximos reduzidos em um valor igual ao seu nível.
+    Cair tem consequência mesmo quando você é salvo.</p>
+  </div>
+</section>
+
+<!-- ==================== V ==================== -->
+<section class="capitulo" id="cap5">
+  <div class="abertura">
+    <span class="alg">Capítulo Cinco</span>
+    <h2>Criação de habilidades</h2>
+    <p>O motor: pontos, alcance, duração e o que cada ponto compra</p>
+  </div>
+
+  <p class="abre">Este jogo não tem lista de magias. Você <strong>constrói</strong> cada
+  habilidade sua, comprando efeitos com pontos, e leva pronta para o Mestre aprovar. É a
+  parte do sistema em que o personagem deixa de ser uma ficha e passa a ser seu.</p>
+
+  <div class="destaque">
+    <span class="rotulo">A regra central</span>
+    <p>O elemento determina <strong>como</strong> a habilidade acontece. O motor determina
+    <strong>o que</strong> ela faz. Uma corrente de água, uma mão de sombras, raízes saindo
+    do chão e uma rajada de vento podem ter exatamente o mesmo perfil mecânico — e devem,
+    se custarem o mesmo.</p>
+  </div>
+
+  <h3>Primeiro: a Fonte</h3>
+  <p>Toda habilidade tem uma Fonte, e ela decide qual recurso você gasta e qual atributo
+  usa.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Fonte</th><th>Recurso</th><th>Atributo</th><th>O que é</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Elemental</strong></td><td>MP</td><td>Atributo Divino</td>
+            <td>Sua Afinidade: fogo, sombra, água, raio, plantas, telecinese</td></tr>
+        <tr><td><strong>Física</strong></td><td>SP</td><td>Força ou Destreza</td>
+            <td>Corpo e técnica: investidas, golpes giratórios, saltos, bloqueios</td></tr>
+        <tr><td><strong>Híbrida</strong></td><td>MP + SP</td><td>qualquer um dos dois</td>
+            <td>As duas juntas: a espada coberta de sombra, a investida em chamas</td></tr>
+        <tr><td><strong>Médica</strong></td><td>SP</td><td>Inteligência ou Sabedoria</td>
+            <td>Tratamento real, com kit e materiais. A <em>única</em> que cura PV</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Uma habilidade <strong>Híbrida</strong> divide o custo final entre os dois recursos como
+  você quiser, desde que a soma feche. Uma de custo 4 pode sair como 2 MP e 2 SP, 3 MP e
+  1 SP, ou 4 de um só — o que combinar com a descrição.</p>
+
+  <h4>As duas rolagens</h4>
+  <div class="destaque">
+    <p class="formula">Ataque de habilidade = 1d20 + atributo + proficiência</p>
+    <p class="formula">CD da habilidade = 8 + atributo + proficiência</p>
+  </div>
+  <p>Uma habilidade ofensiva usa <strong>uma das duas, nunca as duas</strong>. Ou você rola
+  para acertar, ou o alvo rola para resistir. Escolha na criação e deixe escrito.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>A conta do custo</h3>
+
+  <div class="destaque">
+    <span class="rotulo">A conta</span>
+    <p class="formula">CUSTO = duração + efeitos adicionais + alcance</p>
+  </div>
+
+  <p>Você começa pela <strong>duração</strong>, e ela já vem com <strong>um ponto de
+  efeito incluído</strong>. Depois soma os pontos de efeito extras que quiser, e por último
+  o alcance, se ele passar do normal. O custo nunca fica abaixo de 1.</p>
+
+  <h4>Duração</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Duração</th><th class="num">Custo</th><th>Como funciona</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instantânea</strong></td><td class="num">1</td>
+            <td>Resolve e acaba. O dano é o dano, o empurrão é o empurrão.</td></tr>
+        <tr><td><strong>Sustentada</strong></td><td class="num">2</td>
+            <td>Dura até o início do seu próximo turno. Para manter, pague a
+            <strong>metade do custo final</strong> no começo de cada turno seu.
+            Exige <strong>Concentração</strong>.</td></tr>
+        <tr><td><strong>Cena</strong></td><td class="num">4</td>
+            <td>Até o combate terminar, ou dez minutos. <em>Sem</em> Concentração — mas só
+            vale para efeitos que se gastam sozinhos, como PV temporários.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="destaque">
+    <span class="rotulo">Sustentar</span>
+    <p class="formula">por rodada = custo final ÷ 2, arredondado para baixo (mínimo 1)</p>
+  </div>
+
+  <p>Você mantém <strong>uma</strong> habilidade de Concentração por vez, e a perde se cair
+  inconsciente ou falhar num Teste de Fortitude ao sofrer dano (CD 10 ou metade do dano
+  recebido, o que for maior). Você pode encerrá-la de graça quando quiser.</p>
+
+  <div class="nota">
+    <p><strong>Sustentar quase sempre sai mais barato que reconjurar</strong> — mas não em
+    habilidades de um ponto só. Uma sustentada mínima custa 2 e mantém por 1, então três
+    rodadas saem por 4; reconjurar a instantânea três vezes sai por 3. Coisa pequena, deixe
+    instantânea.</p>
+  </div>
+
+  <h4>Alcance</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Alcance</th><th>Distância</th><th class="num">Custo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pessoal</strong></td><td>só você</td><td class="num">0</td></tr>
+        <tr><td><strong>Toque</strong></td><td>quem você tocar</td><td class="num">0</td></tr>
+        <tr><td><strong>Curto</strong></td><td>6 metros</td><td class="num">0</td></tr>
+        <tr><td><strong>Médio</strong></td><td>12 metros</td><td class="num">+1</td></tr>
+        <tr><td><strong>Longo</strong></td><td>18 metros</td><td class="num">+2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Formas de área</h4>
+  <p>Se o efeito for em área, a forma vem incluída no custo do efeito. Escolha uma:</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Forma</th><th>Tamanho padrão</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Explosão</strong></td><td>raio de 3 metros</td></tr>
+        <tr><td><strong>Cone</strong></td><td>3 metros</td></tr>
+        <tr><td><strong>Linha</strong></td><td>6 metros de comprimento por 1,5 de largura</td></tr>
+        <tr><td><strong>Zona</strong></td><td>raio de 3 metros, fica no lugar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Dobrar o tamanho da área custa <strong>+2</strong>. Uma Zona que permanece depois do seu
+  turno é uma habilidade <strong>sustentada</strong>.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>O que cada ponto compra</h3>
+
+  <p>Esta é a tabela central do capítulo. Cada linha é <strong>um ponto</strong>. Some quantos
+  quiser, misture efeitos diferentes, e lembre que o primeiro ponto já veio na duração.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Efeito</th><th>Um ponto compra</th><th>Rolagem</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dano em alvo único</strong></td>
+            <td><span class="dado">1d8</span></td><td>Ataque de habilidade</td></tr>
+        <tr><td><strong>Dano em área</strong></td>
+            <td><span class="dado">1d6</span> em todos na área</td>
+            <td>Reflexos: metade se passar</td></tr>
+        <tr><td><strong>Dano contínuo</strong></td>
+            <td><span class="dado">1d6</span> no fim do turno do alvo</td>
+            <td>—</td></tr>
+        <tr><td><strong>PV temporários</strong></td>
+            <td><span class="dado">1d8</span></td><td>—</td></tr>
+        <tr><td><strong>Cura</strong> <em>(só Fonte Médica)</em></td>
+            <td><span class="dado">1d8</span></td><td>—</td></tr>
+        <tr><td><strong>Movimento</strong></td><td>+3 metros</td><td>—</td></tr>
+        <tr><td><strong>Defesa</strong></td>
+            <td>+1 DEF <em>(o segundo ponto de DEF custa 2; máximo +2)</em></td><td>—</td></tr>
+        <tr><td><strong>Vantagem</strong></td>
+            <td>Vantagem em <em>uma</em> rolagem</td><td>—</td></tr>
+        <tr><td><strong>Empurrar ou puxar</strong></td><td>3 metros</td>
+            <td>Fortitude para resistir</td></tr>
+        <tr><td><strong>Condição fraca</strong></td><td>uma condição fraca</td>
+            <td>Resistência para evitar</td></tr>
+        <tr><td><strong>Condição média</strong></td><td colspan="2"><strong>2 pontos</strong> · Resistência para evitar, e repete no fim de cada turno</td></tr>
+        <tr><td><strong>Condição forte</strong></td><td colspan="2"><strong>4 pontos</strong> · Resistência para evitar, e repete no fim de cada turno</td></tr>
+        <tr><td><strong>Resistência a um tipo de dano</strong></td><td colspan="2"><strong>2 pontos</strong></td></tr>
+        <tr><td><strong>Teleporte</strong></td><td colspan="2"><strong>2 pontos</strong> · até 9 metros, para um lugar que você veja</td></tr>
+        <tr><td><strong>Ignorar terreno difícil</strong></td><td>por uma rodada</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="destaque">
+    <span class="rotulo">O modificador entra uma vez</span>
+    <p>Some o modificador do atributo da habilidade <strong>uma única vez</strong> ao total de
+    dano, PV temporários ou cura — não uma vez por ponto. Uma habilidade de 3 pontos de dano
+    causa <span class="dado">3d8 + mod</span>, não 3d8 + 3× mod.</p>
+  </div>
+
+  <h4>As três forças de condição</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Força</th><th class="num">Pontos</th><th>Condições</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fraca</strong></td><td class="num">1</td>
+            <td>Caído · movimento pela metade · −1 DEF · Desvantagem no próximo ataque ·
+            não pode usar reações · não pode se esconder</td></tr>
+        <tr><td><strong>Média</strong></td><td class="num">2</td>
+            <td>Amedrontado · Cego · Envenenado · Preso · Silenciado · Surdo ·
+            movimento zero · Desvantagem em todos os ataques</td></tr>
+        <tr><td><strong>Forte</strong></td><td class="num">4</td>
+            <td>Atordoado · Paralisado · Incapacitado</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Condição média ou forte <strong>sempre</strong> permite Teste de Resistência para
+  evitar, e um novo teste no fim de cada turno do alvo. Nenhuma condição pode ser aplicada
+  automaticamente.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Modificadores de custo</h3>
+  <p>Depois de somar tudo, ajuste. O custo nunca fica abaixo de 1.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Custa +1</h5>
+      <p class="etiqueta">Conveniência custa</p>
+      <p>Usa <strong>ação bônus</strong> · usa <strong>reação</strong> · tem gatilho
+      automático · funciona sem você ver o alvo · ignora cobertura · afeta vários aliados
+      individualmente.</p>
+    </div>
+    <div class="cartao">
+      <h5>Custa −1</h5>
+      <p class="etiqueta">A limitação tem que ser real</p>
+      <p>Só <strong>uma vez por combate</strong> · exige as duas mãos livres · causa
+      <span class="dado">1d6</span> em você · te deixa <strong>Caído</strong> · zera seu
+      movimento no turno · exige um componente raro · exige preparação de minutos ·
+      só funciona sob uma condição difícil.</p>
+    </div>
+  </div>
+
+  <div class="nota">
+    <p>Uma redução que não muda nada na prática não vale desconto. "Só funciona de noite"
+    numa campanha que só acontece de noite é −0. O Mestre é o juiz disso, e deve ser chato
+    nessa hora.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Habilidades passivas</h3>
+
+  <p>Uma passiva fica <strong>sempre ligada</strong>. Não custa MP nem SP para usar, não
+  precisa de ação, não pode ser desligada — e é justamente por isso que ela cobra um preço
+  que sai do seu corpo.</p>
+
+  <div class="destaque">
+    <span class="rotulo">O preço de uma passiva</span>
+    <p>Cada passiva preparada custa, permanentemente enquanto estiver preparada:</p>
+    <p><strong>−1 ponto</strong> no valor de <strong>Inteligência</strong> ou de
+    <strong>Constituição</strong>, à sua escolha, <strong>e −1</strong> no máximo do recurso
+    que aquele atributo alimenta — <strong>MP</strong> se foi Inteligência,
+    <strong>SP</strong> se foi Constituição.</p>
+  </div>
+
+  <p>As regras do sacrifício:</p>
+  <ul>
+    <li>O atributo escolhido <strong>não pode ser o que a passiva melhora</strong>, nem
+    alimentar o mesmo valor que ela melhora. Uma passiva de DEF não se paga com Destreza.</li>
+    <li>Nenhum atributo desce abaixo de <strong>8</strong>.</li>
+    <li>A passiva <strong>ocupa um espaço de Memória</strong>, como qualquer habilidade.</li>
+    <li>Abandonar a passiva num Interlúdio devolve o ponto e o recurso.</li>
+  </ul>
+
+  <h4>O que uma passiva pode e não pode</h4>
+  <div class="grade">
+    <div class="cartao">
+      <h5>Pode</h5>
+      <p>Um efeito fraco, do tamanho de <strong>um ponto</strong>: +1 DEF · +1,5 m de
+      movimento · +1 em uma perícia · enxergar no escuro comum · respirar num meio hostil ·
+      resistência a um perigo ambiental · Vantagem numa categoria estreita de teste.</p>
+    </div>
+    <div class="cartao">
+      <h5>Não pode</h5>
+      <p><strong>Causar dano</strong>, de nenhuma forma · curar · somar às suas rolagens de
+      ataque ou de dano · conceder Vantagem em ataques · aplicar condições · ter efeitos
+      adicionais. Uma passiva é um ponto, e um ponto só.</p>
+    </div>
+  </div>
+
+  <p>Passivas com o mesmo efeito não se acumulam. Duas fontes de +1 DEF continuam sendo
+  +1 DEF.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Passiva</th><th>Efeito</th><th>Sacrifício possível</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pele de Pedra</strong></td><td>+1 DEF</td>
+            <td>Inteligência — a pedra não pensa rápido</td></tr>
+        <tr><td><strong>Passos Ligeiros</strong></td><td>+1,5 m de movimento</td>
+            <td>Constituição — corpo leve aguenta menos</td></tr>
+        <tr><td><strong>Olhos das Sombras</strong></td><td>Enxerga na escuridão comum</td>
+            <td>Constituição ou Inteligência</td></tr>
+        <tr><td><strong>Pulmão de Profundeza</strong></td><td>Respira debaixo d'água</td>
+            <td>Inteligência</td></tr>
+        <tr><td><strong>Mão Firme</strong></td><td>+1 em Manufatura</td>
+            <td>Constituição</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Memória</h3>
+  <div class="destaque">
+    <p class="formula">Memória = 2 + modificador do Atributo Divino</p>
+  </div>
+  <p>Mínimo 1, máximo 6. É quantas habilidades você mantém <strong>preparadas</strong> ao
+  mesmo tempo. Cada habilidade ocupa um espaço, independentemente do custo — passivas
+  incluídas.</p>
+  <p>Você pode <strong>conhecer</strong> quantas quiser. Depois de um descanso longo, escolhe
+  quais entram na Memória. O resto fica anotado na ficha, esperando.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Três limites que valem sempre</h3>
+
+  <ul>
+    <li><strong>Habilidades elementais não curam PV.</strong> Elas protegem, dão PV
+    temporários, impedem dano e removem condições — mas fechar ferimento é trabalho da Fonte
+    Médica, de um item, ou do Oráculo.</li>
+    <li><strong>Manifestações livres não têm efeito mecânico.</strong> Fazer uma sombra se
+    mexer, uma faísca aparecer, uma poça ondular: de graça, sem ação, quando quiser. No
+    instante em que aquilo der uma vantagem de regra, virou habilidade e tem custo.</li>
+    <li><strong>Ataque ou resistência, nunca os dois.</strong> Uma habilidade ofensiva pede
+    uma rolagem sua ou uma rolagem do alvo. Não as duas.</li>
+  </ul>
+
+  <div class="nota">
+    <p><strong>Ressonância Elemental.</strong> Em contato com uma manifestação natural e forte
+    do seu domínio — o mar, uma tempestade, uma forja acesa, uma floresta —, você recupera
+    <strong>1 PV por turno</strong>. Só funciona se você ainda tiver ao menos dois terços dos
+    seus PV, e nunca com um elemento que você mesmo criou. É a única forma de o seu elemento
+    devolver vida.</p>
+  </div>
+
+  <div class="ornamento">❖ ❖ ❖</div>
+
+  <h3>Oito habilidades montadas com o motor</h3>
+  <p>Confira as contas. Todas são de nível 1 e nenhuma passa de 5 pontos.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Habilidade</th><th>Efeito</th><th>Duração</th><th>Alcance</th>
+        <th class="num">Custo</th><th class="num">Sustentar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Dardo de Sombras</strong></td><td><span class="dado">1d8</span> + mod, alvo único</td>
+            <td>Instantânea</td><td>Médio</td><td class="num">2</td><td class="num">—</td></tr>
+        <tr><td><strong>Passo do Vento</strong></td><td>+3 m de movimento</td>
+            <td>Instantânea</td><td>Pessoal</td><td class="num">1</td><td class="num">—</td></tr>
+        <tr><td><strong>Explosão de Brasa</strong></td><td><span class="dado">2d6</span> + mod em área, Reflexos</td>
+            <td>Instantânea</td><td>Médio</td><td class="num">3</td><td class="num">—</td></tr>
+        <tr><td><strong>Golpe Trovejante</strong></td><td><span class="dado">2d8</span> + mod e o alvo cai</td>
+            <td>Instantânea</td><td>Curto</td><td class="num">3</td><td class="num">—</td></tr>
+        <tr><td><strong>Raízes Agarradoras</strong></td><td>Preso (condição média)</td>
+            <td>Sustentada</td><td>Médio</td><td class="num">4</td><td class="num">2</td></tr>
+        <tr><td><strong>Escudo de Água</strong></td><td>+2 DEF</td>
+            <td>Sustentada</td><td>Pessoal</td><td class="num">4</td><td class="num">2</td></tr>
+        <tr><td><strong>Lança de Gelo</strong></td><td><span class="dado">3d8</span> + mod, alvo único</td>
+            <td>Instantânea</td><td>Longo</td><td class="num">5</td><td class="num">—</td></tr>
+        <tr><td><strong>Couraça de Pedra</strong></td><td><span class="dado">2d8</span> + mod em PV temporários</td>
+            <td>Cena</td><td>Pessoal</td><td class="num">5</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Como a conta de duas delas foi feita</h4>
+  <p><strong>Explosão de Brasa.</strong> Instantânea (1, e vem com o primeiro ponto de efeito)
+  + um ponto de área a mais (1) + alcance médio (1) = <strong>3</strong>. Dois pontos de área
+  são <span class="dado">2d6</span>, mais o modificador uma vez.</p>
+  <p><strong>Raízes Agarradoras.</strong> Sustentada (2, com o primeiro ponto) + o segundo
+  ponto da condição média (1) + alcance médio (1) = <strong>4</strong>. Sustentar custa
+  4 ÷ 2 = <strong>2</strong> por rodada, e exige Concentração.</p>
+
+  <div class="nota">
+    <p><strong>O que o motor foi calibrado para fazer.</strong> Uma habilidade de 1 ponto
+    empata em dano com uma espada longa — o que ela compra a mais é alcance, tipo de dano e a
+    chance de levar um efeito junto. De 2 pontos em diante ela passa a arma. O dano em área
+    perde para o alvo único contra um inimigo e ganha a partir de dois. E nem gastando os 17
+    MP dela em ataques a Oráculo alcança o dano de um dia do Furioso, que não gasta nada —
+    quem paga em MP compra escolha, não dano bruto.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Modelo para registrar</h3>
+  <p>Toda habilidade criada entra na ficha assim. Se algum campo estiver em branco, ela não
+  está pronta.</p>
+
+  <div class="destaque">
+    <p style="font-family: var(--mono); font-size: .9rem; line-height: 1.9; margin: 0;">
+      Nome:<br>
+      Fonte: Elemental · Física · Híbrida · Médica<br>
+      Afinidade ou estilo:<br>
+      Atributo:<br>
+      Duração:<br>
+      Alcance:<br>
+      Alvo ou área:<br>
+      Efeitos e pontos:<br>
+      Modificadores de custo:<br>
+      <strong>Custo final:</strong><br>
+      Sustentar por rodada:<br>
+      Tipo de ação:<br>
+      Rolagem: ataque <em>ou</em> resistência<br>
+      Concentração: sim · não<br>
+      Limitações:<br>
+      Descrição:
+    </p>
+  </div>
+
+  <h4>As etapas, em ordem</h4>
+  <ol class="passos">
+    <li><b>Conceito</b> O que você quer que aconteça na mesa, em uma frase.</li>
+    <li><b>Fonte</b> Elemental, Física, Híbrida ou Médica. Isso fixa recurso e atributo.</li>
+    <li><b>Duração</b> Instantânea, sustentada ou cena. Ela já traz o primeiro ponto.</li>
+    <li><b>Efeitos</b> Compre os pontos extras na tabela. Misture o que quiser.</li>
+    <li><b>Alcance e área</b> Só pague se passar do normal.</li>
+    <li><b>Rolagem</b> Ataque de habilidade ou Teste de Resistência. Uma só.</li>
+    <li><b>Modificadores</b> Ajuste com os +1 e os −1 que forem honestos.</li>
+    <li><b>Some</b> E confira o custo de sustentar, se houver.</li>
+    <li><b>Descreva</b> Dê nome e diga como fica quando acontece.</li>
+    <li><b>Aprove</b> Leve ao Mestre. Ele pode pedir mudança, e é para isso que ele existe.</li>
+  </ol>
+</section>
+
+<section class="capitulo" id="cap6">
+  <div class="abertura">
+    <span class="alg">Capítulo Seis</span>
+    <h2>Entre aventuras</h2>
+    <p>Descanso, comida e o tempo em que você vira alguém</p>
+  </div>
+
+  <p class="abre">Um semideus não é feito nas brigas. É feito no que acontece entre elas —
+  no treino, na oficina, na mesa de jantar, na conversa difícil que ficou pendente.</p>
+
+  <h3>Descanso</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Descanso</th><th>Tempo</th><th>PV</th><th>SP</th><th>MP</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fôlego</strong></td><td>1 minuto</td><td>—</td><td>1 + CON</td><td>—</td></tr>
+        <tr><td><strong>Curto</strong></td><td>1 hora</td><td>só por Tratamento</td><td><strong>tudo</strong></td><td>—</td></tr>
+        <tr><td><strong>Longo</strong></td><td>8 horas</td><td><strong>metade do máximo</strong></td><td><strong>tudo</strong></td><td><strong>tudo</strong></td></tr>
+        <tr><td><strong>Interlúdio</strong></td><td>dias</td><td><strong>tudo</strong></td><td><strong>tudo</strong></td><td><strong>tudo</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>PV não voltam por inteiro dormindo.</strong> Isso é de propósito: ferimento
+    dura, e é o que transforma uma sequência de brigas numa campanha de verdade.</p>
+  </div>
+
+  <h4>Tratamentos</h4>
+  <p>Você tem um número de <em class="termo">Tratamentos</em> igual ao seu bônus de
+  proficiência — <strong>2 no nível 1</strong> —, recuperados no descanso longo. Cada um custa
+  <strong>uma ação e 2 SP</strong> e devolve <span class="dado">1d6 + CON</span> PV. Com um
+  Kit Médico, <span class="dado">1d8</span>. Fora de combate.</p>
+  <p>Cura paga em <strong>MP</strong> não gasta Tratamento. É por isso que ter um Oráculo no
+  grupo é diferente de ter uma caixa de curativos.</p>
+
+  <h3>Refeições</h3>
+  <p>Ninguém precisa anotar rações. Mas parar para comer bem é uma decisão com efeito, e
+  recompensa quem investiu em Sobrevivência e Manufatura.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Refeição</th><th class="num">CD</th><th>O que dá para cada um na mesa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Simples</strong></td><td class="num">—</td><td>Só evita passar fome</td></tr>
+        <tr><td><strong>Boa</strong></td><td class="num">10</td><td><span class="dado">1d4</span> PV temporários e Vantagem no primeiro Teste de Fortitude</td></tr>
+        <tr><td><strong>Farta</strong></td><td class="num">13</td><td>PV temporários iguais a nível + CON, e +1 numa perícia à escolha de cada um</td></tr>
+        <tr><td><strong>Grandiosa</strong></td><td class="num">16</td><td>Tudo da Farta, mais <strong>1 Ânimo</strong> para cada participante</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><em class="termo">Ânimo</em> é uma ficha guardada: gaste para receber Vantagem em uma
+  rolagem qualquer. Você carrega no máximo um, e ele some no próximo descanso longo. É a
+  memória de uma boa noite antes de uma manhã ruim.</p>
+
+  <div class="nota">
+    <p>Uma refeição Grandiosa exige o grupo sentado junto, sem pressa. Se vocês estão
+    fugindo, não tem banquete. O bônus é da cena, não da comida.</p>
+  </div>
+
+  <h3>O Interlúdio</h3>
+  <p>Entre missões, todo mundo recupera tudo, cura Ferimentos Graves, e recebe
+  <strong>Ações de Interlúdio</strong>: 1 para alguns dias, 2 para uma semana, 4 para um mês,
+  6 para uma estação inteira.</p>
+
+  <div class="grade">
+    <div class="cartao"><h5>Treinar</h5><p>Três Ações no mesmo atributo e ele sobe
+    <strong>+1</strong> — adiantado da sua cota do próximo nível. Precisa de um teste CD 15
+    e, de preferência, de um mentor.</p></div>
+    <div class="cartao"><h5>Criar ou melhorar</h5><p>Cada Ação é um período de trabalho com
+    um Kit de Criação: fabricar, subir a classe de um item, reparar, desmontar.</p></div>
+    <div class="cartao"><h5>Desenvolver uma habilidade</h5><p>Uma Ação para projetar e
+    treinar uma habilidade nova pelo motor do Capítulo Cinco. Teste de <strong>Arcanismo</strong>
+    (elemental), <strong>Atletismo</strong> (física) ou <strong>Manufatura</strong>
+    (médica) contra <strong>CD 10 + o custo</strong> dela. Em uma falha, você entende onde
+    errou e tenta de novo no próximo Interlúdio.</p></div>
+    <div class="cartao"><h5>Convalescer</h5><p>Remove um Ferimento Grave, uma doença ou um
+    veneno persistente. Alguém pode gastar a Ação dele para te dar Vantagem.</p></div>
+    <div class="cartao"><h5>Pesquisar</h5><p>Investigação ou Mitologia para descobrir um fato
+    concreto sobre um monstro, um lugar, uma profecia ou uma família.</p></div>
+    <div class="cartao"><h5>Fortalecer um Vínculo</h5><p>Tempo com alguém que importa. Vale
+    Vantagem numa rolagem por causa dessa pessoa, um favor concreto, ou recusar uma Ruptura
+    de graça. Até três ativos.</p></div>
+    <div class="cartao"><h5>Buscar a Bênção</h5><p>Oferendas ao seu parente divino, com um
+    teste CD 15. Deuses são irregulares — e uma falha feia atrai atenção que você não
+    queria.</p></div>
+    <div class="cartao"><h5>Confrontar a Húbris</h5><p>Cinco Ações acumuladas e você pode
+    trocar seu defeito fatal, ou abrandá-lo. Nunca removê-lo: semideus não deixa de ter
+    defeito fatal.</p></div>
+  </div>
+</section>
+
+<!-- ==================== VII ==================== -->
+<section class="capitulo" id="cap7">
+  <div class="abertura">
+    <span class="alg">Capítulo Sete</span>
+    <h2>Uma ficha pronta</h2>
+    <p>As sete etapas aplicadas do começo ao fim</p>
+  </div>
+
+  <p class="abre">Acompanhe as decisões, não só os números. Elas mostram como as etapas
+  conversam entre si — e por que uma ficha boa tem uma fraqueza que o jogador quis ter.</p>
+
+  <div class="ficha">
+    <div class="ficha-cabeca">
+      <h4>Guardiã · Nível 1 · Filha de Ares</h4>
+      <p class="nome">Cássia Duarte</p>
+    </div>
+    <div class="ficha-corpo">
+      <div class="atributos">
+        <div class="atributo"><span class="sigla">For</span><span class="valor">17</span><span class="mod">+3</span></div>
+        <div class="atributo"><span class="sigla">Des</span><span class="valor">13</span><span class="mod">+1</span></div>
+        <div class="atributo"><span class="sigla">Con</span><span class="valor">15</span><span class="mod">+2</span></div>
+        <div class="atributo"><span class="sigla">Int</span><span class="valor">10</span><span class="mod">+0</span></div>
+        <div class="atributo"><span class="sigla">Sab</span><span class="valor">12</span><span class="mod">+1</span></div>
+        <div class="atributo"><span class="sigla">Car</span><span class="valor">8</span><span class="mod">−1</span></div>
+      </div>
+
+      <div class="recursos">
+        <div class="recurso"><b>16</b><span>PV</span></div>
+        <div class="recurso"><b>14</b><span>SP</span></div>
+        <div class="recurso"><b>7</b><span>MP</span></div>
+        <div class="recurso"><b>17</b><span>DEF</span></div>
+        <div class="recurso"><b>+2</b><span>Prof.</span></div>
+      </div>
+
+      <p><strong>Conceito Mortal:</strong> Problemática — cresceu apanhando e batendo em três
+      escolas diferentes. <em>Instinto de Briga:</em> soma FOR à Iniciativa, então rola
+      <span class="dado">1d20 + 4</span>.</p>
+
+      <p><strong>Húbris:</strong> Fúria Incontrolável. O Mestre já sabe como provocá-la.</p>
+
+      <p><strong>Classe:</strong> Guardiã. PV 14+2, SP 12+2, MP 6+1. Técnica escolhida:
+      <strong>Interceptar</strong> — ela existe para receber o golpe dos outros.</p>
+
+      <p><strong>Perícias:</strong> Intimidação e Furtividade (Conceito) · Atletismo e
+      Percepção (Classe) · Intuição e Sobrevivência (livres).
+      <strong>Resistências:</strong> Fortitude +4, Vontade +3, Reflexos +1.</p>
+
+      <p><strong>Parente Divino:</strong> Ares. +2 FOR e +1 CON já somados acima. Afinidade
+      <strong>Física</strong>. <em>Fúria da Batalha:</em> ao derrubar alguém corpo a corpo,
+      ganha 2 PV temporários.</p>
+
+      <p><strong>Atributo Divino:</strong> Sabedoria — ela não estuda o poder, ela sente.
+      Memória = 2 + 1 = <strong>3</strong>. CD das habilidades = 8 + 1 + 2 = <strong>11</strong>.</p>
+
+      <p><strong>Equipamento:</strong> peitoral e escudo (DEF 14 + 1 + 2 = 17), espada longa
+      <span class="dado">1d8 + 3</span>, ataque <span class="dado">1d20 + 5</span>.</p>
+
+      <p><strong>Como descobriu:</strong> uma briga de rua que ela deveria ter perdido, e não
+      perdeu. O outro garoto tinha chifres.</p>
+    </div>
+  </div>
+
+  <div class="nota">
+    <p><strong>Repare no que aconteceu.</strong> O Carisma 8 foi escolha: Cássia é péssima em
+    conversar, e isso força o grupo a resolver conversas sem ela — o que gera cena. Uma ficha
+    boa tem uma fraqueza que o jogador queria ter.</p>
+  </div>
+</section>
+
+<!-- ==================== COLOFÃO ==================== -->
+<footer class="colofao">
+  <h3>Sobre esta edição</h3>
+  <p><strong>Números.</strong> Este livro usa a versão corrigida das classes — a que passou
+  pelas simulações de balanceamento, não a primeira escrita. As diferenças principais estão
+  no Guardião, que era a classe mais frágil do jogo, no Ataque Pesado, que era escolha
+  obrigatória, e no Ataque Feroz, que agora não se acumula com ele.</p>
+
+  <p><strong>O que ainda falta.</strong> A progressão dos níveis 2 ao 20 e o capítulo
+  completo de armaduras e preços. As armaduras usadas aqui são provisórias.</p>
+
+  <p><strong>O motor de habilidades foi testado.</strong> As tabelas do Capítulo Cinco não
+  são chute: cada faixa de custo foi medida contra o dano de uma arma, contra o número de
+  alvos que justifica uma área, e contra o orçamento de MP de um dia inteiro de aventura.</p>
+
+  <p><strong>Outros livros.</strong> O <em>Bestiário</em> é do Mestre: traz a Escala de Kleos,
+  o motor de criação de monstros e 38 criaturas, do sátiro errante a Tifão.</p>
+</footer>
+
+</div><!-- /mancha -->
+
+<!-- ==================== CONTRACAPA ==================== -->
+<div class="capa-pagina fundo">
+  <img src="{{CONTRACAPA}}" alt="Contracapa de A Ascensão dos Semideuses RPG: um pégaso empinado em gravura preta sobre fundo claro">
+</div>
+
+</div><!-- /livro -->
+
+<script>
+var visor = document.getElementById('visor');
+var detalhe = document.getElementById('detalhe');
+var BONUS = 5, CD = 13;
+
+function d20() { return Math.floor(Math.random() * 20) + 1; }
+
+function rolar(modo) {
+  var a = d20(), b = d20(), nat, explicacao;
+
+  if (modo === 'vantagem') {
+    nat = Math.max(a, b);
+    explicacao = 'Vantagem: dois dados, <b>' + a + '</b> e <b>' + b + '</b>, fica o maior. ';
+  } else if (modo === 'desvantagem') {
+    nat = Math.min(a, b);
+    explicacao = 'Desvantagem: dois dados, <b>' + a + '</b> e <b>' + b + '</b>, fica o menor. ';
+  } else {
+    nat = a;
+    explicacao = 'Um dado: <b>' + a + '</b>. ';
+  }
+
+  var total = nat + BONUS;
+  visor.textContent = total;
+  visor.className = 'rolador-visor';
+
+  var veredito;
+  if (nat === 20) {
+    visor.classList.add('critico');
+    veredito = '<b>20 natural.</b> A porta sai da dobradiça inteira.';
+  } else if (nat === 1) {
+    visor.classList.add('falha');
+    veredito = '<b>1 natural.</b> Você acerta o ombro na madeira e ela nem range.';
+  } else if (total >= CD) {
+    veredito = '<b>' + total + '</b> contra CD 13: <b>passou</b>. A porta cede.';
+  } else {
+    visor.classList.add('falha');
+    veredito = '<b>' + total + '</b> contra CD 13: <b>faltou ' + (CD - total) + '</b>. ' +
+               'A porta aguenta — e alguém do outro lado ouviu.';
+  }
+
+  detalhe.innerHTML = explicacao + 'Somando o bônus de +5, deu <b>' + total + '</b>.<br>' + veredito;
+}
+</script>

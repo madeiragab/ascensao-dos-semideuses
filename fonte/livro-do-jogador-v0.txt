@@ -1,0 +1,3049 @@
+﻿1. CRIAÇÃO DE PERSONAGEM
+A criação de um semideus segue esta ordem:
+1. Atributos Base
+2. Conceito Mortal
+3. Húbris
+4. Classe
+5. Perícias
+6. Parente Divino
+7. Finalização do Personagem
+8. Equipamento — será desenvolvido posteriormente
+________________
+
+
+2. ATRIBUTOS BASE
+Todo personagem possui seis atributos.
+Força — FOR
+Representa força muscular, capacidade de levantar peso, empurrar, saltar e realizar ataques físicos.
+Destreza — DES
+Representa agilidade, coordenação, equilíbrio, precisão, velocidade de reação e capacidade de se mover silenciosamente.
+Constituição — CON
+Representa resistência física, vitalidade, saúde e capacidade de suportar ferimentos, doenças e venenos.
+Inteligência — INT
+Representa conhecimento, raciocínio, memória, investigação e capacidade técnica.
+Sabedoria — SAB
+Representa percepção, intuição, instinto, atenção e força de vontade.
+Carisma — CAR
+Representa presença, confiança, capacidade de comunicação, manipulação e influência social.
+________________
+
+
+2.1 Distribuição padrão
+O método padrão de criação utiliza os seguintes valores:
+15, 14, 13, 12, 10 e 8
+O jogador distribui um valor diferente entre cada um dos seis atributos.
+Este é o método recomendado para manter personagens equilibrados.
+________________
+
+
+2.2 Distribuição aleatória
+Como método opcional, o jogador pode gerar cada atributo rolando:
+4d6, descartando o menor resultado e somando os três maiores.
+O processo é repetido seis vezes. Depois, os seis resultados são distribuídos entre os atributos.
+________________
+
+
+2.3 Modificadores de atributo
+O valor de um atributo gera um modificador.
+Valor do atributo
+	Modificador
+	1
+	−5
+	2–3
+	−4
+	4–5
+	−3
+	6–7
+	−2
+	8–9
+	−1
+	10–11
+	+0
+	12–13
+	+1
+	14–15
+	+2
+	16–17
+	+3
+	18–19
+	+4
+	20
+	+5
+	O modificador pode ser calculado pela fórmula:
+Modificador = valor do atributo − 10, dividido por 2 e arredondado para baixo.
+________________
+
+
+3. CONCEITO MORTAL
+O Conceito Mortal representa quem o personagem era antes de descobrir sua origem divina.
+Cada Conceito Mortal concede:
+* duas perícias proficientes;
+* uma habilidade exclusiva;
+* uma base narrativa para a história do personagem.
+________________
+
+
+3.1 Atleta
+O personagem se dedicava a esportes, competições e treinamento físico.
+Perícias: Atletismo e Acrobacia.
+Pique de Adrenalina
+Quando utiliza a ação Correr em combate, o personagem pode gastar 2 SP para aumentar sua movimentação em 3 metros durante aquele turno.
+________________
+
+
+3.2 Rato de Biblioteca
+O personagem dedicava grande parte de sua vida ao estudo e à busca de conhecimento.
+Perícias: Mitologia e Investigação.
+Conhecimento Aplicado
+Ao realizar um teste baseado em Inteligência, o personagem pode gastar 2 MP para receber +5 no teste.
+________________
+
+
+3.3 Artista de Rua
+O personagem aprendeu a sobreviver utilizando talento, carisma e habilidade manual.
+Perícias: Atuação e Prestidigitação.
+Plateia Cativante
+Uma vez por sessão, o personagem pode realizar uma apresentação para um grupo de mortais.
+Com um teste bem-sucedido de Atuação, pode conseguir informações básicas ou uma pequena quantia de dinheiro.
+________________
+
+
+3.4 Problemático
+O personagem cresceu cercado por brigas, confusões e problemas.
+Perícias: Intimidação e Furtividade.
+Instinto de Briga
+O personagem adiciona seu modificador de Força à sua Iniciativa.
+________________
+
+
+3.5 Sobrevivencialista
+O personagem possui experiência com natureza, exploração e sobrevivência.
+Perícias: Sobrevivência e Percepção.
+Um com a Natureza
+O personagem sempre sabe onde fica o norte.
+Em ambientes selvagens, pode encontrar comida e água para si e mais uma pessoa após uma hora de busca, sem precisar realizar um teste.
+________________
+
+
+3.6 Socorrista
+O personagem possuía treinamento ou experiência em primeiros socorros.
+Perícias: Intuição e Persuasão.
+Primeiros Socorros
+O personagem pode gastar uma ação e 2 SP para tocar uma criatura consciente.
+A criatura recupera 1d6 Pontos de Vida.
+A habilidade não funciona em criaturas com 0 PV.
+________________
+
+
+3.7 Cérebro Digital
+O personagem possui experiência com computadores, internet, máquinas e dispositivos eletrônicos.
+Perícias: Investigação e Manufatura.
+Familiaridade Tecnológica
+O personagem pode utilizar Manufatura no lugar de Prestidigitação para interagir com dispositivos eletrônicos.
+________________
+
+
+3.8 Herdeiro
+O personagem cresceu em uma família rica, influente ou poderosa.
+Perícias: Persuasão e Intuição.
+Recursos da Família
+Uma vez por missão, o personagem pode utilizar suas conexões para conseguir uma vantagem no mundo mortal.
+Exemplos:
+* acesso a um local restrito;
+* um objeto mundano caro;
+* transporte ou passagem;
+* ajuda de um contato.
+O benefício final deve ser aprovado pelo Mestre.
+________________
+
+
+4. HÚBRIS
+A Húbris representa o defeito fatal do personagem.
+Ela orienta a interpretação e pode ser explorada pelo Mestre para criar conflitos, tentações e consequências narrativas.
+A Húbris ainda não possui uma mecânica própria de recompensa ou punição.
+________________
+
+
+4.1 Arrogância
+O personagem acredita ser superior aos outros e frequentemente subestima seus inimigos.
+________________
+
+
+4.2 Lealdade Pessoal Excessiva
+O personagem coloca seus amigos e pessoas importantes acima da missão, da lógica e da própria segurança.
+________________
+
+
+4.3 Ambição Desmedida
+O personagem possui uma necessidade intensa de conquistar poder, glória ou reconhecimento.
+Pode tomar decisões perigosas ou questionáveis para se tornar mais forte ou importante.
+________________
+
+
+4.4 Fúria Incontrolável
+O personagem perde o controle quando é provocado, humilhado ou frustrado.
+________________
+
+
+4.5 Ingenuidade Crônica
+O personagem confia facilmente e acredita no melhor das pessoas, mesmo quando existem sinais de perigo.
+________________
+
+
+4.6 Rancor Obsessivo
+O personagem não consegue esquecer ofensas, humilhações e traições.
+________________
+
+
+5. CLASSES
+A Classe representa o treinamento, o estilo de combate e a maneira como o personagem utiliza seus recursos.
+As três classes atualmente existentes são:
+* Guardião;
+* Furioso;
+* Oráculo.
+As regras abaixo representam somente as características iniciais de nível 1. A progressão completa ainda deverá ser revisada.
+________________
+
+
+6. GUARDIÃO
+O Guardião é um combatente defensivo, especializado em resistência, proteção e controle do campo de batalha.
+Recursos iniciais
+* PV Máximos: 6 + modificador de CON.
+* SP Máximos: 13 + modificador de CON.
+* MP Máximos: 8 + modificador de INT.
+Proficiências
+* Armaduras leves;
+* armaduras médias;
+* escudos;
+* armas simples;
+* armas marciais;
+* Fortitude.
+Perícias da classe
+Escolha duas:
+* Atletismo;
+* Intuição;
+* Intimidação;
+* Percepção.
+Maestria em Armaduras
+O Guardião possui proficiência com armaduras leves, armaduras médias e escudos.
+________________
+
+
+Técnicas de Guardião — Tier 1
+No nível 1, o Guardião escolhe uma técnica.
+Postura Desafiadora
+Gaste 2 SP para marcar um inimigo.
+O inimigo possui desvantagem em ataques contra alvos que não sejam o Guardião.
+A duração da marca ainda precisa ser definida.
+Escudo Vínculo
+Quando for atingido, use sua reação e gaste 2 SP para adicionar seu bônus de proficiência à DEF contra aquele ataque.
+Vigor do Sobrevivente
+Os Pontos de Vida máximos aumentam em uma quantidade igual ao nível do personagem.
+Interceptar
+Use sua reação para receber o dano de um ataque que atingiria um aliado adjacente.
+________________
+
+
+7. FURIOSO
+O Furioso é um combatente agressivo, especializado em causar grande quantidade de dano ao custo da própria segurança.
+Recursos iniciais
+* PV Máximos: 10 + modificador de Constituição.
+* SP Máximos: 10 + modificador de Constituição.
+* MP Máximos: 10 + modificador de Inteligência.
+Proficiências
+* Armaduras leves;
+* armas simples;
+* armas marciais;
+* Fortitude.
+A proficiência original em Força foi substituída por proficiência em Fortitude.
+Perícias da classe
+Escolha duas:
+* Atletismo;
+* Intimidação;
+* Percepção;
+* Sobrevivência.
+________________
+
+
+Ataque Feroz
+Uma vez por turno, ao realizar seu primeiro ataque, o Furioso pode declarar um Ataque Feroz.
+Quando fizer isso:
+* o ataque é realizado com Vantagem;
+* ataques realizados contra o Furioso também possuem Vantagem até o início do próximo turno dele.
+A habilidade não possui custo de SP.
+________________
+
+
+Técnicas de Furioso — Tier 1
+No nível 1, o Furioso escolhe uma técnica.
+Investida Imprudente
+Após se mover pelo menos 6 metros em linha reta até um alvo, o personagem pode gastar 2 SP.
+O primeiro ataque corpo a corpo contra aquele alvo possui Vantagem.
+Grito de Batalha
+Com uma ação, o personagem gasta 2 SP.
+Criaturas hostis a até 3 metros realizam um Teste de Vontade.
+Em caso de falha, ficam Amedrontadas durante uma rodada.
+Sede de Sangue
+Quando reduzir uma criatura hostil a 0 PV, o personagem recupera 1d4 SP.
+Ataque Pesado
+Antes de realizar um ataque corpo a corpo com uma arma na qual seja proficiente, o personagem pode declarar um Ataque Pesado.
+O ataque recebe:
+* −2 na rolagem de ataque;
+* +5 no dano, caso acerte.
+A decisão deve ser tomada antes da rolagem.
+Ataque Pesado pode ser combinado com Ataque Feroz.
+________________
+
+
+8. ORÁCULO
+O Oráculo é uma classe especializada em cura, suporte, proteção e manipulação do destino.
+Recursos iniciais
+* PV Máximos: 8 + modificador de Constituição.
+* SP Máximos: 10 + modificador de Constituição.
+* MP Máximos: 10 + modificador de Inteligência.
+Proficiências
+* Armaduras leves;
+* armas simples;
+* Vontade.
+Perícias da classe
+Escolha duas:
+* Arcanismo;
+* Mitologia;
+* Intuição;
+* Persuasão.
+________________
+
+
+Fonte de Mana
+Com uma ação, o Oráculo pode tocar uma criatura, incluindo a si próprio, e gastar 3 SP.
+O alvo recupera:
+1d4 + modificador de Sabedoria em MP.
+________________
+
+
+Técnicas de Oráculo — Tier 1
+No nível 1, o Oráculo escolhe uma técnica.
+Palavra Curativa
+Com uma ação bônus, gaste 2 MP.
+Um aliado visível a até 18 metros recupera:
+1d6 + modificador de Sabedoria em PV.
+Bênção da Coragem
+Com uma ação, toque um aliado e gaste 2 MP.
+Até o final da próxima rodada:
+* o aliado fica imune à condição Amedrontado;
+* adiciona 1d4 às suas rolagens de ataque.
+Visão do Infortúnio
+Com uma ação, gaste 1 MP e escolha um inimigo visível.
+O alvo realiza um Teste de Vontade.
+Em caso de falha, possui desvantagem na próxima rolagem de ataque.
+Presságio
+Fora de combate, o Oráculo pode realizar um ritual de dez minutos e gastar 3 MP.
+O Mestre concede uma visão curta e enigmática sobre o resultado provável de uma ação planejada para o futuro próximo.
+________________
+
+
+9. PERÍCIAS
+Cada personagem começa com seis perícias proficientes:
+* duas concedidas pelo Conceito Mortal;
+* duas escolhidas na lista da Classe;
+* duas escolhidas livremente.
+Caso uma perícia seja concedida duas vezes, o jogador escolhe outra perícia no lugar.
+________________
+
+
+9.1 Bônus de proficiência
+No nível 1, o bônus de proficiência é +2.
+A progressão atual é:
+Nível
+	Bônus de proficiência
+	1–4
+	+2
+	5–8
+	+3
+	9–12
+	+4
+	13–16
+	+5
+	17–20
+	+6
+	________________
+
+
+9.2 Cálculo das perícias
+Perícia proficiente
+Modificador do atributo + bônus de proficiência
+Perícia não proficiente
+Somente o modificador do atributo
+________________
+
+
+9.3 Lista de perícias
+Força
+* Atletismo.
+Destreza
+* Acrobacia;
+* Furtividade;
+* Prestidigitação.
+Inteligência
+* Arcanismo;
+* Investigação;
+* Manufatura;
+* Mitologia.
+Sabedoria
+* Intuição;
+* Lidar com Animais;
+* Percepção;
+* Sobrevivência.
+Carisma
+* Atuação;
+* Enganação;
+* Intimidação;
+* Persuasão.
+________________
+
+
+10. TESTES DE RESISTÊNCIA
+Existem três Testes de Resistência principais.
+Fortitude
+Utiliza Constituição.
+Representa resistência contra:
+* venenos;
+* doenças;
+* exaustão;
+* petrificação;
+* efeitos que atacam o corpo.
+Reflexos
+Utiliza Destreza.
+Representa reação contra:
+* explosões;
+* armadilhas;
+* objetos em queda;
+* ataques em área;
+* perigos que podem ser evitados com agilidade.
+Vontade
+Utiliza Sabedoria.
+Representa resistência contra:
+* medo;
+* controle mental;
+* ilusões;
+* encantamentos;
+* manipulação emocional.
+________________
+
+
+10.1 Cálculo da resistência
+Sem proficiência:
+Modificador do atributo correspondente
+Com proficiência:
+Modificador do atributo + bônus de proficiência
+________________
+
+
+11. PARENTE DIVINO
+O Parente Divino representa a herança sobrenatural do personagem.
+Cada Parente Divino concede:
+* bônus em atributos;
+* uma Afinidade Divina;
+* uma habilidade passiva.
+O sistema de criação e utilização de poderes ainda será desenvolvido.
+________________
+
+
+11.1 Hades
+Hades é o deus do Mundo Inferior, dos mortos e das riquezas subterrâneas.
+* Bônus de Atributos: +2 Constituição, +1 Sabedoria
+* Afinidade Elemental: Trevas ou Terra
+
+
+
+
+* Habilidade Passiva (Afinidade Necrótica): Mortos-vivos menores não te atacarão a menos que sejam ordenados ou que você os ataque primeiro. Você tem resistência a dano necrótico.
+
+
+11.2 Zeus
+Rei dos Deuses, senhor dos céus, do trovão e da justiça.
+* Bônus de Atributos: +2 Força, +1 Carisma
+* Afinidade Elemental: Elétrico ou Ar
+* Habilidade Passiva (Filho dos Céus): Você tem Vantagem em testes de Sabedoria (Percepção) para notar a presença de monstros.
+11.3 Poseidon
+Deus dos mares, terremotos e cavalos.
+* Bônus de Atributos: +2 Força, +1 Constituição
+* Afinidade Elemental: Água
+* Habilidade Passiva (Filho do Mar): Você pode respirar debaixo d'água e se comunicar de forma simples com criaturas marinhas e equinos.
+11.4 Deméter
+Deusa da colheita, da agricultura e das estações.
+* Bônus de Atributos: +2 Constituição, +1 Sabedoria
+* Afinidade Elemental: Natureza (Plantas)
+* Habilidade Passiva (Toque Verdejante): Você tem Vantagem em testes de Sobrevivência para encontrar comida em ambientes naturais. Uma vez por dia, você pode tocar em um aliado ferido para que ele recupere Pontos de Vida iguais ao seu bônus de proficiência.
+11.5 Atena
+Deusa da sabedoria, da estratégia em batalha e do artesanato.
+* Bônus de Atributos: +2 Inteligência, +1 Sabedoria
+* Afinidade Elemental: Psíquico (poder mental/telecinético)
+* Habilidade Passiva (Mente Estratégica): Uma vez por combate, você pode usar uma ação bônus para analisar um inimigo. O Mestre deve lhe informar uma de suas resistências, vulnerabilidades ou imunidades.
+11.6 Ares
+Deus da guerra, da violência e da fúria em batalha.
+* Bônus de Atributos: +2 Força, +1 Constituição
+* Afinidade Elemental: Físico (poder bruto)
+* Habilidade Passiva (Fúria da Batalha): Quando você reduz um inimigo a 0 Pontos de Vida com um ataque corpo a corpo, você ganha Pontos de Vida temporários iguais ao seu bônus de proficiência.
+11.7 Apolo
+Deus do sol, da música, da arquearia e da medicina.
+* Bônus de Atributos: +2 Destreza, +1 Carisma
+* Afinidade Elemental: Luz ou Som
+* Habilidade Passiva (Dom Artístico): Você é proficiente em um instrumento musical à sua escolha e tem Vantagem em testes de Percepção que dependem da visão.
+11.8 Hefesto
+Deus do fogo, da forja e dos inventores.
+* Bônus de Atributos: +2 Inteligência, +1 Constituição
+* Afinidade Elemental: Fogo ou Metal
+* Habilidade Passiva (Mãos de Ferreiro): Você tem proficiência na perícia Manufatura. Além disso, uma vez por dia, você pode tocar em um objeto de metal não-mágico quebrado e repará-lo instantaneamente.
+
+
+________________
+
+
+12. FINALIZAÇÃO DO PERSONAGEM
+Após escolher o Parente Divino, o jogador define:
+* nome;
+* idade;
+* aparência;
+* personalidade;
+* história;
+* relação entre o Conceito Mortal e a descoberta da origem divina.
+O equipamento será escolhido posteriormente.
+________________
+
+
+13. REGRAS BÁSICAS DE TESTE
+Quando uma ação possuir risco, dúvida ou consequência, o Mestre pode solicitar uma rolagem.
+A rolagem básica é:
+1d20 + modificador apropriado
+Quando uma perícia ou proficiência for aplicável, o bônus de proficiência também é adicionado.
+O resultado é comparado com uma dificuldade definida pelo Mestre ou com a Defesa de outro personagem.
+As dificuldades gerais ainda não foram oficialmente definidas.
+________________
+
+
+14. VANTAGEM E DESVANTAGEM
+Vantagem
+Role dois d20 e utilize o maior resultado.
+Desvantagem
+Role dois d20 e utilize o menor resultado.
+Acúmulo
+Vantagens não se acumulam.
+Duas fontes diferentes de Vantagem continuam gerando somente dois dados.
+Vantagem e Desvantagem se anulam.
+________________
+
+
+15. RECURSOS
+Os personagens podem possuir três recursos.
+Pontos de Vida — PV
+Representam saúde e capacidade de continuar lutando.
+Pontos de Vigor — SP
+Representam esforço físico, resistência e técnicas de classe.
+Pontos de Mana — MP
+Representam energia sobrenatural e utilização de poderes divinos.
+As regras de recuperação de PV, SP e MP ainda não foram definidas.
+________________
+
+
+16. DEFESA
+A Defesa representa a dificuldade de atingir uma criatura.
+Sem equipamentos:
+DEF = 10 + modificador de Destreza
+Armaduras e escudos poderão modificar a DEF quando o sistema de equipamentos for criado.
+________________
+
+
+17. INICIATIVA
+No início de um combate, cada participante realiza:
+1d20 + modificador de Destreza
+Quem obtiver o maior resultado age primeiro.
+Empates ainda precisam de uma regra definitiva.
+________________
+
+
+18. ESTRUTURA DO TURNO
+Durante seu turno, uma criatura possui:
+* uma movimentação;
+* uma ação;
+* uma ação bônus, somente se alguma habilidade permitir;
+* uma interação ou fala simples;
+* uma reação, utilizada quando algum gatilho permitir.
+________________
+
+
+19. MOVIMENTAÇÃO
+A movimentação padrão é de 9 metros.
+O personagem pode usar sua movimentação antes ou depois de realizar sua ação.
+O sistema de terreno difícil ainda será definido.
+________________
+
+
+20. AÇÃO CORRER
+Quando utiliza a ação Correr, o personagem recebe movimentação adicional igual à sua movimentação normal.
+Um personagem com movimentação de 9 metros pode percorrer:
+* 9 metros com sua movimentação;
+* mais 9 metros pela ação Correr;
+* total de 18 metros.
+Um Atleta que utilize Pique de Adrenalina pode gastar 2 SP e acrescentar mais 3 metros:
+9 + 9 + 3 = 21 metros.
+Como Correr utiliza a ação principal, o personagem normalmente não pode atacar no mesmo turno.
+________________
+
+
+21. ATAQUES
+Para realizar um ataque:
+1d20 + modificador do atributo + proficiência
+O resultado deve ser igual ou superior à DEF do alvo.
+Ataques corpo a corpo normalmente utilizam Força.
+Armas específicas poderão permitir o uso de Destreza.
+________________
+
+
+21.1 Dano
+Ao acertar, o personagem rola o dado de dano da arma e adiciona o modificador do atributo utilizado.
+Exemplo provisório:
+Machado: 1d8 + modificador de Força.
+As armas definitivas serão criadas no capítulo de Equipamentos.
+________________
+
+
+22. FALAR DURANTE O COMBATE
+Falas breves não consomem uma ação.
+Exemplos:
+* provocar um inimigo;
+* dar uma ordem curta;
+* avisar um aliado;
+* dizer uma frase durante um ataque.
+Conversas longas ou tentativas de persuasão podem exigir uma ação e um teste.
+________________
+
+
+23. REPOSICIONAMENTO EM COMBATE
+Mover-se ao redor de um inimigo sem sair do alcance dele não provoca ataque de oportunidade.
+A regra completa de ataques de oportunidade ainda precisa ser desenvolvida.
+________________
+
+
+24. REGRAS PROVISÓRIAS PARA SUBIR EM CRIATURAS
+Estas regras foram utilizadas no primeiro combate de teste, mas ainda não são definitivas.
+Um personagem pode tentar subir nas costas de uma criatura durante o movimento.
+O Mestre solicita um teste resistido:
+Atletismo do personagem contra Fortitude ou Atletismo da criatura.
+Em caso de sucesso:
+* o personagem fica agarrado à criatura;
+* pode receber Vantagem em ataques contra ela, dependendo da posição;
+* a criatura pode gastar sua ação para tentar derrubá-lo.
+Se for derrubado, o personagem cai em um espaço adjacente.
+O tamanho máximo das criaturas que podem ser escaladas ainda precisa ser definido.
+________________
+
+
+25. COMBINAÇÃO DE HABILIDADES
+Ataque Feroz e Ataque Pesado podem ser utilizados no mesmo ataque.
+Exemplo:
+Bônus normal de ataque: +4
+Ataque Pesado: −2
+Bônus final: +2
+O ataque é realizado com Vantagem por causa do Ataque Feroz.
+Se acertar, recebe +5 de dano pelo Ataque Pesado.
+Mesmo que o personagem já possua Vantagem por outro motivo, Ataque Feroz não concede dados adicionais. Sua penalidade continua sendo aplicada normalmente.
+SISTEMA DE CRIAÇÃO DE HABILIDADES
+A Afinidade Divina determina a aparência, a origem e a forma narrativa dos poderes de um semideus. Entretanto, ela não concede liberdade ilimitada para produzir qualquer efeito.
+O jogador pode criar suas próprias habilidades, mas todas devem seguir as regras de nível, custo, quantidade de efeitos, alcance, duração e categoria apresentadas neste capítulo.
+A regra central é:
+O elemento determina como a habilidade acontece. As regras determinam o que ela faz.
+Uma corrente de água, uma mão de sombras, raízes crescendo do chão ou uma rajada de vento podem possuir o mesmo efeito mecânico, ainda que sejam narrativamente diferentes.
+________________
+
+
+1. MANIFESTAÇÃO LIVRE DA AFINIDADE
+Todo semideus pode produzir pequenas manifestações narrativas de sua Afinidade sem gastar MP.
+Essas manifestações:
+* não ocupam espaço de Memória;
+* não causam dano;
+* não recuperam PV;
+* não aplicam condições;
+* não aumentam atributos;
+* não concedem Vantagem;
+* não substituem perícias;
+* não alteram significativamente o cenário;
+* não produzem efeitos relevantes durante o combate.
+Exemplos:
+* fazer uma sombra se movimentar;
+* produzir uma pequena chama;
+* gerar uma faísca;
+* mover uma pequena quantidade de água;
+* fazer folhas ou flores se moverem;
+* produzir uma corrente leve de ar;
+* criar um som curto;
+* fazer pequenas pedras vibrarem.
+Quando uma manifestação produz uma vantagem mecânica, ela passa a ser considerada uma Habilidade Criada e precisa seguir as regras deste capítulo.
+________________
+
+
+2. MEMÓRIA
+A Memória determina quantas habilidades o personagem consegue manter preparadas ao mesmo tempo.
+Cálculo da Memória
+Memória = 2 + modificador de Inteligência
+A Memória possui:
+* mínimo de 1;
+* máximo de 6.
+Cada habilidade ocupa um espaço de Memória, independentemente de seu nível.
+Habilidades passivas também ocupam Memória.
+O personagem pode conhecer mais habilidades do que consegue preparar. Após um descanso longo, ele escolhe quais habilidades ficarão em sua Memória.
+Exemplo
+Um personagem com Inteligência 12 possui modificador +1.
+Memória = 2 + 1 = 3
+Ele pode manter três habilidades preparadas ao mesmo tempo.
+________________
+
+
+3. FONTES DAS HABILIDADES
+Toda habilidade deve possuir uma Fonte.
+3.1 Habilidade Elemental
+Utiliza a Afinidade Divina do personagem.
+Recurso utilizado: MP.
+Exemplos:
+* lançar fogo;
+* controlar água;
+* manipular sombras;
+* movimentar plantas;
+* produzir eletricidade;
+* criar rajadas de vento;
+* utilizar telecinese.
+Habilidades elementais não podem recuperar Pontos de Vida.
+________________
+
+
+3.2 Habilidade Física
+Utiliza o corpo, treinamento, força, velocidade, resistência ou técnica do personagem.
+Recurso utilizado: SP.
+Exemplos:
+* investidas;
+* golpes giratórios;
+* saltos especiais;
+* bloqueios;
+* técnicas com armas;
+* corridas;
+* manobras de combate.
+________________
+
+
+3.3 Habilidade Híbrida
+Combina o corpo do personagem com sua Afinidade Divina.
+Exemplos:
+* revestir uma espada com sombras;
+* realizar uma investida envolta em chamas;
+* fortalecer um soco com pedra;
+* utilizar uma corrente de água para ampliar um salto.
+A habilidade pode:
+* dividir o custo entre MP e SP; ou
+* utilizar apenas um dos recursos com custo aumentado.
+A soma dos recursos gastos deve ser equivalente ao custo final da habilidade.
+Exemplo
+Uma habilidade híbrida de custo 4 pode exigir:
+* 2 MP e 2 SP;
+* 3 MP e 1 SP;
+* 4 MP;
+* 4 SP.
+A divisão deve combinar com a descrição da habilidade.
+________________
+
+
+4. ATRIBUTO DA HABILIDADE
+4.1 Habilidades físicas
+Habilidades físicas utilizam:
+* Força, para potência, impacto e resistência;
+* Destreza, para velocidade, precisão e agilidade.
+O atributo é definido durante a criação da habilidade.
+________________
+
+
+4.2 Habilidades elementais
+Durante a criação do personagem, o jogador escolhe um Atributo Divino:
+* Inteligência;
+* Sabedoria;
+* Carisma.
+Essa escolha representa como o personagem controla seus poderes.
+Inteligência
+O personagem controla o elemento através de estudo, precisão e compreensão.
+Sabedoria
+O personagem controla o elemento através de instinto, sintonia e percepção espiritual.
+Carisma
+O personagem controla o elemento através de vontade, presença e imposição.
+A escolha é permanente.
+________________
+
+
+4.3 Ataque de habilidade
+Quando a habilidade exige uma rolagem de ataque:
+1d20 + modificador do atributo da habilidade + bônus de proficiência
+O resultado deve ser igual ou superior à DEF do alvo.
+________________
+
+
+4.4 Classe de Dificuldade
+Quando a habilidade exige que o alvo realize um Teste de Resistência:
+CD = 8 + modificador do atributo da habilidade + bônus de proficiência
+A habilidade deve indicar qual resistência será utilizada:
+* Fortitude;
+* Reflexos;
+* Vontade.
+Uma habilidade ofensiva utiliza uma rolagem de ataque ou um Teste de Resistência, nunca os dois ao mesmo tempo.
+________________
+
+
+5. NÍVEIS DAS HABILIDADES
+As habilidades possuem níveis de 0 a 4.
+Nível da habilidade
+	Poder geral
+	Custo-base
+	Nível mínimo do personagem
+	0
+	Simples ou passiva
+	0
+	1
+	1
+	Fraca
+	2 MP ou SP
+	1
+	2
+	Moderada
+	4 MP ou SP
+	5
+	3
+	Forte
+	6 MP ou SP
+	10
+	4
+	Heroica
+	9 MP ou SP
+	15
+	O custo-base considera:
+* uma ação principal;
+* um efeito principal;
+* alcance comum;
+* duração instantânea ou de uma rodada;
+* apenas um alvo ou uma área padrão.
+Modificadores, efeitos adicionais e formas especiais de ativação aumentam o custo.
+________________
+
+
+6. QUANTIDADE DE EFEITOS
+Toda habilidade começa com um efeito principal, já incluído em seu custo-base.
+Exemplos de efeitos:
+* causar dano;
+* aplicar uma condição;
+* empurrar;
+* conceder PV temporários;
+* aumentar a DEF;
+* aumentar o movimento;
+* impedir reações;
+* criar uma zona persistente;
+* teletransportar;
+* conceder resistência;
+* aumentar o alcance.
+Uma habilidade pode receber efeitos adicionais de acordo com seu nível.
+Limite de efeitos por nível
+Nível
+	Efeito principal
+	Efeitos adicionais máximos
+	Efeitos totais máximos
+	0
+	1
+	0
+	1
+	1
+	1
+	1
+	2
+	2
+	1
+	2
+	3
+	3
+	1
+	3
+	4
+	4
+	1
+	4
+	5
+	Portanto:
+* uma habilidade de nível 1 pode possuir um efeito principal e um efeito adicional;
+* uma habilidade de nível 2 pode possuir um efeito principal e até dois adicionais;
+* uma habilidade de nível 3 pode possuir um efeito principal e até três adicionais;
+* uma habilidade de nível 4 pode possuir um efeito principal e até quatro adicionais.
+________________
+
+
+6.1 Custo dos efeitos adicionais
+O custo aumenta progressivamente.
+Efeito adicional
+	Aumento individual
+	Aumento total acumulado
+	Primeiro efeito adicional
+	+1
+	+1
+	Segundo efeito adicional
+	+2
+	+3
+	Terceiro efeito adicional
+	+3
+	+6
+	Quarto efeito adicional
+	+4
+	+10
+	Exemplo de nível 1
+Uma habilidade de nível 1 possui custo-base 2.
+* Um efeito principal: custo 2.
+* Um efeito principal e um adicional: custo 3.
+Exemplo de nível 2
+Uma habilidade de nível 2 possui custo-base 4.
+* Um efeito principal: custo 4.
+* Um efeito adicional: custo 5.
+* Dois efeitos adicionais: custo 7.
+Exemplo de nível 3
+Uma habilidade de nível 3 possui custo-base 6.
+* Um efeito principal: custo 6.
+* Um adicional: custo 7.
+* Dois adicionais: custo 9.
+* Três adicionais: custo 12.
+Exemplo de nível 4
+Uma habilidade de nível 4 possui custo-base 9.
+* Um efeito principal: custo 9.
+* Um adicional: custo 10.
+* Dois adicionais: custo 12.
+* Três adicionais: custo 15.
+* Quatro adicionais: custo 19.
+________________
+
+
+6.2 Força dos efeitos adicionais
+Um efeito adicional deve ser mais fraco que o efeito principal.
+Por padrão, o efeito adicional utiliza a potência do nível imediatamente inferior.
+Nível da habilidade
+	Força máxima do efeito adicional
+	1
+	Efeito fraco
+	2
+	Efeito equivalente ao nível 1
+	3
+	Efeito equivalente ao nível 2
+	4
+	Efeito equivalente ao nível 3
+	Uma habilidade de nível 2 pode causar dano moderado como efeito principal e aplicar uma condição fraca como efeito adicional.
+Ela não pode causar dano moderado e aplicar uma condição média completa sem uma limitação relevante ou sem aumentar o nível da habilidade.
+________________
+
+
+7. MODIFICADORES DE CUSTO
+Além dos efeitos adicionais, outras características podem alterar o custo.
+O custo aumenta em +1 quando:
+* a habilidade utiliza uma ação bônus;
+* a habilidade utiliza uma reação;
+* possui alcance muito superior ao padrão;
+* atinge uma área maior que a área padrão;
+* afeta vários aliados individualmente;
+* não exige Concentração apesar de possuir duração prolongada;
+* ignora cobertura;
+* pode ser utilizada sem que o usuário veja o alvo;
+* possui um gatilho automático.
+Mais de um modificador pode ser aplicado à mesma habilidade.
+________________
+
+
+O custo pode diminuir em −1 quando:
+* só pode ser utilizada uma vez por combate;
+* exige uma preparação anterior;
+* causa dano ao próprio usuário;
+* impede o usuário de se movimentar;
+* exige que o usuário permaneça em uma área específica;
+* só funciona sob uma condição difícil;
+* exige um objeto ou componente raro;
+* coloca o usuário em Desvantagem;
+* exige as duas mãos livres.
+O custo nunca pode ser reduzido abaixo de 1, exceto em habilidades de nível 0.
+Toda redução precisa representar uma limitação real.
+________________
+
+
+8. AÇÕES DAS HABILIDADES
+Uma habilidade pode utilizar:
+* ação principal;
+* ação bônus;
+* reação;
+* preparação fora de combate.
+Ação principal
+Não altera o custo-base.
+Ação bônus
+Aumenta o custo em +1.
+Reação
+Aumenta o custo em +1.
+Preparação longa
+Uma habilidade que exige vários minutos de preparação pode receber uma redução de custo, desde que não seja utilizada durante o combate.
+________________
+
+
+9. ALCANCE E ÁREA
+Alcances padrão
+Tipo
+	Alcance padrão
+	Pessoal
+	Apenas o usuário
+	Toque
+	Criatura ou objeto tocado
+	Curto
+	6 metros
+	Médio
+	12 metros
+	Longo
+	18 metros
+	Aumentar muito o alcance pode adicionar +1 ao custo.
+________________
+
+
+Áreas padrão
+Formato
+	Área padrão
+	Explosão
+	Raio de 3 metros
+	Cone
+	3 metros
+	Linha
+	6 metros de comprimento e 1,5 metro de largura
+	Zona
+	Raio de 3 metros
+	Uma habilidade de dano em área utiliza a tabela própria de dano em área.
+Transformar um ataque de alvo único em área não conta automaticamente como efeito adicional, mas reduz o dano.
+Criar uma área que permanece no cenário conta como um efeito adicional.
+________________
+
+
+10. MANUTENÇÃO
+Algumas habilidades continuam ativas depois de sua utilização.
+O efeito permanece até o início do próximo turno do usuário sem custo adicional.
+Para manter a habilidade por mais uma rodada, o personagem paga uma quantidade de recurso igual à metade do custo final de ativação, arredondada para baixo.
+Manutenção = custo final ÷ 2, arredondado para baixo
+O custo mínimo de manutenção é 1.
+Custo de ativação
+	Custo de manutenção
+	1–3
+	1
+	4–5
+	2
+	6–7
+	3
+	8–9
+	4
+	10–11
+	5
+	12–13
+	6
+	14–15
+	7
+	16–17
+	8
+	18–19
+	9
+	A manutenção:
+* é paga no início do turno;
+* não consome uma ação;
+* utiliza o mesmo recurso da habilidade;
+* termina caso o custo não seja pago;
+* exige Concentração;
+* não pode ser paga se o personagem não possuir recurso suficiente.
+O personagem só pode manter uma habilidade por Concentração de cada vez.
+________________
+
+
+Exemplo: Bola de Fogo Incendiária
+Nível: 1
+Custo-base: 2 MP
+Efeito principal
+A bola de fogo causa dano em um alvo.
+Efeito adicional
+O local ao redor do alvo permanece em chamas.
+Primeiro efeito adicional:
++1 MP
+Custo final
+3 MP
+A habilidade permanece até o início do próximo turno do usuário.
+Para manter as chamas:
+1 MP por rodada.
+________________
+
+
+11. CONCENTRAÇÃO
+Habilidades mantidas ou prolongadas podem exigir Concentração.
+O personagem:
+* só pode manter uma habilidade de Concentração por vez;
+* perde a Concentração se ficar inconsciente;
+* pode encerrar a habilidade livremente;
+* realiza um Teste de Fortitude quando sofre dano.
+Teste de Concentração
+CD 10 ou metade do dano recebido, utilizando o maior resultado.
+Em caso de falha, a habilidade termina imediatamente.
+Habilidades que concedem apenas uma quantidade fixa de PV temporários não exigem manutenção ou Concentração, pois sua proteção já é limitada.
+________________
+
+
+12. HABILIDADES DE DANO
+12.1 Dano em alvo único
+Nível
+	Dano-base
+	0
+	1d4
+	1
+	1d8 + modificador da habilidade
+	2
+	2d8 + modificador da habilidade
+	3
+	4d8 + modificador da habilidade
+	4
+	6d8 + modificador da habilidade
+	Habilidades de nível 0 não adicionam o modificador ao dano.
+Uma habilidade de dano em alvo único normalmente exige uma rolagem de ataque.
+________________
+
+
+12.2 Dano em área
+Nível
+	Dano-base
+	0
+	Não disponível
+	1
+	1d6 + modificador da habilidade
+	2
+	2d6 + modificador da habilidade
+	3
+	4d6 + modificador da habilidade
+	4
+	6d6 + modificador da habilidade
+	Criaturas na área realizam normalmente um Teste de Reflexos.
+* Falha: sofrem o dano completo.
+* Sucesso: sofrem metade do dano.
+O dano é rolado uma única vez para todas as criaturas atingidas.
+________________
+
+
+12.3 Dano contínuo
+Dano contínuo conta como um efeito adicional.
+O dano contínuo deve ser menor que o dano inicial.
+Sugestão:
+Nível da habilidade
+	Dano contínuo por rodada
+	1
+	1d4
+	2
+	1d6
+	3
+	2d6
+	4
+	3d6
+	O dano acontece no final do turno da criatura afetada.
+A habilidade deve definir como o efeito pode ser encerrado.
+________________
+
+
+13. HABILIDADES DE CONDIÇÃO
+Condições são divididas em fracas, médias e fortes.
+13.1 Condições fracas
+Podem aparecer em habilidades de nível 1.
+Exemplos:
+* movimento reduzido pela metade;
+* empurrar ou puxar 1,5 metro;
+* derrubar;
+* Desvantagem no próximo ataque;
+* −1 na DEF;
+* impedir reações;
+* impedir que o alvo se esconda;
+* reduzir o alcance;
+* aplicar uma penalidade pequena.
+Duração padrão:
+Uma rodada.
+________________
+
+
+13.2 Condições médias
+Normalmente aparecem em habilidades de nível 2.
+Exemplos:
+* Amedrontado;
+* Cego;
+* Envenenado;
+* Preso;
+* Silenciado;
+* movimento reduzido a zero;
+* Desvantagem em todos os ataques;
+* incapacidade de utilizar reações;
+* redução significativa de atributos derivados.
+O alvo pode repetir o Teste de Resistência no final de cada turno.
+________________
+
+
+13.3 Condições fortes
+Normalmente aparecem em habilidades de nível 3 ou 4.
+Exemplos:
+* Atordoado;
+* Paralisado;
+* Incapacitado;
+* controlado mentalmente;
+* transformado;
+* inconsciente por efeito sobrenatural.
+Condições fortes:
+* sempre permitem Teste de Resistência;
+* não podem ser aplicadas automaticamente;
+* normalmente duram uma rodada;
+* permitem um novo teste no final do turno do alvo;
+* podem exigir Concentração.
+________________
+
+
+14. HABILIDADES DE BUFF
+Buffs fortalecem o usuário ou seus aliados.
+14.1 Buffs de nível 1
+Exemplos:
+* +3 metros de movimento;
+* +1 DEF;
+* +3 metros de alcance;
+* Vantagem em uma única rolagem;
+* ignorar terreno difícil por uma rodada;
+* +1 em uma categoria específica de teste;
+* resistência a um perigo ambiental específico.
+________________
+
+
+14.2 Buffs de nível 2
+Exemplos:
+* +2 DEF;
+* +1 em ataques;
+* resistência a um tipo de dano;
+* +1d4 de dano em ataques;
+* Vantagem em uma categoria de testes;
+* movimento aumentado significativamente;
+* alcance corpo a corpo aumentado em 1,5 metro.
+________________
+
+
+14.3 Buffs de nível 3
+Exemplos:
+* realizar um ataque adicional por turno;
+* Vantagem em todos os ataques;
+* resistência a vários tipos de dano;
+* imunidade temporária a uma condição;
+* grande aumento de movimento;
+* proteção para vários aliados.
+________________
+
+
+14.4 Buffs de nível 4
+Exemplos:
+* afetar todo o grupo;
+* conceder benefícios fortes simultaneamente;
+* imunidade temporária a uma categoria de efeitos;
+* permitir ações adicionais;
+* fortalecer vários atributos derivados.
+Efeitos que concedem ações ou ataques adicionais são sempre considerados fortes.
+________________
+
+
+15. HABILIDADES DE MOVIMENTO
+Nível
+	Efeito sugerido
+	0
+	Pequeno movimento narrativo
+	1
+	Mover 3 metros adicionais
+	2
+	Mover até metade da movimentação sem provocar reações
+	3
+	Teletransportar até 9 metros
+	4
+	Transportar várias criaturas ou atravessar grande distância
+	A descrição depende da Afinidade.
+Exemplos:
+* atravessar sombras;
+* deslizar por uma corrente de água;
+* impulsionar-se com fogo;
+* voar com uma rajada de ar;
+* ser puxado por cipós;
+* desaparecer em um clarão.
+________________
+
+
+16. HABILIDADES DEFENSIVAS
+Nível
+	Efeito sugerido
+	0
+	Proteção pequena e situacional
+	1
+	+1 DEF ou pequena redução de dano
+	2
+	Resistência a um tipo de dano ou proteção moderada
+	3
+	Barreira para vários aliados
+	4
+	Anular, redirecionar ou absorver um ataque poderoso
+	Uma habilidade defensiva utilizada como reação aumenta seu custo em +1.
+________________
+
+
+17. HABILIDADES PASSIVAS
+Habilidades passivas são sempre de nível 0.
+Elas:
+* permanecem constantemente ativas;
+* não gastam MP ou SP;
+* ocupam um espaço de Memória;
+* possuem apenas um efeito fraco;
+* não podem possuir efeitos adicionais;
+* exigem um Sacrifício de Atributo.
+________________
+
+
+17.1 Sacrifício de Atributo
+Enquanto a habilidade passiva estiver preparada, um atributo relacionado sofre −2 em seu valor.
+O atributo:
+* não pode ser reduzido abaixo de 8;
+* deve possuir relação com a habilidade;
+* não pode ser escolhido apenas por ser pouco utilizado;
+* retorna ao valor normal quando a habilidade deixa de estar preparada.
+O sacrifício permanece ativo durante todo o período em que a passiva estiver na Memória.
+________________
+
+
+Exemplos
+Pele de Pedra
+Efeito: +1 DEF.
+Sacrifício: −2 Destreza.
+Passos Ligeiros
+Efeito: +1,5 metro de movimentação.
+Sacrifício: −2 Constituição.
+Olhos das Sombras
+Efeito: enxergar normalmente em escuridão comum.
+Sacrifício: −2 Carisma.
+Força das Profundezas
+Efeito: +1 em testes de Atletismo.
+Sacrifício: −2 Inteligência.
+Passivas com o mesmo efeito não se acumulam.
+________________
+
+
+18. CURA
+Habilidades elementais criadas pelos jogadores não podem recuperar Pontos de Vida.
+Isso vale tanto para o próprio usuário quanto para aliados.
+Não podem ser criadas habilidades como:
+* água curativa;
+* luz restauradora;
+* sombras regenerativas;
+* plantas que recuperam PV;
+* fogo que fecha ferimentos;
+* energia divina que devolve vida.
+Os elementos podem:
+* proteger;
+* conceder PV temporários;
+* impedir dano;
+* remover condições quando apropriado;
+* aumentar a eficiência de um tratamento médico.
+Entretanto, não podem recuperar PV diretamente.
+________________
+
+
+18.1 Formas de recuperar PV
+Pontos de Vida podem ser recuperados por:
+* itens curativos;
+* medicamentos;
+* primeiros socorros;
+* tratamento médico;
+* descanso;
+* habilidades médicas não elementais;
+* Ressonância Elemental natural.
+________________
+
+
+19. HABILIDADES MÉDICAS
+Habilidades baseadas em medicina podem recuperar PV porque não possuem natureza elemental.
+Elas podem utilizar:
+* Inteligência;
+* Sabedoria;
+* Manufatura;
+* ferramentas médicas;
+* medicamentos;
+* kits de primeiros socorros;
+* SP.
+Uma habilidade médica normalmente exige contato com o alvo e materiais adequados.
+Exemplo: Primeiros Socorros
+Fonte: Física ou Médica
+Custo: 2 SP
+Ação: ação principal
+Alcance: toque
+Requisito: kit de primeiros socorros
+Efeito: o alvo recupera 1d6 PV.
+O sistema completo de itens médicos ainda deverá ser desenvolvido.
+________________
+
+
+20. RESSONÂNCIA ELEMENTAL
+Ressonância Elemental é a única forma sobrenatural de um semideus recuperar PV através de seu elemento.
+Ela ocorre quando o personagem permanece em contato com uma manifestação natural, preexistente e suficientemente intensa de sua Afinidade.
+A Ressonância não é uma habilidade criada.
+________________
+
+
+20.1 Dano Severo
+A Ressonância só funciona se o personagem não tiver perdido mais de um terço dos seus PV máximos.
+O personagem precisa possuir pelo menos dois terços de seus PV máximos.
+Exemplo
+Um personagem possui 12 PV máximos.
+* Com 8 a 12 PV, pode receber Ressonância.
+* Com 7 PV ou menos, possui Dano Severo e não recebe recuperação.
+A Ressonância não pode retirar um personagem do estado de Dano Severo.
+________________
+
+
+20.2 Intensidade da fonte
+Fonte
+	Recuperação
+	Ideal
+	1 PV por turno
+	Parcial
+	1 PV a cada dois turnos
+	Insuficiente
+	Nenhuma recuperação
+	A recuperação acontece no final do turno do personagem.
+________________
+
+
+20.3 Fonte ideal
+Representa contato forte com uma manifestação natural do domínio.
+Exemplos:
+* filho de Poseidon dentro do mar;
+* filho de Hefesto em uma grande forja ativa;
+* filho de Deméter em uma floresta ou plantação abundante;
+* filho de Zeus no centro de uma tempestade;
+* filho de Apolo sob luz solar intensa;
+* filho de Hades no Mundo Inferior ou em um local fortemente ligado aos mortos.
+Recuperação:
+1 PV por turno.
+________________
+
+
+20.4 Fonte parcial
+Possui relação com o domínio, mas é menos intensa.
+Exemplos:
+* filho de Poseidon em água doce;
+* filho de Hefesto próximo de uma fogueira pequena;
+* filho de Deméter em um jardim;
+* filho de Zeus em uma tempestade distante;
+* filho de Apolo sob luz solar fraca;
+* filho de Hades em um cemitério comum.
+Recuperação:
+1 PV a cada dois turnos.
+________________
+
+
+20.5 Fonte insuficiente
+Uma presença pequena ou meramente simbólica não produz recuperação.
+Exemplos:
+* um copo de água;
+* uma vela;
+* uma pequena planta em um vaso;
+* uma sombra comum;
+* uma lâmpada;
+* uma corrente de ar fraca.
+________________
+
+
+20.6 Elementos criados
+Um elemento criado pelo próprio semideus nunca ativa Ressonância.
+Exemplos:
+* criar água e entrar nela;
+* produzir uma chama para se recuperar;
+* gerar sombras ao redor do corpo;
+* fazer plantas crescerem apenas para recuperar PV.
+A fonte precisa existir independentemente do poder do personagem.
+________________
+
+
+20.7 Limites da Ressonância
+* Não funciona em personagens inconscientes.
+* Não recupera SP.
+* Não recupera MP.
+* Não ultrapassa os PV máximos.
+* Fontes diferentes não acumulam recuperação.
+* A recuperação termina quando o contato acaba.
+* PV temporários não contam para determinar Dano Severo.
+* O Mestre determina se uma fonte é ideal, parcial ou insuficiente.
+________________
+
+
+21. PONTOS DE VIDA TEMPORÁRIOS
+Habilidades criadas podem conceder Pontos de Vida Temporários.
+PV temporários representam proteção adicional, não recuperação de ferimentos.
+Exemplos:
+* armadura de terra;
+* revestimento de metal;
+* escudo de água;
+* cobertura de sombras;
+* casca de madeira;
+* barreira de vento;
+* fortalecimento físico.
+________________
+
+
+21.1 Funcionamento
+Quando o personagem sofre dano:
+1. o dano reduz primeiro os PV temporários;
+2. o restante reduz os PV normais.
+Exemplo
+O personagem possui:
+* 8 PV normais;
+* 5 PV temporários.
+Ele recebe 7 de dano.
+* Os 5 PV temporários são destruídos.
+* Os 2 pontos restantes atingem seus PV normais.
+* O personagem termina com 6 PV normais.
+________________
+
+
+21.2 Quantidade por nível
+Nível
+	PV temporários
+	0
+	Bônus de Proficiência
+	1
+	1d6 + modificador da habilidade
+	2
+	2d6 + modificador da habilidade
+	3
+	4d6 + modificador da habilidade
+	4
+	6d6 + duas vezes o modificador da habilidade
+	________________
+
+
+21.3 Limites
+* PV temporários não são cura.
+* Não recuperam PV normais.
+* Não removem Dano Severo.
+* Não ativam Ressonância.
+* Não podem ser curados.
+* Não se acumulam.
+* Ao receber novos PV temporários, o personagem mantém o maior valor.
+* Desaparecem quando chegam a zero.
+* Todo PV temporário restante desaparece quando o combate termina.
+________________
+
+
+Exemplo: Couraça de Pedra
+Nível: 2
+Fonte: Elemental
+Categoria: Proteção
+Custo-base: 4 MP
+Ação: ação principal
+Alcance: pessoal
+Efeito: o usuário recebe 2d6 + modificador do Atributo Divino em PV temporários.
+Duração: até os PV temporários acabarem ou o combate terminar.
+A habilidade não exige manutenção.
+________________
+
+
+Exemplo: Couraça de Pedra Reforçada
+A habilidade também concede +1 DEF enquanto os PV temporários existirem.
+Ela possui:
+1. PV temporários como efeito principal;
+2. +1 DEF como primeiro efeito adicional.
+Custo:
+* custo-base de nível 2: 4 MP;
+* primeiro efeito adicional: +1 MP.
+Custo final: 5 MP.
+Os efeitos terminam quando:
+* os PV temporários chegam a zero; ou
+* o combate termina.
+________________
+
+
+22. MODELO PARA CRIAR UMA HABILIDADE
+Toda habilidade deve ser registrada desta forma:
+Nome:
+ Nível:
+ Fonte: Elemental, Física, Médica ou Híbrida
+Afinidade ou estilo:
+ Categoria:
+ Atributo utilizado:
+ Custo-base:
+ Efeitos adicionais:
+ Modificadores de custo:
+ Custo final:
+ Manutenção:
+ Tipo de ação:
+ Alcance:
+ Área ou alvo:
+ Rolagem: Ataque ou Teste de Resistência
+Dano ou benefício:
+ Condição aplicada:
+ Duração:
+ Concentração:
+ Limitações:
+ Descrição narrativa:
+________________
+
+
+23. ETAPAS PARA CRIAR UMA HABILIDADE
+1. Escolha o conceito da habilidade.
+2. Defina sua Fonte.
+3. Escolha o nível.
+4. Escolha o efeito principal.
+5. Defina o atributo utilizado.
+6. Escolha entre ataque ou Teste de Resistência.
+7. Defina alcance, alvo ou área.
+8. Adicione efeitos extras, respeitando o limite do nível.
+9. Calcule o custo dos efeitos adicionais.
+10. Aplique modificadores de ação, alcance e duração.
+11. Calcule o custo final.
+12. Determine se existe manutenção ou Concentração.
+13. Registre as limitações.
+14. Apresente a habilidade ao Mestre para aprovação.
+________________
+
+
+24. LIMITES GERAIS
+Para impedir habilidades excessivamente poderosas:
+1. Manifestações livres não produzem efeitos mecânicos relevantes.
+2. Toda habilidade possui um efeito principal.
+3. Efeitos adicionais aumentam progressivamente o custo.
+4. O nível limita a quantidade e a força dos efeitos.
+5. Uma habilidade ofensiva utiliza ataque ou resistência, nunca os dois.
+6. Condições fortes sempre permitem resistência.
+7. Habilidades elementais não recuperam PV.
+8. Elementos criados não ativam Ressonância.
+9. PV temporários não são cura.
+10. Vantagens não se acumulam.
+11. Efeitos que concedem ações extras são de nível alto.
+12. Passivas possuem apenas um efeito fraco.
+13. Passivas exigem Sacrifício de Atributo.
+14. Toda habilidade precisa ser aprovada pelo Mestre.
+15. O Mestre pode exigir limitações quando uma combinação produzir resultados excessivos.
+
+
+25.3 CARGA NARRATIVA
+O sistema não utiliza peso exato em quilogramas ou Pontos de Carga.
+Um personagem consegue transportar uma quantidade razoável de equipamentos de acordo com:
+* seu valor de Força;
+* seu porte físico;
+* o tamanho dos objetos;
+* a existência de mochilas, bolsas ou outros recipientes;
+* o tempo durante o qual precisará carregar os objetos.
+Todos os itens relevantes ainda devem ser anotados na ficha, mas objetos pequenos e comuns não precisam ser contabilizados individualmente.
+O Mestre deve utilizar o bom senso para determinar quando a carga começa a prejudicar o personagem.
+________________
+
+
+25.3.1 Categorias narrativas de peso
+Os objetos podem ser classificados informalmente em quatro categorias.
+Insignificante
+Objetos pequenos que praticamente não dificultam o movimento.
+Exemplos:
+* chaves;
+* moedas;
+* documentos;
+* canetas;
+* pequenos frascos;
+* celulares;
+* munições em pequena quantidade.
+Vários objetos insignificantes podem ser guardados juntos sem causar penalidades.
+Comum
+Objetos que podem ser carregados normalmente por uma pessoa.
+Exemplos:
+* espada;
+* machado;
+* arco;
+* mochila;
+* kit médico;
+* corda;
+* ferramentas;
+* escudo pequeno.
+Um aventureiro pode carregar vários objetos comuns, desde que possua onde guardá-los.
+Volumoso
+Objetos pesados, grandes ou difíceis de transportar.
+Exemplos:
+* arma muito pesada;
+* escudo grande;
+* corpo de uma pessoa;
+* baú;
+* estátua;
+* grande quantidade de suprimentos;
+* equipamento que precisa das duas mãos apenas para ser transportado.
+Um personagem normalmente pode carregar um objeto volumoso por vez sem grandes dificuldades.
+Excessivo
+Objetos que uma pessoa comum não conseguiria transportar normalmente.
+Exemplos:
+* uma grande pedra;
+* uma porta de metal;
+* um monstro de grande porte;
+* vários objetos volumosos simultaneamente;
+* uma quantidade absurda de equipamentos.
+Carregar algo excessivo exige um teste e normalmente só pode ser feito durante pouco tempo.
+________________
+
+
+25.4 LIMITE RAZOÁVEL
+Um personagem não sofre penalidades por carregar um conjunto normal de equipamentos de aventura.
+Exemplo:
+* uma armadura;
+* uma ou duas armas;
+* uma mochila;
+* um kit médico;
+* algumas ferramentas;
+* pequenos consumíveis;
+* objetos pessoais.
+O Mestre só deve aplicar penalidades quando a quantidade transportada for claramente exagerada ou quando o peso fizer parte do desafio da cena.
+Antes de aplicar uma penalidade, o Mestre deve avisar o jogador:
+“Se você levar esse baú junto com seus equipamentos, ficará Sobrecarregado.”
+Assim, o jogador pode abandonar, dividir ou reorganizar a carga.
+________________
+
+
+25.5 PERSONAGEM SOBRECARREGADO
+Um personagem fica Sobrecarregado quando carrega mais do que conseguiria transportar confortavelmente.
+Enquanto estiver Sobrecarregado:
+* sua movimentação é reduzida em 3 metros;
+* possui Desvantagem em Acrobacia;
+* possui Desvantagem em Furtividade;
+* não pode utilizar habilidades que dependam de corrida ou grande agilidade;
+* o Mestre pode exigir Testes de Fortitude após longos períodos de esforço.
+A condição termina quando o personagem reduz sua carga.
+________________
+
+
+25.6 PERSONAGEM MUITO SOBRECARREGADO
+Quando o personagem tenta transportar uma carga claramente excessiva:
+* sua movimentação é reduzida pela metade;
+* não pode utilizar a ação Correr;
+* possui Desvantagem em Atletismo, Acrobacia, Furtividade e Reflexos;
+* não pode utilizar habilidades especiais de movimento;
+* precisa realizar um Teste de Atletismo ou Fortitude quando tentar continuar carregando o peso.
+Em uma falha, o personagem precisa largar a carga, descansar ou sofre uma consequência determinada pelo Mestre.
+________________
+
+
+25.7 FORÇA E CARGA
+A Força influencia diretamente o julgamento narrativo da carga.
+Força
+	Capacidade narrativa
+	1–7
+	Muito abaixo da média
+	8–11
+	Capacidade de uma pessoa comum
+	12–15
+	Fisicamente forte
+	16–19
+	Força extraordinária
+	20 ou mais
+	Limite sobre-humano
+	Um personagem com Força elevada pode carregar objetos que deixariam outro personagem Sobrecarregado.
+Entretanto, Força alta não elimina limitações de tamanho e espaço. Mesmo um personagem muito forte pode ter dificuldade para atravessar uma porta carregando um objeto enorme.
+________________
+
+
+25.8 LEVANTAR, ARRASTAR E EMPURRAR
+Quando o resultado for incerto, o Mestre pode solicitar um teste de Atletismo.
+Dificuldades sugeridas
+Situação
+	CD
+	Peso difícil, mas possível
+	10
+	Peso muito pesado
+	15
+	Feito extraordinário
+	20
+	Feito sobre-humano
+	25 ou mais
+	Levantar um objeto permite carregá-lo.
+Arrastar ou empurrar um objeto pesado normalmente reduz a movimentação pela metade.
+O Mestre pode conceder Vantagem quando:
+* outra pessoa estiver ajudando;
+* uma alavanca estiver sendo utilizada;
+* o personagem possuir uma posição favorável;
+* existirem ferramentas adequadas.
+________________
+
+
+25.9 RECIPIENTES
+Mochilas, bolsas, cintos e outros recipientes não aumentam a força do personagem, mas permitem organizar e acessar os equipamentos.
+Um recipiente pode determinar se um item está:
+* equipado;
+* acessível;
+* guardado;
+* protegido;
+* impossível de alcançar naquele momento.
+O Mestre não deve exigir controle detalhado de cada compartimento. Essa regra só importa quando o acesso rápido ao item fizer diferença.
+________________
+
+
+25.10 PRINCÍPIO DA CARGA NARRATIVA
+A carga existe para criar decisões interessantes, não para punir os jogadores por carregarem equipamentos comuns.
+Ela deve se tornar relevante quando:
+* o grupo tenta transportar um tesouro;
+* alguém carrega uma criatura ferida;
+* existe uma fuga ou perseguição;
+* o personagem precisa escalar;
+* equipamentos volumosos dificultam a passagem;
+* o peso faz parte do desafio da cena.
+Em situações normais, basta anotar os objetos importantes e seguir a narrativa.
+26. ARMAS
+Armas são equipamentos utilizados para realizar ataques físicos.
+Toda arma possui:
+* categoria;
+* tipo de dano;
+* dado de dano;
+* número de mãos necessárias;
+* alcance;
+* propriedades.
+As armas são divididas em:
+* armas simples;
+* armas marciais;
+* armas improvisadas;
+* ataques desarmados.
+________________
+
+
+26.1 PROFICIÊNCIA COM ARMAS
+Quando um personagem é proficiente com uma arma, ele adiciona seu Bônus de Proficiência à rolagem de ataque.
+Personagem proficiente
+Ataque = 1d20 + modificador do atributo + Bônus de Proficiência
+Personagem não proficiente
+Ataque = 1d20 + modificador do atributo
+Um personagem não proficiente ainda pode utilizar a arma, mas não adiciona seu Bônus de Proficiência.
+Algumas armas podem exigir treinamento específico, mesmo que pertençam a uma categoria com a qual o personagem seja proficiente.
+________________
+
+
+26.2 ATRIBUTO DO ATAQUE
+Armas corpo a corpo
+Armas corpo a corpo utilizam normalmente Força.
+Armas à distância
+Armas à distância utilizam normalmente Destreza.
+Armas com Fineza
+Uma arma com a propriedade Fineza pode utilizar:
+* Força;
+* Destreza.
+O mesmo atributo escolhido para a rolagem de ataque também é adicionado ao dano.
+________________
+
+
+26.3 ROLAGEM DE ATAQUE
+Para realizar um ataque com arma:
+1d20 + modificador do atributo + Bônus de Proficiência
+O ataque acerta quando o resultado é igual ou superior à DEF do alvo.
+Exemplo
+Liam possui:
+* Força 14: +2;
+* Bônus de Proficiência: +2;
+* proficiência com armas marciais.
+Ao atacar com um machado:
+1d20 + 4
+________________
+
+
+26.4 DANO DAS ARMAS
+Quando um ataque acerta:
+Dado da arma + modificador do atributo utilizado
+Exemplo
+Uma espada longa causa 1d8 de dano.
+Um personagem com Força +2 causa:
+1d8 + 2 de dano
+O Bônus de Proficiência não é adicionado ao dano, salvo quando alguma habilidade disser o contrário.
+________________
+
+
+26.5 TIPOS DE DANO FÍSICO
+As armas normalmente causam um dos seguintes tipos de dano:
+Concussão
+Dano causado por impacto e esmagamento.
+Exemplos:
+* martelos;
+* clavas;
+* bastões;
+* maças.
+Cortante
+Dano causado por lâminas que cortam.
+Exemplos:
+* espadas;
+* machados;
+* foices.
+Perfurante
+Dano causado por pontas e projéteis.
+Exemplos:
+* lanças;
+* flechas;
+* adagas;
+* tridentes.
+Uma criatura pode possuir resistência, vulnerabilidade ou imunidade a tipos específicos de dano.
+________________
+
+
+26.6 ACERTOS CRÍTICOS
+Quando o resultado natural do d20 for 20, o ataque é um Acerto Crítico.
+Em um Acerto Crítico:
+* todos os dados de dano do ataque são rolados duas vezes;
+* modificadores fixos são adicionados apenas uma vez.
+Exemplo
+Um ataque causa:
+1d8 + 2
+Em um crítico, causa:
+2d8 + 2
+Dados adicionais concedidos por habilidades também são duplicados quando fizerem parte diretamente do dano do ataque.
+Dano contínuo, condições e outros efeitos posteriores não são duplicados.
+________________
+
+
+26.7 FALHA CRÍTICA
+Quando o resultado natural do d20 for 1, o ataque erra automaticamente.
+Uma Falha Crítica não deve destruir a arma nem ferir automaticamente o personagem.
+O Mestre pode acrescentar uma complicação narrativa leve quando isso for apropriado, mas não deve punir excessivamente o jogador.
+________________
+
+
+26.8 ALCANCE CORPO A CORPO
+O alcance normal de uma arma corpo a corpo é de 1,5 metro.
+Isso representa um alvo adjacente ao personagem.
+Armas com a propriedade Alcance podem atingir alvos a até 3 metros.
+________________
+
+
+26.9 ALCANCE À DISTÂNCIA
+Armas de arremesso e armas de disparo apresentam dois valores de alcance.
+Exemplo
+6/18 metros
+* primeiro valor: alcance normal;
+* segundo valor: alcance máximo.
+Ataques realizados dentro do alcance normal não recebem penalidade.
+Ataques além do alcance normal, mas dentro do alcance máximo, possuem Desvantagem.
+Não é possível atacar além do alcance máximo.
+________________
+
+
+26.10 ATAQUES À DISTÂNCIA EM COMBATE CORPO A CORPO
+Quando um personagem realiza um ataque à distância enquanto existe uma criatura hostil adjacente a ele, o ataque possui Desvantagem.
+Essa penalidade se aplica mesmo quando o alvo do ataque é outra criatura.
+O Mestre pode ignorar essa regra quando a criatura adjacente estiver:
+* inconsciente;
+* incapacitada;
+* completamente imobilizada;
+* incapaz de ameaçar o personagem.
+________________
+
+
+26.11 SACAR E GUARDAR ARMAS
+Durante seu turno, um personagem pode sacar ou guardar uma arma utilizando sua Interação Simples.
+Trocar uma arma por outra normalmente exige:
+1. guardar ou soltar a primeira;
+2. sacar a segunda.
+Soltar uma arma no chão não consome ação.
+Recuperar uma arma caída normalmente utiliza uma Interação Simples.
+________________
+
+
+26.12 ATAQUES DESARMADOS
+Todo personagem é proficiente com seus próprios ataques desarmados.
+Um ataque desarmado pode representar:
+* soco;
+* chute;
+* joelhada;
+* cabeçada;
+* cotovelada.
+Ataque
+1d20 + Força + Bônus de Proficiência
+Dano
+1 + modificador de Força
+O dano mínimo de um ataque desarmado é 1.
+Habilidades, classes ou equipamentos podem aumentar o dano desarmado.
+________________
+
+
+26.13 ARMAS IMPROVISADAS
+Uma arma improvisada é um objeto que não foi criado originalmente para combate.
+Exemplos:
+* cadeira;
+* garrafa;
+* pedra;
+* ferramenta;
+* pedaço de madeira;
+* objeto metálico.
+Uma arma improvisada causa normalmente:
+1d4 + modificador de Força
+O personagem não adiciona Proficiência, salvo quando:
+* possui uma habilidade apropriada;
+* o objeto é muito semelhante a uma arma na qual é proficiente;
+* o Mestre considera que o treinamento do personagem é aplicável.
+Uma arma improvisada pode quebrar depois de um ataque, dependendo do objeto.
+________________
+
+
+26.14 ARMAS SIMPLES
+Armas simples são fáceis de aprender e utilizar.
+Elas costumam possuir:
+* dano moderado;
+* poucas propriedades;
+* funcionamento direto.
+Personagens sem treinamento marcial costumam ter acesso a armas simples.
+________________
+
+
+Tabela de armas simples corpo a corpo
+Arma
+	Dano
+	Tipo
+	Mãos
+	Propriedades
+	Adaga
+	1d4
+	Perfurante
+	1
+	Fineza, Leve, Arremesso 6/18, Ocultável
+	Bastão
+	1d6
+	Concussão
+	1
+	Versátil 1d8
+	Cajado
+	1d6
+	Concussão
+	1
+	Versátil 1d8
+	Clava
+	1d6
+	Concussão
+	1
+	—
+	Foice curta
+	1d4
+	Cortante
+	1
+	Leve, Gancho
+	Lança
+	1d6
+	Perfurante
+	1
+	Arremesso 6/18, Versátil 1d8
+	Martelo leve
+	1d4
+	Concussão
+	1
+	Leve, Arremesso 6/18
+	Porrete grande
+	1d8
+	Concussão
+	2
+	Duas Mãos
+	Dardo
+	1d4
+	Perfurante
+	1
+	Fineza, Arremesso 6/18
+	________________
+
+
+Tabela de armas simples à distância
+Arma
+	Dano
+	Tipo
+	Mãos
+	Alcance
+	Propriedades
+	Funda
+	1d4
+	Concussão
+	1
+	12/48 m
+	Munição
+	Arco curto
+	1d6
+	Perfurante
+	2
+	24/96 m
+	Munição, Duas Mãos
+	Besta leve
+	1d8
+	Perfurante
+	2
+	24/96 m
+	Munição, Duas Mãos, Recarga
+	________________
+
+
+26.15 ARMAS MARCIAIS
+Armas marciais exigem treinamento específico.
+Elas normalmente possuem:
+* dano maior;
+* alcance melhor;
+* propriedades especiais;
+* maior capacidade ofensiva ou defensiva.
+________________
+
+
+Tabela de armas marciais corpo a corpo
+Arma
+	Dano
+	Tipo
+	Mãos
+	Propriedades
+	Espada curta
+	1d6
+	Perfurante
+	1
+	Fineza, Leve
+	Espada longa
+	1d8
+	Cortante
+	1
+	Versátil 1d10
+	Rapieira
+	1d8
+	Perfurante
+	1
+	Fineza
+	Machado de batalha
+	1d8
+	Cortante
+	1
+	Versátil 1d10
+	Machado grande
+	1d10
+	Cortante
+	2
+	Duas Mãos, Pesada, Brutal
+	Martelo de guerra
+	1d8
+	Concussão
+	1
+	Versátil 1d10
+	Maça pesada
+	1d8
+	Concussão
+	1
+	Demolidora
+	Tridente
+	1d8
+	Perfurante
+	1
+	Arremesso 6/18, Versátil 1d10
+	Lança longa
+	1d10
+	Perfurante
+	2
+	Alcance, Duas Mãos
+	Glaive
+	1d10
+	Cortante
+	2
+	Alcance, Duas Mãos, Pesada
+	Chicote
+	1d4
+	Cortante
+	1
+	Fineza, Alcance, Gancho
+	Sabre defensivo
+	1d6
+	Cortante
+	1
+	Fineza, Defensiva
+	________________
+
+
+Tabela de armas marciais à distância
+Arma
+	Dano
+	Tipo
+	Mãos
+	Alcance
+	Propriedades
+	Arco longo
+	1d8
+	Perfurante
+	2
+	45/180 m
+	Munição, Duas Mãos, Pesada
+	Besta pesada
+	1d10
+	Perfurante
+	2
+	30/120 m
+	Munição, Duas Mãos, Pesada, Recarga
+	Arco composto
+	1d8
+	Perfurante
+	2
+	36/144 m
+	Munição, Duas Mãos
+	Chakram
+	1d6
+	Cortante
+	1
+	9/27 m
+	Fineza, Arremesso
+	________________
+
+
+27. PROPRIEDADES DAS ARMAS
+As propriedades representam características especiais de uma arma.
+Uma arma pode possuir várias propriedades.
+________________
+
+
+27.1 ALCANCE
+Uma arma com Alcance pode atacar alvos a até 3 metros.
+Ela também pode atacar alvos adjacentes normalmente.
+O alcance maior não permite atacar através de paredes, aliados ou obstáculos sólidos.
+________________
+
+
+27.2 ARREMESSO
+Uma arma com Arremesso pode ser lançada como um ataque à distância.
+O ataque utiliza o mesmo atributo que seria utilizado no corpo a corpo, salvo quando a arma também possuir Fineza.
+Exemplo
+Uma lança normalmente utiliza Força.
+Ao ser arremessada, continua utilizando Força.
+Depois do ataque, a arma permanece no local onde caiu ou atingiu o alvo.
+________________
+
+
+27.3 BRUTAL
+Quando o personagem rolar 1 em um dado de dano da arma, pode rolar aquele dado novamente.
+Ele deve utilizar o novo resultado.
+A propriedade pode ser utilizada apenas uma vez por ataque.
+Exemplo
+Um machado grande causa 1d10.
+Se o jogador rolar 1, pode rolar novamente o d10.
+________________
+
+
+27.4 DEFENSIVA
+Enquanto estiver empunhando uma arma Defensiva, o personagem recebe +1 DEF.
+Esse bônus não se acumula com:
+* outra arma Defensiva;
+* um escudo.
+Caso o personagem possua ambos, utiliza apenas o maior bônus.
+O bônus termina quando a arma é guardada, derrubada ou deixa de ser empunhada.
+________________
+
+
+27.5 DEMOLIDORA
+Uma arma Demolidora é especialmente eficiente contra objetos e estruturas.
+O personagem possui Vantagem em ataques ou testes realizados para quebrar:
+* portas;
+* paredes frágeis;
+* correntes;
+* objetos;
+* estruturas não vivas.
+Quando apropriado, o Mestre pode permitir que a arma cause dano adicional contra objetos.
+Essa propriedade não concede dano adicional automático contra criaturas.
+________________
+
+
+27.6 DUAS MÃOS
+A arma precisa ser empunhada com duas mãos para ser utilizada em ataques.
+O personagem pode segurá-la com uma mão enquanto não estiver atacando.
+Não é possível utilizar simultaneamente:
+* uma arma de Duas Mãos;
+* um escudo;
+* outra arma;
+* um item que precise permanecer na mão.
+________________
+
+
+27.7 FINEZA
+O personagem pode utilizar Força ou Destreza para realizar ataques com a arma.
+O atributo escolhido também é utilizado no dano.
+O jogador escolhe o atributo a cada ataque.
+________________
+
+
+27.8 GANCHO
+A arma possui uma forma adequada para prender, puxar ou desequilibrar.
+O personagem recebe Vantagem em testes realizados com a arma para:
+* puxar um objeto;
+* desarmar uma criatura;
+* derrubar uma criatura;
+* prender um membro;
+* agarrar algo fora do alcance das mãos.
+A propriedade não garante sucesso automático.
+A manobra ainda pode exigir uma ação e um teste resistido.
+________________
+
+
+27.9 LEVE
+Uma arma Leve pode ser utilizada em combate com duas armas.
+Para lutar com duas armas, ambas precisam possuir a propriedade Leve.
+________________
+
+
+27.10 MUNIÇÃO
+A arma exige munição para atacar.
+Exemplos:
+* flechas;
+* virotes;
+* pedras;
+* projéteis especiais.
+Sacar a munição necessária faz parte do ataque.
+Quando a munição acabar, a arma não pode ser utilizada à distância.
+Controle simplificado de munição
+Durante combates comuns, não é necessário contar cada projétil.
+A munição se torna relevante quando:
+* o personagem passa vários dias sem reabastecer;
+* perde sua mochila ou aljava;
+* está preso em um local sem recursos;
+* utiliza munição especial;
+* o Mestre informa que os suprimentos estão acabando.
+________________
+
+
+27.11 OCULTÁVEL
+A arma é pequena e fácil de esconder.
+O personagem possui Vantagem em testes para ocultá-la:
+* sob roupas;
+* dentro de bolsas;
+* em compartimentos;
+* durante uma revista superficial.
+Uma inspeção cuidadosa ainda pode encontrar a arma.
+________________
+
+
+27.12 PESADA
+Uma arma Pesada exige força e espaço para ser utilizada corretamente.
+Um personagem com Força inferior a 13 possui Desvantagem nos ataques com ela.
+Uma arma Pesada:
+* não pode ser utilizada em combate com duas armas;
+* não pode ser ocultada facilmente;
+* pode ser considerada volumosa em situações de Carga Narrativa;
+* pode ser difícil de utilizar em corredores muito estreitos.
+________________
+
+
+27.13 RECARGA
+Depois de disparar uma arma com Recarga, o personagem precisa prepará-la novamente.
+Recarregar utiliza a Interação Simples do turno.
+Uma arma com Recarga só pode realizar um disparo por ação, mesmo quando o personagem possuir uma habilidade que permita vários ataques.
+Uma habilidade específica pode ignorar essa limitação.
+________________
+
+
+27.14 VERSÁTIL
+Uma arma Versátil pode ser utilizada com uma ou duas mãos.
+Quando utilizada com uma mão, causa seu dano normal.
+Quando utilizada com duas mãos, utiliza o dado indicado pela propriedade.
+Exemplo
+Espada longa:
+* uma mão: 1d8;
+* duas mãos: 1d10.
+Trocar entre uma e duas mãos não consome ação, desde que a outra mão esteja livre.
+________________
+
+
+28. COMBATE COM DUAS ARMAS
+Quando um personagem realiza a ação Atacar com uma arma Leve, pode utilizar sua Ação Bônus para atacar com outra arma Leve empunhada na outra mão.
+No ataque da mão secundária:
+* o Bônus de Proficiência é adicionado normalmente ao ataque;
+* o modificador de atributo não é adicionado ao dano;
+* modificadores negativos ainda são aplicados.
+Exemplo
+Liam empunha duas espadas curtas.
+Seu ataque principal causa:
+1d6 + 2
+Seu ataque da mão secundária causa:
+1d6
+Uma habilidade pode permitir adicionar o modificador ao segundo ataque.
+________________
+
+
+29. ATAQUE PESADO E PROPRIEDADES
+A técnica Ataque Pesado da classe Furioso pode ser utilizada com qualquer arma corpo a corpo na qual o personagem seja proficiente.
+A arma não precisa possuir a propriedade Pesada.
+A propriedade Pesada e a técnica Ataque Pesado são regras diferentes:
+* Pesada: característica física da arma;
+* Ataque Pesado: técnica da classe Furioso.
+Ataque Pesado pode ser utilizado com armas de Fineza, mas ainda aplica:
+* −2 na rolagem de ataque;
+* +5 no dano.
+Ele não pode ser utilizado em:
+* ataques desarmados;
+* armas à distância;
+* habilidades elementais;
+* habilidades físicas que não utilizem uma arma;
+* ataques com armas improvisadas, salvo autorização do Mestre.
+________________
+
+
+30. ARMAS E HABILIDADES CRIADAS
+Uma habilidade pode utilizar uma arma como parte de sua ativação.
+Nesse caso, ela deve indicar se realiza:
+Ataque com arma
+Utiliza:
+* o bônus normal da arma;
+* o dado normal da arma;
+* as propriedades da arma.
+Ataque de habilidade
+Utiliza:
+* o atributo definido pela habilidade;
+* o dano definido pelo nível da habilidade;
+* apenas as propriedades compatíveis.
+Uma habilidade não recebe automaticamente o dano da arma e o dano completo de habilidade ao mesmo tempo.
+Caso combine os dois, um deles será considerado efeito adicional ou terá seu dano reduzido.
+Exemplo
+Corte Sombrio
+Liam cobre seu machado com sombras.
+A habilidade pode ser construída como:
+* dano normal do machado como efeito principal;
+* 1d4 de dano de Trevas como efeito adicional.
+O dano elemental adicional aumenta o custo da habilidade conforme as regras de efeitos adicionais.
+________________
+
+
+31. MATERIAIS DAS ARMAS
+O formato da arma determina seu dano e propriedades.
+O material determina quais criaturas ela consegue ferir e quais efeitos especiais pode possuir.
+Os materiais serão desenvolvidos separadamente.
+Exemplos futuros:
+* aço mortal;
+* Bronze Celestial;
+* Ouro Imperial;
+* Ferro Estígio;
+* prata;
+* materiais divinos;
+* materiais monstruosos.
+Uma arma não recebe dano maior apenas por ser feita de um material sobrenatural. O material normalmente concede:
+* capacidade de ferir certas criaturas;
+* resistência;
+* afinidade;
+* propriedade especial;
+* espaço para encantamentos.
+
+
+
+32. CRIAÇÃO DE ARMAS
+As regras desta seção permitem que jogadores e Mestres criem armas personalizadas sem alterar livremente seus valores de dano.
+A criação de uma arma define:
+* sua categoria;
+* seu modo de uso;
+* seu dado de dano;
+* seu tipo de dano;
+* suas propriedades;
+* sua aparência e descrição.
+Esta seção representa a criação do perfil mecânico da arma, não sua fabricação. Regras para construir, consertar ou melhorar equipamentos utilizando Manufatura serão desenvolvidas posteriormente.
+A regra central é:
+A aparência da arma é livre, mas seu funcionamento deve respeitar um perfil mecânico.
+Uma espada curva, uma lâmina egípcia e uma espada feita com ossos podem utilizar o mesmo perfil, desde que possuam o mesmo dano e propriedades.
+________________
+
+
+32.1 ETAPAS DE CRIAÇÃO
+Para criar uma arma:
+1. Escolha se ela é Simples ou Marcial.
+2. Escolha seu perfil básico.
+3. Escolha o tipo de dano.
+4. Determine o dado de dano.
+5. Escolha suas propriedades.
+6. Aplique limitações.
+7. Dê um nome e uma descrição.
+8. Apresente a arma ao Mestre para aprovação.
+________________
+
+
+32.2 CATEGORIA DA ARMA
+Arma simples
+Uma arma simples:
+* é relativamente fácil de utilizar;
+* possui dano ou propriedades mais limitados;
+* pode representar ferramentas adaptadas para combate;
+* é compatível com personagens que possuem proficiência em armas simples.
+Arma marcial
+Uma arma marcial:
+* exige treinamento específico;
+* possui dano maior ou propriedades mais eficientes;
+* é compatível com personagens que possuem proficiência em armas marciais.
+Uma arma não se torna Marcial apenas por ser rara ou bonita. A categoria representa sua dificuldade de utilização.
+________________
+
+
+32.3 PERFIS BÁSICOS
+O perfil determina o dano inicial, o alcance e quantas propriedades a arma pode receber.
+Perfis de armas simples
+Perfil
+	Dano-base
+	Alcance
+	Mãos
+	Propriedades disponíveis
+	Corpo a corpo, uma mão
+	1d6
+	1,5 m
+	1
+	1
+	Corpo a corpo, duas mãos
+	1d8
+	1,5 m
+	2
+	1
+	Arremesso
+	1d6
+	6/18 m
+	1
+	1
+	Distância
+	1d6
+	24/96 m
+	2
+	1
+	O perfil de Arremesso já possui a propriedade Arremesso.
+O perfil de Distância já possui:
+* Munição;
+* Duas Mãos.
+Essas propriedades não gastam os espaços disponíveis.
+________________
+
+
+Perfis de armas marciais
+Perfil
+	Dano-base
+	Alcance
+	Mãos
+	Propriedades disponíveis
+	Corpo a corpo, uma mão
+	1d8
+	1,5 m
+	1
+	1
+	Corpo a corpo, duas mãos
+	1d10
+	1,5 m
+	2
+	1
+	Arremesso
+	1d8
+	9/27 m
+	1
+	1
+	Distância
+	1d8
+	36/144 m
+	2
+	1
+	O perfil de Arremesso já possui a propriedade Arremesso.
+O perfil de Distância já possui:
+* Munição;
+* Duas Mãos.
+________________
+
+
+32.4 ESPAÇOS DE PROPRIEDADE
+Cada perfil começa com um espaço de propriedade.
+Um espaço pode ser utilizado para adicionar uma das seguintes propriedades:
+* Alcance;
+* Arremesso;
+* Brutal;
+* Defensiva;
+* Demolidora;
+* Fineza;
+* Gancho;
+* Leve;
+* Versátil.
+As propriedades abaixo são limitações, características automáticas ou propriedades ligadas ao perfil:
+* Duas Mãos;
+* Munição;
+* Ocultável;
+* Pesada;
+* Recarga.
+Elas seguem regras próprias.
+Uma propriedade nunca pode ser escolhida mais de uma vez para a mesma arma.
+________________
+
+
+32.5 REDUZINDO O DANO
+O criador pode reduzir o dado de dano da arma para receber espaços adicionais de propriedade.
+Cada redução de uma categoria concede:
++1 espaço de propriedade.
+Ordem dos dados
+1d10 → 1d8 → 1d6 → 1d4
+O dano não pode ser reduzido abaixo de 1d4.
+Exemplo
+Uma arma marcial de uma mão começa com:
+* dano 1d8;
+* um espaço de propriedade.
+O criador reduz o dano para 1d6.
+A arma passa a possuir dois espaços de propriedade.
+Caso reduza novamente para 1d4, passa a possuir três espaços.
+________________
+
+
+Limite de propriedades
+Uma arma pode possuir no máximo:
+três propriedades que concedam benefícios.
+Propriedades automáticas, como Munição e Duas Mãos, não contam para esse limite.
+________________
+
+
+32.6 AUMENTANDO O DANO
+O dano de uma arma não pode ser aumentado livremente além do valor de seu perfil.
+Uma arma simples de uma mão não pode causar 1d8 apenas por perder uma propriedade.
+Uma arma marcial de duas mãos não pode causar mais de 1d10 sem:
+* habilidade especial;
+* material sobrenatural;
+* encantamento;
+* regra específica.
+A única exceção comum é a propriedade Recarga em armas à distância.
+________________
+
+
+32.7 ESCOLHENDO O TIPO DE DANO
+A arma causa um tipo principal de dano:
+* Concussão;
+* Cortante;
+* Perfurante.
+O tipo deve combinar com sua construção.
+Concussão
+Utilizado por:
+* martelos;
+* clavas;
+* bastões;
+* maças;
+* objetos de impacto.
+Cortante
+Utilizado por:
+* espadas;
+* machados;
+* foices;
+* lâminas.
+Perfurante
+Utilizado por:
+* lanças;
+* adagas;
+* flechas;
+* virotes;
+* tridentes.
+Uma arma normalmente possui apenas um tipo de dano.
+Mudar livremente o tipo de dano durante o combate exige uma característica específica da arma.
+________________
+
+
+32.8 PROPRIEDADES DISPONÍVEIS
+Alcance
+A arma pode atingir alvos a até 3 metros.
+Requisitos
+A arma deve:
+* utilizar duas mãos; ou
+* causar apenas 1d4 de dano quando utilizada com uma mão.
+Uma arma de uma mão com Alcance representa objetos como chicotes ou correntes leves.
+________________
+
+
+Arremesso
+Uma arma corpo a corpo pode ser arremessada.
+Alcance padrão:
+6/18 metros.
+A arma precisa ser utilizada com uma mão.
+O atributo utilizado no arremesso é normalmente o mesmo utilizado no corpo a corpo.
+________________
+
+
+Brutal
+Quando o personagem obtiver 1 em um dado de dano da arma, poderá rolar aquele dado novamente.
+Requisitos
+A arma deve:
+* causar pelo menos 1d8;
+* não possuir Fineza.
+A nova rolagem deve ser utilizada.
+________________
+
+
+Defensiva
+Enquanto estiver empunhando a arma, o personagem recebe:
++1 DEF.
+Requisitos
+A arma deve:
+* utilizar uma mão;
+* causar no máximo 1d6;
+* não possuir Leve.
+Esse bônus não se acumula com um escudo ou outra arma Defensiva.
+________________
+
+
+Demolidora
+A arma concede Vantagem em testes ou ataques realizados para destruir objetos e estruturas frágeis.
+Requisitos
+A arma deve:
+* causar dano de Concussão;
+* causar pelo menos 1d6.
+Essa propriedade não aumenta automaticamente o dano contra criaturas.
+________________
+
+
+Fineza
+A arma pode utilizar Força ou Destreza em seus ataques e danos.
+Requisitos
+A arma:
+* não pode possuir Pesada;
+* não pode exigir duas mãos;
+* não pode causar mais de 1d8.
+________________
+
+
+Gancho
+A arma concede Vantagem em testes apropriados para:
+* derrubar;
+* desarmar;
+* puxar;
+* prender;
+* agarrar objetos.
+A propriedade não transforma essas manobras em ações gratuitas.
+________________
+
+
+Leve
+A arma pode ser utilizada em combate com duas armas.
+Requisitos
+A arma deve:
+* utilizar uma mão;
+* causar no máximo 1d6;
+* não possuir Pesada;
+* não possuir Defensiva.
+________________
+
+
+Versátil
+A arma pode ser utilizada com uma ou duas mãos.
+Quando utilizada com duas mãos, seu dado de dano aumenta uma categoria.
+Dano com uma mão
+	Dano com duas mãos
+	1d4
+	1d6
+	1d6
+	1d8
+	1d8
+	1d10
+	Requisitos
+A arma:
+* deve possuir perfil de uma mão;
+* não pode possuir Leve;
+* não pode possuir Alcance;
+* não pode possuir Defensiva.
+Utilizar Versátil não permite ultrapassar 1d10.
+________________
+
+
+32.9 PROPRIEDADES AUTOMÁTICAS E LIMITAÇÕES
+Duas Mãos
+Armas com perfil de duas mãos recebem essa propriedade automaticamente.
+Ela não ocupa espaço de propriedade.
+________________
+
+
+Munição
+Armas de disparo recebem Munição automaticamente.
+Ela não ocupa espaço de propriedade.
+________________
+
+
+Ocultável
+Uma arma recebe Ocultável automaticamente quando:
+* causa 1d4;
+* utiliza apenas uma mão;
+* possui tamanho pequeno;
+* não possui Alcance;
+* não possui Pesada.
+Ocultável não ocupa espaço de propriedade.
+O Mestre pode negar essa característica caso o formato da arma não permita escondê-la.
+________________
+
+
+Pesada
+O criador pode adicionar Pesada a uma arma de duas mãos.
+Ao fazer isso, a arma recebe:
++1 espaço de propriedade.
+Entretanto:
+* personagens com Força inferior a 13 atacam com Desvantagem;
+* ela é considerada volumosa;
+* não pode possuir Fineza;
+* não pode possuir Leve;
+* não pode ser Ocultável.
+A arma precisa causar pelo menos 1d8.
+Uma arma não pode receber mais de um espaço adicional por possuir Pesada.
+________________
+
+
+Recarga
+A propriedade Recarga pode ser aplicada apenas a armas de disparo.
+Ela permite aumentar o dado de dano da arma em uma categoria.
+Dano original
+	Dano com Recarga
+	1d6
+	1d8
+	1d8
+	1d10
+	Recarga:
+* não ocupa espaço de propriedade;
+* limita a arma a um disparo por ação;
+* exige uma Interação Simples para prepará-la novamente;
+* não permite ultrapassar 1d10.
+________________
+
+
+32.10 COMBINAÇÕES PROIBIDAS
+As seguintes combinações não são permitidas:
+* Fineza e Pesada;
+* Fineza em arma de duas mãos;
+* Leve e Pesada;
+* Leve e Defensiva;
+* Leve em arma de duas mãos;
+* Versátil e Leve;
+* Versátil e Defensiva;
+* Versátil e Alcance;
+* Brutal e Fineza;
+* Ocultável e Pesada;
+* Recarga em arma corpo a corpo;
+* Arremesso em arma que exija duas mãos.
+O Mestre pode impedir outras combinações que não façam sentido para o formato da arma.
+________________
+
+
+32.11 ARMAS COM FORMATO INCOMUM
+O jogador pode descrever sua arma livremente.
+Exemplos:
+* espada em formato de lua;
+* martelo com cabeça de touro;
+* corrente com lâminas;
+* lança dobrável;
+* escudo com lâmina;
+* manoplas metálicas;
+* bastão dividido em duas partes.
+A aparência não concede benefícios gratuitamente.
+Uma corrente com lâminas só terá Alcance caso essa propriedade tenha sido escolhida.
+Um martelo enorme só terá Brutal ou Demolidora caso possua essas propriedades.
+________________
+
+
+32.12 ARMAS DUPLAS
+Uma arma dupla possui duas extremidades capazes de atacar.
+Exemplos:
+* bastão com duas lâminas;
+* lança dupla;
+* corrente com armas nas duas pontas.
+Para fins de regras, uma arma dupla é tratada como duas armas Leves.
+Requisitos
+A arma deve:
+* utilizar duas mãos;
+* causar no máximo 1d6 em cada extremidade;
+* possuir a propriedade Leve;
+* ser Marcial.
+Para realizar o segundo ataque, o personagem utiliza sua Ação Bônus, seguindo as regras de combate com duas armas.
+A arma dupla não recebe automaticamente dois ataques com uma única ação.
+________________
+
+
+32.13 ARMAS ACOPLADAS
+Uma arma pode ser acoplada a:
+* escudo;
+* armadura;
+* manopla;
+* ferramenta;
+* prótese;
+* outro equipamento.
+O acoplamento não permite utilizar o item sem ocupar a mão, salvo quando uma regra disser o contrário.
+Uma lâmina presa ao braço, por exemplo, ainda utiliza aquela mão para fins de combate.
+Armas acopladas devem possuir um perfil normal de arma.
+________________
+
+
+32.14 ARMAS DE TRANSFORMAÇÃO
+Uma arma pode alternar entre dois formatos.
+Exemplo:
+* espada que se transforma em lança;
+* bastão que se divide em duas armas;
+* arco que se transforma em lâmina;
+* escudo que se abre em uma arma.
+Cada formato precisa possuir um perfil válido.
+Troca de formato
+Transformar a arma utiliza:
+uma Interação Simples.
+Limite
+Os dois formatos devem possuir o mesmo nível de poder geral.
+Uma arma não pode possuir um perfil fraco apenas para justificar um segundo perfil muito superior.
+Armas de transformação raras ou divinas podem possuir regras próprias.
+________________
+
+
+32.15 ARMAS E MATERIAIS SOBRENATURAIS
+O material não altera automaticamente:
+* dado de dano;
+* quantidade de propriedades;
+* alcance;
+* número de mãos.
+Uma espada de Bronze Celestial continua utilizando o perfil normal de uma espada.
+O material pode determinar:
+* quais criaturas ela consegue ferir;
+* sua resistência;
+* sua interação com monstros;
+* efeitos especiais;
+* compatibilidade com encantamentos.
+Essas características serão definidas no sistema de materiais e itens divinos.
+________________
+
+
+32.16 ARMAS E AFINIDADE ELEMENTAL
+Um personagem pode descrever uma arma como ligada ao seu elemento, mas isso não concede dano elemental gratuito.
+Exemplos:
+* espada coberta por sombras;
+* lança molhada;
+* martelo com brasas;
+* arco envolto em vento;
+* lâmina decorada com plantas.
+Para causar dano elemental ou produzir efeitos, o personagem precisa:
+* utilizar uma habilidade;
+* possuir um encantamento;
+* utilizar uma propriedade divina;
+* gastar o recurso indicado.
+A aparência elemental pode existir sem custo quando for apenas narrativa.
+________________
+
+
+32.17 MODELO DE CRIAÇÃO DE ARMA
+Toda arma criada deve ser registrada desta forma:
+Nome:
+ Categoria: Simples ou Marcial
+Perfil:
+ Dano:
+ Tipo de dano:
+ Mãos:
+ Alcance:
+ Propriedades automáticas:
+ Espaços iniciais:
+ Reduções de dano:
+ Espaços adicionais:
+ Propriedades escolhidas:
+ Limitações:
+ Material:
+ Descrição:
+________________
+
+
+32.18 EXEMPLOS DE CRIAÇÃO
+Adaga
+Categoria: Simples
+Perfil: Arremesso
+Dano-base: 1d6
+ Redução: 1d6 para 1d4
+ Espaços disponíveis: 2
+Propriedades escolhidas:
+* Fineza;
+* Leve.
+Propriedades automáticas:
+* Arremesso 6/18;
+* Ocultável.
+Resultado:
+1d4 Perfurante, Fineza, Leve, Arremesso 6/18 e Ocultável.
+________________
+
+
+Sabre defensivo
+Categoria: Marcial
+Perfil: Corpo a corpo, uma mão
+Dano-base: 1d8
+ Redução: 1d8 para 1d6
+ Espaços disponíveis: 2
+Propriedades escolhidas:
+* Fineza;
+* Defensiva.
+Resultado:
+1d6 Cortante, Fineza e Defensiva.
+________________
+
+
+Chicote
+Categoria: Marcial
+Perfil: Corpo a corpo, uma mão
+Dano-base: 1d8
+ Reduções:
+* 1d8 para 1d6;
+* 1d6 para 1d4.
+Espaços disponíveis: 3
+Propriedades escolhidas:
+* Fineza;
+* Alcance;
+* Gancho.
+Resultado:
+1d4 Cortante, Fineza, Alcance e Gancho.
+________________
+
+
+Machado grande
+Categoria: Marcial
+Perfil: Corpo a corpo, duas mãos
+Dano-base: 1d10
+ Espaços disponíveis: 1
+Propriedade escolhida:
+* Brutal.
+Limitação:
+* Pesada, sem utilizar o espaço adicional.
+Resultado:
+1d10 Cortante, Duas Mãos, Pesada e Brutal.
+O criador não é obrigado a utilizar todos os espaços disponíveis.
+________________
+
+
+Glaive pesada
+Categoria: Marcial
+Perfil: Corpo a corpo, duas mãos
+Dano-base: 1d10
+ Espaço inicial: 1
+Limitação Pesada: +1 espaço
+Espaços disponíveis: 2
+Propriedades escolhidas:
+* Alcance;
+* Gancho.
+Resultado:
+1d10 Cortante, Duas Mãos, Pesada, Alcance e Gancho.
+________________
+
+
+Besta leve
+Categoria: Simples
+Perfil: Distância
+Dano-base: 1d6
+ Recarga: aumenta para 1d8
+ Propriedades automáticas:
+* Munição;
+* Duas Mãos;
+* Recarga.
+Alcance: 24/96 metros.
+Resultado:
+1d8 Perfurante, Munição, Duas Mãos e Recarga.
+________________
+
+
+Besta pesada
+Categoria: Marcial
+Perfil: Distância
+Dano-base: 1d8
+ Recarga: aumenta para 1d10
+ Limitação adicional: Pesada
+Propriedades automáticas:
+* Munição;
+* Duas Mãos;
+* Recarga.
+Resultado:
+1d10 Perfurante, Munição, Duas Mãos, Pesada e Recarga.
+________________
+
+
+32.19 LIMITES GERAIS DA CRIAÇÃO DE ARMAS
+1. Toda arma começa com um perfil existente.
+2. O dano não pode ultrapassar o limite do perfil.
+3. Reduzir o dano concede espaços de propriedade.
+4. A arma possui no máximo três propriedades benéficas.
+5. Propriedades automáticas não contam nesse limite.
+6. A aparência não concede vantagens gratuitamente.
+7. O material não aumenta o dano automaticamente.
+8. Dano elemental exige habilidade ou encantamento.
+9. Combinações proibidas não podem ser utilizadas.
+10. Toda arma personalizada precisa ser aprovada pelo Mestre.
+11. O Mestre pode ajustar uma arma caso uma combinação se mostre excessivamente eficiente.
+12. Uma arma criada não deve tornar todas as armas da mesma categoria claramente inferiores.
