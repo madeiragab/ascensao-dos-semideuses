@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ascensão dos Semideuses — RPG de mesa</title>
+<meta name="description" content="RPG de mesa: semideuses gregos no mundo moderno. Livro do Jogador e Bestiário.">
+<meta property="og:title" content="Ascensão dos Semideuses — RPG de mesa">
+<meta property="og:description" content="Semideuses gregos no mundo moderno. Livro do Jogador completo e Bestiário com 38 criaturas.">
+<meta property="og:image" content="imagens/capa.png">
+<meta property="og:type" content="website">
+<style>
+:root {
+  --brasa: #E8632C;
+  --bronze: #C49A5C;
+  --fundo: #0C0A09;
+  --superficie: #16110F;
+  --texto: #EBE3D6;
+  --suave: #A2968676;
+  --suave-cheio: #A29686;
+  --borda: #2E2520;
+  --titulo: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --texto-f: Charter, "Bitstream Charter", "Sitka Text", Georgia, serif;
+  --sans: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(120% 90% at 50% 118%, rgba(232,99,44,.30) 0%, rgba(232,99,44,.06) 45%, transparent 72%),
+    var(--fundo);
+  color: var(--texto);
+  font-family: var(--texto-f);
+  font-size: 17px;
+  line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 8vh, 5rem) clamp(1.2rem, 5vw, 2.5rem) 3rem;
+}
+.topo { text-align: center; margin-bottom: clamp(2.5rem, 7vh, 4rem); }
+.selo { margin: 0 auto 1.8rem; display: block; }
+h1 {
+  font-family: var(--titulo);
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  line-height: .98;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  margin: 0 0 .5rem;
+  color: #F7C77E;
+  text-shadow: 0 0 44px rgba(232,99,44,.35);
+  text-wrap: balance;
+}
+h1 span { display: block; color: var(--texto); }
+.tagline {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  font-size: .72rem;
+  color: var(--bronze);
+  padding-left: .3em;
+  margin: 0 0 1.6rem;
+}
+.pitch {
+  max-width: 30rem; margin: 0 auto;
+  color: #D5C9B8; font-size: 1.06rem; text-wrap: pretty;
+}
+
+.estante {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.4rem;
+}
+.livro {
+  display: flex; flex-direction: column;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .18s, transform .18s;
+}
+.livro:hover, .livro:focus-visible {
+  border-color: var(--bronze);
+  transform: translateY(-3px);
+}
+.livro:focus-visible { outline: 2px solid var(--brasa); outline-offset: 3px; }
+.livro img { width: 100%; height: auto; display: block; border-bottom: 1px solid var(--borda); }
+.livro .corpo { padding: 1.2rem 1.3rem 1.4rem; flex: 1; display: flex; flex-direction: column; }
+.livro .tomo {
+  font-family: var(--sans); font-size: .64rem;
+  text-transform: uppercase; letter-spacing: .2em;
+  color: var(--bronze); margin: 0 0 .35rem; padding-left: .2em;
+}
+.livro h2 { font-family: var(--titulo); font-size: 1.4rem; margin: 0 0 .5rem; }
+.livro p { margin: 0 0 1rem; font-size: .95rem; color: var(--suave-cheio); }
+.livro .abrir {
+  margin-top: auto;
+  font-family: var(--sans); font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .13em;
+  color: var(--brasa);
+}
+.livro.indisponivel { opacity: .72; }
+.livro.indisponivel .abrir { color: var(--suave-cheio); }
+
+.oficina {
+  margin-top: 3rem;
+  border-top: 1px solid var(--borda);
+  padding-top: 2rem;
+  font-size: .95rem;
+  color: var(--suave-cheio);
+}
+.oficina h3 {
+  font-family: var(--sans); font-size: .7rem;
+  text-transform: uppercase; letter-spacing: .18em;
+  color: var(--bronze); margin: 0 0 .8rem; padding-left: .18em;
+}
+.oficina p { max-width: 38rem; margin: 0 0 .9rem; }
+a.linha { color: var(--brasa); }
+
+footer {
+  border-top: 1px solid var(--borda);
+  padding: 1.6rem clamp(1.2rem, 5vw, 2.5rem);
+  text-align: center;
+  font-family: var(--sans);
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #6E6355;
+}
+footer a { color: #8A7C69; text-decoration: none; }
+footer a:hover { color: var(--bronze); }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="topo">
+    <svg class="selo" width="72" height="72" viewBox="0 0 100 100" aria-hidden="true">
+      <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="none" stroke="#C49A5C" stroke-width="1.6"/>
+      <path d="M50 26 L62 50 L50 74 L38 50 Z" fill="none" stroke="#F7C77E" stroke-width="1.5"/>
+      <circle cx="50" cy="50" r="3.5" fill="#E8632C"/>
+    </svg>
+    <h1>A Ascensão dos <span>Semideuses</span></h1>
+    <p class="tagline">RPG de mesa</p>
+    <p class="pitch">
+      Você descobriu tarde demais que um dos seus pais não era humano.
+      O mundo já sabia. Os monstros também.
+    </p>
+  </div>
+
+  <div class="estante">
+    <a class="livro" href="livro-do-jogador.html">
+      <img src="imagens/capa.png"
+           alt="Capa: quatro semideuses armados encarando um titã sobre uma cidade em chamas">
+      <div class="corpo">
+        <p class="tomo">Livro I</p>
+        <h2>Livro do Jogador</h2>
+        <p>Tudo que você precisa para começar a jogar: o d20, criação de personagem
+          em sete etapas, combate, e o motor completo de criação de habilidades.</p>
+        <span class="abrir">Abrir o livro →</span>
+      </div>
+    </a>
+
+    <a class="livro" href="bestiario/README.md">
+      <img src="imagens/contracapa.png"
+           alt="Pégaso empinado em gravura preta sobre fundo claro">
+      <div class="corpo">
+        <p class="tomo">Livro II</p>
+        <h2>Bestiário</h2>
+        <p>Para o Mestre. A Escala de Kleos — onze degraus de Rumor a Cataclisma —,
+          o motor de criação de monstros, e 38 criaturas do sátiro errante a Tifão.</p>
+        <span class="abrir">Ler no repositório →</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="oficina">
+    <h3>Como este sistema é feito</h3>
+    <p>Nenhum número entra no livro sem passar por um simulador. Ele calcula a
+      probabilidade exata do d20 e roda milhares de combates completos para medir se
+      uma escolha é de verdade — se a técnica que parece boa é sempre a certa, se a
+      classe defensiva realmente aguenta mais, se o desgaste de uma sequência de
+      brigas acumula.</p>
+    <p>Ele já me contrariou três vezes, e as três estão documentadas: a combinação
+      Ataque Feroz mais Ataque Pesado não tinha conserto numérico, bandos de inimigos
+      fracos valem menos que a soma e não mais, e quem gasta mana compra escolha,
+      não dano bruto.</p>
+    <p><a class="linha" href="https://github.com/madeiragab/ascensao-dos-semideuses">Código,
+      rascunhos e simulador no GitHub →</a></p>
+  </div>
+</main>
+
+<footer>
+  Ascensão dos Semideuses · em desenvolvimento ·
+  <a href="https://madeiragab.github.io/">madeiragab</a>
+</footer>
+</body>
+</html>
