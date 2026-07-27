@@ -45,23 +45,71 @@ numa mesa.
 
 ## 3. O Kleos de um grupo
 
-Cada semideus vale um tanto de Kleos, de acordo com o nível.
+Cada semideus vale um tanto de Kleos, e esse valor cresce com o nível — mas
+**cresce bem mais devagar do que a escala de monstros**. Um herói de nível 20 não
+vale vinte vezes um de nível 1; vale menos de três vezes.
 
 | Nível do personagem | Kleos que ele vale |
 |---|---|
 | 1–4 | **1** |
-| 5–9 | **2** |
-| 10–14 | **3** |
-| 15–20 | **4** |
+| 5–9 | **1¾** |
+| 10–14 | **2¼** |
+| 15–19 | **2¾** |
+| 20 | **3** |
 
-O **Kleos do Grupo** é a soma. Quatro personagens de nível 3 valem Kleos 4. Os
-mesmos quatro no nível 17 valem Kleos 16.
+O **Kleos do Grupo** é a soma. Para não fazer conta com frações na mesa, consulte
+direto:
 
-**Aliados contam.** Um deus que luta ao seu lado soma o Kleos dele. É por isso
-que existem alianças na mitologia — e é assim que um Cataclisma vira um problema
+| Nível | 3 heróis | 4 heróis | 5 heróis |
+|---|---|---|---|
+| 1–4 | 3 | 4 | 5 |
+| 5–9 | 5 | 7 | 9 |
+| 10–14 | 7 | 9 | 11 |
+| 15–19 | 8 | 11 | — |
+| 20 | 9 | 12 | — |
+
+**Aliados contam.** Um deus que luta ao seu lado soma o Kleos dele. É por isso que
+existem alianças na mitologia — e é assim que um Cataclisma vira um problema
 resolvível.
 
----
+### Estes números foram medidos, e a primeira versão estava errada
+
+A escala original dizia que um personagem valia 1, 2, 3 ou 4 de Kleos conforme a
+faixa de nível. Isso estava certo no nível 1 e errado em todo o resto. Com a
+progressão do Capítulo Nove implementada no simulador — e com a Oráculo usando o
+MP dela, não cutucando com uma lança —, o Kleos justo para um trio ficou assim:
+
+| Nível do trio | Kleos justo medido | A regra antiga dizia |
+|---|---|---|
+| 1 | 3,1 | 3 ✓ |
+| 5 | 5,2 | 6 |
+| 10 | 6,8 | **9** |
+| 15 | 8,0 | **12** |
+| 20 | 8,6 | **12** |
+
+Um grupo de nível 15 seguindo a regra antiga seria mandado contra algo três
+degraus acima do que aguenta. A tabela acima é a corrigida.
+
+Para reproduzir: `sim/calibrar_kleos.py`.
+
+### Onde a escala fica grossa
+
+Nos degraus altos, um passo de Kleos é um salto grande demais. Um trio de nível 5
+vence um Kleos 5 em 95% das vezes e um Kleos 6 em 34% — não existe nada no meio.
+Isso acontece porque a Tábua cresce cerca de 35% por degrau enquanto o grupo
+cresce cerca de 10% por nível.
+
+Quando precisar de um meio-termo, **não invente um Kleos quebrado**: monte o
+encontro com criaturas menores somadas, usando as fórmulas da seção 5. Um Kleos 5
+mais um Kleos 2 dá um encontro entre 5 e 6 com muito mais precisão do que
+qualquer ajuste na ficha de um monstro só.
+
+### Acima de Kleos 9, a ficção manda
+
+Se um grupo grande de nível alto chegar a somar Kleos 12 ou mais, a conta diz que
+eles poderiam enfrentar um deus de igual para igual. Deixe. O que impede isso não
+é a matemática, é a seção 7: **deuses não morrem** — são derrotados, recuam e
+guardam rancor. E um Cataclisma não cai por dano nenhum, só pelo Selo.
 
 ## 4. A Regra da Moira
 
