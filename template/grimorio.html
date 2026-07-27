@@ -1,0 +1,116 @@
+<title>Ascensão dos Semideuses — Grimório</title>
+
+<style>
+{{CSS}}
+
+/* ============================================================
+   GRIMÓRIO — paleta própria: verde de couro e ouro velho.
+   Sobrepõe só os tokens de cor; toda a estrutura vem do CSS comum.
+   ============================================================ */
+:root {
+  --acento:       #3B5A38;
+  --acento-fraco: #E0E7DA;
+  --bronze:       #937726;
+  --bronze-luz:   #C9A24A;
+  --papel:        #F7F6EF;
+  --superficie-2: #E7E9DE;
+  --borda:        #D2D4C4;
+  --borda-forte:  #AFB29C;
+  --texto:        #1F241C;
+  --texto-suave:  #626A5B;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --acento:       #8FB37C;
+    --acento-fraco: #1D2A1A;
+    --bronze:       #C9A24A;
+    --papel:        #14180F;
+    --superficie-2: #1E2418;
+    --borda:        #2E3527;
+    --borda-forte:  #465138;
+    --texto:        #E4E7D8;
+    --texto-suave:  #98A088;
+    --fundo:        #0D100A;
+  }
+}
+:root[data-theme="dark"] {
+  --acento:       #8FB37C;
+  --acento-fraco: #1D2A1A;
+  --bronze:       #C9A24A;
+  --papel:        #14180F;
+  --superficie-2: #1E2418;
+  --borda:        #2E3527;
+  --borda-forte:  #465138;
+  --texto:        #E4E7D8;
+  --texto-suave:  #98A088;
+  --fundo:        #0D100A;
+}
+:root[data-theme="light"] {
+  --acento:       #3B5A38;
+  --acento-fraco: #E0E7DA;
+  --bronze:       #937726;
+  --papel:        #F7F6EF;
+  --superficie-2: #E7E9DE;
+  --borda:        #D2D4C4;
+  --borda-forte:  #AFB29C;
+  --texto:        #1F241C;
+  --texto-suave:  #626A5B;
+  --fundo:        #EDEBE1;
+}
+</style>
+
+<div class="livro">
+
+<div class="capa-pagina frente">
+  <img src="{{CAPA}}" alt="Capa do Grimório de Ascensão dos Semideuses: Hécate de três faces em relevo dourado sobre couro verde, entre luas, tochas, chaves e cães">
+</div>
+
+<div class="mancha">
+
+<div class="rosto">
+  <svg class="selo" width="80" height="80" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="42" fill="none" stroke="var(--bronze)" stroke-width="1.5"/>
+    <path d="M50 14 A36 36 0 0 1 50 86 A28 28 0 0 0 50 14 Z" fill="var(--acento)" opacity=".22"/>
+    <path d="M34 30 A24 24 0 0 0 34 70" fill="none" stroke="var(--acento)" stroke-width="2"/>
+    <path d="M66 30 A24 24 0 0 1 66 70" fill="none" stroke="var(--acento)" stroke-width="2"/>
+    <path d="M50 22 V78" stroke="var(--bronze)" stroke-width="1.4"/>
+    <circle cx="50" cy="50" r="6" fill="none" stroke="var(--bronze)" stroke-width="1.6"/>
+    <circle cx="50" cy="50" r="2" fill="var(--acento)"/>
+  </svg>
+  <h1>Grimório</h1>
+  <p class="tomo">Livro III · a Magia da Névoa</p>
+  <p class="epigrafe">
+    A Névoa não mente. Ela traduz — e quem aprende a impor a própria tradução
+    descobre que o mundo aceita quase qualquer coisa, desde que ninguém pare para
+    duvidar.
+  </p>
+</div>
+
+<div class="destaque">
+  <span class="rotulo">Antes de começar</span>
+  <p>Este livro não é pré-requisito de nada. Um semideus joga a campanha inteira
+  sem tocar em magia, usando só as habilidades do sangue e as técnicas de classe do
+  <em>Livro do Jogador</em>. O que está aqui é uma segunda porta, aberta por
+  Hécate ou por quem ela já iniciou — e o preço dela é ter mestre, ter instrumento
+  e ter gesto.</p>
+</div>
+
+{{CONTEUDO}}
+
+<footer class="colofao">
+  <h3>Sobre esta edição</h3>
+  <p><strong>Por que magia é um livro separado.</strong> Ela não corre no sangue de
+  ninguém: é aprendida, e qualquer pessoa pode aprender — inclusive um mortal. Isso
+  a torna material de campanha, não de criação de personagem. Nada aqui aparece na
+  ficha de um semideus recém-feito.</p>
+  <p><strong>A regra que sustenta o resto.</strong> Toda criação de Névoa pode ser
+  <em>desacreditada</em>. Uma Fórmula sem resposta escrita para a Descrença não está
+  pronta, e é esse teste que impede a magia de virar uma segunda lista de
+  habilidades elementais com outro nome.</p>
+  <p><strong>O que ainda falta.</strong> Fórmulas de Círculo 3 e 4 em maior número,
+  e regras para itens que armazenam Fórmulas.</p>
+</footer>
+
+</div><!-- /mancha -->
+
+</div><!-- /livro -->

@@ -554,6 +554,123 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .classe, .cartao, .ficha, .destaque, .grade { page-break-inside: avoid; }
   .capa-pagina.fundo { page-break-before: always; page-break-after: auto; }
 }
+
+/* ============================================================
+   BESTIÁRIO — blocos de criatura
+   ============================================================ */
+
+/* Divisor de degrau: "KLEOS 1 — RUMOR" */
+.degrau {
+  margin: 3.5rem 0 2rem;
+  padding: 1.4rem 0 1.2rem;
+  border-top: 3px double var(--bronze);
+  border-bottom: 1px solid var(--borda);
+  text-align: center;
+}
+.degrau h2 {
+  font-family: var(--serifa-titulo);
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 0;
+  color: var(--acento);
+  text-wrap: balance;
+}
+.degrau p { font-style: italic; color: var(--texto-suave); margin: .5rem 0 0; }
+
+/* Ficha de criatura */
+.criatura {
+  border: 1px solid var(--borda-forte);
+  border-top: 3px solid var(--acento);
+  background: var(--papel);
+  margin: 2rem 0;
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+.criatura > h3 {
+  font-family: var(--serifa-titulo);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.criatura .kleos {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: .64rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--papel);
+  background: var(--acento);
+  padding: .18em .55em;
+  margin-left: .5rem;
+  vertical-align: .18em;
+  white-space: nowrap;
+}
+.criatura .tipo {
+  font-family: var(--sans);
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--bronze);
+  margin: .35rem 0 .9rem;
+}
+/* Linhas de PV / DEF / Ataque / resistências */
+.criatura .status {
+  background: var(--superficie-2);
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+  padding: .7rem .9rem;
+  margin: 0 0 1.1rem;
+  font-family: var(--sans);
+  font-size: .87rem;
+  line-height: 1.75;
+  font-variant-numeric: tabular-nums;
+}
+.criatura .status b { color: var(--texto-suave); font-weight: 600; }
+.criatura .status .sep { color: var(--borda-forte); padding: 0 .1rem; }
+
+/* Rótulos internos: TRAÇOS, AÇÕES, FRAQUEZA MÍTICA... */
+.criatura .rotulo-bloco {
+  font-family: var(--sans);
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: var(--acento);
+  margin: 1.3rem 0 .5rem;
+  padding-bottom: .3rem;
+  border-bottom: 1px solid var(--borda);
+}
+.criatura .rotulo-bloco:first-of-type { margin-top: 0; }
+.criatura ul { margin: 0 0 .8rem; padding-left: 1.15rem; }
+.criatura p { margin: 0 0 .8rem; }
+.criatura > *:last-child { margin-bottom: 0; }
+
+/* Fraqueza e morte recebem tratamento próprio */
+.criatura .fraqueza { border-left: 2px solid var(--bronze); padding-left: .95rem; }
+.criatura .morte {
+  font-size: .93rem;
+  color: var(--texto-suave);
+  border-top: 1px dashed var(--borda-forte);
+  padding-top: .8rem;
+}
+.criatura .morte .rotulo-bloco { border: none; padding: 0; margin-bottom: .2rem; }
+
+/* Aviso de efeito perigoso (Medusa) */
+.aviso {
+  border: 1px solid var(--acento);
+  background: var(--acento-fraco);
+  padding: .9rem 1.1rem;
+  margin: 1.2rem 0;
+  font-size: .95rem;
+}
+.aviso p:last-child { margin-bottom: 0; }
+
+@media print {
+  .criatura, .degrau { page-break-inside: avoid; }
+  .degrau { page-break-before: always; }
+}
+
 </style>
 
 <div class="livro">
