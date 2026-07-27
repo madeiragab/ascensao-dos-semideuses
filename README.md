@@ -1,76 +1,69 @@
-# Ascensão dos Semideuses
+> 🇧🇷 **Português** · 🇬🇧 [English](README.en.md)
 
-RPG de mesa autoral. Semideuses gregos no mundo moderno, base d20, com sistemas
-próprios de criação de habilidades, de armas e de monstros.
+# Ascensão dos Semideuses — RPG de mesa
 
-Este repositório é a **oficina**: o livro sendo escrito e um simulador que testa
-o balanceamento antes de qualquer número entrar no texto.
+Sistema de RPG autoral. Semideuses gregos no mundo moderno, base d20, com
+motores próprios de criação de habilidades, de armas e de monstros.
 
----
+**No ar:** https://madeiragab.github.io/ascensao-dos-semideuses/
 
-## O livro
-
-**[`livro-do-jogador.html`](livro-do-jogador.html)** — o Livro do Jogador
-diagramado. Abra no navegador. Ensina a jogar e a criar personagem do zero, com
-capa e contracapa, sumário, capitulares e um d20 clicável no capítulo que explica
-o teste. Imprime em PDF pelo Ctrl+P.
-
-### Como ele é montado
-
-O HTML publicado precisa ser autossuficiente — nenhum arquivo externo é
-carregado —, então as capas entram codificadas dentro dele. Por isso existe uma
-etapa de montagem:
-
-```
-livro-do-jogador.template.html  +  imagens/*.png  →  livro-do-jogador.html
-```
-
-```bash
-powershell -ExecutionPolicy Bypass -File build-livro.ps1
-```
-
-> **Edite sempre o template.** O `livro-do-jogador.html` é gerado e será
-> sobrescrito no próximo build.
+O que separa este projeto de um documento de regras é o **simulador**: nenhum
+número entra no livro sem antes ser medido. Ele já me contrariou três vezes, e as
+três correções estão documentadas mais abaixo.
 
 ---
 
-## Os dois livros
+## Os três livros
 
-| Livro | Onde | Conteúdo |
+| | Livro | Conteúdo |
 |---|---|---|
-| **I — Livro do Jogador** | `livro-do-jogador.html` · rascunhos em `regras/` | personagem, combate, motor de habilidades, equipamento, interlúdio |
-| **II — Bestiário** | [`bestiario/`](bestiario/README.md) | a Escala de Kleos, o motor de criação de monstros, 38 criaturas |
+| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação de personagem em sete etapas, combate, e o motor de criação de habilidades |
+| **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
+| **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 
 ---
 
-## Pastas
+## Como o sistema funciona
 
-| Pasta | O que tem |
-|---|---|
-| `fonte/` | o Google Doc exportado, estado inicial do sistema. Quando um documento cita "seção 12.2", é aqui |
-| `imagens/` | capa e contracapa originais, em PNG |
-| `regras/` | os capítulos escritos e as propostas de mudança |
-| `bestiario/` | o Livro II, completo |
-| `sim/` | o simulador |
+**A rolagem** é `1d20 + modificador + proficiência` contra uma CD. Vantagem e
+Desvantagem substituem modificadores pequenos: dois dados, usa o maior ou o menor.
 
-### Comece por [`regras/SUMARIO.md`](regras/SUMARIO.md)
+**Três recursos**, cada um com um ritmo próprio de recuperação. Pontos de Vida
+voltam devagar — um descanso longo devolve só metade. Pontos de Vigor voltam
+inteiros em uma hora. Pontos de Mana só voltam dormindo. Isso faz o desgaste de
+um dia de aventura acumular de verdade.
 
-É o mapa: cada capítulo do sistema, o que está pronto, o que tem buraco e o que
-ainda não existe.
+**A Húbris** é o defeito fatal do personagem, e tem regra. O Mestre oferece uma
+*Provocação*; se o jogador aceita agir conforme o defeito, ganha *Ímpeto*, que
+compra Vantagem e outras coisas. Uma vez por arco, o Mestre pode declarar uma
+*Ruptura*, e aí a Húbris decide por você.
 
-| Documento | Conteúdo |
-|---|---|
-| [SUMARIO.md](regras/SUMARIO.md) | mapa do livro inteiro e estado de cada capítulo |
-| [v1-numeros.md](regras/v1-numeros.md) | correções de balanceamento, com o número que justifica cada uma |
-| [combate.md](regras/combate.md) | ações, condições, cobertura, oportunidade, 0 PV e morte |
-| [interludio.md](regras/interludio.md) | descanso, refeições, atividades de interlúdio, mecânica da Húbris |
-| [magia-da-nevoa.md](regras/magia-da-nevoa.md) | **fora do Livro do Jogador.** Magia aprendida, Fórmulas, Descrença. Material para outro livro |
+**Habilidades não vêm em lista.** O jogador constrói cada uma comprando efeitos
+com pontos:
+
+```
+CUSTO = duração + efeitos adicionais + alcance
+```
+
+A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2, cena
+4. Sustentar custa metade do custo final por rodada. Cada ponto compra 1d8 de
+dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assim por
+diante.
+
+**Monstros são medidos em Kleos** — a glória que custa derrubá-los. Onze degraus
+com nome: Rumor, Boato, Conto, Façanha, Feito, Canção, Lenda, Mito, Epopeia,
+Teomaquia, Cataclisma. Uma criatura de Kleos N é um combate justo e perigoso para
+N semideuses.
+
+**Toda criatura tem uma Fraqueza Mítica** descobrível. A Hidra é impossível sem
+fogo. O Leão de Neméia é imune a armas. Cérbero quer brincar de bola. Descobrir
+isso é jogar.
 
 ---
 
 ## O simulador
 
-Python 3, nenhuma biblioteca externa. Rode de dentro de `sim/`.
+Python 3, sem nenhuma biblioteca externa. Rode de dentro de `sim/`.
 
 ```bash
 cd sim
@@ -81,64 +74,89 @@ python kleos.py             # valida a escala de perigo do Bestiário
 python habilidades.py       # valida o motor de criação de habilidades
 ```
 
-| Arquivo | O que faz |
-|---|---|
-| `dados.py` | Probabilidade exata do d20: acerto, crítico, Vantagem, dano esperado. Nada aqui é aleatório |
-| `fichas.py` | Personagens de nível 1 conforme o sistema original, e os monstros de teste |
-| `fichas_v1.py` | Os mesmos personagens com os números corrigidos, e a tabela de armaduras |
-| `combate.py` | Motor de combate por turnos. Roda as duas versões de regra (`regras="v0"` ou `"v1"`) |
-| `experimentos.py` | Bateria de diagnóstico do sistema original |
-| `comparar.py` | Original contra proposta, nos mesmos combates |
-| `dia_de_aventura.py` | Testa as regras de descanso: o desgaste acumula? |
-| `kleos.py` | Valida a Escala de Kleos e as fórmulas de montagem de encontro |
-| `habilidades.py` | Valida o motor de habilidades: custo por ponto, área, sustentar, orçamento do dia |
+Ele mede de duas formas, e as duas importam. A **analítica** calcula
+probabilidade exata do d20, sem sorte envolvida — serve para afirmações fechadas
+do tipo "esta técnica é sempre melhor que a outra". A **simulação** roda milhares
+de combates completos com rolagens de verdade, e alcança o que o cálculo isolado
+não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeiro.
 
-### Duas formas de medir, e por que as duas importam
+### As três vezes em que o teste me contrariou
 
-**Analítica** (`dados.py`): probabilidade exata, sem sorte envolvida. Serve para
-afirmações fechadas do tipo "esta técnica é sempre melhor que a outra".
-
-**Simulação** (`combate.py`): milhares de combates completos com rolagens de
-verdade. Alcança o que o cálculo isolado não vê — ordem de iniciativa, foco de
-alvo, gasto de recursos ao longo do combate, quem cai primeiro.
-
-Quando as duas discordam, a simulação está capturando algo real. Vale investigar
-antes de decidir.
-
-### Três vezes em que o teste me contrariou
-
-Vale registrar, porque é o motivo de o simulador existir:
-
-1. **Ataque Pesado.** Eu ia ajustar de −2/+5 para outro par de números. Nenhum
-   par funciona enquanto o Ataque Feroz der Vantagem de graça no mesmo ataque —
-   o conserto tinha de ser estrutural, não numérico.
-2. **Bandos de monstros.** Escrevi que muitos inimigos fracos valem *mais* que a
-   soma do Kleos. Valem **menos**: o grupo concentra fogo e cada morto para de
-   causar dano para sempre. A regra foi reescrita segundo o dado.
-3. **Orçamento do conjurador.** Escrevi que ele ganha o dia em dano acumulado.
-   Não ganha — 80 contra 97 do Furioso, que não gasta nada. O que ele compra com
-   MP é escolha, não dano bruto.
+1. **O Ataque Pesado não tinha conserto numérico.** Eu ia trocar o −2/+5 por
+   outro par de números. Varri sete variantes: nenhuma funciona enquanto o Ataque
+   Feroz der Vantagem de graça no mesmo ataque, porque Vantagem paga qualquer
+   penalidade de acerto. O conserto foi estrutural — proibir a combinação.
+2. **Bandos de inimigos fracos valem menos, não mais.** Eu havia escrito que
+   muitos inimigos somavam acima do Kleos total. É o contrário: três criaturas de
+   Kleos 1 dão 96% de vitória contra 82% de uma única de Kleos 3, porque o grupo
+   concentra fogo e cada morto para de causar dano para sempre. A regra virou
+   `soma × 3/4`, com erro máximo de 0,3 numa escala de onze.
+3. **Quem gasta mana não compra dano.** Eu havia concluído que o conjurador ganha
+   o dia em dano acumulado. Não ganha: 80 contra 97 do Furioso, que não gasta
+   nada. O que o MP compra é alcance, área, condição e escolha.
 
 ---
 
-## Limites conhecidos do simulador
+## Estrutura do repositório
 
-- **Condições não são modeladas.** Amedrontado, Preso, Atordoado e companhia não
-  existem no motor de combate, então criaturas de controle são mais perigosas na
-  mesa do que na simulação.
-- **Arremetidas e Recusas não são modeladas**, então os degraus altos da Escala
-  de Kleos (6 a 11) têm margem de erro maior que os baixos.
-- **Sem posicionamento nem distância**: todos alcançam todos. Movimento, terreno,
-  cobertura e alcance de arma não influenciam.
-- **Ataques de oportunidade** já existem nas regras, mas não no simulador.
-- **A escala foi calibrada no nível 1.** Enquanto não existir progressão de
-  nível, tudo acima disso é extrapolação.
+```
+livro-do-jogador.html   bestiario.html   grimorio.html   ← gerados, não edite
+index.html              a estante do site
 
-Cada item é uma lacuna a fechar, não uma limitação técnica.
+template/               as cascas dos livros e a folha de estilo única
+  livro.css             CSS compartilhado pelos três livros
+  livro-do-jogador.html escrito à mão
+  bestiario.html        casca; o conteúdo vem dos markdown
+  grimorio.html         casca, com paleta verde e ouro própria
+
+regras/                 os capítulos em markdown, e o mapa do sistema
+bestiario/              o Livro II em markdown
+imagens/                capas originais e miniaturas geradas
+sim/                    o simulador
+fonte/                  o documento original, estado inicial do sistema
+```
+
+Comece por **[`regras/SUMARIO.md`](regras/SUMARIO.md)**: é o mapa de cada
+capítulo, o que está pronto, o que tem buraco e o que ainda não existe.
+
+### Como gerar os livros
+
+Os HTML publicados são autossuficientes — nenhum arquivo externo é carregado, e
+as capas entram codificadas dentro deles. Por isso existe uma etapa de montagem:
+
+```bash
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+O script redimensiona as capas, gera as miniaturas da estante e chama
+`build_livros.py`, que converte os markdown e monta os três livros.
+
+> **Edite sempre `template/` e os markdown.** Os arquivos `.html` na raiz são
+> gerados e serão sobrescritos no próximo build.
+
+---
 
 ## As dívidas do sistema
 
 1. **Progressão de nível 2 a 20.** Hoje só existe o bônus de proficiência. É o
-   que mais trava, e trava os dois livros.
+   que mais trava, e trava os três livros: a Escala de Kleos foi calibrada só no
+   nível 1, então os degraus altos são extrapolação.
 2. **Armaduras e preços.** As armaduras em uso são provisórias.
 3. **Economia.** Dracmas, quanto custa um Kit de Criação, quanto rende um bico.
+
+### Limites conhecidos do simulador
+
+- Condições não são modeladas, então criaturas de controle são mais perigosas na
+  mesa do que na simulação.
+- Arremetidas e Recusas não são modeladas, o que aumenta a margem de erro nos
+  degraus de Kleos 6 a 11.
+- Sem posicionamento nem distância: todos alcançam todos.
+- Ataques de oportunidade existem nas regras, mas não no simulador.
+
+---
+
+## Licença
+
+Projeto pessoal, em desenvolvimento. As criaturas e divindades vêm da mitologia
+greco-romana, que é domínio público; o sistema de regras, os textos e a Escala de
+Kleos são autorais.
