@@ -671,6 +671,101 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .degrau { page-break-before: always; }
 }
 
+/* ============================================================
+   FICHA EM BRANCO — pensada para ser impressa e preenchida à mão
+   ============================================================ */
+.folha {
+  border: 1px solid var(--borda-forte);
+  padding: 1.2rem;
+  margin: 1.6rem 0;
+  background: var(--papel);
+}
+.folha h4 { margin: 1.4rem 0 .5rem; }
+.folha h4:first-child { margin-top: 0; }
+.folha h4 small { color: var(--texto-suave); letter-spacing: 0; text-transform: none; font-weight: 400; }
+
+.folha-topo { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: .7rem; }
+.campo { flex: 1 1 9rem; }
+.campo.largo { flex: 2 1 14rem; }
+.campo.curto { flex: 0 1 5rem; }
+.campo span {
+  display: block;
+  font-family: var(--sans); font-size: .6rem;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--texto-suave);
+}
+.campo i { display: block; border-bottom: 1px solid var(--borda-forte); height: 1.5rem; }
+
+.folha-atributos {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: .5rem;
+}
+.folha-atributos .atr {
+  border: 1px solid var(--borda); text-align: center; padding: .4rem .3rem .5rem;
+}
+.folha-atributos .atr span {
+  display: block; font-family: var(--sans); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.folha-atributos .atr b {
+  display: block; height: 1.7rem; border-bottom: 1px solid var(--borda-forte);
+  margin: .2rem .8rem 0;
+}
+.folha-atributos .atr em {
+  display: block; font-style: normal; font-family: var(--sans);
+  font-size: .55rem; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--texto-suave); margin-top: .25rem;
+}
+
+.folha-recursos {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.2rem, 1fr)); gap: .5rem;
+}
+.folha-recursos .cx { border: 1px solid var(--borda); padding: .4rem .5rem .5rem; }
+.folha-recursos .cx.alto { grid-column: span 2; }
+.folha-recursos .cx span {
+  display: block; font-family: var(--sans); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.folha-recursos .cx b { display: block; height: 1.5rem; border-bottom: 1px solid var(--borda-forte); }
+.folha-recursos .cx small {
+  display: block; font-family: var(--sans); font-size: .52rem;
+  color: var(--texto-suave); margin-top: .2rem;
+}
+
+.folha-duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.4rem; }
+
+.lista-marcada { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+.lista-marcada li { display: flex; align-items: baseline; gap: .45rem; margin-bottom: .3rem; }
+.lista-marcada small { color: var(--texto-suave); font-size: .68rem; }
+.lista-marcada.duas-colunas { columns: 2; column-gap: 1.2rem; }
+.lista-marcada.duas-colunas li { break-inside: avoid; }
+i.quad {
+  flex: none; width: .72rem; height: .72rem;
+  border: 1px solid var(--borda-forte); display: inline-block;
+}
+.pontilhado { flex: 1; border-bottom: 1px dotted var(--borda-forte); }
+.dica { font-size: .78rem; color: var(--texto-suave); margin: .4rem 0 0; }
+
+.folha-tabela th { font-size: .58rem; }
+.folha-tabela td { height: 1.6rem; border-bottom: 1px solid var(--borda); }
+
+/* Pautas: linhas para escrever. O número é quantas linhas. */
+.pauta {
+  border-bottom: 1px solid var(--borda-forte);
+  background-image: repeating-linear-gradient(
+    to bottom, transparent, transparent calc(1.6rem - 1px),
+    var(--borda) calc(1.6rem - 1px), var(--borda) 1.6rem);
+}
+.pauta.duas   { height: 3.2rem; }
+.pauta.tres   { height: 4.8rem; }
+.pauta.quatro { height: 6.4rem; }
+.pauta.seis   { height: 9.6rem; }
+
+@media print {
+  .folha { page-break-inside: avoid; border-color: #000; }
+  .folha-atributos .atr, .folha-recursos .cx, i.quad { border-color: #666; }
+  .campo i, .folha-atributos .atr b, .folha-recursos .cx b { border-bottom-color: #666; }
+}
+
 </style>
 
 <div class="livro">
@@ -707,16 +802,22 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
       <span class="sub">O d20, a dificuldade, e as duas palavras que mais importam</span></span></a></li>
     <li><a href="#cap3"><span class="alg">III</span><span><span class="tit">Criação de personagem</span>
       <span class="sub">Sete etapas, nesta ordem</span></span></a></li>
-    <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Combate</span>
+    <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Equipamento</span>
+      <span class="sub">Armas, armaduras, dracmas e o que cabe nas suas costas</span></span></a></li>
+    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Combate</span>
       <span class="sub">Curto, letal, e cheio de decisão</span></span></a></li>
-    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Condições</span>
+    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Condições</span>
       <span class="sub">Quarenta estados, do corpo preso ao destino selado</span></span></a></li>
-    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Criação de habilidades</span>
+    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Criação de habilidades</span>
       <span class="sub">O motor: pontos, alcance, duração e o que cada ponto compra</span></span></a></li>
-    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Entre aventuras</span>
+    <li><a href="#cap8"><span class="alg">VIII</span><span><span class="tit">Entre aventuras</span>
       <span class="sub">Descanso, comida e o tempo em que você vira alguém</span></span></a></li>
-    <li><a href="#cap8"><span class="alg">VIII</span><span><span class="tit">Uma ficha pronta</span>
+    <li><a href="#cap9"><span class="alg">IX</span><span><span class="tit">Subir de nível</span>
+      <span class="sub">O que você ganha, do nível 1 ao 20</span></span></a></li>
+    <li><a href="#cap10"><span class="alg">X</span><span><span class="tit">Uma ficha pronta</span>
       <span class="sub">As sete etapas aplicadas do começo ao fim</span></span></a></li>
+    <li><a href="#cap11"><span class="alg">XI</span><span><span class="tit">Ficha em branco</span>
+      <span class="sub">Para imprimir e levar para a mesa</span></span></a></li>
   </ol>
 </nav>
 
@@ -1233,17 +1334,32 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 
   <div class="rolagem">
     <table>
-      <thead><tr><th>Força</th><th>Destreza</th><th>Inteligência</th><th>Sabedoria</th><th>Carisma</th></tr></thead>
+      <thead><tr><th>Perícia</th><th>Atributo</th><th>Para quê serve</th></tr></thead>
       <tbody>
-        <tr>
-          <td>Atletismo</td>
-          <td>Acrobacia<br>Furtividade<br>Prestidigitação</td>
-          <td>Arcanismo<br>Investigação<br>Manufatura<br>Mitologia</td>
-          <td>Intuição<br>Lidar com Animais<br>Percepção<br>Sobrevivência</td>
-          <td>Atuação<br>Enganação<br>Intimidação<br>Persuasão</td>
-        </tr>
+        <tr><td><strong>Acrobacia</strong></td><td>DES</td><td>Equilíbrio, quedas controladas, passar por espaço apertado, se soltar de um agarrão</td></tr>
+        <tr><td><strong>Arcanismo</strong></td><td>INT</td><td>Reconhecer magia, entender um símbolo, saber o que uma habilidade acabou de fazer</td></tr>
+        <tr><td><strong>Atletismo</strong></td><td>FOR</td><td>Escalar, nadar, saltar, arrombar, agarrar e empurrar</td></tr>
+        <tr><td><strong>Atuação</strong></td><td>CAR</td><td>Cantar, tocar, representar, prender uma plateia — e distrair uma sala inteira</td></tr>
+        <tr><td><strong>Enganação</strong></td><td>CAR</td><td>Mentir, blefar, disfarçar intenção, fingir ser quem não é</td></tr>
+        <tr><td><strong>Furtividade</strong></td><td>DES</td><td>Não ser visto nem ouvido, seguir alguém, esconder um objeto no corpo</td></tr>
+        <tr><td><strong>Intimidação</strong></td><td>CAR</td><td>Ameaçar, impor presença, arrancar resposta pelo medo</td></tr>
+        <tr><td><strong>Intuição</strong></td><td>SAB</td><td>Ler intenção alheia, sentir mentira, avaliar ferimento e estabilizar quem está caindo</td></tr>
+        <tr><td><strong>Investigação</strong></td><td>INT</td><td>Deduzir a partir de pistas, procurar o que está escondido, pesquisar</td></tr>
+        <tr><td><strong>Lidar com Animais</strong></td><td>SAB</td><td>Acalmar, montar, treinar — inclusive o que não é bem um animal</td></tr>
+        <tr><td><strong>Manufatura</strong></td><td>INT</td><td>Consertar, construir, criar itens, entender mecanismos e eletrônicos</td></tr>
+        <tr><td><strong>Mitologia</strong></td><td>INT</td><td>Saber de deuses, monstros, profecias e fraquezas míticas</td></tr>
+        <tr><td><strong>Percepção</strong></td><td>SAB</td><td>Notar o que está lá: um vulto, um cheiro, um som fora do lugar</td></tr>
+        <tr><td><strong>Persuasão</strong></td><td>CAR</td><td>Convencer com verdade, negociar, acalmar, pedir favor</td></tr>
+        <tr><td><strong>Prestidigitação</strong></td><td>DES</td><td>Mãos rápidas: furtar, plantar, abrir fechadura, truque de dedo</td></tr>
+        <tr><td><strong>Sobrevivência</strong></td><td>SAB</td><td>Rastrear, achar comida e água, se orientar, cozinhar de verdade</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>Percepção é o que você nota sem procurar; Investigação é o que você
+    descobre procurando.</strong> Ver a porta falsa é Percepção; entender para onde
+    ela leva é Investigação. E <strong>Intuição</strong> não lê mente — lê pessoa.</p>
   </div>
 
   <h4>Testes de Resistência</h4>
@@ -1340,6 +1456,323 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 <section class="capitulo" id="cap4">
   <div class="abertura">
     <span class="alg">Capítulo Quatro</span>
+    <h2>Equipamento</h2>
+    <p>Armas, armaduras, dinheiro e o que cabe nas suas costas</p>
+  </div>
+
+  <p class="abre">Seu personagem já existe. Agora ele precisa de alguma coisa para
+  segurar. Este capítulo tem as armas, as armaduras, os preços e as regras de carga —
+  e termina com o que cada classe já leva no primeiro dia.</p>
+
+  <h3>Dracmas</h3>
+  <p>A moeda do mundo mítico é a <em class="termo">dracma</em>, e ela circula em
+  paralelo ao dinheiro mortal. Ninguém no acampamento aceita cartão.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Moeda</th><th>Vale</th><th>Na prática</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Óbolo</strong></td><td>1/6 de dracma</td><td>Um pão, uma passagem, uma vela</td></tr>
+        <tr><td><strong>Dracma</strong></td><td>—</td><td>Um dia de trabalho honesto</td></tr>
+        <tr><td><strong>Mina</strong></td><td>100 dracmas</td><td>Uma armadura boa, um mês de vida folgada</td></tr>
+        <tr><td><strong>Talento</strong></td><td>6.000 dracmas</td><td>Riqueza de família. Raramente em moedas</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>Dracmas de ouro</strong> são o troco dos deuses: valem o mesmo, mas
+  abrem portas que o dinheiro mortal não abre. Um táxi cinzento, um barqueiro, um
+  favor num templo. O Mestre diz quando só elas servem.</p>
+
+  <h4>Quanto se ganha</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Trabalho</th><th class="num">Por dia</th></tr></thead>
+      <tbody>
+        <tr><td>Bico qualquer, sem perícia</td><td class="num">1 dracma</td></tr>
+        <tr><td>Trabalho com perícia proficiente</td><td class="num">2 dracmas</td></tr>
+        <tr><td>Apresentação, negócio, trabalho arriscado</td><td class="num">1d6 dracmas</td></tr>
+        <tr><td>Conceito Herdeiro, usando as conexões</td><td class="num">a critério do Mestre</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Uma <strong>Ação de Interlúdio</strong> gasta em Trabalhar rende cerca de uma
+  semana disso. Ver o Capítulo Oito.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Armas</h3>
+  <p>Toda arma tem categoria, dado de dano, tipo de dano, número de mãos e
+  propriedades. Você só soma seu <strong>bônus de proficiência</strong> ao ataque se
+  for proficiente com a categoria dela.</p>
+
+  <div class="destaque">
+    <p class="formula">Ataque = 1d20 + atributo + proficiência</p>
+    <p class="formula">Dano = dado da arma + atributo</p>
+  </div>
+
+  <p>Corpo a corpo usa <strong>Força</strong>; à distância usa
+  <strong>Destreza</strong>; armas com <strong>Fineza</strong> deixam você escolher, e
+  o atributo escolhido vale para o ataque <em>e</em> para o dano.</p>
+
+  <h4>Armas simples — corpo a corpo</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Arma</th><th>Dano</th><th>Tipo</th><th class="num">Mãos</th><th>Propriedades</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Adaga</td><td>1d4</td><td>Perfurante</td><td class="num">1</td><td>Fineza, Leve, Arremesso 6/18, Ocultável</td><td class="num">2</td></tr>
+        <tr><td>Bastão</td><td>1d6</td><td>Concussão</td><td class="num">1</td><td>Versátil 1d8</td><td class="num">2</td></tr>
+        <tr><td>Clava</td><td>1d6</td><td>Concussão</td><td class="num">1</td><td>—</td><td class="num">1</td></tr>
+        <tr><td>Foice curta</td><td>1d4</td><td>Cortante</td><td class="num">1</td><td>Leve, Gancho</td><td class="num">3</td></tr>
+        <tr><td>Lança</td><td>1d6</td><td>Perfurante</td><td class="num">1</td><td>Arremesso 6/18, Versátil 1d8</td><td class="num">5</td></tr>
+        <tr><td>Martelo leve</td><td>1d4</td><td>Concussão</td><td class="num">1</td><td>Leve, Arremesso 6/18</td><td class="num">2</td></tr>
+        <tr><td>Dardo</td><td>1d4</td><td>Perfurante</td><td class="num">1</td><td>Fineza, Arremesso 6/18</td><td class="num">1</td></tr>
+        <tr><td>Porrete grande</td><td>1d8</td><td>Concussão</td><td class="num">2</td><td>Duas Mãos</td><td class="num">4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Armas simples — à distância</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Arma</th><th>Dano</th><th>Tipo</th><th class="num">Mãos</th><th>Alcance</th><th>Propriedades</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Funda</td><td>1d4</td><td>Concussão</td><td class="num">1</td><td>12/48 m</td><td>Munição</td><td class="num">1</td></tr>
+        <tr><td>Arco curto</td><td>1d6</td><td>Perfurante</td><td class="num">2</td><td>24/96 m</td><td>Munição, Duas Mãos</td><td class="num">25</td></tr>
+        <tr><td>Besta leve</td><td>1d8</td><td>Perfurante</td><td class="num">2</td><td>24/96 m</td><td>Munição, Duas Mãos, Recarga</td><td class="num">25</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Armas marciais — corpo a corpo</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Arma</th><th>Dano</th><th>Tipo</th><th class="num">Mãos</th><th>Propriedades</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Espada curta</td><td>1d6</td><td>Perfurante</td><td class="num">1</td><td>Fineza, Leve</td><td class="num">10</td></tr>
+        <tr><td>Sabre defensivo</td><td>1d6</td><td>Cortante</td><td class="num">1</td><td>Fineza, Defensiva</td><td class="num">18</td></tr>
+        <tr><td>Chicote</td><td>1d4</td><td>Cortante</td><td class="num">1</td><td>Fineza, Alcance, Gancho</td><td class="num">8</td></tr>
+        <tr><td>Espada longa</td><td>1d8</td><td>Cortante</td><td class="num">1</td><td>Versátil 1d10</td><td class="num">15</td></tr>
+        <tr><td>Rapieira</td><td>1d8</td><td>Perfurante</td><td class="num">1</td><td>Fineza</td><td class="num">25</td></tr>
+        <tr><td>Machado de batalha</td><td>1d8</td><td>Cortante</td><td class="num">1</td><td>Versátil 1d10</td><td class="num">10</td></tr>
+        <tr><td>Martelo de guerra</td><td>1d8</td><td>Concussão</td><td class="num">1</td><td>Versátil 1d10</td><td class="num">15</td></tr>
+        <tr><td>Maça pesada</td><td>1d8</td><td>Concussão</td><td class="num">1</td><td>Demolidora</td><td class="num">10</td></tr>
+        <tr><td>Tridente</td><td>1d8</td><td>Perfurante</td><td class="num">1</td><td>Arremesso 6/18, Versátil 1d10</td><td class="num">10</td></tr>
+        <tr><td>Machado grande</td><td>1d10</td><td>Cortante</td><td class="num">2</td><td>Duas Mãos, Pesada, Brutal</td><td class="num">30</td></tr>
+        <tr><td>Lança longa</td><td>1d10</td><td>Perfurante</td><td class="num">2</td><td>Alcance, Duas Mãos</td><td class="num">20</td></tr>
+        <tr><td>Glaive</td><td>1d10</td><td>Cortante</td><td class="num">2</td><td>Alcance, Duas Mãos, Pesada</td><td class="num">30</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Armas marciais — à distância</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Arma</th><th>Dano</th><th>Tipo</th><th class="num">Mãos</th><th>Alcance</th><th>Propriedades</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Chakram</td><td>1d6</td><td>Cortante</td><td class="num">1</td><td>9/27 m</td><td>Fineza, Arremesso</td><td class="num">15</td></tr>
+        <tr><td>Arco longo</td><td>1d8</td><td>Perfurante</td><td class="num">2</td><td>45/180 m</td><td>Munição, Duas Mãos, Pesada</td><td class="num">50</td></tr>
+        <tr><td>Arco composto</td><td>1d8</td><td>Perfurante</td><td class="num">2</td><td>36/144 m</td><td>Munição, Duas Mãos</td><td class="num">60</td></tr>
+        <tr><td>Besta pesada</td><td>1d10</td><td>Perfurante</td><td class="num">2</td><td>30/120 m</td><td>Munição, Duas Mãos, Pesada, Recarga</td><td class="num">50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Ataques desarmados e armas improvisadas</h4>
+  <p>Todo mundo é proficiente com os próprios punhos: <span class="dado">1 + FOR</span>
+  de dano, mínimo 1. Uma cadeira, uma garrafa ou um pedaço de cano causa
+  <span class="dado">1d4 + FOR</span>, e você <strong>não</strong> soma proficiência —
+  a menos que o objeto seja parecido o bastante com uma arma que você domina, e o
+  Mestre concorde. Improvisadas quebram com facilidade.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Propriedades das armas</h3>
+
+  <div class="grade">
+    <div class="cartao"><h5>Alcance</h5><p>Atinge alvos a até 3 metros, e continua
+    atingindo os adjacentes. Também significa que você ameaça mais espaço para
+    ataques de oportunidade.</p></div>
+    <div class="cartao"><h5>Arremesso</h5><p>Pode ser lançada, usando o mesmo atributo
+    do corpo a corpo — salvo se tiver Fineza. Depois do ataque ela fica onde caiu.</p></div>
+    <div class="cartao"><h5>Brutal</h5><p>Quando um dado de dano da arma cair em 1,
+    role aquele dado de novo e use o novo resultado. Uma vez por ataque.</p></div>
+    <div class="cartao"><h5>Defensiva</h5><p>+1 DEF enquanto empunhada. Não acumula com
+    escudo nem com outra arma Defensiva — vale só o maior.</p></div>
+    <div class="cartao"><h5>Demolidora</h5><p>Vantagem para quebrar portas, correntes,
+    paredes frágeis e objetos. Não dá dano extra contra criaturas.</p></div>
+    <div class="cartao"><h5>Duas Mãos</h5><p>Precisa das duas mãos para atacar. Sem
+    escudo, sem segunda arma, sem nada na outra mão.</p></div>
+    <div class="cartao"><h5>Fineza</h5><p>Use Força ou Destreza, escolhendo a cada
+    ataque. O atributo escolhido vale para o ataque e para o dano.</p></div>
+    <div class="cartao"><h5>Gancho</h5><p>Vantagem em manobras de derrubar, desarmar,
+    puxar e prender feitas com a arma.</p></div>
+    <div class="cartao"><h5>Leve</h5><p>Serve para combate com duas armas. As duas
+    precisam ser Leves.</p></div>
+    <div class="cartao"><h5>Munição</h5><p>Precisa de flechas, virotes ou pedras. Sacar
+    a munição faz parte do ataque.</p></div>
+    <div class="cartao"><h5>Ocultável</h5><p>Vantagem para esconder a arma sob roupas,
+    em bolsas, numa revista superficial.</p></div>
+    <div class="cartao"><h5>Pesada</h5><p>Com Força menor que 13 você ataca com
+    <strong>Desvantagem</strong>. Conta como volumosa e não se esconde.</p></div>
+    <div class="cartao"><h5>Recarga</h5><p>Um disparo por ação, mesmo que você tenha
+    ataques extras, e recarregar usa a Interação Simples do turno.</p></div>
+    <div class="cartao"><h5>Versátil</h5><p>Com as duas mãos, o dado de dano sobe para o
+    indicado. Trocar entre uma e duas mãos não custa ação.</p></div>
+  </div>
+
+  <h4>Combate com duas armas</h4>
+  <p>Ao usar a ação Atacar com uma arma <strong>Leve</strong>, você pode gastar sua
+  <strong>ação bônus</strong> para atacar com outra arma Leve na outra mão. No ataque
+  da mão secundária você soma proficiência normalmente, mas <strong>não soma o
+  modificador de atributo ao dano</strong> — penalidades continuam valendo.</p>
+
+  <div class="nota">
+    <p><strong>Sobre a Besta leve.</strong> Ela causa 1d8 contra os 1d6 do Arco curto,
+    pelo mesmo preço e mesma categoria. Isso é de propósito: a partir do
+    <strong>nível 5</strong>, quando chega o Ataque Extra, a limitação da Recarga passa
+    a custar um ataque inteiro por turno, e o Arco vira a arma melhor. Até lá, a besta
+    é a escolha de quem só vai atirar uma vez mesmo.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Armaduras e escudos</h3>
+  <p>Sua DEF vem da armadura, não de 10 + Destreza — esse valor é só o que sobra para
+  quem está sem nada. Armaduras médias limitam quanto de Destreza você soma.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Armadura</th><th>Categoria</th><th>DEF</th><th>Limite de DES</th><th>Furtividade</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Sem armadura</td><td>—</td><td>10 + DES</td><td>—</td><td>—</td><td class="num">—</td></tr>
+        <tr><td>Acolchoada</td><td>Leve</td><td>11 + DES</td><td>—</td><td>Desvantagem</td><td class="num">5</td></tr>
+        <tr><td>Couro batido</td><td>Leve</td><td>12 + DES</td><td>—</td><td>—</td><td class="num">45</td></tr>
+        <tr><td>Cota de escamas</td><td>Média</td><td>13 + DES</td><td>+2</td><td>Desvantagem</td><td class="num">50</td></tr>
+        <tr><td>Peitoral</td><td>Média</td><td>14 + DES</td><td>+2</td><td>—</td><td class="num">400</td></tr>
+        <tr><td><strong>Escudo</strong></td><td>—</td><td><strong>+2 DEF</strong></td><td>—</td><td>—</td><td class="num">10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Um <strong>escudo</strong> ocupa uma mão e soma à DEF de qualquer armadura. Vestir
+  ou tirar leva um minuto para armadura leve e cinco para média; um escudo é uma
+  <strong>Interação Simples</strong>.</p>
+
+  <div class="nota">
+    <p><strong>Usar armadura sem proficiência</strong> custa caro: Desvantagem em todo
+    teste, ataque e Teste de Resistência que use Força ou Destreza, e você não consegue
+    usar habilidades de Fonte Física.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Equipamento de aventura</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Item</th><th class="num">Preço</th><th>Para quê</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kit Médico</strong></td><td class="num">25</td><td>Tratamentos passam a curar 1d8, e estabilizar tem Vantagem</td></tr>
+        <tr><td>Kit de Armeiro, de Armaduras, de Artesão</td><td class="num">50</td><td>Criar e reparar equipamento nos Interlúdios</td></tr>
+        <tr><td>Kit de Tecnologia</td><td class="num">75</td><td>Eletrônicos, mecanismos, segurança</td></tr>
+        <tr><td>Kit Alquímico</td><td class="num">100</td><td>Óleos, ácidos, antídotos, bombas</td></tr>
+        <tr><td>Mochila</td><td class="num">2</td><td>Onde tudo isso vai</td></tr>
+        <tr><td>Corda, 15 metros</td><td class="num">1</td><td>Resolve mais problemas que uma espada</td></tr>
+        <tr><td>Lanterna e pilhas</td><td class="num">2</td><td>Luz brilhante a 9 m, fraca a mais 9 m</td></tr>
+        <tr><td>Tocha</td><td class="num">1 óbolo</td><td>Uma hora de luz — e fogo, que resolve Hidra</td></tr>
+        <tr><td>Saco de dormir</td><td class="num">1</td><td>Descanso Longo confortável</td></tr>
+        <tr><td>Rações, um dia</td><td class="num">2 óbolos</td><td>Refeição Simples</td></tr>
+        <tr><td>Ingredientes frescos, um dia</td><td class="num">1</td><td>Refeição Boa ou Farta</td></tr>
+        <tr><td>Ingredientes de banquete</td><td class="num">10</td><td>Refeição Grandiosa para o grupo</td></tr>
+        <tr><td>Munição, 20 flechas ou virotes</td><td class="num">1</td><td>Repor a aljava</td></tr>
+        <tr><td>Antídoto</td><td class="num">25</td><td>Encerra Envenenado, mesmo persistente</td></tr>
+        <tr><td>Espelho de bolso</td><td class="num">3</td><td>Górgonas. Confie em mim</td></tr>
+        <tr><td>Pousada, uma noite</td><td class="num">1</td><td>Descanso Longo em segurança</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Bronze celestial</h4>
+  <p>Aço comum atravessa um monstro sem feri-lo — a lâmina passa como se ele fosse
+  fumaça. Para machucar o que veio do mito você precisa de <strong>bronze
+  celestial</strong>, de <strong>ferro estígio</strong> ou de <strong>ouro
+  imperial</strong>.</p>
+  <p>Uma arma desses materiais tem o <strong>mesmo perfil</strong> da versão mortal:
+  mesmo dado, mesmas propriedades. O que muda é o que ela consegue ferir. Bronze
+  celestial atravessa mortais sem causar dano — passa direto por gente comum.</p>
+  <p>Não se compra: é dada no acampamento, herdada, tomada de um monstro ou forjada.
+  Todo semideus começa com uma.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Carga</h3>
+  <p>Ninguém anota quilos. Os objetos entram em quatro categorias, e o bom senso do
+  Mestre resolve o resto.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Categoria</th><th>Exemplos</th><th>Quanto dá para levar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Insignificante</strong></td><td>Chaves, moedas, celular, frasco, munição</td><td>Quanto couber</td></tr>
+        <tr><td><strong>Comum</strong></td><td>Espada, arco, mochila, kit, corda</td><td>Vários, se houver onde guardar</td></tr>
+        <tr><td><strong>Volumoso</strong></td><td>Arma muito pesada, escudo grande, um corpo, um baú</td><td>Um por vez</td></tr>
+        <tr><td><strong>Excessivo</strong></td><td>Uma pedra enorme, uma porta de metal, um monstro</td><td>Só com teste, e por pouco tempo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Um conjunto normal de aventura — armadura, uma ou duas armas, mochila, kit,
+  ferramentas, consumíveis — <strong>nunca</strong> gera penalidade. Carga só vira
+  regra quando o grupo tenta levar o tesouro, carregar um ferido, escalar, ou fugir.</p>
+
+  <p>Quem exagera fica <strong>Sobrecarregado</strong> (Capítulo Seis). O Mestre deve
+  <em>avisar antes</em>: "se você levar esse baú junto com o resto, fica
+  Sobrecarregado" — para o jogador ainda poder escolher.</p>
+
+  <p>Força alta permite carregar mais, mas não resolve tamanho: um personagem muito
+  forte ainda não passa por uma porta com uma estátua no ombro.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Com o que você começa</h3>
+  <p>Escolha o pacote da sua classe. Ele já inclui a arma de bronze celestial que o
+  acampamento entrega a todo semideus.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Guardião</h5>
+      <p class="etiqueta">DEF 15 com Destreza +1</p>
+      <p>Cota de escamas · escudo · espada longa de bronze celestial · adaga ·
+      mochila · corda · saco de dormir · rações para 3 dias</p>
+    </div>
+    <div class="cartao">
+      <h5>Furioso</h5>
+      <p class="etiqueta">DEF 13 com Destreza +1</p>
+      <p>Couro batido · machado grande <em>ou</em> duas espadas curtas, de bronze
+      celestial · duas adagas · mochila · corda · saco de dormir · rações para 3 dias</p>
+    </div>
+    <div class="cartao">
+      <h5>Oráculo</h5>
+      <p class="etiqueta">DEF 13 com Destreza +1</p>
+      <p>Couro batido · lança de bronze celestial · funda · <strong>Kit Médico</strong> ·
+      mochila · corda · saco de dormir · rações para 3 dias</p>
+    </div>
+  </div>
+
+  <p>Além do pacote, todo personagem começa com <span class="dado">2d6</span> dracmas.
+  O Conceito <strong>Herdeiro</strong> começa com <span class="dado">2d6 + 20</span>.</p>
+
+  <div class="nota">
+    <p><strong>Prefere escolher item por item?</strong> Combine com o Mestre: em vez do
+    pacote, o personagem começa com <strong>75 dracmas</strong> e a arma de bronze
+    celestial, e compra o resto nas tabelas acima. Dá personagens mais pessoais e
+    custa quinze minutos de mesa.</p>
+  </div>
+</section>
+
+<section class="capitulo" id="cap5">
+  <div class="abertura">
+    <span class="alg">Capítulo Cinco</span>
     <h2>Combate</h2>
     <p>Curto, letal, e cheio de decisão</p>
   </div>
@@ -1409,7 +1842,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   <h3>Condições</h3>
   <p>Combate impõe condições o tempo todo: Caído, Amedrontado, Preso, Atordoado.
   Cada uma muda o que você consegue fazer, e todas estão definidas em ordem no
-  <strong><a href="#cap5">Capítulo Cinco</a></strong>, com uma tabela de consulta
+  <strong><a href="#cap6">Capítulo Seis</a></strong>, com uma tabela de consulta
   rápida no fim.</p>
 
   <p>As três regras que mais aparecem na mesa: condições não se acumulam com elas
@@ -1439,9 +1872,9 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 </section>
 
 <!-- ==================== V — CONDIÇÕES ==================== -->
-<section class="capitulo" id="cap5">
+<section class="capitulo" id="cap6">
   <div class="abertura">
-    <span class="alg">Capítulo Cinco</span>
+    <span class="alg">Capítulo Seis</span>
     <h2>Condições</h2>
     <p>O que pode acontecer com o seu corpo, a sua mente e o seu destino</p>
   </div>
@@ -1469,10 +1902,10 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   </ol>
 
   <div class="nota">
-    <p>Os capítulos de <a href="#cap4">Combate</a> e de
-    <a href="#cap6">Criação de habilidades</a> apontam para cá. Se você quer saber
+    <p>Os capítulos de <a href="#cap5">Combate</a> e de
+    <a href="#cap7">Criação de habilidades</a> apontam para cá. Se você quer saber
     <em>quanto custa</em> aplicar uma condição numa habilidade que você está
-    montando, é no Capítulo Seis. Aqui é o que ela faz quando cai em você.</p>
+    montando, é no Capítulo Sete. Aqui é o que ela faz quando cai em você.</p>
   </div>
 
   <div class="ornamento">❖</div>
@@ -1790,9 +2223,9 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 </section>
 
 <!-- ==================== V ==================== -->
-<section class="capitulo" id="cap6">
+<section class="capitulo" id="cap7">
   <div class="abertura">
-    <span class="alg">Capítulo Seis</span>
+    <span class="alg">Capítulo Sete</span>
     <h2>Criação de habilidades</h2>
     <p>O motor: pontos, alcance, duração e o que cada ponto compra</p>
   </div>
@@ -1967,7 +2400,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   </div>
 
   <h4>Os graus de condição</h4>
-  <p>Toda condição do <a href="#cap5">Capítulo Cinco</a> tem um grau, e o grau é o
+  <p>Toda condição do <a href="#cap6">Capítulo Seis</a> tem um grau, e o grau é o
   preço dela em pontos.</p>
 
   <div class="rolagem">
@@ -2217,9 +2650,9 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   </ol>
 </section>
 
-<section class="capitulo" id="cap7">
+<section class="capitulo" id="cap8">
   <div class="abertura">
-    <span class="alg">Capítulo Sete</span>
+    <span class="alg">Capítulo Oito</span>
     <h2>Entre aventuras</h2>
     <p>Descanso, comida e o tempo em que você vira alguém</p>
   </div>
@@ -2290,7 +2723,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
     <div class="cartao"><h5>Criar ou melhorar</h5><p>Cada Ação é um período de trabalho com
     um Kit de Criação: fabricar, subir a classe de um item, reparar, desmontar.</p></div>
     <div class="cartao"><h5>Desenvolver uma habilidade</h5><p>Uma Ação para projetar e
-    treinar uma habilidade nova pelo motor do Capítulo Cinco. Teste de <strong>Arcanismo</strong>
+    treinar uma habilidade nova pelo motor do Capítulo Sete. Teste de <strong>Arcanismo</strong>
     (elemental), <strong>Atletismo</strong> (física) ou <strong>Manufatura</strong>
     (médica) contra <strong>CD 10 + o custo</strong> dela. Em uma falha, você entende onde
     errou e tenta de novo no próximo Interlúdio.</p></div>
@@ -2311,9 +2744,176 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 </section>
 
 <!-- ==================== VII ==================== -->
-<section class="capitulo" id="cap8">
+<section class="capitulo" id="cap9">
   <div class="abertura">
-    <span class="alg">Capítulo Oito</span>
+    <span class="alg">Capítulo Nove</span>
+    <h2>Subir de nível</h2>
+    <p>O que você ganha, do nível 1 ao 20</p>
+  </div>
+
+  <p class="abre">Personagem não sobe de nível porque acumulou pontos numa planilha.
+  Sobe quando o Mestre diz que subiu — normalmente ao fim de uma missão, e sempre
+  durante um <strong>Interlúdio</strong>. Você não vira mais forte no meio de uma
+  caverna; vira depois, quando teve tempo de digerir o que aconteceu.</p>
+
+  <h3>A tabela</h3>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Nível</th><th class="num">Prof.</th><th>O que você ganha</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td class="num">+2</td><td>Conceito Mortal, Húbris, Classe, primeira técnica, Parente Divino, Atributo Divino</td></tr>
+        <tr><td class="num">2</td><td class="num">+2</td><td><strong>Segunda técnica</strong> da sua classe</td></tr>
+        <tr><td class="num">3</td><td class="num">+2</td><td><strong>Habilidade Assinatura</strong></td></tr>
+        <tr><td class="num">4</td><td class="num">+2</td><td><strong>+2 pontos de atributo</strong></td></tr>
+        <tr><td class="num">5</td><td class="num">+3</td><td><strong>Ataque Extra</strong> · Oráculo recebe <strong>Bênção Ampliada</strong></td></tr>
+        <tr><td class="num">6</td><td class="num">+3</td><td>Terceira técnica</td></tr>
+        <tr><td class="num">7</td><td class="num">+3</td><td><strong>Resistência da Linhagem</strong></td></tr>
+        <tr><td class="num">8</td><td class="num">+3</td><td><strong>+2 pontos de atributo</strong></td></tr>
+        <tr><td class="num">9</td><td class="num">+4</td><td>Proficiência no seu <strong>terceiro Teste de Resistência</strong></td></tr>
+        <tr><td class="num">10</td><td class="num">+4</td><td>Quarta técnica</td></tr>
+        <tr><td class="num">11</td><td class="num">+4</td><td><strong>Golpe Verdadeiro</strong></td></tr>
+        <tr><td class="num">12</td><td class="num">+4</td><td><strong>+2 pontos de atributo</strong></td></tr>
+        <tr><td class="num">13</td><td class="num">+5</td><td>Segunda Habilidade Assinatura</td></tr>
+        <tr><td class="num">14</td><td class="num">+5</td><td>Quinta técnica</td></tr>
+        <tr><td class="num">15</td><td class="num">+5</td><td><strong>Herança Desperta</strong></td></tr>
+        <tr><td class="num">16</td><td class="num">+5</td><td><strong>+2 pontos de atributo</strong></td></tr>
+        <tr><td class="num">17</td><td class="num">+6</td><td><strong>Fôlego Heroico</strong></td></tr>
+        <tr><td class="num">18</td><td class="num">+6</td><td>Sexta técnica</td></tr>
+        <tr><td class="num">19</td><td class="num">+6</td><td><strong>+2 pontos de atributo</strong></td></tr>
+        <tr><td class="num">20</td><td class="num">+6</td><td><strong>Ascensão</strong> — a marca da sua classe</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Recursos por nível</h3>
+  <p>A cada nível, some à sua ficha:</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Classe</th><th>PV</th><th>SP</th><th>MP</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Guardião</strong></td><td>+6 + CON</td><td class="num">+4</td><td class="num">+1</td></tr>
+        <tr><td><strong>Furioso</strong></td><td>+5 + CON</td><td class="num">+5</td><td class="num">+1</td></tr>
+        <tr><td><strong>Oráculo</strong></td><td>+4 + CON</td><td class="num">+3</td><td class="num">+4</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Se a Constituição subir, recalcule os PV como se ela sempre tivesse sido aquela —
+  ganhe o valor retroativo de uma vez. O mesmo vale para o Atributo Divino e o MP.</p>
+
+  <div class="nota">
+    <p><strong>Por que o Furioso ganha menos PV que o Guardião e mais SP.</strong> Os
+    três recebem o mesmo total por nível — muda só onde ele entra. Guardião converte em
+    resistência, Furioso em combustível para técnicas, Oráculo em poder. Isso mantém as
+    três classes trocando as mesmas moedas de lugar, e não uma sendo melhor.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>O que cada ganho faz</h3>
+
+  <h4>Técnicas</h4>
+  <p>Nos níveis 2, 6, 10, 14 e 18 você escolhe mais uma técnica da lista da sua classe.
+  Você termina o nível 20 com <strong>seis</strong> — e as listas do Capítulo Três têm
+  quatro cada, então o Mestre acrescenta as demais conforme a campanha, ou você repete
+  uma escolha melhorando-a.</p>
+
+  <h4>Habilidade Assinatura</h4>
+  <p>Escolha uma habilidade que você conhece. Ela passa a custar <strong>1 a menos</strong>
+  (mínimo 1) e <strong>não ocupa espaço de Memória</strong>. É o golpe pelo qual as
+  pessoas te reconhecem. No nível 13 você escolhe uma segunda.</p>
+
+  <h4>Ataque Extra</h4>
+  <p>Ao usar a ação Atacar, você faz <strong>dois</strong> ataques em vez de um. É o
+  maior salto de poder da tabela, e é onde armas com <strong>Recarga</strong> passam a
+  custar caro de verdade.</p>
+  <p><strong>Oráculo</strong> não recebe Ataque Extra. Em vez disso ganha
+  <em class="termo">Bênção Ampliada</em>: toda habilidade sua que cura, protege ou
+  fortalece atinge <strong>um alvo a mais</strong>, sem custo adicional.</p>
+
+  <h4>Resistência da Linhagem</h4>
+  <p>Vantagem em Testes de Resistência contra efeitos da sua própria Afinidade
+  Elemental. Filha de Hefesto resiste melhor ao fogo; filho de Poseidon não se afoga.</p>
+
+  <h4>Golpe Verdadeiro</h4>
+  <p>Uma vez por combate, depois de ver o resultado, você pode transformar um erro seu
+  em <strong>acerto</strong>. Não transforma em crítico.</p>
+
+  <h4>Herança Desperta</h4>
+  <p>A habilidade passiva do seu Parente Divino cresce. O Mestre define o quê, junto com
+  você, e deve ser algo que o personagem <strong>conquistou na história</strong> —
+  não uma linha de tabela. Um filho de Atena passa a analisar dois inimigos por combate;
+  uma filha de Apolo enxerga no escuro como quem enxerga ao meio-dia.</p>
+
+  <h4>Fôlego Heroico</h4>
+  <p>Uma vez por Descanso Longo, com uma <strong>ação bônus</strong>, recupere metade
+  dos seus PV máximos. É a regra que permite ao grupo aguentar o quarto combate do dia.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Ascensão — nível 20</h3>
+  <div class="grade">
+    <div class="cartao">
+      <h5>Guardião · Muralha</h5>
+      <p>Aliados a até 3 metros de você recebem <strong>+2 DEF</strong>. E quando você
+      usa Interceptar, o dano que você recebe no lugar do aliado é reduzido
+      <strong>à metade</strong>.</p>
+    </div>
+    <div class="cartao">
+      <h5>Furioso · Fúria Imortal</h5>
+      <p>Uma vez por Descanso Longo, quando você cair a 0 PV, você continua de pé com
+      <strong>1 PV</strong> e age normalmente por uma rodada antes de cair. Se matar
+      alguma coisa nessa rodada, não cai.</p>
+    </div>
+    <div class="cartao">
+      <h5>Oráculo · Voz do Destino</h5>
+      <p>Uma vez por Descanso Longo, force <strong>qualquer rolagem</strong> da mesa a
+      ser refeita — sua, de um aliado ou de um inimigo. O segundo resultado vale.</p>
+    </div>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Duas regras que crescem com você</h3>
+
+  <h4>Teto de custo das habilidades</h4>
+  <div class="destaque">
+    <p class="formula">custo máximo = 4 + metade do seu nível, arredondada para cima</p>
+  </div>
+  <p>No nível 1 você não constrói nada acima de <strong>5</strong>; no nível 10, nada
+  acima de <strong>9</strong>; no nível 20, nada acima de <strong>14</strong>. É o que
+  impede um personagem de guardar MP a vida toda para montar uma habilidade que resolve
+  a campanha sozinha.</p>
+
+  <h4>Memória</h4>
+  <p>Continua sendo <span class="dado">2 + Atributo Divino</span>, mínimo 1 e máximo 6.
+  Ela cresce quando você põe pontos no Atributo Divino nos níveis 4, 8, 12, 16 e 19 —
+  e uma Habilidade Assinatura deixa de ocupar espaço, o que na prática vale mais um.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>Quando o Mestre concede um nível</h3>
+  <p>Não existe tabela de experiência neste jogo. O Mestre concede nível quando a
+  história pede, e o guia é o <strong>Kleos</strong> do que o grupo enfrentou: subir um
+  nível depois de derrubar algo de Kleos igual ou superior ao Kleos do próprio grupo é
+  um ritmo honesto.</p>
+  <p>Na prática, isso dá um nível a cada duas ou três sessões no começo, e mais espaçado
+  depois. Um grupo que joga toda semana chega ao nível 10 em uns seis meses — e isso é
+  proposital: o nível 5 muda o jogo, e ninguém deveria atravessá-lo correndo.</p>
+
+  <div class="nota">
+    <p><strong>Subir de nível é uma cena.</strong> Peça ao jogador para dizer o que
+    mudou no personagem — o que ele aprendeu, o que passou a conseguir olhar de frente,
+    o que deixou de ter medo. Preencher a ficha leva dois minutos; essa frase é o que
+    faz o nível significar alguma coisa.</p>
+  </div>
+</section>
+
+<section class="capitulo" id="cap10">
+  <div class="abertura">
+    <span class="alg">Capítulo Dez</span>
     <h2>Uma ficha pronta</h2>
     <p>As sete etapas aplicadas do começo ao fim</p>
   </div>
@@ -2380,6 +2980,134 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 </section>
 
 <!-- ==================== COLOFÃO ==================== -->
+<section class="capitulo" id="cap11">
+  <div class="abertura">
+    <span class="alg">Capítulo Onze</span>
+    <h2>Ficha em branco</h2>
+    <p>Imprima esta página e leve para a mesa</p>
+  </div>
+
+  <p class="abre">Ctrl+P imprime o livro inteiro. Se quiser só esta folha, use o
+  intervalo de páginas na janela de impressão — ou copie à mão, que é como metade
+  das melhores fichas do mundo foi feita.</p>
+
+  <div class="folha">
+
+    <div class="folha-topo">
+      <div class="campo largo"><span>Personagem</span><i></i></div>
+      <div class="campo"><span>Jogador</span><i></i></div>
+      <div class="campo curto"><span>Nível</span><i></i></div>
+    </div>
+
+    <div class="folha-topo">
+      <div class="campo"><span>Classe</span><i></i></div>
+      <div class="campo"><span>Conceito Mortal</span><i></i></div>
+      <div class="campo"><span>Húbris</span><i></i></div>
+    </div>
+
+    <div class="folha-topo">
+      <div class="campo"><span>Parente Divino</span><i></i></div>
+      <div class="campo"><span>Afinidade Elemental</span><i></i></div>
+      <div class="campo"><span>Atributo Divino</span><i></i></div>
+    </div>
+
+    <h4>Atributos</h4>
+    <div class="folha-atributos">
+      <div class="atr"><span>Força</span><b></b><em>mod</em></div>
+      <div class="atr"><span>Destreza</span><b></b><em>mod</em></div>
+      <div class="atr"><span>Constituição</span><b></b><em>mod</em></div>
+      <div class="atr"><span>Inteligência</span><b></b><em>mod</em></div>
+      <div class="atr"><span>Sabedoria</span><b></b><em>mod</em></div>
+      <div class="atr"><span>Carisma</span><b></b><em>mod</em></div>
+    </div>
+
+    <h4>Recursos e números</h4>
+    <div class="folha-recursos">
+      <div class="cx alto"><span>Pontos de Vida</span><b></b><small>atual / máximo</small></div>
+      <div class="cx alto"><span>Pontos de Vigor</span><b></b><small>atual / máximo</small></div>
+      <div class="cx alto"><span>Pontos de Mana</span><b></b><small>atual / máximo</small></div>
+      <div class="cx"><span>DEF</span><b></b></div>
+      <div class="cx"><span>Iniciativa</span><b></b></div>
+      <div class="cx"><span>Movimento</span><b></b></div>
+      <div class="cx"><span>Proficiência</span><b></b></div>
+      <div class="cx"><span>Tratamentos</span><b></b></div>
+      <div class="cx"><span>Memória</span><b></b></div>
+      <div class="cx"><span>CD da habilidade</span><b></b></div>
+      <div class="cx"><span>Ímpeto</span><b></b></div>
+      <div class="cx"><span>Ânimo</span><b></b></div>
+    </div>
+
+    <div class="folha-duas">
+      <div>
+        <h4>Testes de Resistência</h4>
+        <ul class="lista-marcada">
+          <li><i class="quad"></i> Fortitude <span class="pontilhado"></span></li>
+          <li><i class="quad"></i> Reflexos <span class="pontilhado"></span></li>
+          <li><i class="quad"></i> Vontade <span class="pontilhado"></span></li>
+        </ul>
+        <p class="dica">Marque o quadrado onde você é proficiente.</p>
+
+        <h4>Perícias</h4>
+        <ul class="lista-marcada duas-colunas">
+          <li><i class="quad"></i> Acrobacia <small>DES</small></li>
+          <li><i class="quad"></i> Arcanismo <small>INT</small></li>
+          <li><i class="quad"></i> Atletismo <small>FOR</small></li>
+          <li><i class="quad"></i> Atuação <small>CAR</small></li>
+          <li><i class="quad"></i> Enganação <small>CAR</small></li>
+          <li><i class="quad"></i> Furtividade <small>DES</small></li>
+          <li><i class="quad"></i> Intimidação <small>CAR</small></li>
+          <li><i class="quad"></i> Intuição <small>SAB</small></li>
+          <li><i class="quad"></i> Investigação <small>INT</small></li>
+          <li><i class="quad"></i> Lidar com Animais <small>SAB</small></li>
+          <li><i class="quad"></i> Manufatura <small>INT</small></li>
+          <li><i class="quad"></i> Mitologia <small>INT</small></li>
+          <li><i class="quad"></i> Percepção <small>SAB</small></li>
+          <li><i class="quad"></i> Persuasão <small>CAR</small></li>
+          <li><i class="quad"></i> Prestidigitação <small>DES</small></li>
+          <li><i class="quad"></i> Sobrevivência <small>SAB</small></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Ataques</h4>
+        <table class="folha-tabela">
+          <thead><tr><th>Arma</th><th>Ataque</th><th>Dano</th><th>Propriedades</th></tr></thead>
+          <tbody>
+            <tr><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td></tr>
+            <tr><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+
+        <h4>Técnicas de classe</h4>
+        <div class="pauta tres"></div>
+
+        <h4>Condições ativas</h4>
+        <div class="pauta duas"></div>
+      </div>
+    </div>
+
+    <h4>Habilidades preparadas <small>— nome · fonte · custo · alcance · duração · efeito</small></h4>
+    <div class="pauta seis"></div>
+
+    <div class="folha-duas">
+      <div>
+        <h4>Equipamento</h4>
+        <div class="pauta seis"></div>
+        <div class="campo"><span>Dracmas</span><i></i></div>
+      </div>
+      <div>
+        <h4>Vínculos <small>— até três</small></h4>
+        <div class="pauta tres"></div>
+        <h4>Aparência, história, o que ficou para trás</h4>
+        <div class="pauta quatro"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <footer class="colofao">
   <h3>Sobre esta edição</h3>
   <p><strong>Números.</strong> Este livro usa a versão corrigida das classes — a que passou
@@ -2390,7 +3118,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   <p><strong>O que ainda falta.</strong> A progressão dos níveis 2 ao 20 e o capítulo
   completo de armaduras e preços. As armaduras usadas aqui são provisórias.</p>
 
-  <p><strong>O motor de habilidades foi testado.</strong> As tabelas do Capítulo Cinco não
+  <p><strong>O motor de habilidades foi testado.</strong> As tabelas do Capítulo Sete não
   são chute: cada faixa de custo foi medida contra o dano de uma arma, contra o número de
   alvos que justifica uma área, e contra o orçamento de MP de um dia inteiro de aventura.</p>
 

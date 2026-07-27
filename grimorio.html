@@ -671,6 +671,101 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .degrau { page-break-before: always; }
 }
 
+/* ============================================================
+   FICHA EM BRANCO — pensada para ser impressa e preenchida à mão
+   ============================================================ */
+.folha {
+  border: 1px solid var(--borda-forte);
+  padding: 1.2rem;
+  margin: 1.6rem 0;
+  background: var(--papel);
+}
+.folha h4 { margin: 1.4rem 0 .5rem; }
+.folha h4:first-child { margin-top: 0; }
+.folha h4 small { color: var(--texto-suave); letter-spacing: 0; text-transform: none; font-weight: 400; }
+
+.folha-topo { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: .7rem; }
+.campo { flex: 1 1 9rem; }
+.campo.largo { flex: 2 1 14rem; }
+.campo.curto { flex: 0 1 5rem; }
+.campo span {
+  display: block;
+  font-family: var(--sans); font-size: .6rem;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: var(--texto-suave);
+}
+.campo i { display: block; border-bottom: 1px solid var(--borda-forte); height: 1.5rem; }
+
+.folha-atributos {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: .5rem;
+}
+.folha-atributos .atr {
+  border: 1px solid var(--borda); text-align: center; padding: .4rem .3rem .5rem;
+}
+.folha-atributos .atr span {
+  display: block; font-family: var(--sans); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.folha-atributos .atr b {
+  display: block; height: 1.7rem; border-bottom: 1px solid var(--borda-forte);
+  margin: .2rem .8rem 0;
+}
+.folha-atributos .atr em {
+  display: block; font-style: normal; font-family: var(--sans);
+  font-size: .55rem; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--texto-suave); margin-top: .25rem;
+}
+
+.folha-recursos {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.2rem, 1fr)); gap: .5rem;
+}
+.folha-recursos .cx { border: 1px solid var(--borda); padding: .4rem .5rem .5rem; }
+.folha-recursos .cx.alto { grid-column: span 2; }
+.folha-recursos .cx span {
+  display: block; font-family: var(--sans); font-size: .58rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.folha-recursos .cx b { display: block; height: 1.5rem; border-bottom: 1px solid var(--borda-forte); }
+.folha-recursos .cx small {
+  display: block; font-family: var(--sans); font-size: .52rem;
+  color: var(--texto-suave); margin-top: .2rem;
+}
+
+.folha-duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.4rem; }
+
+.lista-marcada { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+.lista-marcada li { display: flex; align-items: baseline; gap: .45rem; margin-bottom: .3rem; }
+.lista-marcada small { color: var(--texto-suave); font-size: .68rem; }
+.lista-marcada.duas-colunas { columns: 2; column-gap: 1.2rem; }
+.lista-marcada.duas-colunas li { break-inside: avoid; }
+i.quad {
+  flex: none; width: .72rem; height: .72rem;
+  border: 1px solid var(--borda-forte); display: inline-block;
+}
+.pontilhado { flex: 1; border-bottom: 1px dotted var(--borda-forte); }
+.dica { font-size: .78rem; color: var(--texto-suave); margin: .4rem 0 0; }
+
+.folha-tabela th { font-size: .58rem; }
+.folha-tabela td { height: 1.6rem; border-bottom: 1px solid var(--borda); }
+
+/* Pautas: linhas para escrever. O número é quantas linhas. */
+.pauta {
+  border-bottom: 1px solid var(--borda-forte);
+  background-image: repeating-linear-gradient(
+    to bottom, transparent, transparent calc(1.6rem - 1px),
+    var(--borda) calc(1.6rem - 1px), var(--borda) 1.6rem);
+}
+.pauta.duas   { height: 3.2rem; }
+.pauta.tres   { height: 4.8rem; }
+.pauta.quatro { height: 6.4rem; }
+.pauta.seis   { height: 9.6rem; }
+
+@media print {
+  .folha { page-break-inside: avoid; border-color: #000; }
+  .folha-atributos .atr, .folha-recursos .cx, i.quad { border-color: #666; }
+  .campo i, .folha-atributos .atr b, .folha-recursos .cx b { border-bottom-color: #666; }
+}
+
 
 /* ============================================================
    GRIMÓRIO — paleta própria: verde de couro e ouro velho.
