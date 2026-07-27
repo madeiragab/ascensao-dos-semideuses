@@ -246,7 +246,13 @@ alta.
 
 ---
 
-## 25. Condições *(novo — eram citadas em dezenas de habilidades e nunca definidas)*
+## 25. Condições
+
+> ⚠️ **Superado pelo Capítulo Cinco do livro.** A lista completa — 36 condições
+> organizadas por natureza do efeito, de Sangrando e Hemorragia a Petrificado,
+> Selado e Envelhecido — está em `template/livro-do-jogador.html`, capítulo
+> Condições. O que segue abaixo é a primeira versão, mantida como histórico.
+> Quando as duas discordarem, o livro manda.
 
 Condições não se acumulam com elas mesmas. Salvo indicação em contrário, uma
 condição imposta por uma habilidade dura **uma rodada** e permite um novo Teste de

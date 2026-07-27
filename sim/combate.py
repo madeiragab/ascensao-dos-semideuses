@@ -63,6 +63,12 @@ class Lutador:
         self.sp = self.sp_max
         self.mp = self.mp_max
         self.reacao_disponivel = True
+        # Condições ativas: nome -> rodadas restantes. O motor entende três
+        # famílias, que é o suficiente para medir o preço delas:
+        #   perde_turno    Atordoado, Paralisado, Incapacitado
+        #   cega           Amedrontado, Cego  (Desvantagem nos ataques)
+        #   sangra_N       perde N PV no fim do próprio turno
+        self.condicoes: dict[str, int] = {}
         # Quantos ataques contra mim ainda têm Vantagem por causa do Ataque
         # Feroz. No v0 a marca vale para TODOS os ataques até meu próximo
         # turno; no v1 vale só para o primeiro.
@@ -91,6 +97,30 @@ class Lutador:
             self.ataques_com_vantagem_contra_mim -= 1
             return True
         return False
+
+    # -- condições ---------------------------------------------------------
+    def aplicar_condicao(self, nome: str, rodadas: int = 1) -> None:
+        """Condições não se acumulam com elas mesmas: fica a maior duração."""
+        self.condicoes[nome] = max(self.condicoes.get(nome, 0), rodadas)
+
+    @property
+    def perde_o_turno(self) -> bool:
+        return self.condicoes.get("perde_turno", 0) > 0
+
+    @property
+    def ataca_com_desvantagem(self) -> bool:
+        return self.condicoes.get("cega", 0) > 0
+
+    def resolver_fim_de_turno(self) -> None:
+        """Sangramento cobra aqui; depois toda condição perde uma rodada."""
+        sangra = next((int(k.split("_")[1]) for k in self.condicoes
+                       if k.startswith("sangra_") and self.condicoes[k] > 0), 0)
+        if sangra:
+            self.sofrer(sangra)
+        for nome in list(self.condicoes):
+            self.condicoes[nome] -= 1
+            if self.condicoes[nome] <= 0:
+                del self.condicoes[nome]
 
     @classmethod
     def de_monstro(cls, m: Monstro, sufixo: str = "") -> "Lutador":
@@ -130,6 +160,8 @@ class Lutador:
         bonus_extra: int = 0,
         dano_extra: int = 0,
     ) -> int:
+        if self.ataca_com_desvantagem:
+            desvantagem = True
         nat = rola_d20(vantagem, desvantagem)
         total = nat + self.bonus_ataque + bonus_extra
 
@@ -155,8 +187,21 @@ class Lutador:
 
     # -- turno -------------------------------------------------------------
     def turno(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
+        """Age e depois resolve o fim do turno, por qualquer caminho."""
+        try:
+            self._agir(aliados, inimigos)
+        finally:
+            if not self.perde_o_turno:
+                self.resolver_fim_de_turno()
+
+    def _agir(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
         self.reacao_disponivel = True
         self.ataques_com_vantagem_contra_mim = 0   # a marca do Feroz expira aqui
+
+        # Quem perdeu o turno ainda sangra e ainda vê a condição expirar.
+        if self.perde_o_turno:
+            self.resolver_fim_de_turno()
+            return
 
         alvos = [i for i in inimigos if i.vivo]
         if not alvos:
