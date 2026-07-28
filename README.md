@@ -13,13 +13,14 @@ três correções estão documentadas mais abaixo.
 
 ---
 
-## Os três livros
+## Os quatro livros
 
 | | Livro | Conteúdo |
 |---|---|---|
 | **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação de personagem em sete etapas, combate, e o motor de criação de habilidades |
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
+| **IV** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível no navegador, com retrato do personagem, e sai em PDF |
 
 ---
 
@@ -49,6 +50,10 @@ A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2,
 4. Sustentar custa metade do custo final por rodada. Cada ponto compra 1d8 de
 dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assim por
 diante.
+
+**Catorze perícias**, não dezesseis: *Arcanismo* foi absorvida por Mitologia, porque
+num mundo em que toda magia é grega não existem dois corpos de conhecimento, e
+*Lidar com Animais* entrou em Sobrevivência.
 
 **Monstros são medidos em Kleos** — a glória que custa derrubá-los. Onze degraus
 com nome: Rumor, Boato, Conto, Façanha, Feito, Canção, Lenda, Mito, Epopeia,
@@ -100,7 +105,8 @@ não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeir
 ## Estrutura do repositório
 
 ```
-livro-do-jogador.html   bestiario.html   grimorio.html   ← gerados, não edite
+livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
+                                                        ← gerados, não edite
 index.html              a estante do site
 
 template/               as cascas dos livros e a folha de estilo única
@@ -108,6 +114,7 @@ template/               as cascas dos livros e a folha de estilo única
   livro-do-jogador.html escrito à mão
   bestiario.html        casca; o conteúdo vem dos markdown
   grimorio.html         casca, com paleta verde e ouro própria
+  ficha.html            a ficha preenchível, paleta preta e ouro
 
 regras/                 os capítulos em markdown, e o mapa do sistema
 bestiario/              o Livro II em markdown

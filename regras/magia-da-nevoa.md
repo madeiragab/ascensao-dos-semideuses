@@ -51,7 +51,7 @@ responsabilidade pelo que o aprendiz fizer.
 
 A Iniciação concede:
 
-- proficiência na perícia **Arcanismo**, se ainda não tiver;
+- proficiência na perícia **Mitologia**, se ainda não tiver;
 - um **Repositório** vazio;
 - as três primeiras Fórmulas de **Círculo 0** à sua escolha.
 
@@ -140,7 +140,7 @@ Não é possível manter as duas.
 ### 37.4 Refluxo *(conjurar no desespero)*
 
 Um conjurador pode tentar uma Fórmula **sem o Repositório** ou de um **Círculo
-acima do seu nível mínimo**. Isso exige um teste de **Arcanismo contra CD 10 + 3
+acima do seu nível mínimo**. Isso exige um teste de **Mitologia contra CD 10 + 3
 por Círculo** da Fórmula.
 
 - **Sucesso:** a Fórmula funciona normalmente e o custo é pago.
@@ -393,7 +393,7 @@ Depois da Iniciação, cada Fórmula é conquistada individualmente. Isso é uma
 | **Estudo de uma Fórmula em ação** | ter visto alguém conjurar e um teste muito mais difícil |
 | **A própria deusa** | evento de campanha |
 
-**Teste de aprendizado:** Arcanismo contra **CD 10 + 3 por Círculo**. Cada Ação
+**Teste de aprendizado:** Mitologia contra **CD 10 + 3 por Círculo**. Cada Ação
 de Interlúdio concede uma tentativa. Em uma falha, o tempo é gasto e o
 personagem tenta de novo depois.
 

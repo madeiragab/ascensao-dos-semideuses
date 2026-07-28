@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Grimório: a Magia da Névoa. Magia aprendida, Fórmulas, Repositório e a regra de Descrença.">
 <title>Ascensão dos Semideuses — Grimório</title>
 
 <style>
@@ -671,101 +677,6 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .degrau { page-break-before: always; }
 }
 
-/* ============================================================
-   FICHA EM BRANCO — pensada para ser impressa e preenchida à mão
-   ============================================================ */
-.folha {
-  border: 1px solid var(--borda-forte);
-  padding: 1.2rem;
-  margin: 1.6rem 0;
-  background: var(--papel);
-}
-.folha h4 { margin: 1.4rem 0 .5rem; }
-.folha h4:first-child { margin-top: 0; }
-.folha h4 small { color: var(--texto-suave); letter-spacing: 0; text-transform: none; font-weight: 400; }
-
-.folha-topo { display: flex; gap: .7rem; flex-wrap: wrap; margin-bottom: .7rem; }
-.campo { flex: 1 1 9rem; }
-.campo.largo { flex: 2 1 14rem; }
-.campo.curto { flex: 0 1 5rem; }
-.campo span {
-  display: block;
-  font-family: var(--sans); font-size: .6rem;
-  text-transform: uppercase; letter-spacing: .12em;
-  color: var(--texto-suave);
-}
-.campo i { display: block; border-bottom: 1px solid var(--borda-forte); height: 1.5rem; }
-
-.folha-atributos {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: .5rem;
-}
-.folha-atributos .atr {
-  border: 1px solid var(--borda); text-align: center; padding: .4rem .3rem .5rem;
-}
-.folha-atributos .atr span {
-  display: block; font-family: var(--sans); font-size: .58rem;
-  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
-}
-.folha-atributos .atr b {
-  display: block; height: 1.7rem; border-bottom: 1px solid var(--borda-forte);
-  margin: .2rem .8rem 0;
-}
-.folha-atributos .atr em {
-  display: block; font-style: normal; font-family: var(--sans);
-  font-size: .55rem; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--texto-suave); margin-top: .25rem;
-}
-
-.folha-recursos {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(6.2rem, 1fr)); gap: .5rem;
-}
-.folha-recursos .cx { border: 1px solid var(--borda); padding: .4rem .5rem .5rem; }
-.folha-recursos .cx.alto { grid-column: span 2; }
-.folha-recursos .cx span {
-  display: block; font-family: var(--sans); font-size: .58rem;
-  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
-}
-.folha-recursos .cx b { display: block; height: 1.5rem; border-bottom: 1px solid var(--borda-forte); }
-.folha-recursos .cx small {
-  display: block; font-family: var(--sans); font-size: .52rem;
-  color: var(--texto-suave); margin-top: .2rem;
-}
-
-.folha-duas { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1.4rem; }
-
-.lista-marcada { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
-.lista-marcada li { display: flex; align-items: baseline; gap: .45rem; margin-bottom: .3rem; }
-.lista-marcada small { color: var(--texto-suave); font-size: .68rem; }
-.lista-marcada.duas-colunas { columns: 2; column-gap: 1.2rem; }
-.lista-marcada.duas-colunas li { break-inside: avoid; }
-i.quad {
-  flex: none; width: .72rem; height: .72rem;
-  border: 1px solid var(--borda-forte); display: inline-block;
-}
-.pontilhado { flex: 1; border-bottom: 1px dotted var(--borda-forte); }
-.dica { font-size: .78rem; color: var(--texto-suave); margin: .4rem 0 0; }
-
-.folha-tabela th { font-size: .58rem; }
-.folha-tabela td { height: 1.6rem; border-bottom: 1px solid var(--borda); }
-
-/* Pautas: linhas para escrever. O número é quantas linhas. */
-.pauta {
-  border-bottom: 1px solid var(--borda-forte);
-  background-image: repeating-linear-gradient(
-    to bottom, transparent, transparent calc(1.6rem - 1px),
-    var(--borda) calc(1.6rem - 1px), var(--borda) 1.6rem);
-}
-.pauta.duas   { height: 3.2rem; }
-.pauta.tres   { height: 4.8rem; }
-.pauta.quatro { height: 6.4rem; }
-.pauta.seis   { height: 9.6rem; }
-
-@media print {
-  .folha { page-break-inside: avoid; border-color: #000; }
-  .folha-atributos .atr, .folha-recursos .cx, i.quad { border-color: #666; }
-  .campo i, .folha-atributos .atr b, .folha-recursos .cx b { border-bottom-color: #666; }
-}
-
 
 /* ============================================================
    GRIMÓRIO — paleta própria: verde de couro e ouro velho.
@@ -822,7 +733,8 @@ i.quad {
   --fundo:        #EDEBE1;
 }
 </style>
-
+</head>
+<body>
 <div class="livro">
 
 <div class="capa-pagina frente">
@@ -876,7 +788,7 @@ i.quad {
 <p><strong>Pela deusa.</strong> Hécate, ou um enviado dela, aceita o personagem. Isso é sempre um evento de campanha, não uma escolha de ficha — a deusa cobra alguma coisa, mesmo que só muito depois.</p>
 <p><strong>Por quem já domina.</strong> Um conjurador experiente — chamado de <strong>místes</strong> — pode iniciar outra pessoa. Leva tempo, exige confiança, e o mestre carrega parte da responsabilidade pelo que o aprendiz fizer.</p>
 <p>A Iniciação concede:</p>
-<ul><li>proficiência na perícia <strong>Arcanismo</strong>, se ainda não tiver;</li><li>um <strong>Repositório</strong> vazio;</li><li>as três primeiras Fórmulas de <strong>Círculo 0</strong> à sua escolha.</li></ul>
+<ul><li>proficiência na perícia <strong>Mitologia</strong>, se ainda não tiver;</li><li>um <strong>Repositório</strong> vazio;</li><li>as três primeiras Fórmulas de <strong>Círculo 0</strong> à sua escolha.</li></ul>
 <p><strong>Atributo de Conjuração: Inteligência</strong>, sempre, para todo mundo. Magia é estudo, não sangue. Um semideus cujo Atributo Divino seja Sabedoria ou Carisma conjura suas habilidades elementais com um atributo e suas Fórmulas com outro — e isso é proposital: acumular as duas coisas deve custar caro na distribuição de atributos.</p>
 <p>``<span class="dado"> CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência </span>``</p>
 <div class="ornamento">❖</div>
@@ -922,7 +834,7 @@ i.quad {
 <p>Fórmulas com duração prolongada exigem <strong>Concentração</strong>, seguindo as regras já existentes do livro (seção 11 de Habilidades): uma por vez, Teste de Fortitude CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.</p>
 <p>Concentração de Fórmula e Concentração de habilidade <strong>disputam o mesmo espaço</strong>. Não é possível manter as duas.</p>
 <h3>37.4 Refluxo <em>(conjurar no desespero)</em></h3>
-<p>Um conjurador pode tentar uma Fórmula <strong>sem o Repositório</strong> ou de um <strong>Círculo acima do seu nível mínimo</strong>. Isso exige um teste de <strong>Arcanismo contra CD 10 + 3 por Círculo</strong> da Fórmula.</p>
+<p>Um conjurador pode tentar uma Fórmula <strong>sem o Repositório</strong> ou de um <strong>Círculo acima do seu nível mínimo</strong>. Isso exige um teste de <strong>Mitologia contra CD 10 + 3 por Círculo</strong> da Fórmula.</p>
 <ul><li><strong>Sucesso:</strong> a Fórmula funciona normalmente e o custo é pago.</li><li><strong>Falha:</strong> o MP é gasto assim mesmo, a Fórmula não acontece, e o conjurador</li></ul>
 <p>sofre <strong>Refluxo</strong>: 1d6 de dano por Círculo e fica <strong>Atordoado</strong> até o fim do seu próximo turno.</p>
 <p>Não é possível dar Refluxo em Fórmulas de Círculo 4.</p>
@@ -1021,7 +933,7 @@ i.quad {
 <tr><td><strong>A própria deusa</strong></td><td>evento de campanha</td></tr>
 </tbody>
 </table></div>
-<p><strong>Teste de aprendizado:</strong> Arcanismo contra <strong>CD 10 + 3 por Círculo</strong>. Cada Ação de Interlúdio concede uma tentativa. Em uma falha, o tempo é gasto e o personagem tenta de novo depois.</p>
+<p><strong>Teste de aprendizado:</strong> Mitologia contra <strong>CD 10 + 3 por Círculo</strong>. Cada Ação de Interlúdio concede uma tentativa. Em uma falha, o tempo é gasto e o personagem tenta de novo depois.</p>
 <p>Círculo 0 é a exceção: qualquer conjurador aprende um truque novo com uma única Ação de Interlúdio, sem teste, desde que tenha a fonte.</p>
 <div class="ornamento">❖</div>
 <h2>43. Limites gerais da Magia da Névoa</h2>
@@ -1045,3 +957,5 @@ i.quad {
 </div><!-- /mancha -->
 
 </div><!-- /livro -->
+</body>
+</html>

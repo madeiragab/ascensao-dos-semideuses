@@ -16,13 +16,14 @@ and all three corrections are documented below.
 
 ---
 
-## The three books
+## The four books
 
 | | Book | Contents |
 |---|---|---|
 | **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, seven-step character creation, combat, and the ability-building engine |
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
+| **IV** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable in the browser, takes a character portrait, prints to PDF |
 
 ---
 
@@ -53,6 +54,10 @@ Duration already includes the first point of effect: instantaneous 1, sustained 
 scene 4. Sustaining costs half the final cost per round. Each point buys 1d8
 single-target damage, or 1d6 area damage, or +1 to Defense, or a weak condition,
 and so on.
+
+**Fourteen skills**, not sixteen: *Arcana* was absorbed into Mythology — in a world
+where all magic is Greek there aren't two bodies of knowledge — and *Animal Handling*
+folded into Survival.
 
 **Monsters are measured in Kleos** — the glory it costs to bring one down. Eleven
 named rungs: Rumour, Hearsay, Tale, Exploit, Deed, Song, Legend, Myth, Epic,
@@ -104,7 +109,8 @@ focus, resource spending, who drops first.
 ## Repository layout
 
 ```
-livro-do-jogador.html   bestiario.html   grimorio.html   ← generated, don't edit
+livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
+                                                        ← generated, don't edit
 index.html              the shelf page
 
 template/               book shells and the single stylesheet
@@ -112,6 +118,7 @@ template/               book shells and the single stylesheet
   livro-do-jogador.html hand-written
   bestiario.html        shell; content comes from the markdown
   grimorio.html         shell, with its own green-and-gold palette
+  ficha.html            the fillable sheet, black-and-gold palette
 
 regras/                 chapters in markdown, plus the system map
 bestiario/              Book II in markdown

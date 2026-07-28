@@ -1,0 +1,458 @@
+<title>Ascensão dos Semideuses — Ficha do Herói</title>
+
+<style>
+{{CSS}}
+
+/* ============================================================
+   FICHA DO HERÓI — paleta própria: couro preto e ouro velho
+   ============================================================ */
+:root {
+  --acento:       #8A6B1E;
+  --acento-fraco: #F0E7D2;
+  --bronze:       #6E5518;
+  --bronze-luz:   #C9A94E;
+  --papel:        #FBF8F0;
+  --superficie-2: #EFE9DA;
+  --borda:        #D8CFB8;
+  --borda-forte:  #A99B78;
+  --texto:        #1C1913;
+  --texto-suave:  #6A6250;
+  --fundo:        #EFEBE0;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --acento:       #C9A94E;
+    --acento-fraco: #302713;
+    --bronze:       #C9A94E;
+    --papel:        #16140F;
+    --superficie-2: #1F1C14;
+    --borda:        #34301F;
+    --borda-forte:  #4C462E;
+    --texto:        #E8E1CD;
+    --texto-suave:  #9C9379;
+    --fundo:        #0E0C09;
+  }
+}
+:root[data-theme="dark"] {
+  --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
+  --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
+  --borda-forte: #4C462E; --texto: #E8E1CD; --texto-suave: #9C9379;
+  --fundo: #0E0C09;
+}
+:root[data-theme="light"] {
+  --acento: #8A6B1E; --acento-fraco: #F0E7D2; --bronze: #6E5518;
+  --papel: #FBF8F0; --superficie-2: #EFE9DA; --borda: #D8CFB8;
+  --borda-forte: #A99B78; --texto: #1C1913; --texto-suave: #6A6250;
+  --fundo: #EFEBE0;
+}
+
+/* ---------- Barra de comandos ---------- */
+.comandos {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
+  padding: .8rem 0;
+  background: color-mix(in srgb, var(--papel) 94%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--borda);
+  margin-bottom: 1.6rem;
+}
+.comandos .aviso {
+  font-family: var(--sans); font-size: .78rem; color: var(--texto-suave);
+  margin-left: auto; max-width: 24rem; text-align: right;
+}
+button.acao {
+  font-family: var(--sans); font-size: .76rem;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: .6rem 1.1rem; border-radius: 3px; cursor: pointer;
+  border: 1px solid var(--bronze); background: var(--acento); color: #FFF8E6;
+  transition: filter .15s;
+}
+button.acao:hover { filter: brightness(1.12); }
+button.acao.fantasma { background: transparent; color: var(--acento); }
+button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset: 2px; }
+
+/* ---------- A folha ---------- */
+.ficha-viva { border: 2px solid var(--borda-forte); background: var(--papel); }
+.bloco { border-bottom: 1px solid var(--borda); padding: 1rem 1.1rem; }
+.bloco:last-child { border-bottom: none; }
+.bloco > h3 {
+  font-family: var(--sans); font-size: .68rem;
+  text-transform: uppercase; letter-spacing: .18em;
+  color: var(--acento); margin: 0 0 .8rem; padding-left: .18em;
+}
+
+/* identidade com retrato */
+.identidade { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
+.retrato {
+  width: 7.5rem; height: 9rem;
+  border: 2px solid var(--borda-forte);
+  background: var(--superficie-2) center/cover no-repeat;
+  display: grid; place-items: center; text-align: center;
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.retrato span {
+  font-family: var(--sans); font-size: .6rem; line-height: 1.4;
+  color: var(--texto-suave); padding: .5rem;
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.retrato.tem-foto span { display: none; }
+.retrato:hover { border-color: var(--acento); }
+.linhas-id { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
+
+/* campos preenchíveis */
+.f { display: flex; flex-direction: column; }
+.f > label {
+  font-family: var(--sans); font-size: .56rem;
+  text-transform: uppercase; letter-spacing: .12em; color: var(--texto-suave);
+  margin-bottom: .1rem;
+}
+input[type="text"], input[type="number"], textarea {
+  font-family: var(--serifa-texto); font-size: .95rem;
+  color: var(--texto); background: transparent;
+  border: none; border-bottom: 1px solid var(--borda-forte);
+  padding: .18rem .1rem; width: 100%;
+}
+input:focus, textarea:focus {
+  outline: none; border-bottom-color: var(--acento);
+  background: var(--acento-fraco);
+}
+textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 1.7; }
+
+/* atributos e caixas numéricas */
+.grade-atr { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); gap: .5rem; }
+.atr-cx { border: 1px solid var(--borda-forte); text-align: center; padding: .35rem .3rem .45rem; }
+.atr-cx > span {
+  display: block; font-family: var(--sans); font-size: .55rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.atr-cx input { text-align: center; font-size: 1.25rem; font-weight: 700; border-bottom: none; }
+.atr-cx .mod-linha {
+  border-top: 1px solid var(--borda); margin-top: .2rem; padding-top: .2rem;
+}
+.atr-cx .mod-linha input { font-size: .9rem; color: var(--acento); }
+.atr-cx em {
+  font-style: normal; font-family: var(--sans); font-size: .5rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+
+.grade-num { display: grid; grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr)); gap: .5rem; }
+.num-cx { border: 1px solid var(--borda-forte); padding: .35rem .5rem .45rem; }
+.num-cx > span {
+  display: block; font-family: var(--sans); font-size: .55rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.num-cx input { text-align: center; font-size: 1.05rem; border-bottom: none; }
+.num-cx.duplo { grid-column: span 2; }
+.num-cx .par { display: flex; align-items: baseline; gap: .3rem; }
+.num-cx .par span { color: var(--texto-suave); }
+
+/* listas com marcação */
+.marcavel { list-style: none; padding: 0; margin: 0; font-size: .88rem; }
+.marcavel li { display: flex; align-items: center; gap: .45rem; margin-bottom: .22rem; }
+.marcavel input[type="checkbox"] {
+  flex: none; width: .8rem; height: .8rem; margin: 0;
+  accent-color: var(--acento);
+}
+.marcavel .nome { flex: 1; }
+.marcavel small { color: var(--texto-suave); font-size: .66rem; }
+.marcavel input[type="text"] { flex: 0 0 2.6rem; text-align: center; font-size: .85rem; }
+.colunas-2 { columns: 2; column-gap: 1.4rem; }
+.colunas-2 li { break-inside: avoid; }
+/* Em tela estreita, duas colunas de perícia ficam ilegíveis. */
+@media (max-width: 30rem) {
+  .colunas-2 { columns: 1; }
+  .retrato { width: 6rem; height: 7.2rem; }
+  .comandos .aviso { text-align: left; margin-left: 0; }
+}
+
+/* tabela de ataques */
+table.viva { width: 100%; border-collapse: collapse; }
+table.viva th {
+  font-family: var(--sans); font-size: .55rem; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--texto-suave); text-align: left;
+  padding: 0 .3rem .2rem; border-bottom: 1px solid var(--borda-forte);
+}
+table.viva td { padding: .1rem .3rem; border-bottom: 1px solid var(--borda); }
+table.viva input { border-bottom: none; }
+
+.duas-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
+
+/* ---------- Impressão: só a folha ---------- */
+@media print {
+  @page { margin: 12mm; }
+  body { background: #fff; }
+  .capa-pagina, .rosto, .comandos, .instrucoes, .colofao { display: none !important; }
+  .livro { border: none; max-width: none; background: #fff; }
+  .mancha { padding: 0; }
+  .capitulo { padding: 0; page-break-before: auto; }
+  .abertura { display: none; }
+  .ficha-viva { border-color: #000; }
+  .bloco { border-color: #999; page-break-inside: avoid; }
+  .bloco > h3 { color: #000; }
+  input, textarea {
+    color: #000 !important; background: transparent !important;
+    border-color: #999 !important;
+  }
+  .atr-cx, .num-cx, table.viva th, .retrato { border-color: #666 !important; }
+  input[type="checkbox"] { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .retrato span { display: none; }
+  .quebra-pagina { page-break-before: always; }
+}
+</style>
+
+<div class="livro">
+
+<div class="capa-pagina frente">
+  <img src="{{CAPA}}" alt="Capa da Ficha do Herói: escudo de bronze com a cabeça da Medusa em relevo, sobre couro preto">
+</div>
+
+<div class="mancha">
+
+<div class="rosto">
+  <svg class="selo" width="76" height="76" viewBox="0 0 100 100" aria-hidden="true">
+    <path d="M50 10 L86 24 V54 C86 74 68 86 50 92 C32 86 14 74 14 54 V24 Z"
+          fill="none" stroke="var(--bronze)" stroke-width="2"/>
+    <circle cx="50" cy="48" r="15" fill="none" stroke="var(--acento)" stroke-width="1.8"/>
+    <path d="M35 40 Q30 30 38 27 M65 40 Q70 30 62 27 M35 56 Q28 62 36 66 M65 56 Q72 62 64 66"
+          fill="none" stroke="var(--acento)" stroke-width="1.5"/>
+    <circle cx="44" cy="46" r="2.2" fill="var(--bronze)"/>
+    <circle cx="56" cy="46" r="2.2" fill="var(--bronze)"/>
+  </svg>
+  <h1>Ficha do Herói</h1>
+  <p class="tomo">Livro IV · para preencher</p>
+  <p class="epigrafe">
+    Um nome, um defeito e um pai que nunca apareceu. O resto se descobre jogando.
+  </p>
+</div>
+
+<section class="capitulo" id="ficha">
+  <div class="abertura">
+    <span class="alg">A Folha</span>
+    <h2>Ficha do Herói</h2>
+    <p>Preencha na tela e leve embora</p>
+  </div>
+
+  <div class="instrucoes">
+    <p class="abre">Esta ficha se preenche <strong>aqui mesmo, no navegador</strong>.
+    Clique em qualquer campo e escreva. Clique no quadrado do retrato para escolher uma
+    imagem do rosto do seu personagem — ela fica só no seu computador, não sobe para
+    lugar nenhum.</p>
+
+    <div class="destaque">
+      <span class="rotulo">Sobre o botão de baixar</span>
+      <p>Ele abre a janela de impressão do navegador com a folha já formatada, sem a
+      capa e sem os botões. Escolha <strong>"Salvar como PDF"</strong> no destino e
+      pronto: o PDF sai com tudo que você digitou, em texto de verdade, com os acentos
+      certos.</p>
+      <p><strong>Nada é guardado.</strong> Se você fechar a aba sem baixar, o
+      preenchimento se perde — é de propósito, e é por isso que a ficha não pede
+      nenhum dado seu.</p>
+    </div>
+  </div>
+
+  <div class="comandos">
+    <button class="acao" type="button" onclick="baixarPdf()">Baixar em PDF</button>
+    <button class="acao fantasma" type="button" onclick="limparFicha()">Limpar ficha</button>
+    <span class="aviso">No destino da impressão, escolha <strong>Salvar como PDF</strong>.
+      Papel A4, margens padrão.</span>
+  </div>
+
+  <form class="ficha-viva" id="folha" autocomplete="off">
+
+    <!-- ===== IDENTIDADE ===== -->
+    <div class="bloco">
+      <div class="identidade">
+        <label class="retrato" id="retrato" title="Escolher uma imagem do rosto">
+          <input type="file" accept="image/*" id="arquivoRetrato" hidden>
+          <span>Clique para<br>escolher o<br>rosto</span>
+        </label>
+
+        <div class="linhas-id">
+          <div class="f"><label>Personagem</label><input type="text" name="nome"></div>
+          <div class="f"><label>Jogador</label><input type="text"></div>
+          <div class="f"><label>Nível</label><input type="text"></div>
+          <div class="f"><label>Classe</label><input type="text"></div>
+          <div class="f"><label>Conceito Mortal</label><input type="text"></div>
+          <div class="f"><label>Húbris</label><input type="text"></div>
+          <div class="f"><label>Parente Divino</label><input type="text"></div>
+          <div class="f"><label>Afinidade Elemental</label><input type="text"></div>
+          <div class="f"><label>Atributo Divino</label><input type="text"></div>
+          <div class="f"><label>Idade</label><input type="text"></div>
+          <div class="f"><label>Altura</label><input type="text"></div>
+          <div class="f"><label>Dracmas</label><input type="text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ATRIBUTOS ===== -->
+    <div class="bloco">
+      <h3>Atributos</h3>
+      <div class="grade-atr">
+        <div class="atr-cx"><span>Força</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Destreza</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Constituição</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Inteligência</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Sabedoria</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Carisma</span><input type="text">
+          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+      </div>
+    </div>
+
+    <!-- ===== RECURSOS ===== -->
+    <div class="bloco">
+      <h3>Recursos e números</h3>
+      <div class="grade-num">
+        <div class="num-cx duplo"><span>Pontos de Vida</span>
+          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
+        <div class="num-cx duplo"><span>Pontos de Vigor</span>
+          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
+        <div class="num-cx duplo"><span>Pontos de Mana</span>
+          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
+        <div class="num-cx"><span>DEF</span><input type="text"></div>
+        <div class="num-cx"><span>Iniciativa</span><input type="text"></div>
+        <div class="num-cx"><span>Movimento</span><input type="text"></div>
+        <div class="num-cx"><span>Proficiência</span><input type="text"></div>
+        <div class="num-cx"><span>Tratamentos</span><input type="text"></div>
+        <div class="num-cx"><span>Memória</span><input type="text"></div>
+        <div class="num-cx"><span>CD habilidade</span><input type="text"></div>
+        <div class="num-cx"><span>Ímpeto</span><input type="text"></div>
+        <div class="num-cx"><span>Ânimo</span><input type="text"></div>
+      </div>
+    </div>
+
+    <!-- ===== RESISTÊNCIAS E PERÍCIAS ===== -->
+    <div class="bloco">
+      <div class="duas-col">
+        <div>
+          <h3>Testes de Resistência</h3>
+          <ul class="marcavel">
+            <li><input type="checkbox"><span class="nome">Fortitude <small>CON</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Reflexos <small>DES</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Vontade <small>SAB</small></span><input type="text"></li>
+          </ul>
+
+          <h3 style="margin-top:1.1rem;">Perícias</h3>
+          <ul class="marcavel colunas-2">
+            <li><input type="checkbox"><span class="nome">Acrobacia <small>DES</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Atletismo <small>FOR</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Atuação <small>CAR</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Enganação <small>CAR</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Furtividade <small>DES</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Intimidação <small>CAR</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Intuição <small>SAB</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Investigação <small>INT</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Manufatura <small>INT</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Mitologia <small>INT</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Percepção <small>SAB</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Persuasão <small>CAR</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Prestidigitação <small>DES</small></span><input type="text"></li>
+            <li><input type="checkbox"><span class="nome">Sobrevivência <small>SAB</small></span><input type="text"></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Ataques</h3>
+          <table class="viva">
+            <thead><tr><th style="width:34%">Arma</th><th style="width:16%">Ataque</th>
+              <th style="width:20%">Dano</th><th>Propriedades</th></tr></thead>
+            <tbody>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top:1.1rem;">Técnicas de classe</h3>
+          <textarea rows="5"></textarea>
+
+          <h3 style="margin-top:1.1rem;">Condições ativas</h3>
+          <textarea rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== HABILIDADES ===== -->
+    <div class="bloco quebra-pagina">
+      <h3>Habilidades preparadas — nome · fonte · custo · alcance · duração · efeito</h3>
+      <textarea rows="9"></textarea>
+    </div>
+
+    <!-- ===== EQUIPAMENTO E LAÇOS ===== -->
+    <div class="bloco">
+      <div class="duas-col">
+        <div>
+          <h3>Equipamento</h3>
+          <textarea rows="8"></textarea>
+        </div>
+        <div>
+          <h3>Vínculos — até três</h3>
+          <textarea rows="3"></textarea>
+          <h3 style="margin-top:1.1rem;">Como descobriu que era semideus</h3>
+          <textarea rows="4"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3>Anotações</h3>
+      <textarea rows="5"></textarea>
+    </div>
+
+  </form>
+</section>
+
+<footer class="colofao">
+  <h3>Sobre esta ficha</h3>
+  <p><strong>Ela não guarda nada.</strong> Tudo que você digita fica só na aba aberta,
+  e some quando você fecha. A imagem do retrato é lida pelo próprio navegador e nunca
+  sai do seu computador — não existe servidor nenhum do outro lado.</p>
+  <p><strong>Por que o PDF sai pela impressão.</strong> Gerar PDF por conta própria
+  exigiria carregar uma biblioteca de fora, e essa página é feita para funcionar
+  sozinha, sem depender de nada. A impressão do navegador faz melhor: texto de
+  verdade, acentos certos, e você escolhe o tamanho do papel.</p>
+  <p><strong>Prefere caneta?</strong> Imprima com a ficha em branco e preencha à mão.
+  Funciona igual, e é como metade das melhores fichas do mundo foi feita.</p>
+</footer>
+
+</div><!-- /mancha -->
+
+</div><!-- /livro -->
+
+<script>
+(function () {
+  var alvo = document.getElementById('retrato');
+  var arquivo = document.getElementById('arquivoRetrato');
+
+  arquivo.addEventListener('change', function () {
+    var f = arquivo.files && arquivo.files[0];
+    if (!f) return;
+    if (!f.type.startsWith('image/')) return;
+    var leitor = new FileReader();
+    leitor.onload = function (e) {
+      alvo.style.backgroundImage = 'url("' + e.target.result + '")';
+      alvo.classList.add('tem-foto');
+    };
+    leitor.readAsDataURL(f);          // nunca sai do navegador
+  });
+})();
+
+function baixarPdf() {
+  window.print();
+}
+
+function limparFicha() {
+  if (!confirm('Isso apaga tudo que você preencheu. Continuar?')) return;
+  document.getElementById('folha').reset();
+  var r = document.getElementById('retrato');
+  r.style.backgroundImage = '';
+  r.classList.remove('tem-foto');
+  document.getElementById('arquivoRetrato').value = '';
+}
+</script>

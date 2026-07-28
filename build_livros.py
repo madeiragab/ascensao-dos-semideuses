@@ -285,8 +285,32 @@ def ler_b64(nome: str) -> str:
 
 
 
+def envelopar(corpo_e_cabeca: str, descricao: str) -> str:
+    """Fecha o livro num documento HTML de verdade.
+
+    Os templates são fragmentos: começam no <title> e seguem no <style>. Sem
+    doctype, charset e viewport, um celular renderiza a página a 980 px e o
+    leitor recebe um livro ilegível. O corte é no fim do </style>: o que vem
+    antes é cabeça, o que vem depois é corpo.
+    """
+    marca = "</style>"
+    i = corpo_e_cabeca.rindex(marca) + len(marca)
+    cabeca, corpo = corpo_e_cabeca[:i], corpo_e_cabeca[i:]
+    return (
+        "<!doctype html>\n"
+        '<html lang="pt-BR">\n<head>\n'
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        f'<meta name="description" content="{html.escape(descricao, quote=True)}">\n'
+        + cabeca
+        + "\n</head>\n<body>\n"
+        + corpo.strip()
+        + "\n</body>\n</html>\n"
+    )
+
+
 def montar(template_nome: str, saida_nome: str, css: str,
-           substituicoes: dict[str, str]) -> None:
+           substituicoes: dict[str, str], descricao: str = "") -> None:
     s = (TEMPLATE / template_nome).read_text(encoding="utf-8")
     s = s.replace("{{CSS}}", css)
     for k, v in substituicoes.items():
@@ -294,6 +318,7 @@ def montar(template_nome: str, saida_nome: str, css: str,
     faltando = re.findall(r"\{\{[A-Z_]+\}\}", s)
     if faltando:
         raise SystemExit(f"{saida_nome}: marcadores não substituídos: {set(faltando)}")
+    s = envelopar(s, descricao)
     (RAIZ / saida_nome).write_text(s, encoding="utf-8")
     kb = round((RAIZ / saida_nome).stat().st_size / 1024)
     print(f"  {saida_nome:<26} {kb:>5} KB")
@@ -307,7 +332,9 @@ def main() -> None:
     montar("livro-do-jogador.html", "livro-do-jogador.html", css, {
         "CAPA": ler_b64("capa"),
         "CONTRACAPA": ler_b64("contracapa"),
-    })
+    }, descricao=(
+        "Livro do Jogador: como jogar, criação de personagem em sete etapas, combate, equipamento, condições e o motor de criação de habilidades."
+    ))
 
     # --- Bestiário (a partir dos markdown)
     partes = [
@@ -327,17 +354,28 @@ def main() -> None:
     montar("bestiario.html", "bestiario.html", css, {
         "CAPA": ler_b64("capa-bestiario"),
         "CONTEUDO": "\n".join(corpo),
-    })
+    }, descricao=(
+        "Bestiário: a Escala de Kleos, o motor de criação de monstros e 38 criaturas, do sátiro errante a Tifão."
+    ))
 
     # --- Grimório (a partir de regras/magia-da-nevoa.md)
     md = (RAIZ / "regras/magia-da-nevoa.md").read_text(encoding="utf-8")
     md = re.sub(r"^# Livro I.*?\n", "", md)
     md = re.sub(r"^## Parte V — Magia da Névoa\s*\n", "", md, flags=re.M)
+    # --- Ficha do Herói (formulário, sem markdown)
+    montar("ficha.html", "ficha.html", css, {
+        "CAPA": ler_b64("capa-ficha"),
+    }, descricao=(
+        "Ficha do Herói preenchível: complete no navegador, adicione o retrato do personagem e baixe em PDF."
+    ))
+
     montar("grimorio.html", "grimorio.html", css, {
         "CAPA": ler_b64("capa-grimorio"),
         "CONTEUDO": '<section class="capitulo" id="parte1">'
                     + converter(md) + "</section>",
-    })
+    }, descricao=(
+        "Grimório: a Magia da Névoa. Magia aprendida, Fórmulas, Repositório e a regra de Descrença."
+    ))
 
 
 if __name__ == "__main__":
