@@ -18,32 +18,27 @@
   --texto:        #1C1913;
   --texto-suave:  #6A6250;
   --fundo:        #EFEBE0;
+  --calculado:    #EDE4CC;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --acento:       #C9A94E;
-    --acento-fraco: #302713;
-    --bronze:       #C9A94E;
-    --papel:        #16140F;
-    --superficie-2: #1F1C14;
-    --borda:        #34301F;
-    --borda-forte:  #4C462E;
-    --texto:        #E8E1CD;
-    --texto-suave:  #9C9379;
-    --fundo:        #0E0C09;
+    --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
+    --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
+    --borda-forte: #4C462E; --texto: #E8E1CD; --texto-suave: #9C9379;
+    --fundo: #0E0C09; --calculado: #241F12;
   }
 }
 :root[data-theme="dark"] {
   --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
   --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
   --borda-forte: #4C462E; --texto: #E8E1CD; --texto-suave: #9C9379;
-  --fundo: #0E0C09;
+  --fundo: #0E0C09; --calculado: #241F12;
 }
 :root[data-theme="light"] {
   --acento: #8A6B1E; --acento-fraco: #F0E7D2; --bronze: #6E5518;
   --papel: #FBF8F0; --superficie-2: #EFE9DA; --borda: #D8CFB8;
   --borda-forte: #A99B78; --texto: #1C1913; --texto-suave: #6A6250;
-  --fundo: #EFEBE0;
+  --fundo: #EFEBE0; --calculado: #EDE4CC;
 }
 
 /* ---------- Barra de comandos ---------- */
@@ -57,8 +52,8 @@
   margin-bottom: 1.6rem;
 }
 .comandos .aviso {
-  font-family: var(--sans); font-size: .78rem; color: var(--texto-suave);
-  margin-left: auto; max-width: 24rem; text-align: right;
+  font-family: var(--sans); font-size: .76rem; color: var(--texto-suave);
+  margin-left: auto; max-width: 22rem; text-align: right;
 }
 button.acao {
   font-family: var(--sans); font-size: .76rem;
@@ -70,6 +65,10 @@ button.acao {
 button.acao:hover { filter: brightness(1.12); }
 button.acao.fantasma { background: transparent; color: var(--acento); }
 button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset: 2px; }
+.destravar {
+  font-family: var(--sans); font-size: .72rem; color: var(--texto-suave);
+  display: flex; align-items: center; gap: .35rem; cursor: pointer;
+}
 
 /* ---------- A folha ---------- */
 .ficha-viva { border: 2px solid var(--borda-forte); background: var(--papel); }
@@ -80,6 +79,10 @@ button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
   text-transform: uppercase; letter-spacing: .18em;
   color: var(--acento); margin: 0 0 .8rem; padding-left: .18em;
 }
+.bloco > h3 small {
+  text-transform: none; letter-spacing: 0; color: var(--texto-suave);
+  font-weight: 400;
+}
 
 /* identidade com retrato */
 .identidade { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
@@ -88,7 +91,7 @@ button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
   border: 2px solid var(--borda-forte);
   background: var(--superficie-2) center/cover no-repeat;
   display: grid; place-items: center; text-align: center;
-  cursor: pointer; position: relative; overflow: hidden;
+  cursor: pointer; overflow: hidden;
 }
 .retrato span {
   font-family: var(--sans); font-size: .6rem; line-height: 1.4;
@@ -99,24 +102,40 @@ button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
 .retrato:hover { border-color: var(--acento); }
 .linhas-id { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
 
-/* campos preenchíveis */
+/* campos */
 .f { display: flex; flex-direction: column; }
 .f > label {
   font-family: var(--sans); font-size: .56rem;
   text-transform: uppercase; letter-spacing: .12em; color: var(--texto-suave);
   margin-bottom: .1rem;
 }
-input[type="text"], input[type="number"], textarea {
+input[type="text"], input[type="number"], textarea, select {
   font-family: var(--serifa-texto); font-size: .95rem;
   color: var(--texto); background: transparent;
   border: none; border-bottom: 1px solid var(--borda-forte);
   padding: .18rem .1rem; width: 100%;
 }
-input:focus, textarea:focus {
+select { font-family: var(--sans); font-size: .82rem; cursor: pointer; }
+input:focus, textarea:focus, select:focus {
   outline: none; border-bottom-color: var(--acento);
   background: var(--acento-fraco);
 }
 textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 1.7; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { opacity: .35; }
+
+/* campos calculados */
+input.calc {
+  background: var(--calculado);
+  color: var(--acento); font-weight: 700;
+  cursor: help;
+}
+input.calc:read-only { border-bottom-style: dotted; }
+.legenda-calc {
+  font-family: var(--sans); font-size: .68rem; color: var(--texto-suave);
+  margin: .6rem 0 0;
+}
+.legenda-calc b { color: var(--acento); }
 
 /* atributos e caixas numéricas */
 .grade-atr { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); gap: .5rem; }
@@ -126,10 +145,8 @@ textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 
   text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
 }
 .atr-cx input { text-align: center; font-size: 1.25rem; font-weight: 700; border-bottom: none; }
-.atr-cx .mod-linha {
-  border-top: 1px solid var(--borda); margin-top: .2rem; padding-top: .2rem;
-}
-.atr-cx .mod-linha input { font-size: .9rem; color: var(--acento); }
+.atr-cx .mod-linha { border-top: 1px solid var(--borda); margin-top: .2rem; padding-top: .2rem; }
+.atr-cx .mod-linha input { font-size: .95rem; }
 .atr-cx em {
   font-style: normal; font-family: var(--sans); font-size: .5rem;
   text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
@@ -150,15 +167,13 @@ textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 
 .marcavel { list-style: none; padding: 0; margin: 0; font-size: .88rem; }
 .marcavel li { display: flex; align-items: center; gap: .45rem; margin-bottom: .22rem; }
 .marcavel input[type="checkbox"] {
-  flex: none; width: .8rem; height: .8rem; margin: 0;
-  accent-color: var(--acento);
+  flex: none; width: .8rem; height: .8rem; margin: 0; accent-color: var(--acento);
 }
 .marcavel .nome { flex: 1; }
 .marcavel small { color: var(--texto-suave); font-size: .66rem; }
-.marcavel input[type="text"] { flex: 0 0 2.6rem; text-align: center; font-size: .85rem; }
+.marcavel input[type="text"] { flex: 0 0 2.8rem; text-align: center; font-size: .88rem; }
 .colunas-2 { columns: 2; column-gap: 1.4rem; }
 .colunas-2 li { break-inside: avoid; }
-/* Em tela estreita, duas colunas de perícia ficam ilegíveis. */
 @media (max-width: 30rem) {
   .colunas-2 { columns: 1; }
   .retrato { width: 6rem; height: 7.2rem; }
@@ -173,7 +188,8 @@ table.viva th {
   padding: 0 .3rem .2rem; border-bottom: 1px solid var(--borda-forte);
 }
 table.viva td { padding: .1rem .3rem; border-bottom: 1px solid var(--borda); }
-table.viva input { border-bottom: none; }
+table.viva input, table.viva select { border-bottom: none; }
+table.viva select { font-size: .72rem; }
 
 .duas-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
 
@@ -181,18 +197,19 @@ table.viva input { border-bottom: none; }
 @media print {
   @page { margin: 12mm; }
   body { background: #fff; }
-  .capa-pagina, .rosto, .comandos, .instrucoes, .colofao { display: none !important; }
+  .capa-pagina, .rosto, .comandos, .instrucoes, .colofao, .legenda-calc { display: none !important; }
   .livro { border: none; max-width: none; background: #fff; }
   .mancha { padding: 0; }
-  .capitulo { padding: 0; page-break-before: auto; }
+  .capitulo { padding: 0; }
   .abertura { display: none; }
   .ficha-viva { border-color: #000; }
   .bloco { border-color: #999; page-break-inside: avoid; }
   .bloco > h3 { color: #000; }
-  input, textarea {
+  input, textarea, select {
     color: #000 !important; background: transparent !important;
-    border-color: #999 !important;
+    border-color: #999 !important; font-weight: 400 !important;
   }
+  input.calc { border-bottom-style: solid !important; }
   .atr-cx, .num-cx, table.viva th, .retrato { border-color: #666 !important; }
   input[type="checkbox"] { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .retrato span { display: none; }
@@ -229,32 +246,37 @@ table.viva input { border-bottom: none; }
   <div class="abertura">
     <span class="alg">A Folha</span>
     <h2>Ficha do Herói</h2>
-    <p>Preencha na tela e leve embora</p>
+    <p>Ela faz as contas por você</p>
   </div>
 
   <div class="instrucoes">
-    <p class="abre">Esta ficha se preenche <strong>aqui mesmo, no navegador</strong>.
-    Clique em qualquer campo e escreva. Clique no quadrado do retrato para escolher uma
-    imagem do rosto do seu personagem — ela fica só no seu computador, não sobe para
-    lugar nenhum.</p>
+    <p class="abre">Preencha o que só você sabe — <strong>nível, classe, os seis
+    atributos, a armadura</strong> — e a ficha calcula o resto na hora: modificadores,
+    proficiência, DEF, iniciativa, PV, SP, MP, Memória, CD, resistências e o bônus de
+    cada uma das catorze perícias.</p>
 
     <div class="destaque">
-      <span class="rotulo">Sobre o botão de baixar</span>
-      <p>Ele abre a janela de impressão do navegador com a folha já formatada, sem a
-      capa e sem os botões. Escolha <strong>"Salvar como PDF"</strong> no destino e
-      pronto: o PDF sai com tudo que você digitou, em texto de verdade, com os acentos
-      certos.</p>
-      <p><strong>Nada é guardado.</strong> Se você fechar a aba sem baixar, o
-      preenchimento se perde — é de propósito, e é por isso que a ficha não pede
-      nenhum dado seu.</p>
+      <span class="rotulo">Três coisas que vale saber</span>
+      <p><strong>Os campos dourados são calculados.</strong> Passe o mouse em cima e a
+      ficha mostra a fórmula. Se sua mesa usa regra da casa, item mágico ou Ferimento
+      Grave, marque <em>Editar campos calculados</em> na barra e escreva o que quiser.</p>
+      <p><strong>O retrato fica no seu computador.</strong> Clique no quadrado e
+      escolha uma imagem do rosto do personagem. Ela é lida pelo próprio navegador e
+      não sobe para lugar nenhum.</p>
+      <p><strong>Nada é guardado.</strong> Fechou a aba sem baixar, perdeu — é de
+      propósito, e é por isso que a ficha não pede nenhum dado seu.</p>
     </div>
   </div>
 
   <div class="comandos">
     <button class="acao" type="button" onclick="baixarPdf()">Baixar em PDF</button>
     <button class="acao fantasma" type="button" onclick="limparFicha()">Limpar ficha</button>
-    <span class="aviso">No destino da impressão, escolha <strong>Salvar como PDF</strong>.
-      Papel A4, margens padrão.</span>
+    <label class="destravar">
+      <input type="checkbox" id="destravar" onchange="alternarTrava()">
+      Editar campos calculados
+    </label>
+    <span class="aviso">No destino da impressão, escolha
+      <strong>Salvar como PDF</strong>.</span>
   </div>
 
   <form class="ficha-viva" id="folha" autocomplete="off">
@@ -270,15 +292,39 @@ table.viva input { border-bottom: none; }
         <div class="linhas-id">
           <div class="f"><label>Personagem</label><input type="text" name="nome"></div>
           <div class="f"><label>Jogador</label><input type="text"></div>
-          <div class="f"><label>Nível</label><input type="text"></div>
-          <div class="f"><label>Classe</label><input type="text"></div>
+          <div class="f"><label>Nível</label>
+            <input type="number" id="nivel" min="1" max="20" value="1"></div>
+          <div class="f"><label>Classe</label>
+            <select id="classe">
+              <option value="">—</option>
+              <option value="guardiao">Guardião</option>
+              <option value="furioso">Furioso</option>
+              <option value="oraculo">Oráculo</option>
+            </select></div>
           <div class="f"><label>Conceito Mortal</label><input type="text"></div>
           <div class="f"><label>Húbris</label><input type="text"></div>
           <div class="f"><label>Parente Divino</label><input type="text"></div>
           <div class="f"><label>Afinidade Elemental</label><input type="text"></div>
-          <div class="f"><label>Atributo Divino</label><input type="text"></div>
-          <div class="f"><label>Idade</label><input type="text"></div>
-          <div class="f"><label>Altura</label><input type="text"></div>
+          <div class="f"><label>Atributo Divino</label>
+            <select id="divino">
+              <option value="">—</option>
+              <option value="inteligencia">Inteligência</option>
+              <option value="sabedoria">Sabedoria</option>
+              <option value="carisma">Carisma</option>
+            </select></div>
+          <div class="f"><label>Armadura</label>
+            <select id="armadura">
+              <option value="0">Sem armadura</option>
+              <option value="acolchoada">Acolchoada</option>
+              <option value="couro">Couro batido</option>
+              <option value="escamas">Cota de escamas</option>
+              <option value="peitoral">Peitoral</option>
+            </select></div>
+          <div class="f"><label>Escudo</label>
+            <select id="escudo">
+              <option value="0">Não</option>
+              <option value="2">Sim, +2 DEF</option>
+            </select></div>
           <div class="f"><label>Dracmas</label><input type="text"></div>
         </div>
       </div>
@@ -286,87 +332,76 @@ table.viva input { border-bottom: none; }
 
     <!-- ===== ATRIBUTOS ===== -->
     <div class="bloco">
-      <h3>Atributos</h3>
+      <h3>Atributos <small>— escreva o valor; o modificador aparece sozinho</small></h3>
       <div class="grade-atr">
-        <div class="atr-cx"><span>Força</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
-        <div class="atr-cx"><span>Destreza</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
-        <div class="atr-cx"><span>Constituição</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
-        <div class="atr-cx"><span>Inteligência</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
-        <div class="atr-cx"><span>Sabedoria</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
-        <div class="atr-cx"><span>Carisma</span><input type="text">
-          <div class="mod-linha"><input type="text"><em>mod</em></div></div>
+        <div class="atr-cx"><span>Força</span><input type="text" data-atr="forca">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-forca" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Destreza</span><input type="text" data-atr="destreza">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-destreza" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Constituição</span><input type="text" data-atr="constituicao">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-constituicao" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Inteligência</span><input type="text" data-atr="inteligencia">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-inteligencia" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Sabedoria</span><input type="text" data-atr="sabedoria">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-sabedoria" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Carisma</span><input type="text" data-atr="carisma">
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-carisma" readonly><em>mod</em></div></div>
       </div>
+      <p class="legenda-calc">Modificador = <b>valor − 10, dividido por 2, arredondado
+        para baixo</b>.</p>
     </div>
 
     <!-- ===== RECURSOS ===== -->
     <div class="bloco">
-      <h3>Recursos e números</h3>
+      <h3>Recursos e números <small>— o máximo vem da classe e do nível</small></h3>
       <div class="grade-num">
         <div class="num-cx duplo"><span>Pontos de Vida</span>
-          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
+          <div class="par"><input type="text"><span>/</span>
+            <input type="text" class="calc" data-calc="pv" readonly></div></div>
         <div class="num-cx duplo"><span>Pontos de Vigor</span>
-          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
+          <div class="par"><input type="text"><span>/</span>
+            <input type="text" class="calc" data-calc="sp" readonly></div></div>
         <div class="num-cx duplo"><span>Pontos de Mana</span>
-          <div class="par"><input type="text"><span>/</span><input type="text"></div></div>
-        <div class="num-cx"><span>DEF</span><input type="text"></div>
-        <div class="num-cx"><span>Iniciativa</span><input type="text"></div>
-        <div class="num-cx"><span>Movimento</span><input type="text"></div>
-        <div class="num-cx"><span>Proficiência</span><input type="text"></div>
-        <div class="num-cx"><span>Tratamentos</span><input type="text"></div>
-        <div class="num-cx"><span>Memória</span><input type="text"></div>
-        <div class="num-cx"><span>CD habilidade</span><input type="text"></div>
+          <div class="par"><input type="text"><span>/</span>
+            <input type="text" class="calc" data-calc="mp" readonly></div></div>
+        <div class="num-cx"><span>DEF</span><input type="text" class="calc" data-calc="def" readonly></div>
+        <div class="num-cx"><span>Iniciativa</span><input type="text" class="calc" data-calc="iniciativa" readonly></div>
+        <div class="num-cx"><span>Movimento</span><input type="text" class="calc" data-calc="movimento" readonly></div>
+        <div class="num-cx"><span>Proficiência</span><input type="text" class="calc" data-calc="prof" readonly></div>
+        <div class="num-cx"><span>Tratamentos</span><input type="text" class="calc" data-calc="tratamentos" readonly></div>
+        <div class="num-cx"><span>Memória</span><input type="text" class="calc" data-calc="memoria" readonly></div>
+        <div class="num-cx"><span>CD habilidade</span><input type="text" class="calc" data-calc="cd" readonly></div>
+        <div class="num-cx"><span>Percepção passiva</span><input type="text" class="calc" data-calc="passiva" readonly></div>
+        <div class="num-cx"><span>Teto de custo</span><input type="text" class="calc" data-calc="teto" readonly></div>
         <div class="num-cx"><span>Ímpeto</span><input type="text"></div>
         <div class="num-cx"><span>Ânimo</span><input type="text"></div>
       </div>
+      <p class="legenda-calc">Os PV do <b>Ferimento Grave</b> e qualquer item mágico
+        não entram na conta — destrave os campos para ajustar.</p>
     </div>
 
     <!-- ===== RESISTÊNCIAS E PERÍCIAS ===== -->
     <div class="bloco">
       <div class="duas-col">
         <div>
-          <h3>Testes de Resistência</h3>
+          <h3>Testes de Resistência <small>— marque onde é proficiente</small></h3>
           <ul class="marcavel">
-            <li><input type="checkbox"><span class="nome">Fortitude <small>CON</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Reflexos <small>DES</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Vontade <small>SAB</small></span><input type="text"></li>
+            <li><input type="checkbox" data-prof="fortitude"><span class="nome">Fortitude <small>CON</small></span><input type="text" class="calc" data-calc="res-fortitude" readonly></li>
+            <li><input type="checkbox" data-prof="reflexos"><span class="nome">Reflexos <small>DES</small></span><input type="text" class="calc" data-calc="res-reflexos" readonly></li>
+            <li><input type="checkbox" data-prof="vontade"><span class="nome">Vontade <small>SAB</small></span><input type="text" class="calc" data-calc="res-vontade" readonly></li>
           </ul>
 
-          <h3 style="margin-top:1.1rem;">Perícias</h3>
-          <ul class="marcavel colunas-2">
-            <li><input type="checkbox"><span class="nome">Acrobacia <small>DES</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Atletismo <small>FOR</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Atuação <small>CAR</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Enganação <small>CAR</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Furtividade <small>DES</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Intimidação <small>CAR</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Intuição <small>SAB</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Investigação <small>INT</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Manufatura <small>INT</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Mitologia <small>INT</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Percepção <small>SAB</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Persuasão <small>CAR</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Prestidigitação <small>DES</small></span><input type="text"></li>
-            <li><input type="checkbox"><span class="nome">Sobrevivência <small>SAB</small></span><input type="text"></li>
-          </ul>
+          <h3 style="margin-top:1.1rem;">Perícias <small>— seis proficientes no nível 1</small></h3>
+          <ul class="marcavel colunas-2" id="listaPericias"></ul>
         </div>
 
         <div>
-          <h3>Ataques</h3>
+          <h3>Ataques <small>— escolha o atributo e o bônus aparece</small></h3>
           <table class="viva">
-            <thead><tr><th style="width:34%">Arma</th><th style="width:16%">Ataque</th>
-              <th style="width:20%">Dano</th><th>Propriedades</th></tr></thead>
-            <tbody>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-              <tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
-            </tbody>
+            <thead><tr><th style="width:30%">Arma</th><th style="width:16%">Atrib.</th>
+              <th style="width:14%">Ataque</th><th style="width:18%">Dano</th>
+              <th>Propriedades</th></tr></thead>
+            <tbody id="linhasAtaque"></tbody>
           </table>
 
           <h3 style="margin-top:1.1rem;">Técnicas de classe</h3>
@@ -380,7 +415,7 @@ table.viva input { border-bottom: none; }
 
     <!-- ===== HABILIDADES ===== -->
     <div class="bloco quebra-pagina">
-      <h3>Habilidades preparadas — nome · fonte · custo · alcance · duração · efeito</h3>
+      <h3>Habilidades preparadas <small>— nome · fonte · custo · alcance · duração · efeito</small></h3>
       <textarea rows="9"></textarea>
     </div>
 
@@ -392,7 +427,7 @@ table.viva input { border-bottom: none; }
           <textarea rows="8"></textarea>
         </div>
         <div>
-          <h3>Vínculos — até três</h3>
+          <h3>Vínculos <small>— até três</small></h3>
           <textarea rows="3"></textarea>
           <h3 style="margin-top:1.1rem;">Como descobriu que era semideus</h3>
           <textarea rows="4"></textarea>
@@ -410,15 +445,16 @@ table.viva input { border-bottom: none; }
 
 <footer class="colofao">
   <h3>Sobre esta ficha</h3>
-  <p><strong>Ela não guarda nada.</strong> Tudo que você digita fica só na aba aberta,
-  e some quando você fecha. A imagem do retrato é lida pelo próprio navegador e nunca
-  sai do seu computador — não existe servidor nenhum do outro lado.</p>
+  <p><strong>Ela calcula, mas não decide.</strong> Todo campo dourado é derivado do
+  que você escreveu, com a fórmula no tooltip. Nenhum deles é sagrado: destrave e
+  escreva por cima quando a mesa mandar.</p>
+  <p><strong>Não guarda nada.</strong> Tudo fica só na aba aberta e some quando você
+  fecha. A imagem do retrato é lida pelo próprio navegador e nunca sai do seu
+  computador — não existe servidor nenhum do outro lado.</p>
   <p><strong>Por que o PDF sai pela impressão.</strong> Gerar PDF por conta própria
-  exigiria carregar uma biblioteca de fora, e essa página é feita para funcionar
-  sozinha, sem depender de nada. A impressão do navegador faz melhor: texto de
-  verdade, acentos certos, e você escolhe o tamanho do papel.</p>
-  <p><strong>Prefere caneta?</strong> Imprima com a ficha em branco e preencha à mão.
-  Funciona igual, e é como metade das melhores fichas do mundo foi feita.</p>
+  exigiria carregar uma biblioteca de fora, e esta página é feita para funcionar
+  sozinha. A impressão do navegador faz melhor: texto de verdade, acentos certos, e
+  você escolhe o tamanho do papel.</p>
 </footer>
 
 </div><!-- /mancha -->
@@ -426,33 +462,243 @@ table.viva input { border-bottom: none; }
 </div><!-- /livro -->
 
 <script>
-(function () {
-  var alvo = document.getElementById('retrato');
-  var arquivo = document.getElementById('arquivoRetrato');
+/* ============================================================
+   A ficha se calcula. Tudo que é derivado tem data-calc e é
+   preenchido por recalcular(), que roda a cada digitação.
+   ============================================================ */
 
-  arquivo.addEventListener('change', function () {
+var PERICIAS = [
+  ["Acrobacia", "destreza"],      ["Atletismo", "forca"],
+  ["Atuação", "carisma"],         ["Enganação", "carisma"],
+  ["Furtividade", "destreza"],    ["Intimidação", "carisma"],
+  ["Intuição", "sabedoria"],      ["Investigação", "inteligencia"],
+  ["Manufatura", "inteligencia"], ["Mitologia", "inteligencia"],
+  ["Percepção", "sabedoria"],     ["Persuasão", "carisma"],
+  ["Prestidigitação", "destreza"],["Sobrevivência", "sabedoria"]
+];
+
+var SIGLA = {
+  forca: "FOR", destreza: "DES", constituicao: "CON",
+  inteligencia: "INT", sabedoria: "SAB", carisma: "CAR"
+};
+
+/* Progressão do Capítulo Nove. base = nível 1; porNivel = a cada nível seguinte.
+   PV somam Constituição no base e em cada nível; MP somam o Atributo Divino. */
+var CLASSES = {
+  guardiao: { pv: 14, sp: 12, mp: 6,  pvN: 6, spN: 4, mpN: 1 },
+  furioso:  { pv: 12, sp: 14, mp: 6,  pvN: 5, spN: 5, mpN: 1 },
+  oraculo:  { pv: 10, sp: 8,  mp: 14, pvN: 4, spN: 3, mpN: 4 }
+};
+
+var ARMADURAS = {
+  "0":         { base: 10, limite: null },
+  acolchoada:  { base: 11, limite: null },
+  couro:       { base: 12, limite: null },
+  escamas:     { base: 13, limite: 2 },
+  peitoral:    { base: 14, limite: 2 }
+};
+
+/* ---------- monta as listas repetitivas ---------- */
+(function montar() {
+  var ul = document.getElementById("listaPericias");
+  PERICIAS.forEach(function (p) {
+    var li = document.createElement("li");
+    li.innerHTML =
+      '<input type="checkbox" data-prof="per-' + p[1] + '-' + p[0] + '">' +
+      '<span class="nome">' + p[0] + ' <small>' + SIGLA[p[1]] + '</small></span>' +
+      '<input type="text" class="calc" data-calc="per-' + p[0] + '" readonly>';
+    ul.appendChild(li);
+  });
+
+  var tb = document.getElementById("linhasAtaque");
+  for (var i = 0; i < 5; i++) {
+    var tr = document.createElement("tr");
+    tr.innerHTML =
+      '<td><input type="text"></td>' +
+      '<td><select data-atk="' + i + '">' +
+        '<option value="">—</option>' +
+        '<option value="forca">FOR</option>' +
+        '<option value="destreza">DES</option>' +
+        '<option value="inteligencia">INT</option>' +
+        '<option value="sabedoria">SAB</option>' +
+        '<option value="carisma">CAR</option>' +
+      '</select></td>' +
+      '<td><input type="text" class="calc" data-calc="atk-' + i + '" readonly></td>' +
+      '<td><input type="text"></td>' +
+      '<td><input type="text"></td>';
+    tb.appendChild(tr);
+  }
+})();
+
+/* ---------- leitura ---------- */
+function num(v) {
+  var n = parseInt(String(v).replace(/[^\d\-]/g, ""), 10);
+  return isNaN(n) ? null : n;
+}
+function valorAtr(nome) {
+  var el = document.querySelector('[data-atr="' + nome + '"]');
+  return el ? num(el.value) : null;
+}
+function mod(nome) {
+  var v = valorAtr(nome);
+  return v === null ? null : Math.floor((v - 10) / 2);
+}
+function sinal(n) { return (n >= 0 ? "+" : "−") + Math.abs(n); }
+
+function escreve(chave, texto, formula) {
+  var el = document.querySelector('[data-calc="' + chave + '"]');
+  if (!el) return;
+  if (el.dataset.manual === "1") return;      // o usuário assumiu o campo
+  el.value = texto === null ? "" : texto;
+  if (formula) el.title = formula;
+}
+
+/* ---------- o cálculo ---------- */
+function recalcular() {
+  var nivel = num(document.getElementById("nivel").value) || 1;
+  if (nivel < 1) nivel = 1;
+  if (nivel > 20) nivel = 20;
+  var classe = document.getElementById("classe").value;
+  var divino = document.getElementById("divino").value;
+  var prof = 2 + Math.floor((nivel - 1) / 4);
+
+  // modificadores
+  Object.keys(SIGLA).forEach(function (a) {
+    var m = mod(a);
+    escreve("mod-" + a, m === null ? null : sinal(m),
+      "(" + (valorAtr(a) === null ? "valor" : valorAtr(a)) + " − 10) ÷ 2, para baixo");
+  });
+
+  escreve("prof", sinal(prof), "2 + (nível − 1) ÷ 4, para baixo");
+  escreve("tratamentos", String(prof), "Igual ao bônus de proficiência");
+  escreve("movimento", "9 m", "Movimentação padrão");
+  escreve("teto", String(4 + Math.ceil(nivel / 2)),
+          "4 + metade do nível, arredondada para cima");
+
+  var mDes = mod("destreza"), mCon = mod("constituicao"), mSab = mod("sabedoria");
+
+  // DEF
+  var arm = ARMADURAS[document.getElementById("armadura").value] || ARMADURAS["0"];
+  var escudo = num(document.getElementById("escudo").value) || 0;
+  if (mDes === null) {
+    escreve("def", null, "Depende da Destreza");
+  } else {
+    var des = arm.limite === null ? mDes : Math.min(mDes, arm.limite);
+    escreve("def", String(arm.base + des + escudo),
+      arm.base + " (armadura) " + sinal(des) + " Destreza" +
+      (escudo ? " + " + escudo + " escudo" : "") +
+      (arm.limite !== null ? " · limite de +" + arm.limite + " em Destreza" : ""));
+  }
+
+  escreve("iniciativa", mDes === null ? null : sinal(mDes),
+          "1d20 + Destreza. O Conceito Problemático soma Força também");
+
+  // Atributo Divino: Memória e CD
+  var mDiv = divino ? mod(divino) : null;
+  escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))),
+          "2 + Atributo Divino, entre 1 e 6");
+  escreve("cd", mDiv === null ? null : String(8 + mDiv + prof),
+          "8 + Atributo Divino + proficiência");
+
+  // PV, SP, MP máximos
+  var c = CLASSES[classe];
+  if (!c || mCon === null) {
+    escreve("pv", null, "Escolha a classe e escreva a Constituição");
+    escreve("sp", null, "Escolha a classe e escreva a Constituição");
+  } else {
+    escreve("pv", String(c.pv + mCon + (nivel - 1) * (c.pvN + mCon)),
+      c.pv + " + CON, e mais " + c.pvN + " + CON por nível");
+    escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN),
+      c.sp + " + CON, e mais " + c.spN + " por nível");
+  }
+  if (!c || mDiv === null) {
+    escreve("mp", null, "Escolha a classe e o Atributo Divino");
+  } else {
+    escreve("mp", String(c.mp + mDiv + (nivel - 1) * c.mpN),
+      c.mp + " + Atributo Divino, e mais " + c.mpN + " por nível");
+  }
+
+  // resistências
+  [["fortitude", "constituicao"], ["reflexos", "destreza"], ["vontade", "sabedoria"]]
+  .forEach(function (r) {
+    var m = mod(r[1]);
+    var marcado = document.querySelector('[data-prof="' + r[0] + '"]').checked;
+    escreve("res-" + r[0], m === null ? null : sinal(m + (marcado ? prof : 0)),
+      SIGLA[r[1]] + (marcado ? " + proficiência" : " (sem proficiência)"));
+  });
+
+  // perícias
+  PERICIAS.forEach(function (p) {
+    var m = mod(p[1]);
+    var cb = document.querySelector('[data-prof="per-' + p[1] + '-' + p[0] + '"]');
+    var marcado = cb && cb.checked;
+    escreve("per-" + p[0], m === null ? null : sinal(m + (marcado ? prof : 0)),
+      SIGLA[p[1]] + (marcado ? " + proficiência" : " (sem proficiência)"));
+    if (p[0] === "Percepção") {
+      escreve("passiva", m === null ? null : String(10 + m + (marcado ? prof : 0)),
+        "10 + bônus de Percepção");
+    }
+  });
+
+  // ataques
+  document.querySelectorAll("[data-atk]").forEach(function (sel) {
+    var m = sel.value ? mod(sel.value) : null;
+    escreve("atk-" + sel.dataset.atk, m === null ? null : sinal(m + prof),
+      sel.value ? SIGLA[sel.value] + " + proficiência" : "Escolha o atributo");
+  });
+}
+
+/* ---------- ligação ---------- */
+var folha = document.getElementById("folha");
+folha.addEventListener("input", function (e) {
+  // se o usuário digita num campo calculado destravado, ele passa a ser dele
+  if (e.target.classList.contains("calc") && !e.target.readOnly) {
+    e.target.dataset.manual = "1";
+    return;
+  }
+  recalcular();
+});
+folha.addEventListener("change", recalcular);
+
+function alternarTrava() {
+  var livre = document.getElementById("destravar").checked;
+  document.querySelectorAll("input.calc").forEach(function (el) {
+    el.readOnly = !livre;
+    if (!livre) delete el.dataset.manual;   // volta a ser calculado
+  });
+  if (!livre) recalcular();
+}
+
+/* ---------- retrato ---------- */
+(function () {
+  var alvo = document.getElementById("retrato");
+  var arquivo = document.getElementById("arquivoRetrato");
+  arquivo.addEventListener("change", function () {
     var f = arquivo.files && arquivo.files[0];
-    if (!f) return;
-    if (!f.type.startsWith('image/')) return;
+    if (!f || !f.type.startsWith("image/")) return;
     var leitor = new FileReader();
     leitor.onload = function (e) {
       alvo.style.backgroundImage = 'url("' + e.target.result + '")';
-      alvo.classList.add('tem-foto');
+      alvo.classList.add("tem-foto");
     };
     leitor.readAsDataURL(f);          // nunca sai do navegador
   });
 })();
 
-function baixarPdf() {
-  window.print();
-}
+function baixarPdf() { window.print(); }
 
 function limparFicha() {
-  if (!confirm('Isso apaga tudo que você preencheu. Continuar?')) return;
-  document.getElementById('folha').reset();
-  var r = document.getElementById('retrato');
-  r.style.backgroundImage = '';
-  r.classList.remove('tem-foto');
-  document.getElementById('arquivoRetrato').value = '';
+  if (!confirm("Isso apaga tudo que você preencheu. Continuar?")) return;
+  folha.reset();
+  document.querySelectorAll("input.calc").forEach(function (el) {
+    delete el.dataset.manual;
+  });
+  var r = document.getElementById("retrato");
+  r.style.backgroundImage = "";
+  r.classList.remove("tem-foto");
+  document.getElementById("arquivoRetrato").value = "";
+  recalcular();
 }
+
+recalcular();
 </script>
