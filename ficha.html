@@ -799,6 +799,38 @@ textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button { opacity: .35; }
 
+/* ---------- seletor de nível ---------- */
+.nivel-stepper { display: flex; align-items: stretch; gap: .25rem; }
+.nivel-stepper input { text-align: center; font-weight: 700; font-size: 1.05rem; }
+.nivel-stepper button {
+  flex: none; width: 1.7rem; border: 1px solid var(--borda-forte);
+  background: var(--superficie-2); color: var(--acento);
+  font-family: var(--sans); font-size: 1rem; line-height: 1; cursor: pointer;
+  border-radius: 2px;
+}
+.nivel-stepper button:hover:not(:disabled) { background: var(--acento-fraco); border-color: var(--acento); }
+.nivel-stepper button:disabled { opacity: .35; cursor: default; }
+.nivel-stepper button:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset: 1px; }
+
+/* ---------- painel de ganhos do nível ---------- */
+.ganhos { background: var(--superficie-2); border-left: 3px solid var(--acento); }
+.ganhos ul { list-style: none; padding: 0; margin: 0 0 .7rem; }
+.ganhos li {
+  display: flex; gap: .5rem; align-items: baseline;
+  font-size: .93rem; margin-bottom: .3rem;
+}
+.ganhos li::before { content: "◆"; color: var(--acento); font-size: .6rem; flex: none; }
+.ganhos .recursos-nivel {
+  font-family: var(--mono); font-size: .85rem; color: var(--acento);
+  background: var(--papel); border: 1px solid var(--borda);
+  padding: .45rem .7rem; margin: 0 0 .7rem;
+}
+.ganhos .acumulado {
+  font-family: var(--sans); font-size: .72rem; color: var(--texto-suave);
+  margin: 0; padding-top: .55rem; border-top: 1px solid var(--borda);
+}
+.ganhos .pedir-classe { font-style: italic; color: var(--texto-suave); margin: 0; }
+
 /* campos calculados */
 input.calc {
   background: var(--calculado);
@@ -969,7 +1001,14 @@ table.viva select { font-size: .72rem; }
           <div class="f"><label>Personagem</label><input type="text" name="nome"></div>
           <div class="f"><label>Jogador</label><input type="text"></div>
           <div class="f"><label>Nível</label>
-            <input type="number" id="nivel" min="1" max="20" value="1"></div>
+            <div class="nivel-stepper">
+              <button type="button" id="descer" onclick="mudarNivel(-1)"
+                      title="Descer um nível" aria-label="Descer um nível">−</button>
+              <input type="number" id="nivel" min="1" max="20" value="1"
+                     aria-label="Nível do personagem">
+              <button type="button" id="subir" onclick="mudarNivel(1)"
+                      title="Subir de nível" aria-label="Subir de nível">+</button>
+            </div></div>
           <div class="f"><label>Classe</label>
             <select id="classe">
               <option value="">—</option>
@@ -1004,6 +1043,14 @@ table.viva select { font-size: .72rem; }
           <div class="f"><label>Dracmas</label><input type="text"></div>
         </div>
       </div>
+    </div>
+
+    <!-- ===== O QUE ESTE NÍVEL DÁ ===== -->
+    <div class="bloco ganhos">
+      <h3 id="tituloGanhos">O que o nível 1 te dá</h3>
+      <ul id="listaGanhos"></ul>
+      <p class="recursos-nivel" id="recursosNivel"></p>
+      <p class="acumulado" id="acumulado"></p>
     </div>
 
     <!-- ===== ATRIBUTOS ===== -->
@@ -1174,6 +1221,50 @@ var ARMADURAS = {
   peitoral:    { base: 14, limite: 2 }
 };
 
+var NOME_CLASSE = { guardiao: "Guardião", furioso: "Furioso", oraculo: "Oráculo" };
+
+/* Ganhos por nível, do Capítulo Nove. Texto entre {} é resolvido pela classe. */
+var GANHOS = {
+  1:  ["Conceito Mortal, Húbris, Classe, Parente Divino e Atributo Divino",
+       "<strong>Primeira técnica</strong> da sua classe (Tier 1)"],
+  2:  ["<strong>Habilidade Assinatura</strong> — custa 1 a menos e não ocupa Memória"],
+  3:  ["<strong>Técnica</strong> — a 2ª"],
+  4:  ["<strong>+2 pontos de atributo</strong>"],
+  5:  ["{5}"],
+  6:  ["<strong>Técnica</strong> — a 3ª · <em>abre o Tier 2</em>"],
+  7:  ["<strong>Resistência da Linhagem</strong> — Vantagem contra a sua própria Afinidade"],
+  8:  ["<strong>+2 pontos de atributo</strong>"],
+  9:  ["<strong>Técnica</strong> — a 4ª"],
+  10: ["Proficiência no seu <strong>terceiro Teste de Resistência</strong>"],
+  11: ["<strong>Golpe Verdadeiro</strong> — uma vez por combate, transforme um erro em acerto"],
+  12: ["<strong>Técnica</strong> — a 5ª · <em>abre o Tier 3</em>",
+       "<strong>+2 pontos de atributo</strong>"],
+  13: ["Segunda <strong>Habilidade Assinatura</strong>"],
+  14: ["<strong>Fôlego Heroico</strong> — ação bônus, recupere metade dos PV, uma vez por descanso longo"],
+  15: ["<strong>Técnica</strong> — a 6ª"],
+  16: ["<strong>+2 pontos de atributo</strong>"],
+  17: ["<strong>Herança Desperta</strong> — a passiva do Parente Divino cresce"],
+  18: ["<strong>Técnica</strong> — a 7ª"],
+  19: ["<strong>+2 pontos de atributo</strong>"],
+  20: ["{20}"]
+};
+
+var POR_CLASSE = {
+  5: {
+    guardiao: "<strong>Ataque Extra</strong> — dois ataques na ação Atacar",
+    furioso:  "<strong>Ataque Extra</strong> — dois ataques na ação Atacar",
+    oraculo:  "<strong>Bênção Ampliada</strong> — cura, proteção e buff atingem um alvo a mais"
+  },
+  20: {
+    guardiao: "<strong>Ascensão · Muralha</strong> — aliados a 3 m ganham +2 DEF, e Interceptar reduz o dano à metade",
+    furioso:  "<strong>Ascensão · Fúria Imortal</strong> — ao cair a 0 PV, siga de pé com 1 PV por uma rodada",
+    oraculo:  "<strong>Ascensão · Voz do Destino</strong> — force qualquer rolagem da mesa a ser refeita"
+  }
+};
+
+var NIVEIS_TECNICA  = [1, 3, 6, 9, 12, 15, 18];
+var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
+
 /* ---------- monta as listas repetitivas ---------- */
 (function montar() {
   var ul = document.getElementById("listaPericias");
@@ -1322,6 +1413,65 @@ function recalcular() {
     escreve("atk-" + sel.dataset.atk, m === null ? null : sinal(m + prof),
       sel.value ? SIGLA[sel.value] + " + proficiência" : "Escolha o atributo");
   });
+
+  atualizarGanhos(nivel, classe, mCon, mDiv);
+}
+
+/* ---------- o painel do nível ---------- */
+function atualizarGanhos(nivel, classe, mCon, mDiv) {
+  document.getElementById("subir").disabled = nivel >= 20;
+  document.getElementById("descer").disabled = nivel <= 1;
+
+  document.getElementById("tituloGanhos").textContent =
+    "O que o nível " + nivel + " te dá" +
+    (classe ? " — " + NOME_CLASSE[classe] : "");
+
+  var itens = (GANHOS[nivel] || []).map(function (t) {
+    var chave = t.match(/^\{(\d+)\}$/);
+    if (!chave) return t;
+    if (!classe) return "<em>Escolha a classe para ver o que este nível concede</em>";
+    return POR_CLASSE[chave[1]][classe];
+  });
+
+  var ul = document.getElementById("listaGanhos");
+  ul.innerHTML = itens.map(function (t) { return "<li>" + t + "</li>"; }).join("");
+
+  // quanto o nível soma nos recursos
+  var caixa = document.getElementById("recursosNivel");
+  var c = CLASSES[classe];
+  if (!c) {
+    caixa.innerHTML = "<span class='pedir-classe'>Escolha a classe para ver o ganho de PV, SP e MP.</span>";
+  } else if (nivel === 1) {
+    caixa.textContent = "No nível 1: PV " + c.pv + " + CON · SP " + c.sp +
+      " + CON · MP " + c.mp + " + Atributo Divino";
+  } else {
+    var pv = c.pvN + (mCon === null ? 0 : mCon);
+    caixa.textContent = "Deste nível: PV +" + (mCon === null ? c.pvN + " + CON" : pv) +
+      " · SP +" + c.spN + " · MP +" + c.mpN;
+  }
+
+  // acumulado da carreira até aqui
+  var tec = NIVEIS_TECNICA.filter(function (n) { return n <= nivel; }).length;
+  var pts = NIVEIS_ATRIBUTO.filter(function (n) { return n <= nivel; }).length * 2;
+  var assin = (nivel >= 13 ? 2 : nivel >= 2 ? 1 : 0);
+  var partes = [tec + (tec === 1 ? " técnica" : " técnicas") + " escolhida" + (tec === 1 ? "" : "s"),
+                pts + " pontos de atributo ganhos"];
+  if (assin) partes.push(assin + (assin === 1 ? " Habilidade Assinatura" : " Habilidades Assinatura"));
+  var proximaTec = NIVEIS_TECNICA.find(function (n) { return n > nivel; });
+  var proximoAtr = NIVEIS_ATRIBUTO.find(function (n) { return n > nivel; });
+  var vem = [];
+  if (proximaTec) vem.push("técnica no " + proximaTec);
+  if (proximoAtr) vem.push("atributos no " + proximoAtr);
+  document.getElementById("acumulado").textContent =
+    "Até aqui: " + partes.join(" · ") +
+    (vem.length ? ".  A seguir: " + vem.join(" · ") + "." : ".  Fim da carreira.");
+}
+
+function mudarNivel(delta) {
+  var el = document.getElementById("nivel");
+  var n = (num(el.value) || 1) + delta;
+  el.value = Math.max(1, Math.min(20, n));
+  recalcular();
 }
 
 /* ---------- ligação ---------- */
