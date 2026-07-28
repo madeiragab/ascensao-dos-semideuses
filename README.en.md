@@ -81,6 +81,8 @@ python comparar.py          # original vs. the corrected proposal
 python dia_de_aventura.py   # attrition curve across several fights
 python kleos.py             # validates the Bestiary's danger scale
 python habilidades.py       # validates the ability-building engine
+python condicoes.py         # prices control against damage
+python calibrar_kleos.py    # tests the Kleos scale at every level
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
@@ -89,7 +91,7 @@ always better than that one". The **simulation** side runs thousands of complete
 fights with real dice, reaching what isolated math cannot: initiative order, target
 focus, resource spending, who drops first.
 
-### The three times the tests proved me wrong
+### The four times the tests proved me wrong
 
 1. **Heavy Attack had no numerical fix.** I was going to swap −2/+5 for another
    pair. I swept seven variants: none works while Fierce Attack grants free
@@ -103,6 +105,11 @@ focus, resource spending, who drops first.
 3. **Spending mana doesn't buy damage.** I had concluded the caster wins the day on
    accumulated damage. It doesn't: 80 against the melee class's 97, and that class
    spends nothing. What mana buys is range, area, conditions and choice.
+4. **The Kleos Scale was wrong above level 1.** The rule said a hero was worth 1, 2,
+   3 or 4 Kleos by level band. Measured, it's 1 · 1¾ · 2¼ · 2¾ · 3 — a level-20
+   character is worth less than *three* times a level-1 one, not four. A level-15
+   party following the old rule would be sent against something three rungs above
+   what it can survive.
 
 ---
 
@@ -114,7 +121,7 @@ livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
 index.html              the shelf page
 
 template/               book shells and the single stylesheet
-  livro.css             CSS shared by all three books
+  livro.css             CSS shared by all four books
   livro-do-jogador.html hand-written
   bestiario.html        shell; content comes from the markdown
   grimorio.html         shell, with its own green-and-gold palette
@@ -140,7 +147,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 The script resizes the covers, generates the shelf thumbnails, and calls
-`build_livros.py`, which converts the markdown and assembles the three books.
+`build_livros.py`, which converts the markdown and assembles the four books.
 
 > **Always edit `template/` and the markdown.** The `.html` files at the root are
 > generated and will be overwritten on the next build.
@@ -149,18 +156,25 @@ The script resizes the covers, generates the shelf thumbnails, and calls
 
 ## Known debts
 
-1. **Level progression from 2 to 20.** Only the proficiency bonus exists so far.
-   It's the biggest blocker, and it blocks all three books: the Kleos Scale was
-   calibrated at level 1, so the upper rungs are extrapolation.
-2. **Armour and prices.** The armour currently in use is provisional.
-3. **Economy.** Drachmas, what a crafting kit costs, what a side job pays.
+The Player's Book is complete enough to play from level 1 to 20. What's left is
+refinement:
+
+1. **New techniques, untested.** The lists went from 4 to 12 options per class, and
+   only the progression rules went through the simulator. *Heart of Ares* (crit on
+   19–20) and *Massacre* (a free attack on every kill) are the ones I'd measure
+   first — both scale with attack count.
+2. **Provisional armour.** The table works but was never checked against a monster
+   damage curve by level.
+3. **Divine materials.** Celestial bronze exists as a what-hurts-what rule; Stygian
+   iron and imperial gold are only mentioned.
 
 ### Known limits of the simulator
 
-- Conditions aren't modelled, so control creatures are more dangerous at the table
-  than in simulation.
-- Legendary-style actions and saves aren't modelled, which widens the error margin
-  on Kleos rungs 6 to 11.
+- **Legendary-style actions and saves** aren't modelled, which widens the error
+  margin on Kleos rungs 6 to 11 — the Bestiary's full creatures are more dangerous
+  than the tested version.
+- Conditions **are** modelled since the Conditions chapter was calibrated, but only
+  three families: losing your turn, attacking at Disadvantage, and bleeding.
 - No positioning or distance: everyone reaches everyone.
 - Opportunity attacks exist in the rules but not in the simulator.
 

@@ -77,6 +77,8 @@ python comparar.py          # original contra a proposta corrigida
 python dia_de_aventura.py   # curva de desgaste ao longo de vários combates
 python kleos.py             # valida a escala de perigo do Bestiário
 python habilidades.py       # valida o motor de criação de habilidades
+python condicoes.py         # mede o preço do controle contra o do dano
+python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula
@@ -85,7 +87,7 @@ do tipo "esta técnica é sempre melhor que a outra". A **simulação** roda mil
 de combates completos com rolagens de verdade, e alcança o que o cálculo isolado
 não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeiro.
 
-### As três vezes em que o teste me contrariou
+### As quatro vezes em que o teste me contrariou
 
 1. **O Ataque Pesado não tinha conserto numérico.** Eu ia trocar o −2/+5 por
    outro par de números. Varri sete variantes: nenhuma funciona enquanto o Ataque
@@ -99,6 +101,11 @@ não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeir
 3. **Quem gasta mana não compra dano.** Eu havia concluído que o conjurador ganha
    o dia em dano acumulado. Não ganha: 80 contra 97 do Furioso, que não gasta
    nada. O que o MP compra é alcance, área, condição e escolha.
+4. **A Escala de Kleos estava errada fora do nível 1.** A regra dizia que um herói
+   valia 1, 2, 3 ou 4 de Kleos conforme a faixa de nível. O medido é 1 · 1¾ · 2¼ ·
+   2¾ · 3 — um personagem de nível 20 vale menos de *três* vezes um de nível 1, não
+   quatro. Um grupo de nível 15 seguindo a regra antiga seria mandado contra algo
+   três degraus acima do que aguenta.
 
 ---
 
@@ -110,7 +117,7 @@ livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
 index.html              a estante do site
 
 template/               as cascas dos livros e a folha de estilo única
-  livro.css             CSS compartilhado pelos três livros
+  livro.css             CSS compartilhado pelos quatro livros
   livro-do-jogador.html escrito à mão
   bestiario.html        casca; o conteúdo vem dos markdown
   grimorio.html         casca, com paleta verde e ouro própria
@@ -136,7 +143,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 O script redimensiona as capas, gera as miniaturas da estante e chama
-`build_livros.py`, que converte os markdown e monta os três livros.
+`build_livros.py`, que converte os markdown e monta os quatro livros.
 
 > **Edite sempre `template/` e os markdown.** Os arquivos `.html` na raiz são
 > gerados e serão sobrescritos no próximo build.
@@ -145,18 +152,25 @@ O script redimensiona as capas, gera as miniaturas da estante e chama
 
 ## As dívidas do sistema
 
-1. **Progressão de nível 2 a 20.** Hoje só existe o bônus de proficiência. É o
-   que mais trava, e trava os três livros: a Escala de Kleos foi calibrada só no
-   nível 1, então os degraus altos são extrapolação.
-2. **Armaduras e preços.** As armaduras em uso são provisórias.
-3. **Economia.** Dracmas, quanto custa um Kit de Criação, quanto rende um bico.
+O Livro do Jogador está completo para jogar do nível 1 ao 20. O que falta é
+refinamento:
+
+1. **Técnicas novas sem teste.** As listas foram de 4 para 12 opções por classe, e
+   só as regras de progressão passaram pelo simulador. *Coração de Ares* (crítico
+   em 19 e 20) e *Massacre* (ataque livre a cada abate) são as que eu mediria
+   primeiro — as duas escalam com o número de ataques.
+2. **Armaduras provisórias.** A tabela funciona, mas nunca foi comparada contra uma
+   curva de dano de monstro por nível.
+3. **Materiais divinos.** Bronze celestial existe como regra de o que fere o quê;
+   ferro estígio e ouro imperial só são citados.
 
 ### Limites conhecidos do simulador
 
-- Condições não são modeladas, então criaturas de controle são mais perigosas na
-  mesa do que na simulação.
-- Arremetidas e Recusas não são modeladas, o que aumenta a margem de erro nos
-  degraus de Kleos 6 a 11.
+- **Arremetidas e Recusas** não são modeladas, o que aumenta a margem de erro nos
+  degraus de Kleos 6 a 11 — as criaturas completas do Bestiário são mais perigosas
+  que a versão testada.
+- Condições **são** modeladas desde a calibragem do capítulo de Condições, mas só
+  três famílias: perder o turno, atacar com Desvantagem e sangramento por rodada.
 - Sem posicionamento nem distância: todos alcançam todos.
 - Ataques de oportunidade existem nas regras, mas não no simulador.
 
