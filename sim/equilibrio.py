@@ -38,13 +38,16 @@ def titulo(n: str, t: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-def montar_grupo(nivel: int, tecnicas_extra=None, classe_alvo=None):
+def montar_grupo(nivel: int, tecnicas_extra=None, classe_alvo=None,
+                 substituir: bool = False):
     """O trio no nível pedido. tecnicas_extra entra só na classe_alvo."""
     def f():
         saida = []
         for base in (guardiao_v1(), furioso_v1(), oraculo_v1()):
             fic = personagem(base, nivel)
             extras = list(tecnicas_extra or []) if fic.classe == classe_alvo else []
+            if substituir and fic.classe == classe_alvo:
+                fic.tecnicas = []
             crit = 19 if "Coração de Ares" in extras else 20
             if fic.classe == "oraculo":
                 lut = OraculoQueJoga(

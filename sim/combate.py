@@ -78,6 +78,15 @@ class Lutador:
         self.furia = 0            # Fúria Crescente: +1 por rodada, até +3
         self.furia_gasta = False
         self.golpe_duplo_usado = False
+        self.muralha_usada = False       # Segunda Muralha
+        self.furia_cega_usada = False
+        self.olho_usado = False
+        self.rede_usada = False
+        self.folego_usado = False
+        self.bencao = 0                  # Bênção da Coragem: +1d4 no ataque
+        self.aliados: list = []          # preenchido por combate()
+        self.protegido = None            # Juramento do Portão
+        self.marcado_por = None          # Postura Desafiadora
 
     @property
     def vivo(self) -> bool:
@@ -125,6 +134,8 @@ class Lutador:
             self.condicoes[nome] -= 1
             if self.condicoes[nome] <= 0:
                 del self.condicoes[nome]
+        if self.bencao:
+            self.bencao -= 1
 
     @classmethod
     def de_monstro(cls, m: Monstro, sufixo: str = "") -> "Lutador":
@@ -137,11 +148,49 @@ class Lutador:
 
     # -- ações -------------------------------------------------------------
     def sofrer(self, dano: int) -> None:
+        """Reduções pessoais. Quem chama de fora deve usar receber()."""
         # Bastião: reduz cada golpe em um valor igual à proficiência, enquanto
         # acima de metade dos PV. Metade do dano rendia +13,4% de vitória.
         if "Bastião" in self.tecnicas and self.pv > self.pv_max / 2:
             dano = max(0, dano - self.prof)
+        antes = self.pv
         self.pv = max(0, self.pv - dano)
+        # Juramento do Portão: o aliado jurado não cai por um golpe só.
+        if self.pv == 0 and antes > 1:
+            for a in self.aliados:
+                if a.vivo and a is not self and a.protegido is self:
+                    self.pv = 1
+                    break
+
+    def receber(self, dano: int, atacante=None) -> None:
+        """Passa pelas reações de aliados antes de doer em mim."""
+        guardiao = self._quem_intercepta(dano)
+        if guardiao is not None:
+            if "Segunda Muralha" in guardiao.tecnicas and not guardiao.muralha_usada:
+                guardiao.muralha_usada = True
+            else:
+                guardiao.reacao_disponivel = False
+            # Ascensão do Guardião reduz à metade o que ele assume no lugar
+            recebe = dano // 2 if "Muralha" in guardiao.tecnicas else dano
+            guardiao.sofrer(recebe)
+            if "Represália" in guardiao.tecnicas and atacante is not None:
+                atacante.sofrer(guardiao.prof + max(0, guardiao.dano_fixo))
+            return
+        self.sofrer(dano)
+
+    def _quem_intercepta(self, dano: int):
+        """Um Guardião só entra na frente se o golpe derrubaria o aliado — e se
+        ele mesmo sobrevive. É a política de quem sabe jogar."""
+        if dano < self.pv:
+            return None
+        for a in self.aliados:
+            if a is self or not a.vivo or "Interceptar" not in a.tecnicas:
+                continue
+            livre = a.reacao_disponivel or (
+                "Segunda Muralha" in a.tecnicas and not a.muralha_usada)
+            if livre and a.pv > dano:
+                return a
+        return None
 
     def defesa_efetiva(self, total_do_ataque: int) -> int:
         """Aplica Escudo Vínculo: reação, 2 SP, +proficiência na DEF.
@@ -173,6 +222,11 @@ class Lutador:
     ) -> int:
         if self.ataca_com_desvantagem:
             desvantagem = True
+        if self.condicoes.get("favor", 0) > 0:
+            vantagem = True
+        # Marcado: Desvantagem só contra alvos que não sejam quem marcou.
+        if self.marcado_por is not None and self.marcado_por.vivo                 and alvo is not self.marcado_por:
+            desvantagem = True
         nat = rola_d20(vantagem, desvantagem)
         total = nat + self.bonus_ataque + bonus_extra
 
@@ -190,9 +244,11 @@ class Lutador:
                 if self.brutal and r == 1:
                     r = rola(faces)
                 dano += r
+        if self.bencao:
+            dano_extra += rola(4)
         dano += self.dano_fixo + dano_extra + self._furia_deste_ataque()
         dano = max(1, dano)
-        alvo.sofrer(dano)
+        alvo.receber(dano, self)
         self.dano_causado += dano
         return dano
 
@@ -238,6 +294,28 @@ class Lutador:
             self._turno_furioso(alvo, inimigos)
             return
 
+        # Postura Desafiadora / Provocação Ampla: o marcado ataca os outros com
+        # Desvantagem. No motor, isso vira Desvantagem nos ataques dele.
+        if self.classe == "guardiao" and self.sp >= 2:
+            quantos = (2 if "Provocação Ampla" in self.tecnicas
+                       else 1 if "Postura Desafiadora" in self.tecnicas else 0)
+            marcados = 0
+            for m in [i for i in inimigos if i.vivo]:
+                if marcados >= quantos or self.sp < 2:
+                    break
+                if m.marcado_por is None:
+                    self.sp -= 2
+                    m.marcado_por = self
+                    marcados += 1
+            # Provocação Ampla puxa a atenção de dois: você fica exposto.
+            if marcados > 1:
+                self.ataques_com_vantagem_contra_mim = 99
+        # Fôlego de Ferro: uma vez por combate, recupera SP igual ao nível.
+        if ("Fôlego de Ferro" in self.tecnicas and not self.folego_usado
+                and self.sp < self.sp_max * 0.4):
+            self.folego_usado = True
+            self.sp = min(self.sp_max, self.sp + self.prof * 3)
+
         for _ in range(self.ataques_por_turno):
             if not alvo.vivo:
                 restantes = [i for i in inimigos if i.vivo]
@@ -253,6 +331,9 @@ class Lutador:
         else:
             self._feroz_ou_pesado(alvo)
         matou = pv_antes > 0 and alvo.pv == 0
+        # Rasgo: o Ataque Pesado deixa o alvo sangrando.
+        if "Rasgo" in self.tecnicas and alvo.vivo and alvo.pv < pv_antes:
+            alvo.aplicar_condicao("sangra_1", 3)
         if "Sede de Sangue" in self.tecnicas and matou:
             self.sp = min(self.sp_max, self.sp + rola(4))
 
@@ -275,6 +356,16 @@ class Lutador:
             sobra = [i for i in (inimigos or []) if i.vivo]
             if sobra:
                 self.atacar(min(sobra, key=lambda x: x.pv))
+
+        # Fúria Cega: uma vez por combate, um ataque em cada inimigo ao alcance.
+        if ("Fúria Cega" in self.tecnicas and not self.furia_cega_usada
+                and len([i for i in (inimigos or []) if i.vivo]) >= 2):
+            self.furia_cega_usada = True
+            # um ataque em cada inimigo, mas todos com Desvantagem: é um golpe
+            # largo e descontrolado, não cinco ataques limpos.
+            for i in [x for x in (inimigos or []) if x.vivo][:3]:
+                self.atacar(i, desvantagem=True)
+            self.ataques_com_vantagem_contra_mim = 99
 
         # Golpe Duplo: ação bônus, 2 SP, −2 na rolagem
         if ("Golpe Duplo" in self.tecnicas and self.sp >= 2
@@ -326,7 +417,8 @@ class Lutador:
             brutal=self.brutal, vantagem=exposto,
         ).dano_esperado(alvo.defesa)
 
-        if self.usar_pesado and self.sp >= 1 and op_pesado > op_feroz:
+        if ("Ataque Pesado" in self.tecnicas and self.usar_pesado
+                and self.sp >= 1 and op_pesado > op_feroz):
             self.sp -= 1
             dados_originais = self.dados_dano
             self.dados_dano = dados_pesado
@@ -341,6 +433,38 @@ class Lutador:
             self.atacar(alvo, vantagem=exposto)
 
     def _turno_oraculo(self, aliados: list["Lutador"], alvos: list["Lutador"]) -> None:
+        # --- Tier 3: Rede do Destino, uma vez por combate, quando o grupo
+        # ainda tem gente de pé para aproveitar a Vantagem.
+        if ("Rede do Destino" in self.tecnicas and not self.rede_usada
+                and sum(1 for a in aliados if a.vivo) >= 2):
+            self.rede_usada = True
+            for a in aliados:
+                if a.vivo and a is not self:
+                    a.ataques_com_vantagem_contra_mim = 0
+                    a.bencao = 0
+                    a.condicoes["favor"] = 2
+            # o motor lê "favor" como Vantagem no próximo ataque
+        # --- Bênção da Coragem: +1d4 no ataque de um aliado por uma rodada
+        if "Bênção da Coragem" in self.tecnicas and self.mp >= 2:
+            candidato = next((a for a in aliados
+                              if a.vivo and a is not self and not a.bencao), None)
+            if candidato is not None:
+                self.mp -= 2
+                candidato.bencao = 2
+        # --- Visão do Infortúnio: Desvantagem no próximo ataque do inimigo
+        if "Visão do Infortúnio" in self.tecnicas and self.mp >= 1:
+            alvo_v = next((a for a in alvos if a.vivo
+                           and a.condicoes.get("cega", 0) == 0), None)
+            if alvo_v is not None:
+                self.mp -= 1
+                alvo_v.aplicar_condicao("cega", 1)
+        # --- Olho do Futuro: um turno inteiro a mais, uma vez por combate
+        if ("Olho do Futuro" in self.tecnicas and not self.olho_usado):
+            self.olho_usado = True
+            self._turno_oraculo_base(aliados, alvos)
+        return self._turno_oraculo_base(aliados, alvos)
+
+    def _turno_oraculo_base(self, aliados: list["Lutador"], alvos: list["Lutador"]) -> None:
         # Ação bônus: Palavra Curativa no aliado mais ferido, se valer a pena.
         if "Palavra Curativa" in self.tecnicas and self.mp >= 2:
             feridos = [a for a in aliados if a.vivo and a.pv <= a.pv_max // 2]
@@ -349,6 +473,12 @@ class Lutador:
                 self.mp -= 2
                 cura = rola(6) + self.mod_sabedoria
                 alvo_cura.pv = min(alvo_cura.pv_max, alvo_cura.pv + cura)
+                if "Cura em Cadeia" in self.tecnicas and self.mp >= 1:
+                    segundo = next((a for a in feridos if a is not alvo_cura), None)
+                    if segundo is not None:
+                        self.mp -= 1
+                        segundo.pv = min(segundo.pv_max,
+                                         segundo.pv + rola(6) + self.mod_sabedoria)
         alvo = min(alvos, key=lambda a: a.pv)
         self.atacar(alvo, vantagem=alvo.consumir_vantagem())
 
@@ -358,6 +488,21 @@ def combate(
 ) -> dict:
     """Roda um combate até um lado cair. Devolve o relatório."""
     todos = herois + monstros
+    for c in todos:
+        c.aliados = herois if c.lado == "herois" else monstros
+    # Muro de Escudos: +1 DEF nos aliados enquanto o Guardião estiver de pé.
+    for c in herois:
+        if "Muro de Escudos" in c.tecnicas:
+            for a in herois:
+                if a is not c:
+                    a.defesa += 1
+    # Juramento do Portão: protege quem tem menos PV máximos.
+    for c in herois:
+        if "Juramento do Portão" in c.tecnicas:
+            outros = [a for a in herois if a is not c]
+            if outros:
+                c.protegido = min(outros, key=lambda a: a.pv_max)
+
     ordem = sorted(
         todos, key=lambda c: rola_d20() + c.iniciativa_bonus, reverse=True
     )
