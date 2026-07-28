@@ -162,7 +162,7 @@ Heroico, se alguém conseguir transportar uma perna de bronze de quatro metros.
 18** o deixa **Incapacitado** por 1d4 rodadas. E — a fraqueza mais barata do
 livro inteiro — ele **quer brincar**. Uma bola vermelha de borracha, um graveto,
 qualquer brinquedo grande o bastante para três cabeças disputarem, atirado como
-ação: **Lidar com Animais CD 15**, e Cérbero passa a rodada brincando em vez de
+ação: **Sobrevivência CD 15**, e Cérbero passa a rodada brincando em vez de
 matar. Funciona uma vez por combate por brinquedo diferente.
 
 **AO MORRER** Não morre. Reduzido a 0 PV, ele recua para o portão, deita e rosna.

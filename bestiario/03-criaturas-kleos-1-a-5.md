@@ -72,7 +72,7 @@ conjurador nunca deveria precisar lutar contra mercenários mortais.
 - **Mordida.** +3, **1d6 + 2** de dano perfurante.
 
 **FRAQUEZA MÍTICA**
-Ainda é filhote. Um personagem com **Lidar com Animais CD 13** o afasta, e um
+Ainda é filhote. Um personagem com **Sobrevivência CD 13** o afasta, e um
 filho de Hades o acalma sem teste. Bronze celestial o dissolve em um golpe que
 cause 6 ou mais.
 

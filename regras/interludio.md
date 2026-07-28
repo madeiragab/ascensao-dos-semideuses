@@ -155,7 +155,7 @@ atributo escolhido, se o personagem passar em um teste relacionado ao esforço
 | Atributo treinado | Teste |
 |---|---|
 | Força, Destreza, Constituição | Atletismo ou Acrobacia |
-| Inteligência | Arcanismo, Mitologia ou Investigação |
+| Inteligência | Mitologia, Mitologia ou Investigação |
 | Sabedoria | Intuição, Percepção ou Sobrevivência |
 | Carisma | Persuasão, Atuação ou Enganação |
 
@@ -194,7 +194,7 @@ Um item Aprimorado (2 de Progresso) leva 2 Ações. Um Magistral, 3. Um Heroico,
 
 ### 57.3 Aprender uma Fórmula
 
-Uma tentativa de aprender uma Fórmula nova (Parte V, seção 42): **Arcanismo
+Uma tentativa de aprender uma Fórmula nova (Parte V, seção 42): **Mitologia
 contra CD 10 + 3 por Círculo**, exigindo uma fonte válida.
 
 Fórmulas de Círculo 0 não exigem teste.
