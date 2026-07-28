@@ -362,6 +362,11 @@ def main() -> None:
     md = (RAIZ / "regras/magia-da-nevoa.md").read_text(encoding="utf-8")
     md = re.sub(r"^# Livro I.*?\n", "", md)
     md = re.sub(r"^## Parte V — Magia da Névoa\s*\n", "", md, flags=re.M)
+    # --- Guia do Mestre (escrito à mão)
+    montar("guia.html", "guia.html", css, {
+        "CAPA": ler_b64("capa-guia"),
+    })
+
     # --- Ficha do Herói (formulário, sem markdown)
     montar("ficha.html", "ficha.html", css, {
         "CAPA": ler_b64("capa-ficha"),

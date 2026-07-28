@@ -110,6 +110,7 @@ Converter-Capa -Arquivo 'capa-bestiario.png'  -Saida 'capa-bestiario'  -Qualidad
 Converter-Capa -Arquivo 'capa-grimorio.png'   -Saida 'capa-grimorio' `
                -LarguraMax 950 -Qualidade 82
 Converter-Capa -Arquivo 'capa-ficha.png'      -Saida 'capa-ficha'     -Qualidade 86
+Converter-Capa -Arquivo 'capa-guia.png'       -Saida 'capa-guia'      -Qualidade 84
 
 Write-Output ''
 Write-Output 'gerando miniaturas para a estante do site:'
@@ -118,6 +119,7 @@ Gerar-Miniatura -Arquivo 'capa.png'           -Saida 'thumb-jogador.jpg'
 Gerar-Miniatura -Arquivo 'capa-bestiario.png' -Saida 'thumb-bestiario.jpg'
 Gerar-Miniatura -Arquivo 'capa-grimorio.png'  -Saida 'thumb-grimorio.jpg'
 Gerar-Miniatura -Arquivo 'capa-ficha.png'     -Saida 'thumb-ficha.jpg'
+Gerar-Miniatura -Arquivo 'capa-guia.png'      -Saida 'thumb-guia.jpg'
 
 Write-Output ''
 & python (Join-Path $raiz 'build_livros.py')

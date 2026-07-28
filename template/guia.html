@@ -1,0 +1,843 @@
+<title>Ascensão dos Semideuses — Guia do Mestre</title>
+
+<style>
+{{CSS}}
+
+/* ============================================================
+   GUIA DO MESTRE — paleta própria: couro roxo e ouro
+   ============================================================ */
+:root {
+  --acento:       #6B3FA0;
+  --acento-fraco: #EDE4F5;
+  --bronze:       #9A7B2E;
+  --bronze-luz:   #C9A94E;
+  --papel:        #FAF7FB;
+  --superficie-2: #EDE7F2;
+  --borda:        #D8CFE0;
+  --borda-forte:  #AB9CBC;
+  --texto:        #1E1726;
+  --texto-suave:  #635A70;
+  --fundo:        #EFEAF3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
+    --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
+    --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
+    --fundo: #100C16;
+  }
+}
+:root[data-theme="dark"] {
+  --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
+  --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
+  --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
+  --fundo: #100C16;
+}
+:root[data-theme="light"] {
+  --acento: #6B3FA0; --acento-fraco: #EDE4F5; --bronze: #9A7B2E;
+  --papel: #FAF7FB; --superficie-2: #EDE7F2; --borda: #D8CFE0;
+  --borda-forte: #AB9CBC; --texto: #1E1726; --texto-suave: #635A70;
+  --fundo: #EFEAF3;
+}
+
+/* falas de exemplo na mesa */
+.mesa {
+  border-left: 3px solid var(--bronze);
+  padding: .2rem 0 .2rem 1.1rem;
+  margin: 1.4rem 0;
+  font-size: .96rem;
+}
+.mesa p { margin: 0 0 .5rem; }
+.mesa p:last-child { margin-bottom: 0; }
+.mesa b { color: var(--acento); font-weight: 700; }
+.mesa em { color: var(--texto-suave); }
+</style>
+
+<div class="livro">
+
+<div class="capa-pagina frente">
+  <img src="{{CAPA}}" alt="Capa do Guia do Mestre: pégaso dourado em relevo dentro de um medalhão de meandro grego, sobre couro roxo">
+</div>
+
+<div class="mancha">
+
+<div class="rosto">
+  <svg class="selo" width="78" height="78" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="var(--bronze)" stroke-width="2"/>
+    <circle cx="50" cy="50" r="32" fill="none" stroke="var(--acento)" stroke-width="1.2"/>
+    <path d="M50 24 L58 44 L78 46 L62 58 L68 78 L50 66 L32 78 L38 58 L22 46 L42 44 Z"
+          fill="none" stroke="var(--acento)" stroke-width="1.6"/>
+  </svg>
+  <h1>Guia do Mestre</h1>
+  <p class="tomo">Livro IV · para quem conduz</p>
+  <p class="epigrafe">
+    Você não joga contra a mesa. Você joga o mundo — e o mundo não quer ganhar,
+    quer ser interessante.
+  </p>
+</div>
+
+<nav class="sumario" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#cap1"><span class="alg">I</span><span><span class="tit">O que o Mestre faz</span>
+      <span class="sub">A única coisa que você não pode delegar</span></span></a></li>
+    <li><a href="#cap2"><span class="alg">II</span><span><span class="tit">Pedir testes</span>
+      <span class="sub">Quando rolar, quando não rolar, e o que fazer com o resultado</span></span></a></li>
+    <li><a href="#cap3"><span class="alg">III</span><span><span class="tit">Uma história que prende</span>
+      <span class="sub">Gancho, promessa, profecia e o direito de escolher</span></span></a></li>
+    <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Da one-shot à campanha</span>
+      <span class="sub">Três formatos, e como dimensionar cada um</span></span></a></li>
+    <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Gente</span>
+      <span class="sub">Criar NPCs que a mesa lembra, e o vilão que sustenta a campanha</span></span></a></li>
+    <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Cenas de investigação</span>
+      <span class="sub">A regra dos três indícios, e o que fazer quando travam</span></span></a></li>
+    <li><a href="#cap7"><span class="alg">VII</span><span><span class="tit">Cenas de combate</span>
+      <span class="sub">Objetivo, terreno, e quando parar de rolar</span></span></a></li>
+    <li><a href="#cap8"><span class="alg">VIII</span><span><span class="tit">O mundo resiste</span>
+      <span class="sub">Portas, correntes, paredes: quebrar coisas tem regra</span></span></a></li>
+    <li><a href="#cap9"><span class="alg">IX</span><span><span class="tit">Perigos</span>
+      <span class="sub">Fogo, lava, afogamento, queda, frio, veneno e escuridão</span></span></a></li>
+    <li><a href="#cap10"><span class="alg">X</span><span><span class="tit">Ritmo e recompensa</span>
+      <span class="sub">Quando subir de nível, e o que dar além de dracmas</span></span></a></li>
+  </ol>
+</nav>
+
+<!-- ==================== I ==================== -->
+<section class="capitulo" id="cap1">
+  <div class="abertura">
+    <span class="alg">Capítulo Um</span>
+    <h2>O que o Mestre faz</h2>
+    <p>A única coisa que você não pode delegar</p>
+  </div>
+
+  <p class="abre">Você descreve o mundo, interpreta tudo que não é um personagem dos
+  jogadores, e decide o que as regras não decidem. Só isso. Você <strong>não</strong>
+  escreve a história sozinho, não protege a trama contra os jogadores, e não joga
+  contra eles.</p>
+
+  <div class="destaque">
+    <span class="rotulo">O ciclo, e ele é só isto</span>
+    <p><strong>1.</strong> Você descreve a situação. <strong>2.</strong> Os jogadores
+    dizem o que fazem. <strong>3.</strong> Você diz o que acontece — pedindo uma
+    rolagem só se houver risco de verdade. E volta ao 1.</p>
+  </div>
+
+  <h3>Três perguntas antes de qualquer cena</h3>
+  <ol>
+    <li><strong>O que os jogadores querem aqui?</strong> Se você não sabe, a cena não
+    tem tensão — tem só descrição.</li>
+    <li><strong>O que pode dar errado?</strong> Sem isso não há motivo para rolar dados.</li>
+    <li><strong>O que muda se eles vencerem?</strong> Se nada muda, corte a cena.</li>
+  </ol>
+
+  <h3>Diga sim, ou diga sim com um custo</h3>
+  <p>Quando um jogador propõe algo criativo, a resposta padrão é <strong>sim</strong>.
+  A segunda opção é <em>"sim, mas vai custar"</em>. A terceira é <em>"sim, se você
+  passar num teste"</em>. <strong>Não</strong> é a última, e exige um motivo dentro da
+  ficção — não "não estava no meu roteiro".</p>
+
+  <div class="mesa">
+    <p><b>Jogador:</b> Posso jogar a mesa em cima do autômato para prender as pernas dele?</p>
+    <p><b>Mestre:</b> Pode. Atletismo contra a Fortitude dele. Se passar, ele fica Preso
+    por uma rodada — e você fica sem cobertura.</p>
+    <p><em>O jogador inventou uma manobra que não está no livro. O Mestre traduziu para
+    uma regra que está: teste resistido e uma condição. É isso o tempo todo.</em></p>
+  </div>
+
+  <h3>A regra que vale mais que as outras</h3>
+  <p>Quando uma regra atrapalhar uma cena boa, <strong>a cena boa ganha</strong>. Decida
+  na hora, siga jogando, e anote para conversar depois. Nenhuma mesa foi arruinada por
+  uma decisão rápida e imperfeita; muitas foram por vinte minutos de consulta ao livro.</p>
+
+  <div class="nota">
+    <p><strong>Você tem direito de errar em público.</strong> Diga "vou decidir assim
+    agora e a gente revê depois" em voz alta. Isso não enfraquece sua autoridade — é
+    exatamente o que a fortalece.</p>
+  </div>
+</section>
+
+<!-- ==================== II ==================== -->
+<section class="capitulo" id="cap2">
+  <div class="abertura">
+    <span class="alg">Capítulo Dois</span>
+    <h2>Pedir testes</h2>
+    <p>Quando rolar, quando não rolar, e o que fazer com o resultado</p>
+  </div>
+
+  <p class="abre">Rolar dados é caro: gasta tempo, quebra o ritmo e transfere a decisão
+  para o acaso. Use quando o acaso for melhor narrador que você.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Só peça um teste se as três forem verdade</span>
+    <p><strong>1.</strong> A ação pode falhar. <strong>2.</strong> A falha tem
+    consequência interessante. <strong>3.</strong> O sucesso muda alguma coisa.</p>
+  </div>
+
+  <p>Se falhar não muda nada, o personagem simplesmente <strong>consegue</strong>. Se
+  não há como conseguir, diga isso na cara e deixe o jogador tentar outra coisa. Um
+  teste que só pode falhar é uma armadilha; um que só pode passar é uma perda de tempo.</p>
+
+  <h3>Escolher a dificuldade</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Dificuldade</th><th class="num">CD</th><th>Quem passa com folga</th></tr></thead>
+      <tbody>
+        <tr><td>Fácil</td><td class="num">10</td><td>Quase todo mundo</td></tr>
+        <tr><td>Média</td><td class="num">13</td><td>Quem é proficiente</td></tr>
+        <tr><td>Difícil</td><td class="num">16</td><td>Quem é proficiente e treinou o atributo</td></tr>
+        <tr><td>Muito difícil</td><td class="num">19</td><td>O especialista do grupo, com sorte</td></tr>
+        <tr><td>Quase impossível</td><td class="num">22</td><td>Ninguém, sem ajuda ou Vantagem</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Escolha a CD antes de saber quem vai rolar.</strong> Definir depois de ver
+  a ficha é decidir o resultado e fingir que foi o dado.</p>
+
+  <h3>Quatro resultados, não dois</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Passou com folga</h5>
+      <p class="etiqueta">5 ou mais acima da CD</p>
+      <p>Consegue, e ganha algo: informação a mais, tempo, posição, um detalhe útil.</p></div>
+    <div class="cartao"><h5>Passou</h5>
+      <p class="etiqueta">Na CD ou acima</p>
+      <p>Consegue o que queria. Diga como, não só "você passou".</p></div>
+    <div class="cartao"><h5>Falhou por pouco</h5>
+      <p class="etiqueta">1 ou 2 abaixo</p>
+      <p><strong>Sucesso com custo.</strong> Consegue, mas faz barulho, quebra a
+      gazua, demora demais, ou fica devendo.</p></div>
+    <div class="cartao"><h5>Falhou feio</h5>
+      <p class="etiqueta">3 ou mais abaixo</p>
+      <p>Não consegue — e a situação <strong>piora</strong>. Falha que só nega é
+      falha morta.</p></div>
+  </div>
+
+  <div class="nota">
+    <p><strong>Falha nunca deve parar a história.</strong> Se o grupo falha em achar a
+    pista que abre a próxima cena, eles acham a pista — do jeito difícil, tarde demais,
+    ou pagando por ela. O que falha é o <em>como</em>, não o <em>se</em>.</p>
+  </div>
+
+  <h3>Ajudar, testes em grupo e testes resistidos</h3>
+  <ul>
+    <li><strong>Ajudar</strong> dá Vantagem, e só uma pessoa pode ajudar. Ela precisa
+    saber fazer aquilo — dois analfabetos não leem melhor juntos.</li>
+    <li><strong>Teste em grupo:</strong> quando o grupo inteiro tenta algo (atravessar
+    o pântano em silêncio), metade passando basta.</li>
+    <li><strong>Teste resistido:</strong> os dois rolam, maior vence. Empate mantém a
+    situação como estava.</li>
+  </ul>
+
+  <h3>Rolem escondido, às vezes</h3>
+  <p>Quando o personagem não saberia que falhou — perceber uma emboscada, sentir uma
+  mentira, lembrar de uma lenda —, <strong>role você</strong>, atrás da tela. Um jogador
+  que vê o 3 no dado sabe que há algo ali, e isso é informação que o personagem não tem.</p>
+</section>
+
+<!-- ==================== III ==================== -->
+<section class="capitulo" id="cap3">
+  <div class="abertura">
+    <span class="alg">Capítulo Três</span>
+    <h2>Uma história que prende</h2>
+    <p>Gancho, promessa, profecia e o direito de escolher</p>
+  </div>
+
+  <p class="abre">História que prende não é história bem escrita: é história em que as
+  decisões dos jogadores <strong>importam</strong>. Um roteiro perfeito que aconteceria
+  igual sem eles é um livro, não um jogo.</p>
+
+  <h3>Comece pelo que já está na ficha</h3>
+  <p>Os jogadores já te entregaram os ganchos: <strong>Húbris</strong>,
+  <strong>Conceito Mortal</strong>, <strong>Parente Divino</strong> e a cena de
+  descoberta que cada um escreveu. Use isso antes de inventar qualquer coisa.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>O que está na ficha</th><th>O que vira na mesa</th></tr></thead>
+      <tbody>
+        <tr><td>Húbris: Lealdade Excessiva</td><td>A missão exige abandonar alguém. Provocação pronta.</td></tr>
+        <tr><td>Conceito: Herdeiro</td><td>A família dele tem negócio com o vilão.</td></tr>
+        <tr><td>Parente: Hades</td><td>Os mortos falam com ele — e cobram.</td></tr>
+        <tr><td>Vínculo com a mãe mortal</td><td>Alguém descobriu onde ela mora.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>A promessa da campanha</h3>
+  <p>Na primeira sessão, deixe claro <strong>que tipo de história é essa</strong>. Não o
+  enredo — o gênero. "Vocês vão descobrir quem está soltando monstros na cidade" é uma
+  promessa. Cumpra-a, ou mude-a em voz alta.</p>
+
+  <div class="mesa">
+    <p><b>Mestre, na sessão zero:</b> Isso aqui vai ser sobre adolescentes descobrindo
+    que o mundo é maior e pior do que contaram. Vai ter escola, vai ter monstro no
+    estacionamento, e vai ter uma hora em que um deus pede algo que vocês não querem dar.</p>
+    <p><em>Todo mundo agora sabe o que esperar, e pode construir personagem para isso.</em></p>
+  </div>
+
+  <h3>A Profecia</h3>
+  <p>Este mundo tem oráculos, e uma profecia é a ferramenta mais forte do Mestre:
+  ela dá <strong>direção sem dar ordem</strong>. Escreva em cinco ou seis versos,
+  entregue cedo, e deixe a mesa interpretar errado — a interpretação errada é metade
+  da diversão.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Como escrever uma que funcione</span>
+    <p>Cada verso deve poder virar uma cena. Pelo menos um verso precisa ser
+    <strong>ambíguo de propósito</strong>. E um deles tem que doer: uma perda, uma
+    traição, um preço. Nunca escreva o final — escreva o <em>custo</em>.</p>
+  </div>
+
+  <h3>Os três atos, sem camisa de força</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Abertura</h5><p>Algo quebra a rotina. Um monstro, uma
+    morte, uma carta. O grupo decide se importar — e você <strong>garante</strong>
+    que eles tenham motivo pessoal.</p></div>
+    <div class="cartao"><h5>Meio</h5><p>Eles perseguem, descobrem que estavam errados,
+    e o problema fica maior. É aqui que a Húbris deve custar caro pelo menos uma vez.</p></div>
+    <div class="cartao"><h5>Virada</h5><p>Uma escolha sem opção boa. Não um combate
+    difícil — uma <strong>decisão</strong> difícil. É disso que a mesa vai lembrar.</p></div>
+  </div>
+
+  <h3>Cinco coisas que matam o interesse</h3>
+  <ul>
+    <li><strong>O NPC que resolve.</strong> Se um aliado poderoso pode resolver, os
+    jogadores viram plateia.</li>
+    <li><strong>O corredor invisível.</strong> Toda escolha levando ao mesmo lugar.
+    Eles percebem, sempre.</li>
+    <li><strong>Segredo sem pista.</strong> Reviravolta que ninguém tinha como prever
+    não é surpresa, é decepção.</li>
+    <li><strong>Combate sem motivo.</strong> Luta que não muda nada gasta uma hora.</li>
+    <li><strong>Punir a criatividade.</strong> Se o plano esperto der errado toda vez,
+    eles param de ter planos.</li>
+  </ul>
+</section>
+
+<!-- ==================== IV ==================== -->
+<section class="capitulo" id="cap4">
+  <div class="abertura">
+    <span class="alg">Capítulo Quatro</span>
+    <h2>Da one-shot à campanha</h2>
+    <p>Três formatos, e como dimensionar cada um</p>
+  </div>
+
+  <p class="abre">O formato muda tudo: quantos combates cabem, quanto tempo o vilão tem
+  para existir, e se vale a pena o grupo ter Interlúdio.</p>
+
+  <h3>One-shot — uma sessão de 3 a 5 horas</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Item</th><th>Recomendação</th></tr></thead>
+      <tbody>
+        <tr><td>Nível</td><td><strong>3 a 5</strong> — o 1 é frágil demais, e no 5 já existe Ataque Extra</td></tr>
+        <tr><td>Personagens</td><td><strong>Prontos</strong>, com nome e um vínculo entre eles já escrito</td></tr>
+        <tr><td>Cenas</td><td>Cerca de <strong>seis</strong>: 1 abertura · 2 investigação · 2 combate · 1 clímax</td></tr>
+        <tr><td>Combates</td><td><strong>Dois ou três</strong>, sendo um deles o clímax</td></tr>
+        <tr><td>Descanso</td><td>Um Descanso Curto no meio. Sem Longo, sem Interlúdio</td></tr>
+        <tr><td>Objetivo</td><td>Um só, dito em voz alta nos primeiros dez minutos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="nota">
+    <p><strong>Corte o Interlúdio e a Húbris longa.</strong> Numa one-shot, use
+    Provocações — que resolvem na hora — e esqueça Ruptura, Vínculos e treino. Não há
+    tempo para consequência de longo prazo.</p>
+  </div>
+
+  <h3>Arco curto — três a seis sessões</h3>
+  <p>O formato mais fácil de acertar. Comece no <strong>nível 1 ou 2</strong> e suba
+  um nível por sessão até o 5 ou 6. Um vilão só, uma pergunta só. Um Interlúdio curto
+  no meio, de uma ou duas Ações.</p>
+  <p>Estrutura que funciona: <em>o problema aparece · eles investigam e erram · o
+  vilão contra-ataca e alguém perde algo · eles descobrem a fraqueza · confronto</em>.</p>
+
+  <h3>Campanha longa — meses</h3>
+  <p>Aqui o sistema inteiro entra em jogo: Interlúdios de verdade, Vínculos que
+  importam, Húbris com Ruptura, criação de itens, Iniciação na magia.</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Faixa</th><th>O que a campanha é sobre</th><th>Kleos típico</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1–4</strong></td><td>Sobreviver e descobrir quem você é</td><td>Rumor a Façanha</td></tr>
+        <tr><td><strong>5–9</strong></td><td>Ganhar nome. O acampamento conta com vocês</td><td>Feito a Lenda</td></tr>
+        <tr><td><strong>10–14</strong></td><td>Entrar na política dos deuses</td><td>Lenda a Mito</td></tr>
+        <tr><td><strong>15–20</strong></td><td>Ser a última linha entre o mundo e o fim</td><td>Epopeia a Cataclisma</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>Uma coisa que a simulação mostrou:</strong> o dano de um personagem
+    <em>para de crescer</em> por volta do nível 10 — os atributos travam em 20 e não há
+    ataque extra além do quinto —, enquanto os PV continuam subindo. Na prática, os
+    combates de nível alto duram o dobro dos de nível baixo: cerca de <strong>oito
+    rodadas</strong> contra três. Planeje menos combates por sessão lá em cima, e
+    compense com cenas de decisão.</p>
+  </div>
+
+  <h3>Montar o dia de aventura</h3>
+  <p>O sistema foi calibrado para um dia com <strong>três a quatro encontros</strong>
+  antes do Descanso Longo. Menos que isso e o grupo nunca fica sem recurso; mais e o
+  Oráculo seca. Use a <strong>Regra da Moira</strong> do Bestiário para dimensionar
+  cada um, e lembre que só o clímax precisa ser um combate justo — os outros podem ser
+  escaramuças que gastam recurso.</p>
+</section>
+
+<!-- ==================== V ==================== -->
+<section class="capitulo" id="cap5">
+  <div class="abertura">
+    <span class="alg">Capítulo Cinco</span>
+    <h2>Gente</h2>
+    <p>Criar NPCs que a mesa lembra, e o vilão que sustenta a campanha</p>
+  </div>
+
+  <p class="abre">A mesa não lembra da ficha de um NPC. Lembra de como ele falava, do
+  que ele queria, e da vez em que ele disse não.</p>
+
+  <h3>A regra dos três traços</h3>
+  <p>Todo NPC que fala precisa de três coisas, e só três. Anote numa linha:</p>
+
+  <div class="destaque">
+    <span class="rotulo">O modelo, em uma linha</span>
+    <p><strong>Aparência marcante · Jeito de falar · O que ele quer</strong></p>
+  </div>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>NPC</th><th>Aparência</th><th>Fala</th><th>Quer</th></tr></thead>
+      <tbody>
+        <tr><td>Dona Íris</td><td>Óculos preso com fita</td><td>Termina toda frase com "né"</td><td>Que os garotos parem de sumir</td></tr>
+        <tr><td>Tavro</td><td>Cicatriz do olho ao queixo</td><td>Fala baixo e devagar</td><td>Que ninguém descubra o que ele é</td></tr>
+        <tr><td>Kalix</td><td>Sempre com fome</td><td>Interrompe todo mundo</td><td>Uma dívida paga, não importa como</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>O terceiro traço é o que faz o NPC funcionar: <strong>querer algo</strong> dá a
+  ele opinião sobre o que os jogadores fazem, e opinião é o que produz cena.</p>
+
+  <h3>Quando dar estatísticas</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Nunca</h5><p>Se ele não vai lutar nem ser alvo de um teste
+    resistido, não tem ficha. Nem nome de atributo.</p></div>
+    <div class="cartao"><h5>Meia ficha</h5><p>Se pode resistir a algo: escolha um bônus
+    para o que ele faz bem (+5), outro para o resto (+1), e uma DEF. Pronto.</p></div>
+    <div class="cartao"><h5>Ficha inteira</h5><p>Se vai lutar, use o motor do
+    <em>Bestiário</em>: escolha o Kleos, copie a linha da Tábua, dê um Traço e uma
+    Fraqueza. Cinco minutos.</p></div>
+  </div>
+
+  <h3>Aliados não resolvem</h3>
+  <p>Um NPC aliado pode <strong>informar, transportar, curar e abrir portas</strong>.
+  Não pode <strong>decidir, matar o vilão nem salvar o grupo</strong>. Se ele é forte
+  demais para não resolver, dê a ele um motivo forte para não estar lá — um juramento,
+  uma guerra em outro lugar, um corpo que não pode cruzar aquela fronteira.</p>
+
+  <h3>O vilão</h3>
+  <p>Um vilão que sustenta uma campanha precisa de quatro coisas:</p>
+  <ol>
+    <li><strong>Um objetivo que faz sentido</strong> visto de dentro. Ninguém acorda
+    querendo ser mau; querem algo, e o preço é pago por outros.</li>
+    <li><strong>Um relógio.</strong> O plano avança mesmo quando o grupo não faz nada.
+    Escreva as etapas e marque quando cada uma acontece.</li>
+    <li><strong>Um encontro cedo, sem luta.</strong> Deixe a mesa vê-lo, ouvi-lo e
+    odiá-lo antes de poder enfrentá-lo.</li>
+    <li><strong>Algo em comum com um dos personagens.</strong> Mesmo parente divino,
+    mesma Húbris, mesma cidade. É o que transforma derrotá-lo em decisão.</li>
+  </ol>
+
+  <div class="nota">
+    <p><strong>O relógio do vilão é a ferramenta mais subestimada do Guia.</strong>
+    Quatro ou seis caixinhas no seu papel, e você marca uma sempre que o grupo perde
+    tempo. A mesa sente o mundo se mexendo sem precisar que você diga.</p>
+  </div>
+</section>
+
+<!-- ==================== VI ==================== -->
+<section class="capitulo" id="cap6">
+  <div class="abertura">
+    <span class="alg">Capítulo Seis</span>
+    <h2>Cenas de investigação</h2>
+    <p>A regra dos três indícios, e o que fazer quando travam</p>
+  </div>
+
+  <p class="abre">Investigação trava quando o Mestre esconde uma conclusão atrás de um
+  teste. A pista não é a recompensa: a <strong>decisão sobre o que fazer com ela</strong>
+  é a recompensa.</p>
+
+  <div class="destaque">
+    <span class="rotulo">A regra dos três indícios</span>
+    <p>Para cada conclusão que o grupo <em>precisa</em> alcançar, coloque
+    <strong>três</strong> caminhos independentes até ela. Eles vão achar um, ignorar
+    outro e interpretar o terceiro errado — e ainda assim chegar lá.</p>
+  </div>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Conclusão</th><th>Indício 1</th><th>Indício 2</th><th>Indício 3</th></tr></thead>
+      <tbody>
+        <tr><td>O zelador é uma empusa</td>
+            <td>Marca de casco queimada no piso</td>
+            <td>Ninguém lembra do nome dele</td>
+            <td>Um sátiro não entra naquele corredor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nunca peça um teste para achar a pista principal</h3>
+  <p>A pista que abre a próxima cena é <strong>dada</strong>. O teste serve para achar o
+  que está <em>além</em> dela: quem plantou, há quanto tempo, o que mais estava ali.
+  Percepção e Investigação distribuem <em>vantagem</em>, não <em>permissão</em>.</p>
+
+  <h3>Quando eles travam mesmo assim</h3>
+  <div class="grade">
+    <div class="cartao"><h5>O mundo se mexe</h5><p>O relógio do vilão avança e algo
+    acontece — um incêndio, um sumiço, um recado. Movimento gera pista nova.</p></div>
+    <div class="cartao"><h5>Um NPC pergunta</h5><p>Alguém pergunta o óbvio que a mesa
+    esqueceu: "e a marca no chão, vocês olharam?"</p></div>
+    <div class="cartao"><h5>Peça a teoria</h5><p>Pergunte em voz alta: "o que vocês
+    acham que aconteceu?" Se a teoria for boa, <strong>faça dela a verdade</strong>.</p></div>
+  </div>
+
+  <h3>Montar uma cena de investigação</h3>
+  <ol class="passos">
+    <li><b>Decida a verdade</b> Primeiro, o que de fato aconteceu. Escreva em uma frase.</li>
+    <li><b>Escolha três lugares</b> Onde a verdade deixou marca. Cada um dá um indício.</li>
+    <li><b>Ponha alguém em cada lugar</b> Uma pessoa que quer algo — testemunha, cúmplice, curioso.</li>
+    <li><b>Defina o relógio</b> O que muda se demorarem uma hora? E um dia?</li>
+    <li><b>Deixe uma porta trancada</b> Algo que exige voltar depois, com mais poder ou informação.</li>
+  </ol>
+</section>
+
+<!-- ==================== VII ==================== -->
+<section class="capitulo" id="cap7">
+  <div class="abertura">
+    <span class="alg">Capítulo Sete</span>
+    <h2>Cenas de combate</h2>
+    <p>Objetivo, terreno, e quando parar de rolar</p>
+  </div>
+
+  <p class="abre">Combate onde a única pergunta é "quem chega a 0 PV primeiro" fica
+  chato na terceira rodada. Combate com um <strong>objetivo além de matar</strong> fica
+  interessante até o fim.</p>
+
+  <h3>Dê um objetivo ao combate</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Proteger</h5><p>Alguém ou algo não pode cair. O grupo tem
+    que dividir atenção.</p></div>
+    <div class="cartao"><h5>Alcançar</h5><p>Chegar a um lugar antes que algo aconteça.
+    Matar os inimigos vira desperdício de tempo.</p></div>
+    <div class="cartao"><h5>Aguentar</h5><p>Sobreviver X rodadas até a ajuda, a maré, o
+    amanhecer. Recuar é vencer.</p></div>
+    <div class="cartao"><h5>Descobrir</h5><p>O inimigo tem uma Fraqueza Mítica que eles
+    não conhecem. O combate é a investigação.</p></div>
+  </div>
+
+  <h3>O terreno é metade da luta</h3>
+  <p>Um combate num campo aberto é uma planilha. Ponha <strong>duas ou três</strong>
+  destas em cada mapa:</p>
+  <ul>
+    <li>Algo para <strong>subir</strong> — vantagem de posição, risco de queda</li>
+    <li>Algo para <strong>quebrar</strong> — uma coluna, um vidro, uma corrente</li>
+    <li>Algo que <strong>machuca</strong> — fogo, maquinário, água funda</li>
+    <li>Algo que <strong>esconde</strong> — cobertura, fumaça, escuridão</li>
+    <li>Uma <strong>saída</strong> — porque fugir precisa ser possível</li>
+  </ul>
+
+  <h3>Quando parar de rolar</h3>
+  <p>Quando o resultado já está decidido, <strong>narre o fim</strong>. Se sobrou um
+  capanga com 3 PV contra o grupo inteiro de pé, ele foge ou morre — não gaste mais
+  duas rodadas. O mesmo vale ao contrário: se o grupo vai perder, ofereça a rendição, a
+  fuga ou o preço antes de matar todo mundo.</p>
+
+  <div class="nota">
+    <p><strong>Monstros também fogem.</strong> Quase toda criatura recua abaixo de um
+    quarto dos PV, salvo autômatos, mortos-vivos e coisas com ordem explícita. Um
+    monstro que foge volta depois — e isso é melhor história que um cadáver.</p>
+  </div>
+
+  <h3>Ondas, em vez de tudo de uma vez</h3>
+  <p>Colocar seis inimigos na mesa desde o começo trava o turno de todo mundo. Comece
+  com três e traga o resto na rodada 2 ou 3, pela porta que o grupo não está olhando.
+  O <strong>Kleos total</strong> é o mesmo; a cena respira melhor e a tensão sobe.</p>
+</section>
+
+<!-- ==================== VIII ==================== -->
+<section class="capitulo" id="cap8">
+  <div class="abertura">
+    <span class="alg">Capítulo Oito</span>
+    <h2>O mundo resiste</h2>
+    <p>Portas, correntes, paredes: quebrar coisas tem regra</p>
+  </div>
+
+  <p class="abre">Arrombar coisas é metade do que um semideus faz. Objetos têm
+  <strong>DEF</strong>, <strong>PV</strong> e um <strong>Limiar</strong> — e é o Limiar
+  que impede alguém abrir um portão de metal a canivetadas.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Limiar de Dano</span>
+    <p>Se um golpe causa <strong>menos dano que o Limiar</strong>, o objeto não perde
+    nada. Ele apenas <em>não cede</em> àquilo. Um portão de aço com Limiar 10 ri de uma
+    adaga, e cede a um machado grande.</p>
+  </div>
+
+  <p>Objetos não se esquivam: a DEF deles é baixa e serve só para representar tamanho e
+  ângulo. Um objeto parado e indefeso pode ser atingido automaticamente se houver
+  tempo — a rolagem só importa no meio de um combate.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Objeto</th><th class="num">DEF</th><th class="num">PV</th><th class="num">Limiar</th><th>Quanto demora</th></tr></thead>
+      <tbody>
+        <tr><td>Vidro, cerâmica, tábua solta</td><td class="num">8</td><td class="num">4</td><td class="num">—</td><td>Um golpe</td></tr>
+        <tr><td>Corda, cadeira, caixote</td><td class="num">10</td><td class="num">8</td><td class="num">—</td><td>Um golpe</td></tr>
+        <tr><td>Baú de madeira, janela emperrada</td><td class="num">10</td><td class="num">12</td><td class="num">—</td><td>Um golpe forte</td></tr>
+        <tr><td><strong>Porta de madeira comum</strong></td><td class="num">10</td><td class="num">15</td><td class="num">—</td><td>Uma rodada do grupo</td></tr>
+        <tr><td>Corrente de ferro</td><td class="num">14</td><td class="num">20</td><td class="num">5</td><td>Uma rodada, com a arma certa</td></tr>
+        <tr><td><strong>Porta reforçada</strong></td><td class="num">12</td><td class="num">35</td><td class="num">5</td><td>Duas rodadas</td></tr>
+        <tr><td>Estátua de mármore</td><td class="num">10</td><td class="num">40</td><td class="num">5</td><td>Duas rodadas</td></tr>
+        <tr><td>Carro</td><td class="num">10</td><td class="num">60</td><td class="num">5</td><td>Três rodadas</td></tr>
+        <tr><td><strong>Portão de metal</strong></td><td class="num">14</td><td class="num">60</td><td class="num">10</td><td>Três rodadas, só arma pesada</td></tr>
+        <tr><td>Parede de pedra, 1,5 m²</td><td class="num">12</td><td class="num">90</td><td class="num">10</td><td>Cinco rodadas</td></tr>
+        <tr><td>Bronze celestial, portas divinas</td><td class="num">18</td><td class="num">150</td><td class="num">20</td><td>Não vai ceder. Ache a chave</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>De onde vêm esses números.</strong> Um trio de nível 1 causa cerca de
+    <strong>16 de dano por rodada</strong> contra um alvo parado; do nível 10 em diante,
+    cerca de <strong>44</strong>. As portas foram calibradas nisso: a comum cede numa
+    rodada no nível 1, a reforçada em duas, o portão de metal em três — e continua
+    valendo a pena procurar a chave.</p>
+  </div>
+
+  <h3>Sem quebrar: só força</h3>
+  <p>Nem tudo precisa virar combate. Para arrombar de ombrada, teste de
+  <strong>Atletismo</strong>:</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Situação</th><th class="num">CD</th></tr></thead>
+      <tbody>
+        <tr><td>Porta emperrada, janela travada</td><td class="num">10</td></tr>
+        <tr><td>Porta de madeira trancada</td><td class="num">15</td></tr>
+        <tr><td>Porta reforçada, grade</td><td class="num">20</td></tr>
+        <tr><td>Portão de metal, pedra</td><td class="num">25</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Ferramenta adequada, alavanca ou uma segunda pessoa dão <strong>Vantagem</strong>.
+  Falhar por 5 ou mais faz barulho suficiente para quem estiver do outro lado ouvir.</p>
+
+  <h3>Objetos com Integridade</h3>
+  <p>Equipamento dos personagens não usa esta tabela — usa <strong>Integridade</strong>,
+  do capítulo de Itens: uma escala de 1 a 6 pontos ligada à Classe de Qualidade. Esta
+  tabela é para o <em>cenário</em>.</p>
+</section>
+
+<!-- ==================== IX ==================== -->
+<section class="capitulo" id="cap9">
+  <div class="abertura">
+    <span class="alg">Capítulo Nove</span>
+    <h2>Perigos</h2>
+    <p>Fogo, lava, afogamento, queda, frio, veneno e escuridão</p>
+  </div>
+
+  <p class="abre">Perigos de ambiente <strong>não escalam com o nível</strong>, e isso é
+  de propósito. Lava é lava. Um semideus de nível 1 morre nela em uma rodada; um de
+  nível 20 aguenta quatro e sai andando. É assim que o mundo mostra o quanto eles
+  cresceram.</p>
+
+  <div class="destaque">
+    <span class="rotulo">A regra geral de todo perigo</span>
+    <p><strong>Aviso</strong> antes — a mesa precisa poder evitar. <strong>Teste</strong>
+    para escapar ou reduzir, quase sempre Reflexos ou Fortitude. E uma
+    <strong>saída</strong>: nenhum perigo deve ser inescapável sem que o grupo tenha
+    escolhido entrar nele.</p>
+  </div>
+
+  <h3>Fogo</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Fonte</th><th>Dano por rodada</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Tocha, fogão, faísca</td><td><span class="dado">1d6</span></td><td>Só se ficar em contato</td></tr>
+        <tr><td>Fogueira, carro pegando fogo</td><td><span class="dado">2d6</span></td><td>Aplica <strong>Queimando</strong></td></tr>
+        <tr><td>Incêndio, cômodo tomado</td><td><span class="dado">4d6</span></td><td>Queimando · e fumaça: ver adiante</td></tr>
+        <tr><td>Forja acesa, brasa viva</td><td><span class="dado">6d6</span></td><td>Filhos de Hefesto são imunes</td></tr>
+        <tr><td><strong>Lava, contato</strong></td><td><span class="dado">10d6</span></td><td>Fortitude CD 18 ou <strong>Queimando</strong> até apagar</td></tr>
+        <tr><td>Lava, submerso</td><td><span class="dado">20d6</span></td><td>Isso mata. É para matar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Queimando</strong> é <span class="dado">1d6</span> por rodada até apagar:
+  uma ação rolando no chão, ou qualquer volume de água, encerra sem teste.</p>
+
+  <h3>Fumaça e ar irrespirável</h3>
+  <p>Fumaça densa é <strong>obscurecimento pesado</strong>. Quem respira faz
+  <strong>Fortitude CD 13</strong> por rodada; falhando, ganha um nível de
+  <strong>Exausto</strong> e perde a ação seguinte tossindo. Prender a respiração
+  funciona pelo tempo do afogamento, abaixo.</p>
+
+  <h3>Afogamento e sufocamento</h3>
+  <div class="destaque">
+    <p class="formula">Você aguenta 1 + modificador de Constituição minutos</p>
+  </div>
+  <p>Mínimo de trinta segundos. Esgotado o fôlego, no início do seu próximo turno você
+  cai a <strong>0 PV</strong> e fica <strong>Agonizante</strong> — não morre na hora, e
+  quem te puxar para fora ainda pode salvar.</p>
+  <ul>
+    <li>Ser pego <strong>de surpresa</strong> debaixo d'água corta o tempo pela metade.</li>
+    <li>Nadar em armadura média exige <strong>Atletismo CD 15</strong> por rodada; falhar
+    afunda você 3 metros.</li>
+    <li>Filhos de Poseidon <strong>ignoram tudo isto</strong>, e devem se sentir deuses
+    numa cena dessas.</li>
+  </ul>
+
+  <h3>Queda</h3>
+  <p><span class="dado">1d6</span> de concussão a cada 3 metros, até 20d6, e você termina
+  <strong>Caído</strong>. Um teste de <strong>Acrobacia CD 13</strong> desconta 3 metros
+  quando há como rolar ou se segurar.</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Altura</th><th>Dano médio</th><th>Contra quem</th></tr></thead>
+      <tbody>
+        <tr><td>3 m — um andar</td><td>3</td><td>Nada demais</td></tr>
+        <tr><td>9 m — telhado baixo</td><td>10</td><td>Derruba um nível 1</td></tr>
+        <tr><td>18 m — prédio</td><td>21</td><td>Sério em qualquer nível baixo</td></tr>
+        <tr><td>60 m — penhasco</td><td>70</td><td>Mata quase todo mundo abaixo do 10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Frio e calor extremos</h3>
+  <ul>
+    <li><strong>Frio severo</strong>, sem agasalho: <strong>Fortitude CD 13</strong> a
+    cada dez minutos. Falha dá um nível de <strong>Exausto</strong>.</li>
+    <li><strong>Calor extremo</strong>, sem água: o mesmo teste a cada hora.</li>
+    <li><strong>Água gelada</strong>: <span class="dado">1d6</span> por minuto e
+    Fortitude CD 15 ou Exausto.</li>
+  </ul>
+
+  <h3>Veneno</h3>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Grau</th><th class="num">CD</th><th>Efeito na falha</th><th>Quando repete</th></tr></thead>
+      <tbody>
+        <tr><td>Irritante</td><td class="num">11</td><td><strong>Envenenado</strong> por uma hora</td><td>—</td></tr>
+        <tr><td>Comum</td><td class="num">13</td><td>Envenenado · <span class="dado">2d6</span> imediato</td><td>A cada hora</td></tr>
+        <tr><td>Forte</td><td class="num">16</td><td>Envenenado · <span class="dado">4d6</span> · <strong>Lento</strong></td><td>A cada 10 minutos</td></tr>
+        <tr><td>Letal</td><td class="num">19</td><td>Envenenado · <span class="dado">6d6</span> · Exausto 1</td><td>A cada rodada, 3 vezes</td></tr>
+        <tr><td>Divino</td><td class="num">22</td><td>Fere até um deus. Não passa sozinho</td><td>Só com antídoto ou milagre</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Um <strong>antídoto</strong> encerra qualquer veneno abaixo do Divino. A perícia
+  <strong>Intuição</strong> com Kit Médico permite tratar: CD igual à do veneno.</p>
+
+  <h3>Ácido, eletricidade e esmagamento</h3>
+  <ul>
+    <li><strong>Ácido:</strong> <span class="dado">2d6</span> a <span class="dado">6d6</span>
+    por rodada de contato. Equipamento atingido faz Teste de Integridade.</li>
+    <li><strong>Eletricidade:</strong> <span class="dado">3d6</span> a
+    <span class="dado">8d6</span>, Reflexos por metade. Em água, ninguém tem metade.</li>
+    <li><strong>Esmagamento</strong> — teto, prensa, criatura enorme:
+    <span class="dado">4d6</span> a <span class="dado">10d6</span>, Reflexos por metade,
+    e <strong>Preso</strong> em caso de falha.</li>
+  </ul>
+
+  <h3>Escuridão</h3>
+  <p>Escuridão total é <strong>obscurecimento pesado</strong>: quem está dentro conta
+  como <strong>Cego</strong> para o que tenta enxergar. Filhos de Hades e quem tem a
+  passiva certa enxergam normalmente — e essas cenas existem para essas pessoas
+  brilharem.</p>
+
+  <div class="nota">
+    <p><strong>Como escolher a intensidade.</strong> Compare com os PV do personagem
+    mais frágil do grupo. Um perigo que tira cerca de <strong>um quarto</strong> dos PV
+    dele por rodada assusta sem matar; <strong>metade</strong> é uma ameaça real;
+    <strong>tudo</strong> é uma sentença, e só deve existir onde a mesa escolheu entrar
+    sabendo.</p>
+  </div>
+</section>
+
+<!-- ==================== X ==================== -->
+<section class="capitulo" id="cap10">
+  <div class="abertura">
+    <span class="alg">Capítulo Dez</span>
+    <h2>Ritmo e recompensa</h2>
+    <p>Quando subir de nível, e o que dar além de dracmas</p>
+  </div>
+
+  <p class="abre">Não existe tabela de experiência. Você concede nível quando a história
+  pede — e o guia é o <strong>Kleos</strong> do que o grupo enfrentou.</p>
+
+  <div class="destaque">
+    <span class="rotulo">O ritmo honesto</span>
+    <p>Suba um nível depois que o grupo derrubar algo de Kleos <strong>igual ou
+    superior</strong> ao Kleos do próprio grupo — ou depois de resolver um problema
+    grande sem luta nenhuma, que vale o mesmo.</p>
+  </div>
+
+  <p>Na prática isso dá um nível a cada duas ou três sessões no começo, e mais espaçado
+  depois. Suba <strong>durante um Interlúdio</strong>, nunca no meio de uma caverna.</p>
+
+  <h3>Recompensa não é só dinheiro</h3>
+  <div class="grade">
+    <div class="cartao"><h5>Dracmas</h5><p>Concreto e chato, e por isso funciona. Um
+    arco curto custa 25; uma missão de nível baixo deveria render algo entre 20 e 60
+    por pessoa.</p></div>
+    <div class="cartao"><h5>Materiais</h5><p>O chifre do minotauro, o metal do autômato.
+    Vale mais que dracmas: vira item pelo motor de criação, num Interlúdio.</p></div>
+    <div class="cartao"><h5>Acesso</h5><p>Uma oficina, uma biblioteca, um místes
+    disposto a iniciar alguém. Abre caminho mecânico sem inflacionar poder.</p></div>
+    <div class="cartao"><h5>Dívida</h5><p>Um NPC deve um favor. É a melhor recompensa
+    que existe: gera cena em vez de número.</p></div>
+    <div class="cartao"><h5>Verdade</h5><p>Uma resposta que eles queriam. Numa campanha
+    com profecia, informação é tesouro.</p></div>
+    <div class="cartao"><h5>Bênção</h5><p>Um deus reparou. Pequena, temática, e com
+    prazo — ver a atividade de Interlúdio no Livro do Jogador.</p></div>
+  </div>
+
+  <h3>Itens: devagar</h3>
+  <p>O sistema não tem tabela de itens mágicos, e isso é intencional. Equipamento
+  melhora por <strong>Classe de Qualidade</strong> e <strong>Aprimoramentos</strong>, no
+  motor de criação de itens — o que significa que o grupo <em>constrói</em> o que tem em
+  vez de encontrar. Um item divino de verdade deve ser <strong>um evento</strong>, com
+  nome e história, não um achado de baú.</p>
+
+  <h3>Fechar uma sessão</h3>
+  <p>Reserve cinco minutos no fim. Pergunte três coisas:</p>
+  <ol>
+    <li><strong>Qual foi o melhor momento?</strong> Aponta para o que repetir.</li>
+    <li><strong>O que ficou pendente?</strong> Vira a abertura da próxima.</li>
+    <li><strong>O que seu personagem está pensando agora?</strong> Faz a mesa sair da
+    sessão ainda dentro dela.</li>
+  </ol>
+
+  <div class="nota">
+    <p><strong>E anote o relógio do vilão.</strong> Uma caixinha marcada por sessão em
+    que o grupo não o atrapalhou. Quando as caixinhas acabarem, o plano dele
+    <em>acontece</em> — e a mesa vai sentir que o mundo era real o tempo todo.</p>
+  </div>
+</section>
+
+<footer class="colofao">
+  <h3>Sobre este livro</h3>
+  <p><strong>Os números daqui foram medidos.</strong> Os PV das portas saem do dano real
+  de um grupo por rodada — 16 no nível 1, cerca de 44 do nível 10 em diante —, para que
+  uma porta comum ceda numa rodada e um portão de metal continue valendo a pena
+  contornar. Os perigos foram calibrados contra os PV do personagem mais frágil de cada
+  faixa de nível.</p>
+  <p><strong>Uma coisa que a simulação revelou e vale para o seu planejamento:</strong>
+  o dano de um personagem para de crescer por volta do nível 10, enquanto os PV
+  continuam subindo. Combates de nível alto duram cerca de oito rodadas contra três nos
+  níveis baixos. Não é defeito — é o motivo de o Guia mandar você trocar combates por
+  decisões lá em cima.</p>
+  <p><strong>O que este livro não faz.</strong> Não te ensina a improvisar, a ler a mesa
+  nem a saber quando calar a boca. Isso não cabe em regra: vem de mestrar, errar e
+  mestrar de novo.</p>
+</footer>
+
+</div><!-- /mancha -->
+
+</div><!-- /livro -->
