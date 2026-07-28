@@ -18,7 +18,8 @@ from combate import Lutador, combate
 from fichas import Monstro
 from fichas_v1 import furioso_v1, guardiao_v1, oraculo_v1
 from kleos import TABUA
-from niveis import ataques_por_turno, kleos_do_personagem, personagem, teto_de_custo
+from niveis import (ataques_por_turno, kleos_do_grupo, kleos_do_personagem,
+                    personagem, teto_de_custo)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -122,7 +123,7 @@ def fichas_por_nivel() -> None:
         g = personagem(guardiao_v1(), nv)
         f = personagem(furioso_v1(), nv)
         o = personagem(oraculo_v1(), nv)
-        kg = 3 * kleos_do_personagem(nv)
+        kg = kleos_do_grupo(nv, 3)
         print(f"{nv:>6} {g.prof:>+5} | "
               f"{g.pv_max:>7}/{g.defesa}/{ataques_por_turno('guardiao', nv):<11} "
               f"{f.pv_max:>7}/{f.defesa}/{ataques_por_turno('furioso', nv):<10} "
@@ -137,7 +138,7 @@ def teste_promessa() -> None:
           + "".join(f"{'K'+str(d):>9}" for d in ("-1", "justo", "+1", "+2")))
     print("-" * 78)
     for nv in NIVEIS:
-        kg = 3 * kleos_do_personagem(nv)
+        kg = kleos_do_grupo(nv, 3)
         linha = []
         for delta in (-1, 0, 1, 2):
             k = kg + delta
@@ -155,7 +156,7 @@ def detalhe_do_justo() -> None:
           f"{'heróis de pé':>13}")
     print("-" * 78)
     for nv in NIVEIS:
-        kg = 3 * kleos_do_personagem(nv)
+        kg = kleos_do_grupo(nv, 3)
         r = rodar(nv, kg)
         print(f"{nv:>6} {kg:>6} | {r['vitoria']:>8.1%} {r['rodadas']:>8.2f} "
               f"{r['de_pe']:>13.2f}")
