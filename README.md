@@ -13,14 +13,15 @@ três correções estão documentadas mais abaixo.
 
 ---
 
-## Os quatro livros
+## Os cinco livros
 
 | | Livro | Conteúdo |
 |---|---|---|
 | **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação de personagem em sete etapas, combate, e o motor de criação de habilidades |
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
-| **IV** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível no navegador, com retrato do personagem, e sai em PDF |
+| **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível no navegador, calcula sozinha, aceita retrato e sai em PDF |
 
 ---
 
@@ -78,6 +79,8 @@ python dia_de_aventura.py   # curva de desgaste ao longo de vários combates
 python kleos.py             # valida a escala de perigo do Bestiário
 python habilidades.py       # valida o motor de criação de habilidades
 python condicoes.py         # mede o preço do controle contra o do dano
+python equilibrio.py        # auditoria: Kleos por nível, classes, armas, armaduras
+python tecnicas.py          # mede as 36 técnicas de classe, uma a uma
 python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
 ```
 
@@ -112,15 +115,17 @@ não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeir
 ## Estrutura do repositório
 
 ```
-livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
+livro-do-jogador.html   bestiario.html   grimorio.html
+guia.html               ficha.html
                                                         ← gerados, não edite
 index.html              a estante do site
 
 template/               as cascas dos livros e a folha de estilo única
-  livro.css             CSS compartilhado pelos quatro livros
+  livro.css             CSS compartilhado pelos cinco livros
   livro-do-jogador.html escrito à mão
   bestiario.html        casca; o conteúdo vem dos markdown
   grimorio.html         casca, com paleta verde e ouro própria
+  guia.html             o Guia do Mestre, paleta roxa e ouro
   ficha.html            a ficha preenchível, paleta preta e ouro
 
 regras/                 os capítulos em markdown, e o mapa do sistema
@@ -143,7 +148,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 O script redimensiona as capas, gera as miniaturas da estante e chama
-`build_livros.py`, que converte os markdown e monta os quatro livros.
+`build_livros.py`, que converte os markdown e monta os cinco livros.
 
 > **Edite sempre `template/` e os markdown.** Os arquivos `.html` na raiz são
 > gerados e serão sobrescritos no próximo build.
@@ -155,10 +160,9 @@ O script redimensiona as capas, gera as miniaturas da estante e chama
 O Livro do Jogador está completo para jogar do nível 1 ao 20. O que falta é
 refinamento:
 
-1. **Técnicas novas sem teste.** As listas foram de 4 para 12 opções por classe, e
-   só as regras de progressão passaram pelo simulador. *Coração de Ares* (crítico
-   em 19 e 20) e *Massacre* (ataque livre a cada abate) são as que eu mediria
-   primeiro — as duas escalam com o número de ataques.
+1. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
+   outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem,
+   que o motor não modela. Precisam de mesa, não de simulador.
 2. **Armaduras provisórias.** A tabela funciona, mas nunca foi comparada contra uma
    curva de dano de monstro por nível.
 3. **Materiais divinos.** Bronze celestial existe como regra de o que fere o quê;

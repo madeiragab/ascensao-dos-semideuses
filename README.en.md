@@ -16,14 +16,15 @@ and all three corrections are documented below.
 
 ---
 
-## The four books
+## The five books
 
 | | Book | Contents |
 |---|---|---|
 | **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, seven-step character creation, combat, and the ability-building engine |
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
-| **IV** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable in the browser, takes a character portrait, prints to PDF |
+| **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable in the browser, self-calculating, takes a portrait, prints to PDF |
 
 ---
 
@@ -83,6 +84,8 @@ python kleos.py             # validates the Bestiary's danger scale
 python habilidades.py       # validates the ability-building engine
 python condicoes.py         # prices control against damage
 python calibrar_kleos.py    # tests the Kleos scale at every level
+python equilibrio.py        # audit: Kleos by level, classes, weapons, armour
+python tecnicas.py          # measures all 36 class techniques, one by one
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
@@ -116,15 +119,17 @@ focus, resource spending, who drops first.
 ## Repository layout
 
 ```
-livro-do-jogador.html   bestiario.html   grimorio.html   ficha.html
+livro-do-jogador.html   bestiario.html   grimorio.html
+guia.html               ficha.html
                                                         ← generated, don't edit
 index.html              the shelf page
 
 template/               book shells and the single stylesheet
-  livro.css             CSS shared by all four books
+  livro.css             CSS shared by all five books
   livro-do-jogador.html hand-written
   bestiario.html        shell; content comes from the markdown
   grimorio.html         shell, with its own green-and-gold palette
+  guia.html             the GM's Guide, purple-and-gold palette
   ficha.html            the fillable sheet, black-and-gold palette
 
 regras/                 chapters in markdown, plus the system map
@@ -147,7 +152,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
 The script resizes the covers, generates the shelf thumbnails, and calls
-`build_livros.py`, which converts the markdown and assembles the four books.
+`build_livros.py`, which converts the markdown and assembles the five books.
 
 > **Always edit `template/` and the markdown.** The `.html` files at the root are
 > generated and will be overwritten on the next build.
@@ -159,10 +164,9 @@ The script resizes the covers, generates the shelf thumbnails, and calls
 The Player's Book is complete enough to play from level 1 to 20. What's left is
 refinement:
 
-1. **New techniques, untested.** The lists went from 4 to 12 options per class, and
-   only the progression rules went through the simulator. *Heart of Ares* (crit on
-   19–20) and *Massacre* (a free attack on every kill) are the ones I'd measure
-   first — both scale with attack count.
+1. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
+   the rest depend on positioning, forced movement, fear or rerolls, which the
+   engine does not model. They need a table, not a simulator.
 2. **Provisional armour.** The table works but was never checked against a monster
    damage curve by level.
 3. **Divine materials.** Celestial bronze exists as a what-hurts-what rule; Stygian
