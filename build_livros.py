@@ -107,6 +107,23 @@ def converter(md: str) -> str:
             i += 1
             continue
 
+        # ---- bloco de código cercado por ```
+        #
+        # Precisa vir antes de tudo. Sem este branch, as duas linhas de crase
+        # eram lidas como um par de código *inline*, e o bloco inteiro virava um
+        # <span class="dado"> — que tem white-space: nowrap. O resultado era uma
+        # linha única de 2.300 px estourando a página do Grimório.
+        if cru.startswith("```"):
+            i += 1
+            corpo_cod: list[str] = []
+            while i < len(linhas) and not linhas[i].strip().startswith("```"):
+                corpo_cod.append(linhas[i])
+                i += 1
+            i += 1                      # consome a crase de fechamento
+            texto = html.escape("\n".join(corpo_cod), quote=False)
+            saida.append(f'<pre class="bloco-codigo">{texto}</pre>')
+            continue
+
         # ---- divisor de degrau (# KLEOS n — NOME)
         m = RE_DEGRAU.match(cru)
         if m:

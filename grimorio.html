@@ -677,6 +677,37 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .degrau { page-break-before: always; }
 }
 
+/* ============================================================
+   BLOCO DE CÓDIGO CERCADO — modelos de registro, fórmulas
+   Preserva as quebras de linha e rola sozinho se for largo
+   demais, para nunca empurrar a página de lado.
+   ============================================================ */
+pre.bloco-codigo {
+  font-family: var(--mono);
+  font-size: .86rem;
+  line-height: 1.8;
+  color: var(--texto);
+  background: var(--superficie-2);
+  border-left: 3px solid var(--acento);
+  padding: 1rem 1.2rem;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* Rede de segurança: nenhum trecho de código inline pode ser largo o
+   bastante para estourar a mancha, por mais nowrap que ele seja. */
+.dado { max-width: 100%; overflow-wrap: anywhere; }
+
+@media print {
+  pre.bloco-codigo {
+    white-space: pre-wrap;
+    border-left-color: #666;
+    page-break-inside: avoid;
+  }
+}
+
 
 /* ============================================================
    GRIMÓRIO — paleta própria: verde de couro e ouro velho.
@@ -790,7 +821,8 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 <p>A Iniciação concede:</p>
 <ul><li>proficiência na perícia <strong>Mitologia</strong>, se ainda não tiver;</li><li>um <strong>Repositório</strong> vazio;</li><li>as três primeiras Fórmulas de <strong>Círculo 0</strong> à sua escolha.</li></ul>
 <p><strong>Atributo de Conjuração: Inteligência</strong>, sempre, para todo mundo. Magia é estudo, não sangue. Um semideus cujo Atributo Divino seja Sabedoria ou Carisma conjura suas habilidades elementais com um atributo e suas Fórmulas com outro — e isso é proposital: acumular as duas coisas deve custar caro na distribuição de atributos.</p>
-<p>``<span class="dado"> CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência </span>``</p>
+<pre class="bloco-codigo">CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência
+Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência</pre>
 <div class="ornamento">❖</div>
 <h2>36. O Repositório e as Fórmulas</h2>
 <p>Uma <strong>Fórmula</strong> é uma instrução registrada para dobrar a Névoa de um jeito específico. Ela não é memorizada: é <strong>consultada</strong>.</p>
@@ -919,7 +951,22 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 <p><strong>3. Dano é sempre de segunda mão.</strong> Fórmulas de dano direto custam <strong>+1 MP</strong> em relação a uma habilidade elemental equivalente. Névoa é ilusão e forma; queimar alguém é trabalho de quem herdou fogo. Uma Fórmula de dano nunca é a resposta mais eficiente, e isso é intencional.</p>
 <p><strong>4. Toda Fórmula declara sua densidade e seus componentes.</strong> Uma Fórmula sem Voz custa <strong>+1 MP</strong>. Uma Fórmula sem Gesto custa <strong>+1 MP</strong>. Uma Fórmula que dispensa o Foco custa <strong>+2 MP</strong>. Poder conjurar amarrado e amordaçado é uma vantagem enorme, e tem que ser paga.</p>
 <h3>Modelo de registro</h3>
-<p>``<span class="dado"> Nome: Via: Círculo: Densidade: Vestida ou Densa Componentes: V / G / F Tipo de ação: Alcance: Alvo ou área: Duração e Concentração: Rolagem: Ataque de Fórmula ou Teste de Resistência Efeito principal: Efeitos adicionais: Modificadores de custo: Custo final: O que acontece contra quem descrê: Descrição narrativa: </span>``</p>
+<pre class="bloco-codigo">Nome:
+Via:
+Círculo:
+Densidade: Vestida ou Densa
+Componentes: V / G / F
+Tipo de ação:
+Alcance:
+Alvo ou área:
+Duração e Concentração:
+Rolagem: Ataque de Fórmula ou Teste de Resistência
+Efeito principal:
+Efeitos adicionais:
+Modificadores de custo:
+Custo final:
+O que acontece contra quem descrê:
+Descrição narrativa:</pre>
 <p>O último campo não é decoração. <strong>Uma Fórmula sem resposta para a Descrença não está pronta.</strong></p>
 <div class="ornamento">❖</div>
 <h2>42. Como se aprende uma Fórmula nova</h2>

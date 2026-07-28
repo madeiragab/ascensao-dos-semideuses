@@ -677,6 +677,37 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   .degrau { page-break-before: always; }
 }
 
+/* ============================================================
+   BLOCO DE CÓDIGO CERCADO — modelos de registro, fórmulas
+   Preserva as quebras de linha e rola sozinho se for largo
+   demais, para nunca empurrar a página de lado.
+   ============================================================ */
+pre.bloco-codigo {
+  font-family: var(--mono);
+  font-size: .86rem;
+  line-height: 1.8;
+  color: var(--texto);
+  background: var(--superficie-2);
+  border-left: 3px solid var(--acento);
+  padding: 1rem 1.2rem;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* Rede de segurança: nenhum trecho de código inline pode ser largo o
+   bastante para estourar a mancha, por mais nowrap que ele seja. */
+.dado { max-width: 100%; overflow-wrap: anywhere; }
+
+@media print {
+  pre.bloco-codigo {
+    white-space: pre-wrap;
+    border-left-color: #666;
+    page-break-inside: avoid;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1084,13 +1115,30 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 <p>Uma fraqueza explorada normalmente concede <strong>Vantagem</strong>, ignora uma resistência, ou anula um Traço. Fraquezas que <strong>matam de imediato</strong> existem, mas devem ser raras e caras de conseguir.</p>
 <div class="ornamento">❖</div>
 <h2>20. Modelo de registro</h2>
-<p>``` NOME — Kleos N (Degrau) Tipo, tamanho · Arquétipo PV     ·  DEF     ·  Movimento Ataque +   ·  CD Fortitude +   ·  Reflexos +   ·  Vontade + Resistências / Imunidades / Vulnerabilidades:</p>
-<p>TRAÇOS ...</p>
-<p>AÇÕES Ataque principal:  ... Poder:  ... (Recarga 5–6)</p>
-<p>ARREMETIDAS (n) ...</p>
-<p>RECUSAS (n)</p>
-<p>FRAQUEZA MÍTICA ...</p>
-<p>O QUE ACONTECE AO MORRER ... ```</p>
+<pre class="bloco-codigo">NOME — Kleos N (Degrau)
+Tipo, tamanho · Arquétipo
+PV     ·  DEF     ·  Movimento
+Ataque +   ·  CD
+Fortitude +   ·  Reflexos +   ·  Vontade +
+Resistências / Imunidades / Vulnerabilidades:
+
+TRAÇOS
+  ...
+
+AÇÕES
+  Ataque principal:  ...
+  Poder:  ... (Recarga 5–6)
+
+ARREMETIDAS (n)
+  ...
+
+RECUSAS (n)
+
+FRAQUEZA MÍTICA
+  ...
+
+O QUE ACONTECE AO MORRER
+  ...</pre>
 <p>O último campo importa. Um monstro que vira pó dourado, um autômato que vira sucata aproveitável e um deus que some numa coluna de fogo contam histórias diferentes sobre o mesmo combate.</p>
 <div class="ornamento">❖</div>
 <h2>21. Limites gerais</h2>
