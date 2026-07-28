@@ -56,16 +56,16 @@ class OraculoQueJoga(Lutador):
         self.mod_divino = mod_divino
         self.teto = teto
 
-    def _turno_oraculo(self, aliados, alvos):
+    def _turno_oraculo_base(self, aliados, alvos):
         feridos = [a for a in aliados if a.vivo and a.pv <= a.pv_max * 0.35]
         if feridos and self.mp >= 2:
-            return super()._turno_oraculo(aliados, alvos)
+            return super()._turno_oraculo_base(aliados, alvos)
 
         # Orçamento: gastar como se o combate durasse umas quatro rodadas.
         pontos = min(self.teto, max(1, self.mp // 4))
         custo = pontos            # instantânea, alcance curto: custo = pontos
         if self.mp < custo:
-            return super()._turno_oraculo(aliados, alvos)
+            return super()._turno_oraculo_base(aliados, alvos)
 
         self.mp -= custo
         alvo = min([a for a in alvos if a.vivo], key=lambda a: a.pv)
