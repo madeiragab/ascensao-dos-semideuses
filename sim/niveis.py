@@ -98,12 +98,24 @@ def teto_de_custo(nivel: int) -> int:
     return 4 + (nivel + 1) // 2
 
 
-def kleos_do_personagem(nivel: int) -> int:
-    """Livro II, seção 3."""
+def kleos_do_personagem(nivel: int) -> float:
+    """Livro II, seção 3 — valores CALIBRADOS.
+
+    A primeira versão dizia 1 / 2 / 3 / 4 por faixa de nível. Medido em
+    calibrar_kleos.py, o valor real é bem menor: um herói de nível 20 vale
+    menos de três vezes um de nível 1, não quatro.
+    """
     if nivel <= 4:
-        return 1
+        return 1.0
     if nivel <= 9:
-        return 2
+        return 1.75
     if nivel <= 14:
-        return 3
-    return 4
+        return 2.25
+    if nivel <= 19:
+        return 2.75
+    return 3.0
+
+
+def kleos_do_grupo(nivel: int, quantos: int = 3) -> int:
+    """Kleos do encontro justo, arredondado — é o que o Mestre consulta."""
+    return min(11, max(1, round(kleos_do_personagem(nivel) * quantos)))

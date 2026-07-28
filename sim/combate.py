@@ -54,6 +54,7 @@ class Lutador:
     mod_sabedoria: int = 0
     tecnicas: list[str] = field(default_factory=list)
     regras: str = "v0"            # "v0" = livro atual, "v1" = proposta corrigida
+    critico_em: int = 20          # Coração de Ares baixa para 19
     # Interruptores para testes A/B
     usar_feroz: bool = True
     usar_pesado: bool = True
@@ -74,6 +75,9 @@ class Lutador:
         # turno; no v1 vale só para o primeiro.
         self.ataques_com_vantagem_contra_mim = 0
         self.dano_causado = 0
+        self.furia = 0            # Fúria Crescente: +1 por rodada, até +3
+        self.furia_gasta = False
+        self.golpe_duplo_usado = False
 
     @property
     def vivo(self) -> bool:
@@ -133,6 +137,10 @@ class Lutador:
 
     # -- ações -------------------------------------------------------------
     def sofrer(self, dano: int) -> None:
+        # Bastião: reduz cada golpe em um valor igual à proficiência, enquanto
+        # acima de metade dos PV. Metade do dano rendia +13,4% de vitória.
+        if "Bastião" in self.tecnicas and self.pv > self.pv_max / 2:
+            dano = max(0, dano - self.prof)
         self.pv = max(0, self.pv - dano)
 
     def defesa_efetiva(self, total_do_ataque: int) -> int:
@@ -141,16 +149,19 @@ class Lutador:
         Só é gasto quando faria diferença — o Guardião vê a rolagem antes de
         decidir, o que é generoso mas evita desperdício e mede o teto da técnica.
         """
+        # Casca Grossa: +2 DEF com metade dos PV ou menos.
+        base = self.defesa + (2 if "Casca Grossa" in self.tecnicas
+                              and self.pv <= self.pv_max / 2 else 0)
         if (
             "Escudo Vínculo" in self.tecnicas
             and self.reacao_disponivel
             and self.sp >= 2
-            and self.defesa <= total_do_ataque < self.defesa + self.prof
+            and base <= total_do_ataque < base + self.prof
         ):
             self.sp -= 2
             self.reacao_disponivel = False
-            return self.defesa + self.prof
-        return self.defesa
+            return base + self.prof
+        return base
 
     def atacar(
         self,
@@ -167,7 +178,7 @@ class Lutador:
 
         if nat == 1:
             return 0
-        critico = nat == 20
+        critico = nat >= self.critico_em
         if not critico and total < alvo.defesa_efetiva(total):
             return 0
 
@@ -179,11 +190,18 @@ class Lutador:
                 if self.brutal and r == 1:
                     r = rola(faces)
                 dano += r
-        dano += self.dano_fixo + dano_extra
+        dano += self.dano_fixo + dano_extra + self._furia_deste_ataque()
         dano = max(1, dano)
         alvo.sofrer(dano)
         self.dano_causado += dano
         return dano
+
+    def _furia_deste_ataque(self) -> int:
+        """Fúria Crescente entra uma vez por turno, no primeiro ataque."""
+        if not self.furia or self.furia_gasta:
+            return 0
+        self.furia_gasta = True
+        return self.furia
 
     # -- turno -------------------------------------------------------------
     def turno(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
@@ -197,6 +215,9 @@ class Lutador:
     def _agir(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
         self.reacao_disponivel = True
         self.ataques_com_vantagem_contra_mim = 0   # a marca do Feroz expira aqui
+        self.furia_gasta = False
+        if "Fúria Crescente" in self.tecnicas:
+            self.furia = min(3, self.furia + 1)
 
         # Quem perdeu o turno ainda sangra e ainda vê a condição expirar.
         if self.perde_o_turno:
@@ -214,7 +235,7 @@ class Lutador:
         alvo = min(alvos, key=lambda a: a.pv)   # foca em quem está mais ferido
 
         if self.classe == "furioso":
-            self._turno_furioso(alvo)
+            self._turno_furioso(alvo, inimigos)
             return
 
         for _ in range(self.ataques_por_turno):
@@ -225,14 +246,47 @@ class Lutador:
                 alvo = restantes[0]
             self.atacar(alvo, vantagem=alvo.consumir_vantagem())
 
-    def _turno_furioso(self, alvo: "Lutador") -> None:
+    def _turno_furioso(self, alvo: "Lutador", inimigos=None) -> None:
         pv_antes = alvo.pv
         if self.regras == "v0":
             self._feroz_e_pesado_juntos(alvo)
         else:
             self._feroz_ou_pesado(alvo)
-        if "Sede de Sangue" in self.tecnicas and pv_antes > 0 and alvo.pv == 0:
+        matou = pv_antes > 0 and alvo.pv == 0
+        if "Sede de Sangue" in self.tecnicas and matou:
             self.sp = min(self.sp_max, self.sp + rola(4))
+
+        # Ataque Extra (nível 5+) entra como ataques_por_turno; os extras abaixo
+        # são técnicas do Capítulo Nove.
+        for _ in range(max(0, self.ataques_por_turno - 1)):
+            restantes = [i for i in (inimigos or []) if i.vivo]
+            if not restantes:
+                break
+            a = min(restantes, key=lambda x: x.pv)
+            pv2 = a.pv
+            self.atacar(a, vantagem=a.consumir_vantagem())
+            if "Massacre" in self.tecnicas and pv2 > 0 and a.pv == 0:
+                sobra = [i for i in (inimigos or []) if i.vivo]
+                if sobra:
+                    self.atacar(min(sobra, key=lambda x: x.pv))
+
+        # Massacre pelo primeiro abate
+        if "Massacre" in self.tecnicas and matou:
+            sobra = [i for i in (inimigos or []) if i.vivo]
+            if sobra:
+                self.atacar(min(sobra, key=lambda x: x.pv))
+
+        # Golpe Duplo: ação bônus, 2 SP, −2 na rolagem
+        if ("Golpe Duplo" in self.tecnicas and self.sp >= 2
+                and not self.golpe_duplo_usado):
+            restantes = [i for i in (inimigos or []) if i.vivo]
+            if restantes:
+                self.sp -= 2
+                self.golpe_duplo_usado = True
+                # uma vez por combate, e sem o modificador de atributo no dano.
+                # Um ataque extra por rodada valia +17,4% e virava obrigatório.
+                self.atacar(min(restantes, key=lambda x: x.pv),
+                            bonus_extra=-2, dano_extra=-self.dano_fixo)
 
     def _feroz_e_pesado_juntos(self, alvo: "Lutador") -> None:
         """Livro v0: o texto permite explicitamente combinar os dois (seção 25)."""

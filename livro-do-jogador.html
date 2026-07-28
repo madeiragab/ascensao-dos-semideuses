@@ -1575,7 +1575,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
         <tr><td>Sem armadura</td><td>—</td><td>10 + DES</td><td>—</td><td>—</td><td class="num">—</td></tr>
         <tr><td>Acolchoada</td><td>Leve</td><td>11 + DES</td><td>—</td><td>Desvantagem</td><td class="num">5</td></tr>
         <tr><td>Couro batido</td><td>Leve</td><td>12 + DES</td><td>—</td><td>—</td><td class="num">45</td></tr>
-        <tr><td>Cota de escamas</td><td>Média</td><td>13 + DES</td><td>+2</td><td>Desvantagem</td><td class="num">50</td></tr>
+        <tr><td>Cota de escamas</td><td>Média</td><td>13 + DES</td><td>+2</td><td>Desvantagem</td><td class="num">30</td></tr>
         <tr><td>Peitoral</td><td>Média</td><td>14 + DES</td><td>+2</td><td>—</td><td class="num">400</td></tr>
         <tr><td><strong>Escudo</strong></td><td>—</td><td><strong>+2 DEF</strong></td><td>—</td><td>—</td><td class="num">10</td></tr>
       </tbody>
@@ -1585,6 +1585,13 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   <p>Um <strong>escudo</strong> ocupa uma mão e soma à DEF de qualquer armadura. Vestir
   ou tirar leva um minuto para armadura leve e cinco para média; um escudo é uma
   <strong>Interação Simples</strong>.</p>
+
+  <div class="nota">
+    <p><strong>Armadura média é para quem tem Destreza baixa.</strong> O limite de +2
+    faz a Cota de escamas empatar com o Couro batido a partir de <strong>Destreza
+    +3</strong> — e o Couro não atrapalha a Furtividade. Se sua Destreza é alta,
+    compre leve e pare de pensar no assunto.</p>
+  </div>
 
   <div class="nota">
     <p><strong>Usar armadura sem proficiência</strong> custa caro: Desvantagem em todo
@@ -2773,7 +2780,8 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   <h4>Guardião · Tier 3 <small>— a partir do nível 12</small></h4>
   <div class="grade">
     <div class="cartao"><h5>Bastião</h5><p>Enquanto estiver acima de metade dos PV,
-    você tem <strong>resistência a dano físico</strong> de armas.</p></div>
+    cada golpe que você recebe é reduzido em um valor igual ao seu
+    <strong>bônus de proficiência</strong>.</p></div>
     <div class="cartao"><h5>Segunda Muralha</h5><p>Uma vez por rodada, você pode usar
     <strong>Interceptar sem gastar sua reação</strong>.</p></div>
     <div class="cartao"><h5>Juramento do Portão</h5><p>Escolha um aliado no início do
@@ -2783,11 +2791,13 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 
   <h4>Furioso · Tier 2 <small>— a partir do nível 6</small></h4>
   <div class="grade">
-    <div class="cartao"><h5>Fúria Crescente</h5><p>A cada rodada de combate, seu dano
-    aumenta em <strong>+1</strong>, acumulando até <strong>+5</strong>. Zera quando o
-    combate acaba.</p></div>
-    <div class="cartao"><h5>Golpe Duplo</h5><p>Ação bônus e <strong>2 SP</strong>: mais
-    um ataque corpo a corpo, com <strong>−2</strong> na rolagem.</p></div>
+    <div class="cartao"><h5>Fúria Crescente</h5><p>A cada rodada de combate seu dano
+    aumenta em <strong>+1</strong>, até <strong>+3</strong>. Vale para o
+    <strong>primeiro ataque de cada turno</strong>, e zera quando o combate acaba.</p></div>
+    <div class="cartao"><h5>Golpe Duplo</h5><p><strong>Uma vez por combate</strong>,
+    ação bônus e <strong>2 SP</strong>: mais um ataque corpo a corpo, com
+    <strong>−2</strong> na rolagem e <strong>sem somar o modificador de atributo ao
+    dano</strong>.</p></div>
     <div class="cartao"><h5>Sem Recuo</h5><p>Você é <strong>imune</strong> a
     Amedrontado e a Aterrorizado. Nada te faz sair de uma briga.</p></div>
     <div class="cartao"><h5>Rasgo</h5><p>Quando acerta com Ataque Pesado, o alvo fica
@@ -2797,7 +2807,8 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   <h4>Furioso · Tier 3 <small>— a partir do nível 12</small></h4>
   <div class="grade">
     <div class="cartao"><h5>Massacre</h5><p>Quando você reduz um inimigo a 0 PV, faça
-    <strong>mais um ataque de graça</strong> contra outro alvo ao alcance.</p></div>
+    <strong>mais um ataque de graça</strong> contra outro alvo ao alcance.
+    <em>Não faz nada contra um chefe sozinho, e é devastadora contra um bando.</em></p></div>
     <div class="cartao"><h5>Fúria Cega</h5><p>Uma vez por combate, ataque
     <strong>todas</strong> as criaturas ao seu alcance, uma vez cada. Você fica
     Desprevenido até seu próximo turno.</p></div>
