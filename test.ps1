@@ -6,6 +6,7 @@ param([string] $Only = '')
 $ErrorActionPreference = 'Stop'
 $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
 $testes = @(
+    'defesas_passivas.py',
     'comparar.py',
     'dia_de_aventura.py',
     'kleos.py',

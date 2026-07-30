@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.12.0 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.13.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -39,8 +39,12 @@ canto inferior abre os outros tomos sem tirar o leitor da página atual.
 
 ## Como o sistema funciona
 
-**A rolagem** é `1d20 + modificador + proficiência` contra uma CD. Vantagem e
-Desvantagem substituem modificadores pequenos: dois dados, usa o maior ou o menor.
+**A rolagem** continua simples, mas agora cada oposição usa um alvo pronto. Testes
+de perícia rolam `1d20 + modificador + proficiência` contra uma CD; ataques rolam
+contra a DEF; efeitos rolam contra Fortitude, Reflexos ou Vontade passiva. Cada
+defesa é `14 + atributo + proficiência`, se treinada. Quem causa o efeito é quem
+rola. A base 14 preserva exatamente a chance do modelo anterior, inclusive ao
+inverter Vantagem e Desvantagem.
 
 **Três recursos**, cada um com um ritmo próprio de recuperação. Pontos de Vida
 voltam devagar — um descanso longo devolve só metade. Pontos de Vigor voltam
@@ -70,7 +74,7 @@ dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assi
 diante.
 
 **As regras universais** fecham as situações que costumavam depender do Mestre:
-efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
+defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
 objetos e mãos, críticos de perícia, estabilização e Ímpeto. A consulta curta está
 em [`regras/regras-universais.md`](regras/regras-universais.md).
 
@@ -109,6 +113,7 @@ python condicoes.py         # mede o preço do controle contra o do dano
 python equilibrio.py        # auditoria: Kleos por nível, classes, armas, armaduras
 python tecnicas.py          # mede as 36 técnicas de classe, uma a uma
 python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
+python defesas_passivas.py  # prova a equivalência exata das defesas de base 14
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula

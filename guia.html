@@ -929,10 +929,12 @@ pre.bloco-codigo {
 
   <div class="mesa">
     <p><b>Jogador:</b> Posso jogar a mesa em cima do autômato para prender as pernas dele?</p>
-    <p><b>Mestre:</b> Pode. Atletismo contra a Fortitude dele. Se passar, ele fica Preso
-    por uma rodada — e você fica sem cobertura.</p>
-    <p><em>O jogador inventou uma manobra que não está no livro. O Mestre traduziu para
-    uma regra que está: teste resistido e uma condição. É isso o tempo todo.</em></p>
+    <p><b>Mestre:</b> Pode. Faça uma Rolagem de Efeito com Força (Atletismo)
+    contra a Fortitude dele. Em um acerto, ele fica Preso por uma rodada — e
+    você fica sem cobertura.</p>
+    <p><em>O jogador inventou uma manobra que não está no livro. O Mestre escolheu
+    a defesa passiva, aplicou uma condição e deixou o jogador rolar. É isso o tempo
+    todo.</em></p>
   </div>
 
   <h3>A regra que vale mais que as outras</h3>
@@ -1033,7 +1035,7 @@ pre.bloco-codigo {
       <thead><tr><th>Situação</th><th>Teste mais comum</th><th>Troque quando...</th></tr></thead>
       <tbody>
         <tr><td>Manipular chaves ou objeto pequeno algemado</td><td>Prestidigitação</td><td>Acrobacia serve se o problema for posição do corpo</td></tr>
-        <tr><td>Agarrar arma ou objeto arremessado sob pressão</td><td>Reflexos</td><td>sem pressão, simplesmente consegue</td></tr>
+        <tr><td>Agarrar arma ou objeto arremessado sob pressão</td><td>Acrobacia (Destreza)</td><td>sem pressão, simplesmente consegue</td></tr>
         <tr><td>Sustentar uma ilusão improvisada diante de alguém</td><td>Enganação</td><td>Atuação se a meta for distrair uma plateia</td></tr>
         <tr><td>Entender a lógica de um ritual</td><td>Investigação</td><td>Mitologia identifica símbolos e tradição</td></tr>
         <tr><td>Carregar alguém em terreno ruim</td><td>Atletismo</td><td>em chão comum, aplique só movimento pela metade</td></tr>
@@ -1484,10 +1486,12 @@ pre.bloco-codigo {
 
   <div class="destaque">
     <span class="rotulo">A regra geral de todo perigo</span>
-    <p><strong>Aviso</strong> antes — a mesa precisa poder evitar. <strong>Teste</strong>
-    para escapar ou reduzir, quase sempre Reflexos ou Fortitude. E uma
-    <strong>saída</strong>: nenhum perigo deve ser inescapável sem que o grupo tenha
-    escolhido entrar nele.</p>
+    <p><strong>Aviso</strong> antes — a mesa precisa poder evitar. Quando o perigo
+    tenta atingir alguém, ele faz uma <strong>Rolagem de Efeito</strong> contra
+    Reflexos, Fortitude ou Vontade passiva. Use +3 para um risco leve, +5 para um
+    risco perigoso, +8 para um risco severo, +11 para um risco lendário e +14
+    para um risco divino. Role separadamente contra cada alvo. Uma antiga CD pode
+    ser convertida subtraindo 8: CD 13 vira Efeito +5.</p>
   </div>
 
   <h3>Fogo</h3>
@@ -1499,7 +1503,7 @@ pre.bloco-codigo {
         <tr><td>Fogueira, carro pegando fogo</td><td><span class="dado">2d6</span></td><td>Aplica <strong>Queimando</strong></td></tr>
         <tr><td>Incêndio, cômodo tomado</td><td><span class="dado">4d6</span></td><td>Queimando · e fumaça: ver adiante</td></tr>
         <tr><td>Forja acesa, brasa viva</td><td><span class="dado">6d6</span></td><td>Filhos de Hefesto são imunes</td></tr>
-        <tr><td><strong>Lava, contato</strong></td><td><span class="dado">10d6</span></td><td>Fortitude CD 18 ou <strong>Queimando</strong> até apagar</td></tr>
+        <tr><td><strong>Lava, contato</strong></td><td><span class="dado">10d6</span></td><td>Efeito +10 contra Fortitude; acerto deixa <strong>Queimando</strong> até apagar</td></tr>
         <tr><td>Lava, submerso</td><td><span class="dado">20d6</span></td><td>Isso mata. É para matar</td></tr>
       </tbody>
     </table>
@@ -1508,9 +1512,10 @@ pre.bloco-codigo {
   uma ação rolando no chão, ou qualquer volume de água, encerra sem teste.</p>
 
   <h3>Fumaça e ar irrespirável</h3>
-  <p>Fumaça densa é <strong>obscurecimento pesado</strong>. Quem respira faz
-  <strong>Fortitude CD 13</strong> por rodada; falhando, ganha um nível de
-  <strong>Exausto</strong> e perde a ação seguinte tossindo. Prender a respiração
+  <p>Fumaça densa é <strong>obscurecimento pesado</strong>. A cada rodada, faça
+  <strong>Efeito +5 contra a Fortitude</strong> de quem respira. Em um acerto,
+  o alvo ganha um nível de <strong>Exausto</strong> e perde a ação seguinte
+  tossindo. Prender a respiração
   funciona pelo tempo do afogamento, abaixo.</p>
 
   <h3>Afogamento e sufocamento</h3>
@@ -1546,38 +1551,44 @@ pre.bloco-codigo {
 
   <h3>Frio e calor extremos</h3>
   <ul>
-    <li><strong>Frio severo</strong>, sem agasalho: <strong>Fortitude CD 13</strong> a
-    cada dez minutos. Falha dá um nível de <strong>Exausto</strong>.</li>
-    <li><strong>Calor extremo</strong>, sem água: o mesmo teste a cada hora.</li>
+    <li><strong>Frio severo</strong>, sem agasalho: a cada dez minutos, faça
+    <strong>Efeito +5 contra Fortitude</strong>; um acerto dá um nível de
+    <strong>Exausto</strong>.</li>
+    <li><strong>Calor extremo</strong>, sem água: o mesmo Efeito a cada hora.</li>
     <li><strong>Água gelada</strong>: <span class="dado">1d6</span> por minuto e
-    Fortitude CD 15 ou Exausto.</li>
+    <strong>Efeito +7 contra Fortitude</strong>; um acerto deixa Exausto.</li>
   </ul>
 
   <h3>Veneno</h3>
   <div class="rolagem">
     <table>
-      <thead><tr><th>Grau</th><th class="num">CD</th><th>Efeito na falha</th><th>Quando repete</th></tr></thead>
+      <thead><tr><th>Grau</th><th class="num">Efeito</th><th class="num">Tratamento</th><th>Em um acerto</th><th>Quando repete</th></tr></thead>
       <tbody>
-        <tr><td>Irritante</td><td class="num">11</td><td><strong>Envenenado</strong> por uma hora</td><td>—</td></tr>
-        <tr><td>Comum</td><td class="num">13</td><td>Envenenado · <span class="dado">2d6</span> imediato</td><td>A cada hora</td></tr>
-        <tr><td>Forte</td><td class="num">16</td><td>Envenenado · <span class="dado">4d6</span> · <strong>Lento</strong></td><td>A cada 10 minutos</td></tr>
-        <tr><td>Letal</td><td class="num">19</td><td>Envenenado · <span class="dado">6d6</span> · Exausto 1</td><td>A cada rodada, 3 vezes</td></tr>
-        <tr><td>Divino</td><td class="num">22</td><td>Fere até um deus. Não passa sozinho</td><td>Só com antídoto ou milagre</td></tr>
+        <tr><td>Irritante</td><td class="num">+3</td><td class="num">CD 11</td><td><strong>Envenenado</strong> por uma hora</td><td>—</td></tr>
+        <tr><td>Comum</td><td class="num">+5</td><td class="num">CD 13</td><td>Envenenado · <span class="dado">2d6</span> imediato</td><td>A cada hora</td></tr>
+        <tr><td>Forte</td><td class="num">+8</td><td class="num">CD 16</td><td>Envenenado · <span class="dado">4d6</span> · <strong>Lento</strong></td><td>A cada 10 minutos</td></tr>
+        <tr><td>Letal</td><td class="num">+11</td><td class="num">CD 19</td><td>Envenenado · <span class="dado">6d6</span> · Exausto 1</td><td>A cada rodada, 3 vezes</td></tr>
+        <tr><td>Divino</td><td class="num">+14</td><td class="num">CD 22</td><td>Fere até um deus. Não passa sozinho</td><td>Só com antídoto ou milagre</td></tr>
       </tbody>
     </table>
   </div>
-  <p>Um <strong>antídoto</strong> encerra qualquer veneno abaixo do Divino. A perícia
-  <strong>Intuição</strong> com Kit Médico permite tratar: CD igual à do veneno.</p>
+  <p>Ao aplicar ou repetir um veneno, role seu Efeito contra a <strong>Fortitude</strong>
+  do alvo. Um <strong>antídoto</strong> encerra qualquer veneno abaixo do Divino.
+  A perícia <strong>Intuição</strong> com Kit Médico permite tratar usando a CD
+  indicada na tabela.</p>
 
   <h3>Ácido, eletricidade e esmagamento</h3>
   <ul>
     <li><strong>Ácido:</strong> <span class="dado">2d6</span> a <span class="dado">6d6</span>
     por rodada de contato. Equipamento atingido faz Teste de Integridade.</li>
     <li><strong>Eletricidade:</strong> <span class="dado">3d6</span> a
-    <span class="dado">8d6</span>, Reflexos por metade. Em água, ninguém tem metade.</li>
+    <span class="dado">8d6</span>. Use Efeito +5 para uma rede elétrica, +8 para
+    alta tensão e +11 para um raio mítico, contra Reflexos. Um erro reduz o dano
+    à metade; na água, ninguém reduz.</li>
     <li><strong>Esmagamento</strong> — teto, prensa, criatura enorme:
-    <span class="dado">4d6</span> a <span class="dado">10d6</span>, Reflexos por metade,
-    e <strong>Preso</strong> em caso de falha.</li>
+    <span class="dado">4d6</span> a <span class="dado">10d6</span>. Use Efeito +5 a
+    +11 contra Reflexos. Um erro reduz o dano à metade; um acerto também deixa
+    <strong>Preso</strong>.</li>
   </ul>
 
   <h3>Escuridão</h3>

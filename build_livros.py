@@ -37,7 +37,7 @@ BUILD = RAIZ / ".build"
 RE_ROTULO_BLOCO = re.compile(r"^\*\*([A-ZÀ-ÜÇ0-9][A-ZÀ-ÜÇ0-9 ()—\-/]*)\*\*\s*(.*)$")
 
 # Linhas de estatística da criatura.
-STATS = ("PV", "Ataque", "Fortitude", "Resistência", "Resistências",
+STATS = ("PV", "Ataque", "Efeito", "Fortitude", "Resistência", "Resistências",
          "Imune", "Imunidades", "Presença", "Vulnerabilidade", "Cada ave")
 RE_STATUS = re.compile(r"^\*\*(" + "|".join(STATS) + r")\*\*")
 

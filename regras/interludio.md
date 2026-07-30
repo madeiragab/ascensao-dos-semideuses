@@ -93,7 +93,7 @@ específico, e a mesa inteira se beneficia.
 | Refeição | Requisitos | CD | Efeito para cada participante |
 |---|---|---|---|
 | **Simples** | qualquer comida | — | evita a condição **Faminto**. Nada além disso. |
-| **Boa** | comida fresca, 30 minutos parados, alguém preparando | 10 | **1d4 PV temporários** e **Vantagem no primeiro Teste de Fortitude** até o próximo Descanso Longo |
+| **Boa** | comida fresca, 30 minutos parados, alguém preparando | 10 | **1d4 PV temporários** e **Desvantagem na primeira Rolagem de Efeito contra sua Fortitude** até o próximo Descanso Longo |
 | **Farta** | ingredientes de qualidade, 1 hora, utensílios | 13 | PV temporários iguais ao **nível + modificador de Constituição**, e **+1 em uma perícia à escolha de cada um** até o próximo Descanso Longo |
 | **Grandiosa** | ingredientes especiais ou caros, 2 horas, o grupo reunido à mesa, sem pressa | 16 | tudo da Farta, **mais 1 Ânimo** para cada participante |
 

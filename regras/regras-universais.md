@@ -6,11 +6,23 @@ o Livro do Jogador publicado é a referência final.
 
 ## Uma habilidade, uma resolução
 
-Uma habilidade ofensiva usa **Ataque de Habilidade ou Teste de Resistência**, nunca
-os dois. Se usa ataque, o acerto aplica o dano e os efeitos secundários fracos. Se
-usa resistência, o mesmo resultado decide todo o pacote. Condições médias e fortes
-obrigam o perfil a usar resistência; passar evita a condição e, salvo indicação
+Uma habilidade ofensiva usa **Ataque de Habilidade ou Rolagem de Efeito**, nunca
+os dois. Ataques enfrentam a DEF. Efeitos enfrentam uma defesa passiva: Fortitude,
+Reflexos ou Vontade. Se usa ataque, o acerto aplica o dano e os efeitos secundários
+fracos. Se usa Efeito, o mesmo resultado decide todo o pacote. Condições médias e
+fortes obrigam o perfil a usar Efeito; errar evita a condição e, salvo indicação
 contrária, reduz o dano à metade.
+
+As três defesas são números prontos: **14 + atributo + proficiência**, quando
+treinada. A fonte do efeito rola **1d20 + atributo + proficiência** contra esse
+número. Um Efeito não causa crítico; 1 e 20 naturais usam o total. Contra várias
+criaturas, faça uma rolagem por alvo. Uma antiga CD vira bônus de Efeito subtraindo
+8: CD 13 passa a Efeito +5.
+
+Vantagem numa antiga Resistência vira Desvantagem para quem rola o Efeito; a
+Desvantagem vira Vantagem. Se não houver criatura como fonte, o perigo rola com
+**bônus igual à antiga CD − 8**. Efeitos prolongados repetem a Rolagem de Efeito
+no momento em que antes o alvo repetiria a Resistência.
 
 ## Ativação obrigatória
 

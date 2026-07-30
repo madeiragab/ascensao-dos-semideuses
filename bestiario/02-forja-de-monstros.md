@@ -25,21 +25,21 @@ podem ter o mesmo perfil de Kleos 3.
 
 ## 10. A Tábua de Kleos
 
-| Kleos | PV | DEF | Ataque | Dano por rodada | CD | Resistências fortes | Resistências fracas |
+| Kleos | PV | DEF | Ataque | Dano por rodada | Efeito | Defesas fortes | Defesa fraca |
 |---|---|---|---|---|---|---|---|
-| 1 | 11 | 12 | +3 | 5 | 11 | +3 | +0 |
-| 2 | 22 | 13 | +4 | 9 | 12 | +4 | +1 |
-| 3 | 36 | 14 | +5 | 14 | 13 | +5 | +1 |
-| 4 | 55 | 15 | +6 | 20 | 14 | +6 | +2 |
-| 5 | 80 | 16 | +7 | 27 | 15 | +7 | +2 |
-| 6 | 115 | 17 | +8 | 35 | 16 | +8 | +3 |
-| 7 | 155 | 17 | +9 | 45 | 17 | +9 | +3 |
-| 8 | 210 | 18 | +10 | 56 | 18 | +10 | +4 |
-| 9 | 280 | 19 | +11 | 70 | 19 | +11 | +4 |
-| 10 | 370 | 20 | +13 | 88 | 21 | +13 | +5 |
-| 11 | 500 | 21 | +15 | 110 | 23 | +15 | +6 |
+| 1 | 11 | 12 | +3 | 5 | +3 | 17 | 14 |
+| 2 | 22 | 13 | +4 | 9 | +4 | 18 | 15 |
+| 3 | 36 | 14 | +5 | 14 | +5 | 19 | 15 |
+| 4 | 55 | 15 | +6 | 20 | +6 | 20 | 16 |
+| 5 | 80 | 16 | +7 | 27 | +7 | 21 | 16 |
+| 6 | 115 | 17 | +8 | 35 | +8 | 22 | 17 |
+| 7 | 155 | 17 | +9 | 45 | +9 | 23 | 17 |
+| 8 | 210 | 18 | +10 | 56 | +10 | 24 | 18 |
+| 9 | 280 | 19 | +11 | 70 | +11 | 25 | 18 |
+| 10 | 370 | 20 | +13 | 88 | +13 | 27 | 19 |
+| 11 | 500 | 21 | +15 | 110 | +15 | 29 | 20 |
 
-Cada criatura tem **duas resistências fortes** e **uma fraca**. Escolha conforme
+Cada criatura tem **duas defesas passivas fortes** e **uma fraca**. Escolha conforme
 a natureza dela: um autômato é forte em Fortitude e Vontade e fraco em Reflexos.
 
 ### Orçamento por Kleos
@@ -89,8 +89,8 @@ Não é uma criatura: são muitas. *Estinfálides, matilha, mirmidões.*
 ### Conjurador
 Bate pouco, muda o campo. *Esfinge, Hécate, Circe.*
 - **−40% do dano por rodada**
-- Ganha **+2 Poderes** e **+1 na CD**
-- Costuma atacar Resistências em vez da DEF
+- Ganha **+2 Poderes** e **+1 em Efeito**
+- Costuma usar Efeito contra defesas passivas em vez de atacar a DEF
 
 ### Sombra
 Existe menos do que parece. *Espectro, espírito do nevoeiro, aparição.*
@@ -178,17 +178,18 @@ uma destas três formas:
 | Tipo de Poder | Valor |
 |---|---|
 | **Golpe** — dano em alvo único | 1,5 × o dano de um ataque normal |
-| **Sopro** — dano em área, Reflexos por metade | 1,0 × o dano por rodada, atinge todos na área |
-| **Grilhão** — aplica uma condição, com Teste de Resistência | sem dano, ou metade do dano de um ataque |
+| **Sopro** — dano em área, Efeito contra Reflexos | 1,0 × o dano por rodada; um erro reduz o dano à metade |
+| **Grilhão** — aplica uma condição com Efeito | sem dano, ou metade do dano de um ataque |
 | **Ceifa** — dano + condição | 0,75 × o dano de um ataque, e a condição |
 | **Deslocamento** — teleporte, investida, reposicionamento | livre; costuma vir junto de um Golpe |
 | **Chamado** — invoca criaturas de Kleos −3 | 1 vez por combate, no máximo |
 
-Um Poder de dano em área usa a **CD** da criatura contra **Reflexos**. Um Poder de
-condição usa a CD contra **Fortitude** ou **Vontade**, conforme a natureza.
+Um Poder usa o **bônus de Efeito** da criatura contra **Reflexos**, **Fortitude**
+ou **Vontade**, conforme sua natureza. Em áreas, faça uma Rolagem de Efeito
+separada contra cada alvo e role o dano uma única vez.
 
 **A regra de ouro:** nenhum Poder deve tirar um personagem do combate por mais de
-uma rodada sem permitir um novo teste no fim de cada turno dele.
+uma rodada sem permitir que a fonte repita a Rolagem de Efeito no fim de cada turno dele.
 
 ---
 
@@ -218,8 +219,8 @@ assim que o controle continua valendo a pena contra chefes.
 
 ## 16. Recusas *(Kleos 5+)*
 
-> Quando a criatura falha em um Teste de Resistência, ela pode gastar uma
-> **Recusa** para transformar a falha em sucesso.
+> Quando uma Rolagem de Efeito acerta uma defesa passiva da criatura, ela pode
+> gastar uma **Recusa** para transformar o acerto em erro.
 
 Recusas representam o peso do mito: a Hidra recusa morrer, o deus recusa ser
 comandado. Elas recarregam no Descanso Longo, ou no início de um novo combate se
@@ -239,10 +240,10 @@ Criaturas que vivem há séculos no mesmo lugar moldam o lugar.
 Cada criatura com Vontade do Lugar tem três efeitos, e o Mestre escolhe um por
 rodada, sem repetir dois seguidos. Exemplos:
 
-- raízes brotam e criaturas na área fazem Reflexos ou ficam Presas;
+- raízes brotam; role Efeito contra os Reflexos de cada criatura na área; em um acerto, ela fica Presa;
 - a escuridão engrossa e a área vira obscurecimento pesado por uma rodada;
-- o chão treme e criaturas fazem Reflexos ou caem;
-- vozes sussurram e uma criatura faz Vontade ou fica Amedrontada.
+- o chão treme; role Efeito contra os Reflexos de cada criatura; em um acerto, ela cai;
+- vozes sussurram; role Efeito contra a Vontade de uma criatura; em um acerto, ela fica Amedrontada.
 
 Fora do covil, esses efeitos não existem. Vale a pena atrair o monstro para fora.
 
@@ -252,9 +253,10 @@ Fora do covil, esses efeitos não existem. Vale a pena atrair o monstro para for
 
 Uma aura, ativa desde o momento em que a criatura é vista.
 
-> Toda criatura que começar seu turno a até 18 m e puder ver a criatura faz um
-> Teste de **Vontade** contra a CD dela. Em uma falha, fica **Amedrontada** por
-> uma rodada. Quem passar fica imune à Presença daquela criatura por 24 horas.
+> No começo do turno de cada criatura a até 18 m que possa vê-la, o monstro faz
+> uma Rolagem de Efeito contra a **Vontade** do alvo. Em um acerto, ele fica
+> **Amedrontado** por uma rodada. Depois de um erro, o alvo fica imune àquela
+> Presença por 24 horas.
 
 Presença é o que faz um deus parecer um deus antes de rolar qualquer dano.
 
@@ -291,8 +293,8 @@ raras e caras de conseguir.
 NOME — Kleos N (Degrau)
 Tipo, tamanho · Arquétipo
 PV     ·  DEF     ·  Movimento
-Ataque +   ·  CD
-Fortitude +   ·  Reflexos +   ·  Vontade +
+Ataque +   ·  Efeito +
+Fortitude     ·  Reflexos     ·  Vontade
 Resistências / Imunidades / Vulnerabilidades:
 
 TRAÇOS
@@ -324,8 +326,7 @@ diferentes sobre o mesmo combate.
 
 1. Todo monstro começa de uma linha da Tábua de Kleos.
 2. Arquétipos trocam números, nunca os aumentam de graça.
-3. Nenhum Poder tira um personagem do combate por mais de uma rodada sem novo
-   teste.
+3. Nenhum Poder tira um personagem do combate por mais de uma rodada sem nova Rolagem de Efeito no fim do turno do alvo.
 4. Efeitos de derrota instantânea exigem aviso dentro da ficção.
 5. Arremetidas só existem a partir de Kleos 6, e param quando a criatura é
    Atordoada.

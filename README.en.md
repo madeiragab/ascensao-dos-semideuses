@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.12.0 · [Changelog](CHANGELOG.md)
+**Current version:** 0.13.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -42,9 +42,12 @@ trident opens the other volumes without taking over the reading layout.
 
 ## How the system works
 
-**The core roll** is `1d20 + modifier + proficiency` against a difficulty. Advantage
-and Disadvantage replace small modifiers: roll two dice, keep the higher or the
-lower.
+**The core roll** is unchanged, but each opposition now has a ready target.
+Skill checks roll `1d20 + modifier + proficiency` against a difficulty; attacks
+roll against Defense; effects roll against passive Fortitude, Reflexes or Will.
+Each passive defense is `14 + ability + proficiency` when trained, and the effect
+source rolls. Base 14 is exactly probability-equivalent to the former model,
+including inverted Advantage and Disadvantage.
 
 **Three resources**, each on its own recovery clock. Hit Points come back slowly —
 a long rest returns only half. Stamina returns in full after an hour. Mana only
@@ -74,7 +77,7 @@ scene 4. Sustaining costs half the final cost per round. Each point buys 1d8
 single-target damage, or 1d6 area damage, or +1 to Defense, or a weak condition,
 and so on.
 
-**Universal table rules** now cover the former edge cases: combined effects,
+**Universal table rules** now cover the former edge cases: passive defenses, combined effects,
 activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands
 and objects, skill criticals, stabilization, and Impetus timing. The Portuguese
 quick reference is [`regras/regras-universais.md`](regras/regras-universais.md).
@@ -114,6 +117,7 @@ python condicoes.py         # prices control against damage
 python calibrar_kleos.py    # tests the Kleos scale at every level
 python equilibrio.py        # audit: Kleos by level, classes, weapons, armour
 python tecnicas.py          # measures all 36 class techniques, one by one
+python defesas_passivas.py  # proves exact base-14 probability equivalence
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
@@ -209,7 +213,7 @@ refinement:
 
 ### Known limits of the simulator
 
-- **Legendary-style actions and saves** aren't modelled, which widens the error
+- **Legendary-style actions and Refusals** aren't modelled, which widens the error
   margin on Kleos rungs 6 to 11 — the Bestiary's full creatures are more dangerous
   than the tested version.
 - Conditions **are** modelled since the Conditions chapter was calibrated, but only
