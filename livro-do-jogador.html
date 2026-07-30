@@ -913,11 +913,15 @@ pre.bloco-codigo {
   </div>
 
   <h3>Crítico e falha crítica</h3>
-  <p>Em um <strong>20 natural</strong> — o dado mostrando 20, antes de somar nada — um ataque
+  <p>Em um <strong>20 natural</strong> - o dado mostrando 20, antes de somar nada - um ataque
   acerta e vira <em class="termo">Acerto Crítico</em>: você rola todos os dados de dano duas
   vezes. Em um <strong>1 natural</strong>, o ataque erra, não importa o bônus.</p>
-  <p>Fora de combate, o Mestre pode tratar 20 e 1 como sucessos e fracassos memoráveis — mas
-  um 1 nunca deve destruir seu equipamento nem te machucar de graça.</p>
+  <p>Num <strong>teste de perícia possível</strong>, um 20 natural não garante o impossível,
+  mas acrescenta um benefício excepcional ao resultado: mais informação, menos tempo, melhor
+  posição ou uma impressão duradoura. Um 1 natural usa o total normalmente e pode trazer uma
+  complicação coerente, mas nunca destrói seu equipamento nem te machuca de graça.</p>
+  <p><strong>Iniciativa não tem crítico.</strong> Um 20 natural dá apenas um total alto: não
+  concede ação, movimento nem turno adicional.</p>
 
   <div class="ornamento">❖ ❖ ❖</div>
 
@@ -1109,6 +1113,17 @@ pre.bloco-codigo {
     <li>recuperar <strong>3 SP</strong> ou <strong>3 MP</strong>;</li>
     <li>transformar uma falha crítica sua em falha comum.</li>
   </ul>
+
+  <div class="nota">
+    <p><strong>Cadência da Húbris.</strong> Você recebe Ímpeto pela Húbris no máximo
+    <strong>uma vez por cena</strong>. A mesma Provocação não recompensa de novo até o risco
+    anterior ser resolvido. O Mestre só abre uma exceção quando uma nova decisão cria uma
+    consequência substancialmente diferente.</p>
+    <p><strong>Cadência do gasto.</strong> Gastar Ímpeto não exige ação, mas você gasta no
+    máximo <strong>1 por turno</strong> e nunca recupera SP ou MP acima do máximo. Fora da
+    iniciativa, gaste no máximo 1 por rolagem ou consequência. Resistir a uma Ruptura é a
+    única exceção: os 2 pontos são pagos juntos.</p>
+  </div>
 
   <div class="nota">
     <p><strong>Ruptura.</strong> Uma vez por arco de campanha, num momento de crise real, o
@@ -1399,7 +1414,7 @@ pre.bloco-codigo {
       <tbody>
         <tr><td><strong>PV / SP / MP máximos</strong></td><td>Da sua classe, somando CON (PV e SP) e o Atributo Divino (MP)</td></tr>
         <tr><td><strong>DEF</strong></td><td>Da armadura + DES · sem armadura, <span class="dado">10 + DES</span></td></tr>
-        <tr><td><strong>Iniciativa</strong></td><td><span class="dado">1d20 + DES</span></td></tr>
+        <tr><td><strong>Iniciativa</strong></td><td><span class="dado">1d20 + DES</span>; o Conceito Problemático também soma FOR</td></tr>
         <tr><td><strong>Movimento</strong></td><td>9 metros</td></tr>
         <tr><td><strong>Bônus de ataque</strong></td><td>Modificador do atributo da arma + proficiência</td></tr>
         <tr><td><strong>CD das suas habilidades</strong></td><td><span class="dado">8 + Atributo Divino + proficiência</span></td></tr>
@@ -1697,6 +1712,52 @@ pre.bloco-codigo {
   <p>Força alta permite carregar mais, mas não resolve tamanho: um personagem muito
   forte ainda não passa por uma porta com uma estátua no ombro.</p>
 
+  <h4>Apoiar, carregar e arrastar</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Situação</th><th>Para começar</th><th>Enquanto se move</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Apoiar</strong> alguém consciente e cooperativo</td>
+          <td>Interação Simples e uma mão livre</td><td>cada metro custa 2 metros</td></tr>
+        <tr><td><strong>Carregar</strong> alguém incapaz de andar</td>
+          <td>uma ação, duas mãos livres e Força suficiente</td>
+          <td>a criatura é carga Volumosa; cada metro custa 2 metros</td></tr>
+        <tr><td><strong>Arrastar</strong> alguém ou algo pesado</td>
+          <td>uma ação para firmar a pegada</td>
+          <td>cada metro custa 2 metros; Atletismo se o terreno for difícil</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Uma criatura consciente pode liberar uma das suas mãos e ajudar a se sustentar.
+  Quem empunha duas armas precisa guardar ou soltar uma antes de apoiar; <strong>soltar</strong>
+  é gratuito, guardar usa a Interação Simples.</p>
+
+  <h4>Objetos e mãos durante a luta</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>O que você faz</th><th>Custo normal</th></tr></thead>
+      <tbody>
+        <tr><td>Pegar, sacar ou guardar um objeto; abrir uma porta destrancada</td><td>Interação Simples</td></tr>
+        <tr><td>Sacar duas armas <strong>Leves</strong>, guardadas juntas para combate com duas armas</td><td>uma Interação Simples para as duas</td></tr>
+        <tr><td>Soltar o que está na mão</td><td>gratuito</td></tr>
+        <tr><td>Entregar a alguém adjacente</td><td>Interação Simples de quem entrega ou recebe</td></tr>
+        <tr><td>Arremessar um objeto para um aliado a até 6 m</td><td>Interação Simples; ele usa a Reação para agarrar</td></tr>
+        <tr><td>Abrir fechadura, algema, corrente ou mecanismo delicado</td><td>ação; Prestidigitação ou Manufatura se houver pressão</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Agarrar um objeto arremessado só pede <strong>Reflexos</strong> quando há pressão,
+  surpresa, mãos presas ou lançamento ruim. Com as mãos algemadas, tarefas delicadas têm
+  Desvantagem; tarefas que realmente exigem duas mãos são impossíveis até libertá-las.</p>
+
+  <div class="nota">
+    <p><strong>Magia sem vantagem é gratuita.</strong> Um item pode mudar de aparência,
+    brilhar, ter voz ou voltar ao dono depois de <strong>1 minuto fora de combate</strong>
+    sem custo. Voltar para a mão no meio da luta já é mecânico: conta como uma melhoria
+    <em>Retorno Vinculado</em> e usa sua Interação Simples, até 18 metros, desde que o item
+    não esteja sendo segurado nem selado.</p>
+  </div>
+
   <div class="ornamento">❖</div>
 
   <h3>Com o que você começa</h3>
@@ -1761,6 +1822,16 @@ pre.bloco-codigo {
     </table>
   </div>
 
+  <h3>Interações que costumam travar a cena</h3>
+  <p><strong>Apoiar</strong> um aliado consciente usa sua Interação Simples e deixa o
+  movimento pela metade. <strong>Erguer</strong> alguém incapaz de andar usa uma ação, exige
+  as mãos necessárias e o transforma em carga Volumosa; depois, movimento pela metade.
+  <strong>Arrastar</strong> também custa uma ação para começar e movimento dobrado, com
+  Atletismo quando o terreno briga de volta.</p>
+  <p>Pegar ou sacar um objeto usa a Interação Simples; soltar é gratuito. Duas armas Leves
+  guardadas juntas podem ser sacadas na mesma Interação. Abrir uma algema ou fechadura usa a
+  ação. A tabela completa está no capítulo de Equipamento.</p>
+
   <h3>Suas ações</h3>
   <div class="grade">
     <div class="cartao"><h5>Atacar</h5><p><span class="dado">1d20 + atributo + proficiência</span>
@@ -1804,6 +1875,15 @@ pre.bloco-codigo {
     </table>
   </div>
 
+  <h3>Áreas e fogo amigo</h3>
+  <p>Uma habilidade em área atinge <strong>todas as criaturas</strong> dentro dela, inclusive
+  você e seus aliados, salvo se estiver escrito que ela escolhe ou exclui alvos. Explosões e
+  Zonas partem de um ponto dentro do alcance que você possa ver; Cones e Linhas partem de
+  você; uma área Pessoal fica centrada em você. Cobertura total e paredes bloqueiam o efeito.</p>
+  <p>No mapa, uma criatura entra na área quando o centro do espaço dela estiver dentro. Sem
+  mapa, o Mestre anuncia quem será atingido <strong>antes</strong> do gasto e da rolagem, para
+  o jogador poder mudar de posição ou escolher outra ação.</p>
+
   <h3>Condições</h3>
   <p>Combate impõe condições o tempo todo: Caído, Amedrontado, Preso, Atordoado.
   Cada uma muda o que você consegue fazer, e todas estão definidas em ordem no
@@ -1826,8 +1906,15 @@ pre.bloco-codigo {
   </ul>
 
   <p><strong>Três sucessos</strong> e você estabiliza. <strong>Três falhas</strong> e o
-  personagem morre. Sofrer dano nesse estado conta como uma falha — duas, se for crítico
+  personagem morre. Sofrer dano nesse estado conta como uma falha - duas, se for crítico
   ou de perto.</p>
+
+  <p>Uma criatura adjacente pode usar a ação e fazer <strong>Intuição CD 10</strong> para
+  estabilizar. Falhar gasta a ação, mas permite nova tentativa depois. Um Kit Médico concede
+  Vantagem. Em vez de rolar, quem possui um Kit pode gastar <strong>1 Tratamento e 2 SP</strong>
+  para estabilizar automaticamente; isso não recupera PV durante o combate. Um estabilizado
+  acorda com 1 PV depois de uma hora. Qualquer outro valor de cura precisa ter fonte, custo e
+  tempo anotados.</p>
 
   <div class="nota">
     <p><strong>Ferimento Grave.</strong> Quem chegou a 0 PV numa cena carrega, até o próximo
@@ -2239,18 +2326,47 @@ pre.bloco-codigo {
   <p>Uma habilidade ofensiva usa <strong>uma das duas, nunca as duas</strong>. Ou você rola
   para acertar, ou o alvo rola para resistir. Escolha na criação e deixe escrito.</p>
 
+  <div class="nota">
+    <p><strong>Efeitos combinados usam a mesma resolução.</strong> Se a habilidade usa Ataque
+    de Habilidade, o acerto aplica o dano e também seus efeitos secundários fracos, como
+    empurrar ou derrubar, sem uma segunda resistência. Se usa Teste de Resistência, o mesmo
+    resultado decide todo o pacote. Condições médias e fortes sempre obrigam a habilidade a
+    usar resistência. Salvo quando o perfil disser diferente, passar evita a condição e reduz
+    o dano à metade.</p>
+  </div>
+
+  <h3>Ativação é obrigatória</h3>
+  <p>Toda habilidade precisa declarar <strong>Ativação</strong>. Em branco, ela não está
+  pronta para jogar.</p>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Ativação</th><th>Ajuste</th><th>O que significa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ação</strong></td><td class="num">+0</td><td>o padrão; ocupa sua ação</td></tr>
+        <tr><td><strong>Ação bônus</strong></td><td class="num">+1</td><td>pode acompanhar sua ação</td></tr>
+        <tr><td><strong>Reação</strong></td><td class="num">+1</td><td>precisa de um gatilho escrito</td></tr>
+        <tr><td><strong>Movimento</strong></td><td class="num">+1</td><td>acontece durante o movimento e não dá movimento extra por si</td></tr>
+        <tr><td><strong>Passiva</strong></td><td>-</td><td>usa as regras próprias de Habilidades Passivas</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Não existe habilidade ativa “sem ação”. <strong>Passo das Trevas</strong>, por exemplo:
+  ação bônus, pessoal, instantânea, +3 m de movimento; custo final <strong>2 MP</strong>
+  (1 do efeito + 1 da ativação).</p>
+
   <div class="ornamento">❖</div>
 
   <h3>A conta do custo</h3>
 
   <div class="destaque">
     <span class="rotulo">A conta</span>
-    <p class="formula">CUSTO = duração + efeitos adicionais + alcance</p>
+    <p class="formula">CUSTO FINAL = duração + efeitos adicionais + alcance + modificadores</p>
   </div>
 
   <p>Você começa pela <strong>duração</strong>, e ela já vem com <strong>um ponto de
   efeito incluído</strong>. Depois soma os pontos de efeito extras que quiser, e por último
-  o alcance, se ele passar do normal. O custo nunca fica abaixo de 1.</p>
+  o alcance, se ele passar do normal. Por último entram Ativação e demais modificadores.
+  O custo nunca fica abaixo de 1.</p>
 
   <h4>Duração</h4>
   <div class="rolagem">
@@ -2314,7 +2430,9 @@ pre.bloco-codigo {
     </table>
   </div>
   <p>Dobrar o tamanho da área custa <strong>+2</strong>. Uma Zona que permanece depois do seu
-  turno é uma habilidade <strong>sustentada</strong>.</p>
+  turno é uma habilidade <strong>sustentada</strong>. A área atinge aliados por padrão. Torná-la
+  <strong>seletiva</strong>, excluindo até sua proficiência em criaturas escolhidas, custa
+  <strong>+1</strong>.</p>
 
   <div class="ornamento">❖</div>
 
@@ -2518,6 +2636,15 @@ pre.bloco-codigo {
     uma rolagem sua ou uma rolagem do alvo. Não as duas.</li>
   </ul>
 
+  <h4>Manifestação Menor de Afinidade</h4>
+  <p>Para improvisar algo criativo que vai além do cosmético, gaste <strong>1 MP</strong> e
+  uma <strong>Interação Simples</strong>. O efeito precisa caber na sua Afinidade, ser pequeno
+  e narrativo: duplicar a aparência de uma chave em sombra, esfriar uma bebida, mover uma
+  chama, deixar pegadas de barro. Ele não causa dano, não concede bônus numérico, não aplica
+  condição, não cria objeto funcional e não substitui uma habilidade preparada. Quando alguém
+  se opõe, o Mestre pede a perícia adequada. Uma cópia ilusória, por exemplo, pode exigir
+  Enganação e desaparece ao toque ou quando tentam usá-la.</p>
+
   <div class="nota">
     <p><strong>Ressonância Elemental.</strong> Em contato com uma manifestação natural e forte
     do seu domínio — o mar, uma tempestade, uma forja acesa, uma floresta —, você recupera
@@ -2582,6 +2709,7 @@ pre.bloco-codigo {
   <div class="destaque">
     <p style="font-family: var(--mono); font-size: .9rem; line-height: 1.9; margin: 0;">
       Nome:<br>
+      Ativação: ação, ação bônus, reação, movimento ou passiva<br>
       Fonte: Elemental · Física · Híbrida · Médica<br>
       Afinidade ou estilo:<br>
       Atributo:<br>
@@ -2592,7 +2720,6 @@ pre.bloco-codigo {
       Modificadores de custo:<br>
       <strong>Custo final:</strong><br>
       Sustentar por rodada:<br>
-      Tipo de ação:<br>
       Rolagem: ataque <em>ou</em> resistência<br>
       Concentração: sim · não<br>
       Limitações:<br>
@@ -2604,6 +2731,7 @@ pre.bloco-codigo {
   <ol class="passos">
     <li><b>Conceito</b> O que você quer que aconteça na mesa, em uma frase.</li>
     <li><b>Fonte</b> Elemental, Física, Híbrida ou Médica. Isso fixa recurso e atributo.</li>
+    <li><b>Ativação</b> Ação, ação bônus, reação, movimento ou passiva. Aplique o ajuste.</li>
     <li><b>Duração</b> Instantânea, sustentada ou cena. Ela já traz o primeiro ponto.</li>
     <li><b>Efeitos</b> Compre os pontos extras na tabela. Misture o que quiser.</li>
     <li><b>Alcance e área</b> Só pague se passar do normal.</li>
@@ -2648,6 +2776,9 @@ pre.bloco-codigo {
   proficiência — <strong>2 no nível 1</strong> —, recuperados no descanso longo. Cada um custa
   <strong>uma ação e 2 SP</strong> e devolve <span class="dado">1d6 + CON</span> PV. Com um
   Kit Médico, <span class="dado">1d8</span>. Fora de combate.</p>
+  <p>Em combate, um Tratamento não cura, mas quem estiver com um Kit Médico pode gastar
+  <strong>1 Tratamento e 2 SP</strong> para estabilizar automaticamente uma criatura
+  Agonizante adjacente. Sem gastar Tratamento, ainda é possível usar Intuição CD 10.</p>
   <p>Cura paga em <strong>MP</strong> não gasta Tratamento. É por isso que ter um Oráculo no
   grupo é diferente de ter uma caixa de curativos.</p>
 

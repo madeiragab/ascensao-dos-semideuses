@@ -7,9 +7,12 @@ motores próprios de criação de habilidades, de armas e de monstros.
 
 **No ar:** https://madeiragab.github.io/ascensao-dos-semideuses/
 
-O que separa este projeto de um documento de regras é o **simulador**: nenhum
-número entra no livro sem antes ser medido. Ele já me contrariou três vezes, e as
-três correções estão documentadas mais abaixo.
+O que separa este projeto de um documento de regras é a combinação de
+**simulação e playtest de mesa**: números são medidos, decisões improvisadas são
+registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
+que os números contrariaram a intuição estão documentadas mais abaixo.
+
+**Versão atual:** 0.10.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -21,7 +24,7 @@ três correções estão documentadas mais abaixo.
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível no navegador, calcula sozinha, aceita retrato e sai em PDF |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e gera três folhas A4 para PDF |
 
 ---
 
@@ -38,19 +41,25 @@ um dia de aventura acumular de verdade.
 **A Húbris** é o defeito fatal do personagem, e tem regra. O Mestre oferece uma
 *Provocação*; se o jogador aceita agir conforme o defeito, ganha *Ímpeto*, que
 compra Vantagem e outras coisas. Uma vez por arco, o Mestre pode declarar uma
-*Ruptura*, e aí a Húbris decide por você.
+*Ruptura*, e aí a Húbris decide por você. Ímpeto entra no máximo uma vez por cena
+e é gasto no máximo uma vez por turno.
 
 **Habilidades não vêm em lista.** O jogador constrói cada uma comprando efeitos
 com pontos:
 
 ```
-CUSTO = duração + efeitos adicionais + alcance
+CUSTO FINAL = duração + efeitos adicionais + alcance + modificadores
 ```
 
 A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2, cena
 4. Sustentar custa metade do custo final por rodada. Cada ponto compra 1d8 de
 dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assim por
 diante.
+
+**As regras universais** fecham as situações que costumavam depender do Mestre:
+efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
+objetos e mãos, críticos de perícia, estabilização e Ímpeto. A consulta curta está
+em [`regras/regras-universais.md`](regras/regras-universais.md).
 
 **Catorze perícias**, não dezesseis: *Arcanismo* foi absorvida por Mitologia, porque
 num mundo em que toda magia é grega não existem dois corpos de conhecimento, e
@@ -129,10 +138,12 @@ template/               as cascas dos livros e a folha de estilo única
   ficha.html            a ficha preenchível, paleta preta e ouro
 
 regras/                 os capítulos em markdown, e o mapa do sistema
+  regras-universais.md  consulta rápida nascida do primeiro playtest completo
 bestiario/              o Livro II em markdown
 imagens/                capas originais e miniaturas geradas
 sim/                    o simulador
 fonte/                  o documento original, estado inicial do sistema
+CHANGELOG.md            histórico de versões e decisões de regra
 ```
 
 Comece por **[`regras/SUMARIO.md`](regras/SUMARIO.md)**: é o mapa de cada
@@ -150,6 +161,12 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 O script redimensiona as capas, gera as miniaturas da estante e chama
 `build_livros.py`, que converte os markdown e monta os cinco livros.
 
+Para repetir toda a regressão numérica:
+
+```bash
+powershell -ExecutionPolicy Bypass -File test.ps1
+```
+
 > **Edite sempre `template/` e os markdown.** Os arquivos `.html` na raiz são
 > gerados e serão sobrescritos no próximo build.
 
@@ -163,8 +180,8 @@ refinamento:
 1. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
    outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem,
    que o motor não modela. Precisam de mesa, não de simulador.
-2. **Armaduras provisórias.** A tabela funciona, mas nunca foi comparada contra uma
-   curva de dano de monstro por nível.
+2. **Economia de dracmas em campanha.** Os preços e recompensas iniciais funcionam,
+   mas ainda falta medir inflação, manutenção e recompensas de arcos longos.
 3. **Materiais divinos.** Bronze celestial existe como regra de o que fere o quê;
    ferro estígio e ouro imperial só são citados.
 
