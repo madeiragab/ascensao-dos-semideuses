@@ -15,7 +15,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.11.0 · [Changelog](CHANGELOG.md)
+**Current version:** 0.11.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -23,7 +23,7 @@ contradicted intuition are documented below.
 
 | | Book | Contents |
 |---|---|---|
-| **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, character creation, combat, optional Demigod Fury, item catalogue, and the ability engine |
+| **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, character creation, combat, optional Demigod Fury, item catalogue, divine materials, and the ability engine |
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
@@ -197,8 +197,6 @@ refinement:
    engine does not model. They need a table, not a simulator.
 2. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
    upkeep and rewards across long campaign arcs still need measurement.
-3. **Divine materials.** Celestial bronze exists as a what-hurts-what rule; Stygian
-   iron and imperial gold are only mentioned.
 
 ### Known limits of the simulator
 

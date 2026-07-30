@@ -923,6 +923,17 @@ input.calc:read-only { border-bottom-style: dotted; }
 .num-cx.duplo { grid-column: span 2; }
 .num-cx .par { display: flex; align-items: baseline; gap: .3rem; }
 .num-cx .par span { color: var(--texto-suave); }
+.agonia {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .45rem 1rem;
+  margin-top: .65rem; padding: .5rem .65rem;
+  border: 1px solid var(--borda); background: var(--superficie-2);
+  font-family: var(--sans); font-size: .7rem; color: var(--texto-suave);
+}
+.agonia > strong { color: var(--acento); text-transform: uppercase; letter-spacing: .1em; }
+.agonia-grupo { display: inline-flex; align-items: center; gap: .3rem; }
+.agonia-grupo b { color: var(--texto); font-size: .66rem; }
+.agonia input[type="checkbox"] { width: .9rem; height: .9rem; margin: 0; accent-color: var(--acento); }
+.agonia small { margin-left: auto; }
 
 /* listas com marcação */
 .marcavel { list-style: none; padding: 0; margin: 0; font-size: .88rem; }
@@ -1193,6 +1204,20 @@ table.viva select { font-size: .72rem; }
         <div class="num-cx"><span>Teto de custo</span><input type="text" class="calc" data-calc="teto" readonly></div>
         <div class="num-cx"><span>Ímpeto</span><input type="text" id="impeto"></div>
         <div class="num-cx"><span>Ânimo</span><input type="text" id="animo"></div>
+      </div>
+      <div class="agonia" aria-label="Marcador de Testes de Morte">
+        <strong>Agonia</strong>
+        <span class="agonia-grupo"><b>Sucessos</b>
+          <input type="checkbox" data-morte="sucesso" aria-label="Primeiro sucesso no Teste de Morte">
+          <input type="checkbox" data-morte="sucesso" aria-label="Segundo sucesso no Teste de Morte">
+          <input type="checkbox" data-morte="sucesso" aria-label="Terceiro sucesso no Teste de Morte">
+        </span>
+        <span class="agonia-grupo"><b>Falhas</b>
+          <input type="checkbox" data-morte="falha" aria-label="Primeira falha no Teste de Morte">
+          <input type="checkbox" data-morte="falha" aria-label="Segunda falha no Teste de Morte">
+          <input type="checkbox" data-morte="falha" aria-label="Terceira falha no Teste de Morte">
+        </span>
+        <small>3 sucessos estabilizam · 3 falhas matam</small>
       </div>
       <h3 style="margin-top:1rem;">Ajustes mecânicos <small>- itens e técnicas que a ficha não pode escolher por você</small></h3>
       <div class="ajustes">
@@ -2328,13 +2353,16 @@ function prepararImpressao() {
   porTexto("pParente", nomeSelecionado("parente")); porTexto("pAfinidade", nomeSelecionado("afinidade"));
   porTexto("pDivino", nomeSelecionado("divino")); porTexto("pDracmas", valorCampo("dracmas"));
 
+  var sucessosMorte = document.querySelectorAll('[data-morte="sucesso"]:checked').length;
+  var falhasMorte = document.querySelectorAll('[data-morte="falha"]:checked').length;
   var status = [
     ["PV", valorCampo("pvAtual") + "/" + valorCalc("pv")], ["SP", valorCampo("spAtual") + "/" + valorCalc("sp")],
     ["MP", valorCampo("mpAtual") + "/" + valorCalc("mp")], ["DEF", valorCalc("def")],
     ["Iniciativa", valorCalc("iniciativa")], ["Movimento", valorCalc("movimento")],
     ["Proficiência", valorCalc("prof")], ["Tratamentos", valorCalc("tratamentos")],
     ["Memória", valorCalc("memoria")], ["CD", valorCalc("cd")],
-    ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")]
+    ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")],
+    ["Agonia · sucessos", sucessosMorte + "/3"], ["Agonia · falhas", falhasMorte + "/3"]
   ];
   document.getElementById("pStatus").innerHTML = status.map(function (s) {
     return '<div class="pdf-num"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
