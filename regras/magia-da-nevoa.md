@@ -131,7 +131,7 @@ Versátil, ou escolhendo Fórmulas sem Gesto.
 ### 37.3 Concentração
 
 Fórmulas com duração prolongada exigem **Concentração**, seguindo as regras já
-existentes do livro (seção 11 de Habilidades): uma por vez, Teste de Fortitude
+existentes no [Capítulo Sete do Livro do Jogador](livro-do-jogador.html#cap7): uma por vez, Teste de Fortitude
 CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.
 
 Concentração de Fórmula e Concentração de habilidade **disputam o mesmo espaço**.

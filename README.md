@@ -2,17 +2,23 @@
 
 # Ascensão dos Semideuses — RPG de mesa
 
-Sistema de RPG autoral. Semideuses gregos no mundo moderno, base d20, com
-motores próprios de criação de habilidades, de armas e de monstros.
+Projeto independente e não oficial de RPG de mesa. Suas regras, seus textos e
+seus motores de criação são autorais; a ambientação apresenta semideuses gregos
+no mundo moderno em uma base d20.
 
 **No ar:** https://madeiragab.github.io/ascensao-dos-semideuses/
+
+> **Aviso de independência:** projeto não oficial e sem fins lucrativos.
+> *Percy Jackson* e os elementos próprios dessa franquia pertencem aos seus
+> respectivos autores e titulares, incluindo Rick Riordan e empresas licenciadas.
+> Este projeto não é afiliado, aprovado ou patrocinado por eles.
 
 O que separa este projeto de um documento de regras é a combinação de
 **simulação e playtest de mesa**: números são medidos, decisões improvisadas são
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.11.1 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.12.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -25,6 +31,9 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
 | **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e baixa diretamente um PDF de três páginas A4 |
+
+Os cinco livros têm sumários e referências clicáveis. Um pequeno tridente no
+canto inferior abre os outros tomos sem tirar o leitor da página atual.
 
 ---
 

@@ -368,7 +368,7 @@ o nome de quem o derrubou.
 # KLEOS 9 — EPOPEIA
 
 *Precisa de um poema inteiro. Todas as criaturas daqui têm **Presença**
-(seção 18).*
+([seção 18](#secao-18)).*
 
 ---
 
@@ -497,7 +497,7 @@ lutar** — e um grupo que descubra o preço nunca precisa rolar iniciativa.
 *Guerra contra um deus. Dez semideuses e ainda vai doer.*
 
 > **Deuses não morrem.** Reduzir um deus a 0 PV significa que ele recua, concede
-> algo, ou perde a forma física por uma temporada. Ver Livro II, seção 7.
+> algo, ou perde a forma física por uma temporada. Ver [seção 7](#secao-7).
 
 ---
 
@@ -807,16 +807,16 @@ plantas. Em algum lugar, alguém planta uma semente sem saber o que está fazend
 
 | Kleos | Criaturas |
 |---|---|
-| **1 Rumor** | Sátiro Errante · Mercenário Mortal · Cão Infernal Filhote · Corvo de Mau Agouro |
-| **2 Boato** | Harpia Carniceira · Dracena Lanceira · Espírito do Nevoeiro · Lobo de Licaão |
-| **3 Conto** | Autômato Hoplita · Empusa · Cão do Inferno · Bando de Estinfálides |
-| **4 Façanha** | Minotauro · Górgona Menor · Ciclope Pastor · Basilisco |
-| **5 Feito** | Medusa · Leão de Neméia · Esfinge · Venti Tempestuoso |
-| **6 Canção** | Quimera · Hidra de Lerna · Talos Menor |
-| **7 Lenda** | Cérbero · Escila · Dragão de Cólquida |
-| **8 Mito** | Ladão · Caríbdis · Menécio |
-| **9 Epopeia** | Polibotes · Hiperião · Divindade Menor *(modelo)* |
-| **10 Teomaquia** | Ares · Hécate · Hades |
-| **11 Cataclisma** | Tifão · Cronos · Gaia |
+| **1 Rumor** | [Sátiro Errante](#criatura-satiro-errante) · [Mercenário Mortal](#criatura-mercenario-mortal) · [Cão Infernal Filhote](#criatura-cao-infernal-filhote) · [Corvo de Mau Agouro](#criatura-corvo-de-mau-agouro) |
+| **2 Boato** | [Harpia Carniceira](#criatura-harpia-carniceira) · [Dracena Lanceira](#criatura-dracena-lanceira) · [Espírito do Nevoeiro](#criatura-espirito-do-nevoeiro) · [Lobo de Licaão](#criatura-lobo-de-licaao) |
+| **3 Conto** | [Autômato Hoplita](#criatura-automato-hoplita) · [Empusa](#criatura-empusa) · [Cão do Inferno](#criatura-cao-do-inferno) · [Bando de Estinfálides](#criatura-bando-de-estinfalides) |
+| **4 Façanha** | [Minotauro](#criatura-minotauro) · [Górgona Menor](#criatura-gorgona-menor) · [Ciclope Pastor](#criatura-ciclope-pastor) · [Basilisco](#criatura-basilisco) |
+| **5 Feito** | [Medusa](#criatura-medusa) · [Leão de Neméia](#criatura-leao-de-nemeia) · [Esfinge](#criatura-esfinge) · [Venti Tempestuoso](#criatura-venti-tempestuoso) |
+| **6 Canção** | [Quimera](#criatura-quimera) · [Hidra de Lerna](#criatura-hidra-de-lerna) · [Talos Menor](#criatura-talos-menor) |
+| **7 Lenda** | [Cérbero](#criatura-cerbero) · [Escila](#criatura-escila) · [Dragão de Cólquida](#criatura-dragao-de-colquida) |
+| **8 Mito** | [Ladão](#criatura-ladao-o-dragao-das-hesperides) · [Caríbdis](#criatura-caribdis) · [Menécio](#criatura-menecio-tita-menor) |
+| **9 Epopeia** | [Polibotes](#criatura-polibotes-gigante-nascido-da-terra) · [Hiperião](#criatura-hiperiao-tita-da-luz) · [Divindade Menor](#criatura-divindade-menor) *(modelo)* |
+| **10 Teomaquia** | [Ares](#criatura-ares-deus-da-guerra) · [Hécate](#criatura-hecate-nas-encruzilhadas) · [Hades](#criatura-hades-senhor-do-mundo-inferior) |
+| **11 Cataclisma** | [Tifão](#criatura-tifao-o-pai-dos-monstros) · [Cronos](#criatura-cronos-reconstituido) · [Gaia](#criatura-gaia-desperta) |
 
 **38 criaturas.**

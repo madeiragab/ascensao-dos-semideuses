@@ -27,7 +27,7 @@ lembrar ao grupo que o mundo mortal também morde.*
 
 **FRAQUEZA MÍTICA**
 Fome e covardia. Um sátiro errante aceita negociar por comida de verdade: uma
-refeição **Farta** ou melhor (Livro I, seção 55) encerra a hostilidade sem
+refeição **Farta** ou melhor ([Interlúdio, Livro do Jogador](livro-do-jogador.html#cap8)) encerra a hostilidade sem
 rolagens. Muitos sabem coisas úteis e trocam por bolotas de café.
 
 **AO MORRER** Vira um arbusto retorcido. Sátiros não vão para o Tártaro.
@@ -166,7 +166,7 @@ Separar a formação delas é metade da luta.
 **TRAÇOS**
 - **Incorpóreo.** Atravessa criaturas e objetos. Sofre 1d10 se terminar o turno
   dentro de matéria sólida.
-- **Feito de Névoa.** Um personagem que descreia dele (Livro I, seção 38) o
+- **Feito de Névoa.** Um personagem que descreia dele ([Descrença, Grimório](grimorio.html#secao-38)) o
   enfraquece pela metade: metade do dano, e ele perde o Incorpóreo contra ele.
 
 **AÇÕES**
@@ -446,7 +446,7 @@ desfaz a petrificação.
 > ⚠️ **Efeito de derrota instantânea.** Medusa pode tirar um personagem do jogo
 > sem passar por PV. O Mestre **precisa** avisar a mesa por dentro da ficção
 > antes: o jardim de estátuas boas demais, as estátuas com expressão de pânico, o
-> cheiro de mofo e serpente. Ver Livro II, seção 6.
+> cheiro de mofo e serpente. Ver [seção 6](#secao-6).
 
 **TRAÇOS**
 - **Disfarce da Névoa.** Mantém uma loja de estátuas de jardim, um estúdio de

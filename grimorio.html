@@ -87,6 +87,8 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 1.25rem; }
 
 body {
   margin: 0;
@@ -97,6 +99,86 @@ body {
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
 }
+
+.mancha p a, .mancha li a, .mancha td a, .colofao a {
+  color: var(--acento);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--acento) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.mancha a:focus-visible, .biblioteca-flutuante a:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}
+
+/* ============ MINIESTANTE FLUTUANTE ============ */
+.biblioteca-flutuante {
+  position: fixed; right: clamp(.65rem, 2vw, 1.25rem); bottom: 1rem;
+  z-index: 120; font-family: var(--sans); color: var(--texto);
+}
+.biblioteca-flutuante > summary {
+  list-style: none; width: 2.35rem; height: 2.35rem;
+  display: grid; place-items: center; margin-left: auto;
+  border: 1px solid var(--bronze); border-radius: 50%;
+  color: var(--bronze); background: var(--papel);
+  box-shadow: 0 .35rem 1rem var(--sombra); cursor: pointer;
+  transition: transform .16s ease, background .16s ease, color .16s ease;
+}
+.biblioteca-flutuante > summary::-webkit-details-marker { display: none; }
+.biblioteca-flutuante > summary span { font-size: 1.38rem; line-height: 1; }
+.biblioteca-flutuante > summary:hover,
+.biblioteca-flutuante > summary:focus-visible,
+.biblioteca-flutuante[open] > summary {
+  color: var(--papel); background: var(--acento); transform: translateY(-2px);
+  outline: none;
+}
+.biblioteca-flutuante nav {
+  position: absolute; right: 0; bottom: calc(100% + .55rem);
+  width: min(15rem, calc(100vw - 1.2rem)); padding: .55rem;
+  border: 1px solid var(--borda-forte); border-radius: 4px;
+  background: var(--papel); box-shadow: 0 .7rem 2rem var(--sombra);
+}
+.biblioteca-flutuante nav > strong {
+  display: block; padding: .15rem .3rem .45rem;
+  color: var(--texto-suave); font-size: .62rem;
+  text-transform: uppercase; letter-spacing: .14em;
+}
+.biblioteca-flutuante nav a {
+  display: grid; grid-template-columns: 1.65rem 1fr; gap: .55rem;
+  align-items: center; padding: .38rem .35rem;
+  color: var(--texto); text-decoration: none; border-radius: 3px;
+}
+.biblioteca-flutuante nav a:hover { background: var(--superficie-2); }
+.biblioteca-flutuante nav a b,
+.biblioteca-flutuante nav a small { display: block; line-height: 1.2; }
+.biblioteca-flutuante nav a b { font-family: var(--serifa-titulo); font-size: .82rem; }
+.biblioteca-flutuante nav a small { margin-top: .12rem; color: var(--texto-suave); font-size: .58rem; }
+.mini-capa {
+  width: 1.45rem; height: 1.9rem; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.28); border-radius: 1px 3px 3px 1px;
+  color: #fff; font-family: var(--serifa-titulo); font-size: .64rem;
+  box-shadow: inset 2px 0 rgba(255,255,255,.14);
+}
+.mini-capa.jogador { background: #9D3E20; }
+.mini-capa.bestiario { background: #71392E; }
+.mini-capa.grimorio { background: #3B5A38; }
+.mini-capa.guia { background: #6B3FA0; }
+.mini-capa.ficha { background: #6E5518; }
+.biblioteca-flutuante nav a.estante-completa {
+  display: block; margin-top: .3rem; padding-top: .5rem;
+  border-top: 1px solid var(--borda); color: var(--acento);
+  text-align: center; font-size: .64rem; text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* ============ AVISO EDITORIAL ============ */
+.aviso-independencia {
+  max-width: var(--pagina); margin: 1rem auto 0; padding: 1rem var(--margem) 1.2rem;
+  color: var(--texto-suave); background: var(--papel); border: 1px solid var(--borda);
+  font-family: var(--sans); font-size: .68rem; line-height: 1.55; text-align: center;
+}
+.aviso-independencia strong { color: var(--bronze); }
 
 /* ============ O LIVRO COMO OBJETO ============ */
 /* Uma coluna única, da capa à contracapa. */
@@ -542,13 +624,14 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 .colofao h3 { margin-top: 0; color: var(--texto); }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
 
 /* ============ IMPRESSÃO ============ */
 @media print {
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
-  .rolador, .botoes { display: none !important; }
+  .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
   .livro { border: none; max-width: none; background: #fff; }
   .mancha { padding: 0; }
   .capa-pagina { background: #fff; page-break-after: always; border: none; }
@@ -766,6 +849,7 @@ pre.bloco-codigo {
 </style>
 </head>
 <body>
+<details class="biblioteca-flutuante"><summary aria-label="Abrir os outros livros" title="Outros livros"><span aria-hidden="true">♆</span></summary><nav aria-label="Outros livros"><strong>Outros livros</strong><a href="livro-do-jogador.html"><span class="mini-capa jogador">I</span><span><b>Livro do Jogador</b><small>abrir livro</small></span></a><a href="bestiario.html"><span class="mini-capa bestiario">II</span><span><b>Bestiário</b><small>abrir livro</small></span></a><a href="guia.html"><span class="mini-capa guia">IV</span><span><b>Guia do Mestre</b><small>abrir livro</small></span></a><a href="ficha.html"><span class="mini-capa ficha">V</span><span><b>Ficha do Herói</b><small>abrir livro</small></span></a><a class="estante-completa" href="index.html">Ver a estante completa</a></nav></details>
 <div class="livro">
 
 <div class="capa-pagina frente">
@@ -793,11 +877,37 @@ pre.bloco-codigo {
   </p>
 </div>
 
+<nav class="sumario" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#secao-34"><span class="alg">I</span><span><span class="tit">O que é a Névoa</span>
+      <span class="sub">O véu que traduz o mundo mítico</span></span></a></li>
+    <li><a href="#secao-35"><span class="alg">II</span><span><span class="tit">Iniciação</span>
+      <span class="sub">Quem pode aprender e quem pode ensinar</span></span></a></li>
+    <li><a href="#secao-36"><span class="alg">III</span><span><span class="tit">Repositório e Fórmulas</span>
+      <span class="sub">Instrumento, Memória e magia preparada</span></span></a></li>
+    <li><a href="#secao-37"><span class="alg">IV</span><span><span class="tit">Conjuração</span>
+      <span class="sub">Círculos, componentes, concentração e refluxo</span></span></a></li>
+    <li><a href="#secao-38"><span class="alg">V</span><span><span class="tit">Descrença</span>
+      <span class="sub">Como resistir à tradução imposta pela Névoa</span></span></a></li>
+    <li><a href="#secao-39"><span class="alg">VI</span><span><span class="tit">As cinco Vias</span>
+      <span class="sub">Vislumbre, Miragem, Véu, Forma e Trama</span></span></a></li>
+    <li><a href="#secao-40"><span class="alg">VII</span><span><span class="tit">Fórmulas iniciais</span>
+      <span class="sub">Magias dos Círculos 0 ao 4</span></span></a></li>
+    <li><a href="#secao-41"><span class="alg">VIII</span><span><span class="tit">Criando Fórmulas</span>
+      <span class="sub">O motor para escrever magia nova</span></span></a></li>
+    <li><a href="#secao-42"><span class="alg">IX</span><span><span class="tit">Aprender Fórmulas</span>
+      <span class="sub">Mentores, registros e tempo de estudo</span></span></a></li>
+    <li><a href="#secao-43"><span class="alg">X</span><span><span class="tit">Limites gerais</span>
+      <span class="sub">O que a Magia da Névoa nunca substitui</span></span></a></li>
+  </ol>
+</nav>
+
 <div class="destaque">
   <span class="rotulo">Antes de começar</span>
   <p>Este livro não é pré-requisito de nada. Um semideus joga a campanha inteira
   sem tocar em magia, usando só as habilidades do sangue e as técnicas de classe do
-  <em>Livro do Jogador</em>. O que está aqui é uma segunda porta, aberta por
+  <a href="livro-do-jogador.html"><em>Livro do Jogador</em></a>. O que está aqui é uma segunda porta, aberta por
   Hécate ou por quem ela já iniciou — e o preço dela é ter mestre, ter instrumento
   e ter gesto.</p>
 </div>
@@ -806,7 +916,7 @@ pre.bloco-codigo {
 <p>Terceira fonte de poder do sistema, ao lado das Habilidades Elementais (herdadas do sangue divino) e das Habilidades Físicas (treinadas no corpo).</p>
 <p><strong>A diferença que define tudo:</strong> habilidades elementais são <em>o que você é</em>. Magia é <em>o que você aprendeu</em>. Qualquer pessoa pode conjurar — inclusive um mortal, inclusive um semideus que já tenha uma Afinidade. O preço é que magia precisa de mestre, de tempo, de instrumento e de gesto, e pode ser <strong>desfeita por quem se recusa a acreditar nela</strong>.</p>
 <div class="ornamento">❖</div>
-<h2>34. O que é a Névoa</h2>
+<h2 id="secao-34">34. O que é a Névoa</h2>
 <p>A Névoa é o véu que separa o mundo mítico do mundo mortal. Ela não esconde os monstros: ela <strong>reescreve</strong> os monstros para olhos que não aguentariam vê-los. Um cão do inferno vira um rottweiler grande. Uma espada de bronze celestial vira um taco de beisebol. A Névoa não mente — ela traduz.</p>
 <p>Conjurar é fazer o contrário: em vez de deixar a Névoa traduzir o mundo mítico para os mortais, o conjurador <strong>impõe à Névoa uma tradução própria</strong>. Ele decide o que ela vai mostrar, e por quanto tempo.</p>
 <p>Duas densidades:</p>
@@ -814,7 +924,7 @@ pre.bloco-codigo {
 <p><strong>Névoa Densa.</strong> A Névoa é comprimida até virar matéria de verdade — enquanto dura. Uma lâmina de Névoa Densa corta. Uma parede segura. Uma fera morde. Ela não some com a Descrença, mas <strong>enfraquece pela metade</strong> contra quem descrê.</p>
 <p>Toda Fórmula declara qual das duas ela usa.</p>
 <div class="ornamento">❖</div>
-<h2>35. Iniciação</h2>
+<h2 id="secao-35">35. Iniciação</h2>
 <p>Ninguém conjura por acidente. Para se tornar conjurador, o personagem precisa de uma <strong>Iniciação</strong>, e só existem dois caminhos:</p>
 <p><strong>Pela deusa.</strong> Hécate, ou um enviado dela, aceita o personagem. Isso é sempre um evento de campanha, não uma escolha de ficha — a deusa cobra alguma coisa, mesmo que só muito depois.</p>
 <p><strong>Por quem já domina.</strong> Um conjurador experiente — chamado de <strong>místes</strong> — pode iniciar outra pessoa. Leva tempo, exige confiança, e o mestre carrega parte da responsabilidade pelo que o aprendiz fizer.</p>
@@ -824,7 +934,7 @@ pre.bloco-codigo {
 <pre class="bloco-codigo">CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência
 Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência</pre>
 <div class="ornamento">❖</div>
-<h2>36. O Repositório e as Fórmulas</h2>
+<h2 id="secao-36">36. O Repositório e as Fórmulas</h2>
 <p>Uma <strong>Fórmula</strong> é uma instrução registrada para dobrar a Névoa de um jeito específico. Ela não é memorizada: é <strong>consultada</strong>.</p>
 <p>O <strong>Repositório</strong> é onde as Fórmulas ficam. Cada conjurador escolhe a forma do seu na Iniciação:</p>
 <div class="rolagem"><table>
@@ -839,8 +949,8 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <p><strong>Fórmulas não ocupam espaço de Memória.</strong> Esse é o contraste central com as habilidades elementais: um semideus tem poucas habilidades sempre prontas na Memória; um conjurador pode ter dezenas de Fórmulas, mas depende de um objeto, de gestos e de voz para usá-las.</p>
 <p><strong>Sem o Repositório em mãos, você não conjura</strong> — exceto pela regra de Refluxo (37.4).</p>
 <div class="ornamento">❖</div>
-<h2>37. Conjuração</h2>
-<h3>37.1 Círculos e custo</h3>
+<h2 id="secao-37">37. Conjuração</h2>
+<h3 id="secao-37-1">37.1 Círculos e custo</h3>
 <p>Fórmulas se organizam em <strong>Círculos</strong> de 0 a 4, com a mesma estrutura de custo das habilidades:</p>
 <div class="rolagem"><table>
 <thead><tr><th>Círculo</th><th>Poder</th><th>Custo em MP</th><th>Nível mínimo</th></tr></thead>
@@ -853,7 +963,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 </tbody>
 </table></div>
 <p>Fórmulas de Círculo 0 podem ser conjuradas à vontade, sem custo.</p>
-<h3>37.2 Componentes</h3>
+<h3 id="secao-37-2">37.2 Componentes</h3>
 <p>Toda Fórmula exige componentes. Eles são o que torna a magia <strong>interrompível</strong>, e é por isso que ela pode ser mais versátil que uma habilidade elemental sem ficar melhor que ela.</p>
 <ul><li><strong>Voz (V)</strong> — uma palavra ou frase dita em voz audível. Impossível enquanto</li></ul>
 <p><strong>Silenciado</strong>.</p>
@@ -862,16 +972,16 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <ul><li><strong>Foco (F)</strong> — o Repositório precisa estar acessível: em mãos, na pele, ou ao</li></ul>
 <p>alcance imediato.</p>
 <p>Uma arma de uma mão e um escudo ocupam as duas mãos. Um conjurador que queira lutar e conjurar precisa resolver isso — largando o escudo, usando arma Versátil, ou escolhendo Fórmulas sem Gesto.</p>
-<h3>37.3 Concentração</h3>
-<p>Fórmulas com duração prolongada exigem <strong>Concentração</strong>, seguindo as regras já existentes do livro (seção 11 de Habilidades): uma por vez, Teste de Fortitude CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.</p>
+<h3 id="secao-37-3">37.3 Concentração</h3>
+<p>Fórmulas com duração prolongada exigem <strong>Concentração</strong>, seguindo as regras já existentes no <a href="livro-do-jogador.html#cap7">Capítulo Sete do Livro do Jogador</a>: uma por vez, Teste de Fortitude CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.</p>
 <p>Concentração de Fórmula e Concentração de habilidade <strong>disputam o mesmo espaço</strong>. Não é possível manter as duas.</p>
-<h3>37.4 Refluxo <em>(conjurar no desespero)</em></h3>
+<h3 id="secao-37-4">37.4 Refluxo <em>(conjurar no desespero)</em></h3>
 <p>Um conjurador pode tentar uma Fórmula <strong>sem o Repositório</strong> ou de um <strong>Círculo acima do seu nível mínimo</strong>. Isso exige um teste de <strong>Mitologia contra CD 10 + 3 por Círculo</strong> da Fórmula.</p>
 <ul><li><strong>Sucesso:</strong> a Fórmula funciona normalmente e o custo é pago.</li><li><strong>Falha:</strong> o MP é gasto assim mesmo, a Fórmula não acontece, e o conjurador</li></ul>
 <p>sofre <strong>Refluxo</strong>: 1d6 de dano por Círculo e fica <strong>Atordoado</strong> até o fim do seu próximo turno.</p>
 <p>Não é possível dar Refluxo em Fórmulas de Círculo 4.</p>
 <div class="ornamento">❖</div>
-<h2>38. Descrença</h2>
+<h2 id="secao-38">38. Descrença</h2>
 <p>Esta é a regra que separa magia de todo o resto do sistema.</p>
 <div class="destaque"><p>Uma criatura que tenha <strong>motivo para duvidar</strong> de uma criação de Névoa pode realizar um <strong>Teste de Descrença</strong>: <strong>Investigação</strong> ou <strong>Vontade</strong>, à escolha dela, contra a CD de Névoa do conjurador.</p></div>
 <p>Existe motivo para duvidar quando a criatura:</p>
@@ -901,7 +1011,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <h3>O que a Descrença não faz</h3>
 <p>Ela não desfaz a Fórmula para os outros, não devolve o MP gasto, não interrompe a Concentração e não impede a mesma Fórmula de ser conjurada de novo.</p>
 <div class="ornamento">❖</div>
-<h2>39. As cinco Vias</h2>
+<h2 id="secao-39">39. As cinco Vias</h2>
 <p>Toda Fórmula pertence a uma Via. A Via não limita quem pode aprender — serve para organizar o estudo e para o Mestre julgar Fórmulas novas.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Via</th><th>Domínio</th></tr></thead>
@@ -914,7 +1024,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 </tbody>
 </table></div>
 <div class="ornamento">❖</div>
-<h2>40. Fórmulas iniciais</h2>
+<h2 id="secao-40">40. Fórmulas iniciais</h2>
 <p>Formato: <strong>Nome</strong> (Via) — Componentes · Ação · Alcance · Duração · Densidade.</p>
 <h3>Círculo 0 — 0 MP</h3>
 <p><strong>Fiapo de Névoa</strong> (Véu) — V, G · ação · 9 m · 1 minuto · Vestida Cria uma imagem ou um som do tamanho de uma mão: uma chama, uma voz distante, um vulto na esquina. Não causa dano nem move objetos. Serve para distrair, sinalizar e mentir.</p>
@@ -943,7 +1053,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <p><strong>Rasgar o Véu</strong> (Caminho) — V, G, F · 1 minuto · toque · 1 minuto · Densa Abre um portal de névoa para um lugar que você já visitou pessoalmente, a até 1 quilômetro. Até oito criaturas atravessam. O Mestre pode exigir um ponto de referência físico, e a Névoa cobra pedágio de quem atravessa sem convite.</p>
 <p><strong>A Névoa Obedece</strong> (Véu) — V, G, F · ação · 30 m · 1 hora · Vestida Você reescreve uma cena inteira para todos os mortais comuns presentes. O combate vira um acidente de trânsito, o monstro vira um cachorro solto, o corpo vira um saco de lixo. Criaturas capazes de descrer testam normalmente — e essa Fórmula existe principalmente para resolver o <em>depois</em> de uma luta em público.</p>
 <div class="ornamento">❖</div>
-<h2>41. Criando novas Fórmulas</h2>
+<h2 id="secao-41">41. Criando novas Fórmulas</h2>
 <p>Fórmulas novas usam <strong>o mesmo motor do sistema de criação de habilidades</strong> (Parte IV): efeito principal, efeitos adicionais com custo progressivo, modificadores de custo, tabelas de dano por nível. Trate <strong>Círculo</strong> e <strong>nível de habilidade</strong> como a mesma escala.</p>
 <p>Sobre isso, quatro regras próprias da Névoa:</p>
 <p><strong>1. Magia não cura.</strong> A mesma proibição das habilidades elementais. A Névoa imita, protege e engana; não fecha ferimentos. PV temporários, sim.</p>
@@ -969,7 +1079,7 @@ O que acontece contra quem descrê:
 Descrição narrativa:</pre>
 <p>O último campo não é decoração. <strong>Uma Fórmula sem resposta para a Descrença não está pronta.</strong></p>
 <div class="ornamento">❖</div>
-<h2>42. Como se aprende uma Fórmula nova</h2>
+<h2 id="secao-42">42. Como se aprende uma Fórmula nova</h2>
 <p>Depois da Iniciação, cada Fórmula é conquistada individualmente. Isso é uma <strong>Atividade de Interlúdio</strong> (Parte VIII), e exige uma fonte:</p>
 <div class="rolagem"><table>
 <thead><tr><th>Fonte</th><th>O que é preciso</th></tr></thead>
@@ -983,7 +1093,7 @@ Descrição narrativa:</pre>
 <p><strong>Teste de aprendizado:</strong> Mitologia contra <strong>CD 10 + 3 por Círculo</strong>. Cada Ação de Interlúdio concede uma tentativa. Em uma falha, o tempo é gasto e o personagem tenta de novo depois.</p>
 <p>Círculo 0 é a exceção: qualquer conjurador aprende um truque novo com uma única Ação de Interlúdio, sem teste, desde que tenha a fonte.</p>
 <div class="ornamento">❖</div>
-<h2>43. Limites gerais da Magia da Névoa</h2>
+<h2 id="secao-43">43. Limites gerais da Magia da Névoa</h2>
 <ol><li>Toda Fórmula precisa de um Repositório acessível, salvo por Refluxo.</li><li>Fórmulas não ocupam Memória — o limite é o MP e o tempo de aprendizado.</li><li>O Atributo de Conjuração é sempre Inteligência.</li><li>Magia não recupera Pontos de Vida.</li><li>Toda criação de Névoa declara sua densidade.</li><li>Mortais comuns nunca descrem. Clarividentes sempre descrem.</li><li>A Descrença é individual e permanente para aquela criação.</li><li>Concentração de Fórmula e de habilidade não coexistem.</li><li>Uma Fórmula que ignora componentes paga por isso.</li><li>Toda Fórmula nova precisa da aprovação do Mestre — e de uma resposta escrita</li></ol>
 <p>para o que acontece quando alguém deixa de acreditar nela.</p></section>
 
@@ -1004,5 +1114,6 @@ Descrição narrativa:</pre>
 </div><!-- /mancha -->
 
 </div><!-- /livro -->
+<aside class="aviso-independencia" role="note"><strong>Projeto independente, não oficial e sem fins lucrativos.</strong> <span><em>Percy Jackson</em> e os elementos próprios dessa franquia pertencem aos seus respectivos autores e titulares, incluindo Rick Riordan e empresas licenciadas. Este projeto não é afiliado, aprovado ou patrocinado por eles.</span></aside>
 </body>
 </html>

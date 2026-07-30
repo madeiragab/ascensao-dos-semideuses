@@ -2,10 +2,16 @@
 
 # Ascensão dos Semideuses — a tabletop RPG
 
-An original tabletop RPG system: Greek demigods in the modern world, d20-based,
-with custom engines for building abilities, weapons and monsters.
+An independent, unofficial tabletop RPG project. Its rules, text, and creation
+engines are original; its setting presents Greek demigods in the modern world
+on a d20 foundation.
 
 **Live:** https://madeiragab.github.io/ascensao-dos-semideuses/
+
+> **Independence notice:** this is an unofficial, non-profit project.
+> *Percy Jackson* and elements specific to that franchise belong to their
+> respective authors and rights holders, including Rick Riordan and licensed
+> companies. This project is not affiliated with, endorsed by, or sponsored by them.
 
 > The books themselves are written in **Brazilian Portuguese**. This page explains
 > the design and the tooling in English.
@@ -15,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.11.1 · [Changelog](CHANGELOG.md)
+**Current version:** 0.12.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -28,6 +34,9 @@ contradicted intuition are documented below.
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
 | **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, and directly downloads a three-page A4 PDF |
+
+All five books now have clickable contents and cross-references. A small floating
+trident opens the other volumes without taking over the reading layout.
 
 ---
 
