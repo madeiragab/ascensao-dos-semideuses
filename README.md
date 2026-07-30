@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.13.0 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.13.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -30,10 +30,14 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e baixa diretamente um PDF de três páginas A4 |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e baixa ou importa um PDF editável de três páginas A4 |
 
 Os cinco livros têm sumários e referências clicáveis. Um pequeno tridente no
 canto inferior abre os outros tomos sem tirar o leitor da página atual.
+
+PDFs baixados pela Ficha a partir da versão 0.13.1 carregam os dados editáveis
+dentro do próprio arquivo e podem ser importados depois. A leitura acontece
+somente no navegador; PDFs anteriores eram imagens e não podem ser reconstruídos.
 
 ---
 
