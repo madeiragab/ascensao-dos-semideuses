@@ -12,7 +12,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.10.0 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.10.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -24,7 +24,7 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e gera três folhas A4 para PDF |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e baixa diretamente um PDF de três páginas A4 |
 
 ---
 
@@ -143,6 +143,7 @@ bestiario/              o Livro II em markdown
 imagens/                capas originais e miniaturas geradas
 sim/                    o simulador
 fonte/                  o documento original, estado inicial do sistema
+vendor/                 bibliotecas MIT incorporadas para gerar o PDF A4
 CHANGELOG.md            histórico de versões e decisões de regra
 ```
 

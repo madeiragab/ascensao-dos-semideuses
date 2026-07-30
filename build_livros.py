@@ -2,14 +2,15 @@
 
 Chamado por build.ps1, que antes disso prepara as capas em .build/*.b64.
 
-    template/livro.css              folha de estilo única dos três livros
+    template/livro.css              folha de estilo única dos cinco livros
     template/livro-do-jogador.html  o Livro do Jogador, escrito à mão
     template/bestiario.html         casca do Bestiário
     template/grimorio.html          casca do Grimório
     bestiario/*.md                  conteúdo do Bestiário
     regras/magia-da-nevoa.md        conteúdo do Grimório
+    vendor/*.min.js                 geração direta do PDF A4 da ficha
 
-Não usa nenhuma biblioteca externa. O conversor de markdown cobre apenas o
+O conversor de markdown não usa bibliotecas externas e cobre apenas o
 subconjunto que os nossos arquivos realmente usam — e é proposital: um parser
 completo seria mais código para manter sem nenhum ganho aqui.
 """
@@ -301,6 +302,12 @@ def ler_b64(nome: str) -> str:
     return p.read_text(encoding="ascii").strip()
 
 
+def ler_vendor(nome: str) -> str:
+    p = RAIZ / "vendor" / nome
+    if not p.exists():
+        raise SystemExit(f"Falta {p}. Restaure as bibliotecas incorporadas da ficha.")
+    return p.read_text(encoding="utf-8")
+
 
 def envelopar(corpo_e_cabeca: str, descricao: str) -> str:
     """Fecha o livro num documento HTML de verdade.
@@ -387,6 +394,8 @@ def main() -> None:
     # --- Ficha do Herói (formulário, sem markdown)
     montar("ficha.html", "ficha.html", css, {
         "CAPA": ler_b64("capa-ficha"),
+        "HTML2CANVAS": ler_vendor("html2canvas.min.js"),
+        "JSPDF": ler_vendor("jspdf.umd.min.js"),
     }, descricao=(
         "Ficha do Herói preenchível: complete no navegador, adicione o retrato do personagem e baixe em PDF."
     ))

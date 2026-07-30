@@ -15,7 +15,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.10.0 · [Changelog](CHANGELOG.md)
+**Current version:** 0.10.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -27,7 +27,7 @@ contradicted intuition are documented below.
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
-| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, prints as three purpose-built A4 pages |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, and directly downloads a three-page A4 PDF |
 
 ---
 
@@ -147,6 +147,7 @@ bestiario/              Book II in markdown
 imagens/                original covers and generated thumbnails
 sim/                    the simulator
 fonte/                  the original document, the system's initial state
+vendor/                 bundled MIT libraries for direct A4 PDF generation
 CHANGELOG.md            version history and rule decisions
 ```
 

@@ -250,6 +250,10 @@ table.viva select { font-size: .72rem; }
 
 /* ---------- Folha dedicada ao PDF ---------- */
 .ficha-impressao { display: none; }
+.ficha-impressao.gerando-pdf {
+  display: block !important; position: fixed; left: -12000px; top: 0;
+  width: 210mm; background: #fff; pointer-events: none;
+}
 .pdf-pagina {
   box-sizing: border-box; background: #fff; color: #17140f;
   font-family: Georgia, serif; padding: 9mm; width: 210mm; min-height: 297mm;
@@ -340,14 +344,14 @@ table.viva select { font-size: .72rem; }
   </div>
 
   <div class="comandos">
-    <button class="acao" type="button" onclick="baixarPdf()">Baixar em PDF</button>
+    <button class="acao" id="baixarPdfBtn" type="button" onclick="baixarPdf()">Baixar em PDF</button>
     <button class="acao fantasma" type="button" onclick="limparFicha()">Limpar ficha</button>
     <label class="destravar">
       <input type="checkbox" id="destravar" onchange="alternarTrava()">
       Editar campos calculados
     </label>
-    <span class="aviso">No destino da impressão, escolha
-      <strong>Salvar como PDF</strong>.</span>
+    <span class="aviso" id="statusPdf" aria-live="polite">O arquivo é baixado diretamente
+      em <strong>três páginas A4</strong>.</span>
   </div>
 
   <form class="ficha-viva" id="folha" autocomplete="off">
@@ -659,6 +663,11 @@ table.viva select { font-size: .72rem; }
     <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 3/3</p>
   </section>
 </main>
+
+<!-- Bibliotecas MIT incorporadas no build. O arquivo publicado continua
+     autossuficiente e não faz requisições a serviços externos. -->
+<script>{{HTML2CANVAS}}</script>
+<script>{{JSPDF}}</script>
 
 <script>
 /* ============================================================
@@ -1290,9 +1299,88 @@ function prepararImpressao() {
 }
 
 window.addEventListener("beforeprint", prepararImpressao);
-function baixarPdf() {
+function esperarImagem(img) {
+  if (!img || !img.getAttribute("src") || (img.complete && img.naturalWidth)) {
+    return Promise.resolve();
+  }
+  return new Promise(function (resolve) {
+    img.addEventListener("load", resolve, { once: true });
+    img.addEventListener("error", resolve, { once: true });
+  });
+}
+
+function nomeDoPdf() {
+  var nome = valorCampo("nome");
+  if (nome === "—") nome = "heroi";
+  nome = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").toLowerCase();
+  return "ficha-" + (nome || "heroi") + ".pdf";
+}
+
+async function baixarPdf() {
+  var botao = document.getElementById("baixarPdfBtn");
+  var status = document.getElementById("statusPdf");
+  var impressao = document.getElementById("fichaImpressao");
+  var textoOriginal = botao.textContent;
+
+  botao.disabled = true;
+  botao.textContent = "Gerando PDF…";
+  status.textContent = "Montando as três páginas A4…";
   prepararImpressao();
-  requestAnimationFrame(function () { window.print(); });
+  impressao.classList.add("gerando-pdf");
+  impressao.setAttribute("aria-hidden", "false");
+
+  try {
+    if (!window.html2canvas || !window.jspdf || !window.jspdf.jsPDF) {
+      throw new Error("As bibliotecas de PDF não foram carregadas.");
+    }
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    await esperarImagem(document.getElementById("printRetrato"));
+    await new Promise(function (resolve) {
+      requestAnimationFrame(function () { requestAnimationFrame(resolve); });
+    });
+
+    var paginas = Array.from(impressao.querySelectorAll(".pdf-pagina"));
+    var pdf = new window.jspdf.jsPDF({
+      orientation: "portrait", unit: "mm", format: "a4",
+      compress: true, putOnlyUsedFonts: true
+    });
+
+    for (var i = 0; i < paginas.length; i++) {
+      status.textContent = "Gerando página " + (i + 1) + " de " + paginas.length + "…";
+      var pagina = paginas[i];
+      var canvas = await window.html2canvas(pagina, {
+        scale: 2, backgroundColor: "#ffffff", logging: false,
+        useCORS: true, allowTaint: false, imageTimeout: 0,
+        width: pagina.scrollWidth, height: pagina.scrollHeight,
+        windowWidth: pagina.scrollWidth, windowHeight: pagina.scrollHeight,
+        scrollX: 0, scrollY: 0
+      });
+
+      if (i) pdf.addPage("a4", "portrait");
+      var largura = 210;
+      var altura = canvas.height * largura / canvas.width;
+      if (altura > 297) {
+        altura = 297;
+        largura = canvas.width * altura / canvas.height;
+      }
+      var x = (210 - largura) / 2;
+      pdf.addImage(canvas.toDataURL("image/jpeg", 0.94), "JPEG",
+        x, 0, largura, altura, "pagina-" + i, "FAST");
+    }
+
+    pdf.save(nomeDoPdf());
+    status.textContent = "PDF A4 baixado: três páginas, sem folhas vazias.";
+  } catch (erro) {
+    console.error(erro);
+    status.textContent = "Não foi possível gerar o PDF. Recarregue a página e tente novamente.";
+    alert("Não foi possível gerar o PDF. Recarregue a página e tente novamente.");
+  } finally {
+    impressao.classList.remove("gerando-pdf");
+    impressao.setAttribute("aria-hidden", "true");
+    botao.disabled = false;
+    botao.textContent = textoOriginal;
+  }
 }
 
 function limparFicha() {
