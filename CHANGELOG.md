@@ -4,6 +4,19 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.13.2] - 2026-07-30
+
+### Ficha do Herói
+
+- Corrigido o retrato do PDF editável: a imagem não é mais cortada para um
+  quadrado de 520 × 520 nem recomprimida antes de ser incorporada ao arquivo.
+- Baixar e importar agora preserva exatamente os dados da imagem original,
+  inclusive proporção, transparência e resolução.
+- A moldura da ficha e a moldura do PDF passaram a usar a mesma proporção e o
+  mesmo ponto central, evitando mudança de enquadramento entre as duas versões.
+- Retratos JPG, PNG, WEBP e GIF de até 15 MB são aceitos e continuam sendo
+  processados apenas no navegador.
+
 ## [0.13.1] - 2026-07-30
 
 ### Ficha do Herói

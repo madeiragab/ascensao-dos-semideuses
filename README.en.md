@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.13.1 · [Changelog](CHANGELOG.md)
+**Current version:** 0.13.2 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -40,7 +40,9 @@ trident opens the other volumes without taking over the reading layout.
 
 PDFs downloaded from version 0.13.1 onward carry their editable sheet data inside
 the file and can be imported later. Everything is read locally in the browser;
-older PDFs were image-only and cannot be reconstructed.
+older PDFs were image-only and cannot be reconstructed. From version 0.13.2 onward,
+the original portrait is also preserved without cropping, resizing, or recompression
+throughout that cycle.
 
 ---
 

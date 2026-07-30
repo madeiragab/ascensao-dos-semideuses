@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.13.1 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.13.2 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -38,6 +38,8 @@ canto inferior abre os outros tomos sem tirar o leitor da página atual.
 PDFs baixados pela Ficha a partir da versão 0.13.1 carregam os dados editáveis
 dentro do próprio arquivo e podem ser importados depois. A leitura acontece
 somente no navegador; PDFs anteriores eram imagens e não podem ser reconstruídos.
+Desde a versão 0.13.2, o retrato original também é preservado sem recorte,
+redimensionamento ou recompressão durante esse ciclo.
 
 ---
 
