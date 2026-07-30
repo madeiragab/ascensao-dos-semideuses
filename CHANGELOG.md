@@ -4,6 +4,23 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.13.1] - 2026-07-30
+
+### Ficha do Herói
+
+- Adicionado **Importar PDF**: uma ficha baixada agora pode ser reaberta no site e
+  restaura campos, seleções, marcações, ataques, recursos, textos, ajustes manuais
+  e o retrato do personagem.
+- O PDF continua com as mesmas três páginas A4, mas passa a carregar um pacote de
+  dados versionado e invisível dentro do próprio arquivo.
+- A importação valida assinatura, versão, tamanho e conteúdo antes de preencher a
+  ficha. PDFs comuns e fichas de versões incompatíveis são recusados com uma
+  mensagem clara.
+- Todo o processo continua local: o PDF não é enviado, não existe conta e nenhum
+  dado permanece no navegador depois que a aba é fechada.
+- PDFs gerados antes desta versão continuam legíveis, mas eram somente imagens e
+  não possuem informação suficiente para reconstruir os campos.
+
 ## [0.13.0] - 2026-07-30
 
 ### Defesas passivas

@@ -854,6 +854,7 @@ button.acao {
 button.acao:hover { filter: brightness(1.12); }
 button.acao.fantasma { background: transparent; color: var(--acento); }
 button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset: 2px; }
+button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
 .destravar {
   font-family: var(--sans); font-size: .72rem; color: var(--texto-suave);
   display: flex; align-items: center; gap: .35rem; cursor: pointer;
@@ -1140,20 +1141,25 @@ table.viva select { font-size: .72rem; }
       <p><strong>O retrato fica no seu computador.</strong> Clique no quadrado e
       escolha uma imagem do rosto do personagem. Ela é lida pelo próprio navegador e
       não sobe para lugar nenhum.</p>
-      <p><strong>Nada é guardado.</strong> Fechou a aba sem baixar, perdeu — é de
-      propósito, e é por isso que a ficha não pede nenhum dado seu.</p>
+      <p><strong>O PDF é a sua cópia.</strong> Nada fica guardado no site. Baixe a
+      ficha antes de fechar e, quando quiser continuar, use <em>Importar PDF</em>
+      para recuperar os campos e o retrato neste navegador.</p>
     </div>
   </div>
 
   <div class="comandos">
     <button class="acao" id="baixarPdfBtn" type="button" onclick="baixarPdf()">Baixar em PDF</button>
+    <button class="acao fantasma" id="importarPdfBtn" type="button"
+            onclick="document.getElementById('arquivoPdf').click()">Importar PDF</button>
+    <input type="file" id="arquivoPdf" accept="application/pdf,.pdf" hidden
+           onchange="importarPdfSelecionado(event)">
     <button class="acao fantasma" type="button" onclick="limparFicha()">Limpar ficha</button>
     <label class="destravar">
       <input type="checkbox" id="destravar" onchange="alternarTrava()">
       Editar campos calculados
     </label>
-    <span class="aviso" id="statusPdf" aria-live="polite">O arquivo é baixado diretamente
-      em <strong>três páginas A4</strong>.</span>
+    <span class="aviso" id="statusPdf" aria-live="polite">Baixe ou importe a ficha
+      editável em <strong>três páginas A4</strong>. Tudo acontece neste navegador.</span>
   </div>
 
   <form class="ficha-viva" id="folha" autocomplete="off">
@@ -2536,6 +2542,258 @@ function nomeDoPdf() {
   return "ficha-" + (nome || "heroi") + ".pdf";
 }
 
+/* ---------- PDF editável: início ---------- */
+var MARCADOR_PDF_INICIO = "%ADS-FICHA-V1-BEGIN";
+var MARCADOR_PDF_FIM = "%ADS-FICHA-V1-END";
+var PRODUTO_FICHA = "ascensao-dos-semideuses:ficha";
+
+function listarCamposFicha() {
+  var controles = Array.from(folha.querySelectorAll("input, select, textarea"));
+  var contagens = Object.create(null);
+  return controles.map(function (el, ordem) {
+    var base;
+    if (el.id) {
+      base = "id:" + el.id;
+    } else if (el.name) {
+      base = "name:" + el.name;
+    } else {
+      var dados = Array.from(el.attributes)
+        .filter(function (atr) {
+          return atr.name.indexOf("data-") === 0 && atr.name !== "data-manual";
+        })
+        .sort(function (a, b) { return a.name.localeCompare(b.name); })
+        .map(function (atr) { return atr.name + "=" + atr.value; });
+      base = dados.length ? el.tagName.toLowerCase() + ":" + dados.join("|") : "ordem:" + ordem;
+    }
+    var repeticao = contagens[base] || 0;
+    contagens[base] = repeticao + 1;
+    return { el: el, chave: base + "#" + repeticao };
+  });
+}
+
+function capturarCamposFicha() {
+  var campos = [];
+  listarCamposFicha().forEach(function (par) {
+    var el = par.el;
+    var tipo = String(el.type || el.tagName).toLowerCase();
+    if (tipo === "file" || tipo === "button" || tipo === "submit" || tipo === "reset") return;
+    if (el.disabled && !el.classList.contains("calc")) return;
+    if (el.classList.contains("calc") && el.dataset.manual !== "1") return;
+    var registro = { chave: par.chave, tipo: tipo };
+    if (tipo === "checkbox" || tipo === "radio") registro.marcado = !!el.checked;
+    else registro.valor = String(el.value || "");
+    if (el.dataset.manual === "1") registro.manual = true;
+    campos.push(registro);
+  });
+  return campos;
+}
+
+async function retratoParaImportacao() {
+  var img = document.getElementById("retratoImg");
+  if (!img || !img.getAttribute("src")) return "";
+  await esperarImagem(img);
+  if (!img.naturalWidth || !img.naturalHeight) return "";
+  try {
+    var lado = 520;
+    var canvas = document.createElement("canvas");
+    canvas.width = lado; canvas.height = lado;
+    var ctx = canvas.getContext("2d");
+    var escala = Math.max(lado / img.naturalWidth, lado / img.naturalHeight);
+    var larguraFonte = lado / escala;
+    var alturaFonte = lado / escala;
+    var xFonte = (img.naturalWidth - larguraFonte) / 2;
+    var yFonte = (img.naturalHeight - alturaFonte) / 2;
+    ctx.fillStyle = "#f7f0df";
+    ctx.fillRect(0, 0, lado, lado);
+    ctx.drawImage(img, xFonte, yFonte, larguraFonte, alturaFonte, 0, 0, lado, lado);
+    return canvas.toDataURL("image/jpeg", 0.86);
+  } catch (erro) {
+    console.warn("O retrato não pôde ser incorporado aos dados editáveis.", erro);
+    return "";
+  }
+}
+
+async function montarPacoteFicha() {
+  return {
+    produto: PRODUTO_FICHA,
+    versao: 1,
+    campos: capturarCamposFicha(),
+    edicaoCalculados: document.getElementById("destravar").checked,
+    retrato: await retratoParaImportacao()
+  };
+}
+
+function textoParaBase64Utf8(texto) {
+  var bytes = new TextEncoder().encode(texto);
+  var binario = "";
+  for (var i = 0; i < bytes.length; i += 32768) {
+    binario += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768));
+  }
+  return btoa(binario);
+}
+
+function base64ParaTextoUtf8(base64) {
+  var binario = atob(base64);
+  var bytes = new Uint8Array(binario.length);
+  for (var i = 0; i < binario.length; i++) bytes[i] = binario.charCodeAt(i);
+  return new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+}
+
+function ultimoIndiceAscii(bytes, texto) {
+  var alvo = new TextEncoder().encode(texto);
+  externo: for (var i = bytes.length - alvo.length; i >= 0; i--) {
+    for (var j = 0; j < alvo.length; j++) {
+      if (bytes[i + j] !== alvo[j]) continue externo;
+    }
+    return i;
+  }
+  return -1;
+}
+
+function incorporarPacoteNoPdf(pdfBuffer, pacote) {
+  var pdfBytes = new Uint8Array(pdfBuffer);
+  var posicaoFim = ultimoIndiceAscii(pdfBytes, "%%EOF");
+  if (posicaoFim < 0) throw new Error("O gerador produziu um PDF incompleto.");
+  var base64 = textoParaBase64Utf8(JSON.stringify(pacote));
+  var linhas = [];
+  for (var i = 0; i < base64.length; i += 180) linhas.push("%" + base64.slice(i, i + 180));
+  var comentario = "\n" + MARCADOR_PDF_INICIO + "\n" + linhas.join("\n") +
+    "\n" + MARCADOR_PDF_FIM + "\n";
+  var extras = new TextEncoder().encode(comentario);
+  var final = new Uint8Array(pdfBytes.length + extras.length);
+  final.set(pdfBytes.subarray(0, posicaoFim), 0);
+  final.set(extras, posicaoFim);
+  final.set(pdfBytes.subarray(posicaoFim), posicaoFim + extras.length);
+  return new Blob([final], { type: "application/pdf" });
+}
+
+function extrairPacoteDoPdf(pdfBuffer) {
+  var bytes = new Uint8Array(pdfBuffer);
+  var cabecalho = new TextDecoder("ascii").decode(bytes.subarray(0, 5));
+  if (cabecalho !== "%PDF-") throw new Error("O arquivo escolhido não é um PDF válido.");
+  var texto = new TextDecoder("latin1").decode(bytes);
+  var inicio = texto.lastIndexOf(MARCADOR_PDF_INICIO);
+  var fim = texto.indexOf(MARCADOR_PDF_FIM, inicio + MARCADOR_PDF_INICIO.length);
+  if (inicio < 0 || fim < 0) {
+    throw new Error("Este PDF não contém dados editáveis. PDFs baixados antes deste recurso eram apenas imagens.");
+  }
+  var bloco = texto.slice(inicio + MARCADOR_PDF_INICIO.length, fim);
+  var base64 = bloco.split(/\r?\n/)
+    .map(function (linha) { return linha.trim(); })
+    .filter(function (linha) { return /^%[A-Za-z0-9+/=]+$/.test(linha); })
+    .map(function (linha) { return linha.slice(1); })
+    .join("");
+  if (!base64 || base64.length > 8000000) throw new Error("Os dados editáveis deste PDF estão corrompidos.");
+  var pacote;
+  try {
+    pacote = JSON.parse(base64ParaTextoUtf8(base64));
+  } catch (erro) {
+    throw new Error("Os dados editáveis deste PDF estão corrompidos.");
+  }
+  if (!pacote || pacote.produto !== PRODUTO_FICHA || pacote.versao !== 1 || !Array.isArray(pacote.campos)) {
+    throw new Error("Este PDF pertence a outra ficha ou a uma versão incompatível.");
+  }
+  if (pacote.campos.length > 500) throw new Error("Este PDF possui dados editáveis inválidos.");
+  pacote.campos.forEach(function (campo) {
+    if (!campo || typeof campo.chave !== "string" || campo.chave.length > 400) {
+      throw new Error("Este PDF possui dados editáveis inválidos.");
+    }
+    if (campo.valor != null && String(campo.valor).length > 250000) {
+      throw new Error("Um campo importado ultrapassa o limite permitido.");
+    }
+  });
+  if (pacote.retrato && (!/^data:image\/(?:jpeg|png|webp);base64,/i.test(pacote.retrato) || pacote.retrato.length > 3000000)) {
+    throw new Error("O retrato incorporado ao PDF é inválido.");
+  }
+  return pacote;
+}
+
+function aplicarRegistroCampo(el, registro) {
+  if (!el || !registro) return;
+  var tipo = String(el.type || el.tagName).toLowerCase();
+  if (tipo === "checkbox" || tipo === "radio") el.checked = !!registro.marcado;
+  else if (registro.valor != null) el.value = String(registro.valor);
+}
+
+function restaurarPacoteFicha(pacote) {
+  var registros = Object.create(null);
+  pacote.campos.forEach(function (campo) { registros[campo.chave] = campo; });
+
+  ultimoParente = null; ultimaClasse = null;
+  var pares = listarCamposFicha();
+  ["classe", "parente"].forEach(function (id) {
+    var par = pares.find(function (item) { return item.el.id === id; });
+    if (par) aplicarRegistroCampo(par.el, registros[par.chave]);
+  });
+  sincronizarParente();
+  sincronizarClasse();
+
+  pares = listarCamposFicha();
+  pares.forEach(function (par) {
+    if (par.el.classList.contains("calc")) return;
+    aplicarRegistroCampo(par.el, registros[par.chave]);
+  });
+  recalcular();
+
+  var temManual = pacote.campos.some(function (campo) { return campo.manual; });
+  document.getElementById("destravar").checked = !!pacote.edicaoCalculados || temManual;
+  alternarTrava();
+  listarCamposFicha().forEach(function (par) {
+    var registro = registros[par.chave];
+    if (!registro || !registro.manual || !par.el.classList.contains("calc")) return;
+    par.el.dataset.manual = "1";
+    par.el.value = String(registro.valor || "");
+  });
+
+  var retrato = document.getElementById("retrato");
+  var img = document.getElementById("retratoImg");
+  if (pacote.retrato) {
+    img.src = pacote.retrato;
+    retrato.classList.add("tem-foto");
+  } else {
+    img.removeAttribute("src");
+    retrato.classList.remove("tem-foto");
+  }
+  document.getElementById("arquivoRetrato").value = "";
+  recalcular();
+}
+
+function baixarBlob(blob, nome) {
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement("a");
+  link.href = url; link.download = nome;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+}
+
+async function importarPdfSelecionado(evento) {
+  var entrada = evento.currentTarget;
+  var arquivo = entrada.files && entrada.files[0];
+  if (!arquivo) return;
+  var botao = document.getElementById("importarPdfBtn");
+  var baixar = document.getElementById("baixarPdfBtn");
+  var status = document.getElementById("statusPdf");
+  botao.disabled = true; baixar.disabled = true;
+  status.textContent = "Lendo os dados editáveis do PDF…";
+  try {
+    if (arquivo.size > 50 * 1024 * 1024) throw new Error("O PDF ultrapassa o limite de 50 MB.");
+    var pacote = extrairPacoteDoPdf(await arquivo.arrayBuffer());
+    restaurarPacoteFicha(pacote);
+    await esperarImagem(document.getElementById("retratoImg"));
+    status.textContent = "Ficha importada: campos, escolhas, marcações e retrato foram restaurados.";
+  } catch (erro) {
+    console.error(erro);
+    status.textContent = erro.message || "Não foi possível importar esta ficha.";
+    alert(status.textContent);
+  } finally {
+    entrada.value = "";
+    botao.disabled = false; baixar.disabled = false;
+  }
+}
+/* ---------- PDF editável: fim ---------- */
+
 async function baixarPdf() {
   var botao = document.getElementById("baixarPdfBtn");
   var status = document.getElementById("statusPdf");
@@ -2555,6 +2813,7 @@ async function baixarPdf() {
     }
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
     await esperarImagem(document.getElementById("printRetrato"));
+    var pacoteFicha = await montarPacoteFicha();
     await new Promise(function (resolve) {
       requestAnimationFrame(function () { requestAnimationFrame(resolve); });
     });
@@ -2588,8 +2847,9 @@ async function baixarPdf() {
         x, 0, largura, altura, "pagina-" + i, "FAST");
     }
 
-    pdf.save(nomeDoPdf());
-    status.textContent = "PDF A4 baixado: três páginas, sem folhas vazias.";
+    var pdfEditavel = incorporarPacoteNoPdf(pdf.output("arraybuffer"), pacoteFicha);
+    baixarBlob(pdfEditavel, nomeDoPdf());
+    status.textContent = "PDF editável baixado: três páginas A4 e pronto para ser importado.";
   } catch (erro) {
     console.error(erro);
     status.textContent = "Não foi possível gerar o PDF. Recarregue a página e tente novamente.";

@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.13.0 · [Changelog](CHANGELOG.md)
+**Current version:** 0.13.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -33,10 +33,14 @@ contradicted intuition are documented below.
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
-| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, and directly downloads a three-page A4 PDF |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, and downloads or imports an editable three-page A4 PDF |
 
 All five books now have clickable contents and cross-references. A small floating
 trident opens the other volumes without taking over the reading layout.
+
+PDFs downloaded from version 0.13.1 onward carry their editable sheet data inside
+the file and can be imported later. Everything is read locally in the browser;
+older PDFs were image-only and cannot be reconstructed.
 
 ---
 
