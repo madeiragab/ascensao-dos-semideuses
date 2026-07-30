@@ -4,6 +4,22 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.11.1] - 2026-07-29
+
+### Regras
+
+- Bronze celestial, ferro estígio e ouro imperial foram fechados como materiais
+  divinos mecanicamente equivalentes: preservam o perfil da arma e ferem criaturas
+  míticas sem conceder bônus gratuito de ataque ou dano.
+- Armas de ouro imperial receberam **Ruptura Áurea**: quando são realmente destruídas,
+  explodem em 8 metros, atingem inclusive o portador, causam 4d6 de dano com Reflexos
+  CD 13 para reduzir à metade e são perdidas definitivamente.
+- O procedimento de 0 PV foi consolidado como **Teste de Morte**: três sucessos
+  estabilizam, três falhas matam, 20 natural recupera 1 PV e 1 natural causa duas
+  falhas. Dano, cura, estabilização e nova queda agora têm regras explícitas.
+- A Ficha do Herói ganhou marcadores para três sucessos e três falhas de Agonia, que
+  também aparecem no PDF.
+
 ## [0.11.0] - 2026-07-29
 
 ### Livro do Jogador

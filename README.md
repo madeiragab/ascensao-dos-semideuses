@@ -12,7 +12,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.11.0 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.11.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -20,7 +20,7 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 
 | | Livro | Conteúdo |
 |---|---|---|
-| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação, combate, Fúria opcional, catálogo de itens e motor de habilidades |
+| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação, combate, Fúria opcional, catálogo de itens, materiais divinos e motor de habilidades |
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
@@ -192,8 +192,6 @@ refinamento:
    que o motor não modela. Precisam de mesa, não de simulador.
 2. **Economia de dracmas em campanha.** Os preços e recompensas iniciais funcionam,
    mas ainda falta medir inflação, manutenção e recompensas de arcos longos.
-3. **Materiais divinos.** Bronze celestial existe como regra de o que fere o quê;
-   ferro estígio e ouro imperial só são citados.
 
 ### Limites conhecidos do simulador
 
