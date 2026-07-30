@@ -15,7 +15,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.10.1 · [Changelog](CHANGELOG.md)
+**Current version:** 0.11.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -23,7 +23,7 @@ contradicted intuition are documented below.
 
 | | Book | Contents |
 |---|---|---|
-| **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, seven-step character creation, combat, and the ability-building engine |
+| **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, character creation, combat, optional Demigod Fury, item catalogue, and the ability engine |
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
@@ -48,6 +48,11 @@ buys Advantage among other things. Once per story arc the GM may declare a
 *Rupture*, and then the flaw decides for you. Impetus can be earned at most once
 per scene and spent at most once per turn.
 
+As an optional module, **Demigod Fury** turns Rupture into three stages of
+divine overflow shaped by Bonds, lineage, Hubris and emotion. Each character
+receives a personal manifestation, while control, consent, anchors and lasting
+consequences keep that power from becoming an every-fight transformation.
+
 **Abilities don't come as a spell list.** Players build each one by buying effects
 with points:
 
@@ -64,6 +69,11 @@ and so on.
 activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands
 and objects, skill criticals, stabilization, and Impetus timing. The Portuguese
 quick reference is [`regras/regras-universais.md`](regras/regras-universais.md).
+
+**Items are level-gated.** Six grades run from Mortal equipment to Divine
+relics, while Attunement limits active permanent powers. Beyond weapons and
+armor, the Player's Book now includes 21 utility items, 12 curatives and 24
+magic items, all priced in drachmas.
 
 **Fourteen skills**, not sixteen: *Arcana* was absorbed into Mythology — in a world
 where all magic is Greek there aren't two bodies of knowledge — and *Animal Handling*

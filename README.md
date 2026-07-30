@@ -12,7 +12,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.10.1 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.11.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -20,7 +20,7 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 
 | | Livro | Conteúdo |
 |---|---|---|
-| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação de personagem em sete etapas, combate, e o motor de criação de habilidades |
+| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação, combate, Fúria opcional, catálogo de itens e motor de habilidades |
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
@@ -44,6 +44,10 @@ compra Vantagem e outras coisas. Uma vez por arco, o Mestre pode declarar uma
 *Ruptura*, e aí a Húbris decide por você. Ímpeto entra no máximo uma vez por cena
 e é gasto no máximo uma vez por turno.
 
+Como módulo opcional, a **Fúria do Semideus** transforma a Ruptura em três
+estágios de transbordamento divino, definidos pelos Vínculos, pela linhagem e
+pelas emoções de cada personagem — com poder grande, agência combinada e preço real.
+
 **Habilidades não vêm em lista.** O jogador constrói cada uma comprando efeitos
 com pontos:
 
@@ -60,6 +64,11 @@ diante.
 efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
 objetos e mãos, críticos de perícia, estabilização e Ímpeto. A consulta curta está
 em [`regras/regras-universais.md`](regras/regras-universais.md).
+
+**Itens têm nível.** Seis graus cobrem do equipamento Mortal à relíquia Divina;
+Sintonização limita quantos poderes permanentes ficam ativos. Além das armas e
+armaduras, o Livro do Jogador traz 21 utilitários, 12 curativos e 24 itens
+mágicos com preço em dracmas.
 
 **Catorze perícias**, não dezesseis: *Arcanismo* foi absorvida por Mitologia, porque
 num mundo em que toda magia é grega não existem dois corpos de conhecimento, e

@@ -4,6 +4,32 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.11.0] - 2026-07-29
+
+### Livro do Jogador
+
+- Adicionada **Fúria do Semideus** como regra opcional de campanha. O módulo
+  transforma a Ruptura da Húbris em três estágios: Despertar, Transbordamento e
+  Ruptura, com gatilho emocional, testes de controle, Âncoras, manifestação
+  pessoal, acordo de agência e consequências.
+- A Fúria não pode ser acionada como técnica comum: depois de usada, exige
+  Descanso Longo e a nova ação de Interlúdio **Assimilar a Fúria**.
+- Criados seis graus de item — Mortal, Consagrado, Heroico, Mítico, Lendário e
+  Divino — com requisito de nível e faixas de preço em dracmas.
+- Itens mágicos permanentes passaram a usar **Sintonização**: um espaço nos
+  níveis 1–5, dois nos níveis 6–11 e três a partir do nível 12.
+- O catálogo ganhou 21 utilitários, 12 curativos e 24 relíquias mágicas, todos
+  com nível, preço e efeito fechado.
+- A tabela defensiva ganhou Broquel, Loriga de Hoplita e Escudo-torre, além de
+  requisito de nível e preço em todos os equipamentos.
+- A Ficha do Herói deixou de presumir uma lista fechada de armaduras: agora
+  calcula DEF por Base da armadura + Destreza permitida + escudo/item + outros
+  ajustes, e leva a fórmula completa para o PDF.
+- Curativos divinos receberam Saturação para impedir consumo em sequência e
+  preservar a função do Oráculo.
+- “Uma vez por combate” foi formalizado para impedir que encerrar e reabrir a
+  iniciativa recupere usos.
+
 ## [0.10.1] - 2026-07-29
 
 ### Ficha do Herói
