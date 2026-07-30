@@ -996,6 +996,10 @@ input.calc:read-only { border-bottom-style: dotted; }
 .escolhas-pericia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem .7rem; margin-bottom: .8rem; }
 .escolhas-pericia .f label { font-size: .5rem; }
 .ajustes { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: .5rem .8rem; }
+.evolucoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem .8rem; margin-top: .8rem; }
+.evolucao-slot.bloqueado { opacity: .52; }
+.evolucao-slot.bloqueado input { cursor: not-allowed; }
+@media (max-width: 36rem) { .evolucoes { grid-template-columns: 1fr; } }
 
 .grade-num { display: grid; grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr)); gap: .5rem; }
 .num-cx { border: 1px solid var(--borda-forte); padding: .35rem .5rem .45rem; }
@@ -1290,6 +1294,7 @@ table.viva select { font-size: .72rem; }
         <div class="num-cx"><span>Proficiência</span><input type="text" class="calc" data-calc="prof" readonly></div>
         <div class="num-cx"><span>Tratamentos</span><input type="text" class="calc" data-calc="tratamentos" readonly></div>
         <div class="num-cx"><span>Memória</span><input type="text" class="calc" data-calc="memoria" readonly></div>
+        <div class="num-cx"><span>Habilidades evoluídas</span><input type="text" class="calc" data-calc="evoluidas" readonly></div>
         <div class="num-cx"><span>Bônus de Habilidade</span><input type="text" class="calc" data-calc="habilidade" readonly></div>
         <div class="num-cx"><span>Percepção passiva</span><input type="text" class="calc" data-calc="passiva" readonly></div>
         <div class="num-cx"><span>Teto de custo</span><input type="text" class="calc" data-calc="teto" readonly></div>
@@ -1376,6 +1381,13 @@ table.viva select { font-size: .72rem; }
         movimento ou passiva. Registre também uma única resolução: Ataque contra DEF ou
         Rolagem de Efeito contra Fortitude, Reflexos ou Vontade.</p>
       <textarea rows="9" id="habilidades"></textarea>
+      <div class="evolucoes">
+        <div class="f evolucao-slot"><label>Evoluída 1</label><input type="text" id="habilidadeEvoluida1" data-evoluida="0" placeholder="Nome da habilidade"></div>
+        <div class="f evolucao-slot"><label>Evoluída 2</label><input type="text" id="habilidadeEvoluida2" data-evoluida="1" placeholder="Nome da habilidade"></div>
+        <div class="f evolucao-slot"><label>Evoluída 3</label><input type="text" id="habilidadeEvoluida3" data-evoluida="2" placeholder="Nome da habilidade"></div>
+      </div>
+      <p class="estado-regra" id="estadoEvoluidas">Defina o Atributo Divino para calcular o limite.</p>
+      <p class="legenda-calc"><b>Elevar:</b> antes de usar uma Evoluída, escolha uma Potência até o Teto de Custo e pague esse valor. Os efeitos não aumentam.</p>
     </div>
 
     <!-- ===== EQUIPAMENTO E LAÇOS ===== -->
@@ -2072,6 +2084,43 @@ function escreve(chave, texto, formula) {
   if (formula) el.title = formula;
 }
 
+function limiteDeEvoluidas(memoria) {
+  if (memoria === null || !Number.isFinite(memoria)) return null;
+  return Math.floor(Math.max(1, Math.min(6, memoria)) / 2);
+}
+
+function atualizarEvolucoes(memoria) {
+  var automatico = limiteDeEvoluidas(memoria);
+  escreve("evoluidas", automatico === null ? null : String(automatico),
+    "Memória ÷ 2, arredondada para baixo");
+
+  var campoLimite = document.querySelector('[data-calc="evoluidas"]');
+  var manual = campoLimite && campoLimite.dataset.manual === "1" ? num(campoLimite.value) : null;
+  var limite = manual === null ? automatico : Math.max(0, Math.min(3, manual));
+  var slots = Array.from(document.querySelectorAll("[data-evoluida]"));
+  var preenchidas = slots.filter(function (el) { return el.value.trim(); }).length;
+
+  slots.forEach(function (el, indice) {
+    var permitido = limite !== null && indice < limite;
+    var preenchido = !!el.value.trim();
+    el.readOnly = !permitido && !preenchido;
+    el.placeholder = permitido ? "Nome da habilidade" : "Bloqueado pela Memória";
+    el.closest(".evolucao-slot").classList.toggle("bloqueado", !permitido);
+    el.setAttribute("aria-disabled", permitido ? "false" : "true");
+  });
+
+  var estado = document.getElementById("estadoEvoluidas");
+  if (limite === null) {
+    estado.className = "estado-regra erro";
+    estado.textContent = "Defina o Atributo Divino para calcular o limite de Evoluídas.";
+    return;
+  }
+  var excedeu = preenchidas > limite;
+  estado.className = "estado-regra " + (excedeu ? "erro" : "ok");
+  estado.textContent = preenchidas + " de " + limite + " habilidades marcadas como Evoluídas" +
+    (excedeu ? " — remova " + (preenchidas - limite) + "." : ".");
+}
+
 /* ---------- o cálculo ---------- */
 function recalcular() {
   var nivel = num(document.getElementById("nivel").value) || 1;
@@ -2105,8 +2154,10 @@ function recalcular() {
 
   // Atributo Divino: Memória e bônus usado em Ataques de Habilidade e Efeitos
   var mDiv = divino ? mod(divino) : null;
-  escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))),
+  var memoria = mDiv === null ? null : Math.max(1, Math.min(6, 2 + mDiv));
+  escreve("memoria", memoria === null ? null : String(memoria),
           "2 + Atributo Divino, entre 1 e 6");
+  atualizarEvolucoes(num(document.querySelector('[data-calc="memoria"]').value));
   escreve("habilidade", mDiv === null ? null : sinal(mDiv + prof),
           "Atributo Divino + proficiência");
 
@@ -2269,7 +2320,9 @@ function recalcularV2() {
     "DES" + (conceitoChave === "problematico" ? " + FOR (Instinto de Briga)" : "") + " + ajustes");
   escreve("movimento", (9 + valorId("ajusteMovimento")) + " m", "9 m + ajustes");
 
-  escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))), "2 + Atributo Divino, entre 1 e 6");
+  var memoria = mDiv === null ? null : Math.max(1, Math.min(6, 2 + mDiv));
+  escreve("memoria", memoria === null ? null : String(memoria), "2 + Atributo Divino, entre 1 e 6");
+  atualizarEvolucoes(num(document.querySelector('[data-calc="memoria"]').value));
   escreve("habilidade", mDiv === null ? null : sinal(mDiv + prof), "Atributo Divino + proficiência");
 
   var c = CLASSES[classe];
@@ -2393,6 +2446,9 @@ folha.addEventListener("input", function (e) {
   // se o usuário digita num campo calculado destravado, ele passa a ser dele
   if (e.target.classList.contains("calc") && !e.target.readOnly) {
     e.target.dataset.manual = "1";
+    if (e.target.dataset.calc === "memoria" || e.target.dataset.calc === "evoluidas") {
+      atualizarEvolucoes(num(document.querySelector('[data-calc="memoria"]').value));
+    }
     return;
   }
   recalcular();
@@ -2485,7 +2541,10 @@ function prepararImpressao() {
     ["MP", valorCampo("mpAtual") + "/" + valorCalc("mp")], ["DEF", valorCalc("def")],
     ["Iniciativa", valorCalc("iniciativa")], ["Movimento", valorCalc("movimento")],
     ["Proficiência", valorCalc("prof")], ["Tratamentos", valorCalc("tratamentos")],
-    ["Memória", valorCalc("memoria")], ["Bônus de Habilidade", valorCalc("habilidade")],
+    ["Memória", valorCalc("memoria")],
+    ["Evoluídas", document.querySelectorAll('[data-evoluida]').length ?
+      Array.from(document.querySelectorAll('[data-evoluida]')).filter(function (el) { return el.value.trim(); }).length + "/" + valorCalc("evoluidas") : "—"],
+    ["Bônus de Habilidade", valorCalc("habilidade")],
     ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")],
     ["Agonia · sucessos", sucessosMorte + "/3"], ["Agonia · falhas", falhasMorte + "/3"]
   ];
@@ -2534,10 +2593,16 @@ function prepararImpressao() {
   });
   document.getElementById("pAtaques").innerHTML = ataques.length ? ataques.join("") : '<tr><td colspan="5">—</td></tr>';
 
-  [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],["pHabilidades","habilidades"],
+  [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],
    ["pAparencia","aparencia"],["pPersonalidade","personalidade"],
    ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
   .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
+
+  var evoluidas = Array.from(document.querySelectorAll("[data-evoluida]"))
+    .map(function (el) { return el.value.trim(); }).filter(Boolean);
+  var textoHabilidades = valorCampo("habilidades");
+  if (evoluidas.length) textoHabilidades += "\n\nEVOLUÍDAS (" + evoluidas.length + "/" + valorCalc("evoluidas") + ")\n• " + evoluidas.join("\n• ");
+  porTexto("pHabilidades", textoHabilidades);
 
   var nomeArmadura = document.getElementById("armadura").value.trim() || "Sem armadura";
   var baseArmadura = num(document.getElementById("armaduraBase").value);

@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.13.2 · [Changelog](CHANGELOG.md)
+**Current version:** 0.13.3 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -33,7 +33,7 @@ contradicted intuition are documented below.
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
-| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, and downloads or imports an editable three-page A4 PDF |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage, advancement, and the Evolved Ability limit, takes a portrait, and downloads or imports an editable three-page A4 PDF |
 
 All five books now have clickable contents and cross-references. A small floating
 trident opens the other volumes without taking over the reading layout.
@@ -82,6 +82,11 @@ Duration already includes the first point of effect: instantaneous 1, sustained 
 scene 4. Sustaining costs half the final cost per round. Each point buys 1d8
 single-target damage, or 1d6 area damage, or +1 to Defense, or a weak condition,
 and so on.
+
+**Evolving preserves the ability's identity.** After a Long Rest, a hero may mark
+up to half their Memory, rounded down, as Evolved. When using one, they may pay a
+higher Potency up to their Cost Ceiling to cross barriers, immunities, dispels,
+or rituals. Damage, area, range, duration, and conditions do not increase.
 
 **Universal table rules** now cover the former edge cases: passive defenses, combined effects,
 activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands

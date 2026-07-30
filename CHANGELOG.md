@@ -4,6 +4,30 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.13.3] - 2026-07-30
+
+### Evolução de Habilidades
+
+- Implementada a mecânica que estava registrada nos playtests, mas ausente dos
+  livros: uma habilidade Evoluída pode elevar sua Potência e seu custo sem
+  aumentar dano, alcance, área, duração ou qualquer outro efeito.
+- O número máximo de habilidades Evoluídas agora é **metade da Memória,
+  arredondada para baixo**: de 0 a 3 escolhas.
+- Potência natural passou a ser o custo final de construção da habilidade; descontos
+  recebidos depois não reduzem esse valor.
+  Uma Evoluída pode alcançar qualquer Potência maior até o Teto de Custo.
+- O Guia do Mestre recebeu Limiares de Potência para barreiras, imunidades,
+  dissipações e rituais, com valores sugeridos de 3 a 14.
+
+### Ficha do Herói
+
+- A ficha calcula automaticamente o limite de Evoluídas e libera até três campos
+  para registrar as habilidades escolhidas.
+- Excesso causado por redução de Memória é sinalizado imediatamente.
+- As escolhas aparecem no PDF e são preservadas ao importar a ficha.
+- Adicionada regressão automática para o limite por Memória, Teto de Custo,
+  descontos e preservação do perfil original da habilidade.
+
 ## [0.13.2] - 2026-07-30
 
 ### Ficha do Herói

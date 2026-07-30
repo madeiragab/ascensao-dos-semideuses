@@ -30,6 +30,19 @@ Toda habilidade registra **ação, ação bônus, reação, movimento ou passiva
 Ação é o padrão. Ação bônus, reação e movimento somam **+1** ao custo. Reação exige
 gatilho. Passivas usam o subsistema próprio. Não existe habilidade ativa sem ação.
 
+## Evolução de habilidades
+
+Depois de preparar a Memória num Descanso Longo, marque como **Evoluídas** até
+**metade da Memória, arredondada para baixo**: Memória 1 permite 0; 2–3 permite 1;
+4–5 permite 2; 6 permite 3. Assinaturas podem ser escolhidas e contam no limite;
+passivas, Fórmulas, técnicas e Manifestações de Fúria não podem.
+
+A Potência natural de uma habilidade é seu custo final de construção; descontos
+recebidos depois não a reduzem. Ao usar uma Evoluída, escolha Potência maior, até o Teto de Custo, e pague esse valor. Dano,
+alcance, área, duração e efeitos não mudam. A Potência elevada só serve quando uma
+barreira, imunidade, dissipação ou ritual declarar um Limiar. Descontos são aplicados
+depois sem reduzir Potência; Sustentação usa metade do custo realmente pago.
+
 ## Manifestação Menor
 
 Uma **Interação Simples e 1 MP** criam um efeito pequeno, narrativo e coerente com a

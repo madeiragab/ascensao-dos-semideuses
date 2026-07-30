@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.13.2 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.13.3 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -30,7 +30,7 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem e progressão, aceita retrato e baixa ou importa um PDF editável de três páginas A4 |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem, progressão e limite de Evoluídas, aceita retrato e baixa ou importa um PDF editável de três páginas A4 |
 
 Os cinco livros têm sumários e referências clicáveis. Um pequeno tridente no
 canto inferior abre os outros tomos sem tirar o leitor da página atual.
@@ -78,6 +78,12 @@ A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2,
 4. Sustentar custa metade do custo final por rodada. Cada ponto compra 1d8 de
 dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assim por
 diante.
+
+**Evoluir preserva a identidade da habilidade.** Depois de um Descanso Longo, o
+herói pode marcar como Evoluídas até metade da Memória, arredondada para baixo.
+Ao usar uma delas, pode pagar uma Potência maior até seu Teto de Custo para
+atravessar barreiras, imunidades, dissipações ou rituais. Dano, área, alcance,
+duração e condições não aumentam.
 
 **As regras universais** fecham as situações que costumavam depender do Mestre:
 defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
