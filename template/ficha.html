@@ -407,19 +407,14 @@ table.viva select { font-size: .72rem; }
               <option value="sabedoria">Sabedoria</option>
               <option value="carisma">Carisma</option>
             </select></div>
-          <div class="f"><label>Armadura</label>
-            <select id="armadura">
-              <option value="0">Sem armadura</option>
-              <option value="acolchoada">Acolchoada</option>
-              <option value="couro">Couro batido</option>
-              <option value="escamas">Cota de escamas</option>
-              <option value="peitoral">Peitoral</option>
-            </select></div>
-          <div class="f"><label>Escudo</label>
-            <select id="escudo">
-              <option value="0">Não</option>
-              <option value="2">Sim, +2 DEF</option>
-            </select></div>
+          <div class="f"><label>Nome da armadura</label>
+            <input type="text" id="armadura" placeholder="Sem armadura"></div>
+          <div class="f"><label>Base da armadura</label>
+            <input type="text" id="armaduraBase" inputmode="numeric" placeholder="10"></div>
+          <div class="f"><label>Limite de DES</label>
+            <input type="text" id="armaduraLimite" inputmode="numeric" placeholder="livre"></div>
+          <div class="f"><label>Escudo / item na DEF</label>
+            <input type="text" id="escudo" inputmode="numeric" placeholder="0"></div>
           <div class="f"><label>Dracmas</label><input type="text" id="dracmas"></div>
         </div>
       </div>
@@ -494,7 +489,7 @@ table.viva select { font-size: .72rem; }
       </div>
       <h3 style="margin-top:1rem;">Ajustes mecânicos <small>- itens e técnicas que a ficha não pode escolher por você</small></h3>
       <div class="ajustes">
-        <div class="f"><label>Ajuste de DEF</label><input type="text" id="ajusteDef" value="0"></div>
+        <div class="f"><label>Outros ajustes de DEF</label><input type="text" id="ajusteDef" value="0"></div>
         <div class="f"><label>Ajuste de Iniciativa</label><input type="text" id="ajusteIniciativa" value="0"></div>
         <div class="f"><label>Ajuste de Movimento, em m</label><input type="text" id="ajusteMovimento" value="0"></div>
         <div class="f"><label>Ajuste de PV máximo</label><input type="text" id="ajustePv" value="0"></div>
@@ -502,9 +497,10 @@ table.viva select { font-size: .72rem; }
         <div class="f"><label>Ajuste de MP máximo</label><input type="text" id="ajusteMp" value="0"></div>
       </div>
       <label class="destravar" style="margin-top:.65rem;"><input type="checkbox" id="ferimentoGrave"> Ferimento Grave ativo: reduz PV máximo pelo nível</label>
-      <p class="legenda-calc">A ficha aplica automaticamente o <b>Instinto de Briga</b>,
-        o Ferimento Grave, bônus de linhagem e progressão. Use ajustes para itens ou técnicas
-        escolhidas que mudem um número.</p>
+      <p class="legenda-calc">Na DEF, copie o número antes do “+ DES” da armadura:
+        Couro batido usa Base 12; Peitoral, Base 14. Limite vazio significa Destreza livre.
+        A ficha soma automaticamente Base + DES permitida + escudo/item + outros ajustes.
+        Instinto de Briga, Ferimento Grave, linhagem e progressão continuam automáticos.</p>
     </div>
 
     <!-- ===== RESISTÊNCIAS E PERÍCIAS ===== -->
@@ -698,14 +694,6 @@ var CLASSES = {
   oraculo:  { pv: 10, sp: 8,  mp: 14, pvN: 4, spN: 3, mpN: 4 }
 };
 
-var ARMADURAS = {
-  "0":         { base: 10, limite: null },
-  acolchoada:  { base: 11, limite: null },
-  couro:       { base: 12, limite: null },
-  escamas:     { base: 13, limite: 2 },
-  peitoral:    { base: 14, limite: 2 }
-};
-
 var NOME_CLASSE = { guardiao: "Guardião", furioso: "Furioso", oraculo: "Oráculo" };
 
 var CONCEITOS = {
@@ -840,6 +828,23 @@ function mod(nome) {
 }
 function sinal(n) { return (n >= 0 ? "+" : "−") + Math.abs(n); }
 
+function dadosDefesa(mDes) {
+  var base = num(document.getElementById("armaduraBase").value);
+  if (base === null) base = 10;
+  var limiteTexto = document.getElementById("armaduraLimite").value.trim();
+  var limite = limiteTexto ? num(limiteTexto) : null;
+  var escudo = valorId("escudo");
+  var ajuste = valorId("ajusteDef");
+  if (mDes === null) return { total: null, formula: "Depende da Destreza" };
+  var des = limite === null ? mDes : Math.min(mDes, limite);
+  return {
+    total: base + des + escudo + ajuste,
+    formula: base + " base " + sinal(des) + " DES " + sinal(escudo) +
+      " escudo/item " + sinal(ajuste) + " outros ajustes" +
+      (limite === null ? " · DES livre" : " · DES limitada a +" + limite)
+  };
+}
+
 function escreve(chave, texto, formula) {
   var el = document.querySelector('[data-calc="' + chave + '"]');
   if (!el) return;
@@ -873,17 +878,8 @@ function recalcular() {
   var mDes = mod("destreza"), mCon = mod("constituicao"), mSab = mod("sabedoria");
 
   // DEF
-  var arm = ARMADURAS[document.getElementById("armadura").value] || ARMADURAS["0"];
-  var escudo = num(document.getElementById("escudo").value) || 0;
-  if (mDes === null) {
-    escreve("def", null, "Depende da Destreza");
-  } else {
-    var des = arm.limite === null ? mDes : Math.min(mDes, arm.limite);
-    escreve("def", String(arm.base + des + escudo),
-      arm.base + " (armadura) " + sinal(des) + " Destreza" +
-      (escudo ? " + " + escudo + " escudo" : "") +
-      (arm.limite !== null ? " · limite de +" + arm.limite + " em Destreza" : ""));
-  }
+  var defesa = dadosDefesa(mDes);
+  escreve("def", defesa.total === null ? null : String(defesa.total), defesa.formula);
 
   escreve("iniciativa", mDes === null ? null : sinal(mDes),
           "1d20 + Destreza. O Conceito Problemático soma Força também");
@@ -1044,14 +1040,8 @@ function recalcularV2() {
   var mFor = mod("forca"), mDes = mod("destreza"), mCon = mod("constituicao");
   var mSab = mod("sabedoria"), mDiv = divino ? mod(divino) : null;
 
-  var arm = ARMADURAS[document.getElementById("armadura").value] || ARMADURAS["0"];
-  var escudo = valorId("escudo"), ajusteDef = valorId("ajusteDef");
-  if (mDes === null) escreve("def", null, "Depende da Destreza");
-  else {
-    var desDef = arm.limite === null ? mDes : Math.min(mDes, arm.limite);
-    escreve("def", String(arm.base + desDef + escudo + ajusteDef),
-      arm.base + " armadura " + sinal(desDef) + " DES + " + escudo + " escudo " + sinal(ajusteDef) + " ajustes");
-  }
+  var defesa = dadosDefesa(mDes);
+  escreve("def", defesa.total === null ? null : String(defesa.total), defesa.formula);
 
   var bonusBriga = conceitoChave === "problematico" && mFor !== null ? mFor : 0;
   var ajusteInit = valorId("ajusteIniciativa");
@@ -1293,9 +1283,21 @@ function prepararImpressao() {
   document.getElementById("pAtaques").innerHTML = ataques.length ? ataques.join("") : '<tr><td colspan="5">—</td></tr>';
 
   [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],["pHabilidades","habilidades"],
-   ["pEquipamento","equipamento"],["pAparencia","aparencia"],["pPersonalidade","personalidade"],
+   ["pAparencia","aparencia"],["pPersonalidade","personalidade"],
    ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
   .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
+
+  var nomeArmadura = document.getElementById("armadura").value.trim() || "Sem armadura";
+  var baseArmadura = num(document.getElementById("armaduraBase").value);
+  if (baseArmadura === null) baseArmadura = 10;
+  var limiteArmadura = num(document.getElementById("armaduraLimite").value);
+  var bonusEscudo = valorId("escudo"), outrosDef = valorId("ajusteDef");
+  var linhaDefesa = "Armadura: " + nomeArmadura + " · Base " + baseArmadura +
+    " + DES" + (limiteArmadura === null ? " livre" : " (máx. +" + limiteArmadura + ")") +
+    " " + sinal(bonusEscudo) + " escudo/item " + sinal(outrosDef) +
+    " outros = DEF " + valorCalc("def");
+  var equipamentoLivre = valorCampo("equipamento");
+  porTexto("pEquipamento", linhaDefesa + (equipamentoLivre === "—" ? "" : "\n" + equipamentoLivre));
 }
 
 window.addEventListener("beforeprint", prepararImpressao);
