@@ -87,6 +87,8 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 1.25rem; }
 
 body {
   margin: 0;
@@ -97,6 +99,86 @@ body {
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
 }
+
+.mancha p a, .mancha li a, .mancha td a, .colofao a {
+  color: var(--acento);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--acento) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.mancha a:focus-visible, .biblioteca-flutuante a:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}
+
+/* ============ MINIESTANTE FLUTUANTE ============ */
+.biblioteca-flutuante {
+  position: fixed; right: clamp(.65rem, 2vw, 1.25rem); bottom: 1rem;
+  z-index: 120; font-family: var(--sans); color: var(--texto);
+}
+.biblioteca-flutuante > summary {
+  list-style: none; width: 2.35rem; height: 2.35rem;
+  display: grid; place-items: center; margin-left: auto;
+  border: 1px solid var(--bronze); border-radius: 50%;
+  color: var(--bronze); background: var(--papel);
+  box-shadow: 0 .35rem 1rem var(--sombra); cursor: pointer;
+  transition: transform .16s ease, background .16s ease, color .16s ease;
+}
+.biblioteca-flutuante > summary::-webkit-details-marker { display: none; }
+.biblioteca-flutuante > summary span { font-size: 1.38rem; line-height: 1; }
+.biblioteca-flutuante > summary:hover,
+.biblioteca-flutuante > summary:focus-visible,
+.biblioteca-flutuante[open] > summary {
+  color: var(--papel); background: var(--acento); transform: translateY(-2px);
+  outline: none;
+}
+.biblioteca-flutuante nav {
+  position: absolute; right: 0; bottom: calc(100% + .55rem);
+  width: min(15rem, calc(100vw - 1.2rem)); padding: .55rem;
+  border: 1px solid var(--borda-forte); border-radius: 4px;
+  background: var(--papel); box-shadow: 0 .7rem 2rem var(--sombra);
+}
+.biblioteca-flutuante nav > strong {
+  display: block; padding: .15rem .3rem .45rem;
+  color: var(--texto-suave); font-size: .62rem;
+  text-transform: uppercase; letter-spacing: .14em;
+}
+.biblioteca-flutuante nav a {
+  display: grid; grid-template-columns: 1.65rem 1fr; gap: .55rem;
+  align-items: center; padding: .38rem .35rem;
+  color: var(--texto); text-decoration: none; border-radius: 3px;
+}
+.biblioteca-flutuante nav a:hover { background: var(--superficie-2); }
+.biblioteca-flutuante nav a b,
+.biblioteca-flutuante nav a small { display: block; line-height: 1.2; }
+.biblioteca-flutuante nav a b { font-family: var(--serifa-titulo); font-size: .82rem; }
+.biblioteca-flutuante nav a small { margin-top: .12rem; color: var(--texto-suave); font-size: .58rem; }
+.mini-capa {
+  width: 1.45rem; height: 1.9rem; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.28); border-radius: 1px 3px 3px 1px;
+  color: #fff; font-family: var(--serifa-titulo); font-size: .64rem;
+  box-shadow: inset 2px 0 rgba(255,255,255,.14);
+}
+.mini-capa.jogador { background: #9D3E20; }
+.mini-capa.bestiario { background: #71392E; }
+.mini-capa.grimorio { background: #3B5A38; }
+.mini-capa.guia { background: #6B3FA0; }
+.mini-capa.ficha { background: #6E5518; }
+.biblioteca-flutuante nav a.estante-completa {
+  display: block; margin-top: .3rem; padding-top: .5rem;
+  border-top: 1px solid var(--borda); color: var(--acento);
+  text-align: center; font-size: .64rem; text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* ============ AVISO EDITORIAL ============ */
+.aviso-independencia {
+  max-width: var(--pagina); margin: 1rem auto 0; padding: 1rem var(--margem) 1.2rem;
+  color: var(--texto-suave); background: var(--papel); border: 1px solid var(--borda);
+  font-family: var(--sans); font-size: .68rem; line-height: 1.55; text-align: center;
+}
+.aviso-independencia strong { color: var(--bronze); }
 
 /* ============ O LIVRO COMO OBJETO ============ */
 /* Uma coluna única, da capa à contracapa. */
@@ -542,13 +624,14 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 .colofao h3 { margin-top: 0; color: var(--texto); }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
 
 /* ============ IMPRESSÃO ============ */
 @media print {
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
-  .rolador, .botoes { display: none !important; }
+  .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
   .livro { border: none; max-width: none; background: #fff; }
   .mancha { padding: 0; }
   .capa-pagina { background: #fff; page-break-after: always; border: none; }
@@ -711,6 +794,7 @@ pre.bloco-codigo {
 </style>
 </head>
 <body>
+<details class="biblioteca-flutuante"><summary aria-label="Abrir os outros livros" title="Outros livros"><span aria-hidden="true">♆</span></summary><nav aria-label="Outros livros"><strong>Outros livros</strong><a href="bestiario.html"><span class="mini-capa bestiario">II</span><span><b>Bestiário</b><small>abrir livro</small></span></a><a href="grimorio.html"><span class="mini-capa grimorio">III</span><span><b>Grimório</b><small>abrir livro</small></span></a><a href="guia.html"><span class="mini-capa guia">IV</span><span><b>Guia do Mestre</b><small>abrir livro</small></span></a><a href="ficha.html"><span class="mini-capa ficha">V</span><span><b>Ficha do Herói</b><small>abrir livro</small></span></a><a class="estante-completa" href="index.html">Ver a estante completa</a></nav></details>
 <div class="livro">
 
 <!-- ==================== CAPA ==================== -->
@@ -786,8 +870,8 @@ pre.bloco-codigo {
     <li>Um jogo de dados de RPG: <span class="dado">d4</span> <span class="dado">d6</span>
         <span class="dado">d8</span> <span class="dado">d10</span> <span class="dado">d12</span>
         <span class="dado">d20</span>. Aplicativo de celular serve.</li>
-    <li>Uma ficha de personagem, lápis e borracha. Você vai apagar bastante.</li>
-    <li>Este livro. Só o Mestre precisa do <em>Bestiário</em>.</li>
+    <li><a href="ficha.html">Uma ficha de personagem</a>, lápis e borracha. Você vai apagar bastante.</li>
+    <li>Este livro. Só o Mestre precisa do <a href="bestiario.html"><em>Bestiário</em></a>.</li>
   </ul>
 
   <div class="destaque">
@@ -1158,7 +1242,7 @@ pre.bloco-codigo {
         <tr><td><strong>Gatilho</strong></td><td>o Vínculo, medo ou limite da Húbris que pode despertá-la</td></tr>
         <tr><td><strong>Impulso</strong></td><td>o comportamento que domina o personagem no Transbordamento</td></tr>
         <tr><td><strong>Âncora</strong></td><td>pessoa, lembrança, ritual ou objeto capaz de trazê-lo de volta</td></tr>
-        <tr><td><strong>Poder</strong></td><td>o perfil mecânico da manifestação, feito pelo motor do Capítulo Sete</td></tr>
+        <tr><td><strong>Poder</strong></td><td>o perfil mecânico da manifestação, feito pelo motor do <a href="#cap7">Capítulo Sete</a></td></tr>
         <tr><td><strong>Limites</strong></td><td>como a mesa tratará apagão, perda de controle e consequências permanentes</td></tr>
       </tbody>
     </table>
@@ -1579,7 +1663,7 @@ pre.bloco-codigo {
     </table>
   </div>
   <p>Uma <strong>Ação de Interlúdio</strong> gasta em Trabalhar rende cerca de uma
-  semana disso. Ver o Capítulo Oito.</p>
+  semana disso. Ver o <a href="#cap8">Capítulo Oito</a>.</p>
 
   <h4>Graus e requisitos de item</h4>
   <p>O preço diz quanto o item vale; o <strong>requisito</strong> diz quando um semideus
@@ -1983,7 +2067,7 @@ pre.bloco-codigo {
   ferramentas, consumíveis — <strong>nunca</strong> gera penalidade. Carga só vira
   regra quando o grupo tenta levar o tesouro, carregar um ferido, escalar, ou fugir.</p>
 
-  <p>Quem exagera fica <strong>Sobrecarregado</strong> (Capítulo Seis). O Mestre deve
+  <p>Quem exagera fica <strong>Sobrecarregado</strong> (<a href="#cap6">Capítulo Seis</a>). O Mestre deve
   <em>avisar antes</em>: "se você levar esse baú junto com o resto, fica
   Sobrecarregado" — para o jogador ainda poder escolher.</p>
 
@@ -2260,7 +2344,7 @@ pre.bloco-codigo {
     <p>Os capítulos de <a href="#cap5">Combate</a> e de
     <a href="#cap7">Criação de habilidades</a> apontam para cá. Se você quer saber
     <em>quanto custa</em> aplicar uma condição numa habilidade que você está
-    montando, é no Capítulo Sete. Aqui é o que ela faz quando cai em você.</p>
+    montando, é no <a href="#cap7">Capítulo Sete</a>. Aqui é o que ela faz quando cai em você.</p>
   </div>
 
   <div class="ornamento">❖</div>
@@ -3122,7 +3206,7 @@ pre.bloco-codigo {
     <div class="cartao"><h5>Criar ou melhorar</h5><p>Cada Ação é um período de trabalho com
     um Kit de Criação: fabricar, subir a classe de um item, reparar, desmontar.</p></div>
     <div class="cartao"><h5>Desenvolver uma habilidade</h5><p>Uma Ação para projetar e
-    treinar uma habilidade nova pelo motor do Capítulo Sete. Teste de <strong>Mitologia</strong>
+    treinar uma habilidade nova pelo motor do <a href="#cap7">Capítulo Sete</a>. Teste de <strong>Mitologia</strong>
     (elemental), <strong>Atletismo</strong> (física) ou <strong>Manufatura</strong>
     (médica) contra <strong>CD 10 + o custo</strong> dela. Em uma falha, você entende onde
     errou e tenta de novo no próximo Interlúdio.</p></div>
@@ -3398,7 +3482,7 @@ pre.bloco-codigo {
   <div class="nota">
     <p><strong>Um aviso para o Mestre.</strong> O quanto um herói vale em Kleos cresce
     devagar: um personagem de nível 20 vale menos de <em>três</em> vezes um de nível 1,
-    não vinte. A tabela de Kleos do Grupo, no Bestiário, foi medida no simulador e
+    não vinte. A tabela de Kleos do Grupo, no <a href="bestiario.html#secao-3">Bestiário</a>, foi medida no simulador e
     corrigida por causa disso — a primeira versão mandava um grupo de nível 15 contra
     monstros três degraus acima do que ele aguenta.</p>
   </div>
@@ -3490,13 +3574,13 @@ pre.bloco-codigo {
   <p><strong>O que ainda falta.</strong> A progressão dos níveis 2 ao 20 e o capítulo
   completo de armaduras e preços. As armaduras usadas aqui são provisórias.</p>
 
-  <p><strong>O motor de habilidades foi testado.</strong> As tabelas do Capítulo Sete não
+  <p><strong>O motor de habilidades foi testado.</strong> As tabelas do <a href="#cap7">Capítulo Sete</a> não
   são chute: cada faixa de custo foi medida contra o dano de uma arma, contra o número de
   alvos que justifica uma área, e contra o orçamento de MP de um dia inteiro de aventura.</p>
 
-  <p><strong>Outros livros.</strong> O <em>Bestiário</em> é do Mestre: traz a
+  <p><strong>Outros livros.</strong> O <a href="bestiario.html"><em>Bestiário</em></a> é do Mestre: traz a
   Escala de Kleos, o motor de criação de monstros e 38 criaturas. O
-  <em>Grimório</em> traz a Magia da Névoa. E a <em>Ficha do Herói</em> é um livro
+  <a href="grimorio.html"><em>Grimório</em></a> traz a Magia da Névoa. E a <a href="ficha.html"><em>Ficha do Herói</em></a> é um livro
   só dela: preenche na tela, aceita o retrato do personagem e sai em PDF.</p>
 </footer>
 
@@ -3552,5 +3636,6 @@ function rolar(modo) {
   detalhe.innerHTML = explicacao + 'Somando o bônus de +5, deu <b>' + total + '</b>.<br>' + veredito;
 }
 </script>
+<aside class="aviso-independencia" role="note"><strong>Projeto independente, não oficial e sem fins lucrativos.</strong> <span><em>Percy Jackson</em> e os elementos próprios dessa franquia pertencem aos seus respectivos autores e titulares, incluindo Rick Riordan e empresas licenciadas. Este projeto não é afiliado, aprovado ou patrocinado por eles.</span></aside>
 </body>
 </html>

@@ -78,6 +78,8 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 1.25rem; }
 
 body {
   margin: 0;
@@ -88,6 +90,86 @@ body {
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
 }
+
+.mancha p a, .mancha li a, .mancha td a, .colofao a {
+  color: var(--acento);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--acento) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.mancha a:focus-visible, .biblioteca-flutuante a:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}
+
+/* ============ MINIESTANTE FLUTUANTE ============ */
+.biblioteca-flutuante {
+  position: fixed; right: clamp(.65rem, 2vw, 1.25rem); bottom: 1rem;
+  z-index: 120; font-family: var(--sans); color: var(--texto);
+}
+.biblioteca-flutuante > summary {
+  list-style: none; width: 2.35rem; height: 2.35rem;
+  display: grid; place-items: center; margin-left: auto;
+  border: 1px solid var(--bronze); border-radius: 50%;
+  color: var(--bronze); background: var(--papel);
+  box-shadow: 0 .35rem 1rem var(--sombra); cursor: pointer;
+  transition: transform .16s ease, background .16s ease, color .16s ease;
+}
+.biblioteca-flutuante > summary::-webkit-details-marker { display: none; }
+.biblioteca-flutuante > summary span { font-size: 1.38rem; line-height: 1; }
+.biblioteca-flutuante > summary:hover,
+.biblioteca-flutuante > summary:focus-visible,
+.biblioteca-flutuante[open] > summary {
+  color: var(--papel); background: var(--acento); transform: translateY(-2px);
+  outline: none;
+}
+.biblioteca-flutuante nav {
+  position: absolute; right: 0; bottom: calc(100% + .55rem);
+  width: min(15rem, calc(100vw - 1.2rem)); padding: .55rem;
+  border: 1px solid var(--borda-forte); border-radius: 4px;
+  background: var(--papel); box-shadow: 0 .7rem 2rem var(--sombra);
+}
+.biblioteca-flutuante nav > strong {
+  display: block; padding: .15rem .3rem .45rem;
+  color: var(--texto-suave); font-size: .62rem;
+  text-transform: uppercase; letter-spacing: .14em;
+}
+.biblioteca-flutuante nav a {
+  display: grid; grid-template-columns: 1.65rem 1fr; gap: .55rem;
+  align-items: center; padding: .38rem .35rem;
+  color: var(--texto); text-decoration: none; border-radius: 3px;
+}
+.biblioteca-flutuante nav a:hover { background: var(--superficie-2); }
+.biblioteca-flutuante nav a b,
+.biblioteca-flutuante nav a small { display: block; line-height: 1.2; }
+.biblioteca-flutuante nav a b { font-family: var(--serifa-titulo); font-size: .82rem; }
+.biblioteca-flutuante nav a small { margin-top: .12rem; color: var(--texto-suave); font-size: .58rem; }
+.mini-capa {
+  width: 1.45rem; height: 1.9rem; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.28); border-radius: 1px 3px 3px 1px;
+  color: #fff; font-family: var(--serifa-titulo); font-size: .64rem;
+  box-shadow: inset 2px 0 rgba(255,255,255,.14);
+}
+.mini-capa.jogador { background: #9D3E20; }
+.mini-capa.bestiario { background: #71392E; }
+.mini-capa.grimorio { background: #3B5A38; }
+.mini-capa.guia { background: #6B3FA0; }
+.mini-capa.ficha { background: #6E5518; }
+.biblioteca-flutuante nav a.estante-completa {
+  display: block; margin-top: .3rem; padding-top: .5rem;
+  border-top: 1px solid var(--borda); color: var(--acento);
+  text-align: center; font-size: .64rem; text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* ============ AVISO EDITORIAL ============ */
+.aviso-independencia {
+  max-width: var(--pagina); margin: 1rem auto 0; padding: 1rem var(--margem) 1.2rem;
+  color: var(--texto-suave); background: var(--papel); border: 1px solid var(--borda);
+  font-family: var(--sans); font-size: .68rem; line-height: 1.55; text-align: center;
+}
+.aviso-independencia strong { color: var(--bronze); }
 
 /* ============ O LIVRO COMO OBJETO ============ */
 /* Uma coluna única, da capa à contracapa. */
@@ -533,13 +615,14 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 .colofao h3 { margin-top: 0; color: var(--texto); }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
 
 /* ============ IMPRESSÃO ============ */
 @media print {
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
-  .rolador, .botoes { display: none !important; }
+  .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
   .livro { border: none; max-width: none; background: #fff; }
   .mancha { padding: 0; }
   .capa-pagina { background: #fff; page-break-after: always; border: none; }

@@ -100,7 +100,7 @@ Isso acontece porque a Tábua cresce cerca de 35% por degrau enquanto o grupo
 cresce cerca de 10% por nível.
 
 Quando precisar de um meio-termo, **não invente um Kleos quebrado**: monte o
-encontro com criaturas menores somadas, usando as fórmulas da seção 5. Um Kleos 5
+encontro com criaturas menores somadas, usando as fórmulas da [seção 5](#secao-5). Um Kleos 5
 mais um Kleos 2 dá um encontro entre 5 e 6 com muito mais precisão do que
 qualquer ajuste na ficha de um monstro só.
 
@@ -108,7 +108,7 @@ qualquer ajuste na ficha de um monstro só.
 
 Se um grupo grande de nível alto chegar a somar Kleos 12 ou mais, a conta diz que
 eles poderiam enfrentar um deus de igual para igual. Deixe. O que impede isso não
-é a matemática, é a seção 7: **deuses não morrem** — são derrotados, recuam e
+é a matemática, é a [seção 7](#secao-7): **deuses não morrem** — são derrotados, recuam e
 guardam rancor. E um Cataclisma não cai por dano nenhum, só pelo Selo.
 
 ## 4. A Regra da Moira
@@ -227,7 +227,7 @@ quase conseguiriam enfrentar. **Efeitos de derrota instantânea ignoram a escala
 pergunta.
 
 **Um deus** é Kleos 10 e ainda assim é invencível, porque não se mata um deus —
-ver a seção 7.
+ver a [seção 7](#secao-7).
 
 Quando uma criatura tiver um efeito que possa acabar com um personagem sem
 passar por PV, o Mestre deve avisar a mesa por dentro da ficção: a estátua no

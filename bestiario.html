@@ -87,6 +87,8 @@
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 1.25rem; }
 
 body {
   margin: 0;
@@ -97,6 +99,86 @@ body {
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
 }
+
+.mancha p a, .mancha li a, .mancha td a, .colofao a {
+  color: var(--acento);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--acento) 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.mancha a:focus-visible, .biblioteca-flutuante a:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}
+
+/* ============ MINIESTANTE FLUTUANTE ============ */
+.biblioteca-flutuante {
+  position: fixed; right: clamp(.65rem, 2vw, 1.25rem); bottom: 1rem;
+  z-index: 120; font-family: var(--sans); color: var(--texto);
+}
+.biblioteca-flutuante > summary {
+  list-style: none; width: 2.35rem; height: 2.35rem;
+  display: grid; place-items: center; margin-left: auto;
+  border: 1px solid var(--bronze); border-radius: 50%;
+  color: var(--bronze); background: var(--papel);
+  box-shadow: 0 .35rem 1rem var(--sombra); cursor: pointer;
+  transition: transform .16s ease, background .16s ease, color .16s ease;
+}
+.biblioteca-flutuante > summary::-webkit-details-marker { display: none; }
+.biblioteca-flutuante > summary span { font-size: 1.38rem; line-height: 1; }
+.biblioteca-flutuante > summary:hover,
+.biblioteca-flutuante > summary:focus-visible,
+.biblioteca-flutuante[open] > summary {
+  color: var(--papel); background: var(--acento); transform: translateY(-2px);
+  outline: none;
+}
+.biblioteca-flutuante nav {
+  position: absolute; right: 0; bottom: calc(100% + .55rem);
+  width: min(15rem, calc(100vw - 1.2rem)); padding: .55rem;
+  border: 1px solid var(--borda-forte); border-radius: 4px;
+  background: var(--papel); box-shadow: 0 .7rem 2rem var(--sombra);
+}
+.biblioteca-flutuante nav > strong {
+  display: block; padding: .15rem .3rem .45rem;
+  color: var(--texto-suave); font-size: .62rem;
+  text-transform: uppercase; letter-spacing: .14em;
+}
+.biblioteca-flutuante nav a {
+  display: grid; grid-template-columns: 1.65rem 1fr; gap: .55rem;
+  align-items: center; padding: .38rem .35rem;
+  color: var(--texto); text-decoration: none; border-radius: 3px;
+}
+.biblioteca-flutuante nav a:hover { background: var(--superficie-2); }
+.biblioteca-flutuante nav a b,
+.biblioteca-flutuante nav a small { display: block; line-height: 1.2; }
+.biblioteca-flutuante nav a b { font-family: var(--serifa-titulo); font-size: .82rem; }
+.biblioteca-flutuante nav a small { margin-top: .12rem; color: var(--texto-suave); font-size: .58rem; }
+.mini-capa {
+  width: 1.45rem; height: 1.9rem; display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.28); border-radius: 1px 3px 3px 1px;
+  color: #fff; font-family: var(--serifa-titulo); font-size: .64rem;
+  box-shadow: inset 2px 0 rgba(255,255,255,.14);
+}
+.mini-capa.jogador { background: #9D3E20; }
+.mini-capa.bestiario { background: #71392E; }
+.mini-capa.grimorio { background: #3B5A38; }
+.mini-capa.guia { background: #6B3FA0; }
+.mini-capa.ficha { background: #6E5518; }
+.biblioteca-flutuante nav a.estante-completa {
+  display: block; margin-top: .3rem; padding-top: .5rem;
+  border-top: 1px solid var(--borda); color: var(--acento);
+  text-align: center; font-size: .64rem; text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* ============ AVISO EDITORIAL ============ */
+.aviso-independencia {
+  max-width: var(--pagina); margin: 1rem auto 0; padding: 1rem var(--margem) 1.2rem;
+  color: var(--texto-suave); background: var(--papel); border: 1px solid var(--borda);
+  font-family: var(--sans); font-size: .68rem; line-height: 1.55; text-align: center;
+}
+.aviso-independencia strong { color: var(--bronze); }
 
 /* ============ O LIVRO COMO OBJETO ============ */
 /* Uma coluna única, da capa à contracapa. */
@@ -542,13 +624,14 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 .colofao h3 { margin-top: 0; color: var(--texto); }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
 
 /* ============ IMPRESSÃO ============ */
 @media print {
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
-  .rolador, .botoes { display: none !important; }
+  .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
   .livro { border: none; max-width: none; background: #fff; }
   .mancha { padding: 0; }
   .capa-pagina { background: #fff; page-break-after: always; border: none; }
@@ -711,6 +794,7 @@ pre.bloco-codigo {
 </style>
 </head>
 <body>
+<details class="biblioteca-flutuante"><summary aria-label="Abrir os outros livros" title="Outros livros"><span aria-hidden="true">♆</span></summary><nav aria-label="Outros livros"><strong>Outros livros</strong><a href="livro-do-jogador.html"><span class="mini-capa jogador">I</span><span><b>Livro do Jogador</b><small>abrir livro</small></span></a><a href="grimorio.html"><span class="mini-capa grimorio">III</span><span><b>Grimório</b><small>abrir livro</small></span></a><a href="guia.html"><span class="mini-capa guia">IV</span><span><b>Guia do Mestre</b><small>abrir livro</small></span></a><a href="ficha.html"><span class="mini-capa ficha">V</span><span><b>Ficha do Herói</b><small>abrir livro</small></span></a><a class="estante-completa" href="index.html">Ver a estante completa</a></nav></details>
 <div class="livro">
 
 <div class="capa-pagina frente">
@@ -754,13 +838,13 @@ pre.bloco-codigo {
 <section class="capitulo" id="parte1">
 <h2>Parte I — A Escala de Kleos</h2>
 <div class="ornamento">❖</div>
-<h2>1. O que é Kleos</h2>
+<h2 id="secao-1">1. O que é Kleos</h2>
 <p><strong>Κλέος</strong> era, para os gregos, a glória que sobrevive a quem a conquistou. Não a força de um herói: o tamanho da história que contam sobre ele depois.</p>
 <p>Neste livro, o <strong>Kleos</strong> de uma criatura mede exatamente isso — <strong>quanta glória custa derrubá-la</strong>. E, porque glória e perigo são a mesma moeda na boca de um poeta, ele mede também quantos semideuses treinados são necessários para sobreviver ao encontro.</p>
 <div class="destaque"><p><strong>A regra em uma frase:</strong> uma criatura de <strong>Kleos N</strong> é um combate justo e perigoso para <strong>N semideuses</strong>.</p></div>
 <p>Kleos 1 é uma criatura que um único semideus resolve. Kleos 10 é um deus olímpico, e dez semideuses ainda vão sangrar por isso. Kleos 11 não é para ser vencido por semideuses de jeito nenhum.</p>
 <div class="ornamento">❖</div>
-<h2>2. Os onze degraus</h2>
+<h2 id="secao-2">2. Os onze degraus</h2>
 <p>Cada degrau tem nome, porque "monstro de dificuldade 6" não é coisa que se diga numa mesa.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Kleos</th><th>Degrau</th><th>O que a morte dessa criatura significa</th></tr></thead>
@@ -779,7 +863,7 @@ pre.bloco-codigo {
 </tbody>
 </table></div>
 <div class="ornamento">❖</div>
-<h2>3. O Kleos de um grupo</h2>
+<h2 id="secao-3">3. O Kleos de um grupo</h2>
 <p>Cada semideus vale um tanto de Kleos, e esse valor cresce com o nível — mas <strong>cresce bem mais devagar do que a escala de monstros</strong>. Um herói de nível 20 não vale vinte vezes um de nível 1; vale menos de três vezes.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Nível do personagem</th><th>Kleos que ele vale</th></tr></thead>
@@ -819,10 +903,10 @@ pre.bloco-codigo {
 <p>Para reproduzir: <span class="dado">sim/calibrar_kleos.py</span>.</p>
 <h3>Onde a escala fica grossa</h3>
 <p>Nos degraus altos, um passo de Kleos é um salto grande demais. Um trio de nível 5 vence um Kleos 5 em 95% das vezes e um Kleos 6 em 34% — não existe nada no meio. Isso acontece porque a Tábua cresce cerca de 35% por degrau enquanto o grupo cresce cerca de 10% por nível.</p>
-<p>Quando precisar de um meio-termo, <strong>não invente um Kleos quebrado</strong>: monte o encontro com criaturas menores somadas, usando as fórmulas da seção 5. Um Kleos 5 mais um Kleos 2 dá um encontro entre 5 e 6 com muito mais precisão do que qualquer ajuste na ficha de um monstro só.</p>
+<p>Quando precisar de um meio-termo, <strong>não invente um Kleos quebrado</strong>: monte o encontro com criaturas menores somadas, usando as fórmulas da <a href="#secao-5">seção 5</a>. Um Kleos 5 mais um Kleos 2 dá um encontro entre 5 e 6 com muito mais precisão do que qualquer ajuste na ficha de um monstro só.</p>
 <h3>Acima de Kleos 9, a ficção manda</h3>
-<p>Se um grupo grande de nível alto chegar a somar Kleos 12 ou mais, a conta diz que eles poderiam enfrentar um deus de igual para igual. Deixe. O que impede isso não é a matemática, é a seção 7: <strong>deuses não morrem</strong> — são derrotados, recuam e guardam rancor. E um Cataclisma não cai por dano nenhum, só pelo Selo.</p>
-<h2>4. A Regra da Moira</h2>
+<p>Se um grupo grande de nível alto chegar a somar Kleos 12 ou mais, a conta diz que eles poderiam enfrentar um deus de igual para igual. Deixe. O que impede isso não é a matemática, é a <a href="#secao-7">seção 7</a>: <strong>deuses não morrem</strong> — são derrotados, recuam e guardam rancor. E um Cataclisma não cai por dano nenhum, só pelo Selo.</p>
+<h2 id="secao-4">4. A Regra da Moira</h2>
 <p>Compare a <strong>soma do Kleos de todos os inimigos</strong> com o <strong>Kleos do Grupo</strong>.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Kleos dos inimigos</th><th>O que acontece</th></tr></thead>
@@ -849,7 +933,7 @@ pre.bloco-codigo {
 <div class="destaque"><p><strong>Sobre o Oráculo:</strong> um personagem de suporte sozinho vale menos Kleos do que a tabela diz. Kleos pressupõe um grupo com alguém que bate e alguém que aguenta. Um grupo só de suporte deve contar seu Kleos como um a menos.</p></div>
 <p>Para reproduzir: <span class="dado">sim/kleos.py</span>.</p>
 <div class="ornamento">❖</div>
-<h2>5. Somando monstros</h2>
+<h2 id="secao-5">5. Somando monstros</h2>
 <p>Vários inimigos <strong>não</strong> somam direto — e somam para <strong>menos</strong>, não para mais.</p>
 <p>O motivo é a economia de ações: o grupo concentra fogo, derruba um inimigo por vez, e cada inimigo morto para de causar dano para sempre. Um único monstro com o mesmo total de PV mantém o dano inteiro até o último ponto de vida.</p>
 <div class="destaque"><p>Eu escrevi a regra oposta na primeira versão deste capítulo. A simulação me desmentiu, e o número manda.</p></div>
@@ -897,14 +981,14 @@ pre.bloco-codigo {
 <ul><li>inimigos espalhados pelo mapa, longe demais para focar;</li><li>inimigos que chegam em ondas, um substituindo o outro;</li><li>inimigos que curam ou ressuscitam uns aos outros;</li><li>terreno que impede o grupo de escolher alvos.</li></ul>
 <p>Nesses casos, use a <strong>soma direta</strong>. Um bando cercando o grupo num corredor estreito não é o mesmo bando espalhado por um campo aberto — e essa diferença é do mapa, não da ficha.</p>
 <div class="ornamento">❖</div>
-<h2>6. O que Kleos não mede</h2>
+<h2 id="secao-6">6. O que Kleos não mede</h2>
 <p>Kleos mede o combate. Não mede tudo, e três criaturas neste livro provam isso.</p>
 <p><strong>Medusa</strong> é Kleos 5, mas o olhar dela petrifica. Um grupo de nível 1 que não saiba do espelho morre inteiro contra uma criatura que a tabela diz que eles quase conseguiriam enfrentar. <strong>Efeitos de derrota instantânea ignoram a escala.</strong></p>
 <p><strong>A Esfinge</strong> é Kleos 5 e pode nunca rolar iniciativa. O perigo dela é uma pergunta.</p>
-<p><strong>Um deus</strong> é Kleos 10 e ainda assim é invencível, porque não se mata um deus — ver a seção 7.</p>
+<p><strong>Um deus</strong> é Kleos 10 e ainda assim é invencível, porque não se mata um deus — ver a <a href="#secao-7">seção 7</a>.</p>
 <p>Quando uma criatura tiver um efeito que possa acabar com um personagem sem passar por PV, o Mestre deve avisar a mesa por dentro da ficção: a estátua no jardim, o cheiro de enxofre, o silêncio dos pássaros. <strong>Kleos é uma promessa sobre dano, não sobre injustiça.</strong></p>
 <div class="ornamento">❖</div>
-<h2>7. O que morre e o que não morre</h2>
+<h2 id="secao-7">7. O que morre e o que não morre</h2>
 <h3>Kleos 1–8 — Dissolução</h3>
 <p>Monstros não morrem de verdade. Ao chegar a 0 PV, o corpo se desfaz em <strong>pó dourado</strong> e a essência escorre para o Tártaro, onde vai se remontando ao longo de anos ou séculos. Matar um monstro é adiá-lo.</p>
 <p>Um monstro que já foi morto pelo mesmo herói antes o reconhece, e volta com rancor.</p>
@@ -917,7 +1001,7 @@ pre.bloco-codigo {
 <p>Tifão foi enterrado sob o Etna. Cronos foi cortado em pedaços e espalhado. Gaia foi devolvida ao sono. Nenhum deles morreu.</p>
 <p><strong>A regra:</strong> todo Cataclisma tem um <strong>Selo</strong> escrito na ficha. Sem cumprir o Selo, o dano só o mantém ocupado.</p>
 <div class="ornamento">❖</div>
-<h2>8. Recompensa</h2>
+<h2 id="secao-8">8. Recompensa</h2>
 <p>O Kleos de um inimigo derrotado é a medida da recompensa: experiência, favores, reputação, atenção divina.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Kleos vencido</th><th>O que o mundo faz</th></tr></thead>
@@ -937,12 +1021,12 @@ pre.bloco-codigo {
 <p>Motor de criação. Toda criatura deste livro foi construída com estas regras, e qualquer Mestre pode construir outras em dez minutos.</p>
 <p>O princípio é o mesmo do Livro I: <strong>a aparência é livre, o perfil mecânico não é.</strong> Uma serpente de bronze, um cão de fogo e um tio esquisito da vizinhança podem ter o mesmo perfil de Kleos 3.</p>
 <div class="ornamento">❖</div>
-<h2>9. As sete etapas</h2>
+<h2 id="secao-9">9. As sete etapas</h2>
 <ol><li>Escolha o <strong>Kleos</strong>.</li><li>Copie a linha da <strong>Tábua de Kleos</strong>.</li><li>Escolha um <strong>Arquétipo</strong> e aplique as trocas.</li><li>Reparta o <strong>dano por rodada</strong> entre os ataques.</li><li>Gaste o <strong>Orçamento</strong> em Traços e Poderes.</li><li>Adicione <strong>Arremetidas</strong>, <strong>Recusas</strong> e <strong>Vontade do Lugar</strong>, se o Kleos</li></ol>
 <p>permitir.</p>
 <ol><li>Escreva a <strong>Fraqueza Mítica</strong>. Não é opcional.</li></ol>
 <div class="ornamento">❖</div>
-<h2>10. A Tábua de Kleos</h2>
+<h2 id="secao-10">10. A Tábua de Kleos</h2>
 <div class="rolagem"><table>
 <thead><tr><th>Kleos</th><th>PV</th><th>DEF</th><th>Ataque</th><th>Dano por rodada</th><th>CD</th><th>Resistências fortes</th><th>Resistências fracas</th></tr></thead>
 <tbody>
@@ -978,7 +1062,7 @@ pre.bloco-codigo {
 </tbody>
 </table></div>
 <div class="ornamento">❖</div>
-<h2>11. Arquétipos</h2>
+<h2 id="secao-11">11. Arquétipos</h2>
 <p>O Arquétipo troca números entre si sem mudar o Kleos. Escolha um.</p>
 <h3>Bruto</h3>
 <p>Grande, lento, devastador. <em>Minotauro, Ciclope, Gigante.</em></p>
@@ -991,7 +1075,7 @@ pre.bloco-codigo {
 <ul><li><strong>+2 DEF</strong>, <strong>−25% PV</strong></li><li>Imunidade a veneno, doença e efeitos mentais é comum</li></ul>
 <h3>Enxame</h3>
 <p>Não é uma criatura: são muitas. <em>Estinfálides, matilha, mirmidões.</em></p>
-<ul><li>Divide-se em <strong>3 a 6 criaturas de Kleos −2</strong></li><li>Some <strong>+1 Kleos</strong> ao total se forem mais de quatro (Regra da Moira, seção 5)</li></ul>
+<ul><li>Divide-se em <strong>3 a 6 criaturas de Kleos −2</strong></li><li>Some <strong>+1 Kleos</strong> ao total se forem mais de quatro (<a href="#secao-5">Regra da Moira</a>)</li></ul>
 <h3>Conjurador</h3>
 <p>Bate pouco, muda o campo. <em>Esfinge, Hécate, Circe.</em></p>
 <ul><li><strong>−40% do dano por rodada</strong></li><li>Ganha <strong>+2 Poderes</strong> e <strong>+1 na CD</strong></li><li>Costuma atacar Resistências em vez da DEF</li></ul>
@@ -1002,7 +1086,7 @@ pre.bloco-codigo {
 <p>Ocupa um pedaço do mapa. <em>Escila, Caríbdis, Tifão.</em></p>
 <ul><li><strong>+50% PV</strong>, <strong>−2 DEF</strong></li><li>Ataca <strong>múltiplos alvos simultâneos</strong> por padrão</li><li>Não pode ser agarrado, empurrado nem derrubado</li></ul>
 <div class="ornamento">❖</div>
-<h2>12. Repartindo o dano</h2>
+<h2 id="secao-12">12. Repartindo o dano</h2>
 <p>Pegue o <strong>dano por rodada</strong> da Tábua e divida pelo número de ataques. Converta em dados, mirando a média.</p>
 <div class="rolagem"><table>
 <thead><tr><th>Média desejada</th><th>Dado + fixo</th></tr></thead>
@@ -1019,7 +1103,7 @@ pre.bloco-codigo {
 </table></div>
 <p><strong>Ataques erram.</strong> A Tábua já assume isso: os valores são dano bruto por rodada supondo que todos os ataques acertem. Contra a DEF típica do grupo, o dano real sai perto de 60% disso. Não compense — a tábua foi calibrada assim.</p>
 <div class="ornamento">❖</div>
-<h2>13. Traços</h2>
+<h2 id="secao-13">13. Traços</h2>
 <p>Traços são passivos. Sempre ligados, sem custo. Cada criatura tem de 1 a 5, conforme o orçamento.</p>
 <p><strong>Traços de resistência</strong></p>
 <ul><li><strong>Couro Impossível</strong> — resistência a dano físico de armas não divinas.</li><li><strong>Regeneração</strong> — recupera PV iguais ao Kleos no início de cada turno. Precisa</li></ul>
@@ -1039,14 +1123,14 @@ pre.bloco-codigo {
 <ul><li><strong>Disfarce da Névoa</strong> — mortais comuns veem a criatura como algo mundano.</li><li><strong>Descrença Difícil</strong> — Testes de Descrença contra as criações dessa criatura</li></ul>
 <p>têm Desvantagem.</p>
 <div class="ornamento">❖</div>
-<h2>14. Poderes</h2>
+<h2 id="secao-14">14. Poderes</h2>
 <p>Poderes são ações ativas. <strong>Monstros não gastam MP.</strong> Cada Poder é limitado de uma destas três formas:</p>
 <div class="rolagem"><table>
 <thead><tr><th>Limite</th><th>Como funciona</th></tr></thead>
 <tbody>
 <tr><td><strong>Recarga (5–6)</strong></td><td>No início do turno da criatura, role 1d6. Com 5 ou 6, o Poder volta a ficar disponível.</td></tr>
 <tr><td><strong>N vezes por combate</strong></td><td>Simples e previsível. Bom para efeitos que decidem a luta.</td></tr>
-<tr><td><strong>Custa Arremetidas</strong></td><td>Só para Kleos 6+. Ver seção 15.</td></tr>
+<tr><td><strong>Custa Arremetidas</strong></td><td>Só para Kleos 6+. Ver <a href="#secao-15">seção 15</a>.</td></tr>
 </tbody>
 </table></div>
 <h3>Potência dos Poderes</h3>
@@ -1064,7 +1148,7 @@ pre.bloco-codigo {
 <p>Um Poder de dano em área usa a <strong>CD</strong> da criatura contra <strong>Reflexos</strong>. Um Poder de condição usa a CD contra <strong>Fortitude</strong> ou <strong>Vontade</strong>, conforme a natureza.</p>
 <p><strong>A regra de ouro:</strong> nenhum Poder deve tirar um personagem do combate por mais de uma rodada sem permitir um novo teste no fim de cada turno dele.</p>
 <div class="ornamento">❖</div>
-<h2>15. Arremetidas <em>(Kleos 6+)</em></h2>
+<h2 id="secao-15">15. Arremetidas <em>(Kleos 6+)</em></h2>
 <p>Monstros grandes perdem para grupos porque agem uma vez enquanto o grupo age quatro. <strong>Arremetidas</strong> corrigem isso.</p>
 <div class="destaque"><p>Ao <strong>fim do turno de outra criatura</strong>, o monstro pode gastar uma Arremetida para realizar uma ação da sua lista de Arremetidas. Elas recarregam todas no início do turno dele.</p></div>
 <p>Custos típicos:</p>
@@ -1080,24 +1164,24 @@ pre.bloco-codigo {
 </table></div>
 <p>Uma criatura <strong>Atordoada, Paralisada ou Inconsciente não usa Arremetidas</strong>. É assim que o controle continua valendo a pena contra chefes.</p>
 <div class="ornamento">❖</div>
-<h2>16. Recusas <em>(Kleos 5+)</em></h2>
+<h2 id="secao-16">16. Recusas <em>(Kleos 5+)</em></h2>
 <div class="destaque"><p>Quando a criatura falha em um Teste de Resistência, ela pode gastar uma <strong>Recusa</strong> para transformar a falha em sucesso.</p></div>
 <p>Recusas representam o peso do mito: a Hidra recusa morrer, o deus recusa ser comandado. Elas recarregam no Descanso Longo, ou no início de um novo combate se a ficção justificar.</p>
 <p><strong>Sempre diga à mesa quando uma Recusa for gasta.</strong> O jogador precisa entender que gastou o recurso dele em algo que funcionou e foi negado — senão parece trapaça.</p>
 <div class="ornamento">❖</div>
-<h2>17. Vontade do Lugar <em>(Kleos 8+, opcional)</em></h2>
+<h2 id="secao-17">17. Vontade do Lugar <em>(Kleos 8+, opcional)</em></h2>
 <p>Criaturas que vivem há séculos no mesmo lugar moldam o lugar.</p>
 <div class="destaque"><p>Na <strong>contagem de iniciativa 20</strong> (perdendo empates), o ambiente age.</p></div>
 <p>Cada criatura com Vontade do Lugar tem três efeitos, e o Mestre escolhe um por rodada, sem repetir dois seguidos. Exemplos:</p>
 <ul><li>raízes brotam e criaturas na área fazem Reflexos ou ficam Presas;</li><li>a escuridão engrossa e a área vira obscurecimento pesado por uma rodada;</li><li>o chão treme e criaturas fazem Reflexos ou caem;</li><li>vozes sussurram e uma criatura faz Vontade ou fica Amedrontada.</li></ul>
 <p>Fora do covil, esses efeitos não existem. Vale a pena atrair o monstro para fora.</p>
 <div class="ornamento">❖</div>
-<h2>18. Presença <em>(Kleos 9+)</em></h2>
+<h2 id="secao-18">18. Presença <em>(Kleos 9+)</em></h2>
 <p>Uma aura, ativa desde o momento em que a criatura é vista.</p>
 <div class="destaque"><p>Toda criatura que começar seu turno a até 18 m e puder ver a criatura faz um Teste de <strong>Vontade</strong> contra a CD dela. Em uma falha, fica <strong>Amedrontada</strong> por uma rodada. Quem passar fica imune à Presença daquela criatura por 24 horas.</p></div>
 <p>Presença é o que faz um deus parecer um deus antes de rolar qualquer dano.</p>
 <div class="ornamento">❖</div>
-<h2>19. Fraqueza Mítica <em>(obrigatória)</em></h2>
+<h2 id="secao-19">19. Fraqueza Mítica <em>(obrigatória)</em></h2>
 <p><strong>Toda criatura deste livro tem uma fraqueza nomeada.</strong> Não é decoração: é o motivo de existir uma cena de investigação antes da cena de luta.</p>
 <p>Uma Fraqueza Mítica é algo que os jogadores podem <strong>descobrir</strong> e <strong>usar</strong>.</p>
 <div class="rolagem"><table>
@@ -1114,7 +1198,7 @@ pre.bloco-codigo {
 <p>Descobrir a fraqueza é um teste de <strong>Mitologia</strong> contra CD <strong>10 + Kleos</strong>, ou uma Ação de Interlúdio de Pesquisa, ou simplesmente perguntar a alguém que sabe.</p>
 <p>Uma fraqueza explorada normalmente concede <strong>Vantagem</strong>, ignora uma resistência, ou anula um Traço. Fraquezas que <strong>matam de imediato</strong> existem, mas devem ser raras e caras de conseguir.</p>
 <div class="ornamento">❖</div>
-<h2>20. Modelo de registro</h2>
+<h2 id="secao-20">20. Modelo de registro</h2>
 <pre class="bloco-codigo">NOME — Kleos N (Degrau)
 Tipo, tamanho · Arquétipo
 PV     ·  DEF     ·  Movimento
@@ -1141,7 +1225,7 @@ O QUE ACONTECE AO MORRER
   ...</pre>
 <p>O último campo importa. Um monstro que vira pó dourado, um autômato que vira sucata aproveitável e um deus que some numa coluna de fogo contam histórias diferentes sobre o mesmo combate.</p>
 <div class="ornamento">❖</div>
-<h2>21. Limites gerais</h2>
+<h2 id="secao-21">21. Limites gerais</h2>
 <ol><li>Todo monstro começa de uma linha da Tábua de Kleos.</li><li>Arquétipos trocam números, nunca os aumentam de graça.</li><li>Nenhum Poder tira um personagem do combate por mais de uma rodada sem novo</li></ol>
 <p>teste.</p>
 <ol><li>Efeitos de derrota instantânea exigem aviso dentro da ficção.</li><li>Arremetidas só existem a partir de Kleos 6, e param quando a criatura é</li></ol>
@@ -1154,12 +1238,12 @@ O QUE ACONTECE AO MORRER
 <h2>Parte III — Criaturas de Kleos 1 a 5</h2>
 <p>Do que ninguém lembra ao que ganha apelido.</p>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 1 <span>·</span> Rumor</h2>
+<div class="degrau" id="kleos-1"><h2>Kleos 1 <span>·</span> Rumor</h2>
 <p>Um semideus resolve sozinho. Servem para ensinar as regras, gastar recursos e</p>
 </div>
 <p>lembrar ao grupo que o mundo mortal também morde.*</p>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-satiro-errante">
 <h3>SÁTIRO ERRANTE<span class="kleos">Kleos 1 · Rumor</span></h3>
 <p class="tipo">Humanoide, médio · Veloz</p>
 <p class="status"><strong>PV</strong> 8 <span class="sep">·</span> <strong>DEF</strong> 13 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +3 <span class="sep">·</span> <strong>CD</strong> 11<br><strong>Fortitude</strong> +0 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +3</p>
@@ -1169,7 +1253,7 @@ O QUE ACONTECE AO MORRER
 <ul><li><strong>Cajado.</strong> +3, alcance 1,5 m, <strong>1d6 + 2</strong> de concussão.</li></ul>
 <div class="fraqueza">
 <p class="rotulo-bloco">FRAQUEZA MÍTICA</p>
-<p>Fome e covardia. Um sátiro errante aceita negociar por comida de verdade: uma refeição <strong>Farta</strong> ou melhor (Livro I, seção 55) encerra a hostilidade sem rolagens. Muitos sabem coisas úteis e trocam por bolotas de café.</p>
+<p>Fome e covardia. Um sátiro errante aceita negociar por comida de verdade: uma refeição <strong>Farta</strong> ou melhor (<a href="livro-do-jogador.html#cap8">Interlúdio, Livro do Jogador</a>) encerra a hostilidade sem rolagens. Muitos sabem coisas úteis e trocam por bolotas de café.</p>
 </div>
 <div class="morte">
 <p class="rotulo-bloco">AO MORRER</p>
@@ -1177,7 +1261,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-mercenario-mortal">
 <h3>MERCENÁRIO MORTAL<span class="kleos">Kleos 1 · Rumor</span></h3>
 <p class="tipo">Humanoide, médio · padrão</p>
 <p class="status"><strong>PV</strong> 11 <span class="sep">·</span> <strong>DEF</strong> 13 (couro batido) <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +3 <span class="sep">·</span> <strong>CD</strong> 11<br><strong>Fortitude</strong> +3 <span class="sep">·</span> <strong>Reflexos</strong> +1 <span class="sep">·</span> <strong>Vontade</strong> +0</p>
@@ -1196,7 +1280,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-cao-infernal-filhote">
 <h3>CÃO INFERNAL FILHOTE<span class="kleos">Kleos 1 · Rumor</span></h3>
 <p class="tipo">Monstruosidade, pequeno · Veloz</p>
 <p class="status"><strong>PV</strong> 8 <span class="sep">·</span> <strong>DEF</strong> 13 <span class="sep">·</span> <strong>Movimento</strong> 15 m<br><strong>Ataque</strong> +3 <span class="sep">·</span> <strong>CD</strong> 11<br><strong>Fortitude</strong> +3 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +0</p>
@@ -1216,7 +1300,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-corvo-de-mau-agouro">
 <h3>CORVO DE MAU AGOURO<span class="kleos">Kleos 1 · Rumor</span></h3>
 <p class="tipo">Espírito, miúdo · Sombra</p>
 <p class="status"><strong>PV</strong> 9 <span class="sep">·</span> <strong>DEF</strong> 13 <span class="sep">·</span> <strong>Voo</strong> 15 m<br><strong>Ataque</strong> +3 <span class="sep">·</span> <strong>CD</strong> 11<br><strong>Fortitude</strong> +0 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +3<br><strong>Resistência</strong> a dano físico de armas não divinas</p>
@@ -1235,11 +1319,11 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 2 <span>·</span> Boato</h2>
+<div class="degrau" id="kleos-2"><h2>Kleos 2 <span>·</span> Boato</h2>
 <p>Comenta-se no acampamento. Dois semideuses dão conta.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-harpia-carniceira">
 <h3>HARPIA CARNICEIRA<span class="kleos">Kleos 2 · Boato</span></h3>
 <p class="tipo">Monstruosidade, média · Veloz</p>
 <p class="status"><strong>PV</strong> 17 <span class="sep">·</span> <strong>DEF</strong> 14 <span class="sep">·</span> <strong>Voo</strong> 15 m<br><strong>Ataque</strong> +4 <span class="sep">·</span> <strong>CD</strong> 12<br><strong>Fortitude</strong> +1 <span class="sep">·</span> <strong>Reflexos</strong> +4 <span class="sep">·</span> <strong>Vontade</strong> +4</p>
@@ -1259,7 +1343,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-dracena-lanceira">
 <h3>DRACENA LANCEIRA<span class="kleos">Kleos 2 · Boato</span></h3>
 <p class="tipo">Monstruosidade, média · Blindada</p>
 <p class="status"><strong>PV</strong> 17 <span class="sep">·</span> <strong>DEF</strong> 15 (escudo) <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +4 <span class="sep">·</span> <strong>CD</strong> 12<br><strong>Fortitude</strong> +4 <span class="sep">·</span> <strong>Reflexos</strong> +1 <span class="sep">·</span> <strong>Vontade</strong> +1</p>
@@ -1278,14 +1362,14 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-espirito-do-nevoeiro">
 <h3>ESPÍRITO DO NEVOEIRO<span class="kleos">Kleos 2 · Boato</span></h3>
 <p class="tipo">Espírito, médio · Sombra</p>
 <p class="status"><strong>PV</strong> 18 <span class="sep">·</span> <strong>DEF</strong> 14 <span class="sep">·</span> <strong>Flutuação</strong> 9 m<br><strong>Ataque</strong> +4 <span class="sep">·</span> <strong>CD</strong> 12<br><strong>Fortitude</strong> +1 <span class="sep">·</span> <strong>Reflexos</strong> +1 <span class="sep">·</span> <strong>Vontade</strong> +4<br><strong>Resistência</strong> a dano físico de armas não divinas <span class="sep">·</span> <strong>Imune</strong> a veneno e doença</p>
 <p class="rotulo-bloco">TRAÇOS</p>
 <ul><li><strong>Incorpóreo.</strong> Atravessa criaturas e objetos. Sofre 1d10 se terminar o turno</li></ul>
 <p>dentro de matéria sólida.</p>
-<ul><li><strong>Feito de Névoa.</strong> Um personagem que descreia dele (Livro I, seção 38) o</li></ul>
+<ul><li><strong>Feito de Névoa.</strong> Um personagem que descreia dele (<a href="grimorio.html#secao-38">Descrença, Grimório</a>) o</li></ul>
 <p>enfraquece pela metade: metade do dano, e ele perde o Incorpóreo contra ele.</p>
 <p class="rotulo-bloco">AÇÕES</p>
 <ul><li><strong>Toque Frio.</strong> +4, <strong>2d6 + 2</strong> de dano de trevas.</li></ul>
@@ -1299,7 +1383,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-lobo-de-licaao">
 <h3>LOBO DE LICAÃO<span class="kleos">Kleos 2 · Boato</span></h3>
 <p class="tipo">Licantropo, médio · Bruto</p>
 <p class="status"><strong>PV</strong> 29 <span class="sep">·</span> <strong>DEF</strong> 12 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +4 <span class="sep">·</span> <strong>CD</strong> 12<br><strong>Fortitude</strong> +4 <span class="sep">·</span> <strong>Reflexos</strong> +1 <span class="sep">·</span> <strong>Vontade</strong> +1</p>
@@ -1320,12 +1404,12 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 3 <span>·</span> Conto</h2>
+<div class="degrau" id="kleos-3"><h2>Kleos 3 <span>·</span> Conto</h2>
 <p>Vira história em volta da fogueira. Um trio de nível 1 vence isso em 82% das</p>
 </div>
 <p>vezes, com quase dois heróis no chão.*</p>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-automato-hoplita">
 <h3>AUTÔMATO HOPLITA<span class="kleos">Kleos 3 · Conto</span></h3>
 <p class="tipo">Autômato, médio · Blindado</p>
 <p class="status"><strong>PV</strong> 27 <span class="sep">·</span> <strong>DEF</strong> 16 <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +5 <span class="sep">·</span> <strong>CD</strong> 13<br><strong>Fortitude</strong> +5 <span class="sep">·</span> <strong>Reflexos</strong> +1 <span class="sep">·</span> <strong>Vontade</strong> +5<br><strong>Imune</strong> a veneno, doença, exaustão e efeitos mentais</p>
@@ -1346,7 +1430,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-empusa">
 <h3>EMPUSA<span class="kleos">Kleos 3 · Conto</span></h3>
 <p class="tipo">Monstruosidade, média · Veloz</p>
 <p class="status"><strong>PV</strong> 27 <span class="sep">·</span> <strong>DEF</strong> 15 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +5 <span class="sep">·</span> <strong>CD</strong> 13<br><strong>Fortitude</strong> +1 <span class="sep">·</span> <strong>Reflexos</strong> +5 <span class="sep">·</span> <strong>Vontade</strong> +5</p>
@@ -1368,7 +1452,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-cao-do-inferno">
 <h3>CÃO DO INFERNO<span class="kleos">Kleos 3 · Conto</span></h3>
 <p class="tipo">Monstruosidade, grande · Veloz</p>
 <p class="status"><strong>PV</strong> 27 <span class="sep">·</span> <strong>DEF</strong> 15 <span class="sep">·</span> <strong>Movimento</strong> 15 m<br><strong>Ataque</strong> +5 <span class="sep">·</span> <strong>CD</strong> 13<br><strong>Fortitude</strong> +5 <span class="sep">·</span> <strong>Reflexos</strong> +5 <span class="sep">·</span> <strong>Vontade</strong> +1</p>
@@ -1388,7 +1472,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-bando-de-estinfalides">
 <h3>BANDO DE ESTINFÁLIDES<span class="kleos">Kleos 3 · Conto</span></h3>
 <p class="tipo">Enxame · 4 aves de Kleos 1</p>
 <p>Cada ave: <strong>PV</strong> 9 · <strong>DEF</strong> 13 · <strong>Voo</strong> 15 m · <strong>Ataque</strong> +3 · <strong>CD</strong> 11 <strong>Fortitude</strong> +0 · <strong>Reflexos</strong> +3 · <strong>Vontade</strong> +0</p>
@@ -1406,11 +1490,11 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 4 <span>·</span> Façanha</h2>
+<div class="degrau" id="kleos-4"><h2>Kleos 4 <span>·</span> Façanha</h2>
 <p>Você se gaba disso, e é justo.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-minotauro">
 <h3>MINOTAURO<span class="kleos">Kleos 4 · Façanha</span></h3>
 <p class="tipo">Monstruosidade, grande · Bruto</p>
 <p class="status"><strong>PV</strong> 72 <span class="sep">·</span> <strong>DEF</strong> 14 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +6 <span class="sep">·</span> <strong>CD</strong> 14<br><strong>Fortitude</strong> +6 <span class="sep">·</span> <strong>Reflexos</strong> +2 <span class="sep">·</span> <strong>Vontade</strong> +2</p>
@@ -1433,7 +1517,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-gorgona-menor">
 <h3>GÓRGONA MENOR<span class="kleos">Kleos 4 · Façanha</span></h3>
 <p class="tipo">Monstruosidade, média · padrão</p>
 <p class="status"><strong>PV</strong> 55 <span class="sep">·</span> <strong>DEF</strong> 15 <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +6 <span class="sep">·</span> <strong>CD</strong> 14<br><strong>Fortitude</strong> +6 <span class="sep">·</span> <strong>Reflexos</strong> +6 <span class="sep">·</span> <strong>Vontade</strong> +2</p>
@@ -1456,7 +1540,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-ciclope-pastor">
 <h3>CICLOPE PASTOR<span class="kleos">Kleos 4 · Façanha</span></h3>
 <p class="tipo">Gigante, grande · Bruto</p>
 <p class="status"><strong>PV</strong> 72 <span class="sep">·</span> <strong>DEF</strong> 14 <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +6 <span class="sep">·</span> <strong>CD</strong> 14<br><strong>Fortitude</strong> +6 <span class="sep">·</span> <strong>Reflexos</strong> +2 <span class="sep">·</span> <strong>Vontade</strong> +2</p>
@@ -1477,7 +1561,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-basilisco">
 <h3>BASILISCO<span class="kleos">Kleos 4 · Façanha</span></h3>
 <p class="tipo">Monstruosidade, pequeno · Blindado / Conjurador</p>
 <p class="status"><strong>PV</strong> 41 <span class="sep">·</span> <strong>DEF</strong> 17 <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +6 <span class="sep">·</span> <strong>CD</strong> 14<br><strong>Fortitude</strong> +6 <span class="sep">·</span> <strong>Reflexos</strong> +2 <span class="sep">·</span> <strong>Vontade</strong> +6<br><strong>Imune</strong> a veneno</p>
@@ -1497,15 +1581,15 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 5 <span>·</span> Feito</h2>
+<div class="degrau" id="kleos-5"><h2>Kleos 5 <span>·</span> Feito</h2>
 <p>Ganha-se um apelido com isto.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-medusa">
 <h3>MEDUSA<span class="kleos">Kleos 5 · Feito</span></h3>
 <p class="tipo">Monstruosidade, média · Conjuradora</p>
 <p class="status"><strong>PV</strong> 80 <span class="sep">·</span> <strong>DEF</strong> 16 <span class="sep">·</span> <strong>Movimento</strong> 9 m<br><strong>Ataque</strong> +7 <span class="sep">·</span> <strong>CD</strong> 15<br><strong>Fortitude</strong> +7 <span class="sep">·</span> <strong>Reflexos</strong> +7 <span class="sep">·</span> <strong>Vontade</strong> +2</p>
-<div class="aviso"><p>⚠️ <strong>Efeito de derrota instantânea.</strong> Medusa pode tirar um personagem do jogo sem passar por PV. O Mestre <strong>precisa</strong> avisar a mesa por dentro da ficção antes: o jardim de estátuas boas demais, as estátuas com expressão de pânico, o cheiro de mofo e serpente. Ver Livro II, seção 6.</p></div>
+<div class="aviso"><p>⚠️ <strong>Efeito de derrota instantânea.</strong> Medusa pode tirar um personagem do jogo sem passar por PV. O Mestre <strong>precisa</strong> avisar a mesa por dentro da ficção antes: o jardim de estátuas boas demais, as estátuas com expressão de pânico, o cheiro de mofo e serpente. Ver <a href="#secao-6">seção 6</a>.</p></div>
 <p class="rotulo-bloco">TRAÇOS</p>
 <ul><li><strong>Disfarce da Névoa.</strong> Mantém uma loja de estátuas de jardim, um estúdio de</li></ul>
 <p>fotografia, um museu de cera. Sempre um lugar onde estátuas fazem sentido.</p>
@@ -1526,7 +1610,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-leao-de-nemeia">
 <h3>LEÃO DE NEMÉIA<span class="kleos">Kleos 5 · Feito</span></h3>
 <p class="tipo">Monstruosidade, grande · Bruto</p>
 <p class="status"><strong>PV</strong> 104 <span class="sep">·</span> <strong>DEF</strong> 14 <span class="sep">·</span> <strong>Movimento</strong> 15 m<br><strong>Ataque</strong> +7 <span class="sep">·</span> <strong>CD</strong> 15<br><strong>Fortitude</strong> +7 <span class="sep">·</span> <strong>Reflexos</strong> +7 <span class="sep">·</span> <strong>Vontade</strong> +2</p>
@@ -1548,7 +1632,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-esfinge">
 <h3>ESFINGE<span class="kleos">Kleos 5 · Feito</span></h3>
 <p class="tipo">Monstruosidade, grande · Conjuradora</p>
 <p class="status"><strong>PV</strong> 80 <span class="sep">·</span> <strong>DEF</strong> 16 <span class="sep">·</span> <strong>Voo</strong> 12 m<br><strong>Ataque</strong> +7 <span class="sep">·</span> <strong>CD</strong> 15<br><strong>Fortitude</strong> +7 <span class="sep">·</span> <strong>Reflexos</strong> +2 <span class="sep">·</span> <strong>Vontade</strong> +7</p>
@@ -1572,7 +1656,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-venti-tempestuoso">
 <h3>VENTI TEMPESTUOSO<span class="kleos">Kleos 5 · Feito</span></h3>
 <p class="tipo">Espírito, grande · Sombra / Veloz</p>
 <p class="status"><strong>PV</strong> 64 <span class="sep">·</span> <strong>DEF</strong> 17 <span class="sep">·</span> <strong>Voo</strong> 24 m<br><strong>Ataque</strong> +7 <span class="sep">·</span> <strong>CD</strong> 15<br><strong>Fortitude</strong> +2 <span class="sep">·</span> <strong>Reflexos</strong> +7 <span class="sep">·</span> <strong>Vontade</strong> +7<br><strong>Resistência</strong> a dano físico de armas não divinas <span class="sep">·</span> <strong>Imune</strong> a veneno, doença,</p>
@@ -1598,11 +1682,11 @@ O QUE ACONTECE AO MORRER
 <p>Da canção ao fim do mundo.</p>
 <p>A partir daqui todas as criaturas têm <strong>Arremetidas</strong> e <strong>Recusas</strong>. Releia as seções 15 e 16 antes de usá-las: um chefe sem Arremetidas é derrubado por quantidade de ações antes de fazer qualquer coisa memorável.</p>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 6 <span>·</span> Canção</h2>
+<div class="degrau" id="kleos-6"><h2>Kleos 6 <span>·</span> Canção</h2>
 <p>Um sátiro escreve uma música sobre isso.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-quimera">
 <h3>QUIMERA<span class="kleos">Kleos 6 · Canção</span></h3>
 <p class="tipo">Monstruosidade, grande · padrão</p>
 <p class="status"><strong>PV</strong> 115 <span class="sep">·</span> <strong>DEF</strong> 17 <span class="sep">·</span> <strong>Movimento</strong> 12 m, <strong>Voo</strong> 15 m<br><strong>Ataque</strong> +8 <span class="sep">·</span> <strong>CD</strong> 16<br><strong>Fortitude</strong> +8 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +3<br><strong>Imune</strong> a fogo</p>
@@ -1628,7 +1712,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-hidra-de-lerna">
 <h3>HIDRA DE LERNA<span class="kleos">Kleos 6 · Canção</span></h3>
 <p class="tipo">Monstruosidade, enorme · Bruto</p>
 <p class="status"><strong>PV</strong> 150 <span class="sep">·</span> <strong>DEF</strong> 15 <span class="sep">·</span> <strong>Movimento</strong> 9 m, <strong>Natação</strong> 9 m<br><strong>Ataque</strong> +8 <span class="sep">·</span> <strong>CD</strong> 16<br><strong>Fortitude</strong> +8 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +3</p>
@@ -1656,7 +1740,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-talos-menor">
 <h3>TALOS MENOR<span class="kleos">Kleos 6 · Canção</span></h3>
 <p class="tipo">Autômato, enorme · Blindado / Colosso</p>
 <p class="status"><strong>PV</strong> 130 <span class="sep">·</span> <strong>DEF</strong> 19 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +8 <span class="sep">·</span> <strong>CD</strong> 16<br><strong>Fortitude</strong> +8 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +8<br><strong>Imune</strong> a veneno, doença, exaustão, sangramento e efeitos mentais</p>
@@ -1681,11 +1765,11 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 7 <span>·</span> Lenda</h2>
+<div class="degrau" id="kleos-7"><h2>Kleos 7 <span>·</span> Lenda</h2>
 <p>Contada por gerações.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-cerbero">
 <h3>CÉRBERO<span class="kleos">Kleos 7 · Lenda</span></h3>
 <p class="tipo">Monstruosidade, enorme · padrão</p>
 <p class="status"><strong>PV</strong> 155 <span class="sep">·</span> <strong>DEF</strong> 17 <span class="sep">·</span> <strong>Movimento</strong> 15 m<br><strong>Ataque</strong> +9 <span class="sep">·</span> <strong>CD</strong> 17<br><strong>Fortitude</strong> +9 <span class="sep">·</span> <strong>Reflexos</strong> +9 <span class="sep">·</span> <strong>Vontade</strong> +3</p>
@@ -1714,7 +1798,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-escila">
 <h3>ESCILA<span class="kleos">Kleos 7 · Lenda</span></h3>
 <p class="tipo">Monstruosidade, gargantuesca · Colosso</p>
 <p class="status"><strong>PV</strong> 232 <span class="sep">·</span> <strong>DEF</strong> 15 <span class="sep">·</span> <strong>Movimento</strong> 0 (presa ao rochedo)<br><strong>Ataque</strong> +9 <span class="sep">·</span> <strong>CD</strong> 17<br><strong>Fortitude</strong> +9 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +3</p>
@@ -1741,7 +1825,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-dragao-de-colquida">
 <h3>DRAGÃO DE CÓLQUIDA<span class="kleos">Kleos 7 · Lenda</span></h3>
 <p class="tipo">Dragão, enorme · Blindado</p>
 <p class="status"><strong>PV</strong> 116 <span class="sep">·</span> <strong>DEF</strong> 19 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +9 <span class="sep">·</span> <strong>CD</strong> 17<br><strong>Fortitude</strong> +9 <span class="sep">·</span> <strong>Reflexos</strong> +3 <span class="sep">·</span> <strong>Vontade</strong> +9<br><strong>Resistência</strong> a dano físico de armas não divinas <span class="sep">·</span> <strong>Imune</strong> a veneno</p>
@@ -1769,11 +1853,11 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 8 <span>·</span> Mito</h2>
+<div class="degrau" id="kleos-8"><h2>Kleos 8 <span>·</span> Mito</h2>
 <p>Entra no cânone. Aqui começa a Vontade do Lugar.</p>
 </div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-ladao-o-dragao-das-hesperides">
 <h3>LADÃO, O DRAGÃO DAS HESPÉRIDES<span class="kleos">Kleos 8 · Mito</span></h3>
 <p class="tipo">Dragão, gargantuesco · Colosso</p>
 <p class="status"><strong>PV</strong> 315 <span class="sep">·</span> <strong>DEF</strong> 16 <span class="sep">·</span> <strong>Movimento</strong> 9 m, <strong>Escalada</strong> 9 m<br><strong>Ataque</strong> +10 <span class="sep">·</span> <strong>CD</strong> 18<br><strong>Fortitude</strong> +10 <span class="sep">·</span> <strong>Reflexos</strong> +4 <span class="sep">·</span> <strong>Vontade</strong> +10</p>
@@ -1803,7 +1887,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-caribdis">
 <h3>CARÍBDIS<span class="kleos">Kleos 8 · Mito</span></h3>
 <p class="tipo">Monstruosidade, gargantuesca · Colosso</p>
 <p class="status"><strong>PV</strong> 315 <span class="sep">·</span> <strong>DEF</strong> 16 <span class="sep">·</span> <strong>Movimento</strong> 0 (é uma boca no mar)<br><strong>Ataque</strong> +10 <span class="sep">·</span> <strong>CD</strong> 18<br><strong>Fortitude</strong> +10 <span class="sep">·</span> <strong>Reflexos</strong> +0 <span class="sep">·</span> <strong>Vontade</strong> +4<br><strong>Imune</strong> a todas as manobras e a dano perfurante</p>
@@ -1828,7 +1912,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-menecio-tita-menor">
 <h3>MENÉCIO, TITÃ MENOR<span class="kleos">Kleos 8 · Mito</span></h3>
 <p class="tipo">Titã, enorme · Bruto</p>
 <p class="status"><strong>PV</strong> 273 <span class="sep">·</span> <strong>DEF</strong> 17 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +10 <span class="sep">·</span> <strong>CD</strong> 18<br><strong>Fortitude</strong> +10 <span class="sep">·</span> <strong>Reflexos</strong> +4 <span class="sep">·</span> <strong>Vontade</strong> +10<br><strong>Resistência</strong> a dano físico de armas não divinas</p>
@@ -1855,12 +1939,12 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 9 <span>·</span> Epopeia</h2>
+<div class="degrau" id="kleos-9"><h2>Kleos 9 <span>·</span> Epopeia</h2>
 <p>Precisa de um poema inteiro. Todas as criaturas daqui têm **Presença</p>
 </div>
-<p>(seção 18).*</p>
+<p>(<a href="#secao-18">seção 18</a>).*</p>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-polibotes-gigante-nascido-da-terra">
 <h3>POLIBOTES, GIGANTE NASCIDO DA TERRA<span class="kleos">Kleos 9 · Epopeia</span></h3>
 <p class="tipo">Gigante, gargantuesco · Bruto / Colosso</p>
 <p class="status"><strong>PV</strong> 364 <span class="sep">·</span> <strong>DEF</strong> 18 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +11 <span class="sep">·</span> <strong>CD</strong> 19<br><strong>Fortitude</strong> +11 <span class="sep">·</span> <strong>Reflexos</strong> +4 <span class="sep">·</span> <strong>Vontade</strong> +11<br><strong>Presença</strong> (Vontade CD 19)</p>
@@ -1889,7 +1973,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-hiperiao-tita-da-luz">
 <h3>HIPERIÃO, TITÃ DA LUZ<span class="kleos">Kleos 9 · Epopeia</span></h3>
 <p class="tipo">Titã, enorme · Conjurador</p>
 <p class="status"><strong>PV</strong> 280 <span class="sep">·</span> <strong>DEF</strong> 19 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +11 <span class="sep">·</span> <strong>CD</strong> 19<br><strong>Fortitude</strong> +11 <span class="sep">·</span> <strong>Reflexos</strong> +11 <span class="sep">·</span> <strong>Vontade</strong> +11<br><strong>Imune</strong> a fogo e a dano de luz <span class="sep">·</span> <strong>Presença</strong> (Vontade CD 19)</p>
@@ -1916,7 +2000,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-divindade-menor">
 <h3>DIVINDADE MENOR<span class="kleos">Kleos 9 · Epopeia</span></h3>
 <p class="tipo">Divindade, médio a enorme · Conjurador · **modelo genérico</p>
 <p>Serve para deuses de rio, ventos, ninfas antigas, deuses de cidade, Éolo, Aquelôo, Ceto. Escolha um <strong>domínio</strong> e todo o resto sai dele.</p>
@@ -1947,12 +2031,12 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 10 <span>·</span> Teomaquia</h2>
+<div class="degrau" id="kleos-10"><h2>Kleos 10 <span>·</span> Teomaquia</h2>
 <p>Guerra contra um deus. Dez semideuses e ainda vai doer.</p>
 </div>
-<div class="destaque"><p><strong>Deuses não morrem.</strong> Reduzir um deus a 0 PV significa que ele recua, concede algo, ou perde a forma física por uma temporada. Ver Livro II, seção 7.</p></div>
+<div class="destaque"><p><strong>Deuses não morrem.</strong> Reduzir um deus a 0 PV significa que ele recua, concede algo, ou perde a forma física por uma temporada. Ver <a href="#secao-7">seção 7</a>.</p></div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-ares-deus-da-guerra">
 <h3>ARES, DEUS DA GUERRA<span class="kleos">Kleos 10 · Teomaquia</span></h3>
 <p class="tipo">Divindade Olímpica · Bruto</p>
 <p class="status"><strong>PV</strong> 370 <span class="sep">·</span> <strong>DEF</strong> 20 <span class="sep">·</span> <strong>Movimento</strong> 15 m<br><strong>Ataque</strong> +13 <span class="sep">·</span> <strong>CD</strong> 21<br><strong>Fortitude</strong> +13 <span class="sep">·</span> <strong>Reflexos</strong> +13 <span class="sep">·</span> <strong>Vontade</strong> +5<br><strong>Presença</strong> (Vontade CD 21) <span class="sep">·</span> <strong>Imune</strong> a Amedrontado</p>
@@ -1982,7 +2066,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-hecate-nas-encruzilhadas">
 <h3>HÉCATE NAS ENCRUZILHADAS<span class="kleos">Kleos 10 · Teomaquia</span></h3>
 <p class="tipo">Divindade, três formas · Conjuradora</p>
 <p class="status"><strong>PV</strong> 370 <span class="sep">·</span> <strong>DEF</strong> 20 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +13 <span class="sep">·</span> <strong>CD</strong> 21<br><strong>Fortitude</strong> +13 <span class="sep">·</span> <strong>Reflexos</strong> +13 <span class="sep">·</span> <strong>Vontade</strong> +13<br><strong>Presença</strong> (Vontade CD 21)</p>
@@ -2017,7 +2101,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-hades-senhor-do-mundo-inferior">
 <h3>HADES, SENHOR DO MUNDO INFERIOR<span class="kleos">Kleos 10 · Teomaquia</span></h3>
 <p class="tipo">Divindade Olímpica · padrão</p>
 <p class="status"><strong>PV</strong> 370 <span class="sep">·</span> <strong>DEF</strong> 20 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +13 <span class="sep">·</span> <strong>CD</strong> 21<br><strong>Fortitude</strong> +13 <span class="sep">·</span> <strong>Reflexos</strong> +5 <span class="sep">·</span> <strong>Vontade</strong> +13<br><strong>Presença</strong> (Vontade CD 21) <span class="sep">·</span> <strong>Imune</strong> a dano necrótico e a efeitos de morte</p>
@@ -2053,12 +2137,12 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<div class="degrau"><h2>Kleos 11 <span>·</span> Cataclisma</h2>
+<div class="degrau" id="kleos-11"><h2>Kleos 11 <span>·</span> Cataclisma</h2>
 <p>O mundo quase acabou.</p>
 </div>
 <div class="destaque"><p><strong>Um Cataclisma não é derrotado por dano.</strong> Reduzi-lo a 0 PV apenas o deixa <strong>Exposto</strong> por uma rodada. Cada um tem um <strong>Selo</strong> — uma condição de história que os jogadores precisam descobrir e cumprir enquanto ele está Exposto. Sem o Selo, ele se levanta com metade dos PV e continua. Um grupo de semideuses <strong>não deve vencer isto sozinho</strong>. Kleos 11 pressupõe deuses aliados somando o próprio Kleos. Essa aliança é a campanha.</p></div>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-tifao-o-pai-dos-monstros">
 <h3>TIFÃO, O PAI DOS MONSTROS<span class="kleos">Kleos 11 · Cataclisma</span></h3>
 <p class="tipo">Primordial, gargantuesco · Colosso</p>
 <p class="status"><strong>PV</strong> 500 <span class="sep">·</span> <strong>DEF</strong> 21 <span class="sep">·</span> <strong>Movimento</strong> 18 m, <strong>Voo</strong> 24 m<br><strong>Ataque</strong> +15 <span class="sep">·</span> <strong>CD</strong> 23<br><strong>Fortitude</strong> +15 <span class="sep">·</span> <strong>Reflexos</strong> +6 <span class="sep">·</span> <strong>Vontade</strong> +15<br><strong>Presença</strong> (Vontade CD 23, alcance 100 m) <span class="sep">·</span> <strong>Imune</strong> a fogo, veneno e a todas</p>
@@ -2091,7 +2175,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-cronos-reconstituido">
 <h3>CRONOS RECONSTITUÍDO<span class="kleos">Kleos 11 · Cataclisma</span></h3>
 <p class="tipo">Titã Primordial, enorme · Conjurador</p>
 <p class="status"><strong>PV</strong> 500 <span class="sep">·</span> <strong>DEF</strong> 21 <span class="sep">·</span> <strong>Movimento</strong> 12 m<br><strong>Ataque</strong> +15 <span class="sep">·</span> <strong>CD</strong> 23<br><strong>Fortitude</strong> +15 <span class="sep">·</span> <strong>Reflexos</strong> +15 <span class="sep">·</span> <strong>Vontade</strong> +15<br><strong>Presença</strong> (Vontade CD 23) <span class="sep">·</span> <strong>Imune</strong> a efeitos que manipulem tempo</p>
@@ -2120,7 +2204,7 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<article class="criatura">
+<article class="criatura" id="criatura-gaia-desperta">
 <h3>GAIA DESPERTA<span class="kleos">Kleos 11 · Cataclisma</span></h3>
 <p class="tipo">Primordial, gargantuesca · Colosso</p>
 <p class="status"><strong>PV</strong> 500 <span class="sep">·</span> <strong>DEF</strong> 21 <span class="sep">·</span> <strong>Movimento</strong> — (ela <strong>é</strong> o chão)<br><strong>Ataque</strong> +15 <span class="sep">·</span> <strong>CD</strong> 23<br><strong>Fortitude</strong> +15 <span class="sep">·</span> <strong>Reflexos</strong> +0 <span class="sep">·</span> <strong>Vontade</strong> +15<br><strong>Presença</strong> (Vontade CD 23, alcance 1 km) <span class="sep">·</span> <strong>Imune</strong> a todas as manobras, a</p>
@@ -2152,21 +2236,21 @@ O QUE ACONTECE AO MORRER
 </div>
 </article>
 <div class="ornamento">❖</div>
-<h2>Índice rápido</h2>
+<h2 id="indice-rapido">Índice rápido</h2>
 <div class="rolagem"><table>
 <thead><tr><th>Kleos</th><th>Criaturas</th></tr></thead>
 <tbody>
-<tr><td><strong>1 Rumor</strong></td><td>Sátiro Errante · Mercenário Mortal · Cão Infernal Filhote · Corvo de Mau Agouro</td></tr>
-<tr><td><strong>2 Boato</strong></td><td>Harpia Carniceira · Dracena Lanceira · Espírito do Nevoeiro · Lobo de Licaão</td></tr>
-<tr><td><strong>3 Conto</strong></td><td>Autômato Hoplita · Empusa · Cão do Inferno · Bando de Estinfálides</td></tr>
-<tr><td><strong>4 Façanha</strong></td><td>Minotauro · Górgona Menor · Ciclope Pastor · Basilisco</td></tr>
-<tr><td><strong>5 Feito</strong></td><td>Medusa · Leão de Neméia · Esfinge · Venti Tempestuoso</td></tr>
-<tr><td><strong>6 Canção</strong></td><td>Quimera · Hidra de Lerna · Talos Menor</td></tr>
-<tr><td><strong>7 Lenda</strong></td><td>Cérbero · Escila · Dragão de Cólquida</td></tr>
-<tr><td><strong>8 Mito</strong></td><td>Ladão · Caríbdis · Menécio</td></tr>
-<tr><td><strong>9 Epopeia</strong></td><td>Polibotes · Hiperião · Divindade Menor <em>(modelo)</em></td></tr>
-<tr><td><strong>10 Teomaquia</strong></td><td>Ares · Hécate · Hades</td></tr>
-<tr><td><strong>11 Cataclisma</strong></td><td>Tifão · Cronos · Gaia</td></tr>
+<tr><td><strong>1 Rumor</strong></td><td><a href="#criatura-satiro-errante">Sátiro Errante</a> · <a href="#criatura-mercenario-mortal">Mercenário Mortal</a> · <a href="#criatura-cao-infernal-filhote">Cão Infernal Filhote</a> · <a href="#criatura-corvo-de-mau-agouro">Corvo de Mau Agouro</a></td></tr>
+<tr><td><strong>2 Boato</strong></td><td><a href="#criatura-harpia-carniceira">Harpia Carniceira</a> · <a href="#criatura-dracena-lanceira">Dracena Lanceira</a> · <a href="#criatura-espirito-do-nevoeiro">Espírito do Nevoeiro</a> · <a href="#criatura-lobo-de-licaao">Lobo de Licaão</a></td></tr>
+<tr><td><strong>3 Conto</strong></td><td><a href="#criatura-automato-hoplita">Autômato Hoplita</a> · <a href="#criatura-empusa">Empusa</a> · <a href="#criatura-cao-do-inferno">Cão do Inferno</a> · <a href="#criatura-bando-de-estinfalides">Bando de Estinfálides</a></td></tr>
+<tr><td><strong>4 Façanha</strong></td><td><a href="#criatura-minotauro">Minotauro</a> · <a href="#criatura-gorgona-menor">Górgona Menor</a> · <a href="#criatura-ciclope-pastor">Ciclope Pastor</a> · <a href="#criatura-basilisco">Basilisco</a></td></tr>
+<tr><td><strong>5 Feito</strong></td><td><a href="#criatura-medusa">Medusa</a> · <a href="#criatura-leao-de-nemeia">Leão de Neméia</a> · <a href="#criatura-esfinge">Esfinge</a> · <a href="#criatura-venti-tempestuoso">Venti Tempestuoso</a></td></tr>
+<tr><td><strong>6 Canção</strong></td><td><a href="#criatura-quimera">Quimera</a> · <a href="#criatura-hidra-de-lerna">Hidra de Lerna</a> · <a href="#criatura-talos-menor">Talos Menor</a></td></tr>
+<tr><td><strong>7 Lenda</strong></td><td><a href="#criatura-cerbero">Cérbero</a> · <a href="#criatura-escila">Escila</a> · <a href="#criatura-dragao-de-colquida">Dragão de Cólquida</a></td></tr>
+<tr><td><strong>8 Mito</strong></td><td><a href="#criatura-ladao-o-dragao-das-hesperides">Ladão</a> · <a href="#criatura-caribdis">Caríbdis</a> · <a href="#criatura-menecio-tita-menor">Menécio</a></td></tr>
+<tr><td><strong>9 Epopeia</strong></td><td><a href="#criatura-polibotes-gigante-nascido-da-terra">Polibotes</a> · <a href="#criatura-hiperiao-tita-da-luz">Hiperião</a> · <a href="#criatura-divindade-menor">Divindade Menor</a> <em>(modelo)</em></td></tr>
+<tr><td><strong>10 Teomaquia</strong></td><td><a href="#criatura-ares-deus-da-guerra">Ares</a> · <a href="#criatura-hecate-nas-encruzilhadas">Hécate</a> · <a href="#criatura-hades-senhor-do-mundo-inferior">Hades</a></td></tr>
+<tr><td><strong>11 Cataclisma</strong></td><td><a href="#criatura-tifao-o-pai-dos-monstros">Tifão</a> · <a href="#criatura-cronos-reconstituido">Cronos</a> · <a href="#criatura-gaia-desperta">Gaia</a></td></tr>
 </tbody>
 </table></div>
 <p><strong>38 criaturas.</strong></p>
@@ -2192,5 +2276,6 @@ O QUE ACONTECE AO MORRER
 </div><!-- /mancha -->
 
 </div><!-- /livro -->
+<aside class="aviso-independencia" role="note"><strong>Projeto independente, não oficial e sem fins lucrativos.</strong> <span><em>Percy Jackson</em> e os elementos próprios dessa franquia pertencem aos seus respectivos autores e titulares, incluindo Rick Riordan e empresas licenciadas. Este projeto não é afiliado, aprovado ou patrocinado por eles.</span></aside>
 </body>
 </html>

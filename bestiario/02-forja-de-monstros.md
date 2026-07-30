@@ -84,7 +84,7 @@ Difícil de acertar, mais fácil de derrubar quando se acerta. *Autômato, Talos
 ### Enxame
 Não é uma criatura: são muitas. *Estinfálides, matilha, mirmidões.*
 - Divide-se em **3 a 6 criaturas de Kleos −2**
-- Some **+1 Kleos** ao total se forem mais de quatro (Regra da Moira, seção 5)
+- Some **+1 Kleos** ao total se forem mais de quatro ([Regra da Moira](#secao-5))
 
 ### Conjurador
 Bate pouco, muda o campo. *Esfinge, Hécate, Circe.*
@@ -171,7 +171,7 @@ uma destas três formas:
 |---|---|
 | **Recarga (5–6)** | No início do turno da criatura, role 1d6. Com 5 ou 6, o Poder volta a ficar disponível. |
 | **N vezes por combate** | Simples e previsível. Bom para efeitos que decidem a luta. |
-| **Custa Arremetidas** | Só para Kleos 6+. Ver seção 15. |
+| **Custa Arremetidas** | Só para Kleos 6+. Ver [seção 15](#secao-15). |
 
 ### Potência dos Poderes
 

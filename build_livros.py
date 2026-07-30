@@ -21,6 +21,7 @@ import html
 import pathlib
 import re
 import sys
+import unicodedata
 
 RAIZ = pathlib.Path(__file__).parent
 TEMPLATE = RAIZ / "template"
@@ -45,6 +46,23 @@ RE_CRIATURA = re.compile(r"^###\s+(.+?)\s+—\s+Kleos\s+(\d+)\s*\(([^)]+)\)\s*$"
 
 # Divisor de degrau: "# KLEOS 4 — FAÇANHA"
 RE_DEGRAU = re.compile(r"^#\s+KLEOS\s+(\d+)\s+—\s+(.+)$")
+
+
+def slug(t: str) -> str:
+    """Identificador curto, legível e estável para âncoras do livro."""
+    t = re.sub(r"[*_`]", "", t)
+    t = unicodedata.normalize("NFKD", t).encode("ascii", "ignore").decode("ascii")
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+def id_titulo(t: str) -> str:
+    """Seções numeradas viram #secao-37 e #secao-37-1."""
+    m = re.match(r"(\d+(?:\.\d+)*)(?:\.\s*|\s+)", re.sub(r"[*_`]", "", t))
+    if m:
+        return "secao-" + m.group(1).replace(".", "-")
+    if slug(t) == "indice-rapido":
+        return "indice-rapido"
+    return ""
 
 
 def inline(t: str) -> str:
@@ -129,7 +147,7 @@ def converter(md: str) -> str:
         m = RE_DEGRAU.match(cru)
         if m:
             fecha_criatura()
-            saida.append(f'<div class="degrau"><h2>Kleos {m.group(1)} '
+            saida.append(f'<div class="degrau" id="kleos-{m.group(1)}"><h2>Kleos {m.group(1)} '
                          f'<span>·</span> {inline(m.group(2).title())}</h2>')
             # a linha em itálico logo abaixo, se houver, é a legenda do degrau
             j = i + 1
@@ -149,7 +167,7 @@ def converter(md: str) -> str:
         if m:
             fecha_criatura()
             nome, k, degrau = m.group(1), m.group(2), m.group(3)
-            saida.append('<article class="criatura">')
+            saida.append(f'<article class="criatura" id="criatura-{slug(nome)}">')
             saida.append(f"<h3>{inline(nome)}"
                          f'<span class="kleos">Kleos {k} · {inline(degrau)}</span></h3>')
             criatura_aberta = True
@@ -174,14 +192,16 @@ def converter(md: str) -> str:
             nivel = len(cru) - len(cru.lstrip("#"))
             texto = cru[nivel:].strip()
             fecha_criatura()
+            ident = id_titulo(texto)
+            attr = f' id="{ident}"' if ident else ""
             if nivel == 1:
-                saida.append(f"<h2>{inline(texto)}</h2>")
+                saida.append(f"<h2{attr}>{inline(texto)}</h2>")
             elif nivel == 2:
-                saida.append(f"<h2>{inline(texto)}</h2>")
+                saida.append(f"<h2{attr}>{inline(texto)}</h2>")
             elif nivel == 3:
-                saida.append(f"<h3>{inline(texto)}</h3>")
+                saida.append(f"<h3{attr}>{inline(texto)}</h3>")
             else:
-                saida.append(f"<h4>{inline(texto)}</h4>")
+                saida.append(f"<h4{attr}>{inline(texto)}</h4>")
             i += 1
             continue
 
@@ -309,7 +329,49 @@ def ler_vendor(nome: str) -> str:
     return p.read_text(encoding="utf-8")
 
 
-def envelopar(corpo_e_cabeca: str, descricao: str) -> str:
+LIVROS = (
+    ("livro-do-jogador.html", "I", "Livro do Jogador", "jogador"),
+    ("bestiario.html", "II", "Bestiário", "bestiario"),
+    ("grimorio.html", "III", "Grimório", "grimorio"),
+    ("guia.html", "IV", "Guia do Mestre", "guia"),
+    ("ficha.html", "V", "Ficha do Herói", "ficha"),
+)
+
+
+def miniestante(pagina_atual: str) -> str:
+    """Tridente fixo que abre os outros livros, sem JavaScript."""
+    links = []
+    for href, tomo, nome, classe in LIVROS:
+        if href == pagina_atual:
+            continue
+        links.append(
+            f'<a href="{href}"><span class="mini-capa {classe}">{tomo}</span>'
+            f'<span><b>{nome}</b><small>abrir livro</small></span></a>'
+        )
+    return (
+        '<details class="biblioteca-flutuante">'
+        '<summary aria-label="Abrir os outros livros" title="Outros livros">'
+        '<span aria-hidden="true">♆</span></summary>'
+        '<nav aria-label="Outros livros"><strong>Outros livros</strong>'
+        + "".join(links)
+        + '<a class="estante-completa" href="index.html">Ver a estante completa</a>'
+        '</nav></details>'
+    )
+
+
+def aviso_independencia() -> str:
+    """Aviso editorial comum a todos os livros publicados no site."""
+    return (
+        '<aside class="aviso-independencia" role="note">'
+        '<strong>Projeto independente, não oficial e sem fins lucrativos.</strong> '
+        '<span><em>Percy Jackson</em> e os elementos próprios dessa franquia '
+        'pertencem aos seus respectivos autores e titulares, incluindo Rick '
+        'Riordan e empresas licenciadas. Este projeto não é afiliado, aprovado '
+        'ou patrocinado por eles.</span></aside>'
+    )
+
+
+def envelopar(corpo_e_cabeca: str, descricao: str, pagina_atual: str) -> str:
     """Fecha o livro num documento HTML de verdade.
 
     Os templates são fragmentos: começam no <title> e seguem no <style>. Sem
@@ -328,7 +390,11 @@ def envelopar(corpo_e_cabeca: str, descricao: str) -> str:
         f'<meta name="description" content="{html.escape(descricao, quote=True)}">\n'
         + cabeca
         + "\n</head>\n<body>\n"
+        + miniestante(pagina_atual)
+        + "\n"
         + corpo.strip()
+        + "\n"
+        + aviso_independencia()
         + "\n</body>\n</html>\n"
     )
 
@@ -342,7 +408,7 @@ def montar(template_nome: str, saida_nome: str, css: str,
     faltando = re.findall(r"\{\{[A-Z_]+\}\}", s)
     if faltando:
         raise SystemExit(f"{saida_nome}: marcadores não substituídos: {set(faltando)}")
-    s = envelopar(s, descricao)
+    s = envelopar(s, descricao, saida_nome)
     (RAIZ / saida_nome).write_text(s, encoding="utf-8")
     kb = round((RAIZ / saida_nome).stat().st_size / 1024)
     print(f"  {saida_nome:<26} {kb:>5} KB")

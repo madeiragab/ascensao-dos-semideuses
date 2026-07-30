@@ -4,6 +4,28 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.12.0] - 2026-07-29
+
+### Leitura e navegação
+
+- Os cinco livros ganharam uma miniestante flutuante: um pequeno tridente acompanha
+  a rolagem, abre os outros quatro tomos e oferece acesso à estante completa.
+- Sumários e referências internas agora são hyperlinks. O Grimório recebeu sumário
+  próprio; seções numeradas, degraus de Kleos e as 38 criaturas ganharam âncoras
+  estáveis para links diretos.
+- O índice rápido do Bestiário passou a levar diretamente a cada criatura, e as
+  referências entre Livro do Jogador, Bestiário, Grimório, Guia e Ficha foram ligadas.
+- A navegação flutuante funciona sem JavaScript, aceita teclado e desaparece na
+  impressão para não alterar o PDF dos livros.
+
+### Identidade do projeto
+
+- A estante, os cinco livros e os READMEs agora identificam o RPG como projeto
+  independente, não oficial e sem fins lucrativos, sem alegar afiliação, aprovação
+  ou patrocínio dos titulares de *Percy Jackson*.
+- A apresentação passou a distinguir explicitamente as regras e os textos autorais
+  dos elementos próprios de franquias de terceiros.
+
 ## [0.11.1] - 2026-07-29
 
 ### Regras
