@@ -10,3 +10,4 @@ Thumbs.db
 
 # build
 .build/
+.test-output/

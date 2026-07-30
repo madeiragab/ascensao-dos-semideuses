@@ -33,6 +33,10 @@ maior resultado vence. Em empate, nada muda: quem já tinha a posição a manté
 Cada participante rola **1d20 + modificador de Destreza**. Age primeiro quem
 tirar mais.
 
+Um **20 natural não concede ação ou turno adicional**. Iniciativa não possui
+sucesso crítico: use apenas o total. O Conceito **Problemático** também soma o
+modificador de Força, por Instinto de Briga.
+
 **Empates** *(novo)*. Desempata, em ordem: maior modificador de Destreza; maior
 valor de Destreza; personagens dos jogadores antes dos personagens do Mestre.
 Se ainda houver empate, os envolvidos rolam 1d20.
@@ -89,6 +93,18 @@ segurar ou rolar na aterrissagem.
 minutos igual a 1 + modificador de Constituição (mínimo 30 segundos). Depois
 disso, ela cai a 0 PV no início de seu próximo turno.
 
+### Apoiar, carregar e arrastar
+
+- **Apoiar** uma criatura consciente e cooperativa usa uma Interação Simples e
+  uma mão livre. Cada metro percorrido custa 2 metros.
+- **Carregar** uma criatura incapaz de andar usa uma ação para erguê-la, exige
+  as mãos necessárias e a transforma em carga Volumosa. Cada metro custa 2.
+- **Arrastar** usa uma ação para firmar a pegada. Cada metro custa 2, e o Mestre
+  pede Atletismo se o terreno for difícil ou a carga Excessiva.
+
+Soltar um objeto para liberar a mão é gratuito; guardá-lo usa a Interação
+Simples.
+
 ---
 
 ## 20. Ações em combate *(novo — o livro só tinha Atacar e Correr)*
@@ -137,9 +153,24 @@ recurso é perdido se o gatilho não acontecer.
 Para interações que vão além da Interação Simples: acionar um mecanismo, aplicar
 um item consumível em outra criatura, forçar uma alavanca travada.
 
+| Interação | Custo |
+|---|---|
+| pegar, sacar ou guardar um objeto; abrir porta destrancada | Interação Simples |
+| sacar duas armas Leves guardadas juntas | uma Interação Simples para ambas |
+| soltar o que está na mão | gratuito |
+| entregar a alguém adjacente | Interação Simples de quem entrega ou recebe |
+| arremessar objeto para aliado a até 6 m | Interação Simples; ele usa Reação para agarrar |
+| abrir fechadura, algema ou mecanismo delicado | ação; teste se houver pressão |
+
+Agarrar algo arremessado pede Reflexos apenas sob pressão, surpresa, mãos presas
+ou lançamento ruim. Mãos algemadas dão Desvantagem em tarefas delicadas e podem
+tornar impossível o que exigir duas mãos livres.
+
 ### Estabilizar
 Ação e um teste de **Intuição CD 10** para estabilizar uma criatura a 0 PV.
-Com um Kit Médico, o teste tem Vantagem. Ver capítulo 26.
+Com um Kit Médico, o teste tem Vantagem. Em vez de rolar, o personagem pode gastar
+**1 Tratamento e 2 SP** para obter sucesso automático; isso não recupera PV
+durante o combate. Ver capítulo 26.
 
 ### Usar Habilidade ou Magia
 Conforme o tipo de ação indicado pela habilidade ou Fórmula.
@@ -184,6 +215,17 @@ Só se aplica a maior cobertura, nunca soma.
 
 Atacar um alvo que você não pode ver dá **Desvantagem**, e você deve escolher o
 espaço às cegas. Ser atacado por quem você não pode ver dá **Vantagem ao atacante**.
+
+### Áreas e fogo amigo
+
+Uma área atinge **todas as criaturas** dentro dela, inclusive aliados e o próprio
+usuário, salvo se o perfil disser que escolhe ou exclui alvos. Explosões e Zonas
+partem de um ponto visível dentro do alcance; Cones e Linhas partem do usuário;
+uma área Pessoal fica centrada nele. Cobertura total e paredes bloqueiam o efeito.
+
+No mapa, use o centro do espaço da criatura. Sem mapa, o Mestre anuncia quem será
+atingido antes do gasto e da rolagem. Uma área seletiva é uma melhoria de
+habilidade e custa **+1**.
 
 ---
 
@@ -373,9 +415,13 @@ Se o dano restante depois de zerar seus PV for **igual ou maior que seus PV
 máximos**, o personagem morre na hora, sem agonia.
 
 ### Estabilizar
-Uma criatura adjacente pode gastar sua ação e um teste de **Intuição CD 10** —
-com Vantagem se possuir um **Kit Médico** — para estabilizar um Agonizante.
-Qualquer cura acima de 0 PV também acorda o personagem imediatamente.
+Uma criatura adjacente pode gastar sua ação e um teste de **Intuição CD 10** -
+com Vantagem se possuir um **Kit Médico** - para estabilizar um Agonizante.
+Falhar gasta a ação, mas permite nova tentativa. Com um Kit, também é possível
+gastar **1 Tratamento e 2 SP** para estabilizar automaticamente, sem recuperar PV
+durante o combate. Qualquer cura acima de 0 PV acorda o personagem imediatamente.
+Um estabilizado recupera 1 PV depois de uma hora; qualquer outro valor precisa
+vir de uma fonte de cura com custo e tempo registrados.
 
 ### Ferimento Grave
 Um personagem que tenha ficado Agonizante durante uma cena fica com um
@@ -407,3 +453,10 @@ justificativa numérica em `v1-numeros.md`, item 4.
 Quando duas fontes concedem Vantagem, o personagem continua rolando apenas dois
 d20. Vantagem e Desvantagem se anulam mutuamente, independentemente de quantas
 fontes existirem de cada lado.
+
+**Uma resolução por habilidade.** Dano e efeitos secundários usam a mesma
+rolagem. Num Ataque de Habilidade, o acerto também aplica efeitos fracos, como
+empurrar ou derrubar, sem uma segunda resistência. Numa habilidade de resistência,
+o mesmo resultado decide o pacote inteiro. Condições médias ou fortes obrigam o
+perfil a usar resistência; salvo indicação contrária, passar evita a condição e
+reduz o dano à metade.

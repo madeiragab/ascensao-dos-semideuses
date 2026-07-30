@@ -99,6 +99,8 @@ button.acao:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
   text-transform: uppercase; letter-spacing: .08em;
 }
 .retrato.tem-foto span { display: none; }
+.retrato img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.retrato.tem-foto img { display: block; }
 .retrato:hover { border-color: var(--acento); }
 .linhas-id { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
 
@@ -183,6 +185,27 @@ input.calc:read-only { border-bottom-style: dotted; }
   font-style: normal; font-family: var(--sans); font-size: .5rem;
   text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
 }
+.atr-partes {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .2rem;
+  border-top: 1px solid var(--borda); margin-top: .2rem; padding-top: .25rem;
+}
+.atr-partes label, .atr-partes span {
+  display: flex; flex-direction: column; align-items: center;
+  font-family: var(--sans); font-size: .46rem; line-height: 1.2;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--texto-suave);
+}
+.atr-partes input { font-size: .8rem; min-width: 0; padding: 0; }
+.atr-partes output { font-family: var(--mono); font-size: .78rem; color: var(--acento); padding-top: .12rem; }
+.estado-regra {
+  font-family: var(--sans); font-size: .72rem; color: var(--texto-suave);
+  margin: .7rem 0 0; padding: .55rem .7rem; border: 1px solid var(--borda);
+  background: var(--superficie-2);
+}
+.estado-regra.ok { border-color: #55734A; color: #35522C; }
+.estado-regra.erro { border-color: #A44A3F; color: #8A2D24; }
+.escolhas-pericia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45rem .7rem; margin-bottom: .8rem; }
+.escolhas-pericia .f label { font-size: .5rem; }
+.ajustes { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: .5rem .8rem; }
 
 .grade-num { display: grid; grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr)); gap: .5rem; }
 .num-cx { border: 1px solid var(--borda-forte); padding: .35rem .5rem .45rem; }
@@ -225,27 +248,43 @@ table.viva select { font-size: .72rem; }
 
 .duas-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
 
-/* ---------- Impressão: só a folha ---------- */
+/* ---------- Folha dedicada ao PDF ---------- */
+.ficha-impressao { display: none; }
+.pdf-pagina {
+  box-sizing: border-box; background: #fff; color: #17140f;
+  font-family: Georgia, serif; padding: 9mm; width: 210mm; min-height: 297mm;
+}
+.pdf-cabecalho { display: flex; align-items: center; gap: 5mm; border-bottom: 2px solid #8A6B1E; padding-bottom: 3mm; margin-bottom: 3mm; }
+.pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #1C1913; }
+.pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #6A6250; }
+.pdf-retrato { width: 29mm; height: 35mm; border: 1px solid #6E5518; object-fit: cover; flex: none; }
+.pdf-grade { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5mm; }
+.pdf-bloco { border: 1px solid #A99B78; padding: 2.5mm; break-inside: avoid; min-width: 0; }
+.pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #6E5518; margin: 0 0 2mm; }
+.pdf-campo { min-height: 5mm; border-bottom: .3pt solid #B8AD92; padding: 0 1mm 1mm; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8.5pt; }
+.pdf-campo b { font: 700 6pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; display: block; }
+.pdf-status { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2mm; }
+.pdf-num { border: 1px solid #A99B78; text-align: center; padding: 1.5mm; min-height: 11mm; }
+.pdf-num b { display: block; font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; }
+.pdf-num span { display: block; font: 700 12pt Arial, sans-serif; margin-top: 1mm; }
+.pdf-tabela { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
+.pdf-tabela th { font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; text-align: left; border-bottom: 1px solid #8A6B1E; padding: 1mm; }
+.pdf-tabela td { border-bottom: .3pt solid #C7BEA8; padding: 1mm; vertical-align: top; overflow-wrap: anywhere; }
+.pdf-texto { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8pt; line-height: 1.35; min-height: 18mm; }
+.pdf-rodape { font: 6pt Arial, sans-serif; color: #6A6250; text-align: right; margin-top: 2mm; }
+.span-3 { grid-column: span 3; } .span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; } .span-6 { grid-column: span 6; }
+.span-7 { grid-column: span 7; } .span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
 @media print {
-  @page { margin: 12mm; }
-  body { background: #fff; }
-  .capa-pagina, .rosto, .comandos, .instrucoes, .colofao, .legenda-calc { display: none !important; }
-  .livro { border: none; max-width: none; background: #fff; }
-  .mancha { padding: 0; }
-  .capitulo { padding: 0; }
-  .abertura { display: none; }
-  .ficha-viva { border-color: #000; }
-  .bloco { border-color: #999; page-break-inside: avoid; }
-  .bloco > h3 { color: #000; }
-  input, textarea, select {
-    color: #000 !important; background: transparent !important;
-    border-color: #999 !important; font-weight: 400 !important;
-  }
-  input.calc { border-bottom-style: solid !important; }
-  .atr-cx, .num-cx, table.viva th, .retrato { border-color: #666 !important; }
-  input[type="checkbox"] { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .retrato span { display: none; }
-  .quebra-pagina { page-break-before: always; }
+  @page { size: A4 portrait; margin: 0; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  .livro { display: none !important; }
+  .ficha-impressao { display: block !important; }
+  .pdf-pagina { break-after: page; page-break-after: always; }
+  .pdf-pagina:last-child { break-after: auto; page-break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
 </style>
 
@@ -318,12 +357,13 @@ table.viva select { font-size: .72rem; }
       <div class="identidade">
         <label class="retrato" id="retrato" title="Escolher uma imagem do rosto">
           <input type="file" accept="image/*" id="arquivoRetrato" hidden>
+          <img id="retratoImg" alt="Retrato do personagem">
           <span>Clique para<br>escolher o<br>rosto</span>
         </label>
 
         <div class="linhas-id">
-          <div class="f"><label>Personagem</label><input type="text" name="nome"></div>
-          <div class="f"><label>Jogador</label><input type="text"></div>
+          <div class="f"><label>Personagem</label><input type="text" id="nome" name="nome"></div>
+          <div class="f"><label>Jogador</label><input type="text" id="jogador"></div>
           <div class="f"><label>Nível</label>
             <div class="nivel-stepper">
               <button type="button" id="descer" onclick="mudarNivel(-1)"
@@ -340,10 +380,22 @@ table.viva select { font-size: .72rem; }
               <option value="furioso">Furioso</option>
               <option value="oraculo">Oráculo</option>
             </select></div>
-          <div class="f"><label>Conceito Mortal</label><input type="text"></div>
-          <div class="f"><label>Húbris</label><input type="text"></div>
-          <div class="f"><label>Parente Divino</label><input type="text"></div>
-          <div class="f"><label>Afinidade Elemental</label><input type="text"></div>
+          <div class="f"><label>Conceito Mortal</label>
+            <select id="conceito">
+              <option value="">-</option><option value="atleta">Atleta</option>
+              <option value="biblioteca">Rato de Biblioteca</option>
+              <option value="artista">Artista de Rua</option><option value="problematico">Problemático</option>
+              <option value="sobrevivencialista">Sobrevivencialista</option><option value="socorrista">Socorrista</option>
+              <option value="digital">Cérebro Digital</option><option value="herdeiro">Herdeiro</option>
+            </select></div>
+          <div class="f"><label>Húbris</label><input type="text" id="hubris"></div>
+          <div class="f"><label>Parente Divino</label>
+            <select id="parente">
+              <option value="">-</option><option value="zeus">Zeus</option><option value="poseidon">Poseidon</option>
+              <option value="hades">Hades</option><option value="atena">Atena</option><option value="ares">Ares</option>
+              <option value="apolo">Apolo</option><option value="hefesto">Hefesto</option><option value="demeter">Deméter</option>
+            </select></div>
+          <div class="f"><label>Afinidade Elemental</label><select id="afinidade"><option value="">Escolha o Parente</option></select></div>
           <div class="f"><label>Atributo Divino</label>
             <select id="divino">
               <option value="">—</option>
@@ -364,9 +416,11 @@ table.viva select { font-size: .72rem; }
               <option value="0">Não</option>
               <option value="2">Sim, +2 DEF</option>
             </select></div>
-          <div class="f"><label>Dracmas</label><input type="text"></div>
+          <div class="f"><label>Dracmas</label><input type="text" id="dracmas"></div>
         </div>
       </div>
+      <p class="estado-regra" id="poderConceito">Escolha o Conceito para aplicar suas perícias e habilidade.</p>
+      <p class="estado-regra" id="poderParente">Escolha o Parente Divino para aplicar bônus, Afinidade e passiva.</p>
     </div>
 
     <!-- ===== O QUE ESTE NÍVEL DÁ ===== -->
@@ -379,23 +433,34 @@ table.viva select { font-size: .72rem; }
 
     <!-- ===== ATRIBUTOS ===== -->
     <div class="bloco">
-      <h3>Atributos <small>— escreva o valor; o modificador aparece sozinho</small></h3>
+      <h3>Atributos <small>- escreva o valor; o modificador aparece sozinho</small></h3>
       <div class="grade-atr">
-        <div class="atr-cx"><span>Força</span><input type="text" data-atr="forca">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-forca" readonly><em>mod</em></div></div>
-        <div class="atr-cx"><span>Destreza</span><input type="text" data-atr="destreza">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-destreza" readonly><em>mod</em></div></div>
-        <div class="atr-cx"><span>Constituição</span><input type="text" data-atr="constituicao">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-constituicao" readonly><em>mod</em></div></div>
-        <div class="atr-cx"><span>Inteligência</span><input type="text" data-atr="inteligencia">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-inteligencia" readonly><em>mod</em></div></div>
-        <div class="atr-cx"><span>Sabedoria</span><input type="text" data-atr="sabedoria">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-sabedoria" readonly><em>mod</em></div></div>
-        <div class="atr-cx"><span>Carisma</span><input type="text" data-atr="carisma">
-          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-carisma" readonly><em>mod</em></div></div>
+        <div class="atr-cx"><span>Força</span><input type="text" class="calc" data-atr="forca" data-calc="atr-forca" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-forca" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="forca"></label><span>Divino<output data-linhagem="forca">+0</output></span><label>Nível<input type="text" data-aumento="forca" value="0"></label></div></div>
+        <div class="atr-cx"><span>Destreza</span><input type="text" class="calc" data-atr="destreza" data-calc="atr-destreza" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-destreza" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="destreza"></label><span>Divino<output data-linhagem="destreza">+0</output></span><label>Nível<input type="text" data-aumento="destreza" value="0"></label></div></div>
+        <div class="atr-cx"><span>Constituição</span><input type="text" class="calc" data-atr="constituicao" data-calc="atr-constituicao" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-constituicao" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="constituicao"></label><span>Divino<output data-linhagem="constituicao">+0</output></span><label>Nível<input type="text" data-aumento="constituicao" value="0"></label></div></div>
+        <div class="atr-cx"><span>Inteligência</span><input type="text" class="calc" data-atr="inteligencia" data-calc="atr-inteligencia" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-inteligencia" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="inteligencia"></label><span>Divino<output data-linhagem="inteligencia">+0</output></span><label>Nível<input type="text" data-aumento="inteligencia" value="0"></label></div></div>
+        <div class="atr-cx"><span>Sabedoria</span><input type="text" class="calc" data-atr="sabedoria" data-calc="atr-sabedoria" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-sabedoria" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="sabedoria"></label><span>Divino<output data-linhagem="sabedoria">+0</output></span><label>Nível<input type="text" data-aumento="sabedoria" value="0"></label></div></div>
+        <div class="atr-cx"><span>Carisma</span><input type="text" class="calc" data-atr="carisma" data-calc="atr-carisma" readonly>
+          <div class="mod-linha"><input type="text" class="calc" data-calc="mod-carisma" readonly><em>mod</em></div>
+          <div class="atr-partes"><label>Base<input type="text" data-base="carisma"></label><span>Divino<output data-linhagem="carisma">+0</output></span><label>Nível<input type="text" data-aumento="carisma" value="0"></label></div></div>
       </div>
-      <p class="legenda-calc">Modificador = <b>valor − 10, dividido por 2, arredondado
-        para baixo</b>.</p>
+      <p class="legenda-calc">Total = <b>Base + bônus do Parente Divino + pontos de nível</b>.
+        Modificador = valor - 10, dividido por 2, para baixo.</p>
+      <div class="ajustes">
+        <div class="f"><label>Progresso de Treino, de 0 a 2</label><input type="text" id="progressoTreino" value="0"></div>
+        <label class="destravar"><input type="checkbox" id="pontoAdiantado"> +1 ponto adiantado por Treino; desmarque quando o próximo aumento de nível pagar a dívida</label>
+      </div>
+      <p class="estado-regra" id="estadoAtributos">No nível 1 ainda não há pontos de atributo da progressão.</p>
     </div>
 
     <!-- ===== RECURSOS ===== -->
@@ -403,13 +468,13 @@ table.viva select { font-size: .72rem; }
       <h3>Recursos e números <small>— o máximo vem da classe e do nível</small></h3>
       <div class="grade-num">
         <div class="num-cx duplo"><span>Pontos de Vida</span>
-          <div class="par"><input type="text"><span>/</span>
+          <div class="par"><input type="text" id="pvAtual"><span>/</span>
             <input type="text" class="calc" data-calc="pv" readonly></div></div>
         <div class="num-cx duplo"><span>Pontos de Vigor</span>
-          <div class="par"><input type="text"><span>/</span>
+          <div class="par"><input type="text" id="spAtual"><span>/</span>
             <input type="text" class="calc" data-calc="sp" readonly></div></div>
         <div class="num-cx duplo"><span>Pontos de Mana</span>
-          <div class="par"><input type="text"><span>/</span>
+          <div class="par"><input type="text" id="mpAtual"><span>/</span>
             <input type="text" class="calc" data-calc="mp" readonly></div></div>
         <div class="num-cx"><span>DEF</span><input type="text" class="calc" data-calc="def" readonly></div>
         <div class="num-cx"><span>Iniciativa</span><input type="text" class="calc" data-calc="iniciativa" readonly></div>
@@ -420,42 +485,60 @@ table.viva select { font-size: .72rem; }
         <div class="num-cx"><span>CD habilidade</span><input type="text" class="calc" data-calc="cd" readonly></div>
         <div class="num-cx"><span>Percepção passiva</span><input type="text" class="calc" data-calc="passiva" readonly></div>
         <div class="num-cx"><span>Teto de custo</span><input type="text" class="calc" data-calc="teto" readonly></div>
-        <div class="num-cx"><span>Ímpeto</span><input type="text"></div>
-        <div class="num-cx"><span>Ânimo</span><input type="text"></div>
+        <div class="num-cx"><span>Ímpeto</span><input type="text" id="impeto"></div>
+        <div class="num-cx"><span>Ânimo</span><input type="text" id="animo"></div>
       </div>
-      <p class="legenda-calc">Os PV do <b>Ferimento Grave</b> e qualquer item mágico
-        não entram na conta — destrave os campos para ajustar.</p>
+      <h3 style="margin-top:1rem;">Ajustes mecânicos <small>- itens e técnicas que a ficha não pode escolher por você</small></h3>
+      <div class="ajustes">
+        <div class="f"><label>Ajuste de DEF</label><input type="text" id="ajusteDef" value="0"></div>
+        <div class="f"><label>Ajuste de Iniciativa</label><input type="text" id="ajusteIniciativa" value="0"></div>
+        <div class="f"><label>Ajuste de Movimento, em m</label><input type="text" id="ajusteMovimento" value="0"></div>
+        <div class="f"><label>Ajuste de PV máximo</label><input type="text" id="ajustePv" value="0"></div>
+        <div class="f"><label>Ajuste de SP máximo</label><input type="text" id="ajusteSp" value="0"></div>
+        <div class="f"><label>Ajuste de MP máximo</label><input type="text" id="ajusteMp" value="0"></div>
+      </div>
+      <label class="destravar" style="margin-top:.65rem;"><input type="checkbox" id="ferimentoGrave"> Ferimento Grave ativo: reduz PV máximo pelo nível</label>
+      <p class="legenda-calc">A ficha aplica automaticamente o <b>Instinto de Briga</b>,
+        o Ferimento Grave, bônus de linhagem e progressão. Use ajustes para itens ou técnicas
+        escolhidas que mudem um número.</p>
     </div>
 
     <!-- ===== RESISTÊNCIAS E PERÍCIAS ===== -->
     <div class="bloco">
       <div class="duas-col">
         <div>
-          <h3>Testes de Resistência <small>— marque onde é proficiente</small></h3>
+          <h3>Testes de Resistência <small>- a classe marca automaticamente</small></h3>
           <ul class="marcavel">
             <li><input type="checkbox" data-prof="fortitude"><span class="nome">Fortitude <small>CON</small></span><input type="text" class="calc" data-calc="res-fortitude" readonly></li>
             <li><input type="checkbox" data-prof="reflexos"><span class="nome">Reflexos <small>DES</small></span><input type="text" class="calc" data-calc="res-reflexos" readonly></li>
             <li><input type="checkbox" data-prof="vontade"><span class="nome">Vontade <small>SAB</small></span><input type="text" class="calc" data-calc="res-vontade" readonly></li>
           </ul>
 
-          <h3 style="margin-top:1.1rem;">Perícias <small>— seis proficientes no nível 1</small></h3>
+          <h3 style="margin-top:1.1rem;">Perícias <small>- duas do Conceito, duas da Classe, duas livres</small></h3>
+          <div class="escolhas-pericia">
+            <div class="f"><label>Classe 1</label><select id="periciaClasse1"></select></div>
+            <div class="f"><label>Classe 2</label><select id="periciaClasse2"></select></div>
+            <div class="f"><label>Livre 1</label><select id="periciaLivre1"></select></div>
+            <div class="f"><label>Livre 2</label><select id="periciaLivre2"></select></div>
+            <div class="f"><label>Bônus ou substituição</label><select id="periciaBonus"></select></div>
+          </div>
+          <p class="estado-regra" id="estadoPericias">Escolha Conceito e Classe.</p>
           <ul class="marcavel colunas-2" id="listaPericias"></ul>
         </div>
 
         <div>
-          <h3>Ataques <small>— escolha o atributo e o bônus aparece</small></h3>
+          <h3>Ataques <small>- escolha o atributo e escreva o dado base</small></h3>
           <table class="viva">
-            <thead><tr><th style="width:30%">Arma</th><th style="width:16%">Atrib.</th>
-              <th style="width:14%">Ataque</th><th style="width:18%">Dano</th>
-              <th>Propriedades</th></tr></thead>
+            <thead><tr><th>Arma</th><th>Atrib.</th><th>Ajuste</th><th>Ataque</th>
+              <th>Dado</th><th>+mod?</th><th>Dano</th><th>Propriedades</th></tr></thead>
             <tbody id="linhasAtaque"></tbody>
           </table>
 
           <h3 style="margin-top:1.1rem;">Técnicas de classe</h3>
-          <textarea rows="5"></textarea>
+          <textarea rows="5" id="tecnicas"></textarea>
 
           <h3 style="margin-top:1.1rem;">Condições ativas</h3>
-          <textarea rows="2"></textarea>
+          <textarea rows="2" id="condicoes"></textarea>
         </div>
       </div>
     </div>
@@ -463,7 +546,9 @@ table.viva select { font-size: .72rem; }
     <!-- ===== HABILIDADES ===== -->
     <div class="bloco quebra-pagina">
       <h3>Habilidades preparadas <small>— nome · fonte · custo · alcance · duração · efeito</small></h3>
-      <textarea rows="9"></textarea>
+      <p class="legenda-calc"><b>Ativação é obrigatória:</b> ação, ação bônus, reação,
+        movimento ou passiva. Registre também uma única resolução: ataque ou resistência.</p>
+      <textarea rows="9" id="habilidades"></textarea>
     </div>
 
     <!-- ===== EQUIPAMENTO E LAÇOS ===== -->
@@ -471,20 +556,29 @@ table.viva select { font-size: .72rem; }
       <div class="duas-col">
         <div>
           <h3>Equipamento</h3>
-          <textarea rows="8"></textarea>
+          <textarea rows="8" id="equipamento"></textarea>
         </div>
         <div>
           <h3>Vínculos <small>— até três</small></h3>
-          <textarea rows="3"></textarea>
+          <textarea rows="3" id="vinculos"></textarea>
           <h3 style="margin-top:1.1rem;">Como descobriu que era semideus</h3>
-          <textarea rows="4"></textarea>
+          <textarea rows="4" id="descoberta"></textarea>
         </div>
       </div>
     </div>
 
     <div class="bloco">
+      <div class="duas-col">
+        <div><h3>Aparência</h3><textarea rows="3" id="aparencia"></textarea></div>
+        <div><h3>Personalidade</h3><textarea rows="3" id="personalidade"></textarea></div>
+      </div>
+      <h3 style="margin-top:1.1rem;">História</h3>
+      <textarea rows="6" id="historia"></textarea>
+    </div>
+
+    <div class="bloco">
       <h3>Anotações</h3>
-      <textarea rows="5"></textarea>
+      <textarea rows="5" id="anotacoes"></textarea>
     </div>
 
   </form>
@@ -507,6 +601,64 @@ table.viva select { font-size: .72rem; }
 </div><!-- /mancha -->
 
 </div><!-- /livro -->
+
+<!-- A impressão não usa os controles acima. Esta folha recebe cópias estáticas
+     dos valores antes de abrir o diálogo de PDF, evitando textarea cortada,
+     retrato ausente e quebras imprevisíveis entre blocos. -->
+<main class="ficha-impressao" id="fichaImpressao" aria-hidden="true">
+  <section class="pdf-pagina">
+    <header class="pdf-cabecalho">
+      <img class="pdf-retrato" id="printRetrato" alt="">
+      <div><h1 id="printNome">Herói sem nome</h1><p id="printSubtitulo">Ascensão dos Semideuses · Ficha do Herói</p></div>
+    </header>
+    <div class="pdf-grade">
+      <div class="pdf-bloco span-12"><h2>Identidade</h2><div class="pdf-grade">
+        <div class="pdf-campo span-3"><b>Jogador</b><span id="pJogador"></span></div>
+        <div class="pdf-campo span-3"><b>Classe e nível</b><span id="pClasseNivel"></span></div>
+        <div class="pdf-campo span-3"><b>Conceito</b><span id="pConceito"></span></div>
+        <div class="pdf-campo span-3"><b>Húbris / Ímpeto</b><span id="pHubris"></span></div>
+        <div class="pdf-campo span-3"><b>Parente Divino</b><span id="pParente"></span></div>
+        <div class="pdf-campo span-3"><b>Afinidade</b><span id="pAfinidade"></span></div>
+        <div class="pdf-campo span-3"><b>Atributo Divino</b><span id="pDivino"></span></div>
+        <div class="pdf-campo span-3"><b>Dracmas</b><span id="pDracmas"></span></div>
+      </div></div>
+      <div class="pdf-bloco span-12"><h2>Números de combate</h2><div class="pdf-status" id="pStatus"></div></div>
+      <div class="pdf-bloco span-7"><h2>Atributos</h2>
+        <table class="pdf-tabela"><thead><tr><th>Atributo</th><th>Base</th><th>Divino</th><th>Nível</th><th>Total</th><th>Mod.</th></tr></thead><tbody id="pAtributos"></tbody></table>
+      </div>
+      <div class="pdf-bloco span-5"><h2>Resistências</h2><table class="pdf-tabela"><tbody id="pResistencias"></tbody></table>
+        <h2 style="margin-top:3mm;">Regras automáticas</h2><div class="pdf-texto" id="pRegras"></div>
+      </div>
+      <div class="pdf-bloco span-12"><h2>Perícias</h2><table class="pdf-tabela"><tbody id="pPericias"></tbody></table></div>
+    </div>
+    <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 1/3</p>
+  </section>
+
+  <section class="pdf-pagina">
+    <header class="pdf-cabecalho"><div><h1 id="printNome2">Herói</h1><p>Combate, técnicas e habilidades</p></div></header>
+    <div class="pdf-grade">
+      <div class="pdf-bloco span-12"><h2>Ataques</h2><table class="pdf-tabela"><thead><tr><th>Arma</th><th>Atributo</th><th>Ataque</th><th>Dano</th><th>Propriedades</th></tr></thead><tbody id="pAtaques"></tbody></table></div>
+      <div class="pdf-bloco span-6"><h2>Técnicas de classe</h2><div class="pdf-texto" id="pTecnicas"></div></div>
+      <div class="pdf-bloco span-6"><h2>Condições ativas</h2><div class="pdf-texto" id="pCondicoes"></div></div>
+      <div class="pdf-bloco span-12"><h2>Habilidades preparadas · inclua ativação e resolução</h2><div class="pdf-texto" id="pHabilidades"></div></div>
+      <div class="pdf-bloco span-12"><h2>Equipamento</h2><div class="pdf-texto" id="pEquipamento"></div></div>
+    </div>
+    <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 2/3</p>
+  </section>
+
+  <section class="pdf-pagina">
+    <header class="pdf-cabecalho"><div><h1 id="printNome3">Herói</h1><p>Pessoa, vínculos e história</p></div></header>
+    <div class="pdf-grade">
+      <div class="pdf-bloco span-6"><h2>Aparência</h2><div class="pdf-texto" id="pAparencia"></div></div>
+      <div class="pdf-bloco span-6"><h2>Personalidade</h2><div class="pdf-texto" id="pPersonalidade"></div></div>
+      <div class="pdf-bloco span-6"><h2>Vínculos</h2><div class="pdf-texto" id="pVinculos"></div></div>
+      <div class="pdf-bloco span-6"><h2>Como descobriu que era semideus</h2><div class="pdf-texto" id="pDescoberta"></div></div>
+      <div class="pdf-bloco span-12"><h2>História</h2><div class="pdf-texto" id="pHistoria"></div></div>
+      <div class="pdf-bloco span-12"><h2>Anotações</h2><div class="pdf-texto" id="pAnotacoes"></div></div>
+    </div>
+    <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 3/3</p>
+  </section>
+</main>
 
 <script>
 /* ============================================================
@@ -546,6 +698,38 @@ var ARMADURAS = {
 };
 
 var NOME_CLASSE = { guardiao: "Guardião", furioso: "Furioso", oraculo: "Oráculo" };
+
+var CONCEITOS = {
+  atleta: { nome: "Atleta", pericias: ["Atletismo", "Acrobacia"], poder: "Pique de Adrenalina: ao Correr, 2 SP concedem +3 m naquele turno." },
+  biblioteca: { nome: "Rato de Biblioteca", pericias: ["Mitologia", "Investigação"], poder: "Conhecimento Aplicado: em teste de Inteligência, 2 MP concedem +5." },
+  artista: { nome: "Artista de Rua", pericias: ["Atuação", "Prestidigitação"], poder: "Plateia Cativante: uma apresentação pode render informação ou dinheiro uma vez por sessão." },
+  problematico: { nome: "Problemático", pericias: ["Intimidação", "Furtividade"], poder: "Instinto de Briga: soma Força à Iniciativa." },
+  sobrevivencialista: { nome: "Sobrevivencialista", pericias: ["Sobrevivência", "Percepção"], poder: "Um com a Natureza: orientação, água e comida para duas pessoas sem teste." },
+  socorrista: { nome: "Socorrista", pericias: ["Intuição", "Persuasão"], poder: "Primeiros Socorros: ação e 2 SP para curar 1d6 PV de alguém consciente." },
+  digital: { nome: "Cérebro Digital", pericias: ["Investigação", "Manufatura"], poder: "Familiaridade Tecnológica: Manufatura substitui Prestidigitação em eletrônicos." },
+  herdeiro: { nome: "Herdeiro", pericias: ["Persuasão", "Intuição"], poder: "Recursos da Família: conexões abrem uma porta mortal uma vez por missão." }
+};
+
+var PARENTES = {
+  zeus: { nome: "Zeus", bonus: { forca: 2, carisma: 1 }, afinidades: ["Elétrico", "Ar"], passiva: "Filho dos Céus: Vantagem em Percepção para notar monstros." },
+  poseidon: { nome: "Poseidon", bonus: { forca: 2, constituicao: 1 }, afinidades: ["Água"], passiva: "Filho do Mar: respira sob a água e fala com criaturas marinhas e equinos." },
+  hades: { nome: "Hades", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Trevas", "Terra"], passiva: "Afinidade Necrótica: mortos-vivos menores hesitam; resistência a dano necrótico." },
+  atena: { nome: "Atena", bonus: { inteligencia: 2, sabedoria: 1 }, afinidades: ["Psíquico"], passiva: "Mente Estratégica: uma vez por combate, revele uma resistência, vulnerabilidade ou imunidade." },
+  ares: { nome: "Ares", bonus: { forca: 2, constituicao: 1 }, afinidades: ["Físico"], passiva: "Fúria da Batalha: ao derrubar inimigo corpo a corpo, ganhe PV temporários iguais à proficiência." },
+  apolo: { nome: "Apolo", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Luz", "Som"], passiva: "Dom Artístico: instrumento proficiente e Vantagem em Percepção visual." },
+  hefesto: { nome: "Hefesto", bonus: { inteligencia: 2, constituicao: 1 }, afinidades: ["Fogo", "Metal"], passiva: "Mãos de Ferreiro: proficiência em Manufatura e conserto de metal uma vez por dia." },
+  demeter: { nome: "Deméter", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Natureza"], passiva: "Toque Verdejante: Vantagem para achar comida e cura diária igual à proficiência." }
+};
+
+var PERICIAS_CLASSE = {
+  guardiao: ["Atletismo", "Intuição", "Intimidação", "Percepção"],
+  furioso: ["Atletismo", "Intimidação", "Percepção", "Sobrevivência"],
+  oraculo: ["Mitologia", "Intuição", "Percepção", "Persuasão"]
+};
+var RESISTENCIAS_CLASSE = {
+  guardiao: ["fortitude", "vontade"], furioso: ["fortitude", "reflexos"],
+  oraculo: ["vontade", "reflexos"]
+};
 
 /* Ganhos por nível, do Capítulo Nove. Texto entre {} é resolvido pela classe. */
 var GANHOS = {
@@ -595,28 +779,39 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
   PERICIAS.forEach(function (p) {
     var li = document.createElement("li");
     li.innerHTML =
-      '<input type="checkbox" data-prof="per-' + p[1] + '-' + p[0] + '">' +
+      '<input type="checkbox" data-prof="per-' + p[1] + '-' + p[0] + '" disabled>' +
       '<span class="nome">' + p[0] + ' <small>' + SIGLA[p[1]] + '</small></span>' +
       '<input type="text" class="calc" data-calc="per-' + p[0] + '" readonly>';
     ul.appendChild(li);
+  });
+
+  ["periciaClasse1", "periciaClasse2", "periciaLivre1", "periciaLivre2", "periciaBonus"].forEach(function (id) {
+    document.getElementById(id).innerHTML = '<option value="">-</option>';
+  });
+  ["periciaLivre1", "periciaLivre2", "periciaBonus"].forEach(function (id) {
+    var sel = document.getElementById(id);
+    PERICIAS.forEach(function (p) { sel.add(new Option(p[0], p[0])); });
   });
 
   var tb = document.getElementById("linhasAtaque");
   for (var i = 0; i < 5; i++) {
     var tr = document.createElement("tr");
     tr.innerHTML =
-      '<td><input type="text"></td>' +
+      '<td><input type="text" data-arma="' + i + '"></td>' +
       '<td><select data-atk="' + i + '">' +
-        '<option value="">—</option>' +
+        '<option value="">-</option>' +
         '<option value="forca">FOR</option>' +
         '<option value="destreza">DES</option>' +
         '<option value="inteligencia">INT</option>' +
         '<option value="sabedoria">SAB</option>' +
         '<option value="carisma">CAR</option>' +
       '</select></td>' +
+      '<td><input type="text" data-atk-ajuste="' + i + '" value="0"></td>' +
       '<td><input type="text" class="calc" data-calc="atk-' + i + '" readonly></td>' +
-      '<td><input type="text"></td>' +
-      '<td><input type="text"></td>';
+      '<td><input type="text" data-dado="' + i + '" placeholder="1d6"></td>' +
+      '<td><select data-dano-mod="' + i + '"><option value="1">sim</option><option value="0">não</option></select></td>' +
+      '<td><input type="text" class="calc" data-calc="dano-' + i + '" readonly></td>' +
+      '<td><input type="text" data-propriedades="' + i + '"></td>';
     tb.appendChild(tr);
   }
 })();
@@ -741,6 +936,180 @@ function recalcular() {
   atualizarGanhos(nivel, classe, mCon, mDiv);
 }
 
+/* ---------- cálculo coerente com a revisão de playtest ---------- */
+var ultimoParente = null;
+var ultimaClasse = null;
+
+function valorId(id) {
+  var el = document.getElementById(id);
+  return el ? (num(el.value) || 0) : 0;
+}
+function nomeSelecionado(id) {
+  var el = document.getElementById(id);
+  return el && el.selectedIndex >= 0 ? el.options[el.selectedIndex].text : "";
+}
+function preencherOpcoes(sel, nomes, manter) {
+  sel.innerHTML = '<option value="">-</option>';
+  (nomes || []).forEach(function (nome) { sel.add(new Option(nome, nome)); });
+  if (manter && (nomes || []).indexOf(manter) >= 0) sel.value = manter;
+}
+function sincronizarParente() {
+  var chave = document.getElementById("parente").value;
+  if (chave === ultimoParente) return;
+  ultimoParente = chave;
+  var sel = document.getElementById("afinidade");
+  var anterior = sel.value;
+  var p = PARENTES[chave];
+  preencherOpcoes(sel, p ? p.afinidades : [], anterior);
+  if (p && p.afinidades.length === 1) sel.value = p.afinidades[0];
+}
+function sincronizarClasse() {
+  var chave = document.getElementById("classe").value;
+  if (chave === ultimaClasse) return;
+  ultimaClasse = chave;
+  ["periciaClasse1", "periciaClasse2"].forEach(function (id) {
+    var sel = document.getElementById(id);
+    preencherOpcoes(sel, PERICIAS_CLASSE[chave] || [], sel.value);
+  });
+}
+
+function recalcularV2() {
+  var nivel = num(document.getElementById("nivel").value) || 1;
+  nivel = Math.max(1, Math.min(20, nivel));
+  document.getElementById("nivel").value = nivel;
+  var classe = document.getElementById("classe").value;
+  var conceitoChave = document.getElementById("conceito").value;
+  var conceito = CONCEITOS[conceitoChave];
+  var parenteChave = document.getElementById("parente").value;
+  var parente = PARENTES[parenteChave];
+  var divino = document.getElementById("divino").value;
+  var prof = 2 + Math.floor((nivel - 1) / 4);
+
+  sincronizarParente();
+  sincronizarClasse();
+
+  document.getElementById("poderConceito").textContent = conceito
+    ? conceito.nome + " · " + conceito.pericias.join(" e ") + ". " + conceito.poder
+    : "Escolha o Conceito para aplicar suas perícias e habilidade.";
+  document.getElementById("poderParente").textContent = parente
+    ? parente.nome + " · " + parente.passiva
+    : "Escolha o Parente Divino para aplicar bônus, Afinidade e passiva.";
+
+  var gastos = 0, excessoTeto = 0;
+  var bases = [];
+  Object.keys(SIGLA).forEach(function (a) {
+    var baseEl = document.querySelector('[data-base="' + a + '"]');
+    var aumentoEl = document.querySelector('[data-aumento="' + a + '"]');
+    var base = baseEl ? num(baseEl.value) : null;
+    var aumento = aumentoEl ? Math.max(0, num(aumentoEl.value) || 0) : 0;
+    var linhagem = parente && parente.bonus[a] ? parente.bonus[a] : 0;
+    gastos += aumento;
+    if (base !== null) bases.push(base);
+    var out = document.querySelector('[data-linhagem="' + a + '"]');
+    if (out) out.textContent = sinal(linhagem);
+    var bruto = base === null ? null : base + aumento + linhagem;
+    if (bruto !== null && bruto > 20) excessoTeto += bruto - 20;
+    escreve("atr-" + a, bruto === null ? null : String(Math.min(20, bruto)),
+      "Base " + (base === null ? "?" : base) + " + Divino " + linhagem + " + Nível " + aumento);
+  });
+
+  var adiantado = document.getElementById("pontoAdiantado").checked ? 1 : 0;
+  var disponiveis = NIVEIS_ATRIBUTO.filter(function (n) { return n <= nivel; }).length * 2 + adiantado;
+  var estadoAtr = document.getElementById("estadoAtributos");
+  var baseCorreta = bases.length < 6 || [8,10,12,13,14,15].every(function (v) { return bases.indexOf(v) >= 0; });
+  estadoAtr.className = "estado-regra " + (gastos <= disponiveis && baseCorreta && excessoTeto === 0 ? "ok" : "erro");
+  estadoAtr.textContent = "Progressão: " + gastos + " de " + disponiveis + " pontos distribuídos" +
+    (gastos > disponiveis ? " — reduza " + (gastos - disponiveis) + "." : ".") +
+    (adiantado ? " Um deles está adiantado por Treino." : "") +
+    (excessoTeto ? " " + excessoTeto + " ponto(s) ultrapassam o máximo 20 e precisam ser realocados." : "") +
+    (!baseCorreta ? " A distribuição base deve usar 15, 14, 13, 12, 10 e 8 uma vez cada." : "");
+
+  Object.keys(SIGLA).forEach(function (a) {
+    var m = mod(a);
+    escreve("mod-" + a, m === null ? null : sinal(m), "(total - 10) ÷ 2, para baixo");
+  });
+  escreve("prof", sinal(prof), "2 + (nível - 1) ÷ 4, para baixo");
+  escreve("tratamentos", String(prof), "Igual ao bônus de proficiência");
+  escreve("teto", String(4 + Math.ceil(nivel / 2)), "4 + metade do nível, para cima");
+
+  var mFor = mod("forca"), mDes = mod("destreza"), mCon = mod("constituicao");
+  var mSab = mod("sabedoria"), mDiv = divino ? mod(divino) : null;
+
+  var arm = ARMADURAS[document.getElementById("armadura").value] || ARMADURAS["0"];
+  var escudo = valorId("escudo"), ajusteDef = valorId("ajusteDef");
+  if (mDes === null) escreve("def", null, "Depende da Destreza");
+  else {
+    var desDef = arm.limite === null ? mDes : Math.min(mDes, arm.limite);
+    escreve("def", String(arm.base + desDef + escudo + ajusteDef),
+      arm.base + " armadura " + sinal(desDef) + " DES + " + escudo + " escudo " + sinal(ajusteDef) + " ajustes");
+  }
+
+  var bonusBriga = conceitoChave === "problematico" && mFor !== null ? mFor : 0;
+  var ajusteInit = valorId("ajusteIniciativa");
+  escreve("iniciativa", mDes === null ? null : sinal(mDes + bonusBriga + ajusteInit),
+    "DES" + (conceitoChave === "problematico" ? " + FOR (Instinto de Briga)" : "") + " + ajustes");
+  escreve("movimento", (9 + valorId("ajusteMovimento")) + " m", "9 m + ajustes");
+
+  escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))), "2 + Atributo Divino, entre 1 e 6");
+  escreve("cd", mDiv === null ? null : String(8 + mDiv + prof), "8 + Atributo Divino + proficiência");
+
+  var c = CLASSES[classe];
+  if (!c || mCon === null) {
+    escreve("pv", null, "Escolha classe e Constituição"); escreve("sp", null, "Escolha classe e Constituição");
+  } else {
+    var ferida = document.getElementById("ferimentoGrave").checked ? nivel : 0;
+    escreve("pv", String(c.pv + mCon + (nivel - 1) * (c.pvN + mCon) + valorId("ajustePv") - ferida),
+      "Classe e nível + CON por nível + ajustes" + (ferida ? " - Ferimento Grave" : ""));
+    escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp")), "Classe e nível + CON inicial + ajustes");
+  }
+  escreve("mp", !c || mDiv === null ? null : String(c.mp + mDiv + (nivel - 1) * c.mpN + valorId("ajusteMp")),
+    "Classe e nível + Atributo Divino + ajustes");
+
+  var profRes = nivel >= 10 ? ["fortitude", "reflexos", "vontade"] : (RESISTENCIAS_CLASSE[classe] || []);
+  [["fortitude", "constituicao"], ["reflexos", "destreza"], ["vontade", "sabedoria"]].forEach(function (r) {
+    var cb = document.querySelector('[data-prof="' + r[0] + '"]');
+    var marcado = profRes.indexOf(r[0]) >= 0;
+    cb.checked = marcado; cb.disabled = true;
+    var m = mod(r[1]);
+    escreve("res-" + r[0], m === null ? null : sinal(m + (marcado ? prof : 0)), SIGLA[r[1]] + (marcado ? " + proficiência" : ""));
+  });
+
+  var escolhidas = [];
+  if (conceito) escolhidas = escolhidas.concat(conceito.pericias);
+  ["periciaClasse1", "periciaClasse2", "periciaLivre1", "periciaLivre2", "periciaBonus"].forEach(function (id) {
+    var v = document.getElementById(id).value; if (v) escolhidas.push(v);
+  });
+  if (parenteChave === "hefesto") escolhidas.push("Manufatura");
+  var unicas = escolhidas.filter(function (v, i, a) { return a.indexOf(v) === i; });
+  PERICIAS.forEach(function (p) {
+    var marcado = unicas.indexOf(p[0]) >= 0;
+    var cb = document.querySelector('[data-prof="per-' + p[1] + '-' + p[0] + '"]');
+    cb.checked = marcado;
+    var m = mod(p[1]);
+    escreve("per-" + p[0], m === null ? null : sinal(m + (marcado ? prof : 0)), SIGLA[p[1]] + (marcado ? " + proficiência" : ""));
+    if (p[0] === "Percepção") escreve("passiva", m === null ? null : String(10 + m + (marcado ? prof : 0)), "10 + Percepção");
+  });
+  var estadoPer = document.getElementById("estadoPericias");
+  var obrigatorias = parenteChave === "hefesto" ? 7 : 6;
+  estadoPer.className = "estado-regra " + (unicas.length >= obrigatorias ? "ok" : "erro");
+  estadoPer.textContent = unicas.length + " perícias únicas marcadas" +
+    (unicas.length < obrigatorias ? " — escolha sem repetir até completar " + obrigatorias + "." :
+      (unicas.length > obrigatorias ? " — as extras devem vir de bônus, item ou substituição legítima." : "."));
+
+  document.querySelectorAll("[data-atk]").forEach(function (sel) {
+    var i = sel.dataset.atk, m = sel.value ? mod(sel.value) : null;
+    var ajuste = num(document.querySelector('[data-atk-ajuste="' + i + '"]').value) || 0;
+    escreve("atk-" + i, m === null ? null : sinal(m + prof + ajuste), sel.value ? SIGLA[sel.value] + " + proficiência + ajuste" : "Escolha o atributo");
+    var dado = document.querySelector('[data-dado="' + i + '"]').value.trim();
+    var somaMod = document.querySelector('[data-dano-mod="' + i + '"]').value === "1";
+    escreve("dano-" + i, !dado ? null : dado + (somaMod && m !== null && m !== 0 ? sinal(m) : ""), "Dado da arma" + (somaMod ? " + atributo" : " sem atributo"));
+  });
+
+  atualizarGanhos(nivel, classe, mCon, mDiv);
+}
+
+recalcular = recalcularV2;
+
 /* ---------- o painel do nível ---------- */
 function atualizarGanhos(nivel, classe, mCon, mDiv) {
   document.getElementById("subir").disabled = nivel >= 20;
@@ -828,14 +1197,103 @@ function alternarTrava() {
     if (!f || !f.type.startsWith("image/")) return;
     var leitor = new FileReader();
     leitor.onload = function (e) {
-      alvo.style.backgroundImage = 'url("' + e.target.result + '")';
+      document.getElementById("retratoImg").src = e.target.result;
       alvo.classList.add("tem-foto");
     };
     leitor.readAsDataURL(f);          // nunca sai do navegador
   });
 })();
 
-function baixarPdf() { window.print(); }
+function valorCampo(id) {
+  var el = document.getElementById(id);
+  return el && String(el.value || "").trim() ? String(el.value).trim() : "—";
+}
+function valorCalc(chave) {
+  var el = document.querySelector('[data-calc="' + chave + '"]');
+  return el && el.value ? el.value : "—";
+}
+function porTexto(id, texto) {
+  var el = document.getElementById(id); if (el) el.textContent = texto || "—";
+}
+function prepararImpressao() {
+  recalcular();
+  var nome = valorCampo("nome");
+  porTexto("printNome", nome); porTexto("printNome2", nome); porTexto("printNome3", nome);
+  var img = document.getElementById("retratoImg"), destino = document.getElementById("printRetrato");
+  if (img.getAttribute("src")) { destino.src = img.src; destino.style.visibility = "visible"; }
+  else { destino.removeAttribute("src"); destino.style.visibility = "hidden"; }
+
+  porTexto("pJogador", valorCampo("jogador"));
+  porTexto("pClasseNivel", nomeSelecionado("classe") + " · nível " + valorCampo("nivel"));
+  porTexto("pConceito", nomeSelecionado("conceito"));
+  porTexto("pHubris", valorCampo("hubris") + " · Ímpeto " + valorCampo("impeto") + "/3");
+  porTexto("pParente", nomeSelecionado("parente")); porTexto("pAfinidade", nomeSelecionado("afinidade"));
+  porTexto("pDivino", nomeSelecionado("divino")); porTexto("pDracmas", valorCampo("dracmas"));
+
+  var status = [
+    ["PV", valorCampo("pvAtual") + "/" + valorCalc("pv")], ["SP", valorCampo("spAtual") + "/" + valorCalc("sp")],
+    ["MP", valorCampo("mpAtual") + "/" + valorCalc("mp")], ["DEF", valorCalc("def")],
+    ["Iniciativa", valorCalc("iniciativa")], ["Movimento", valorCalc("movimento")],
+    ["Proficiência", valorCalc("prof")], ["Tratamentos", valorCalc("tratamentos")],
+    ["Memória", valorCalc("memoria")], ["CD", valorCalc("cd")],
+    ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")]
+  ];
+  document.getElementById("pStatus").innerHTML = status.map(function (s) {
+    return '<div class="pdf-num"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
+  }).join("");
+
+  var nomesAtr = { forca:"Força", destreza:"Destreza", constituicao:"Constituição", inteligencia:"Inteligência", sabedoria:"Sabedoria", carisma:"Carisma" };
+  document.getElementById("pAtributos").innerHTML = Object.keys(SIGLA).map(function (a) {
+    var base = document.querySelector('[data-base="' + a + '"]').value || "—";
+    var lin = document.querySelector('[data-linhagem="' + a + '"]').textContent;
+    var niv = document.querySelector('[data-aumento="' + a + '"]').value || "0";
+    return "<tr><td>" + nomesAtr[a] + "</td><td>" + base + "</td><td>" + lin + "</td><td>" + niv + "</td><td>" + valorCalc("atr-" + a) + "</td><td>" + valorCalc("mod-" + a) + "</td></tr>";
+  }).join("");
+
+  document.getElementById("pResistencias").innerHTML = [["Fortitude","fortitude"],["Reflexos","reflexos"],["Vontade","vontade"]].map(function (r) {
+    var cb = document.querySelector('[data-prof="' + r[1] + '"]');
+    return "<tr><td>" + (cb.checked ? "● " : "○ ") + r[0] + "</td><td>" + valorCalc("res-" + r[1]) + "</td></tr>";
+  }).join("");
+  var regras = [];
+  var con = CONCEITOS[document.getElementById("conceito").value]; if (con) regras.push(con.poder);
+  var par = PARENTES[document.getElementById("parente").value]; if (par) regras.push(par.passiva);
+  if (valorId("progressoTreino")) regras.push("Progresso de Treino: " + valorId("progressoTreino") + "/3.");
+  if (document.getElementById("pontoAdiantado").checked) regras.push("Atributo: 1 ponto adiantado por Treino; descontar no próximo aumento.");
+  if (document.getElementById("ferimentoGrave").checked) regras.push("Ferimento Grave: PV máximo reduzido pelo nível; sem Ressonância Elemental.");
+  regras.push("Ímpeto: máximo 1 gasto por turno; recuperar recurso nunca ultrapassa o máximo.");
+  porTexto("pRegras", regras.join("\n\n"));
+
+  var linhasPer = [];
+  for (var i = 0; i < PERICIAS.length; i += 2) {
+    var celulas = [];
+    [PERICIAS[i], PERICIAS[i + 1]].forEach(function (p) {
+      if (!p) return;
+      var cb = document.querySelector('[data-prof="per-' + p[1] + '-' + p[0] + '"]');
+      celulas.push("<td>" + (cb.checked ? "● " : "○ ") + p[0] + "</td><td>" + valorCalc("per-" + p[0]) + "</td>");
+    });
+    linhasPer.push("<tr>" + celulas.join("") + "</tr>");
+  }
+  document.getElementById("pPericias").innerHTML = linhasPer.join("");
+
+  var ataques = [];
+  document.querySelectorAll("[data-atk]").forEach(function (sel) {
+    var i = sel.dataset.atk, arma = document.querySelector('[data-arma="' + i + '"]').value.trim();
+    if (!arma) return;
+    ataques.push("<tr><td>" + arma + "</td><td>" + (sel.value ? SIGLA[sel.value] : "—") + "</td><td>" + valorCalc("atk-" + i) + "</td><td>" + valorCalc("dano-" + i) + "</td><td>" + (document.querySelector('[data-propriedades="' + i + '"]').value || "—") + "</td></tr>");
+  });
+  document.getElementById("pAtaques").innerHTML = ataques.length ? ataques.join("") : '<tr><td colspan="5">—</td></tr>';
+
+  [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],["pHabilidades","habilidades"],
+   ["pEquipamento","equipamento"],["pAparencia","aparencia"],["pPersonalidade","personalidade"],
+   ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
+  .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
+}
+
+window.addEventListener("beforeprint", prepararImpressao);
+function baixarPdf() {
+  prepararImpressao();
+  requestAnimationFrame(function () { window.print(); });
+}
 
 function limparFicha() {
   if (!confirm("Isso apaga tudo que você preencheu. Continuar?")) return;
@@ -844,9 +1302,10 @@ function limparFicha() {
     delete el.dataset.manual;
   });
   var r = document.getElementById("retrato");
-  r.style.backgroundImage = "";
   r.classList.remove("tem-foto");
+  document.getElementById("retratoImg").removeAttribute("src");
   document.getElementById("arquivoRetrato").value = "";
+  ultimoParente = null; ultimaClasse = null;
   recalcular();
 }
 

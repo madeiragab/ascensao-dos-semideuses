@@ -1,5 +1,7 @@
 # Ascensão dos Semideuses — mapa do sistema
 
+> Consulta rápida da revisão de mesa: [`regras-universais.md`](regras-universais.md).
+
 Estado de tudo que existe, o que está pronto e o que falta. Este arquivo é o
 índice de trabalho: quando um capítulo é escrito, ele muda de estado aqui.
 
