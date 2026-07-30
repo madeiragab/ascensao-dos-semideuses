@@ -889,7 +889,7 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
   text-transform: uppercase; letter-spacing: .08em;
 }
 .retrato.tem-foto span { display: none; }
-.retrato img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.retrato img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: none; }
 .retrato.tem-foto img { display: block; }
 .retrato:hover { border-color: var(--acento); }
 .linhas-id { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
@@ -1062,7 +1062,7 @@ table.viva select { font-size: .72rem; }
 .pdf-cabecalho { display: flex; align-items: center; gap: 5mm; border-bottom: 2px solid #8A6B1E; padding-bottom: 3mm; margin-bottom: 3mm; }
 .pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #1C1913; }
 .pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #6A6250; }
-.pdf-retrato { width: 29mm; height: 35mm; border: 1px solid #6E5518; object-fit: cover; flex: none; }
+.pdf-retrato { width: 29.1667mm; height: 35mm; border: 1px solid #6E5518; object-fit: cover; object-position: center; flex: none; }
 .pdf-grade { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5mm; }
 .pdf-bloco { border: 1px solid #A99B78; padding: 2.5mm; break-inside: avoid; min-width: 0; }
 .pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #6E5518; margin: 0 0 2mm; }
@@ -1140,7 +1140,8 @@ table.viva select { font-size: .72rem; }
       Grave, marque <em>Editar campos calculados</em> na barra e escreva o que quiser.</p>
       <p><strong>O retrato fica no seu computador.</strong> Clique no quadrado e
       escolha uma imagem do rosto do personagem. Ela é lida pelo próprio navegador e
-      não sobe para lugar nenhum.</p>
+      não sobe para lugar nenhum. A moldura mostra o enquadramento, mas o arquivo
+      original é preservado no PDF editável, sem recorte ou recompressão.</p>
       <p><strong>O PDF é a sua cópia.</strong> Nada fica guardado no site. Baixe a
       ficha antes de fechar e, quando quiser continuar, use <em>Importar PDF</em>
       para recuperar os campos e o retrato neste navegador.</p>
@@ -1168,7 +1169,7 @@ table.viva select { font-size: .72rem; }
     <div class="bloco">
       <div class="identidade">
         <label class="retrato" id="retrato" title="Escolher uma imagem do rosto">
-          <input type="file" accept="image/*" id="arquivoRetrato" hidden>
+          <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="arquivoRetrato" hidden>
           <img id="retratoImg" alt="Retrato do personagem">
           <span>Clique para<br>escolher o<br>rosto</span>
         </label>
@@ -2408,16 +2409,44 @@ function alternarTrava() {
 }
 
 /* ---------- retrato ---------- */
+var TIPOS_RETRATO_PERMITIDOS = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+var LIMITE_RETRATO_ARQUIVO = 15 * 1024 * 1024;
+var LIMITE_RETRATO_DADOS = 22 * 1024 * 1024;
+
+function retratoEmFormatoPermitido(fonte) {
+  return /^data:image\/(?:jpeg|png|webp|gif);base64,/i.test(String(fonte || ""));
+}
+
 (function () {
   var alvo = document.getElementById("retrato");
   var arquivo = document.getElementById("arquivoRetrato");
   arquivo.addEventListener("change", function () {
     var f = arquivo.files && arquivo.files[0];
-    if (!f || !f.type.startsWith("image/")) return;
+    if (!f) return;
+    if (TIPOS_RETRATO_PERMITIDOS.indexOf(String(f.type || "").toLowerCase()) < 0) {
+      arquivo.value = "";
+      alert("Escolha uma imagem JPG, PNG, WEBP ou GIF.");
+      return;
+    }
+    if (f.size > LIMITE_RETRATO_ARQUIVO) {
+      arquivo.value = "";
+      alert("O retrato pode ter no máximo 15 MB.");
+      return;
+    }
     var leitor = new FileReader();
     leitor.onload = function (e) {
-      document.getElementById("retratoImg").src = e.target.result;
+      var fonte = String(e.target.result || "");
+      if (!retratoEmFormatoPermitido(fonte) || fonte.length > LIMITE_RETRATO_DADOS) {
+        arquivo.value = "";
+        alert("Não foi possível ler esse retrato sem alterar a imagem.");
+        return;
+      }
+      document.getElementById("retratoImg").src = fonte;
       alvo.classList.add("tem-foto");
+    };
+    leitor.onerror = function () {
+      arquivo.value = "";
+      alert("Não foi possível ler esse retrato.");
     };
     leitor.readAsDataURL(f);          // nunca sai do navegador
   });
@@ -2590,27 +2619,14 @@ function capturarCamposFicha() {
 
 async function retratoParaImportacao() {
   var img = document.getElementById("retratoImg");
-  if (!img || !img.getAttribute("src")) return "";
+  var fonte = img && img.getAttribute("src");
+  if (!fonte) return "";
   await esperarImagem(img);
   if (!img.naturalWidth || !img.naturalHeight) return "";
-  try {
-    var lado = 520;
-    var canvas = document.createElement("canvas");
-    canvas.width = lado; canvas.height = lado;
-    var ctx = canvas.getContext("2d");
-    var escala = Math.max(lado / img.naturalWidth, lado / img.naturalHeight);
-    var larguraFonte = lado / escala;
-    var alturaFonte = lado / escala;
-    var xFonte = (img.naturalWidth - larguraFonte) / 2;
-    var yFonte = (img.naturalHeight - alturaFonte) / 2;
-    ctx.fillStyle = "#f7f0df";
-    ctx.fillRect(0, 0, lado, lado);
-    ctx.drawImage(img, xFonte, yFonte, larguraFonte, alturaFonte, 0, 0, lado, lado);
-    return canvas.toDataURL("image/jpeg", 0.86);
-  } catch (erro) {
-    console.warn("O retrato não pôde ser incorporado aos dados editáveis.", erro);
-    return "";
+  if (!retratoEmFormatoPermitido(fonte) || fonte.length > LIMITE_RETRATO_DADOS) {
+    throw new Error("O retrato não pode ser preservado sem alteração neste PDF.");
   }
+  return fonte;
 }
 
 async function montarPacoteFicha() {
@@ -2683,7 +2699,7 @@ function extrairPacoteDoPdf(pdfBuffer) {
     .filter(function (linha) { return /^%[A-Za-z0-9+/=]+$/.test(linha); })
     .map(function (linha) { return linha.slice(1); })
     .join("");
-  if (!base64 || base64.length > 8000000) throw new Error("Os dados editáveis deste PDF estão corrompidos.");
+  if (!base64 || base64.length > 32 * 1024 * 1024) throw new Error("Os dados editáveis deste PDF estão corrompidos.");
   var pacote;
   try {
     pacote = JSON.parse(base64ParaTextoUtf8(base64));
@@ -2702,7 +2718,7 @@ function extrairPacoteDoPdf(pdfBuffer) {
       throw new Error("Um campo importado ultrapassa o limite permitido.");
     }
   });
-  if (pacote.retrato && (!/^data:image\/(?:jpeg|png|webp);base64,/i.test(pacote.retrato) || pacote.retrato.length > 3000000)) {
+  if (pacote.retrato && (!retratoEmFormatoPermitido(pacote.retrato) || pacote.retrato.length > LIMITE_RETRATO_DADOS)) {
     throw new Error("O retrato incorporado ao PDF é inválido.");
   }
   return pacote;
