@@ -10,9 +10,12 @@ with custom engines for building abilities, weapons and monsters.
 > The books themselves are written in **Brazilian Portuguese**. This page explains
 > the design and the tooling in English.
 
-What separates this project from a pile of house rules is the **simulator**: no
-number reaches the book before being measured. It has contradicted me three times,
-and all three corrections are documented below.
+What separates this project from a pile of house rules is the combination of
+**simulation and table playtesting**: numbers are measured, improvised rulings are
+recorded, and rules only close after surviving both. The four times the numbers
+contradicted intuition are documented below.
+
+**Current version:** 0.10.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -24,7 +27,7 @@ and all three corrections are documented below.
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
-| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable in the browser, self-calculating, takes a portrait, prints to PDF |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage and advancement, takes a portrait, prints as three purpose-built A4 pages |
 
 ---
 
@@ -42,19 +45,25 @@ actually accumulate.
 **Hubris** is the character's fatal flaw, and it has teeth. The GM offers a
 *Provocation*; if the player accepts and plays the flaw, they earn *Impetus*, which
 buys Advantage among other things. Once per story arc the GM may declare a
-*Rupture*, and then the flaw decides for you.
+*Rupture*, and then the flaw decides for you. Impetus can be earned at most once
+per scene and spent at most once per turn.
 
 **Abilities don't come as a spell list.** Players build each one by buying effects
 with points:
 
 ```
-COST = duration + extra effects + range
+FINAL COST = duration + extra effects + range + modifiers
 ```
 
 Duration already includes the first point of effect: instantaneous 1, sustained 2,
 scene 4. Sustaining costs half the final cost per round. Each point buys 1d8
 single-target damage, or 1d6 area damage, or +1 to Defense, or a weak condition,
 and so on.
+
+**Universal table rules** now cover the former edge cases: combined effects,
+activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands
+and objects, skill criticals, stabilization, and Impetus timing. The Portuguese
+quick reference is [`regras/regras-universais.md`](regras/regras-universais.md).
 
 **Fourteen skills**, not sixteen: *Arcana* was absorbed into Mythology — in a world
 where all magic is Greek there aren't two bodies of knowledge — and *Animal Handling*
@@ -133,10 +142,12 @@ template/               book shells and the single stylesheet
   ficha.html            the fillable sheet, black-and-gold palette
 
 regras/                 chapters in markdown, plus the system map
+  regras-universais.md  quick reference born from the first full playtest
 bestiario/              Book II in markdown
 imagens/                original covers and generated thumbnails
 sim/                    the simulator
 fonte/                  the original document, the system's initial state
+CHANGELOG.md            version history and rule decisions
 ```
 
 Start with **[`regras/SUMARIO.md`](regras/SUMARIO.md)** (in Portuguese): the map of
@@ -154,6 +165,12 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 The script resizes the covers, generates the shelf thumbnails, and calls
 `build_livros.py`, which converts the markdown and assembles the five books.
 
+To repeat the complete numerical regression:
+
+```bash
+powershell -ExecutionPolicy Bypass -File test.ps1
+```
+
 > **Always edit `template/` and the markdown.** The `.html` files at the root are
 > generated and will be overwritten on the next build.
 
@@ -167,8 +184,8 @@ refinement:
 1. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
    the rest depend on positioning, forced movement, fear or rerolls, which the
    engine does not model. They need a table, not a simulator.
-2. **Provisional armour.** The table works but was never checked against a monster
-   damage curve by level.
+2. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
+   upkeep and rewards across long campaign arcs still need measurement.
 3. **Divine materials.** Celestial bronze exists as a what-hurts-what rule; Stygian
    iron and imperial gold are only mentioned.
 

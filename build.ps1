@@ -1,7 +1,8 @@
-# Monta os três livros do sistema.
+# Monta os cinco livros do sistema.
 #
 #   template/*.html  +  template/livro.css  +  bestiario/*.md  +  imagens/*.png
 #       ->  livro-do-jogador.html  ·  bestiario.html  ·  grimorio.html
+#           guia.html  ·  ficha.html
 #
 # As páginas precisam ser autossuficientes: nenhum arquivo externo é carregado,
 # então as capas entram codificadas dentro do próprio HTML. Este script prepara
