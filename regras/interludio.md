@@ -59,6 +59,9 @@ habilidade disser o contrário.
   dele** e os **seus** SP.
 - A habilidade **Primeiros Socorros** do Conceito Socorrista gasta um Tratamento,
   mas **funciona durante o combate**. É essa a vantagem dela.
+- Em combate, quem possui um Kit Médico pode gastar **1 Tratamento e 2 SP** para
+  estabilizar automaticamente uma criatura Agonizante adjacente. Isso não cura
+  PV; sem gastar Tratamento, ainda existe a ação de Intuição CD 10.
 
 **Cura por MP não gasta Tratamentos.** A Palavra Curativa do Oráculo e qualquer
 habilidade médica paga em MP ficam fora desse limite — é o que torna um curandeiro
@@ -315,7 +318,12 @@ O jogador escolhe livremente:
 - **Recusar.** Nada acontece. Sem punição, sem custo, sem nota na ficha.
 
 Uma Provocação precisa ter **custo real**. Se aceitar não piora nada, não era uma
-Provocação — era uma sugestão.
+Provocação - era uma sugestão.
+
+Um personagem ganha Ímpeto pela Húbris no máximo **uma vez por cena**. A mesma
+Provocação não recompensa de novo até a situação e suas consequências serem
+resolvidas. O Mestre só abre exceção quando uma nova decisão cria um risco ou uma
+consequência substancialmente diferente.
 
 ### 58.2 Ímpeto
 
@@ -332,6 +340,11 @@ Gaste 1 Ímpeto para:
 Gaste 2 Ímpeto para:
 
 - **resistir a uma Ruptura**.
+
+Gastar Ímpeto **não exige ação**, mas cada personagem gasta no máximo **1 por
+turno** e nunca recupera SP ou MP acima do máximo. Fora da iniciativa, o limite é
+1 por rolagem ou consequência resolvida. Resistir a uma Ruptura é a única exceção:
+os 2 pontos são pagos juntos.
 
 ### 58.3 Ruptura
 
