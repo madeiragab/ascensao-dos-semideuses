@@ -4,6 +4,19 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.10.1] - 2026-07-29
+
+### Ficha do Herói
+
+- O botão **Baixar em PDF** não abre mais a janela de impressão: agora gera e
+  baixa diretamente um PDF A4, sempre com três páginas.
+- Corrigido o caso real em que uma configuração de papel 5×7 do navegador
+  transformava as três folhas em seis, deixando uma página vazia após cada folha.
+- A geração preserva retrato, cores, tabelas e textos longos e não envia os dados
+  do personagem para nenhum servidor.
+- `html2canvas` 1.4.1 e `jsPDF` 4.2.1 foram incorporados localmente com licença MIT;
+  a ficha publicada continua autossuficiente.
+
 ## [0.10.0] - 2026-07-29
 
 ### Regras
