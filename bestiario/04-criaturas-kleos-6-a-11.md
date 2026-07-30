@@ -18,22 +18,23 @@ quantidade de ações antes de fazer qualquer coisa memorável.
 ### QUIMERA — Kleos 6 (Canção)
 *Monstruosidade, grande · padrão*
 **PV** 115 · **DEF** 17 · **Movimento** 12 m, **Voo** 15 m
-**Ataque** +8 · **CD** 16
-**Fortitude** +8 · **Reflexos** +3 · **Vontade** +3
+**Ataque** +8 · **Efeito** +8
+**Fortitude** 22 · **Reflexos** 17 · **Vontade** 17
 **Imune** a fogo
 
 **TRAÇOS**
-- **Três Cabeças.** Vantagem em Testes de Resistência contra ficar Cega,
-  Amedrontada, Atordoada ou Inconsciente.
+- **Três Cabeças.** Rolagens de Efeito para deixá-la Cega, Amedrontada,
+  Atordoada ou Inconsciente têm Desvantagem.
 - **Voo.**
 
 **AÇÕES**
 - **Mordida do leão.** +8, **3d8 + 4** perfurante.
-- **Chifrada da cabra.** +8, **2d8 + 4** concussão, e **Fortitude CD 16** ou
-  **Caído**.
+- **Chifrada da cabra.** +8, **2d8 + 4** de concussão. Role **Efeito contra a
+  Fortitude** do alvo; em um acerto, ele fica **Caído**.
 - **Cauda-serpente.** +8, **1d8 + 4** perfurante e **3d6** de veneno.
-- **Sopro de Fogo** *(Recarga 5–6)*. Cone de 9 m. **Reflexos CD 16**, **6d8** de
-  fogo, metade em caso de sucesso.
+- **Sopro de Fogo** *(Recarga 5–6)*. Cone de 9 m. Role **Efeito contra os
+  Reflexos** de cada alvo. Em um acerto, ele sofre **6d8** de fogo; em um
+  erro, sofre metade.
 
 **ARREMETIDAS (1)**
 - **Bote da cauda** (1). Um ataque de cauda-serpente.
@@ -54,8 +55,8 @@ Chumbo é barato. Descobrir isso é um teste de **Mitologia CD 16**.
 ### HIDRA DE LERNA — Kleos 6 (Canção)
 *Monstruosidade, enorme · Bruto*
 **PV** 150 · **DEF** 15 · **Movimento** 9 m, **Natação** 9 m
-**Ataque** +8 · **CD** 16
-**Fortitude** +8 · **Reflexos** +3 · **Vontade** +3
+**Ataque** +8 · **Efeito** +8
+**Fortitude** 22 · **Reflexos** 17 · **Vontade** 17
 
 **TRAÇOS**
 - **Muitas Cabeças.** Começa com **três**. Vantagem contra ficar Cega,
@@ -93,20 +94,22 @@ banhada nele fere até um deus. Foi assim que Héracles morreu.
 ### TALOS MENOR — Kleos 6 (Canção)
 *Autômato, enorme · Blindado / Colosso*
 **PV** 130 · **DEF** 19 · **Movimento** 12 m
-**Ataque** +8 · **CD** 16
-**Fortitude** +8 · **Reflexos** +3 · **Vontade** +8
+**Ataque** +8 · **Efeito** +8
+**Fortitude** 22 · **Reflexos** 17 · **Vontade** 22
 **Imune** a veneno, doença, exaustão, sangramento e efeitos mentais
 
 **TRAÇOS**
 - **Bronze Vivo.** Resistência a dano físico de armas não divinas.
-- **Passo de Estátua.** Criaturas de tamanho médio ou menor em seu caminho fazem
-  **Reflexos CD 16** ou sofrem **4d10** de concussão e ficam **Caídas**.
+- **Passo de Estátua.** Role **Efeito contra os Reflexos** de cada criatura de
+  tamanho médio ou menor no caminho. Em um acerto, ela sofre **4d10** de
+  concussão e fica **Caída**.
 - **Não Sente.** Não pode ser Amedrontado nem enganado por ilusões de Névoa.
 
 **AÇÕES**
 - **Dois punhos.** +8, alcance 4,5 m, **4d8 + 4** de concussão.
-- **Calor de Forja** *(Recarga 6)*. O bronze fica em brasa. Criaturas a até 6 m
-  fazem **Fortitude CD 16** ou sofrem **5d8** de fogo.
+- **Calor de Forja** *(Recarga 6)*. O bronze fica em brasa. Role **Efeito
+  contra a Fortitude** de cada criatura a até 6 m. Em um acerto, ela sofre
+  **5d8** de fogo.
 
 **ARREMETIDAS (1)**
 - **Um punho** (1).
@@ -134,8 +137,8 @@ Heroico, se alguém conseguir transportar uma perna de bronze de quatro metros.
 ### CÉRBERO — Kleos 7 (Lenda)
 *Monstruosidade, enorme · padrão*
 **PV** 155 · **DEF** 17 · **Movimento** 15 m
-**Ataque** +9 · **CD** 17
-**Fortitude** +9 · **Reflexos** +9 · **Vontade** +3
+**Ataque** +9 · **Efeito** +9
+**Fortitude** 23 · **Reflexos** 23 · **Vontade** 17
 
 **TRAÇOS**
 - **Três Cabeças.** Vantagem contra Cego, Amedrontado, Atordoado e Inconsciente.
@@ -148,9 +151,10 @@ Heroico, se alguém conseguir transportar uma perna de bronze de quatro metros.
 **AÇÕES**
 - **Três mordidas.** +9, **3d8 + 5** perfurante. Se duas acertarem o mesmo alvo,
   ele fica **Agarrado** e a mordida seguinte tem Vantagem.
-- **Uivo do Limiar** *(Recarga 5–6)*. Criaturas a até 18 m fazem **Vontade CD
-  17** ou ficam **Amedrontadas** por uma rodada. Quem falhar por 5 ou mais fica
-  também **Atordoado** até o fim do próximo turno.
+- **Uivo do Limiar** *(Recarga 5–6)*. Role **Efeito contra a Vontade** de cada
+  criatura a até 18 m. Em um acerto, ela fica **Amedrontada** por uma rodada;
+  se o acerto superar a Vontade por 5 ou mais, também fica **Atordoada** até o
+  fim do próximo turno.
 
 **ARREMETIDAS (1)**
 - **Uma mordida** (1).
@@ -173,8 +177,8 @@ Cérbero é imortal enquanto o Mundo Inferior existir.
 ### ESCILA — Kleos 7 (Lenda)
 *Monstruosidade, gargantuesca · Colosso*
 **PV** 232 · **DEF** 15 · **Movimento** 0 (presa ao rochedo)
-**Ataque** +9 · **CD** 17
-**Fortitude** +9 · **Reflexos** +3 · **Vontade** +3
+**Ataque** +9 · **Efeito** +9
+**Fortitude** 23 · **Reflexos** 17 · **Vontade** 17
 
 **TRAÇOS**
 - **Seis Pescoços.** Ataca **seis alvos diferentes** por rodada, um por cabeça.
@@ -209,8 +213,8 @@ estreito fica navegável para sempre, e isso é notícia no mundo inteiro.
 ### DRAGÃO DE CÓLQUIDA — Kleos 7 (Lenda)
 *Dragão, enorme · Blindado*
 **PV** 116 · **DEF** 19 · **Movimento** 12 m
-**Ataque** +9 · **CD** 17
-**Fortitude** +9 · **Reflexos** +3 · **Vontade** +9
+**Ataque** +9 · **Efeito** +9
+**Fortitude** 23 · **Reflexos** 17 · **Vontade** 23
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno
 
 **TRAÇOS**
@@ -219,14 +223,14 @@ estreito fica navegável para sempre, e isso é notícia no mundo inteiro.
 - **Escamas Sobrepostas.** A primeira vez que sofrer dano em cada rodada, reduz
   esse dano em 10.
 - **Enrodilhado no Tesouro.** Enquanto estiver a até 3 m daquilo que guarda,
-  ganha +2 DEF e Vantagem em Testes de Resistência.
+  ganha +2 DEF, e Rolagens de Efeito contra suas defesas passivas têm Desvantagem.
 
 **AÇÕES**
 - **Mordida.** +9, **4d10 + 5** perfurante.
 - **Duas garras.** +9, **2d8 + 5** cortante.
-- **Sopro Corrosivo** *(Recarga 5–6)*. Linha de 18 m. **Reflexos CD 17**, **8d6**
-  de ácido, metade em caso de sucesso. Equipamentos atingidos fazem **Teste de
-  Integridade CD 15**.
+- **Sopro Corrosivo** *(Recarga 5–6)*. Linha de 18 m. Role **Efeito contra os
+  Reflexos** de cada alvo. Em um acerto, ele sofre **8d6** de ácido; em um
+  erro, sofre metade. Equipamentos atingidos fazem **Integridade CD 15**.
 
 **ARREMETIDAS (1)**
 - **Uma garra** (1).
@@ -255,8 +259,8 @@ souber usar.
 ### LADÃO, O DRAGÃO DAS HESPÉRIDES — Kleos 8 (Mito)
 *Dragão, gargantuesco · Colosso*
 **PV** 315 · **DEF** 16 · **Movimento** 9 m, **Escalada** 9 m
-**Ataque** +10 · **CD** 18
-**Fortitude** +10 · **Reflexos** +4 · **Vontade** +10
+**Ataque** +10 · **Efeito** +10
+**Fortitude** 24 · **Reflexos** 18 · **Vontade** 24
 
 **TRAÇOS**
 - **Cem Cabeças.** Ataca até **quatro alvos diferentes** por ação. Imune a Cego,
@@ -267,9 +271,10 @@ souber usar.
 
 **AÇÕES**
 - **Quatro mordidas.** +10, **3d10 + 5** perfurante, em alvos distintos.
-- **Enredar** *(Recarga 5–6)*. Todas as criaturas a até 9 m fazem **Reflexos CD
-  18** ou ficam **Presas** por pescoços que se enrolam. Repetem o teste no fim de
-  cada turno.
+- **Enredar** *(Recarga 5–6)*. Role **Efeito contra os Reflexos** de cada
+  criatura a até 9 m. Em um acerto, ela fica **Presa** por pescoços que se
+  enrolam. No fim de cada turno do alvo, Ladão repete a Rolagem de Efeito;
+  um erro encerra Preso.
 
 **ARREMETIDAS (2)**
 - **Uma mordida** (1).
@@ -279,7 +284,7 @@ souber usar.
 
 **VONTADE DO LUGAR** *(no jardim das Hespérides, iniciativa 20)*
 - As macieiras se fecham: a área vira terreno difícil e obscurecimento leve.
-- O pomar canta: criaturas fazem **Vontade CD 18** ou ficam **Amedrontadas**.
+- O pomar canta: role Efeito contra a Vontade de cada criatura; em um acerto, ela fica **Amedrontada**.
 - Um fruto cai. Quem o pegar recupera **20 PV** — e Ladão passa a atacá-lo com
   Vantagem, para sempre.
 
@@ -297,20 +302,22 @@ mundo fica sabendo de quem foi a culpa.
 ### CARÍBDIS — Kleos 8 (Mito)
 *Monstruosidade, gargantuesca · Colosso*
 **PV** 315 · **DEF** 16 · **Movimento** 0 (é uma boca no mar)
-**Ataque** +10 · **CD** 18
-**Fortitude** +10 · **Reflexos** +0 · **Vontade** +4
+**Ataque** +10 · **Efeito** +10
+**Fortitude** 24 · **Reflexos** 14 · **Vontade** 18
 **Imune** a todas as manobras e a dano perfurante
 
 **TRAÇOS**
-- **Sorvedouro.** No início de cada turno dela, toda criatura e embarcação a até
-  30 m faz **Fortitude CD 18** ou é puxada 9 m em direção ao centro. Quem chegar
-  ao centro é **engolido**: **6d10** de dano por rodada até ser cuspido.
+- **Sorvedouro.** No início de cada turno dela, role **Efeito contra a
+  Fortitude** de cada criatura e embarcação a até 30 m. Em um acerto, o alvo
+  é puxado 9 m em direção ao centro. Quem chegar ao centro é **engolido**:
+  sofre **6d10** de dano por rodada até ser cuspido.
 - **Ciclo.** Caríbdis **inspira por três rodadas e expira por uma**. Na rodada em
   que expira, o Sorvedouro não funciona e ela sofre dano com Vantagem.
 
 **AÇÕES**
-- **Maremoto.** +10, atinge tudo em 15 m, **5d10** de concussão e **Reflexos CD
-  18** ou **Caído** e arrastado.
+- **Maremoto.** Atinge tudo em 15 m. Role **Efeito contra os Reflexos** de cada
+  alvo. Em um acerto, ele sofre **5d10** de concussão, fica **Caído** e é
+  arrastado; em um erro, sofre metade do dano e não é movido.
 
 **ARREMETIDAS (2)**
 - **Puxar** (1) — uma criatura faz Fortitude ou é arrastada 9 m.
@@ -331,8 +338,8 @@ que o grupo descubra isso.
 ### MENÉCIO, TITÃ MENOR — Kleos 8 (Mito)
 *Titã, enorme · Bruto*
 **PV** 273 · **DEF** 17 · **Movimento** 12 m
-**Ataque** +10 · **CD** 18
-**Fortitude** +10 · **Reflexos** +4 · **Vontade** +10
+**Ataque** +10 · **Efeito** +10
+**Fortitude** 24 · **Reflexos** 18 · **Vontade** 24
 **Resistência** a dano físico de armas não divinas
 
 **TRAÇOS**
@@ -343,8 +350,9 @@ que o grupo descubra isso.
 **AÇÕES**
 - **Três golpes de lança flamejante.** +10, alcance 4,5 m, **3d10 + 6** perfurante
   e **2d6** de fogo.
-- **Pisada Sísmica** *(Recarga 5–6)*. Criaturas a até 9 m fazem **Reflexos CD 18**
-  ou sofrem **6d10** de concussão e ficam **Caídas**.
+- **Pisada Sísmica** *(Recarga 5–6)*. Role **Efeito contra os Reflexos** de
+  cada criatura a até 9 m. Em um acerto, ela sofre **6d10** de concussão e
+  fica **Caída**; em um erro, sofre metade do dano.
 
 **ARREMETIDAS (2)**
 - **Um golpe de lança** (1).
@@ -375,9 +383,9 @@ o nome de quem o derrubou.
 ### POLIBOTES, GIGANTE NASCIDO DA TERRA — Kleos 9 (Epopeia)
 *Gigante, gargantuesco · Bruto / Colosso*
 **PV** 364 · **DEF** 18 · **Movimento** 12 m
-**Ataque** +11 · **CD** 19
-**Fortitude** +11 · **Reflexos** +4 · **Vontade** +11
-**Presença** (Vontade CD 19)
+**Ataque** +11 · **Efeito** +11
+**Fortitude** 25 · **Reflexos** 18 · **Vontade** 25
+**Presença** (Efeito contra Vontade)
 
 **TRAÇOS**
 - **Nascido para Matar um Deus.** Cada Gigante foi gerado como o oposto de um
@@ -389,13 +397,13 @@ o nome de quem o derrubou.
 
 **AÇÕES**
 - **Três golpes de tridente.** +11, alcance 4,5 m, **4d10 + 6** perfurante.
-- **Chuva de Veneno** *(Recarga 5–6)*. Área de 12 m. **Fortitude CD 19**, **8d8**
-  de veneno e **Envenenado** por uma rodada; metade e sem condição em um sucesso.
+- **Chuva de Veneno** *(Recarga 5–6)*. Área de 12 m. Role **Efeito contra a
+  Fortitude** de cada alvo. Em um acerto, ele sofre **8d8** de veneno e fica
+  **Envenenado** por uma rodada; em um erro, sofre metade e evita a condição.
 
 **ARREMETIDAS (2)**
 - **Um golpe de tridente** (1).
-- **Erguer a Terra** (2) — o chão se levanta; criaturas em 9 m fazem Reflexos CD
-  19 ou ficam **Presas**.
+- **Erguer a Terra** (2) — role Efeito contra os Reflexos de cada criatura em 9 m; em um acerto, ela fica **Presa**.
 
 **RECUSAS (3)**
 
@@ -419,9 +427,9 @@ suspensa — desliga o **Filho da Terra**.
 ### HIPERIÃO, TITÃ DA LUZ — Kleos 9 (Epopeia)
 *Titã, enorme · Conjurador*
 **PV** 280 · **DEF** 19 · **Movimento** 12 m
-**Ataque** +11 · **CD** 19
-**Fortitude** +11 · **Reflexos** +11 · **Vontade** +11
-**Imune** a fogo e a dano de luz · **Presença** (Vontade CD 19)
+**Ataque** +11 · **Efeito** +11
+**Fortitude** 25 · **Reflexos** 25 · **Vontade** 25
+**Imune** a fogo e a dano de luz · **Presença** (Efeito contra Vontade)
 
 **TRAÇOS**
 - **Coroa de Chamas.** Criaturas que terminem o turno a até 3 m sofrem **4d6** de
@@ -431,12 +439,13 @@ suspensa — desliga o **Filho da Terra**.
 
 **AÇÕES**
 - **Três golpes de espada solar.** +11, **3d10 + 6** cortante e **2d8** de fogo.
-- **Nova** *(Recarga 6)*. Explosão de 18 m. **Reflexos CD 19**, **10d8** de fogo,
-  metade em um sucesso. Quem falhar fica **Cego** por uma rodada.
+- **Nova** *(Recarga 6)*. Explosão de 18 m. Role **Efeito contra os Reflexos**
+  de cada alvo. Em um acerto, ele sofre **10d8** de fogo e fica **Cego** por
+  uma rodada; em um erro, sofre metade e evita a condição.
 
 **ARREMETIDAS (2)**
 - **Um golpe** (1).
-- **Fulgor** (1) — uma criatura faz Reflexos CD 19 ou fica **Cega** até o fim do
+- **Fulgor** (1) — role Efeito contra os Reflexos de uma criatura; em um acerto, ela fica **Cega** até o fim do próximo turno.
   próximo turno dela.
 
 **RECUSAS (3)**
@@ -461,9 +470,9 @@ Serve para deuses de rio, ventos, ninfas antigas, deuses de cidade, Éolo,
 Aquelôo, Ceto. Escolha um **domínio** e todo o resto sai dele.
 
 **PV** 280 · **DEF** 19 · **Movimento** conforme o domínio
-**Ataque** +11 · **CD** 19
-**Fortitude** +11 · **Reflexos** +11 · **Vontade** +11
-**Imune** ao próprio elemento · **Presença** (Vontade CD 19)
+**Ataque** +11 · **Efeito** +11
+**Fortitude** 25 · **Reflexos** 25 · **Vontade** 25
+**Imune** ao próprio elemento · **Presença** (Efeito contra Vontade)
 
 **TRAÇOS**
 - **Senhor do Domínio.** Dentro de seu domínio (o rio, a ilha, os ventos), tem
@@ -477,8 +486,9 @@ Aquelôo, Ceto. Escolha um **domínio** e todo o resto sai dele.
 **AÇÕES**
 - **Três manifestações do domínio.** +11, **3d10 + 6** do tipo elemental
   apropriado.
-- **Ira do Domínio** *(Recarga 5–6)*. Área de 12 m, **Reflexos CD 19**, **8d10**
-  do elemento, metade em um sucesso.
+- **Ira do Domínio** *(Recarga 5–6)*. Área de 12 m. Role **Efeito contra os
+  Reflexos** de cada alvo. Em um acerto, ele sofre **8d10** do elemento;
+  em um erro, sofre metade.
 
 **ARREMETIDAS (2)** · **RECUSAS (3)**
 
@@ -504,9 +514,9 @@ lutar** — e um grupo que descubra o preço nunca precisa rolar iniciativa.
 ### ARES, DEUS DA GUERRA — Kleos 10 (Teomaquia)
 *Divindade Olímpica · Bruto*
 **PV** 370 · **DEF** 20 · **Movimento** 15 m
-**Ataque** +13 · **CD** 21
-**Fortitude** +13 · **Reflexos** +13 · **Vontade** +5
-**Presença** (Vontade CD 21) · **Imune** a Amedrontado
+**Ataque** +13 · **Efeito** +13
+**Fortitude** 27 · **Reflexos** 27 · **Vontade** 19
+**Presença** (Efeito contra Vontade) · **Imune** a Amedrontado
 
 **TRAÇOS**
 - **Forma Divina.** Se revelar sua forma verdadeira, todo mortal que olhar é
@@ -517,9 +527,9 @@ lutar** — e um grupo que descubra o preço nunca precisa rolar iniciativa.
 
 **AÇÕES**
 - **Três golpes de espada de guerra.** +13, **4d12 + 8** cortante.
-- **Grito de Guerra** *(Recarga 5–6)*. Criaturas a até 18 m fazem **Vontade CD
-  21** ou sofrem **8d8** psíquico e atacam o aliado mais próximo em seu próximo
-  turno.
+- **Grito de Guerra** *(Recarga 5–6)*. Role **Efeito contra a Vontade** de
+  cada criatura a até 18 m. Em um acerto, ela sofre **8d8** psíquico e ataca
+  o aliado mais próximo em seu próximo turno.
 
 **ARREMETIDAS (3)**
 - **Um golpe** (1).
@@ -529,8 +539,8 @@ lutar** — e um grupo que descubra o preço nunca precisa rolar iniciativa.
 
 **VONTADE DO LUGAR** *(campo de batalha, iniciativa 20)*
 - O chão vira lama e sangue: terreno difícil.
-- Armas ficam quentes: quem empunhar aço faz Fortitude CD 21 ou o solta.
-- Ecos de guerras antigas: uma criatura faz Vontade CD 21 ou fica Amedrontada.
+- Armas ficam quentes: role Efeito contra a Fortitude de quem empunha aço; em um acerto, a criatura solta a arma.
+- Ecos de guerras antigas: role Efeito contra a Vontade de uma criatura; em um acerto, ela fica Amedrontada.
 
 **FRAQUEZA MÍTICA**
 **Ele é um valentão.** Ares é o deus da violência, não da estratégia — e perdeu
@@ -548,9 +558,9 @@ real, o Mestre a escreve, e ela dura a campanha inteira.
 ### HÉCATE NAS ENCRUZILHADAS — Kleos 10 (Teomaquia)
 *Divindade, três formas · Conjuradora*
 **PV** 370 · **DEF** 20 · **Movimento** 12 m
-**Ataque** +13 · **CD** 21
-**Fortitude** +13 · **Reflexos** +13 · **Vontade** +13
-**Presença** (Vontade CD 21)
+**Ataque** +13 · **Efeito** +13
+**Fortitude** 27 · **Reflexos** 27 · **Vontade** 27
+**Presença** (Efeito contra Vontade)
 
 **TRAÇOS**
 - **Três Faces.** Ocupa três espaços ao mesmo tempo, a até 9 m um do outro. Cada
@@ -565,9 +575,10 @@ real, o Mestre a escreve, e ela dura a campanha inteira.
   escolha.
 - **Fórmula Suprema** *(2 vezes por combate)*. Conjura qualquer Fórmula de
   Círculo 4 do Livro I, Parte V, sem custo e sem componentes.
-- **Caminho Falso** *(Recarga 5–6)*. Área de 18 m. **Vontade CD 21** ou a criatura
-  passa a acreditar estar em outro lugar: fica **Incapacitada** e se move ao acaso
-  por uma rodada. Novo teste no fim de cada turno.
+- **Caminho Falso** *(Recarga 5–6)*. Área de 18 m. Role **Efeito contra a
+  Vontade** de cada alvo. Em um acerto, ele acredita estar em outro lugar:
+  fica **Incapacitado** e se move ao acaso por uma rodada. No fim de cada turno
+  do alvo, Hécate repete a Rolagem de Efeito; um erro encerra o efeito.
 
 **ARREMETIDAS (3)**
 - **Um raio** (1).
@@ -580,7 +591,7 @@ real, o Mestre a escreve, e ela dura a campanha inteira.
 - Os caminhos se trocam: todos os deslocamentos daquela rodada acabam num lugar
   diferente do pretendido.
 - As tochas se apagam: obscurecimento pesado na área inteira.
-- Cães uivam ao longe: quem falhar em Vontade CD 21 fica **Amedrontado**.
+- Cães uivam ao longe: role Efeito contra a Vontade de cada criatura; em um acerto, ela fica **Amedrontada**.
 
 **FRAQUEZA MÍTICA**
 **Ela é a deusa da escolha, e respeita quem escolhe.** Hécate **não ataca
@@ -600,9 +611,9 @@ por causa dela.
 ### HADES, SENHOR DO MUNDO INFERIOR — Kleos 10 (Teomaquia)
 *Divindade Olímpica · padrão*
 **PV** 370 · **DEF** 20 · **Movimento** 12 m
-**Ataque** +13 · **CD** 21
-**Fortitude** +13 · **Reflexos** +5 · **Vontade** +13
-**Presença** (Vontade CD 21) · **Imune** a dano necrótico e a efeitos de morte
+**Ataque** +13 · **Efeito** +13
+**Fortitude** 27 · **Reflexos** 19 · **Vontade** 27
+**Presença** (Efeito contra Vontade) · **Imune** a dano necrótico e a efeitos de morte
 
 **TRAÇOS**
 - **Elmo das Trevas.** Como ação bônus, fica **Invisível** e **imperceptível por
@@ -617,9 +628,9 @@ por causa dela.
   **3d8** necrótico.
 - **Convocar os Mortos** *(1 vez por combate)*. Ergue **oito guerreiros
   esqueléticos** de Kleos 3 que agem na iniciativa dele.
-- **Julgamento** *(Recarga 6)*. Um alvo a até 18 m faz **Vontade CD 21**. Em uma
-  falha, revive a pior coisa que já fez: **10d8** de dano psíquico e fica
-  **Atordoado** até o fim do próximo turno.
+- **Julgamento** *(Recarga 6)*. Role **Efeito contra a Vontade** de um alvo a
+  até 18 m. Em um acerto, ele revive a pior coisa que já fez: sofre **10d8**
+  de dano psíquico e fica **Atordoado** até o fim do próximo turno.
 
 **ARREMETIDAS (3)**
 - **Um golpe** (1).
@@ -629,8 +640,8 @@ por causa dela.
 **RECUSAS (3)**
 
 **VONTADE DO LUGAR** *(no Mundo Inferior, iniciativa 20)*
-- O chão se abre: Reflexos CD 21 ou cair 9 m e ficar Preso.
-- As almas se aproximam: quem falhar em Vontade CD 21 fica Amedrontado.
+- O chão se abre: role Efeito contra os Reflexos de cada criatura; em um acerto, ela cai 9 m e fica Presa.
+- As almas se aproximam: role Efeito contra a Vontade de cada criatura; em um acerto, ela fica Amedrontada.
 - O Estige murmura: qualquer juramento feito nessa rodada vira vinculante,
   queira o personagem ou não.
 
@@ -665,9 +676,9 @@ passa a cobrar.
 ### TIFÃO, O PAI DOS MONSTROS — Kleos 11 (Cataclisma)
 *Primordial, gargantuesco · Colosso*
 **PV** 500 · **DEF** 21 · **Movimento** 18 m, **Voo** 24 m
-**Ataque** +15 · **CD** 23
-**Fortitude** +15 · **Reflexos** +6 · **Vontade** +15
-**Presença** (Vontade CD 23, alcance 100 m) · **Imune** a fogo, veneno e a todas
+**Ataque** +15 · **Efeito** +15
+**Fortitude** 29 · **Reflexos** 20 · **Vontade** 29
+**Presença** (Efeito contra Vontade, alcance 100 m) · **Imune** a fogo, veneno e a todas
 as manobras
 
 **TRAÇOS**
@@ -682,11 +693,13 @@ as manobras
 
 **AÇÕES**
 - **Seis mordidas.** +15, **5d12 + 10** perfurante, em alvos distintos.
-- **Fúria dos Céus** *(Recarga 5–6)*. Área de 30 m. **Reflexos CD 23**, **12d10**
-  de dano elétrico e de fogo, metade em um sucesso. O terreno na área é destruído.
-- **Arrancar a Montanha** *(1 vez por combate)*. Arremessa um pedaço de paisagem:
-  60 m de alcance, área de 18 m, **15d10** de concussão, **Reflexos CD 23** por
-  metade.
+- **Fúria dos Céus** *(Recarga 5–6)*. Área de 30 m. Role **Efeito contra os
+  Reflexos** de cada alvo. Em um acerto, ele sofre **12d10** de dano elétrico
+  e de fogo; em um erro, sofre metade. O terreno na área é destruído.
+- **Arrancar a Montanha** *(1 vez por combate)*. Arremessa um pedaço de
+  paisagem: alcance 60 m, área de 18 m. Role **Efeito contra os Reflexos** de
+  cada alvo. Em um acerto, ele sofre **15d10** de concussão; em um erro,
+  sofre metade.
 
 **ARREMETIDAS (3)**
 - **Uma mordida** (1) · **Voar** (1) · **Sopro** (2)
@@ -695,7 +708,7 @@ as manobras
 
 **VONTADE DO LUGAR** *(qualquer lugar — ele traz o próprio, iniciativa 20)*
 - O céu desaba: dano de área automático de 4d10 em todos.
-- O chão se parte: Reflexos CD 23 ou cair num abismo novo.
+- O chão se parte: role Efeito contra os Reflexos de cada criatura; em um acerto, ela cai em um abismo novo.
 - Os monstros da região chegam: 1d4 criaturas de Kleos 4 entram no combate.
 
 **SELO**
@@ -716,9 +729,9 @@ aconteceu, e é melhor assim. A montanha fuma pelos próximos três mil anos.
 ### CRONOS RECONSTITUÍDO — Kleos 11 (Cataclisma)
 *Titã Primordial, enorme · Conjurador*
 **PV** 500 · **DEF** 21 · **Movimento** 12 m
-**Ataque** +15 · **CD** 23
-**Fortitude** +15 · **Reflexos** +15 · **Vontade** +15
-**Presença** (Vontade CD 23) · **Imune** a efeitos que manipulem tempo
+**Ataque** +15 · **Efeito** +15
+**Fortitude** 29 · **Reflexos** 29 · **Vontade** 29
+**Presença** (Efeito contra Vontade) · **Imune** a efeitos que manipulem tempo
 
 **TRAÇOS**
 - **Senhor do Tempo.** No início de cada turno dele, **uma criatura à escolha
@@ -731,11 +744,12 @@ aconteceu, e é melhor assim. A montanha fuma pelos próximos três mil anos.
 
 **AÇÕES**
 - **Três golpes de foice.** +15, alcance 4,5 m, **6d10 + 10** cortante.
-- **Parar** *(Recarga 6)*. Até três criaturas a até 18 m fazem **Vontade CD 23**
-  ou ficam **Paralisadas** até o fim do próximo turno dele.
-- **Devorar** *(1 vez por combate)*. Um alvo a até 9 m faz **Fortitude CD 23**.
-  Em uma falha, é engolido pelo tempo e **desaparece por 1d4 rodadas**, voltando
-  no mesmo lugar sem memória do intervalo.
+- **Parar** *(Recarga 6)*. Role **Efeito contra a Vontade** de até três
+  criaturas a até 18 m. Em um acerto, a criatura fica **Paralisada** até o
+  fim do próximo turno.
+- **Devorar** *(1 vez por combate)*. Role **Efeito contra a Fortitude** de um
+  alvo a até 9 m. Em um acerto, ele é engolido pelo tempo e **desaparece por
+  1d4 rodadas**, voltando no mesmo lugar sem memória do intervalo.
 
 **ARREMETIDAS (3)**
 - **Um golpe** (1) · **Acelerar** (2) — age imediatamente de novo, turno completo.
@@ -759,9 +773,9 @@ séculos para se juntar de novo. O hospedeiro pode sobreviver. Depende da escolh
 ### GAIA DESPERTA — Kleos 11 (Cataclisma)
 *Primordial, gargantuesca · Colosso*
 **PV** 500 · **DEF** 21 · **Movimento** — (ela **é** o chão)
-**Ataque** +15 · **CD** 23
-**Fortitude** +15 · **Reflexos** +0 · **Vontade** +15
-**Presença** (Vontade CD 23, alcance 1 km) · **Imune** a todas as manobras, a
+**Ataque** +15 · **Efeito** +15
+**Fortitude** 29 · **Reflexos** 14 · **Vontade** 29
+**Presença** (Efeito contra Vontade, alcance 1 km) · **Imune** a todas as manobras, a
 veneno, a dano perfurante e a efeitos mentais
 
 **TRAÇOS**
@@ -776,15 +790,15 @@ veneno, a dano perfurante e a efeitos mentais
 
 **AÇÕES** *(somente depois de erguida)*
 - **Três punhos de pedra.** +15, alcance 9 m, **6d12 + 10** de concussão.
-- **Engolir** *(Recarga 5–6)*. Área de 18 m. **Reflexos CD 23** ou ser puxado
-  para dentro da terra: **Preso** e sofrendo **8d10** por rodada até ser retirado.
-- **A Terra Recusa** *(1 vez por combate)*. Todas as criaturas em 30 m que
-  estejam tocando o solo fazem **Fortitude CD 23** ou caem **Inconscientes** por
-  uma rodada. Ela quer que você durma com ela.
+- **Engolir** *(Recarga 5–6)*. Área de 18 m. Role **Efeito contra os Reflexos**
+  de cada alvo. Em um acerto, ele é puxado para dentro da terra: fica
+  **Preso** e sofre **8d10** por rodada até ser retirado.
+- **A Terra Recusa** *(1 vez por combate)*. Role **Efeito contra a Fortitude**
+  de cada criatura em 30 m que toque o solo. Em um acerto, ela fica
+  **Inconsciente** por uma rodada. A terra quer que você durma com ela.
 
 **ARREMETIDAS (3)**
-- **Um punho** (1) · **Abrir o chão** (2) — área de 12 m vira terreno difícil e
-  quem falhar em Reflexos CD 23 fica Preso.
+- **Um punho** (1) · **Abrir o chão** (2) — a área de 12 m vira terreno difícil; role Efeito contra os Reflexos de cada alvo, que fica Preso em um acerto.
 
 **RECUSAS (3)**
 

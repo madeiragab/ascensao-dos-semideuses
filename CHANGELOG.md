@@ -4,6 +4,47 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.13.0] - 2026-07-30
+
+### Defesas passivas
+
+- Fortitude, Reflexos e Vontade agora são números prontos: **14 + atributo +
+  proficiência**, quando a defesa é treinada. Guardião treina Fortitude e Vontade;
+  Furioso, Fortitude e Reflexos; Oráculo, Vontade e Reflexos. No nível 10, todos
+  treinam a terceira defesa.
+- Ataques continuam contra DEF. Efeitos agora usam **1d20 + atributo +
+  proficiência** contra uma defesa passiva; igualar o valor é acerto. Rolagens de
+  Efeito não têm crítico e 1 ou 20 naturais usam o total normal.
+- Áreas fazem uma Rolagem de Efeito separada contra cada alvo e rolam o dano uma
+  vez. Efeitos combinados resolvem dano e condição com a mesma rolagem.
+- Vantagem numa antiga resistência virou Desvantagem para a fonte do Efeito, e
+  vice-versa. Perigos fixos usam bônus igual à antiga CD menos 8.
+- A base **14** foi escolhida por equivalência, não por aproximação: a regressão
+  exata verificou 3.888 combinações de rolagem normal, Vantagem e Desvantagem sem
+  mudar nenhuma probabilidade do modelo anterior.
+
+### Livros e ficha
+
+- A Tábua de Kleos e os 38 perfis do Bestiário agora exibem bônus de Efeito e os
+  totais de Fortitude, Reflexos e Vontade, sem somas durante a sessão.
+- Todos os poderes dos monstros, Presenças, Recusas, condições, perigos de ambiente
+  e venenos foram convertidos para a nova resolução.
+- O Grimório ganhou Efeito de Fórmula. Descrença por Investigação ainda enfrenta a
+  CD de Névoa; Descrença por força interior usa o Efeito da Fórmula contra Vontade
+  passiva, com equivalência matemática.
+- A Ficha do Herói calcula automaticamente as três defesas passivas, aplica os
+  treinamentos da classe e do nível 10, aceita ajustes individuais e leva os
+  valores prontos para o PDF.
+- O Guia do Mestre recebeu uma escala de Efeito para perigos: +3 leve, +5 perigoso,
+  +8 severo, +11 lendário e +14 divino.
+
+### Qualidade
+
+- Adicionado `sim/defesas_passivas.py`, uma prova exaustiva e sem dependências da
+  equivalência entre a resolução antiga e a nova.
+- Documentos auxiliares, sumário, READMEs bilíngues e gerador dos livros foram
+  alinhados à versão 0.13.0.
+
 ## [0.12.0] - 2026-07-29
 
 ### Leitura e navegação

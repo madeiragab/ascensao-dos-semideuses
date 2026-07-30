@@ -164,15 +164,15 @@ Ligeiros (+1,5 m) paga com −1 Força.
 
 ---
 
-## 7. Proficiências em Testes de Resistência
+## 7. Proficiências nas Defesas Passivas
 
 **Problema.** Guardião e Furioso são proficientes em Fortitude, Oráculo em
 Vontade. **Ninguém é proficiente em Reflexos** — que é justamente a resistência
 usada pelo dano em área, o padrão das habilidades ofensivas (seção 12.2).
 
-**Proposta.** Duas resistências por classe, cobrindo as três:
+**Correção adotada.** Duas defesas passivas treinadas por classe, cobrindo as três:
 
-| Classe | Resistências |
+| Classe | Defesas treinadas |
 |---|---|
 | Guardião | Fortitude e Vontade |
 | Furioso | Fortitude e Reflexos |
@@ -189,9 +189,8 @@ sem condição de movimento. Ninguém escolhe essa técnica.
 **Proposta.** Trocar o efeito para algo que o Ataque Feroz não faz:
 
 > **Investida Imprudente.** Após se mover pelo menos 6 metros em linha reta até
-> um alvo, o personagem pode gastar 2 SP para atacar. Se acertar, o alvo é
-> empurrado 3 metros e precisa passar em um Teste de Fortitude (CD 8 + mod de
-> Força + proficiência) ou cai derrubado.
+> um alvo, o personagem pode gastar 2 SP para atacar. Se acertar, o mesmo acerto
+> empurra o alvo 3 metros e o deixa Caído, sem uma segunda resolução.
 
 ---
 

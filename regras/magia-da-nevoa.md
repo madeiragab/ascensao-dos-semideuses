@@ -62,8 +62,9 @@ e isso é proposital: acumular as duas coisas deve custar caro na distribuição
 atributos.
 
 ```
-CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência
-Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência
+CD de Névoa       = 8 + modificador de Inteligência + bônus de proficiência
+Ataque de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência
+Efeito de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência
 ```
 
 ---
@@ -131,8 +132,10 @@ Versátil, ou escolhendo Fórmulas sem Gesto.
 ### 37.3 Concentração
 
 Fórmulas com duração prolongada exigem **Concentração**, seguindo as regras já
-existentes no [Capítulo Sete do Livro do Jogador](livro-do-jogador.html#cap7): uma por vez, Teste de Fortitude
-CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.
+existentes no [Capítulo Sete do Livro do Jogador](livro-do-jogador.html#cap7):
+só uma por vez. Ao sofrer dano, a fonte faz uma Rolagem de Efeito contra sua
+Fortitude; use o bônus definido naquela regra. Um erro mantém a Concentração e
+um acerto a encerra.
 
 Concentração de Fórmula e Concentração de habilidade **disputam o mesmo espaço**.
 Não é possível manter as duas.
@@ -157,8 +160,10 @@ Não é possível dar Refluxo em Fórmulas de Círculo 4.
 Esta é a regra que separa magia de todo o resto do sistema.
 
 > Uma criatura que tenha **motivo para duvidar** de uma criação de Névoa pode
-> realizar um **Teste de Descrença**: **Investigação** ou **Vontade**, à escolha
-> dela, contra a CD de Névoa do conjurador.
+> tentar a **Descrença** de duas formas. Com análise, faz **Investigação contra
+> a CD de Névoa**. Com força interior, o conjurador faz **Efeito de Fórmula
+> contra a Vontade passiva** dela. Sucesso na Investigação ou erro da Fórmula
+> significa que a criatura deixou de acreditar.
 
 Existe motivo para duvidar quando a criatura:
 
@@ -176,7 +181,7 @@ continuar acreditando não te faz voltar a acreditar.
 | Densidade | Efeito da Descrença |
 |---|---|
 | **Névoa Vestida** | A criação fica translúcida para aquela criatura. Ela ignora completamente o efeito: atravessa a parede, vê o rosto verdadeiro, não é enganada. |
-| **Névoa Densa** | A criação **enfraquece pela metade** para aquela criatura: metade do dano, metade dos PV temporários, condições só se aplicam com Desvantagem no ataque ou Vantagem no teste dela. Não desaparece. |
+| **Névoa Densa** | A criação **enfraquece pela metade** para aquela criatura: metade do dano, metade dos PV temporários, ataques e Rolagens de Efeito que imponham condições têm Desvantagem. Não desaparece. |
 
 Uma criatura que descreu de uma criação **não precisa testar de novo** contra
 aquela mesma criação. Mas cada nova conjuração é uma nova criação.
@@ -187,8 +192,8 @@ aquela mesma criação. Mas cada nova conjuração é uma nova criação.
 |---|---|
 | **Mortal comum** | **Não pode testar.** A Névoa reescreve o que ele vê para algo mundano, e ele acredita. Esse é o motivo de a Névoa existir. |
 | **Semideus, monstro, ninfa, sátiro** | Testa normalmente. |
-| **Outro conjurador** | Testa com **Vantagem** — reconhece o trabalho. |
-| **Clarividente** (mortal que enxerga através da Névoa) | **Sucesso automático**, sem teste. Não existem muitos, e um deles na mesa muda o jogo. |
+| **Outro conjurador** | Tem Vantagem na Investigação; se usar Vontade, o Efeito da Fórmula tem Desvantagem. |
+| **Clarividente** (mortal que enxerga através da Névoa) | **Descrença automática**, sem rolagem. Não existem muitos, e um deles na mesa muda o jogo. |
 | **Deuses e titãs** | Não são afetados. Nem se dão o trabalho de testar. |
 
 ### O que a Descrença não faz
@@ -258,8 +263,9 @@ Você se desfaz em névoa e se recompõe em um espaço desocupado que possa ver 
 6 metros. Não provoca ataques de oportunidade.
 
 **Sussurro da Névoa** (Domínio) — V · ação · 12 m · 1 rodada · Vestida
-Um alvo ouve, na própria voz, aquilo que mais teme ouvir. Teste de **Vontade** ou
-fica **Amedrontado** de você por uma rodada, com novo teste no fim de cada turno.
+Faça **Efeito de Fórmula contra a Vontade** de um alvo. Em um acerto, ele ouve,
+na própria voz, aquilo que mais teme e fica **Amedrontado** de você. No fim de
+cada turno do alvo, repita a Rolagem de Efeito; um erro encerra o efeito.
 
 **Muralha Fina** (Forma) — V, G, F · ação · 12 m · 1 minuto · Densa
 Uma parede de névoa sólida de 3 por 3 metros. Bloqueia a linha de visão e concede
@@ -292,17 +298,18 @@ Uma nuvem de 6 metros de raio produz **obscurecimento pesado**. O vento forte a
 dispersa em uma rodada.
 
 **Verdade Roubada** (Vislumbre) — V, F · ação · 9 m · instantâneo · —
-Um alvo que possa ouvir você faz um Teste de **Vontade**. Em uma falha, você
-arranca da névoa ao redor dele **uma** verdade que ele esconde — não a que você
-escolher, mas a que estiver mais próxima da superfície. Um alvo não pode ser
+Faça **Efeito de Fórmula contra a Vontade** de um alvo que possa ouvir você.
+Em um acerto, você arranca da névoa ao redor dele **uma** verdade que ele esconde
+— não a que escolher, mas a mais próxima da superfície. Um alvo não pode ser
 afetado de novo até o próximo Descanso Longo.
 
 ### Círculo 3 — 6 MP (nível 10)
 
 **Labirinto Menor** (Caminho) — V, G, F · ação · 18 m · Concentração, até 1 min · Densa
-Um alvo faz Teste de **Vontade** ou desaparece em um corredor de névoa. No turno
-dele, pode gastar a ação em um teste de **Investigação** contra sua CD de Névoa
-para sair, reaparecendo no espaço de onde saiu.
+Faça **Efeito de Fórmula contra a Vontade** de um alvo. Em um acerto, ele
+desaparece em um corredor de névoa. No turno dele, pode gastar a ação em um
+teste de **Investigação contra sua CD de Névoa** para sair, reaparecendo no
+espaço de onde saiu.
 
 **Cidade de Bruma** (Véu) — V, G, F · 1 minuto · 30 m · 10 minutos · Vestida
 Uma ilusão do tamanho de um prédio: um muro que não existe, uma rua onde havia um
@@ -310,9 +317,10 @@ beco, uma multidão. Mortais comuns não questionam. Cada criatura capaz de desc
 testa uma vez ao interagir.
 
 **Coroa da Deusa** (Domínio) — V, G, F · ação · 12 m · Concentração, até 1 min · Vestida
-Um alvo faz Teste de **Vontade** ou passa a ver aliados como inimigos por uma
-rodada, com novo teste no fim de cada turno dele. Ele não é controlado — só está
-enganado, e age de acordo com o que acredita estar vendo.
+Faça **Efeito de Fórmula contra a Vontade** de um alvo. Em um acerto, ele passa
+a ver aliados como inimigos por uma rodada. No fim de cada turno do alvo, repita
+a Rolagem de Efeito; um erro encerra a ilusão. Ele não é controlado — apenas age
+de acordo com o que acredita estar vendo.
 
 ### Círculo 4 — 9 MP (nível 15)
 
@@ -367,7 +375,7 @@ Tipo de ação:
 Alcance:
 Alvo ou área:
 Duração e Concentração:
-Rolagem: Ataque de Fórmula ou Teste de Resistência
+Rolagem: Ataque de Fórmula contra DEF ou Efeito de Fórmula contra uma defesa passiva
 Efeito principal:
 Efeitos adicionais:
 Modificadores de custo:

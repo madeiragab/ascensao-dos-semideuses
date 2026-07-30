@@ -15,8 +15,8 @@ lembrar ao grupo que o mundo mortal também morde.*
 ### SÁTIRO ERRANTE — Kleos 1 (Rumor)
 *Humanoide, médio · Veloz*
 **PV** 8 · **DEF** 13 · **Movimento** 12 m
-**Ataque** +3 · **CD** 11
-**Fortitude** +0 · **Reflexos** +3 · **Vontade** +3
+**Ataque** +3 · **Efeito** +3
+**Fortitude** 14 · **Reflexos** 17 · **Vontade** 17
 
 **TRAÇOS**
 - **Pés que Não Ficam.** Pode usar Desengajar como ação bônus.
@@ -37,8 +37,8 @@ rolagens. Muitos sabem coisas úteis e trocam por bolotas de café.
 ### MERCENÁRIO MORTAL — Kleos 1 (Rumor)
 *Humanoide, médio · padrão*
 **PV** 11 · **DEF** 13 (couro batido) · **Movimento** 9 m
-**Ataque** +3 · **CD** 11
-**Fortitude** +3 · **Reflexos** +1 · **Vontade** +0
+**Ataque** +3 · **Efeito** +3
+**Fortitude** 17 · **Reflexos** 15 · **Vontade** 14
 
 **TRAÇOS**
 - **Nunca Sozinho.** Vantagem em ataques contra alvos que já tenham outro
@@ -60,8 +60,8 @@ conjurador nunca deveria precisar lutar contra mercenários mortais.
 ### CÃO INFERNAL FILHOTE — Kleos 1 (Rumor)
 *Monstruosidade, pequeno · Veloz*
 **PV** 8 · **DEF** 13 · **Movimento** 15 m
-**Ataque** +3 · **CD** 11
-**Fortitude** +3 · **Reflexos** +3 · **Vontade** +0
+**Ataque** +3 · **Efeito** +3
+**Fortitude** 17 · **Reflexos** 17 · **Vontade** 14
 
 **TRAÇOS**
 - **Faro de Sangue.** Vantagem em ataques contra criaturas com metade dos PV ou
@@ -83,8 +83,8 @@ cause 6 ou mais.
 ### CORVO DE MAU AGOURO — Kleos 1 (Rumor)
 *Espírito, miúdo · Sombra*
 **PV** 9 · **DEF** 13 · **Voo** 15 m
-**Ataque** +3 · **CD** 11
-**Fortitude** +0 · **Reflexos** +3 · **Vontade** +3
+**Ataque** +3 · **Efeito** +3
+**Fortitude** 14 · **Reflexos** 17 · **Vontade** 17
 **Resistência** a dano físico de armas não divinas
 
 **TRAÇOS**
@@ -96,8 +96,8 @@ cause 6 ou mais.
 
 **FRAQUEZA MÍTICA**
 Um corvo de agouro **não suporta ser contado em voz alta**. Se um personagem
-disser o número exato de corvos presentes, todos eles precisam passar em um
-Teste de Vontade CD 13 ou fugir imediatamente.
+disser o número exato de corvos presentes, faça **Efeito +5 contra a Vontade**
+de cada corvo. Em um acerto, aquele corvo foge imediatamente.
 
 **AO MORRER** Some numa fumaça que cheira a chuva.
 
@@ -112,8 +112,8 @@ Teste de Vontade CD 13 ou fugir imediatamente.
 ### HARPIA CARNICEIRA — Kleos 2 (Boato)
 *Monstruosidade, média · Veloz*
 **PV** 17 · **DEF** 14 · **Voo** 15 m
-**Ataque** +4 · **CD** 12
-**Fortitude** +1 · **Reflexos** +4 · **Vontade** +4
+**Ataque** +4 · **Efeito** +4
+**Fortitude** 15 · **Reflexos** 18 · **Vontade** 18
 
 **TRAÇOS**
 - **Voo.**
@@ -123,8 +123,8 @@ Teste de Vontade CD 13 ou fugir imediatamente.
 
 **AÇÕES**
 - **Duas garras.** +4 cada, **1d6 + 1** de dano cortante.
-- **Grito Sujo** *(Recarga 5–6)*. Todas as criaturas a até 6 m fazem
-  **Fortitude CD 12** ou ficam **Envenenadas** por uma rodada.
+- **Grito Sujo** *(Recarga 5–6)*. Role **Efeito contra a Fortitude** de cada
+  criatura a até 6 m. Em um acerto, ela fica **Envenenada** por uma rodada.
 
 **FRAQUEZA MÍTICA**
 Gula. Uma harpia não resiste a comida exposta: largar rações no chão a distrai
@@ -137,8 +137,8 @@ por uma rodada inteira, sem teste. Foi assim que os Boréadas salvaram Fineu.
 ### DRACENA LANCEIRA — Kleos 2 (Boato)
 *Monstruosidade, média · Blindada*
 **PV** 17 · **DEF** 15 (escudo) · **Movimento** 9 m
-**Ataque** +4 · **CD** 12
-**Fortitude** +4 · **Reflexos** +1 · **Vontade** +1
+**Ataque** +4 · **Efeito** +4
+**Fortitude** 18 · **Reflexos** 15 · **Vontade** 15
 
 **TRAÇOS**
 - **Muralha de Escudos.** Cada outra dracena adjacente concede **+1 DEF** a ela,
@@ -159,8 +159,8 @@ Separar a formação delas é metade da luta.
 ### ESPÍRITO DO NEVOEIRO — Kleos 2 (Boato)
 *Espírito, médio · Sombra*
 **PV** 18 · **DEF** 14 · **Flutuação** 9 m
-**Ataque** +4 · **CD** 12
-**Fortitude** +1 · **Reflexos** +1 · **Vontade** +4
+**Ataque** +4 · **Efeito** +4
+**Fortitude** 15 · **Reflexos** 15 · **Vontade** 18
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno e doença
 
 **TRAÇOS**
@@ -183,8 +183,8 @@ Vento forte o dissipa completamente em uma rodada.
 ### LOBO DE LICAÃO — Kleos 2 (Boato)
 *Licantropo, médio · Bruto*
 **PV** 29 · **DEF** 12 · **Movimento** 12 m
-**Ataque** +4 · **CD** 12
-**Fortitude** +4 · **Reflexos** +1 · **Vontade** +1
+**Ataque** +4 · **Efeito** +4
+**Fortitude** 18 · **Reflexos** 15 · **Vontade** 15
 
 **TRAÇOS**
 - **Carne Amaldiçoada.** Recupera **2 PV** no início de cada turno. Interrompido
@@ -192,8 +192,8 @@ Vento forte o dissipa completamente em uma rodada.
 - **Matilha.** Vantagem em ataques quando outro lobo estiver adjacente ao alvo.
 
 **AÇÕES**
-- **Mordida.** +4, **2d6 + 2** de dano perfurante. O alvo faz **Fortitude CD 12**
-  ou é derrubado.
+- **Mordida.** +4, **2d6 + 2** de dano perfurante. Role **Efeito contra a
+  Fortitude** do alvo; em um acerto, ele fica **Caído**.
 
 **FRAQUEZA MÍTICA**
 **Prata.** Qualquer dano de prata desliga a regeneração e é rolado com Vantagem.
@@ -214,8 +214,8 @@ vezes, com quase dois heróis no chão.*
 ### AUTÔMATO HOPLITA — Kleos 3 (Conto)
 *Autômato, médio · Blindado*
 **PV** 27 · **DEF** 16 · **Movimento** 9 m
-**Ataque** +5 · **CD** 13
-**Fortitude** +5 · **Reflexos** +1 · **Vontade** +5
+**Ataque** +5 · **Efeito** +5
+**Fortitude** 19 · **Reflexos** 15 · **Vontade** 19
 **Imune** a veneno, doença, exaustão e efeitos mentais
 
 **TRAÇOS**
@@ -225,8 +225,8 @@ vezes, com quase dois heróis no chão.*
 
 **AÇÕES**
 - **Dois golpes de lança.** +5 cada, alcance 3 m, **1d8 + 3** de dano perfurante.
-- **Empuxo de Escudo** *(Recarga 5–6)*. Um alvo a até 1,5 m faz **Fortitude CD
-  13** ou é empurrado 3 m e fica **Caído**.
+- **Empuxo de Escudo** *(Recarga 5–6)*. Role **Efeito contra a Fortitude** de
+  um alvo a até 1,5 m. Em um acerto, ele é empurrado 3 m e fica **Caído**.
 
 **FRAQUEZA MÍTICA**
 O **núcleo de comando na nuca**. Um teste de **Manufatura CD 15** — ou um
@@ -243,8 +243,8 @@ Aprimorado.
 ### EMPUSA — Kleos 3 (Conto)
 *Monstruosidade, média · Veloz*
 **PV** 27 · **DEF** 15 · **Movimento** 12 m
-**Ataque** +5 · **CD** 13
-**Fortitude** +1 · **Reflexos** +5 · **Vontade** +5
+**Ataque** +5 · **Efeito** +5
+**Fortitude** 15 · **Reflexos** 19 · **Vontade** 19
 
 **TRAÇOS**
 - **Disfarce da Névoa.** Aparenta ser uma jovem comum e agradável. Mortais nunca
@@ -255,9 +255,10 @@ Aprimorado.
 
 **AÇÕES**
 - **Três garras.** +5 cada, **1d6 + 1** de dano cortante.
-- **Encanto** *(1 vez por combate)*. Uma criatura que possa ouvi-la faz
-  **Vontade CD 13** ou fica **Amedrontada de todos menos dela** por uma rodada, e
-  se aproxima voluntariamente. Novo teste no fim de cada turno.
+- **Encanto** *(1 vez por combate)*. Role **Efeito contra a Vontade** de uma
+  criatura que possa ouvi-la. Em um acerto, ela fica **Amedrontada de todos
+  menos dela** e se aproxima voluntariamente. No fim de cada turno do alvo,
+  a empusa repete a Rolagem de Efeito; um erro encerra o efeito.
 
 **FRAQUEZA MÍTICA**
 **Fogo.** Empusas sofrem dano de fogo com Vantagem na rolagem e não conseguem
@@ -271,8 +272,8 @@ Encanto até a próxima noite.
 ### CÃO DO INFERNO — Kleos 3 (Conto)
 *Monstruosidade, grande · Veloz*
 **PV** 27 · **DEF** 15 · **Movimento** 15 m
-**Ataque** +5 · **CD** 13
-**Fortitude** +5 · **Reflexos** +5 · **Vontade** +1
+**Ataque** +5 · **Efeito** +5
+**Fortitude** 19 · **Reflexos** 19 · **Vontade** 15
 
 **TRAÇOS**
 - **Faro de Sangue.** Vantagem contra alvos com metade dos PV ou menos.
@@ -286,7 +287,8 @@ Encanto até a próxima noite.
 **FRAQUEZA MÍTICA**
 **Bronze celestial** o dissolve: dano de bronze celestial é rolado com Vantagem.
 E, se alguém tiver o cheiro de seu dono — um filho de Hades, um objeto do Mundo
-Inferior —, ele hesita: **Vontade CD 13** ou perde a ação daquele turno.
+Inferior —, faça **Efeito +5 contra a Vontade** do cão. Em um acerto, ele perde
+a ação daquele turno.
 
 **AO MORRER** Pó dourado. Se foi enviado por alguém, esse alguém sabe.
 
@@ -294,8 +296,8 @@ Inferior —, ele hesita: **Vontade CD 13** ou perde a ação daquele turno.
 
 ### BANDO DE ESTINFÁLIDES — Kleos 3 (Conto)
 *Enxame · 4 aves de Kleos 1*
-Cada ave: **PV** 9 · **DEF** 13 · **Voo** 15 m · **Ataque** +3 · **CD** 11
-**Fortitude** +0 · **Reflexos** +3 · **Vontade** +0
+Cada ave: **PV** 9 · **DEF** 13 · **Voo** 15 m · **Ataque** +3 · **Efeito** +3
+**Fortitude** 14 · **Reflexos** 17 · **Vontade** 14
 
 **TRAÇOS DO BANDO**
 - **Nuvem.** Enquanto houver três ou mais aves vivas, todas têm **+2 DEF**.
@@ -306,10 +308,10 @@ Cada ave: **PV** 9 · **DEF** 13 · **Voo** 15 m · **Ataque** +3 · **CD** 11
 - **Salva de Penas.** +3, 18 m, **1d6** de dano perfurante.
 
 **FRAQUEZA MÍTICA**
-**Barulho de metal.** Héracles as expulsou com um chocalho de bronze. Uma ação
-batendo escudo, armadura ou panelas força todas as aves a um **Teste de Vontade
-CD 12**; as que falharem fogem por uma rodada. Um personagem com a perícia
-**Atuação** faz isso com Vantagem.
+**Barulho de metal.** Héracles as expulsou com um chocalho de bronze. Com uma
+ação, bata escudo, armadura ou panelas e faça uma **Rolagem de Efeito com
+Carisma** contra a Vontade de cada ave; some a proficiência se for treinado em
+**Atuação**. O metal barulhento concede Vantagem à rolagem.
 
 **AO MORRER** Pó dourado. As penas de bronze sobrevivem e servem de munição.
 
@@ -324,12 +326,13 @@ CD 12**; as que falharem fogem por uma rodada. Um personagem com a perícia
 ### MINOTAURO — Kleos 4 (Façanha)
 *Monstruosidade, grande · Bruto*
 **PV** 72 · **DEF** 14 · **Movimento** 12 m
-**Ataque** +6 · **CD** 14
-**Fortitude** +6 · **Reflexos** +2 · **Vontade** +2
+**Ataque** +6 · **Efeito** +6
+**Fortitude** 20 · **Reflexos** 16 · **Vontade** 16
 
 **TRAÇOS**
 - **Investida.** Se mover pelo menos 6 m em linha reta antes de atacar, o ataque
-  causa **+4 de dano** e o alvo faz **Fortitude CD 14** ou fica **Caído**.
+  causa **+4 de dano**. Role **Efeito contra a Fortitude** do alvo; em um
+  acerto, ele fica **Caído**.
 - **Fúria Cega.** Nunca recua e nunca troca de alvo enquanto seu alvo atual
   estiver de pé e visível.
 
@@ -352,8 +355,8 @@ sofrendo 2d6. Colunas, árvores e esquinas são armas contra ele.
 ### GÓRGONA MENOR — Kleos 4 (Façanha)
 *Monstruosidade, média · padrão*
 **PV** 55 · **DEF** 15 · **Movimento** 9 m
-**Ataque** +6 · **CD** 14
-**Fortitude** +6 · **Reflexos** +6 · **Vontade** +2
+**Ataque** +6 · **Efeito** +6
+**Fortitude** 20 · **Reflexos** 20 · **Vontade** 16
 
 **TRAÇOS**
 - **Cabeleira Viva.** Qualquer criatura que a agarre, ou que ela agarre, sofre
@@ -363,8 +366,8 @@ sofrendo 2d6. Colunas, árvores e esquinas são armas contra ele.
 
 **AÇÕES**
 - **Garras.** ×2, +6, **2d6 + 3** de dano cortante.
-- **Mordida das Serpentes.** +6, **1d8 + 3** perfurante e **Fortitude CD 14** ou
-  **Envenenado** por uma rodada.
+- **Mordida das Serpentes.** +6, **1d8 + 3** perfurante. Role **Efeito contra a
+  Fortitude** do alvo; em um acerto, ele fica **Envenenado** por uma rodada.
 
 **FRAQUEZA MÍTICA**
 **O próprio reflexo.** Górgonas evitam ver a si mesmas. Um espelho, um escudo
@@ -379,8 +382,8 @@ um lado, veneno do outro, e o Mestre não diz qual é qual.
 ### CICLOPE PASTOR — Kleos 4 (Façanha)
 *Gigante, grande · Bruto*
 **PV** 72 · **DEF** 14 · **Movimento** 9 m
-**Ataque** +6 · **CD** 14
-**Fortitude** +6 · **Reflexos** +2 · **Vontade** +2
+**Ataque** +6 · **Efeito** +6
+**Fortitude** 20 · **Reflexos** 16 · **Vontade** 16
 
 **TRAÇOS**
 - **Força Descomunal.** Conta como duas categorias de tamanho acima para agarrar,
@@ -389,8 +392,8 @@ um lado, veneno do outro, e o Mestre não diz qual é qual.
 
 **AÇÕES**
 - **Clava de tronco.** +6, alcance 3 m, **4d8** de concussão.
-- **Pedregulho.** +6, 12/36 m, **3d10** de concussão, e o alvo faz **Fortitude CD
-  14** ou fica **Caído**.
+- **Pedregulho.** +6, 12/36 m, **3d10** de concussão. Role **Efeito contra a
+  Fortitude** do alvo; em um acerto, ele fica **Caído**.
 
 **FRAQUEZA MÍTICA**
 **Um olho só.** Tem Desvantagem em Percepção e em ataques contra criaturas que
@@ -405,8 +408,8 @@ primeiro: uma refeição **Grandiosa** compartilhada pode encerrar a hostilidade
 ### BASILISCO — Kleos 4 (Façanha)
 *Monstruosidade, pequeno · Blindado / Conjurador*
 **PV** 41 · **DEF** 17 · **Movimento** 9 m
-**Ataque** +6 · **CD** 14
-**Fortitude** +6 · **Reflexos** +2 · **Vontade** +6
+**Ataque** +6 · **Efeito** +6
+**Fortitude** 20 · **Reflexos** 16 · **Vontade** 20
 **Imune** a veneno
 
 **TRAÇOS**
@@ -415,9 +418,10 @@ primeiro: uma refeição **Grandiosa** compartilhada pode encerrar a hostilidade
 
 **AÇÕES**
 - **Mordida.** +6, **2d6 + 3** perfurante e **2d6** de veneno.
-- **Olhar de Pedra** *(Recarga 5–6)*. Um alvo a até 9 m que possa vê-lo faz
-  **Fortitude CD 14**. Em uma falha, fica **Preso** enquanto a pedra sobe pelo
-  corpo. Se falhar de novo no fim do próximo turno, fica **Petrificado**.
+- **Olhar de Pedra** *(Recarga 5–6)*. Role **Efeito contra a Fortitude** de um
+  alvo a até 9 m que possa vê-lo. Em um acerto, ele fica **Preso** enquanto a
+  pedra sobe pelo corpo. No fim do próximo turno do alvo, o cocatriz repete a
+  Rolagem de Efeito: outro acerto o deixa **Petrificado**; um erro encerra Preso.
   *Petrificação é reversível: ver Fraqueza.*
 
 **FRAQUEZA MÍTICA**
@@ -440,8 +444,8 @@ desfaz a petrificação.
 ### MEDUSA — Kleos 5 (Feito)
 *Monstruosidade, média · Conjuradora*
 **PV** 80 · **DEF** 16 · **Movimento** 9 m
-**Ataque** +7 · **CD** 15
-**Fortitude** +7 · **Reflexos** +7 · **Vontade** +2
+**Ataque** +7 · **Efeito** +7
+**Fortitude** 21 · **Reflexos** 21 · **Vontade** 16
 
 > ⚠️ **Efeito de derrota instantânea.** Medusa pode tirar um personagem do jogo
 > sem passar por PV. O Mestre **precisa** avisar a mesa por dentro da ficção
@@ -454,9 +458,10 @@ desfaz a petrificação.
 - **Cabeleira Viva.** 2d6 de veneno por turno em quem a agarrar.
 
 **AÇÕES**
-- **Olhar de Pedra.** *Não é uma ação — está sempre ativo.* Toda criatura que
-  **começar seu turno vendo Medusa** faz **Fortitude CD 15**. Em uma falha, fica
-  **Preso**; em uma segunda falha consecutiva, fica **Petrificado**.
+- **Olhar de Pedra.** *Não é uma ação — está sempre ativo.* No começo do turno
+  de cada criatura que veja Medusa, ela faz **Efeito contra a Fortitude** do
+  alvo. O primeiro acerto consecutivo o deixa **Preso**; o segundo o deixa
+  **Petrificado**. Um erro quebra a sequência e encerra Preso.
   Uma criatura pode escolher **lutar de olhos fechados**: fica imune ao olhar,
   mas conta como **Cega**.
 - **Cimitarra.** +7, **2d8 + 4** de dano cortante.
@@ -480,8 +485,8 @@ aventura inteira.
 ### LEÃO DE NEMÉIA — Kleos 5 (Feito)
 *Monstruosidade, grande · Bruto*
 **PV** 104 · **DEF** 14 · **Movimento** 15 m
-**Ataque** +7 · **CD** 15
-**Fortitude** +7 · **Reflexos** +7 · **Vontade** +2
+**Ataque** +7 · **Efeito** +7
+**Fortitude** 21 · **Reflexos** 21 · **Vontade** 16
 
 **TRAÇOS**
 - **Couro Impossível.** **Imune a dano de armas e projéteis de qualquer
@@ -510,8 +515,8 @@ normalmente exige as próprias garras da criatura.
 ### ESFINGE — Kleos 5 (Feito)
 *Monstruosidade, grande · Conjuradora*
 **PV** 80 · **DEF** 16 · **Voo** 12 m
-**Ataque** +7 · **CD** 15
-**Fortitude** +7 · **Reflexos** +2 · **Vontade** +7
+**Ataque** +7 · **Efeito** +7
+**Fortitude** 21 · **Reflexos** 16 · **Vontade** 21
 
 **TRAÇOS**
 - **Voo.**
@@ -525,8 +530,9 @@ normalmente exige as próprias garras da criatura.
   resposta correta a obriga a deixar passar. Uma resposta errada inicia o
   combate — e ela ganha **Vantagem em todos os ataques na primeira rodada**.
 - **Duas garras.** +7, **2d8 + 4** de dano cortante.
-- **Palavra que Corrói** *(Recarga 5–6)*. Um alvo faz **Vontade CD 15** ou sofre
-  **4d8** de dano psíquico e fica **Amedrontado** por uma rodada.
+- **Palavra que Corrói** *(Recarga 5–6)*. Role **Efeito contra a Vontade** de
+  um alvo. Em um acerto, ele sofre **4d8** de dano psíquico e fica
+  **Amedrontado** por uma rodada.
 
 **RECUSAS (1)**
 
@@ -544,8 +550,8 @@ Uma esfinge derrotada por enigma se atira do penhasco. É o que elas fazem.
 ### VENTI TEMPESTUOSO — Kleos 5 (Feito)
 *Espírito, grande · Sombra / Veloz*
 **PV** 64 · **DEF** 17 · **Voo** 24 m
-**Ataque** +7 · **CD** 15
-**Fortitude** +2 · **Reflexos** +7 · **Vontade** +7
+**Ataque** +7 · **Efeito** +7
+**Fortitude** 16 · **Reflexos** 21 · **Vontade** 21
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno, doença,
 a ficar Agarrado, Preso ou Caído
 
@@ -555,17 +561,17 @@ a ficar Agarrado, Preso ou Caído
 
 **AÇÕES**
 - **Três lâminas de vento.** +7, alcance 9 m, **2d6 + 4** de dano cortante.
-- **Redemoinho** *(Recarga 5–6)*. Todas as criaturas em um raio de 6 m fazem
-  **Reflexos CD 15** ou sofrem **4d6** de concussão, são lançadas 6 m e ficam
-  **Caídas**.
+- **Redemoinho** *(Recarga 5–6)*. Role **Efeito contra os Reflexos** de cada
+  criatura em um raio de 6 m. Em um acerto, ela sofre **4d6** de concussão,
+  é lançada 6 m e fica **Caída**.
 
 **RECUSAS (1)**
 
 **FRAQUEZA MÍTICA**
 **Pode ser engarrafado.** Um recipiente selado — um odre, um cantil, um pote com
 tampa — usado como ação contra um venti **Atordoado, Preso ou abaixo de um quarto
-dos PV** o aprisiona permanentemente com um **Teste de Vontade CD 15** feito pelo
-personagem. Éolo guardava os ventos assim. Um venti engarrafado é um item
+dos PV** o aprisiona permanentemente com um teste de **Mitologia CD 15** feito
+pelo personagem. Éolo guardava os ventos assim. Um venti engarrafado é um item
 poderoso e uma péssima ideia.
 
 **AO MORRER** Dissipa-se numa lufada. O ar fica frio por um minuto.

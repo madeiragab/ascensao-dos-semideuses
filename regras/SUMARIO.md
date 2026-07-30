@@ -43,7 +43,7 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 4 | Húbris | 🟡 sem mecânica — proposta em `interludio.md` |
 | 5 | Classes: Guardião, Furioso, Oráculo | ⚙️ recursos quebrados, ver `v1-numeros.md` |
 | 6 | Perícias | ✅ |
-| 7 | Testes de Resistência | ⚙️ ninguém é proficiente em Reflexos |
+| 7 | Defesas passivas | ✅ Fortitude, Reflexos e Vontade treinadas por classe |
 | 8 | Parente Divino | ✅ |
 | 9 | Atributo Divino | 🟡 existe em 4.2 mas não é usado por MP nem Memória |
 | 10 | Finalização | ✅ |

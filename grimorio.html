@@ -931,8 +931,9 @@ pre.bloco-codigo {
 <p>A Iniciação concede:</p>
 <ul><li>proficiência na perícia <strong>Mitologia</strong>, se ainda não tiver;</li><li>um <strong>Repositório</strong> vazio;</li><li>as três primeiras Fórmulas de <strong>Círculo 0</strong> à sua escolha.</li></ul>
 <p><strong>Atributo de Conjuração: Inteligência</strong>, sempre, para todo mundo. Magia é estudo, não sangue. Um semideus cujo Atributo Divino seja Sabedoria ou Carisma conjura suas habilidades elementais com um atributo e suas Fórmulas com outro — e isso é proposital: acumular as duas coisas deve custar caro na distribuição de atributos.</p>
-<pre class="bloco-codigo">CD de Névoa      = 8 + modificador de Inteligência + bônus de proficiência
-Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiência</pre>
+<pre class="bloco-codigo">CD de Névoa       = 8 + modificador de Inteligência + bônus de proficiência
+Ataque de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência
+Efeito de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência</pre>
 <div class="ornamento">❖</div>
 <h2 id="secao-36">36. O Repositório e as Fórmulas</h2>
 <p>Uma <strong>Fórmula</strong> é uma instrução registrada para dobrar a Névoa de um jeito específico. Ela não é memorizada: é <strong>consultada</strong>.</p>
@@ -973,7 +974,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <p>alcance imediato.</p>
 <p>Uma arma de uma mão e um escudo ocupam as duas mãos. Um conjurador que queira lutar e conjurar precisa resolver isso — largando o escudo, usando arma Versátil, ou escolhendo Fórmulas sem Gesto.</p>
 <h3 id="secao-37-3">37.3 Concentração</h3>
-<p>Fórmulas com duração prolongada exigem <strong>Concentração</strong>, seguindo as regras já existentes no <a href="livro-do-jogador.html#cap7">Capítulo Sete do Livro do Jogador</a>: uma por vez, Teste de Fortitude CD 10 ou metade do dano recebido ao sofrer dano, o maior dos dois.</p>
+<p>Fórmulas com duração prolongada exigem <strong>Concentração</strong>, seguindo as regras já existentes no <a href="livro-do-jogador.html#cap7">Capítulo Sete do Livro do Jogador</a>: só uma por vez. Ao sofrer dano, a fonte faz uma Rolagem de Efeito contra sua Fortitude; use o bônus definido naquela regra. Um erro mantém a Concentração e um acerto a encerra.</p>
 <p>Concentração de Fórmula e Concentração de habilidade <strong>disputam o mesmo espaço</strong>. Não é possível manter as duas.</p>
 <h3 id="secao-37-4">37.4 Refluxo <em>(conjurar no desespero)</em></h3>
 <p>Um conjurador pode tentar uma Fórmula <strong>sem o Repositório</strong> ou de um <strong>Círculo acima do seu nível mínimo</strong>. Isso exige um teste de <strong>Mitologia contra CD 10 + 3 por Círculo</strong> da Fórmula.</p>
@@ -983,7 +984,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <div class="ornamento">❖</div>
 <h2 id="secao-38">38. Descrença</h2>
 <p>Esta é a regra que separa magia de todo o resto do sistema.</p>
-<div class="destaque"><p>Uma criatura que tenha <strong>motivo para duvidar</strong> de uma criação de Névoa pode realizar um <strong>Teste de Descrença</strong>: <strong>Investigação</strong> ou <strong>Vontade</strong>, à escolha dela, contra a CD de Névoa do conjurador.</p></div>
+<div class="destaque"><p>Uma criatura que tenha <strong>motivo para duvidar</strong> de uma criação de Névoa pode tentar a <strong>Descrença</strong> de duas formas. Com análise, faz <strong>Investigação contra a CD de Névoa</strong>. Com força interior, o conjurador faz <strong>Efeito de Fórmula contra a Vontade passiva</strong> dela. Sucesso na Investigação ou erro da Fórmula significa que a criatura deixou de acreditar.</p></div>
 <p>Existe motivo para duvidar quando a criatura:</p>
 <ul><li>gasta uma <strong>ação</strong> estudando deliberadamente a criação;</li><li><strong>interage fisicamente</strong> com ela (toca, atravessa, tenta abrir);</li><li><strong>sofre um efeito</strong> dela — dano, condição, bloqueio de caminho;</li><li>vê algo que contradiz a criação de forma inescapável (a porta que você criou</li></ul>
 <p>está numa parede que ela acabou de derrubar).</p>
@@ -993,7 +994,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <thead><tr><th>Densidade</th><th>Efeito da Descrença</th></tr></thead>
 <tbody>
 <tr><td><strong>Névoa Vestida</strong></td><td>A criação fica translúcida para aquela criatura. Ela ignora completamente o efeito: atravessa a parede, vê o rosto verdadeiro, não é enganada.</td></tr>
-<tr><td><strong>Névoa Densa</strong></td><td>A criação <strong>enfraquece pela metade</strong> para aquela criatura: metade do dano, metade dos PV temporários, condições só se aplicam com Desvantagem no ataque ou Vantagem no teste dela. Não desaparece.</td></tr>
+<tr><td><strong>Névoa Densa</strong></td><td>A criação <strong>enfraquece pela metade</strong> para aquela criatura: metade do dano, metade dos PV temporários, ataques e Rolagens de Efeito que imponham condições têm Desvantagem. Não desaparece.</td></tr>
 </tbody>
 </table></div>
 <p>Uma criatura que descreu de uma criação <strong>não precisa testar de novo</strong> contra aquela mesma criação. Mas cada nova conjuração é uma nova criação.</p>
@@ -1003,8 +1004,8 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <tbody>
 <tr><td><strong>Mortal comum</strong></td><td><strong>Não pode testar.</strong> A Névoa reescreve o que ele vê para algo mundano, e ele acredita. Esse é o motivo de a Névoa existir.</td></tr>
 <tr><td><strong>Semideus, monstro, ninfa, sátiro</strong></td><td>Testa normalmente.</td></tr>
-<tr><td><strong>Outro conjurador</strong></td><td>Testa com <strong>Vantagem</strong> — reconhece o trabalho.</td></tr>
-<tr><td><strong>Clarividente</strong> (mortal que enxerga através da Névoa)</td><td><strong>Sucesso automático</strong>, sem teste. Não existem muitos, e um deles na mesa muda o jogo.</td></tr>
+<tr><td><strong>Outro conjurador</strong></td><td>Tem Vantagem na Investigação; se usar Vontade, o Efeito da Fórmula tem Desvantagem.</td></tr>
+<tr><td><strong>Clarividente</strong> (mortal que enxerga através da Névoa)</td><td><strong>Descrença automática</strong>, sem rolagem. Não existem muitos, e um deles na mesa muda o jogo.</td></tr>
 <tr><td><strong>Deuses e titãs</strong></td><td>Não são afetados. Nem se dão o trabalho de testar.</td></tr>
 </tbody>
 </table></div>
@@ -1036,7 +1037,7 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <p><strong>Manto de Névoa</strong> (Véu) — V, G · ação · pessoal · Concentração, até 10 min · Vestida Você fica fortemente obscurecido e tem Vantagem em testes de Furtividade. O efeito termina imediatamente se você atacar ou conjurar outra Fórmula.</p>
 <p><strong>Aço Emprestado</strong> (Forma) — V, G · ação bônus (3 MP) · pessoal · 1 minuto · Densa Uma arma se condensa na sua mão. Escolha qualquer perfil de <strong>arma simples</strong> ao conjurar. Ela causa <strong>1d6 + modificador de Inteligência</strong> e usa seu Ataque de Fórmula. Se for desarmado, ela se desfaz e você pode reconjurá-la.</p>
 <p><strong>Passo de Bruma</strong> (Caminho) — G · ação bônus (3 MP) · 6 m · instantâneo · — Você se desfaz em névoa e se recompõe em um espaço desocupado que possa ver a até 6 metros. Não provoca ataques de oportunidade.</p>
-<p><strong>Sussurro da Névoa</strong> (Domínio) — V · ação · 12 m · 1 rodada · Vestida Um alvo ouve, na própria voz, aquilo que mais teme ouvir. Teste de <strong>Vontade</strong> ou fica <strong>Amedrontado</strong> de você por uma rodada, com novo teste no fim de cada turno.</p>
+<p><strong>Sussurro da Névoa</strong> (Domínio) — V · ação · 12 m · 1 rodada · Vestida Faça <strong>Efeito de Fórmula contra a Vontade</strong> de um alvo. Em um acerto, ele ouve, na própria voz, aquilo que mais teme e fica <strong>Amedrontado</strong> de você. No fim de cada turno do alvo, repita a Rolagem de Efeito; um erro encerra o efeito.</p>
 <p><strong>Muralha Fina</strong> (Forma) — V, G, F · ação · 12 m · 1 minuto · Densa Uma parede de névoa sólida de 3 por 3 metros. Bloqueia a linha de visão e concede <strong>três quartos de cobertura</strong>. Possui <strong>Integridade 3</strong> e pode ser derrubada com dano. Contra quem descreu, concede apenas <strong>meia cobertura</strong>.</p>
 <p><strong>Leitura de Rastro</strong> (Vislumbre) — G, F · 1 minuto · toque · instantâneo · — Tocando um lugar ou objeto, você vê em névoa as últimas 24 horas dele em imagens mudas e desconexas. O Mestre escolhe o que aparece; ele não é obrigado a ser claro.</p>
 <h3>Círculo 2 — 4 MP (nível 5)</h3>
@@ -1044,11 +1045,11 @@ Ataque de Fórmula = 1d20 + modificador de Inteligência + bônus de proficiênc
 <p><strong>Fera de Névoa</strong> (Forma) — V, G, F · ação · 9 m · Concentração, até 1 min · Densa Condensa uma fera do tamanho de um cão grande. Ela age logo depois do seu turno, usa seu Ataque de Fórmula e causa <strong>2d6</strong> de dano. Possui PV iguais a <strong>5 × seu bônus de proficiência</strong> e DEF 13. Contra quem descreu, causa metade do dano.</p>
 <p><strong>Porta Falsa</strong> (Caminho) — V, G, F · ação · toque · 1 minuto · Densa Abre uma passagem atravessável em uma superfície sólida de até 1,5 metro de espessura. Não funciona em metal divino nem em construções feitas por um deus. Quando termina, quem estiver dentro é empurrado para o lado mais próximo.</p>
 <p><strong>Névoa Cega</strong> (Véu) — V, G · ação · 18 m · Concentração, até 10 min · Vestida Uma nuvem de 6 metros de raio produz <strong>obscurecimento pesado</strong>. O vento forte a dispersa em uma rodada.</p>
-<p><strong>Verdade Roubada</strong> (Vislumbre) — V, F · ação · 9 m · instantâneo · — Um alvo que possa ouvir você faz um Teste de <strong>Vontade</strong>. Em uma falha, você arranca da névoa ao redor dele <strong>uma</strong> verdade que ele esconde — não a que você escolher, mas a que estiver mais próxima da superfície. Um alvo não pode ser afetado de novo até o próximo Descanso Longo.</p>
+<p><strong>Verdade Roubada</strong> (Vislumbre) — V, F · ação · 9 m · instantâneo · — Faça <strong>Efeito de Fórmula contra a Vontade</strong> de um alvo que possa ouvir você. Em um acerto, você arranca da névoa ao redor dele <strong>uma</strong> verdade que ele esconde — não a que escolher, mas a mais próxima da superfície. Um alvo não pode ser afetado de novo até o próximo Descanso Longo.</p>
 <h3>Círculo 3 — 6 MP (nível 10)</h3>
-<p><strong>Labirinto Menor</strong> (Caminho) — V, G, F · ação · 18 m · Concentração, até 1 min · Densa Um alvo faz Teste de <strong>Vontade</strong> ou desaparece em um corredor de névoa. No turno dele, pode gastar a ação em um teste de <strong>Investigação</strong> contra sua CD de Névoa para sair, reaparecendo no espaço de onde saiu.</p>
+<p><strong>Labirinto Menor</strong> (Caminho) — V, G, F · ação · 18 m · Concentração, até 1 min · Densa Faça <strong>Efeito de Fórmula contra a Vontade</strong> de um alvo. Em um acerto, ele desaparece em um corredor de névoa. No turno dele, pode gastar a ação em um teste de <strong>Investigação contra sua CD de Névoa</strong> para sair, reaparecendo no espaço de onde saiu.</p>
 <p><strong>Cidade de Bruma</strong> (Véu) — V, G, F · 1 minuto · 30 m · 10 minutos · Vestida Uma ilusão do tamanho de um prédio: um muro que não existe, uma rua onde havia um beco, uma multidão. Mortais comuns não questionam. Cada criatura capaz de descrer testa uma vez ao interagir.</p>
-<p><strong>Coroa da Deusa</strong> (Domínio) — V, G, F · ação · 12 m · Concentração, até 1 min · Vestida Um alvo faz Teste de <strong>Vontade</strong> ou passa a ver aliados como inimigos por uma rodada, com novo teste no fim de cada turno dele. Ele não é controlado — só está enganado, e age de acordo com o que acredita estar vendo.</p>
+<p><strong>Coroa da Deusa</strong> (Domínio) — V, G, F · ação · 12 m · Concentração, até 1 min · Vestida Faça <strong>Efeito de Fórmula contra a Vontade</strong> de um alvo. Em um acerto, ele passa a ver aliados como inimigos por uma rodada. No fim de cada turno do alvo, repita a Rolagem de Efeito; um erro encerra a ilusão. Ele não é controlado — apenas age de acordo com o que acredita estar vendo.</p>
 <h3>Círculo 4 — 9 MP (nível 15)</h3>
 <p><strong>Rasgar o Véu</strong> (Caminho) — V, G, F · 1 minuto · toque · 1 minuto · Densa Abre um portal de névoa para um lugar que você já visitou pessoalmente, a até 1 quilômetro. Até oito criaturas atravessam. O Mestre pode exigir um ponto de referência físico, e a Névoa cobra pedágio de quem atravessa sem convite.</p>
 <p><strong>A Névoa Obedece</strong> (Véu) — V, G, F · ação · 30 m · 1 hora · Vestida Você reescreve uma cena inteira para todos os mortais comuns presentes. O combate vira um acidente de trânsito, o monstro vira um cachorro solto, o corpo vira um saco de lixo. Criaturas capazes de descrer testam normalmente — e essa Fórmula existe principalmente para resolver o <em>depois</em> de uma luta em público.</p>
@@ -1070,7 +1071,7 @@ Tipo de ação:
 Alcance:
 Alvo ou área:
 Duração e Concentração:
-Rolagem: Ataque de Fórmula ou Teste de Resistência
+Rolagem: Ataque de Fórmula contra DEF ou Efeito de Fórmula contra uma defesa passiva
 Efeito principal:
 Efeitos adicionais:
 Modificadores de custo:

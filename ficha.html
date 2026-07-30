@@ -1129,7 +1129,7 @@ table.viva select { font-size: .72rem; }
   <div class="instrucoes">
     <p class="abre">Preencha o que só você sabe — <strong>nível, classe, os seis
     atributos, a armadura</strong> — e a ficha calcula o resto na hora: modificadores,
-    proficiência, DEF, iniciativa, PV, SP, MP, Memória, CD, resistências e o bônus de
+    proficiência, DEF, iniciativa, PV, SP, MP, Memória, bônus de Habilidade, defesas passivas e o bônus de
     cada uma das catorze perícias.</p>
 
     <div class="destaque">
@@ -1283,7 +1283,7 @@ table.viva select { font-size: .72rem; }
         <div class="num-cx"><span>Proficiência</span><input type="text" class="calc" data-calc="prof" readonly></div>
         <div class="num-cx"><span>Tratamentos</span><input type="text" class="calc" data-calc="tratamentos" readonly></div>
         <div class="num-cx"><span>Memória</span><input type="text" class="calc" data-calc="memoria" readonly></div>
-        <div class="num-cx"><span>CD habilidade</span><input type="text" class="calc" data-calc="cd" readonly></div>
+        <div class="num-cx"><span>Bônus de Habilidade</span><input type="text" class="calc" data-calc="habilidade" readonly></div>
         <div class="num-cx"><span>Percepção passiva</span><input type="text" class="calc" data-calc="passiva" readonly></div>
         <div class="num-cx"><span>Teto de custo</span><input type="text" class="calc" data-calc="teto" readonly></div>
         <div class="num-cx"><span>Ímpeto</span><input type="text" id="impeto"></div>
@@ -1306,6 +1306,9 @@ table.viva select { font-size: .72rem; }
       <h3 style="margin-top:1rem;">Ajustes mecânicos <small>- itens e técnicas que a ficha não pode escolher por você</small></h3>
       <div class="ajustes">
         <div class="f"><label>Outros ajustes de DEF</label><input type="text" id="ajusteDef" value="0"></div>
+        <div class="f"><label>Ajuste de Fortitude</label><input type="text" id="ajusteFortitude" value="0"></div>
+        <div class="f"><label>Ajuste de Reflexos</label><input type="text" id="ajusteReflexos" value="0"></div>
+        <div class="f"><label>Ajuste de Vontade</label><input type="text" id="ajusteVontade" value="0"></div>
         <div class="f"><label>Ajuste de Iniciativa</label><input type="text" id="ajusteIniciativa" value="0"></div>
         <div class="f"><label>Ajuste de Movimento, em m</label><input type="text" id="ajusteMovimento" value="0"></div>
         <div class="f"><label>Ajuste de PV máximo</label><input type="text" id="ajustePv" value="0"></div>
@@ -1319,11 +1322,11 @@ table.viva select { font-size: .72rem; }
         Instinto de Briga, Ferimento Grave, linhagem e progressão continuam automáticos.</p>
     </div>
 
-    <!-- ===== RESISTÊNCIAS E PERÍCIAS ===== -->
+    <!-- ===== DEFESAS PASSIVAS E PERÍCIAS ===== -->
     <div class="bloco">
       <div class="duas-col">
         <div>
-          <h3>Testes de Resistência <small>- a classe marca automaticamente</small></h3>
+          <h3>Defesas passivas <small>- 14 + atributo; a classe soma proficiência</small></h3>
           <ul class="marcavel">
             <li><input type="checkbox" data-prof="fortitude"><span class="nome">Fortitude <small>CON</small></span><input type="text" class="calc" data-calc="res-fortitude" readonly></li>
             <li><input type="checkbox" data-prof="reflexos"><span class="nome">Reflexos <small>DES</small></span><input type="text" class="calc" data-calc="res-reflexos" readonly></li>
@@ -1363,7 +1366,8 @@ table.viva select { font-size: .72rem; }
     <div class="bloco quebra-pagina">
       <h3>Habilidades preparadas <small>— nome · fonte · custo · alcance · duração · efeito</small></h3>
       <p class="legenda-calc"><b>Ativação é obrigatória:</b> ação, ação bônus, reação,
-        movimento ou passiva. Registre também uma única resolução: ataque ou resistência.</p>
+        movimento ou passiva. Registre também uma única resolução: Ataque contra DEF ou
+        Rolagem de Efeito contra Fortitude, Reflexos ou Vontade.</p>
       <textarea rows="9" id="habilidades"></textarea>
     </div>
 
@@ -1442,7 +1446,7 @@ table.viva select { font-size: .72rem; }
       <div class="pdf-bloco span-7"><h2>Atributos</h2>
         <table class="pdf-tabela"><thead><tr><th>Atributo</th><th>Base</th><th>Divino</th><th>Nível</th><th>Total</th><th>Mod.</th></tr></thead><tbody id="pAtributos"></tbody></table>
       </div>
-      <div class="pdf-bloco span-5"><h2>Resistências</h2><table class="pdf-tabela"><tbody id="pResistencias"></tbody></table>
+      <div class="pdf-bloco span-5"><h2>Defesas passivas</h2><table class="pdf-tabela"><tbody id="pResistencias"></tbody></table>
         <h2 style="margin-top:3mm;">Regras automáticas</h2><div class="pdf-texto" id="pRegras"></div>
       </div>
       <div class="pdf-bloco span-12"><h2>Perícias</h2><table class="pdf-tabela"><tbody id="pPericias"></tbody></table></div>
@@ -1919,7 +1923,7 @@ var PARENTES = {
   zeus: { nome: "Zeus", bonus: { forca: 2, carisma: 1 }, afinidades: ["Elétrico", "Ar"], passiva: "Filho dos Céus: Vantagem em Percepção para notar monstros." },
   poseidon: { nome: "Poseidon", bonus: { forca: 2, constituicao: 1 }, afinidades: ["Água"], passiva: "Filho do Mar: respira sob a água e fala com criaturas marinhas e equinos." },
   hades: { nome: "Hades", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Trevas", "Terra"], passiva: "Afinidade Necrótica: mortos-vivos menores hesitam; resistência a dano necrótico." },
-  atena: { nome: "Atena", bonus: { inteligencia: 2, sabedoria: 1 }, afinidades: ["Psíquico"], passiva: "Mente Estratégica: uma vez por combate, revele uma resistência, vulnerabilidade ou imunidade." },
+  atena: { nome: "Atena", bonus: { inteligencia: 2, sabedoria: 1 }, afinidades: ["Psíquico"], passiva: "Mente Estratégica: uma vez por combate, revele uma defesa passiva, vulnerabilidade ou imunidade." },
   ares: { nome: "Ares", bonus: { forca: 2, constituicao: 1 }, afinidades: ["Físico"], passiva: "Fúria da Batalha: ao derrubar inimigo corpo a corpo, ganhe PV temporários iguais à proficiência." },
   apolo: { nome: "Apolo", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Luz", "Som"], passiva: "Dom Artístico: instrumento proficiente e Vantagem em Percepção visual." },
   hefesto: { nome: "Hefesto", bonus: { inteligencia: 2, constituicao: 1 }, afinidades: ["Fogo", "Metal"], passiva: "Mãos de Ferreiro: proficiência em Manufatura e conserto de metal uma vez por dia." },
@@ -1945,10 +1949,10 @@ var GANHOS = {
   4:  ["<strong>+2 pontos de atributo</strong>"],
   5:  ["{5}"],
   6:  ["<strong>Técnica</strong> — a 3ª · <em>abre o Tier 2</em>"],
-  7:  ["<strong>Resistência da Linhagem</strong> — Vantagem contra a sua própria Afinidade"],
+  7:  ["<strong>Resistência da Linhagem</strong> — Efeitos da sua Afinidade têm Desvantagem contra você"],
   8:  ["<strong>+2 pontos de atributo</strong>"],
   9:  ["<strong>Técnica</strong> — a 4ª"],
-  10: ["Proficiência no seu <strong>terceiro Teste de Resistência</strong>"],
+  10: ["Proficiência na sua <strong>terceira defesa passiva</strong>"],
   11: ["<strong>Golpe Verdadeiro</strong> — uma vez por combate, transforme um erro em acerto"],
   12: ["<strong>Técnica</strong> — a 5ª · <em>abre o Tier 3</em>",
        "<strong>+2 pontos de atributo</strong>"],
@@ -2092,12 +2096,12 @@ function recalcular() {
   escreve("iniciativa", mDes === null ? null : sinal(mDes),
           "1d20 + Destreza. O Conceito Problemático soma Força também");
 
-  // Atributo Divino: Memória e CD
+  // Atributo Divino: Memória e bônus usado em Ataques de Habilidade e Efeitos
   var mDiv = divino ? mod(divino) : null;
   escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))),
           "2 + Atributo Divino, entre 1 e 6");
-  escreve("cd", mDiv === null ? null : String(8 + mDiv + prof),
-          "8 + Atributo Divino + proficiência");
+  escreve("habilidade", mDiv === null ? null : sinal(mDiv + prof),
+          "Atributo Divino + proficiência");
 
   // PV, SP, MP máximos
   var c = CLASSES[classe];
@@ -2117,13 +2121,14 @@ function recalcular() {
       c.mp + " + Atributo Divino, e mais " + c.mpN + " por nível");
   }
 
-  // resistências
-  [["fortitude", "constituicao"], ["reflexos", "destreza"], ["vontade", "sabedoria"]]
+  // defesas passivas
+  [["fortitude", "constituicao", "ajusteFortitude"], ["reflexos", "destreza", "ajusteReflexos"], ["vontade", "sabedoria", "ajusteVontade"]]
   .forEach(function (r) {
     var m = mod(r[1]);
     var marcado = document.querySelector('[data-prof="' + r[0] + '"]').checked;
-    escreve("res-" + r[0], m === null ? null : sinal(m + (marcado ? prof : 0)),
-      SIGLA[r[1]] + (marcado ? " + proficiência" : " (sem proficiência)"));
+    var ajuste = valorId(r[2]);
+    escreve("res-" + r[0], m === null ? null : String(14 + m + (marcado ? prof : 0) + ajuste),
+      "14 + " + SIGLA[r[1]] + (marcado ? " + proficiência" : "") + " + ajustes");
   });
 
   // perícias
@@ -2258,7 +2263,7 @@ function recalcularV2() {
   escreve("movimento", (9 + valorId("ajusteMovimento")) + " m", "9 m + ajustes");
 
   escreve("memoria", mDiv === null ? null : String(Math.max(1, Math.min(6, 2 + mDiv))), "2 + Atributo Divino, entre 1 e 6");
-  escreve("cd", mDiv === null ? null : String(8 + mDiv + prof), "8 + Atributo Divino + proficiência");
+  escreve("habilidade", mDiv === null ? null : sinal(mDiv + prof), "Atributo Divino + proficiência");
 
   var c = CLASSES[classe];
   if (!c || mCon === null) {
@@ -2273,12 +2278,13 @@ function recalcularV2() {
     "Classe e nível + Atributo Divino + ajustes");
 
   var profRes = nivel >= 10 ? ["fortitude", "reflexos", "vontade"] : (RESISTENCIAS_CLASSE[classe] || []);
-  [["fortitude", "constituicao"], ["reflexos", "destreza"], ["vontade", "sabedoria"]].forEach(function (r) {
+  [["fortitude", "constituicao", "ajusteFortitude"], ["reflexos", "destreza", "ajusteReflexos"], ["vontade", "sabedoria", "ajusteVontade"]].forEach(function (r) {
     var cb = document.querySelector('[data-prof="' + r[0] + '"]');
     var marcado = profRes.indexOf(r[0]) >= 0;
     cb.checked = marcado; cb.disabled = true;
-    var m = mod(r[1]);
-    escreve("res-" + r[0], m === null ? null : sinal(m + (marcado ? prof : 0)), SIGLA[r[1]] + (marcado ? " + proficiência" : ""));
+    var m = mod(r[1]), ajuste = valorId(r[2]);
+    escreve("res-" + r[0], m === null ? null : String(14 + m + (marcado ? prof : 0) + ajuste),
+      "14 + " + SIGLA[r[1]] + (marcado ? " + proficiência" : "") + " + ajustes");
   });
 
   var escolhidas = [];
@@ -2444,7 +2450,7 @@ function prepararImpressao() {
     ["MP", valorCampo("mpAtual") + "/" + valorCalc("mp")], ["DEF", valorCalc("def")],
     ["Iniciativa", valorCalc("iniciativa")], ["Movimento", valorCalc("movimento")],
     ["Proficiência", valorCalc("prof")], ["Tratamentos", valorCalc("tratamentos")],
-    ["Memória", valorCalc("memoria")], ["CD", valorCalc("cd")],
+    ["Memória", valorCalc("memoria")], ["Bônus de Habilidade", valorCalc("habilidade")],
     ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")],
     ["Agonia · sucessos", sucessosMorte + "/3"], ["Agonia · falhas", falhasMorte + "/3"]
   ];

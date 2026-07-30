@@ -120,8 +120,8 @@ Ganha movimentação adicional igual à sua movimentação normal.
 Até o fim do turno, seu movimento **não provoca ataques de oportunidade**.
 
 ### Esquivar
-Até o início do seu próximo turno, ataques contra você têm **Desvantagem** e você
-tem **Vantagem** em Testes de Reflexos. Perde o benefício se ficar Incapacitado ou
+Até o início do seu próximo turno, ataques contra você têm **Desvantagem** e
+Rolagens de Efeito contra seus **Reflexos** têm **Desvantagem**. Perde o benefício se ficar Incapacitado ou
 se sua movimentação cair a zero.
 
 ### Ajudar
@@ -162,7 +162,7 @@ um item consumível em outra criatura, forçar uma alavanca travada.
 | arremessar objeto para aliado a até 6 m | Interação Simples; ele usa Reação para agarrar |
 | abrir fechadura, algema ou mecanismo delicado | ação; teste se houver pressão |
 
-Agarrar algo arremessado pede Reflexos apenas sob pressão, surpresa, mãos presas
+Agarrar algo arremessado pede **Acrobacia (Destreza)** apenas sob pressão, surpresa, mãos presas
 ou lançamento ruim. Mãos algemadas dão Desvantagem em tarefas delicadas e podem
 tornar impossível o que exigir duas mãos livres.
 
@@ -201,8 +201,8 @@ A cobertura é medida do atacante até o alvo.
 
 | Cobertura | Efeito |
 |---|---|
-| **Meia** (parapeito, móvel, outra criatura) | +2 DEF e +2 em Testes de Reflexos |
-| **Três quartos** (seteira, tronco grosso, porta entreaberta) | +5 DEF e +5 em Testes de Reflexos |
+| **Meia** (parapeito, móvel, outra criatura) | +2 DEF e +2 nos Reflexos passivos |
+| **Três quartos** (seteira, tronco grosso, porta entreaberta) | +5 DEF e +5 nos Reflexos passivos |
 | **Total** | não pode ser alvo direto de ataques nem de habilidades de alvo único |
 
 Só se aplica a maior cobertura, nunca soma.
@@ -222,6 +222,10 @@ Uma área atinge **todas as criaturas** dentro dela, inclusive aliados e o próp
 usuário, salvo se o perfil disser que escolhe ou exclui alvos. Explosões e Zonas
 partem de um ponto visível dentro do alcance; Cones e Linhas partem do usuário;
 uma área Pessoal fica centrada nele. Cobertura total e paredes bloqueiam o efeito.
+
+Quando a área pede uma Rolagem de Efeito, a fonte rola separadamente contra a
+defesa passiva de cada alvo e rola o dano uma única vez. Efeitos não têm acerto
+crítico; 1 e 20 naturais usam o total normal.
 
 No mapa, use o centro do espaço da criatura. Sem mapa, o Mestre anuncia quem será
 atingido antes do gasto e da rolagem. Uma área seletiva é uma melhoria de
@@ -290,100 +294,23 @@ alta.
 
 ## 25. Condições
 
-> ⚠️ **Superado pelo Capítulo Cinco do livro.** A lista completa — 36 condições
-> organizadas por natureza do efeito, de Sangrando e Hemorragia a Petrificado,
-> Selado e Envelhecido — está em `template/livro-do-jogador.html`, capítulo
-> Condições. O que segue abaixo é a primeira versão, mantida como histórico.
-> Quando as duas discordarem, o livro manda.
+A lista oficial está no **Capítulo Cinco do Livro do Jogador**. Esta referência
+auxiliar usa as mesmas regras:
 
-Condições não se acumulam com elas mesmas. Salvo indicação em contrário, uma
-condição imposta por uma habilidade dura **uma rodada** e permite um novo Teste de
-Resistência no final de cada turno do alvo.
+- a fonte faz uma **Rolagem de Efeito** contra Fortitude, Reflexos ou Vontade;
+- a condição começa em um acerto;
+- se a condição permitir resistência contínua, a fonte repete a Rolagem de Efeito
+  no fim de cada turno do alvo; um erro encerra a condição;
+- Atordoado, Paralisado e Inconsciente são atingidos automaticamente por Efeitos
+  contra Fortitude ou Reflexos;
+- Preso concede Vantagem às Rolagens de Efeito contra Reflexos;
+- Exausto 3 concede Vantagem às Rolagens de Efeito contra qualquer defesa passiva.
 
-### Agarrado
-- Movimentação reduzida a zero.
-- Termina se quem agarra ficar Incapacitado, ou se o alvo for movido para fora do
-  alcance de quem agarra.
-
-### Amedrontado
-- **Desvantagem** em rolagens de ataque e testes de perícia enquanto a fonte do
-  medo estiver visível.
-- Não pode se aproximar voluntariamente da fonte.
-
-### Atordoado
-- Fica **Incapacitado**, não se move e fala com dificuldade.
-- Falha automaticamente em Testes de Fortitude e Reflexos.
-- Ataques contra ele têm **Vantagem**.
-
-### Caído
-- Só pode se mover rastejando, gastando o dobro do movimento, ou gastar metade da
-  movimentação para se levantar.
-- **Desvantagem** em rolagens de ataque.
-- Ataques **corpo a corpo** contra ele têm Vantagem; ataques **à distância** têm
-  Desvantagem.
-
-### Cego
-- Não enxerga e falha automaticamente em testes que dependam da visão.
-- **Desvantagem** nos próprios ataques; ataques contra ele têm **Vantagem**.
-
-### Envenenado
-- **Desvantagem** em rolagens de ataque e testes de perícia.
-
-### Exausto
-Acumula em três níveis. Cada nível soma ao anterior.
-
-| Nível | Efeito |
-|---|---|
-| 1 | Desvantagem em testes de perícia |
-| 2 | Movimentação reduzida pela metade |
-| 3 | Desvantagem em ataques e Testes de Resistência; PV máximos reduzidos pela metade |
-
-Um Descanso Longo remove um nível. Um Interlúdio remove todos.
-
-### Incapacitado
-- Não pode realizar ações, ações bônus nem reações.
-
-### Inconsciente
-- Fica **Incapacitado** e **Caído**, e não percebe o que acontece ao redor.
-- Solta o que estiver segurando.
-- Falha automaticamente em Testes de Fortitude e Reflexos.
-- Ataques contra ele têm **Vantagem**, e qualquer acerto a até 1,5 metro é um
-  **crítico**.
-
-### Invisível
-- Não pode ser visto sem auxílio sobrenatural. Para efeito de se esconder, é
-  considerado fortemente obscurecido — mas ainda faz barulho e deixa rastros.
-- **Vantagem** nos próprios ataques; ataques contra ele têm **Desvantagem**.
-
-### Paralisado
-- Fica **Incapacitado**, não pode se mover nem falar.
-- Falha automaticamente em Testes de Fortitude e Reflexos.
-- Ataques contra ele têm **Vantagem**, e qualquer acerto a até 1,5 metro é um
-  **crítico**.
-
-### Preso
-- Movimentação reduzida a zero.
-- **Desvantagem** em rolagens de ataque e em Testes de Reflexos.
-
-### Silenciado
-- Não pode falar nem produzir som com a voz.
-- Não pode conjurar Fórmulas que exijam o componente **Voz** (Parte V).
-
-### Surdo
-- Não ouve e falha automaticamente em testes que dependam da audição.
-
-### Marcado
-*(usada pela Postura Desafiadora do Guardião — o livro não definia a duração)*
-- Enquanto marcado, a criatura tem **Desvantagem** em ataques contra alvos que
-  não sejam quem a marcou.
-- A marca dura **até o fim do próximo turno de quem marcou**, e termina antes
-  disso se quem marcou ficar Incapacitado ou se afastar mais de 9 metros do alvo.
-
-### Sobrecarregado e Muito Sobrecarregado
-Definidas nas seções 25.5 e 25.6 do livro (Carga Narrativa).
+Condições não se acumulam com elas mesmas, salvo quando o perfil declarar graus,
+como Exausto, Sangramento e Doença. Quando esta referência e o Livro do Jogador
+discordarem, o Livro do Jogador prevalece.
 
 ---
-
 ## 26. Zero PV, agonia e morte *(novo — não existia nenhuma regra)*
 
 ### Caindo a 0 PV
@@ -455,8 +382,8 @@ d20. Vantagem e Desvantagem se anulam mutuamente, independentemente de quantas
 fontes existirem de cada lado.
 
 **Uma resolução por habilidade.** Dano e efeitos secundários usam a mesma
-rolagem. Num Ataque de Habilidade, o acerto também aplica efeitos fracos, como
-empurrar ou derrubar, sem uma segunda resistência. Numa habilidade de resistência,
-o mesmo resultado decide o pacote inteiro. Condições médias ou fortes obrigam o
-perfil a usar resistência; salvo indicação contrária, passar evita a condição e
-reduz o dano à metade.
+rolagem. Num Ataque de Habilidade, o acerto aplica o pacote inteiro. Numa
+habilidade de Efeito, uma única Rolagem de Efeito decide dano e condição contra
+cada alvo. Em áreas, role uma vez por alvo e o dano uma única vez. Condições
+médias ou fortes obrigam o perfil a usar Efeito; salvo indicação contrária, um
+erro evita a condição e reduz o dano à metade.
