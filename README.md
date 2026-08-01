@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.13.4 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.14.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -30,7 +30,7 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 | **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
 | **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem, progressão e limite de Evoluídas, aceita retrato e baixa ou importa um PDF editável de três páginas A4 |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem, progressão e Grau, aceita retrato e baixa ou importa um PDF editável em folhas A4 |
 
 Os cinco livros têm sumários e referências clicáveis. Um pequeno tridente no
 canto inferior abre os outros tomos sem tirar o leitor da página atual.
@@ -68,22 +68,27 @@ estágios de transbordamento divino, definidos pelos Vínculos, pela linhagem e
 pelas emoções de cada personagem — com poder grande, agência combinada e preço real.
 
 **Habilidades não vêm em lista.** O jogador constrói cada uma comprando efeitos
-com pontos:
+com pontos, e só depois converte pontos em recurso:
 
 ```
-CUSTO FINAL = duração + efeitos adicionais + alcance + modificadores
+PONTOS  = duração + efeitos adicionais + alcance + modificadores
+CUSTO   = pontos × Grau do ponto
 ```
 
 A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2, cena
-4. Sustentar custa metade do custo final por rodada. Cada ponto compra 1d8 de
-dano em alvo único, ou 1d6 em área, ou +1 DEF, ou uma condição fraca, e assim por
-diante.
+4. Sustentar custa metade do custo final por rodada.
 
-**Evoluir preserva a identidade da habilidade.** Depois de um Descanso Longo, o
-herói pode marcar como Evoluídas até metade da Memória, arredondada para baixo.
-Ao usar uma delas, pode pagar uma Potência maior até seu Teto de Custo para
-atravessar barreiras, imunidades, dissipações ou rituais. Dano, área, alcance,
-duração e condições não aumentam.
+**A progressão é o Grau**, e ele é a faixa de nível — 1 nos níveis 1–4 até 5 nos
+17–20. Cada tabela de efeito tem uma linha por Grau: um ponto de dano em alvo
+único compra de `1d8` a `5d8`, um de área de `1d6` a `5d6`, um de movimento de
++3 m a +15 m. O ponto do Grau G custa G, de modo que o **dano por MP fica
+constante**: o Grau muda quanto cabe numa ação, não quanto o recurso rende.
+Condições e Vantagem não engordam com o Grau — alcançam mais criaturas. Defesa
+não engorda nunca: +2 continua sendo o máximo, porque medido no nível 20 cada
+ponto de DEF vale quase sete pontos de vitória.
+
+Uma habilidade escrita no nível 1 não precisa ser reconstruída: ela continua na
+ficha e passa a ser paga no Grau novo, entregando mais.
 
 **As regras universais** fecham as situações que costumavam depender do Mestre:
 defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
@@ -125,6 +130,7 @@ python condicoes.py         # mede o preço do controle contra o do dano
 python equilibrio.py        # auditoria: Kleos por nível, classes, armas, armaduras
 python tecnicas.py          # mede as 36 técnicas de classe, uma a uma
 python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
+python graus.py             # calibra os Graus de habilidade e a progressão
 python defesas_passivas.py  # prova a equivalência exata das defesas de base 14
 ```
 

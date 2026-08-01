@@ -2770,14 +2770,20 @@ pre.bloco-codigo {
   <h3>A conta do custo</h3>
 
   <div class="destaque">
-    <span class="rotulo">A conta</span>
-    <p class="formula">CUSTO FINAL = duração + efeitos adicionais + alcance + modificadores</p>
+    <span class="rotulo">A conta, em duas linhas</span>
+    <p class="formula">PONTOS = duração + efeitos adicionais + alcance + modificadores</p>
+    <p class="formula">CUSTO em MP ou SP = pontos × Grau do ponto</p>
   </div>
 
   <p>Você começa pela <strong>duração</strong>, e ela já vem com <strong>um ponto de
   efeito incluído</strong>. Depois soma os pontos de efeito extras que quiser, e por último
   o alcance, se ele passar do normal. Por último entram Ativação e demais modificadores.
-  O custo nunca fica abaixo de 1.</p>
+  O total nunca fica abaixo de 1 ponto.</p>
+
+  <p>Só então você converte pontos em recurso. No <strong>Grau 1</strong> a conversão é
+  invisível: um ponto custa 1, e o número de pontos é o número de MP. Nos Graus seguintes
+  cada ponto custa o valor do Grau — e entrega o valor do Grau. A tabela de cada efeito
+  está em <a href="#cap7">O que cada ponto compra</a>, mais adiante neste capítulo.</p>
 
   <h4>Duração</h4>
   <div class="rolagem">
@@ -2848,50 +2854,145 @@ pre.bloco-codigo {
 
   <div class="ornamento">❖</div>
 
-  <h3>O que cada ponto compra</h3>
+  <h3>O Grau</h3>
 
-  <p>Esta é a tabela central do capítulo. Cada linha é <strong>um ponto</strong>. Some quantos
-  quiser, misture efeitos diferentes, e lembre que o primeiro ponto já veio na duração.</p>
+  <p>Seu <strong>Grau</strong> é a faixa de nível em que você está. Ele não é escolha e não
+  se compra: chega junto com o nível, e é ele que diz <em>quanto</em> um ponto compra.</p>
 
   <div class="rolagem">
     <table>
-      <thead><tr><th>Efeito</th><th>Um ponto compra</th><th>Rolagem</th></tr></thead>
+      <thead><tr><th class="num">Grau</th><th>Níveis</th><th class="num">MP ou SP por ponto</th><th class="num">Teto de Custo</th></tr></thead>
       <tbody>
-        <tr><td><strong>Dano em alvo único</strong></td>
-            <td><span class="dado">1d8</span></td><td>Ataque de habilidade</td></tr>
-        <tr><td><strong>Dano em área</strong></td>
-            <td><span class="dado">1d6</span> em todos na área</td>
-            <td>Efeito contra Reflexos; erro: metade</td></tr>
-        <tr><td><strong>Dano contínuo</strong></td>
-            <td><span class="dado">1d6</span> no fim do turno do alvo</td>
-            <td>—</td></tr>
-        <tr><td><strong>PV temporários</strong></td>
-            <td><span class="dado">1d8</span></td><td>—</td></tr>
-        <tr><td><strong>Cura</strong> <em>(só Fonte Médica)</em></td>
-            <td><span class="dado">1d8</span></td><td>—</td></tr>
-        <tr><td><strong>Movimento</strong></td><td>+3 metros</td><td>—</td></tr>
-        <tr><td><strong>Defesa</strong></td>
-            <td>+1 DEF <em>(o segundo ponto de DEF custa 2; máximo +2)</em></td><td>—</td></tr>
-        <tr><td><strong>Vantagem</strong></td>
-            <td>Vantagem em <em>uma</em> rolagem</td><td>—</td></tr>
-        <tr><td><strong>Empurrar ou puxar</strong></td><td>3 metros</td>
-            <td>Efeito contra Fortitude</td></tr>
-        <tr><td><strong>Condição fraca</strong></td><td>uma condição fraca</td>
-            <td>Efeito contra defesa apropriada</td></tr>
-        <tr><td><strong>Condição média</strong></td><td colspan="2"><strong>2 pontos</strong> · Efeito contra defesa apropriada; repita no fim de cada turno</td></tr>
-        <tr><td><strong>Condição forte</strong></td><td colspan="2"><strong>4 pontos</strong> · Efeito contra defesa apropriada; repita no fim de cada turno</td></tr>
-        <tr><td><strong>Resistência a um tipo de dano</strong></td><td colspan="2"><strong>2 pontos</strong></td></tr>
-        <tr><td><strong>Teleporte</strong></td><td colspan="2"><strong>2 pontos</strong> · até 9 metros, para um lugar que você veja</td></tr>
-        <tr><td><strong>Ignorar terreno difícil</strong></td><td>por uma rodada</td><td>—</td></tr>
+        <tr><td class="num">1</td><td>1 a 4</td><td class="num">1</td><td class="num">5 pontos</td></tr>
+        <tr><td class="num">2</td><td>5 a 8</td><td class="num">2</td><td class="num">6 pontos</td></tr>
+        <tr><td class="num">3</td><td>9 a 12</td><td class="num">3</td><td class="num">6 pontos</td></tr>
+        <tr><td class="num">4</td><td>13 a 16</td><td class="num">4</td><td class="num">6 pontos</td></tr>
+        <tr><td class="num">5</td><td>17 a 20</td><td class="num">5</td><td class="num">6 pontos</td></tr>
       </tbody>
     </table>
   </div>
 
+  <p>Duas colunas importam e vale entender a diferença. O <strong>Teto de Custo</strong> conta
+  <em>pontos</em>: é o tamanho máximo de uma habilidade, e ele quase não cresce. O que cresce é
+  o <strong>preço do ponto</strong> — e junto com ele o que o ponto entrega. Um ponto do Grau 3
+  custa 3 de MP e compra três vezes o que comprava no Grau 1.</p>
+
+  <div class="destaque">
+    <span class="rotulo">A regra que faz o resto funcionar</span>
+    <p>Você pode comprar um ponto em <strong>qualquer Grau até o seu</strong>. Nada obriga a
+    usar o Grau máximo: um ponto de Grau 1 continua custando 1 e comprando o de sempre. Isso
+    mantém baratas as coisas que não precisam crescer — abrir caminho, ganhar um metro, dar
+    Vantagem a alguém — e deixa o Grau alto para onde ele faz falta.</p>
+  </div>
+
+  <p>Suas habilidades antigas não ficam para trás nem precisam ser reconstruídas. A habilidade
+  escrita no nível 1 continua na ficha; quando você chega ao Grau 2, cada ponto dela pode ser
+  pago no Grau novo e passa a entregar o dobro. Você paga mais e recebe mais, sempre na mesma
+  proporção.</p>
+
+  <div class="ornamento">❖</div>
+
+  <h3>O que cada ponto compra</h3>
+
+  <p>Uma tabela por tipo de efeito, uma linha por Grau. Some quantos pontos quiser, misture
+  efeitos diferentes, e lembre que o primeiro ponto já veio na duração.</p>
+
+  <h4>Dano</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Grau</th><th>Alvo único</th><th>Em área</th><th>Contínuo</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><span class="dado">1d8</span></td><td><span class="dado">1d6</span></td><td><span class="dado">1d6</span></td></tr>
+        <tr><td class="num">2</td><td><span class="dado">2d8</span></td><td><span class="dado">2d6</span></td><td><span class="dado">2d6</span></td></tr>
+        <tr><td class="num">3</td><td><span class="dado">3d8</span></td><td><span class="dado">3d6</span></td><td><span class="dado">3d6</span></td></tr>
+        <tr><td class="num">4</td><td><span class="dado">4d8</span></td><td><span class="dado">4d6</span></td><td><span class="dado">4d6</span></td></tr>
+        <tr><td class="num">5</td><td><span class="dado">5d8</span></td><td><span class="dado">5d6</span></td><td><span class="dado">5d6</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Alvo único</strong> usa Ataque de Habilidade. <strong>Área</strong> usa Rolagem de
+  Efeito contra Reflexos e o erro ainda causa metade — é por isso que ela vem um dado atrás.
+  <strong>Contínuo</strong> acontece no fim do turno do alvo e não permite nova defesa.</p>
+
+  <div class="nota">
+    <p><strong>Quando a mão não segura tantos dados.</strong> Nos Graus altos uma habilidade
+    grande chega a trinta dados, e rolar tudo atrasa a mesa. Vale combinar antes: quem quiser
+    pode usar o <strong>valor médio</strong> em vez de rolar — 4,5 por d8 e 3,5 por d6,
+    arredondando para baixo no fim. É a mesma média, sem a pilha de dados.</p>
+  </div>
+
+  <h4>Vida e proteção</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Grau</th><th>PV temporários</th><th>Cura <em>(só Fonte Médica)</em></th><th>Defesa</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td><span class="dado">1d8</span></td><td><span class="dado">1d8</span></td><td>+1 DEF para 1 alvo</td></tr>
+        <tr><td class="num">2</td><td><span class="dado">2d8</span></td><td><span class="dado">2d8</span></td><td>+1 DEF para 2 alvos</td></tr>
+        <tr><td class="num">3</td><td><span class="dado">3d8</span></td><td><span class="dado">3d8</span></td><td>+1 DEF para 3 alvos</td></tr>
+        <tr><td class="num">4</td><td><span class="dado">4d8</span></td><td><span class="dado">4d8</span></td><td>+1 DEF para 4 alvos</td></tr>
+        <tr><td class="num">5</td><td><span class="dado">5d8</span></td><td><span class="dado">5d8</span></td><td>+1 DEF para 5 alvos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="nota">
+    <p><strong>Defesa é a única coisa que não engorda.</strong> O Grau alto espalha o bônus por
+    mais gente, nunca aumenta o número. O segundo ponto de DEF sobre o mesmo alvo continua
+    custando o dobro, e <strong>+2 continua sendo o máximo</strong>. Isso não é capricho: medido
+    no nível 20, cada ponto de DEF vale quase sete pontos de vitória num combate justo — mais
+    que qualquer outra linha destas tabelas por ponto gasto.</p>
+  </div>
+
+  <h4>Movimento e deslocamento</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Grau</th><th>Movimento</th><th>Empurrar ou puxar</th><th>Teleporte <em>(2 pontos)</em></th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>+3 metros</td><td>3 metros</td><td>9 metros</td></tr>
+        <tr><td class="num">2</td><td>+6 metros</td><td>6 metros</td><td>18 metros</td></tr>
+        <tr><td class="num">3</td><td>+9 metros</td><td>9 metros</td><td>27 metros</td></tr>
+        <tr><td class="num">4</td><td>+12 metros</td><td>12 metros</td><td>36 metros</td></tr>
+        <tr><td class="num">5</td><td>+15 metros</td><td>15 metros</td><td>45 metros</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Empurrar e puxar usam Rolagem de Efeito contra Fortitude. Teleporte precisa de um lugar
+  que você veja. <strong>Ignorar terreno difícil</strong> por uma rodada custa 1 ponto em
+  qualquer Grau — não há o que crescer nisso.</p>
+
+  <h4>Vantagem, Desvantagem e condições</h4>
+  <div class="rolagem">
+    <table>
+      <thead><tr><th class="num">Grau</th><th>Vantagem ou Desvantagem em uma rolagem</th><th>Condição</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>1 alvo</td><td>1 alvo</td></tr>
+        <tr><td class="num">2</td><td>2 alvos</td><td>2 alvos</td></tr>
+        <tr><td class="num">3</td><td>3 alvos</td><td>3 alvos</td></tr>
+        <tr><td class="num">4</td><td>4 alvos</td><td>4 alvos</td></tr>
+        <tr><td class="num">5</td><td>5 alvos</td><td>5 alvos</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Uma condição custa pelo <strong>grau dela</strong>, e o Grau da habilidade decide
+  <strong>quantas criaturas</strong> ela alcança — nunca o quanto ela machuca. Condição fraca
+  custa 1 ponto, média 2, forte 4, como sempre. Cada alvo recebe a sua própria Rolagem de
+  Efeito. <strong>Resistência a um tipo de dano</strong> custa 2 pontos e cobre um alvo a mais
+  por Grau.</p>
+
   <div class="destaque">
     <span class="rotulo">O modificador entra uma vez</span>
     <p>Some o modificador do atributo da habilidade <strong>uma única vez</strong> ao total de
-    dano, PV temporários ou cura — não uma vez por ponto. Uma habilidade de 3 pontos de dano
-    causa <span class="dado">3d8 + mod</span>, não 3d8 + 3× mod.</p>
+    dano, PV temporários ou cura — não uma vez por ponto, nem uma vez por Grau. Uma habilidade
+    de 3 pontos de dano no Grau 2 causa <span class="dado">6d8 + mod</span>: três pontos de
+    <span class="dado">2d8</span>, e o modificador no fim.</p>
+  </div>
+
+  <div class="mesa">
+    <p><b>A mesma habilidade em três Graus.</b> <em>Lança de Sombra</em>, instantânea, alcance
+    médio, 3 pontos de dano em alvo único — custo 4 pontos com o alcance.</p>
+    <p>No <strong>Grau 1</strong> ela custa 4 MP e causa <span class="dado">3d8 + mod</span>.
+    No <strong>Grau 3</strong>, os mesmos 4 pontos custam 12 MP e causam
+    <span class="dado">9d8 + mod</span>. No <strong>Grau 5</strong>, 20 MP e
+    <span class="dado">15d8 + mod</span>. A ficha não muda: muda o que você pode pagar por ela.</p>
   </div>
 
   <h4>Os graus de condição</h4>
@@ -3035,65 +3136,6 @@ pre.bloco-codigo {
 
   <div class="ornamento">❖</div>
 
-  <h3>Evolução de habilidades</h3>
-  <p>Alguns poderes acompanham o herói sem precisar ser reconstruídos. Depois de escolher
-  as habilidades preparadas num <a href="#cap8">Descanso Longo</a>, marque quais delas estão
-  <strong>Evoluídas</strong>.</p>
-
-  <div class="destaque">
-    <span class="rotulo">Limite de Evoluídas</span>
-    <p class="formula">habilidades evoluídas = Memória ÷ 2, arredondada para baixo</p>
-  </div>
-
-  <div class="rolagem">
-    <table>
-      <thead><tr><th>Memória</th><th class="num">Evoluídas</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td class="num">0</td></tr>
-        <tr><td>2–3</td><td class="num">1</td></tr>
-        <tr><td>4–5</td><td class="num">2</td></tr>
-        <tr><td>6</td><td class="num">3</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h4>Potência</h4>
-  <p>A <strong>Potência natural</strong> de uma habilidade é igual ao custo final de
-  construção escrito nela. Descontos recebidos depois, por Habilidade Assinatura ou item,
-  não reduzem essa Potência. Uma habilidade Evoluída pode
-  ser <strong>elevada</strong> quando é usada: escolha uma Potência maior que a natural e no
-  máximo igual ao seu <a href="#cap9">Teto de Custo</a>. O custo da ativação passa a ser o
-  número escolhido.</p>
-
-  <p>Elevar a Potência <strong>não aumenta dano, dados, bônus, alcance, área, duração,
-  movimento nem condições</strong>. A descrição continua exatamente igual. A Potência maior
-  só importa quando outra regra exige um valor mínimo: atravessar uma barreira, superar uma
-  imunidade, resistir a dissipação, alimentar um ritual ou afetar algo que ignora poderes
-  mais fracos. Se nada na cena verifica Potência, pagar a mais não concede benefício.</p>
-
-  <ul>
-    <li>Você decide elevar a habilidade <strong>antes</strong> de resolver sua rolagem.</li>
-    <li>Descontos explícitos são aplicados depois da Potência escolhida, mínimo 1, sem reduzir
-    a Potência. Uma Assinatura Evoluída de Potência 6 custa 5, mas continua Potência 6.</li>
-    <li>Numa habilidade Sustentada, calcule a manutenção usando o custo realmente pago após
-    descontos: metade, arredondada para baixo, mínimo 1.</li>
-    <li>Habilidades Híbridas continuam dividindo o custo entre MP e SP; a soma paga deve
-    alcançar o custo da ativação.</li>
-    <li>Habilidades Assinatura podem ser escolhidas e gastam um dos limites de Evoluída.
-    Passivas, Fórmulas, técnicas de classe e Manifestações de Fúria não podem.</li>
-    <li>As escolhas podem mudar no próximo Descanso Longo. Se sua Memória diminuir, retire
-    imediatamente as escolhas que excederem o novo limite.</li>
-  </ul>
-
-  <div class="mesa">
-    <p><b>Exemplo:</b> Dardo de Sombras tem custo e Potência natural 2. O herói possui Teto
-    de Custo 7 e marcou o Dardo como Evoluído. Diante de um selo com Limiar de Potência 6,
-    ele pode pagar 6 MP para lançar o mesmo Dardo como Potência 6. O dano continua
-    <span class="dado">1d8 + atributo</span>; apenas sua capacidade de atravessar o selo muda.</p>
-  </div>
-
-  <div class="ornamento">❖</div>
-
   <h3>Três limites que valem sempre</h3>
 
   <ul>
@@ -3127,7 +3169,9 @@ pre.bloco-codigo {
   <div class="ornamento">❖ ❖ ❖</div>
 
   <h3>Oito habilidades montadas com o motor</h3>
-  <p>Confira as contas. Todas são de nível 1 e nenhuma passa de 5 pontos.</p>
+  <p>Confira as contas. Todas são de nível 1 e nenhuma passa de 5 pontos. Como estão no
+  <strong>Grau 1</strong>, o custo em pontos e o custo em MP são o mesmo número — é assim
+  que a conta se parece antes de a progressão começar.</p>
 
   <div class="rolagem">
     <table>
@@ -3189,7 +3233,9 @@ pre.bloco-codigo {
       Alvo ou área:<br>
       Efeitos e pontos:<br>
       Modificadores de custo:<br>
-      <strong>Custo final:</strong><br>
+      <strong>Total em pontos:</strong><br>
+      Grau em que costuma pagar:<br>
+      <strong>Custo em MP ou SP:</strong> pontos × Grau<br>
       Sustentar por rodada:<br>
       Rolagem: Ataque de Habilidade <em>ou</em> Efeito contra Fortitude · Reflexos · Vontade<br>
       Concentração: sim · não<br>
@@ -3208,7 +3254,8 @@ pre.bloco-codigo {
     <li><b>Alcance e área</b> Só pague se passar do normal.</li>
     <li><b>Rolagem</b> Ataque de Habilidade contra DEF ou Rolagem de Efeito contra uma defesa passiva. Uma só.</li>
     <li><b>Modificadores</b> Ajuste com os +1 e os −1 que forem honestos.</li>
-    <li><b>Some</b> E confira o custo de sustentar, se houver.</li>
+    <li><b>Some os pontos</b> E só então multiplique pelo Grau para achar o custo em
+    recurso. Confira o custo de sustentar, se houver.</li>
     <li><b>Descreva</b> Dê nome e diga como fica quando acontece.</li>
     <li><b>Aprove</b> Leve ao Mestre. Ele pode pedir mudança, e é para isso que ele existe.</li>
   </ol>
@@ -3541,14 +3588,18 @@ pre.bloco-codigo {
 
   <h3>Duas regras que crescem com você</h3>
 
-  <h4>Teto de custo das habilidades</h4>
+  <h4>Grau e Teto de Custo</h4>
   <div class="destaque">
-    <p class="formula">custo máximo = 4 + metade do seu nível, arredondada para cima</p>
+    <p class="formula">Grau 1 · níveis 1 a 4 &nbsp;·&nbsp; Grau 2 · 5 a 8 &nbsp;·&nbsp;
+    Grau 3 · 9 a 12 &nbsp;·&nbsp; Grau 4 · 13 a 16 &nbsp;·&nbsp; Grau 5 · 17 a 20</p>
+    <p class="formula">teto de custo = 5 pontos no Grau 1, 6 pontos daí em diante</p>
   </div>
-  <p>No nível 1 você não constrói nada acima de <strong>5</strong>; no nível 10, nada
-  acima de <strong>9</strong>; no nível 20, nada acima de <strong>14</strong>. É o que
-  impede um personagem de guardar MP a vida toda para montar uma habilidade que
-  resolve a campanha sozinha.</p>
+  <p>Subir de Grau é o maior salto de poder que uma habilidade recebe, e ele não custa
+  escolha nenhuma: chega com o nível. Cada ponto passa a comprar mais e a custar mais,
+  na mesma proporção — o <a href="#cap7">Capítulo Sete</a> tem a tabela de cada efeito.</p>
+  <p>O teto quase não cresce, e é de propósito. Ele conta <strong>pontos</strong>, não MP:
+  é o que impede um personagem de guardar recurso a vida toda para montar uma habilidade
+  que resolve a campanha sozinha. Quem cresce é o ponto.</p>
 
   <h4>Memória</h4>
   <p>Continua sendo <span class="dado">2 + Atributo Divino</span>, mínimo 1 e máximo
@@ -3632,8 +3683,8 @@ pre.bloco-codigo {
 
       <p><strong>Atributo Divino:</strong> Sabedoria — ela não estuda o poder, ela sente.
       Memória = 2 + 1 = <strong>3</strong>. Bônus de habilidade = 1 + 2 = <strong>+3</strong>.
-      Memória 3 dá direito a <strong>uma habilidade Evoluída</strong> — Cássia marca a dela
-      no primeiro Descanso Longo, quando souber que tipo de selo o Mestre costuma usar.</p>
+      Como está no nível 1, ela joga no <strong>Grau 1</strong>: cada ponto custa 1 de MP e
+      compra <span class="dado">1d8</span> de dano, e nenhuma habilidade dela passa de 5 pontos.</p>
 
       <p><strong>Equipamento:</strong> peitoral e escudo (DEF 14 + 1 + 2 = 17), espada longa
       <span class="dado">1d8 + 3</span>, ataque <span class="dado">1d20 + 5</span>.</p>
