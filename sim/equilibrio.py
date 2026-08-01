@@ -20,7 +20,8 @@ from dados import Ataque, chance_de_acertar
 from fichas import Monstro
 from fichas_v1 import ARMADURAS, def_com_armadura, furioso_v1, guardiao_v1, oraculo_v1
 from kleos import TABUA
-from niveis import ataques_por_turno, personagem, proficiencia, teto_de_custo
+from niveis import (ataques_por_turno, grau, personagem, proficiencia,
+                    teto_de_custo)
 from calibrar_kleos import OraculoQueJoga, monstro
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -58,6 +59,7 @@ def montar_grupo(nivel: int, tecnicas_extra=None, classe_alvo=None,
                     classe="oraculo", mod_sabedoria=fic.mods["sabedoria"],
                     tecnicas=list(fic.tecnicas) + extras, regras="v1", nivel=nivel,
                     mod_divino=fic.mods["inteligencia"], teto=teto_de_custo(nivel),
+                    grau=grau(nivel),
                     critico_em=crit,
                 )
             else:

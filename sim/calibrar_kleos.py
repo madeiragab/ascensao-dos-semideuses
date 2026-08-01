@@ -18,8 +18,8 @@ from combate import Lutador, combate
 from fichas import Monstro
 from fichas_v1 import furioso_v1, guardiao_v1, oraculo_v1
 from kleos import TABUA
-from niveis import (ataques_por_turno, kleos_do_grupo, kleos_do_personagem,
-                    personagem, teto_de_custo)
+from niveis import (ataques_por_turno, grau, kleos_do_grupo,
+                    kleos_do_personagem, personagem, teto_de_custo)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -50,11 +50,13 @@ class OraculoQueJoga(Lutador):
     nível 20 ela tem 95 MP, teto de custo 14, e ficaria cutucando com uma lança.
     """
 
-    def __init__(self, *a, nivel: int = 1, mod_divino: int = 3, teto: int = 5, **kw):
+    def __init__(self, *a, nivel: int = 1, mod_divino: int = 3, teto: int = 5,
+                 grau: int = 1, **kw):
         super().__init__(*a, **kw)
         self.nivel = nivel
         self.mod_divino = mod_divino
         self.teto = teto
+        self.grau = grau
 
     def _turno_oraculo_base(self, aliados, alvos):
         feridos = [a for a in aliados if a.vivo and a.pv <= a.pv_max * 0.35]
@@ -62,15 +64,16 @@ class OraculoQueJoga(Lutador):
             return super()._turno_oraculo_base(aliados, alvos)
 
         # Orçamento: gastar como se o combate durasse umas quatro rodadas.
-        pontos = min(self.teto, max(1, self.mp // 4))
-        custo = pontos            # instantânea, alcance curto: custo = pontos
+        # O ponto custa o Grau e entrega o Grau (Capítulo Sete).
+        pontos = min(self.teto, max(1, self.mp // (4 * self.grau)))
+        custo = pontos * self.grau
         if self.mp < custo:
             return super()._turno_oraculo_base(aliados, alvos)
 
         self.mp -= custo
         alvo = min([a for a in alvos if a.vivo], key=lambda a: a.pv)
         d, f, b = self.dados_dano, self.dano_fixo, self.bonus_ataque
-        self.dados_dano = [8] * pontos
+        self.dados_dano = [8] * (pontos * self.grau)
         self.dano_fixo = self.mod_divino
         self.bonus_ataque = self.mod_divino + self.prof
         try:
@@ -92,7 +95,7 @@ def grupo(nivel: int):
                     prof=f.prof, sp_max=f.sp_max, mp_max=f.mp_max, classe="oraculo",
                     mod_sabedoria=f.mods["sabedoria"], tecnicas=list(f.tecnicas),
                     regras="v1", nivel=nivel, mod_divino=f.mods["inteligencia"],
-                    teto=teto_de_custo(nivel),
+                    teto=teto_de_custo(nivel), grau=grau(nivel),
                 )
             else:
                 lut = Lutador.de_ficha(f, regras="v1")

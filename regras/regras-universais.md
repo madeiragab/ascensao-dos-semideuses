@@ -30,18 +30,19 @@ Toda habilidade registra **ação, ação bônus, reação, movimento ou passiva
 Ação é o padrão. Ação bônus, reação e movimento somam **+1** ao custo. Reação exige
 gatilho. Passivas usam o subsistema próprio. Não existe habilidade ativa sem ação.
 
-## Evolução de habilidades
+## Grau das habilidades
 
-Depois de preparar a Memória num Descanso Longo, marque como **Evoluídas** até
-**metade da Memória, arredondada para baixo**: Memória 1 permite 0; 2–3 permite 1;
-4–5 permite 2; 6 permite 3. Assinaturas podem ser escolhidas e contam no limite;
-passivas, Fórmulas, técnicas e Manifestações de Fúria não podem.
+O **Grau** é a faixa de nível do personagem e não se compra: Grau 1 nos níveis 1–4,
+2 nos 5–8, 3 nos 9–12, 4 nos 13–16, 5 nos 17–20.
 
-A Potência natural de uma habilidade é seu custo final de construção; descontos
-recebidos depois não a reduzem. Ao usar uma Evoluída, escolha Potência maior, até o Teto de Custo, e pague esse valor. Dano,
-alcance, área, duração e efeitos não mudam. A Potência elevada só serve quando uma
-barreira, imunidade, dissipação ou ritual declarar um Limiar. Descontos são aplicados
-depois sem reduzir Potência; Sustentação usa metade do custo realmente pago.
+O custo de uma habilidade é contado em **pontos**; o Teto de Custo é 5 pontos no
+Grau 1 e 6 daí em diante. Um ponto comprado na linha do Grau G custa **G** de MP ou
+SP e entrega o valor daquela linha. Pode-se comprar ponto em qualquer Grau até o
+seu, e o que não cresce — terreno difícil, o máximo de +2 DEF — continua valendo 1.
+
+Dano por MP fica constante de propósito: o Grau muda quanto cabe numa ação, não
+quanto o recurso rende. Barreiras e selos passam a exigir **Limiar de Grau**, de 1 a
+5, em vez da antiga Potência.
 
 ## Manifestação Menor
 

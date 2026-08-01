@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.13.4 · [Changelog](CHANGELOG.md)
+**Current version:** 0.14.0 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -33,7 +33,7 @@ contradicted intuition are documented below.
 | **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
-| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage, advancement, and the Evolved Ability limit, takes a portrait, and downloads or imports an editable three-page A4 PDF |
+| **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage, advancement, and Grade, takes a portrait, and downloads or imports an editable A4 PDF |
 
 All five books now have clickable contents and cross-references. A small floating
 trident opens the other volumes without taking over the reading layout.
@@ -72,21 +72,27 @@ receives a personal manifestation, while control, consent, anchors and lasting
 consequences keep that power from becoming an every-fight transformation.
 
 **Abilities don't come as a spell list.** Players build each one by buying effects
-with points:
+with points, and only then convert points into a resource:
 
 ```
-FINAL COST = duration + extra effects + range + modifiers
+POINTS = duration + extra effects + range + modifiers
+COST   = points × the Grade of the point
 ```
 
 Duration already includes the first point of effect: instantaneous 1, sustained 2,
-scene 4. Sustaining costs half the final cost per round. Each point buys 1d8
-single-target damage, or 1d6 area damage, or +1 to Defense, or a weak condition,
-and so on.
+scene 4. Sustaining costs half the final cost per round.
 
-**Evolving preserves the ability's identity.** After a Long Rest, a hero may mark
-up to half their Memory, rounded down, as Evolved. When using one, they may pay a
-higher Potency up to their Cost Ceiling to cross barriers, immunities, dispels,
-or rituals. Damage, area, range, duration, and conditions do not increase.
+**Progression is the Grade**, and the Grade is simply the level band — 1 at levels
+1–4 up to 5 at 17–20. Every effect table has one row per Grade: a point of
+single-target damage buys `1d8` to `5d8`, an area point `1d6` to `5d6`, a movement
+point +3 m to +15 m. A point of Grade G costs G, so **damage per MP stays flat**:
+the Grade changes how much fits into one action, not how far the resource goes.
+Conditions and Advantage don't grow with Grade — they reach more creatures.
+Defence never grows: +2 remains the cap, because measured at level 20 each point
+of DEF is worth almost seven points of win rate.
+
+An ability written at level 1 never has to be rebuilt: it stays on the sheet and
+is simply paid for at the new Grade, delivering more.
 
 **Universal table rules** now cover the former edge cases: passive defenses, combined effects,
 activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands

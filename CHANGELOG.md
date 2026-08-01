@@ -4,6 +4,63 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.14.0] - 2026-08-01
+
+Mudança de motor: sai a Evolução por Potência, entra a progressão por **Grau**.
+Uma habilidade escrita no nível 1 continua válida a campanha inteira e cresce
+junto com o herói, sem ser reconstruída.
+
+### O motor novo
+
+- O **Grau** é a faixa de nível e não se compra: 1 nos níveis 1–4, 2 nos 5–8,
+  3 nos 9–12, 4 nos 13–16, 5 nos 17–20.
+- O custo é contado em **pontos**. O **Teto de Custo** passa a contar pontos e
+  quase não cresce: 5 no Grau 1, 6 daí em diante.
+- Um ponto comprado na linha do Grau G **custa G** de MP ou SP e **entrega o
+  valor daquela linha**. Pode-se comprar ponto em qualquer Grau até o seu.
+- Uma tabela por família de efeito, com uma linha por Grau: dano (alvo único,
+  área, contínuo), vida e proteção, movimento e deslocamento, e Vantagem,
+  Desvantagem e condições.
+- Dano em alvo único vai de `1d8` a `5d8` por ponto; área e contínuo de `1d6` a
+  `5d6`; movimento de +3 m a +15 m.
+- Condições e Vantagem não ficam mais fortes com o Grau: passam a alcançar
+  **mais criaturas**, de 1 a 5 alvos.
+- O **Limiar de Potência** do Guia do Mestre virou **Limiar de Grau**, de 1 a 5.
+  Em vez de comprar um número de 3 a 14 na hora, o herói tem o Grau ou não tem.
+
+### O que a medição decidiu
+
+- **O ponto não podia ficar melhor de graça.** A primeira versão manteve o ponto
+  a 1 MP e só engordou o dado: medido, o conjurador chegava a **300% do dia do
+  Furioso** no nível 20. O que precisa ficar constante é o dano por MP — por isso
+  o ponto do Grau G custa G.
+- **O teto antigo tinha de encolher.** Ele ia de 5 a 14 porque a única progressão
+  possível era comprar mais pontos do mesmo tamanho. Mantê-lo junto com o dado
+  maior somava duas progressões; reduzi-lo sem mexer no preço deixava cada uso
+  barato demais e enchia o dia de usos.
+- **Defesa é a única linha que não engorda.** Medido no nível 20, cada ponto de
+  DEF vale quase **7 pontos de vitória** num combate justo, mais que qualquer
+  outra linha por ponto gasto. O Grau alto espalha o bônus por mais aliados e o
+  máximo continua sendo +2.
+- Resultado: potência por uso sobe de **17 para 91** do nível 4 ao 20, com o dia
+  de aventura parado onde o sistema publicado já estava — 112%, 57%, 80%, 103% e
+  126% do Furioso, contra 110%, 64%, 90%, 106% e 121% do motor antigo.
+- A Escala de Kleos foi reconferida com o Oráculo jogando pelo motor novo e
+  continua de pé: o combate justo dá 84% a 99% de vitória, a mesma curva.
+
+### Livros e ficha
+
+- **Livro do Jogador:** capítulo Sete reescrito — nova seção *O Grau*, a conta do
+  custo agora tem duas linhas (pontos, depois recurso), as seções de Evolução e
+  Potência saíram, e o modelo de registro ganhou Grau e custo em recurso.
+- Nota nova sobre rolar trinta dados: quem preferir pode usar valor médio.
+- O capítulo Nove troca a fórmula do teto pela tabela de Graus.
+- **Ficha do Herói:** os três campos de Evoluída saíram; entrou a caixa **Grau**,
+  calculada do nível, com uma régua que diz o preço e o valor do ponto. O Teto de
+  Custo passou a seguir o Grau.
+- **Simulador:** novo `sim/graus.py` com a calibragem e a regressão do motor;
+  `sim/evolucao_habilidades.py` foi aposentado junto com a regra que ele testava.
+
 ## [0.13.4] - 2026-08-01
 
 ### Ficha do Herói

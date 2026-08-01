@@ -93,9 +93,23 @@ def personagem(base: Ficha, nivel: int) -> Ficha:
     return f
 
 
+def grau(nivel: int) -> int:
+    """Capítulo Sete: a faixa de nível. 1–4, 5–8, 9–12, 13–16, 17–20."""
+    return min(5, (nivel - 1) // 4 + 1)
+
+
 def teto_de_custo(nivel: int) -> int:
-    """Capítulo Nove: custo máximo = 4 + metade do nível, arredondada para cima."""
-    return 4 + (nivel + 1) // 2
+    """Capítulo Sete: o teto conta PONTOS — 5 no Grau 1, 6 daí em diante.
+
+    O teto antigo ia de 5 a 14 porque a única progressão possível era comprar
+    mais pontos do mesmo tamanho. Agora quem cresce é o ponto: ele custa o
+    Grau e entrega o Grau. Ver sim/graus.py."""
+    return 5 if grau(nivel) == 1 else 6
+
+
+def custo_em_recurso(nivel: int, pontos: int) -> int:
+    """Pontos viram MP ou SP multiplicando pelo Grau."""
+    return pontos * grau(nivel)
 
 
 def kleos_do_personagem(nivel: int) -> float:
