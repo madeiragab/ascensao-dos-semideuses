@@ -62,10 +62,18 @@ e isso é proposital: acumular as duas coisas deve custar caro na distribuição
 atributos.
 
 ```
-CD de Névoa       = 8 + modificador de Inteligência + bônus de proficiência
+CD de Névoa        = 8 + modificador de Inteligência + bônus de proficiência
 Ataque de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência
 Efeito de Fórmula  = 1d20 + modificador de Inteligência + bônus de proficiência
 ```
+
+São três números para dois papéis, e vale saber qual é qual antes da primeira
+Fórmula. **Ataque e Efeito são seus:** você rola, contra a DEF ou contra uma
+defesa passiva alheia. A **CD de Névoa é o número que os outros rolam contra**,
+e só aparece quando alguém testa uma perícia para desfazer o que você fez — a
+Descrença por Investigação é o caso comum. Ela usa base 8, e não 14, porque
+quem soma o d20 ali é o outro lado da mesa. As duas bases descrevem a mesma
+chance vista de pontas opostas.
 
 ---
 

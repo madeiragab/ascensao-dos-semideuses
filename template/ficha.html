@@ -373,7 +373,8 @@ table.viva select { font-size: .72rem; }
       Editar campos calculados
     </label>
     <span class="aviso" id="statusPdf" aria-live="polite">Baixe ou importe a ficha
-      editável em <strong>três páginas A4</strong>. Tudo acontece neste navegador.</span>
+      editável em <strong>folhas A4</strong> — texto longo ganha páginas, nunca
+      letra menor. Tudo acontece neste navegador.</span>
   </div>
 
   <form class="ficha-viva" id="folha" autocomplete="off">
@@ -1336,7 +1337,159 @@ function valorCalc(chave) {
 function porTexto(id, texto) {
   var el = document.getElementById(id); if (el) el.textContent = texto || "—";
 }
+
+/* ---------- Paginação da folha de impressão ----------
+   Cada página do PDF é uma imagem. Enquanto a folha era fixa em três seções,
+   uma ficha com muito texto crescia além de A4 e a imagem inteira era reduzida
+   para caber: 887 mm viravam 297, e o texto de 8 pt saía com 2,7 pt, ilegível.
+   Agora o conteúdo é repartido em quantas folhas forem necessárias — a letra
+   nunca muda de tamanho. */
+
+var MOLDE_IMPRESSAO = document.getElementById("fichaImpressao").innerHTML;
+var LIMITE_FOLHAS = 300;   // trava contra laço infinito, não limite de ficha
+
+function limparIds(no) {
+  if (no.id) no.removeAttribute("id");
+  Array.prototype.forEach.call(no.querySelectorAll("[id]"), function (el) {
+    el.removeAttribute("id");
+  });
+  return no;
+}
+function cabeNaFolha(secao, limite) {
+  return secao.getBoundingClientRect().height <= limite + 1;
+}
+function gradeDe(secao) { return secao.querySelector(":scope > .pdf-grade"); }
+
+function novaFolha(secao) {
+  var nova = document.createElement("section");
+  nova.className = "pdf-pagina";
+
+  var cabecalho = secao.querySelector(".pdf-cabecalho");
+  if (cabecalho) {
+    var copia = limparIds(cabecalho.cloneNode(true));
+    var retrato = copia.querySelector(".pdf-retrato");
+    if (retrato) retrato.remove();          // o retrato só na primeira folha
+    var legenda = copia.querySelector("p");
+    if (legenda) legenda.textContent = "continuação";
+    nova.appendChild(copia);
+  }
+  var grade = document.createElement("div");
+  grade.className = "pdf-grade";
+  nova.appendChild(grade);
+  // Já nasce com uma linha escrita: um rodapé vazio mede zero e só ganharia
+  // altura na renumeração, depois de a conta de quanto cabe estar feita.
+  var rodape = nova.appendChild(document.createElement("p"));
+  rodape.className = "pdf-rodape";
+  rodape.textContent = "Ascensão dos Semideuses · Ficha";
+
+  secao.parentNode.insertBefore(nova, secao.nextSibling);
+  return nova;
+}
+
+/* Maior k em [0, total] que ainda passa no teste. O teste é monotônico:
+   se k palavras cabem, k−1 também cabem. */
+function maiorQueCabe(total, testa) {
+  var baixo = 0, alto = total, meio;
+  while (baixo < alto) {
+    meio = Math.ceil((baixo + alto) / 2);
+    if (testa(meio)) baixo = meio; else alto = meio - 1;
+  }
+  return baixo;
+}
+
+function comContinuacao(bloco) {
+  var titulo = bloco.querySelector("h2");
+  if (titulo && titulo.textContent.indexOf("continuação") < 0) {
+    titulo.textContent += " (continuação)";
+  }
+  return bloco;
+}
+
+/* Um bloco sozinho que não cabe numa folha: reparte o conteúdo dele. */
+function repartirBloco(bloco, secao, limite, nova) {
+  var texto = bloco.querySelector(".pdf-texto");
+  if (texto) {
+    var partes = texto.textContent.split(/(\s+)/);
+    var corte = maiorQueCabe(partes.length, function (k) {
+      texto.textContent = partes.slice(0, k).join("");
+      return cabeNaFolha(secao, limite);
+    });
+    // Nem uma palavra coube: deixa uma assim mesmo, senão a folha seguinte
+    // recebe o texto inteiro de volta e a repartição nunca termina.
+    if (corte === 0 && partes.length) corte = 1;
+    texto.textContent = partes.slice(0, corte).join("");
+    var resto = partes.slice(corte).join("").replace(/^\s+/, "");
+    if (!resto) return nova;
+
+    nova = nova || novaFolha(secao);
+    var copia = comContinuacao(limparIds(bloco.cloneNode(true)));
+    copia.querySelector(".pdf-texto").textContent = resto;
+    gradeDe(nova).insertBefore(copia, gradeDe(nova).firstChild);
+    return nova;
+  }
+
+  var corpo = bloco.querySelector("table tbody");
+  if (corpo && corpo.rows.length > 1) {
+    nova = nova || novaFolha(secao);
+    var copiaTabela = comContinuacao(limparIds(bloco.cloneNode(true)));
+    var corpoNovo = copiaTabela.querySelector("table tbody");
+    corpoNovo.innerHTML = "";
+    gradeDe(nova).insertBefore(copiaTabela, gradeDe(nova).firstChild);
+
+    var trava = 0;
+    while (corpo.rows.length > 1 && !cabeNaFolha(secao, limite) && trava++ < 500) {
+      corpoNovo.insertBefore(corpo.rows[corpo.rows.length - 1], corpoNovo.firstChild);
+    }
+  }
+  return nova;   // Identidade e blocos sem texto nem tabela não têm onde cortar
+}
+
+function renumerarFolhas(impressao) {
+  var folhas = impressao.querySelectorAll(".pdf-pagina");
+  Array.prototype.forEach.call(folhas, function (secao, i) {
+    var rodape = secao.querySelector(".pdf-rodape");
+    if (!rodape) {
+      rodape = secao.appendChild(document.createElement("p"));
+      rodape.className = "pdf-rodape";
+    }
+    rodape.textContent = "Ascensão dos Semideuses · Ficha " +
+      (i + 1) + "/" + folhas.length;
+  });
+}
+
+/* Só funciona com a folha visível: escondida, tudo mede zero. */
+function paginarImpressao() {
+  var impressao = document.getElementById("fichaImpressao");
+  var fila = Array.prototype.slice.call(impressao.querySelectorAll(".pdf-pagina"));
+  var voltas = 0;
+
+  while (fila.length && voltas++ < LIMITE_FOLHAS) {
+    var secao = fila.shift();
+    var largura = secao.getBoundingClientRect().width;
+    if (!largura) return;                       // folha escondida: não pagina
+    var limite = largura / 210 * 297;           // A4 na mesma escala da tela
+    if (cabeNaFolha(secao, limite)) continue;
+
+    var grade = gradeDe(secao);
+    if (!grade) continue;
+    var nova = null;
+
+    // devolve blocos inteiros para a folha seguinte, do fim para o começo
+    while (grade.children.length > 1 && !cabeNaFolha(secao, limite)) {
+      nova = nova || novaFolha(secao);
+      gradeDe(nova).insertBefore(grade.lastElementChild, gradeDe(nova).firstChild);
+    }
+    if (!cabeNaFolha(secao, limite) && grade.children.length === 1) {
+      nova = repartirBloco(grade.firstElementChild, secao, limite, nova);
+    }
+    if (nova) fila.push(nova);                  // a nova folha também precisa caber
+  }
+  renumerarFolhas(impressao);
+}
+
 function prepararImpressao() {
+  // volta ao molde: sem isso, uma segunda geração paginaria o já paginado
+  document.getElementById("fichaImpressao").innerHTML = MOLDE_IMPRESSAO;
   recalcular();
   var nome = valorCampo("nome");
   porTexto("printNome", nome); porTexto("printNome2", nome); porTexto("printNome3", nome);
@@ -1434,7 +1587,12 @@ function prepararImpressao() {
   porTexto("pEquipamento", linhaDefesa + (equipamentoLivre === "—" ? "" : "\n" + equipamentoLivre));
 }
 
-window.addEventListener("beforeprint", prepararImpressao);
+window.addEventListener("beforeprint", function () {
+  prepararImpressao();
+  // Se o navegador ainda não aplicou o CSS de impressão, a folha mede zero e
+  // paginarImpressao desiste sozinha — aí quem reparte é o fluxo do navegador.
+  try { paginarImpressao(); } catch (e) { console.error(e); }
+});
 function esperarImagem(img) {
   if (!img || !img.getAttribute("src") || (img.complete && img.naturalWidth)) {
     return Promise.resolve();
@@ -1700,7 +1858,7 @@ async function baixarPdf() {
 
   botao.disabled = true;
   botao.textContent = "Gerando PDF…";
-  status.textContent = "Montando as três páginas A4…";
+  status.textContent = "Montando as páginas A4…";
   prepararImpressao();
   impressao.classList.add("gerando-pdf");
   impressao.setAttribute("aria-hidden", "false");
@@ -1711,6 +1869,7 @@ async function baixarPdf() {
     }
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
     await esperarImagem(document.getElementById("printRetrato"));
+    paginarImpressao();   // depois das fontes e do retrato: as duas mudam altura
     var pacoteFicha = await montarPacoteFicha();
     await new Promise(function (resolve) {
       requestAnimationFrame(function () { requestAnimationFrame(resolve); });
@@ -1736,6 +1895,9 @@ async function baixarPdf() {
       if (i) pdf.addPage("a4", "portrait");
       var largura = 210;
       var altura = canvas.height * largura / canvas.width;
+      // Rede de segurança. Depois da paginação nenhuma folha deveria passar de
+      // 297 mm; se passar por arredondamento, o encolhimento é de fração de por
+      // cento — nada parecido com o 0,335 que reduzia a fonte a 2,7 pt.
       if (altura > 297) {
         altura = 297;
         largura = canvas.width * altura / canvas.height;
@@ -1747,7 +1909,9 @@ async function baixarPdf() {
 
     var pdfEditavel = incorporarPacoteNoPdf(pdf.output("arraybuffer"), pacoteFicha);
     baixarBlob(pdfEditavel, nomeDoPdf());
-    status.textContent = "PDF editável baixado: três páginas A4 e pronto para ser importado.";
+    status.textContent = "PDF editável baixado: " + paginas.length +
+      (paginas.length === 1 ? " página A4" : " páginas A4") +
+      " e pronto para ser importado.";
   } catch (erro) {
     console.error(erro);
     status.textContent = "Não foi possível gerar o PDF. Recarregue a página e tente novamente.";
