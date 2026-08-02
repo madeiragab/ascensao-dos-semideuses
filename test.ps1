@@ -8,6 +8,7 @@ $raiz = Split-Path -Parent $MyInvocation.MyCommand.Path
 $testes = @(
     'defesas_passivas.py',
     'graus.py',
+    'anteparo.py',
     'comparar.py',
     'dia_de_aventura.py',
     'kleos.py',

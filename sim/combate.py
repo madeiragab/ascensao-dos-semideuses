@@ -33,6 +33,22 @@ def rola_d20(vantagem: bool = False, desvantagem: bool = False) -> int:
     return rola(20)
 
 
+# Interruptor de medição: desligado, o Guardião joga sem a habilidade de
+# classe. É assim que sim/anteparo.py mede o que ela vale.
+ANTEPARO_ATIVO = True
+
+
+def anteparo_valor(guardiao) -> int:
+    """Metade da proficiência, mínimo 1 — 1, 2 e 3 ao longo da carreira.
+
+    A proficiência inteira foi medida antes e dava +14,3% de vitória num
+    bando de nível 20: a habilidade dispara toda rodada e, com muitos
+    inimigos batendo, o desconto entra o combate todo. A metade fica em
+    +4,9% no pior caso, que é a faixa das técnicas saudáveis.
+    """
+    return max(1, guardiao.prof // 2)
+
+
 @dataclass
 class Lutador:
     """Estado mutável de um participante do combate."""
@@ -79,6 +95,7 @@ class Lutador:
         self.furia_gasta = False
         self.golpe_duplo_usado = False
         self.muralha_usada = False       # Segunda Muralha
+        self.anteparo_usado = False      # Anteparo, habilidade do Guardião
         self.furia_cega_usada = False
         self.olho_usado = False
         self.rede_usada = False
@@ -176,7 +193,25 @@ class Lutador:
             if "Represália" in guardiao.tecnicas and atacante is not None:
                 atacante.sofrer(guardiao.prof + max(0, guardiao.dano_fixo))
             return
+        escora = self._quem_ampara()
+        if escora is not None:
+            escora.anteparo_usado = True
+            dano = max(0, dano - anteparo_valor(escora))
         self.sofrer(dano)
+
+    def _quem_ampara(self):
+        """Anteparo: habilidade de classe do Guardião. Uma vez por rodada dele,
+        sem ação e sem SP, o golpe que atinge um aliado perde a proficiência do
+        Guardião. Não é reação — não concorre com Interceptar nem com Escudo
+        Vínculo, que é o buraco que a classe tinha."""
+        if not ANTEPARO_ATIVO:
+            return None
+        for a in self.aliados:
+            if a is self or not a.vivo:
+                continue
+            if a.classe == "guardiao" and not a.anteparo_usado:
+                return a
+        return None
 
     def _quem_intercepta(self, dano: int):
         """Um Guardião só entra na frente se o golpe derrubaria o aliado — e se
@@ -270,6 +305,7 @@ class Lutador:
 
     def _agir(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
         self.reacao_disponivel = True
+        self.anteparo_usado = False
         self.ataques_com_vantagem_contra_mim = 0   # a marca do Feroz expira aqui
         self.furia_gasta = False
         if "Fúria Crescente" in self.tecnicas:

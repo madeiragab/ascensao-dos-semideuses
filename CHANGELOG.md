@@ -4,6 +4,37 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.14.1] - 2026-08-01
+
+### Guardião ganha habilidade de classe
+
+- O Guardião era a única das três classes sem habilidade de classe. Não era
+  desenho: `regras/v1-numeros.md` registrava a falta como dívida desde a revisão
+  v1, cujo conserto foi todo numérico — PV, armadura, defesas treinadas.
+- Entra o **Anteparo**: uma vez por rodada, quando um aliado a até 3 metros sofre
+  dano, ele sofre **metade da proficiência do Guardião a menos**, arredondada para
+  baixo, mínimo 1. Sem ação, sem SP e **sem reação**.
+- Não é reação de propósito. Interceptar, Escudo Vínculo e Represália já disputam
+  a reação do Guardião; mais uma coisa naquela fila não seria escolha, seria fila.
+- Reduz o dano em vez de transferi-lo, que era exatamente a falta anotada:
+  "Interceptar transfere dano sem reduzi-lo".
+- Não marca, não provoca e não dá DEF, então não pisa em Postura Desafiadora nem
+  em Muro de Escudos — as duas continuam sendo escolhas de técnica.
+
+### O que a medição decidiu
+
+- A primeira versão descontava a **proficiência inteira**. Medida, dava **+14,3%**
+  de vitória contra um bando no nível 20: com muitos inimigos batendo, o desconto
+  entra toda rodada do combate inteiro. Isso é faixa de habilidade obrigatória.
+- A metade da proficiência fica em **+1,3% a +4,8%**, dentro da faixa que o projeto
+  usa para técnicas saudáveis.
+- O cenário de bando precisou ser recalibrado antes de medir: com bandos fracos a
+  coluna saturava em 100% e não dizia nada. Os bandos agora deixam o trio por volta
+  de 80% de vitória sem a habilidade.
+- Novo `sim/anteparo.py`, na suíte de regressão.
+- A Escala de Kleos foi reconferida com o Anteparo ativo em todos os combates: o
+  combate justo subiu de 1 a 3 pontos de vitória e continua na mesma curva.
+
 ## [0.14.0] - 2026-08-01
 
 Mudança de motor: sai a Evolução por Potência, entra a progressão por **Grau**.

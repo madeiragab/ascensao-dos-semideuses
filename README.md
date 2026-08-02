@@ -18,7 +18,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.14.0 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.14.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -131,6 +131,7 @@ python equilibrio.py        # auditoria: Kleos por nível, classes, armas, armad
 python tecnicas.py          # mede as 36 técnicas de classe, uma a uma
 python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
 python graus.py             # calibra os Graus de habilidade e a progressão
+python anteparo.py          # mede a habilidade de classe do Guardião
 python defesas_passivas.py  # prova a equivalência exata das defesas de base 14
 ```
 

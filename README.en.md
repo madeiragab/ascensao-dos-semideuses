@@ -21,7 +21,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.14.0 · [Changelog](CHANGELOG.md)
+**Current version:** 0.14.1 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -135,6 +135,8 @@ python calibrar_kleos.py    # tests the Kleos scale at every level
 python equilibrio.py        # audit: Kleos by level, classes, weapons, armour
 python tecnicas.py          # measures all 36 class techniques, one by one
 python defesas_passivas.py  # proves exact base-14 probability equivalence
+python graus.py             # calibrates ability Grades and the progression
+python anteparo.py          # measures the Guardian's class ability
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
