@@ -439,6 +439,7 @@ table.viva select { font-size: .72rem; }
       </div>
       <p class="estado-regra" id="poderConceito">Escolha o Conceito para aplicar suas perícias e habilidade.</p>
       <p class="estado-regra" id="poderParente">Escolha o Parente Divino para aplicar bônus, Afinidade e passiva.</p>
+      <p class="estado-regra" id="poderClasse">Escolha a classe para ver a habilidade dela.</p>
     </div>
 
     <!-- ===== O QUE ESTE NÍVEL DÁ ===== -->
@@ -731,10 +732,31 @@ var SIGLA = {
 /* Progressão do Capítulo Nove. base = nível 1; porNivel = a cada nível seguinte.
    PV somam Constituição no base e em cada nível; MP somam o Atributo Divino. */
 var CLASSES = {
-  guardiao: { pv: 14, sp: 12, mp: 6,  pvN: 6, spN: 4, mpN: 1 },
-  furioso:  { pv: 12, sp: 14, mp: 6,  pvN: 5, spN: 5, mpN: 1 },
-  oraculo:  { pv: 10, sp: 8,  mp: 14, pvN: 4, spN: 3, mpN: 4 }
+  guardiao: { pv: 14, sp: 12, mp: 6,  pvN: 6, spN: 4, mpN: 1,
+    habilidade: function (prof) {
+      return "Anteparo: uma vez por rodada, um aliado a até 3 m sofre " +
+        Math.max(1, Math.floor(prof / 2)) + " de dano a menos " +
+        "(metade da proficiência). Sem ação, sem SP e sem reação.";
+    } },
+  furioso:  { pv: 12, sp: 14, mp: 6,  pvN: 5, spN: 5, mpN: 1,
+    habilidade: function () {
+      return "Ataque Feroz: uma vez por turno, no primeiro ataque, role com " +
+        "Vantagem — e o próximo ataque contra você também tem Vantagem. " +
+        "Não custa nada, e não combina com Ataque Pesado.";
+    } },
+  oraculo:  { pv: 10, sp: 8,  mp: 14, pvN: 4, spN: 3, mpN: 4,
+    habilidade: function (prof, sab) {
+      return "Fonte de Mana: ação, toque, 3 SP — o alvo, inclusive você, " +
+        "recupera 1d4" + (sab === null ? " + SAB" : " " + sinal(sab)) + " em MP.";
+    } }
 };
+
+/* A habilidade de classe é automática como o poder do Conceito e a passiva do
+   Parente. Ficava de fora só porque o Guardião não tinha nenhuma. */
+function habilidadeDaClasse(chave, prof, sab) {
+  var c = CLASSES[chave];
+  return c && c.habilidade ? c.habilidade(prof, sab) : null;
+}
 
 var NOME_CLASSE = { guardiao: "Guardião", furioso: "Furioso", oraculo: "Oráculo" };
 
@@ -1076,6 +1098,10 @@ function recalcularV2() {
   document.getElementById("poderParente").textContent = parente
     ? parente.nome + " · " + parente.passiva
     : "Escolha o Parente Divino para aplicar bônus, Afinidade e passiva.";
+  var habClasse = habilidadeDaClasse(classe, prof, null);
+  document.getElementById("poderClasse").textContent = habClasse
+    ? NOME_CLASSE[classe] + " · " + habClasse
+    : "Escolha a classe para ver a habilidade dela.";
 
   var gastos = 0, excessoTeto = 0;
   var bases = [];
@@ -1522,6 +1548,13 @@ function prepararImpressao() {
     return "<tr><td>" + (cb.checked ? "● " : "○ ") + r[0] + "</td><td>" + valorCalc("res-" + r[1]) + "</td></tr>";
   }).join("");
   var regras = [];
+  var habPdf = habilidadeDaClasse(
+    document.getElementById("classe").value,
+    num(valorCalc("prof")) || 2,
+    // valorCalc devolve o modificador já formatado por sinal(), que usa o
+    // menos Unicode; num() só entende hífen ASCII e leria −1 como 1.
+    num(String(valorCalc("mod-sabedoria")).replace("−", "-")));
+  if (habPdf) regras.push(habPdf);
   var con = CONCEITOS[document.getElementById("conceito").value]; if (con) regras.push(con.poder);
   var par = PARENTES[document.getElementById("parente").value]; if (par) regras.push(par.passiva);
   if (valorId("progressoTreino")) regras.push("Progresso de Treino: " + valorId("progressoTreino") + "/3.");
