@@ -262,6 +262,8 @@ que ela distribui — e não contam porque **não existe regra de recuperação 
 recursos no livro**, então não há como medir o valor de um PV recuperado contra
 o custo de um MP.
 
-O Guardião ainda não tem uma ferramenta ofensiva ou de controle própria:
-Postura Desafiadora não tem duração definida, e Interceptar transfere dano sem
-reduzi-lo. Isso é a próxima frente de trabalho.
+O Guardião não tinha uma ferramenta própria: Postura Desafiadora não tem duração
+definida, e Interceptar transfere dano sem reduzi-lo. **Resolvido na 0.14.1** com o
+**Anteparo**, habilidade de classe que reduz — e não transfere — o dano que atinge
+um aliado próximo, uma vez por rodada, sem ação e sem SP. Medido em `sim/anteparo.py`:
++1,3% a +4,8% de vitória, dentro da faixa das técnicas saudáveis.
