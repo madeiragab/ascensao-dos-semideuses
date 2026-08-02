@@ -417,6 +417,7 @@ table.viva select { font-size: .72rem; }
               <option value="">-</option><option value="zeus">Zeus</option><option value="poseidon">Poseidon</option>
               <option value="hades">Hades</option><option value="atena">Atena</option><option value="ares">Ares</option>
               <option value="apolo">Apolo</option><option value="hefesto">Hefesto</option><option value="demeter">Deméter</option>
+              <option value="afrodite">Afrodite</option>
             </select></div>
           <div class="f"><label>Afinidade Elemental</label><select id="afinidade"><option value="">Escolha o Parente</option></select></div>
           <div class="f"><label>Atributo Divino</label>
@@ -779,7 +780,8 @@ var PARENTES = {
   ares: { nome: "Ares", bonus: { forca: 2, constituicao: 1 }, afinidades: ["Físico"], passiva: "Fúria da Batalha: ao derrubar inimigo corpo a corpo, ganhe PV temporários iguais à proficiência." },
   apolo: { nome: "Apolo", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Luz", "Som"], passiva: "Dom Artístico: instrumento proficiente e Vantagem em Percepção visual." },
   hefesto: { nome: "Hefesto", bonus: { inteligencia: 2, constituicao: 1 }, afinidades: ["Fogo", "Metal"], passiva: "Mãos de Ferreiro: proficiência em Manufatura e conserto de metal uma vez por dia." },
-  demeter: { nome: "Deméter", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Natureza"], passiva: "Toque Verdejante: Vantagem para achar comida e cura diária igual à proficiência." }
+  demeter: { nome: "Deméter", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Natureza"], passiva: "Toque Verdejante: Vantagem para achar comida e cura diária igual à proficiência." },
+  afrodite: { nome: "Afrodite", bonus: { carisma: 2, sabedoria: 1 }, afinidades: ["Encanto"], passiva: "Palavra Fácil: uma vez por cena, um mortal obedece uma ordem curta e razoável sem teste, fora de combate." }
 };
 
 var PERICIAS_CLASSE = {
