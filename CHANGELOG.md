@@ -4,6 +4,22 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.14.2] - 2026-08-01
+
+### Ficha do Herói
+
+- A ficha passa a imprimir a **habilidade de classe**, automática como já eram o
+  poder do Conceito e a passiva do Parente Divino. Ela ficava de fora só porque o
+  Guardião não tinha nenhuma; agora as três têm.
+- **Anteparo** aparece com o número já resolvido pela proficiência — 1 nos níveis
+  1–8, 2 nos 9–16, 3 nos 17–20 — em vez de mandar o jogador dividir na mesa.
+- **Fonte de Mana** aparece com o modificador de Sabedoria somado no PDF.
+- Aparece nas duas pontas: na linha de regras automáticas da tela e no bloco
+  *Regras automáticas* do PDF.
+- Corrigido de passagem: `num()` só entende hífen ASCII, mas os modificadores
+  calculados saem com o menos Unicode de `sinal()`. Um Oráculo com Sabedoria
+  negativa teria a Fonte de Mana lida com o sinal trocado.
+
 ## [0.14.1] - 2026-08-01
 
 ### Guardião ganha habilidade de classe
