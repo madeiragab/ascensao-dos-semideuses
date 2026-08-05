@@ -2,6 +2,8 @@
 
 # Ascensão dos Semideuses — a tabletop RPG
 
+[![ci](https://github.com/madeiragab/ascensao-dos-semideuses/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/madeiragab/ascensao-dos-semideuses/actions/workflows/ci.yml)
+
 An independent, unofficial tabletop RPG project. Its rules, text, and creation
 engines are original; its setting presents Greek demigods in the modern world
 on a d20 foundation.
