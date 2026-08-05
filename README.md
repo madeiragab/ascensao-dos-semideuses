@@ -2,6 +2,8 @@
 
 # Ascensão dos Semideuses — RPG de mesa
 
+[![ci](https://github.com/madeiragab/ascensao-dos-semideuses/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/madeiragab/ascensao-dos-semideuses/actions/workflows/ci.yml)
+
 Projeto independente e não oficial de RPG de mesa. Suas regras, seus textos e
 seus motores de criação são autorais; a ambientação apresenta semideuses gregos
 no mundo moderno em uma base d20.
