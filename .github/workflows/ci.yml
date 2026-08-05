@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  regressao:
+    runs-on: ubuntu-latest
+    # A suíte inteira leva ~5 min na minha máquina. O teto é folgado de
+    # propósito: o runner é mais lento e eu prefiro falhar por teste quebrado
+    # do que por relógio.
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Nada de `pip install`: sim/ é stdlib puro de ponta a ponta. Isso é
+      # deliberado — o motor de balanceamento precisa rodar em qualquer máquina
+      # de mesa sem montar ambiente.
+      - name: regressão numérica
+        shell: pwsh
+        run: ./test.ps1
