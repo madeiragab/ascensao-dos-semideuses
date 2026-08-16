@@ -19,7 +19,8 @@
   --texto:        #1F241C;
   --texto-suave:  #626A5B;
 }
-@media (prefers-color-scheme: dark) {
+/* Escuro só na tela: no papel o grimório imprime sempre na paleta clara. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --acento:       #8FB37C;
     --acento-fraco: #1D2A1A;
@@ -33,17 +34,19 @@
     --fundo:        #0D100A;
   }
 }
-:root[data-theme="dark"] {
-  --acento:       #8FB37C;
-  --acento-fraco: #1D2A1A;
-  --bronze:       #C9A24A;
-  --papel:        #14180F;
-  --superficie-2: #1E2418;
-  --borda:        #2E3527;
-  --borda-forte:  #465138;
-  --texto:        #E4E7D8;
-  --texto-suave:  #98A088;
-  --fundo:        #0D100A;
+@media screen {
+  :root[data-theme="dark"] {
+    --acento:       #8FB37C;
+    --acento-fraco: #1D2A1A;
+    --bronze:       #C9A24A;
+    --papel:        #14180F;
+    --superficie-2: #1E2418;
+    --borda:        #2E3527;
+    --borda-forte:  #465138;
+    --texto:        #E4E7D8;
+    --texto-suave:  #98A088;
+    --fundo:        #0D100A;
+  }
 }
 :root[data-theme="light"] {
   --acento:       #3B5A38;
@@ -56,6 +59,11 @@
   --texto:        #1F241C;
   --texto-suave:  #626A5B;
   --fundo:        #EDEBE1;
+}
+
+/* Impressão: a folha do Grimório é o verde-claro dele, não o creme comum. */
+@media print {
+  @page { background: #F7F6EF; }
 }
 </style>
 
