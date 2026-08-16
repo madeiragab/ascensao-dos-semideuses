@@ -55,9 +55,15 @@
 .mesa b { color: var(--acento); font-weight: 700; }
 .mesa em { color: var(--texto-suave); }
 
-/* Impressão: a folha do Guia é o lilás-claro dele, não o creme comum. */
+/* Impressão: o Guia sai no couro roxo escuro, igual à tela. */
 @media print {
-  @page { background: #FAF7FB; }
+  @page { background: #16111C; }
+  :root:root:root {
+    --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
+    --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
+    --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
+    --fundo: #100C16;
+  }
   .mesa { break-inside: avoid; page-break-inside: avoid; }
 }
 </style>

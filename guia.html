@@ -640,8 +640,26 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
      da raiz na impressão, mas pinta o fundo declarado no @page — e pinta a
      folha inteira, margem inclusive. Sem var(): dentro do @page não existe
      elemento de onde herdar. Cada livro repete este bloco com o seu tom. */
-  @page      { size: A4 portrait; margin: 16mm 18mm 18mm; background: #FBF8F2; }
+  @page      { size: A4 portrait; margin: 16mm 18mm 18mm; background: #1A1614; }
   @page capa { margin: 0; background: #0A0808; }
+
+  /* O livro impresso é o de couro escuro, o mesmo que aparece na tela, e é
+     escuro sempre — não importa se o sistema de quem imprime está no claro.
+     A raiz triplicada é de propósito: a paleta própria de cada livro vem
+     depois desta folha no arquivo montado, e um :root sozinho perderia para
+     ela. Cada livro repete este bloco com os seus tons. */
+  :root:root:root {
+    --fundo:       #100D0C;
+    --papel:       #1A1614;
+    --superficie-2:#241F1B;
+    --texto:       #E7E0D4;
+    --texto-suave: #A2978A;
+    --borda:       #352E28;
+    --borda-forte: #4C4038;
+    --acento:      var(--brasa-viva);
+    --acento-fraco:#381C11;
+    --bronze:      var(--bronze-luz);
+  }
 
   /* Sem isto o navegador joga fora todo fundo e imprime só o texto em preto. */
   *, *::before, *::after {
@@ -938,9 +956,15 @@ pre.bloco-codigo {
 .mesa b { color: var(--acento); font-weight: 700; }
 .mesa em { color: var(--texto-suave); }
 
-/* Impressão: a folha do Guia é o lilás-claro dele, não o creme comum. */
+/* Impressão: o Guia sai no couro roxo escuro, igual à tela. */
 @media print {
-  @page { background: #FAF7FB; }
+  @page { background: #16111C; }
+  :root:root:root {
+    --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
+    --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
+    --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
+    --fundo: #100C16;
+  }
   .mesa { break-inside: avoid; page-break-inside: avoid; }
 }
 </style>
