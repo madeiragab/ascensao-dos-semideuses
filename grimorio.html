@@ -640,8 +640,26 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
      da raiz na impressão, mas pinta o fundo declarado no @page — e pinta a
      folha inteira, margem inclusive. Sem var(): dentro do @page não existe
      elemento de onde herdar. Cada livro repete este bloco com o seu tom. */
-  @page      { size: A4 portrait; margin: 16mm 18mm 18mm; background: #FBF8F2; }
+  @page      { size: A4 portrait; margin: 16mm 18mm 18mm; background: #1A1614; }
   @page capa { margin: 0; background: #0A0808; }
+
+  /* O livro impresso é o de couro escuro, o mesmo que aparece na tela, e é
+     escuro sempre — não importa se o sistema de quem imprime está no claro.
+     A raiz triplicada é de propósito: a paleta própria de cada livro vem
+     depois desta folha no arquivo montado, e um :root sozinho perderia para
+     ela. Cada livro repete este bloco com os seus tons. */
+  :root:root:root {
+    --fundo:       #100D0C;
+    --papel:       #1A1614;
+    --superficie-2:#241F1B;
+    --texto:       #E7E0D4;
+    --texto-suave: #A2978A;
+    --borda:       #352E28;
+    --borda-forte: #4C4038;
+    --acento:      var(--brasa-viva);
+    --acento-fraco:#381C11;
+    --bronze:      var(--bronze-luz);
+  }
 
   /* Sem isto o navegador joga fora todo fundo e imprime só o texto em preto. */
   *, *::before, *::after {
@@ -944,9 +962,21 @@ pre.bloco-codigo {
   --fundo:        #EDEBE1;
 }
 
-/* Impressão: a folha do Grimório é o verde-claro dele, não o creme comum. */
+/* Impressão: o Grimório sai no couro verde escuro, igual à tela. */
 @media print {
-  @page { background: #F7F6EF; }
+  @page { background: #14180F; }
+  :root:root:root {
+    --acento:       #8FB37C;
+    --acento-fraco: #1D2A1A;
+    --bronze:       #C9A24A;
+    --papel:        #14180F;
+    --superficie-2: #1E2418;
+    --borda:        #2E3527;
+    --borda-forte:  #465138;
+    --texto:        #E4E7D8;
+    --texto-suave:  #98A088;
+    --fundo:        #0D100A;
+  }
 }
 </style>
 </head>
