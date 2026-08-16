@@ -44,7 +44,8 @@
   --pagina:  calc(var(--mancha) + var(--margem) * 2);
 }
 
-@media (prefers-color-scheme: dark) {
+/* O tema escuro é da tela. No papel, o livro é sempre claro — ver IMPRESSÃO. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --fundo:       #100D0C;
     --papel:       #1A1614;
@@ -59,18 +60,20 @@
     --sombra:      rgba(0, 0, 0, .6);
   }
 }
-:root[data-theme="dark"] {
-  --fundo:       #100D0C;
-  --papel:       #1A1614;
-  --superficie-2:#241F1B;
-  --texto:       #E7E0D4;
-  --texto-suave: #A2978A;
-  --borda:       #352E28;
-  --borda-forte: #4C4038;
-  --acento:      var(--brasa-viva);
-  --acento-fraco:#381C11;
-  --bronze:      var(--bronze-luz);
-  --sombra:      rgba(0, 0, 0, .6);
+@media screen {
+  :root[data-theme="dark"] {
+    --fundo:       #100D0C;
+    --papel:       #1A1614;
+    --superficie-2:#241F1B;
+    --texto:       #E7E0D4;
+    --texto-suave: #A2978A;
+    --borda:       #352E28;
+    --borda-forte: #4C4038;
+    --acento:      var(--brasa-viva);
+    --acento-fraco:#381C11;
+    --bronze:      var(--bronze-luz);
+    --sombra:      rgba(0, 0, 0, .6);
+  }
 }
 :root[data-theme="light"] {
   --fundo:       #F1ECE3;
@@ -629,19 +632,99 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 }
 
 /* ============ IMPRESSÃO ============ */
+/* A folha é A4. Os miolos ficam na mancha do @page; as capas são as únicas
+   páginas sem margem, para sangrarem até a borda como numa capa de verdade.
+   As cores são as mesmas da tela: cada livro imprime na sua própria paleta. */
 @media print {
-  body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.5; }
+  /* A cor do papel vive aqui, e não em html/body: o navegador ignora o fundo
+     da raiz na impressão, mas pinta o fundo declarado no @page — e pinta a
+     folha inteira, margem inclusive. Sem var(): dentro do @page não existe
+     elemento de onde herdar. Cada livro repete este bloco com o seu tom. */
+  @page      { size: A4 portrait; margin: 18mm 22mm 20mm; background: #FBF8F2; }
+  @page capa { margin: 0; background: #0A0808; }
+
+  /* Sem isto o navegador joga fora todo fundo e imprime só o texto em preto. */
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  html, body {
+    background: none;
+    color: var(--texto);
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
   .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
-  .livro { border: none; max-width: none; background: #fff; }
+  .livro { border: none; max-width: none; background: var(--papel); }
   .mancha { padding: 0; }
-  .capa-pagina { background: #fff; page-break-after: always; border: none; }
-  .capa-pagina img { max-width: 100%; height: auto; }
-  .rosto, .sumario { page-break-after: always; }
-  .capitulo { page-break-before: always; padding-top: 0; }
-  .abertura { page-break-after: avoid; }
-  h3, h4 { page-break-after: avoid; }
-  .classe, .cartao, .ficha, .destaque, .grade { page-break-inside: avoid; }
-  .capa-pagina.fundo { page-break-before: always; page-break-after: auto; }
+
+  /* ---- capas: uma folha inteira cada, a arte inteira, sem corte ---- */
+  .capa-pagina {
+    page: capa;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100vh;
+    background: #0A0808;
+    border: none;
+    overflow: hidden;
+    break-inside: avoid;      page-break-inside: avoid;
+    break-after: page;        page-break-after: always;
+  }
+  .capa-pagina img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .capa-pagina.fundo { break-before: page; page-break-before: always; }
+
+  /* ---- estrutura ---- */
+  .rosto, .sumario { break-after: page; page-break-after: always; }
+  .rosto  { padding: 22mm 0 16mm; border-bottom: none; }
+  .sumario { padding: 0; }
+  .capitulo { break-before: page; page-break-before: always; padding-top: 0; }
+  .abertura { break-after: avoid; page-break-after: avoid; }
+  h2, h3, h4, .abertura h2, .cartao h5 { break-after: avoid; page-break-after: avoid; }
+  h3, h4 { break-inside: avoid; page-break-inside: avoid; }
+  p, li { orphans: 3; widows: 3; }
+
+  /* ---- nada de rolagem no papel: o que rola na tela some na impressão ---- */
+  .rolagem, pre.bloco-codigo, .dado {
+    overflow: visible !important;
+    max-width: 100%;
+  }
+  pre.bloco-codigo { white-space: pre-wrap; overflow-wrap: anywhere; }
+  th, td { overflow-wrap: anywhere; }
+  table { font-size: 9pt; }
+  thead { display: table-header-group; }
+  tr, img { break-inside: avoid; page-break-inside: avoid; }
+
+  /* Blocos que só fazem sentido inteiros. A .grade fica de fora de propósito:
+     ela cresce mais que uma folha e, presa, deixava páginas quase vazias. */
+  .classe, .cartao, .ficha, .destaque, .nota, .aviso, .recursos, .atributos {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+
+  /* A grade desenha as linhas com o próprio fundo aparecendo pelos vãos. Num
+     grid partido entre duas folhas isso vira uma tarja no pé da página, com os
+     cartões inteiros já na seguinte. No papel cada cartão leva a sua borda e a
+     grade não pinta nada. */
+  .grade { background: none; border: none; gap: 0; }
+  .grade > .cartao {
+    border: 1px solid var(--borda);
+    margin: -1px 0 0 -1px;
+  }
+
+  /* Miolo do livro impresso não precisa de sublinhado de link. */
+  .mancha p a, .mancha li a, .mancha td a, .colofao a {
+    text-decoration: none;
+    color: var(--texto);
+  }
+  .colofao { break-before: auto; }
 }
 
 /* ============================================================
@@ -756,8 +839,12 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 .aviso p:last-child { margin-bottom: 0; }
 
 @media print {
-  .criatura, .degrau { page-break-inside: avoid; }
-  .degrau { page-break-before: always; }
+  .criatura, .degrau { break-inside: avoid; page-break-inside: avoid; }
+  .degrau {
+    break-before: page;  page-break-before: always;
+    break-after: avoid;  page-break-after: avoid;
+    margin-top: 0;
+  }
 }
 
 /* ============================================================
@@ -786,7 +873,7 @@ pre.bloco-codigo {
 @media print {
   pre.bloco-codigo {
     white-space: pre-wrap;
-    border-left-color: #666;
+    break-inside: avoid;
     page-break-inside: avoid;
   }
 }
@@ -808,7 +895,8 @@ pre.bloco-codigo {
   --texto:        #1F241C;
   --texto-suave:  #626A5B;
 }
-@media (prefers-color-scheme: dark) {
+/* Escuro só na tela: no papel o grimório imprime sempre na paleta clara. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --acento:       #8FB37C;
     --acento-fraco: #1D2A1A;
@@ -822,17 +910,19 @@ pre.bloco-codigo {
     --fundo:        #0D100A;
   }
 }
-:root[data-theme="dark"] {
-  --acento:       #8FB37C;
-  --acento-fraco: #1D2A1A;
-  --bronze:       #C9A24A;
-  --papel:        #14180F;
-  --superficie-2: #1E2418;
-  --borda:        #2E3527;
-  --borda-forte:  #465138;
-  --texto:        #E4E7D8;
-  --texto-suave:  #98A088;
-  --fundo:        #0D100A;
+@media screen {
+  :root[data-theme="dark"] {
+    --acento:       #8FB37C;
+    --acento-fraco: #1D2A1A;
+    --bronze:       #C9A24A;
+    --papel:        #14180F;
+    --superficie-2: #1E2418;
+    --borda:        #2E3527;
+    --borda-forte:  #465138;
+    --texto:        #E4E7D8;
+    --texto-suave:  #98A088;
+    --fundo:        #0D100A;
+  }
 }
 :root[data-theme="light"] {
   --acento:       #3B5A38;
@@ -845,6 +935,11 @@ pre.bloco-codigo {
   --texto:        #1F241C;
   --texto-suave:  #626A5B;
   --fundo:        #EDEBE1;
+}
+
+/* Impressão: a folha do Grimório é o verde-claro dele, não o creme comum. */
+@media print {
+  @page { background: #F7F6EF; }
 }
 </style>
 </head>

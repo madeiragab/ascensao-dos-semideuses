@@ -20,7 +20,8 @@
   --fundo:        #EFEBE0;
   --calculado:    #EDE4CC;
 }
-@media (prefers-color-scheme: dark) {
+/* Escuro só na tela: no papel a ficha imprime sempre na paleta clara. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
     --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
@@ -28,11 +29,13 @@
     --fundo: #0E0C09; --calculado: #241F12;
   }
 }
-:root[data-theme="dark"] {
-  --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
-  --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
-  --borda-forte: #4C462E; --texto: #E8E1CD; --texto-suave: #9C9379;
-  --fundo: #0E0C09; --calculado: #241F12;
+@media screen {
+  :root[data-theme="dark"] {
+    --acento: #C9A94E; --acento-fraco: #302713; --bronze: #C9A94E;
+    --papel: #16140F; --superficie-2: #1F1C14; --borda: #34301F;
+    --borda-forte: #4C462E; --texto: #E8E1CD; --texto-suave: #9C9379;
+    --fundo: #0E0C09; --calculado: #241F12;
+  }
 }
 :root[data-theme="light"] {
   --acento: #8A6B1E; --acento-fraco: #F0E7D2; --bronze: #6E5518;
