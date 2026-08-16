@@ -19,7 +19,8 @@
   --texto-suave:  #635A70;
   --fundo:        #EFEAF3;
 }
-@media (prefers-color-scheme: dark) {
+/* Escuro só na tela: no papel o guia imprime sempre na paleta clara. */
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
     --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
@@ -27,11 +28,13 @@
     --fundo: #100C16;
   }
 }
-:root[data-theme="dark"] {
-  --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
-  --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
-  --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
-  --fundo: #100C16;
+@media screen {
+  :root[data-theme="dark"] {
+    --acento: #B48CE0; --acento-fraco: #2A1D3A; --bronze: #C9A94E;
+    --papel: #16111C; --superficie-2: #1F1828; --borda: #332A40;
+    --borda-forte: #4B3F5C; --texto: #E7DFF0; --texto-suave: #9C90AC;
+    --fundo: #100C16;
+  }
 }
 :root[data-theme="light"] {
   --acento: #6B3FA0; --acento-fraco: #EDE4F5; --bronze: #9A7B2E;
@@ -51,6 +54,12 @@
 .mesa p:last-child { margin-bottom: 0; }
 .mesa b { color: var(--acento); font-weight: 700; }
 .mesa em { color: var(--texto-suave); }
+
+/* Impressão: a folha do Guia é o lilás-claro dele, não o creme comum. */
+@media print {
+  @page { background: #FAF7FB; }
+  .mesa { break-inside: avoid; page-break-inside: avoid; }
+}
 </style>
 
 <div class="livro">
