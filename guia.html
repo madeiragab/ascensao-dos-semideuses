@@ -640,7 +640,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
      da raiz na impressão, mas pinta o fundo declarado no @page — e pinta a
      folha inteira, margem inclusive. Sem var(): dentro do @page não existe
      elemento de onde herdar. Cada livro repete este bloco com o seu tom. */
-  @page      { size: A4 portrait; margin: 18mm 22mm 20mm; background: #FBF8F2; }
+  @page      { size: A4 portrait; margin: 16mm 18mm 18mm; background: #FBF8F2; }
   @page capa { margin: 0; background: #0A0808; }
 
   /* Sem isto o navegador joga fora todo fundo e imprime só o texto em preto. */
@@ -649,11 +649,18 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
     print-color-adjust: exact;
   }
 
-  html, body {
+  /* O corpo do texto vinha de body, mas título, cartão e rótulo são medidos em
+     rem — ou seja, no tamanho da raiz, que continuava sendo o da tela (16px).
+     Encolher a raiz encolhe o livro inteiro junto, na mesma proporção. */
+  /* Cuidado: rem na própria raiz é circular — vale o tamanho inicial, 16px.
+     Por isso o tamanho da raiz sai daqui, sozinho, em pt. */
+  html { font-size: 9.5pt; background: none; }
+
+  body {
     background: none;
     color: var(--texto);
-    font-size: 11pt;
-    line-height: 1.5;
+    font-size: 1em;
+    line-height: 1.45;
   }
 
   .rolador, .botoes, .biblioteca-flutuante, .aviso-independencia { display: none !important; }
@@ -699,7 +706,7 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
   }
   pre.bloco-codigo { white-space: pre-wrap; overflow-wrap: anywhere; }
   th, td { overflow-wrap: anywhere; }
-  table { font-size: 9pt; }
+  table { font-size: .88rem; }
   thead { display: table-header-group; }
   tr, img { break-inside: avoid; page-break-inside: avoid; }
 
