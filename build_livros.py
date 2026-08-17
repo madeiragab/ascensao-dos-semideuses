@@ -432,6 +432,7 @@ def main() -> None:
         "bestiario/02-forja-de-monstros.md",
         "bestiario/03-criaturas-kleos-1-a-5.md",
         "bestiario/04-criaturas-kleos-6-a-11.md",
+        "bestiario/05-a-fera-vinculada.md",
     ]
     corpo = []
     for n, arq in enumerate(partes, 1):
@@ -445,7 +446,7 @@ def main() -> None:
         "CAPA": ler_b64("capa-bestiario"),
         "CONTEUDO": "\n".join(corpo),
     }, descricao=(
-        "Bestiário: a Escala de Kleos, o motor de criação de monstros e 38 criaturas, do sátiro errante a Tifão."
+        "Bestiário: a Escala de Kleos, o motor de criação de monstros, 38 criaturas do sátiro errante a Tifão, e as regras para domar uma delas."
     ))
 
     # --- Grimório (a partir de regras/magia-da-nevoa.md)

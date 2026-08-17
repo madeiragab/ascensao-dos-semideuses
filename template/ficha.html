@@ -604,6 +604,10 @@ table.viva select { font-size: .72rem; }
         <div>
           <h3>Equipamento</h3>
           <textarea rows="8" id="equipamento"></textarea>
+          <h3 style="margin-top:1.1rem;">Itens forjados <small>— Grau · pontos · Integridade · Cargas</small></h3>
+          <textarea rows="4" id="itens"
+            placeholder="Lâmina de Maré — Heroico · 3 pontos · Integridade 3/3 · Cargas 0/2
+2 pontos: 2d8 de dano de água no acerto, 1 Carga · 1 ponto: +1 de ataque e dano"></textarea>
         </div>
         <div>
           <h3>Vínculos <small>— até três</small></h3>
@@ -612,6 +616,27 @@ table.viva select { font-size: .72rem; }
           <textarea rows="4" id="descoberta"></textarea>
         </div>
       </div>
+    </div>
+
+    <!-- ===== A FERA VINCULADA ===== -->
+    <div class="bloco">
+      <h3>A Fera Vinculada <small>— ocupa um dos três Vínculos</small></h3>
+      <div class="ajustes">
+        <div class="f"><label>Nome</label><input type="text" id="feraNome"></div>
+        <div class="f"><label>Criatura, no Livro II</label><input type="text" id="feraCriatura"></div>
+        <div class="f"><label>Kleos</label><input type="text" id="feraKleos" inputmode="numeric"></div>
+        <div class="f"><label>PV atual / máximo</label>
+          <div class="par"><input type="text" id="feraPvAtual"><span>/</span>
+          <input type="text" id="feraPvMax" placeholder="metade do bloco"></div></div>
+        <div class="f"><label>DEF</label><input type="text" id="feraDef" inputmode="numeric"></div>
+        <div class="f"><label>Ataque e dano</label><input type="text" id="feraAtaque"></div>
+        <div class="f"><label>Movimento</label><input type="text" id="feraMovimento"></div>
+      </div>
+      <h3 style="margin-top:1.1rem;">Traços, Fraqueza Mítica e o que ela faz sob comando</h3>
+      <textarea rows="4" id="feraNotas"
+        placeholder="Ação bônus: move e faz uma coisa simples. Ação: algo complexo. Sem comando ela não ataca."></textarea>
+      <p class="estado-regra">PV pela metade do bloco. Arremetidas, Recusas, Presença e Vontade do
+      Lugar não vêm junto. A 0 PV ela entra em Agonia, e a morte é definitiva.</p>
     </div>
 
     <div class="bloco">
@@ -689,6 +714,8 @@ table.viva select { font-size: .72rem; }
       <div class="pdf-bloco span-6"><h2>Condições ativas</h2><div class="pdf-texto" id="pCondicoes"></div></div>
       <div class="pdf-bloco span-12"><h2>Habilidades preparadas · inclua ativação e resolução</h2><div class="pdf-texto" id="pHabilidades"></div></div>
       <div class="pdf-bloco span-12"><h2>Equipamento</h2><div class="pdf-texto" id="pEquipamento"></div></div>
+      <div class="pdf-bloco span-6"><h2>Itens forjados · Grau, pontos, Integridade, Cargas</h2><div class="pdf-texto" id="pItens"></div></div>
+      <div class="pdf-bloco span-6"><h2>A Fera Vinculada</h2><div class="pdf-texto" id="pFera"></div></div>
     </div>
     <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 2/3</p>
   </section>
@@ -1588,10 +1615,30 @@ function prepararImpressao() {
   });
   document.getElementById("pAtaques").innerHTML = ataques.length ? ataques.join("") : '<tr><td colspan="5">—</td></tr>';
 
-  [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],
+  [["pTecnicas","tecnicas"],["pCondicoes","condicoes"],["pItens","itens"],
    ["pAparencia","aparencia"],["pPersonalidade","personalidade"],
    ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
   .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
+
+  // A fera vira uma linha de status mais as notas. Sem nome, o bloco fica vazio.
+  var feraNome = document.getElementById("feraNome").value.trim();
+  if (!feraNome) {
+    porTexto("pFera", "");
+  } else {
+    var feraCampos = [
+      ["Criatura", "feraCriatura"], ["Kleos", "feraKleos"], ["DEF", "feraDef"],
+      ["Ataque", "feraAtaque"], ["Movimento", "feraMovimento"]
+    ].map(function (par) {
+      var v = document.getElementById(par[1]).value.trim();
+      return v ? par[0] + " " + v : "";
+    }).filter(Boolean);
+    var pvAtual = document.getElementById("feraPvAtual").value.trim();
+    var pvMax = document.getElementById("feraPvMax").value.trim();
+    if (pvMax || pvAtual) feraCampos.unshift("PV " + (pvAtual || "—") + "/" + (pvMax || "—"));
+    var feraNotas = document.getElementById("feraNotas").value.trim();
+    porTexto("pFera", feraNome + "\n" + feraCampos.join(" · ") +
+             (feraNotas ? "\n" + feraNotas : ""));
+  }
 
   var textoHabilidades = valorCampo("habilidades");
   porTexto("pHabilidades", textoHabilidades);

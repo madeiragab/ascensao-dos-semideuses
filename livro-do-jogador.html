@@ -942,7 +942,7 @@ pre.bloco-codigo {
     <li><a href="#cap3"><span class="alg">III</span><span><span class="tit">Criação de personagem</span>
       <span class="sub">Sete etapas, nesta ordem</span></span></a></li>
     <li><a href="#cap4"><span class="alg">IV</span><span><span class="tit">Equipamento e itens</span>
-      <span class="sub">Armas, armaduras, curativos, relíquias e dracmas</span></span></a></li>
+      <span class="sub">Armas, armaduras, curativos, relíquias, dracmas e a Forja</span></span></a></li>
     <li><a href="#cap5"><span class="alg">V</span><span><span class="tit">Combate</span>
       <span class="sub">Curto, letal, e cheio de decisão</span></span></a></li>
     <li><a href="#cap6"><span class="alg">VI</span><span><span class="tit">Condições</span>
@@ -2300,6 +2300,170 @@ pre.bloco-codigo {
     celestial, e compra o resto nas tabelas acima. Dá personagens mais pessoais e
     custa quinze minutos de mesa.</p>
   </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>A Forja</h3>
+
+  <p>Você não encontra itens mágicos neste jogo: você os <strong>faz</strong>. E fazer não
+  usa nenhum sistema novo — usa o <strong>motor do Capítulo Sete</strong> guardado dentro de
+  um objeto. Os mesmos pontos, as mesmas tabelas de efeito. Muda só onde a habilidade mora e
+  o que ela gasta para funcionar.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th></th><th>Habilidade</th><th>Item</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Onde mora</strong></td><td>na sua Memória</td><td>no objeto</td></tr>
+        <tr><td><strong>Quem paga</strong></td><td>você, em MP ou SP</td><td>o objeto, em <strong>Cargas</strong></td></tr>
+        <tr><td><strong>Como nasce</strong></td><td>Ação de Interlúdio, CD 10 + custo</td><td>Ação de Interlúdio, CD 10 + pontos</td></tr>
+        <tr><td><strong>Teto</strong></td><td>Teto de Custo do seu Grau</td><td>pontos do Grau do item</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Quem sabe montar uma habilidade já sabe forjar. Não existe uma segunda matemática
+  para aprender.</p>
+
+  <h4>Os pontos de um item</h4>
+
+  <p>Os Graus e os níveis mínimos são os da tabela lá em cima. A Forja só acrescenta uma
+  coluna: <strong>quantos pontos do motor</strong> o objeto aguenta carregar.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Grau</th><th class="num">Nível</th><th class="num">Pontos</th><th class="num">Integridade</th><th>Cargas</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mortal</strong></td><td class="num">1</td><td class="num">—</td><td class="num">1</td><td>—</td></tr>
+        <tr><td><strong>Consagrado</strong></td><td class="num">3</td><td class="num">2</td><td class="num">2</td><td>proficiência</td></tr>
+        <tr><td><strong>Heroico</strong></td><td class="num">6</td><td class="num">3</td><td class="num">3</td><td>proficiência</td></tr>
+        <tr><td><strong>Mítico</strong></td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td>proficiência</td></tr>
+        <tr><td><strong>Lendário</strong></td><td class="num">15</td><td class="num">5</td><td class="num">5</td><td>proficiência</td></tr>
+        <tr><td><strong>Divino</strong></td><td class="num">18</td><td class="num">6</td><td class="num">6</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Os pontos são gastos <strong>nas tabelas do Capítulo Sete</strong>, no Grau em que o
+  item foi forjado — igual a uma habilidade. Um ponto de dano num item forjado no Grau 2
+  entrega <span class="dado">2d8</span>, como entregaria numa habilidade.</p>
+
+  <p><strong>Um item não tem duração.</strong> Onde a habilidade escolheria instantânea,
+  sustentada ou cena, o objeto paga o primeiro ponto de efeito com o próprio corpo: ele
+  <em>é</em> a duração. Conte a partir do primeiro ponto de efeito, sem o ponto de duração.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Bônus numérico para no +3</span>
+    <p>Cada <strong>+1</strong> em ataque e dano de uma arma, na DEF de uma armadura ou numa
+    perícia fixa custa <strong>1 ponto</strong>, e o total nunca passa de <strong>+3</strong>.
+    Isso foi medido: um item de +4 no nível 15 aumenta o dano do Furioso em <strong>57%</strong>,
+    mais do que qualquer habilidade entrega pelo mesmo investimento. Do Mítico para cima o
+    item compra <strong>efeito</strong>, não número.</p>
+  </div>
+
+  <p><strong>Divino não se fabrica.</strong> Seis pontos passam do Teto de Custo de qualquer
+  Grau. Um item Divino carrega uma lei ou um fragmento de deus: é concedido, herdado ou
+  roubado. Nenhum teste de Manufatura chega lá.</p>
+
+  <h4>Cargas</h4>
+
+  <p>Um item não gasta o seu MP nem o seu SP. Ele tem <strong>Cargas</strong>, e o número
+  delas é o seu <strong>bônus de proficiência</strong> — a mesma conta dos Tratamentos, pelo
+  mesmo motivo: é o recurso que mede o quanto você já é, não o quanto você guardou.</p>
+
+  <ul>
+    <li>As Cargas são <strong>do item</strong>, compartilhadas por todos os efeitos dele.</li>
+    <li>Voltam num <strong>Descanso Longo</strong>, e só se o item descansar junto de você.</li>
+    <li>Um efeito <strong>sempre ligado</strong> — bônus fixo, resistência, um sentido — custa
+    <strong>o dobro dos pontos</strong> e não usa Cargas. É o preço de uma passiva, pela mesma
+    razão do Capítulo Sete: o que não pede decisão custa mais caro.</li>
+  </ul>
+
+  <div class="nota">
+    <p><strong>O que um item não pode carregar:</strong> ação, ação bônus ou reação extra;
+    condição aplicada automaticamente, sem Rolagem de Efeito; uma habilidade <em>sua</em> —
+    ele tem os efeitos dele, não os seus; nem o mesmo efeito duas vezes, para empilhar.</p>
+  </div>
+
+  <h4>Forjar</h4>
+
+  <p>Exige <strong>proficiência em Manufatura</strong> e um <strong>Kit de Criação</strong>
+  adequado: forja para metal, bancada para mecanismo, ervanário para consumível, ateliê para
+  pano e couro. Sem o Kit certo, o teste tem Desvantagem e o máximo é um item Mortal.</p>
+
+  <p>Cada <strong>Ação de Interlúdio</strong> dedicada é uma tentativa:</p>
+
+  <div class="destaque">
+    <span class="rotulo">O teste da forja</span>
+    <p class="formula">Manufatura contra CD 10 + os pontos do item</p>
+  </div>
+
+  <p>É a mesma fórmula com que uma habilidade nasce, e isso é proposital: forjar uma espada
+  Heroica de 3 pontos é tão difícil quanto desenvolver uma habilidade de 3 pontos.</p>
+
+  <ul>
+    <li><strong>Sucesso:</strong> o item ganha <strong>1 ponto de Progresso</strong>. Fica
+    pronto quando o Progresso iguala os pontos do Grau — 2 Ações para um Consagrado, 3 para um
+    Heroico, 5 para um Lendário. Um Lendário atravessa Interlúdios, e deve mesmo: ele é o
+    projeto de um arco, não o trabalho de uma semana.</li>
+    <li><strong>Falha:</strong> a peça perde <strong>1 de Integridade</strong>. O defeito fica
+    no metal, não no ferreiro — passar o projeto para quem tem o bônus maior
+    <strong>não devolve</strong> a Integridade. Em <strong>0</strong>, o material se perde, e
+    com ele o Progresso e o que foi gasto.</li>
+    <li><strong>Falhando, você entende onde errou.</strong> A próxima tentativa
+    <em>daquele mesmo projeto</em> tem Vantagem — como na criação de habilidades. A
+    Integridade continua perdida: você aprendeu, a peça não desaprendeu a rachar.</li>
+  </ul>
+
+  <p><strong>Sopro divino.</strong> Um item Consagrado ou acima precisa, além do trabalho, de
+  <strong>um lugar ou um momento</strong>: uma forja consagrada, um raio, água de um rio que
+  tem nome, o altar do seu parente divino. Sem isso, o teste é feito com Desvantagem. Não é um
+  segundo teste — é a razão de a forja acontecer <em>ali</em>.</p>
+
+  <h4>Materiais míticos</h4>
+
+  <p>Do Mítico para cima, boa vontade e bigorna não bastam. O projeto exige material com
+  procedência: <strong>Mítico</strong> pede material de criatura de <strong>Kleos 5 ou
+  mais</strong>, ou de um lugar de poder; <strong>Lendário</strong> pede <strong>Kleos 8 ou
+  mais</strong>, ou algo concedido por um deus.</p>
+
+  <div class="nota">
+    <p>Couro do Leão de Neméia, uma pena do Venti, o bronze de um portão que ninguém deveria
+    ter aberto. Um item Mítico não é uma compra nem uma rolagem de sorte: é a prova de que
+    vocês derrubaram algo que devia tê-los matado. A história do item já vem pronta, porque
+    ela é a história da caçada.</p>
+  </div>
+
+  <h4>Melhorar, reparar, desmontar</h4>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>Subir de Grau</h5>
+      <p class="etiqueta">Progresso do Grau novo</p>
+      <p>A Integridade perdida ao longo da vida <strong>continua contando</strong>. Um item
+      remendado a vida inteira chega ao Mítico com pouca margem — e essa é uma história
+      melhor que a de um item novo.</p>
+    </div>
+    <div class="cartao">
+      <h5>Reparar</h5>
+      <p class="etiqueta">1 Ação · Manufatura contra a CD do item</p>
+      <p>Devolve <strong>1 de Integridade</strong>. Uma peça quebrada de Grau Consagrado ou
+      acima ainda dá para restaurar, por metade do Progresso original.</p>
+    </div>
+    <div class="cartao">
+      <h5>Desmontar</h5>
+      <p class="etiqueta">1 Ação · Manufatura contra a CD do item</p>
+      <p>Você <strong>aprende o projeto</strong>: toda tentativa futura de forjar aquele item
+      tem Vantagem. O item desmontado se perde.</p>
+    </div>
+  </div>
+
+  <h4>Integridade em jogo</h4>
+
+  <p><strong>Integridade</strong> é o quanto o objeto aguenta, e é o mesmo número da tabela
+  acima. Fora da forja, um item perde 1 quando absorve um golpe no seu lugar, quando falha
+  numa Rolagem de Efeito dirigida a ele — ácido, fogo divino, um monstro que come metal — ou
+  quando é usado para algo que ele claramente não aguenta. Em <strong>0</strong>, quebra.</p>
 </section>
 
 <section class="capitulo" id="cap5">
@@ -3456,8 +3620,10 @@ pre.bloco-codigo {
     <div class="cartao"><h5>Treinar</h5><p>Três Ações no mesmo atributo e ele sobe
     <strong>+1</strong> — adiantado da sua cota do próximo nível. Precisa de um teste CD 15
     e, de preferência, de um mentor.</p></div>
-    <div class="cartao"><h5>Criar ou melhorar</h5><p>Cada Ação é um período de trabalho com
-    um Kit de Criação: fabricar, subir a classe de um item, reparar, desmontar.</p></div>
+    <div class="cartao"><h5>Forjar</h5><p>Cada Ação é uma tentativa com um Kit de Criação:
+    <strong>Manufatura contra CD 10 + os pontos do item</strong>. Sucesso dá 1 Progresso;
+    falha custa 1 de Integridade da peça e dá Vantagem na próxima. Ver
+    <a href="#cap4">a Forja</a>.</p></div>
     <div class="cartao"><h5>Desenvolver uma habilidade</h5><p>Uma Ação para projetar e
     treinar uma habilidade nova pelo motor do <a href="#cap7">Capítulo Sete</a>. Teste de <strong>Mitologia</strong>
     (elemental), <strong>Atletismo</strong> (física) ou <strong>Manufatura</strong>

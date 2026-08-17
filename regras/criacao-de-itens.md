@@ -1,218 +1,178 @@
 # Parte VII — A Forja
 
-*(seções 47 a 53 — o Interlúdio já mandava "criar ou melhorar um item (Parte VII)"
-e o Guia já prometia Classe de Qualidade, Aprimoramentos e Integridade. Esta
-parte é o motor que faltava por trás dessas três palavras.)*
+*(seções 47 a 53 — o Interlúdio já mandava "criar ou melhorar um item" e o Guia
+já prometia Classe de Qualidade, Aprimoramentos e Integridade. Esta parte é o
+motor que faltava por trás dessas palavras.)*
 
-O sistema não tem tabela de itens mágicos, e isso é de propósito: **o grupo
-constrói o que tem em vez de encontrar**. Um item Divino continua sendo um
-evento com nome e história, não um achado de baú.
+**A forja não é um sistema novo.** Ela é o motor do Capítulo Sete guardado dentro
+de um objeto. Os mesmos pontos, as mesmas tabelas de efeito, o mesmo teto. Muda
+só onde a habilidade mora e o que ela gasta para funcionar:
 
-A regra que amarra tudo: a forja **não inventa uma segunda matemática**. Um
-Aprimoramento é comprado com os mesmos pontos do motor do Capítulo Sete. Quem
-sabe montar uma habilidade já sabe encantar uma lâmina.
-
----
-
-## 47. Classe de Qualidade
-
-Todo objeto fabricável tem uma **Classe de Qualidade**, de 1 a 6. A Classe diz
-três coisas de uma vez: quanto o item aguenta, quantos Aprimoramentos ele
-carrega, e a partir de quando ele deixa de ser só um objeto bem-feito.
-
-| Classe | Nome | Nível mínimo | Integridade | Aprimoramentos | Bônus | Sintonia |
-|---|---|---|---|---|---|---|
-| 1 | **Comum** | 1 | 1 | — | — | não |
-| 2 | **Bem-feito** | 1 | 2 | — | — | não |
-| 3 | **Consagrado** | 3 | 3 | 1 | +1 | sim |
-| 4 | **Heroico** | 6 | 4 | 2 | +2 | sim |
-| 5 | **Mítico** | 10 | 5 | 3 | +3 | sim |
-| 6 | **Lendário** | 15 | 6 | 4 | +3 e uma **Marca** | sim |
-
-**O bônus para de crescer no +3, e isso é medido.** No `sim/`, um item de +4 no
-nível 15 aumenta o dano do Furioso em 57% — mais do que qualquer habilidade do
-motor entrega pelo mesmo investimento. Do Mítico para cima o item **deixa de
-comprar números e passa a comprar efeito**: mais Aprimoramentos, e a Marca.
-
-**Bônus** vale para ataque e dano de uma arma, para a DEF de uma armadura ou
-escudo, ou para uma perícia fixa de uma ferramenta. O mesmo bônus numérico vindo
-de dois itens **não se acumula** — a regra do Capítulo de Itens continua valendo.
-
-**Divino não se fabrica.** Um item Divino carrega uma lei ou um fragmento de
-deus. Ele é concedido, roubado ou herdado. Nenhum teste de Manufatura chega lá.
-
----
-
-## 48. Kits de Criação
-
-Fabricar exige um **Kit** e **proficiência em Manufatura**. Sem o Kit certo, o
-teste tem Desvantagem e a Classe máxima é 2.
-
-| Kit | Fabrica | Perícia da matéria |
+| | Habilidade | Item |
 |---|---|---|
-| **Forja** | armas, armaduras, escudos, ferragens | Manufatura |
-| **Bancada** | ferramentas, engenhocas, dispositivos, eletrônicos | Manufatura |
-| **Ervanário** | consumíveis, venenos, remédios, óleos | Sobrevivência ou Manufatura |
-| **Ateliê** | roupas, cordas, couro, instrumentos | Manufatura |
+| **Onde mora** | na sua Memória | no objeto |
+| **Quem paga** | você, em MP ou SP | o objeto, em **Cargas** |
+| **Quando nasce** | uma Ação de Interlúdio, teste contra **CD 10 + custo** | uma Ação de Interlúdio, teste contra **CD 10 + pontos** |
+| **Teto** | Teto de Custo do seu Grau | pontos do **Grau do item** |
 
-Um Kit ocupa espaço e não viaja escondido: forja é fogo, bigorna e barulho. Ter
-acesso a uma forja alheia funciona, e é uma boa razão para o grupo dever um favor
-a alguém.
+Quem sabe montar uma habilidade já sabe forjar. Não há segunda matemática para
+aprender.
 
 ---
 
-## 49. As duas rolagens
+## 47. Os pontos de um item
 
-Fabricar não é um teste só. São dois, e os **dois precisam passar**:
+O Capítulo de Itens já traz os **Graus** e o nível mínimo de cada um. A forja só
+acrescenta uma coluna: **quantos pontos do motor** o objeto aguenta carregar.
 
-| Rolagem | O que representa | Perícia |
-|---|---|---|
-| **A matéria** | o metal, a costura, a proporção, o gume | **Manufatura** |
-| **O sopro** | a Névoa entrando e ficando | **Mitologia** |
+| Grau | Nível mínimo | Pontos | Integridade | Cargas | Sintonia |
+|---|---|---|---|---|---|
+| **Mortal** | 1 | — | 1 | — | não |
+| **Consagrado** | 3 | 2 | 2 | proficiência | sim |
+| **Heroico** | 6 | 3 | 3 | proficiência | sim |
+| **Mítico** | 10 | 4 | 4 | proficiência | sim |
+| **Lendário** | 15 | 5 | 5 | proficiência | sim |
+| **Divino** | 18 | 6 | 6 | — | sim |
 
-Um item de Classe 1 ou 2 **não pede o sopro**: é trabalho de artesão, não de
-semideus. Só a partir do Consagrado a segunda rolagem existe.
+Os pontos são gastos **nas tabelas do Capítulo Sete**, e no Grau em que o item
+foi forjado — exatamente como uma habilidade. Um ponto de dano num item forjado
+no Grau 2 entrega 2d8, como entregaria numa habilidade.
 
-**CD das duas rolagens, pela Classe:**
+**Um item não tem duração.** Onde a habilidade escolheria instantânea, sustentada
+ou cena, o item paga o primeiro ponto de efeito com o próprio corpo: o objeto é a
+duração. Comece a contar do primeiro ponto de efeito, sem o ponto de duração.
 
-| Classe | CD |
+**Bônus numérico custa 1 ponto por +1, e para no +3.** Isso vale para ataque e
+dano de uma arma, DEF de armadura ou escudo, ou uma perícia fixa de ferramenta.
+Está medido em `sim/`: um item de +4 no nível 15 aumenta o dano do Furioso em
+57% — mais do que qualquer habilidade entrega pelo mesmo investimento. Do Mítico
+para cima o item compra **efeito**, não número. O mesmo bônus vindo de dois itens
+não se acumula, como o Capítulo de Itens já dizia.
+
+**Divino não se fabrica.** Seis pontos passam do Teto de Custo de qualquer
+Grau: um item Divino carrega uma lei ou um fragmento de deus, e é concedido,
+herdado ou roubado. Nenhum teste de Manufatura chega lá.
+
+---
+
+## 48. Cargas
+
+Um item não gasta o seu MP nem o seu SP: ele tem **Cargas**, e o número delas é o
+seu **bônus de proficiência** — a mesma conta dos Tratamentos, pelo mesmo motivo:
+é o recurso que mede o quanto você já é, não o quanto você guardou.
+
+- As Cargas são **do item**, e compartilhadas por todos os efeitos dele.
+- Voltam num **Descanso Longo**, e só se o item descansar junto do portador.
+- Um efeito **sempre ligado** — um bônus fixo, uma resistência, um sentido — custa
+  **o dobro dos pontos** e não usa Cargas. É o preço de uma passiva, pela mesma
+  razão do Capítulo Sete: o que não pede decisão custa mais caro.
+
+**O que um item não pode carregar:**
+
+- **ação, ação bônus ou reação extra**;
+- condição aplicada **automaticamente** — condição sempre pede Rolagem de Efeito;
+- uma **habilidade sua**: ele tem os efeitos dele, não os seus;
+- o mesmo efeito duas vezes, para empilhar.
+
+---
+
+## 49. Forjar
+
+Exige **proficiência em Manufatura** e um **Kit de Criação** adequado: forja para
+metal, bancada para mecanismo, ervanário para consumível, ateliê para pano e
+couro. Sem o Kit certo, o teste tem Desvantagem e o máximo é um item Mortal.
+
+Cada **Ação de Interlúdio** dedicada é uma tentativa:
+
+> **Teste de Manufatura contra CD 10 + os pontos do item.**
+
+É a mesma fórmula com que o livro já faz nascer uma habilidade — e é de
+propósito: forjar uma espada Heroica de 3 pontos é tão difícil quanto
+desenvolver uma habilidade de 3 pontos.
+
+**Em um sucesso**, o item ganha **1 ponto de Progresso**. Ele fica pronto quando
+o Progresso iguala os **pontos do Grau**: um Consagrado leva 2 Ações, um Heroico
+3, um Lendário 5. Um Lendário atravessa Interlúdios, e deve mesmo — ele é o
+projeto de um arco, não o trabalho de uma semana.
+
+**Em uma falha**, a peça perde **1 de Integridade**. O defeito fica no metal, não
+no ferreiro: passar o projeto para quem tem o bônus maior **não devolve** a
+Integridade perdida. Chegando a **0**, o material se perde, e com ele o Progresso
+e o que foi gasto.
+
+**Falhando, você entende onde errou.** Como na criação de habilidades, a próxima
+tentativa **daquele mesmo projeto** tem Vantagem. A Integridade continua perdida:
+você aprendeu, a peça não desaprendeu a rachar.
+
+**Sopro divino.** Um item de Grau Consagrado ou acima precisa, além do trabalho,
+de **um lugar ou um momento**: uma forja consagrada, um raio, água de um rio que
+tem nome, o altar do seu parente divino. Sem isso, o teste é feito com
+Desvantagem. Não é um segundo teste — é a razão de a forja acontecer *ali*.
+
+---
+
+## 50. Materiais míticos
+
+Do **Mítico** para cima, boa vontade e bigorna não bastam. O projeto exige
+material com procedência:
+
+| Grau | Exige |
 |---|---|
-| 1 — Comum | 10 |
-| 2 — Bem-feito | 13 |
-| 3 — Consagrado | 16 |
-| 4 — Heroico | 19 |
-| 5 — Mítico | 23 |
-| 6 — Lendário | 27 |
-
-Cada **Ação de Interlúdio** gasta na Forja é uma tentativa: role a matéria e,
-quando a Classe pedir, o sopro. Passando nas duas, o item ganha **1 ponto de
-Progresso**.
-
-**Progresso necessário:** 1 para Comum e Bem-feito, 2 para Consagrado, 3 para
-Heroico, 5 para Mítico, 8 para Lendário.
-
-Um Lendário atravessa vários Interlúdios. É proposital: ele deve ser o projeto
-de um arco inteiro, não o trabalho de uma semana.
-
----
-
-## 50. Trincas — a falha é do item
-
-Uma tentativa em que **qualquer uma** das rolagens falhe marca uma **Trinca no
-item**, não no artesão. Trocar de ferreiro no meio do projeto **não zera a
-contagem**: o defeito está na peça.
-
-Um projeto suporta **Trincas iguais à sua Integridade** (a coluna da tabela da
-seção 47). Na trinca seguinte, o material **se perde** — e com ele o Progresso e
-os componentes gastos.
-
-**Aproveitar o erro.** Ao falhar, o artesão pode declarar que guarda o resto do
-trabalho: a têmpera errada, a liga que não pegou, a página do caderno. Isso
-concede **Vantagem na próxima tentativa do mesmo projeto**. Restos além do
-primeiro dão **+2 cada**, até no máximo +4. Guardar o resto **não apaga a
-Trinca** — você aprendeu com o erro, o erro continua na peça.
-
-> **Por que a falha é do item.** Se a falha fosse do personagem, o grupo
-> simplesmente passaria o projeto para quem tem o maior bônus e recomeçaria à
-> vontade. Marcando a peça, cada projeto tem uma vida própria e um ponto onde
-> insistir vira burrice. É a mesma lógica da Agonia: o risco precisa morar em
-> algum lugar.
-
----
-
-## 51. Aprimoramentos
-
-Um **Aprimoramento** é o que faz o item ser mais que um número. Cada um é
-comprado com o **motor do Capítulo Sete**, com os mesmos pontos, as mesmas
-tabelas e o mesmo Teto — a Classe do item diz quantos ele carrega.
-
-**Cada Aprimoramento vale até 2 pontos de efeito**, pagos no Grau em que o item
-foi forjado. O item **não gasta MP nem SP**: ele tem **Cargas**.
-
-- **Cargas = seu bônus de proficiência**, compartilhadas por todos os
-  Aprimoramentos do mesmo item.
-- Cargas voltam num **Descanso Longo**, e só se o item descansar junto com o
-  portador.
-- Um Aprimoramento **permanente e sempre ligado** (um bônus fixo, uma
-  resistência, um sentido) custa **o dobro de pontos** e não usa Cargas — é a
-  mesma lógica do preço de uma habilidade passiva.
-
-**O que um Aprimoramento não pode fazer:**
-
-- conceder **ação, ação bônus ou reação extra**;
-- somar **dados de dano** à arma além do bônus da Classe;
-- aplicar condição **automaticamente** — condição sempre pede Rolagem de Efeito;
-- repetir um Aprimoramento que o item já tem, para empilhar o mesmo efeito;
-- carregar uma **habilidade sua**: o item tem os efeitos dele, não os seus.
-
-**A Marca (só na Classe 6).** Um item Lendário recebe uma habilidade única,
-escrita pelo jogador **com** o Mestre, fora do motor. A Marca tem nome próprio,
-uma condição de despertar ligada à história do item, e funciona **uma vez por
-cena**. É o único lugar da forja onde o motor sai de cena — e por isso o Mestre
-tem voto igual ao do jogador.
-
----
-
-## 52. Materiais míticos
-
-A partir da Classe 5, boa vontade e uma bigorna não bastam. O projeto exige um
-**material mítico**, e material mítico tem procedência: sai de um monstro, de um
-lugar ou de um favor.
-
-| Classe | Exige |
-|---|---|
-| 5 — Mítico | material de uma criatura de **Kleos 5 ou mais**, ou de um lugar de poder |
-| 6 — Lendário | material de **Kleos 8 ou mais**, ou concedido por um deus |
+| **Mítico** | material de criatura de **Kleos 5 ou mais**, ou de um lugar de poder |
+| **Lendário** | material de **Kleos 8 ou mais**, ou concedido por um deus |
 
 Couro do Leão de Neméia, uma pena do Venti, o bronze de um portão que ninguém
-deveria ter aberto. O Mestre decide o que a criatura larga — e o Livro II já traz
-essa coluna no bloco de cada criatura, quando ela tem algo aproveitável.
+deveria ter aberto.
 
-> **Isso liga a forja ao Bestiário de propósito.** O item Mítico não é uma compra
-> nem uma rolagem de sorte: é a prova de que o grupo derrubou algo que devia
-> tê-los matado. A história do item já vem pronta, porque ela é a história da
+> **Isso amarra a forja ao Livro II de propósito.** Um item Mítico não é uma
+> compra nem uma rolagem de sorte: é a prova de que o grupo derrubou algo que
+> devia tê-los matado. A história do item já vem pronta, porque é a história da
 > caçada.
 
 ---
 
-## 53. Integridade, reparo e desmonte
+## 51. Melhorar, reparar, desmontar
 
-**Integridade** é a resistência do item, de 1 a 6, igual à Classe. Um item perde
-1 de Integridade quando:
+**Subir de Grau.** Custa o Progresso do Grau novo, e o item precisa aguentar: a
+Integridade perdida ao longo da vida **continua contando**. Um item remendado a
+vida inteira chega ao Mítico com pouca margem, e essa é uma história melhor que a
+de um item novo.
 
-- absorve um golpe no lugar do portador (a critério da regra que permitiu isso);
+**Reparar.** Uma Ação de Interlúdio e um teste de Manufatura contra a CD do item
+devolve **1 de Integridade**.
+
+**Desmontar.** Uma Ação de Interlúdio e um teste de Manufatura contra a CD do
+item. Em um sucesso, você **aprende o projeto**: toda tentativa futura de forjar
+aquele item tem Vantagem. O item desmontado se perde.
+
+---
+
+## 52. Integridade em jogo
+
+**Integridade** é o quanto o objeto aguenta, e é o mesmo número da tabela da
+seção 47. Fora da forja, um item perde 1 de Integridade quando:
+
+- absorve um golpe no lugar do portador, quando uma regra permitir;
 - falha numa Rolagem de Efeito dirigida a ele — ácido, fogo divino, um monstro
   que come metal;
 - é usado para algo que ele claramente não aguenta.
 
-Em **0 de Integridade** o item quebra: um item de Classe 3 ou mais não vira
-sucata, vira **peça quebrada** — ainda dá para restaurar.
-
-**Reparar.** Uma Ação de Interlúdio e um teste da matéria contra a CD da Classe
-devolve **1 ponto de Integridade**. Restaurar uma peça quebrada custa metade do
-Progresso original, arredondado para cima.
-
-**Melhorar de Classe.** Subir uma Classe custa o Progresso da Classe nova, e as
-Trincas antigas **continuam contando**. Um item remendado a vida inteira chega ao
-Mítico com pouca margem de erro — e isso é uma história melhor que a de um item
-novo.
-
-**Desmontar.** Uma Ação de Interlúdio e um teste da matéria contra a CD da Classe
-do item desmontado. Em um sucesso, o artesão **aprende o projeto**: as próximas
-tentativas de fabricar aquele item têm Vantagem na rolagem da matéria. O item
-desmontado se perde.
+Em **0**, o item quebra. Um item de Grau Consagrado ou acima não vira sucata:
+vira **peça quebrada**, e restaurar custa metade do Progresso original,
+arredondado para cima.
 
 ---
 
-## Resumo da Forja
+## 53. Resumo da Forja
 
 | Passo | O que é |
 |---|---|
-| **Classe** | 1 a 6. Diz Integridade, Aprimoramentos e bônus. |
-| **Kit** | Forja, Bancada, Ervanário ou Ateliê. Sem ele, Classe 2 no máximo. |
-| **Tentativa** | 1 Ação de Interlúdio. Matéria (Manufatura) e, da Classe 3 em diante, Sopro (Mitologia). |
-| **Sucesso nas duas** | +1 Progresso. |
-| **Falha em qualquer uma** | +1 Trinca no item. Excedeu a Integridade, o material se perde. |
-| **Falha aproveitada** | Vantagem na próxima tentativa; restos extras dão +2, até +4. |
-| **Aprimoramento** | Até 2 pontos do motor do Capítulo Sete. Cargas = proficiência. |
-| **Classe 5+** | Exige material mítico do Livro II. |
+| **Pontos** | pelo Grau do item: 2 Consagrado, 3 Heroico, 4 Mítico, 5 Lendário |
+| **Efeitos** | comprados nas tabelas do Capítulo Sete, no Grau da forja, sem ponto de duração |
+| **Teste** | Manufatura contra **CD 10 + pontos**, uma Ação de Interlúdio por tentativa |
+| **Sucesso** | +1 Progresso. Pronto quando o Progresso iguala os pontos |
+| **Falha** | −1 Integridade da peça, e Vantagem na próxima tentativa |
+| **Integridade 0** | o material se perde |
+| **Uso** | Cargas iguais ao bônus de proficiência, devolvidas no Descanso Longo |
+| **Mítico ou acima** | exige material de Kleos 5+ |
+| **Divino** | não se fabrica |
