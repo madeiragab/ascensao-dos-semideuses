@@ -40,24 +40,24 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 1 | Criação de personagem (ordem das etapas) | ✅ |
 | 2 | Atributos e modificadores | ✅ |
 | 3 | Conceito Mortal | ✅ |
-| 4 | Húbris | 🟡 sem mecânica — proposta em `interludio.md` |
-| 5 | Classes: Guardião, Furioso, Oráculo | ⚙️ recursos quebrados, ver `v1-numeros.md` |
+| 4 | Húbris | ✅ Provocação, Ímpeto e Ruptura, no Capítulo Oito |
+| 5 | Classes: Guardião, Furioso, Oráculo | ✅ recursos refeitos e medidos em `sim/equilibrio.py` |
 | 6 | Perícias | ✅ |
 | 7 | Defesas passivas | ✅ Fortitude, Reflexos e Vontade treinadas por classe |
 | 8 | Parente Divino | ✅ |
-| 9 | Atributo Divino | 🟡 existe em 4.2 mas não é usado por MP nem Memória |
+| 9 | Atributo Divino | ✅ alimenta MP e Memória |
 | 10 | Finalização | ✅ |
-| 11 | Progressão de nível 1–20 | 🔴 **só existe o bônus de proficiência** |
+| 11 | Progressão de nível 1–20 | ✅ Capítulo Nove, do nível 1 ao 20 |
 
 ### Parte II — Regras Fundamentais
 
 | # | Capítulo | Estado |
 |---|---|---|
 | 12 | A rolagem básica | ✅ |
-| 13 | Classes de Dificuldade | 🔴 o livro diz "ainda não definidas" — proposta em `combate.md` |
+| 13 | Classes de Dificuldade | ✅ tabela no Guia do Mestre, exemplos no Livro I |
 | 14 | Vantagem e Desvantagem | ✅ |
-| 15 | Recursos: PV, SP, MP | 🟡 sem regra de recuperação — resolvido em `interludio.md` |
-| 16 | Defesa | 🟡 armaduras não existem — tabela provisória em `v1-numeros.md` |
+| 15 | Recursos: PV, SP, MP | ✅ recuperação no Capítulo Oito |
+| 16 | Defesa | ✅ armaduras e escudos no Capítulo Quatro |
 
 ### Parte III — Combate → `combate.md`
 
@@ -79,11 +79,11 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | # | Capítulo | Estado |
 |---|---|---|
 | 27 | Afinidade e manifestação livre | ✅ |
-| 28 | Memória | ⚙️ usa INT em vez do Atributo Divino |
+| 28 | Memória | ✅ usa o Atributo Divino |
 | 29 | Fontes: Elemental, Física, Híbrida, Médica | ✅ |
-| 30 | Níveis, custos e efeitos adicionais | ⚙️ nível 1 custa caro demais |
+| 30 | Graus, custos e efeitos adicionais | ✅ ponto custa o Grau e entrega o Grau, medido em `sim/graus.py` |
 | 31 | Dano, condições, buffs, movimento, defesa | ✅ |
-| 32 | Passivas e Sacrifício de Atributo | ⚙️ o sacrifício se auto-anula |
+| 32 | Passivas e Sacrifício de Atributo | ✅ −1 no atributo **e** −1 no recurso: o custo nunca é zero |
 | 33 | Cura, Ressonância e PV temporários | ✅ |
 
 ### Parte V — Magia da Névoa → `magia-da-nevoa.md`
@@ -116,9 +116,9 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 41 | Carga narrativa | ✅ |
 | 42 | Armas e propriedades | ✅ |
 | 43 | Criação de armas | ✅ |
-| 44 | Armaduras e escudos | 🔴 **três classes têm proficiência em algo que não existe** |
+| 44 | Armaduras e escudos | ✅ tabela completa, medida em `sim/equilibrio.py` |
 | 45 | Materiais sobrenaturais | 🔴 citado como "será desenvolvido" |
-| 46 | Dinheiro e preços | 🔴 nada existe |
+| 46 | Dinheiro e preços | ✅ óbolo, dracma, mina e talento, com o que se ganha por dia |
 
 ### Parte VII — A Forja → `criacao-de-itens.md`
 
@@ -180,13 +180,23 @@ que sem monstros não havia como calibrar nada.
 
 ## As dívidas que mais travam o livro
 
-1. ~~**Bestiário.**~~ ✅ Resolvido pelo Livro II.
-2. **Progressão de nível.** O livro tem personagens de nível 1 e uma tabela de
-   proficiência até o 20, e nada no meio. Habilidades de Círculo 4 custam 9 MP
-   com um pool inicial de 10, e exigem nível 15 — um nível que não existe.
-   **Agora é a dívida número um**, e trava o Livro II também: a Escala de Kleos
-   foi calibrada só no nível 1, e os degraus 6 a 11 são extrapolação.
-3. **Armaduras.** Escritas como proficiência de classe, nunca escritas como
-   equipamento. A tabela provisória está em `v1-numeros.md`, item 3.
-4. **Economia.** Dracmas, preços, quanto custa um Kit de Criação. O sistema de
-   itens pressupõe compras que não têm preço.
+*(revisado em 16/08/2026, medindo o livro montado — as quatro dívidas antigas
+foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
+
+1. **O dano de arma não acompanha o PV dos monstros.** Medido do nível 1 ao 20:
+   o dano do trio sai de 15 para 35 (×2,3) enquanto o PV do monstro do encontro
+   justo sai de 36 para 280 (×7,8). Do nível 5 ao 20 o ataque com arma cresce
+   15%. O combate vai de 2 para 8 rodadas na versão crua, e de 2 para 4 com o
+   grupo jogando bem — e a conta só fecha porque o conjurador cobre o resto.
+   **É a dívida número um.**
+2. **O crítico apaga o encontro em qualquer nível.** Uma habilidade no Teto de
+   Custo, num 20 natural, faz de 98% a 208% dos PV do monstro do encontro justo,
+   em todos os dez níveis medidos. Dobrar os dados de uma habilidade que junta
+   o dia inteiro num dado só é forte demais.
+3. **A DEF do personagem estagna.** De 16 no nível 1 para 18 no nível 20,
+   enquanto o ataque do monstro vai de +3 a +11: a chance de ser acertado sobe
+   de 50% para 70%. Com a Forja no teto de +3 ela volta a 55% — o que torna o
+   item forjado obrigatório em vez de opcional.
+4. **A Escala de Kleos ainda é extrapolação acima do nível 1.** Foi calibrada só
+   no nível 1; os degraus 6 a 11 nunca foram medidos contra um grupo de nível
+   alto de verdade.
