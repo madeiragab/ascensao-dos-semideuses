@@ -52,10 +52,13 @@ vale vinte vezes um de nível 1; vale menos de três vezes.
 | Nível do personagem | Kleos que ele vale |
 |---|---|
 | 1–4 | **1** |
-| 5–9 | **1¾** |
-| 10–14 | **2¼** |
-| 15–19 | **2¾** |
-| 20 | **3** |
+| 5–8 | **1¾** |
+| 9–12 | **2¼** |
+| 13–16 | **2¾** |
+| 17–20 | **3** |
+
+As faixas são **as mesmas faixas de Grau** do Livro I, e isso não é coincidência:
+o personagem muda de patamar quando o Grau dele muda.
 
 O **Kleos do Grupo** é a soma. Para não fazer conta com frações na mesa, consulte
 direto:
@@ -63,10 +66,10 @@ direto:
 | Nível | 3 heróis | 4 heróis | 5 heróis |
 |---|---|---|---|
 | 1–4 | 3 | 4 | 5 |
-| 5–9 | 5 | 7 | 9 |
-| 10–14 | 7 | 9 | 11 |
-| 15–19 | 8 | 11 | — |
-| 20 | 9 | 12 | — |
+| 5–8 | 5 | 7 | 9 |
+| 9–12 | 7 | 9 | 11 |
+| 13–16 | 8 | 11 | — |
+| 17–20 | 9 | 11 | — |
 
 **Aliados contam.** Um deus que luta ao seu lado soma o Kleos dele. É por isso que
 existem alianças na mitologia — e é assim que um Cataclisma vira um problema
@@ -91,6 +94,23 @@ Um grupo de nível 15 seguindo a regra antiga seria mandado contra algo três
 degraus acima do que aguenta. A tabela acima é a corrigida.
 
 Para reproduzir: `sim/calibrar_kleos.py`.
+
+### As faixas mudaram uma segunda vez, e pelo mesmo motivo
+
+A primeira correção acertou os valores e errou os cortes: as faixas eram 1–4,
+5–9, 10–14, 15–19 e 20, o que deixava **cinco níveis** presos no mesmo Kleos. O
+grupo crescia cinco níveis e o encontro justo não mexia. Medido: no nível 9 o
+monstro do encontro justo caía em **1,9 rodada**, contra 3 nos níveis vizinhos.
+
+Alinhar os cortes às faixas de Grau resolve sem tocar em nenhum valor:
+
+| Nível | Rodadas com os cortes antigos | Rodadas com os cortes de Grau |
+|---|---|---|
+| 9 | 1,9 | **3,4** |
+| 13 | 2,8 | **3,9** |
+| 17 | 2,9 | **3,9** |
+
+Para reproduzir: `sim/forja.py`.
 
 ### Onde a escala fica grossa
 

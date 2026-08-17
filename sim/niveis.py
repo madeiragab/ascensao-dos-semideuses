@@ -118,14 +118,20 @@ def kleos_do_personagem(nivel: int) -> float:
     A primeira versão dizia 1 / 2 / 3 / 4 por faixa de nível. Medido em
     calibrar_kleos.py, o valor real é bem menor: um herói de nível 20 vale
     menos de três vezes um de nível 1, não quatro.
+
+    Os valores estavam certos e os CORTES estavam errados. As faixas eram
+    1-4, 5-9, 10-14, 15-19 e 20, o que prendia cinco níveis no mesmo Kleos: o
+    grupo crescia e o encontro justo não mexia. No nível 9 o monstro caía em
+    1,9 rodada contra 3 nos vizinhos. Alinhar os cortes às faixas de Grau
+    conserta sem tocar em nenhum valor — ver sim/forja.py.
     """
     if nivel <= 4:
         return 1.0
-    if nivel <= 9:
+    if nivel <= 8:
         return 1.75
-    if nivel <= 14:
+    if nivel <= 12:
         return 2.25
-    if nivel <= 19:
+    if nivel <= 16:
         return 2.75
     return 3.0
 

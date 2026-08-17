@@ -983,21 +983,22 @@ pre.bloco-codigo {
 <thead><tr><th>Nível do personagem</th><th>Kleos que ele vale</th></tr></thead>
 <tbody>
 <tr><td>1–4</td><td><strong>1</strong></td></tr>
-<tr><td>5–9</td><td><strong>1¾</strong></td></tr>
-<tr><td>10–14</td><td><strong>2¼</strong></td></tr>
-<tr><td>15–19</td><td><strong>2¾</strong></td></tr>
-<tr><td>20</td><td><strong>3</strong></td></tr>
+<tr><td>5–8</td><td><strong>1¾</strong></td></tr>
+<tr><td>9–12</td><td><strong>2¼</strong></td></tr>
+<tr><td>13–16</td><td><strong>2¾</strong></td></tr>
+<tr><td>17–20</td><td><strong>3</strong></td></tr>
 </tbody>
 </table></div>
+<p>As faixas são <strong>as mesmas faixas de Grau</strong> do Livro I, e isso não é coincidência: o personagem muda de patamar quando o Grau dele muda.</p>
 <p>O <strong>Kleos do Grupo</strong> é a soma. Para não fazer conta com frações na mesa, consulte direto:</p>
 <div class="rolagem"><table>
 <thead><tr><th>Nível</th><th>3 heróis</th><th>4 heróis</th><th>5 heróis</th></tr></thead>
 <tbody>
 <tr><td>1–4</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td>5–9</td><td>5</td><td>7</td><td>9</td></tr>
-<tr><td>10–14</td><td>7</td><td>9</td><td>11</td></tr>
-<tr><td>15–19</td><td>8</td><td>11</td><td>—</td></tr>
-<tr><td>20</td><td>9</td><td>12</td><td>—</td></tr>
+<tr><td>5–8</td><td>5</td><td>7</td><td>9</td></tr>
+<tr><td>9–12</td><td>7</td><td>9</td><td>11</td></tr>
+<tr><td>13–16</td><td>8</td><td>11</td><td>—</td></tr>
+<tr><td>17–20</td><td>9</td><td>11</td><td>—</td></tr>
 </tbody>
 </table></div>
 <p><strong>Aliados contam.</strong> Um deus que luta ao seu lado soma o Kleos dele. É por isso que existem alianças na mitologia — e é assim que um Cataclisma vira um problema resolvível.</p>
@@ -1015,6 +1016,18 @@ pre.bloco-codigo {
 </table></div>
 <p>Um grupo de nível 15 seguindo a regra antiga seria mandado contra algo três degraus acima do que aguenta. A tabela acima é a corrigida.</p>
 <p>Para reproduzir: <span class="dado">sim/calibrar_kleos.py</span>.</p>
+<h3>As faixas mudaram uma segunda vez, e pelo mesmo motivo</h3>
+<p>A primeira correção acertou os valores e errou os cortes: as faixas eram 1–4, 5–9, 10–14, 15–19 e 20, o que deixava <strong>cinco níveis</strong> presos no mesmo Kleos. O grupo crescia cinco níveis e o encontro justo não mexia. Medido: no nível 9 o monstro do encontro justo caía em <strong>1,9 rodada</strong>, contra 3 nos níveis vizinhos.</p>
+<p>Alinhar os cortes às faixas de Grau resolve sem tocar em nenhum valor:</p>
+<div class="rolagem"><table>
+<thead><tr><th>Nível</th><th>Rodadas com os cortes antigos</th><th>Rodadas com os cortes de Grau</th></tr></thead>
+<tbody>
+<tr><td>9</td><td>1,9</td><td><strong>3,4</strong></td></tr>
+<tr><td>13</td><td>2,8</td><td><strong>3,9</strong></td></tr>
+<tr><td>17</td><td>2,9</td><td><strong>3,9</strong></td></tr>
+</tbody>
+</table></div>
+<p>Para reproduzir: <span class="dado">sim/forja.py</span>.</p>
 <h3>Onde a escala fica grossa</h3>
 <p>Nos degraus altos, um passo de Kleos é um salto grande demais. Um trio de nível 5 vence um Kleos 5 em 95% das vezes e um Kleos 6 em 34% — não existe nada no meio. Isso acontece porque a Tábua cresce cerca de 35% por degrau enquanto o grupo cresce cerca de 10% por nível.</p>
 <p>Quando precisar de um meio-termo, <strong>não invente um Kleos quebrado</strong>: monte o encontro com criaturas menores somadas, usando as fórmulas da <a href="#secao-5">seção 5</a>. Um Kleos 5 mais um Kleos 2 dá um encontro entre 5 e 6 com muito mais precisão do que qualquer ajuste na ficha de um monstro só.</p>
