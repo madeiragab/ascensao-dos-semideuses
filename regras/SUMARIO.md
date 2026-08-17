@@ -152,14 +152,18 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 62 | Tom, Névoa e o mundo mortal | 🔴 |
 | 63 | Progressão de nível e ganho de experiência | 🔴 |
 
-### A Fera Vinculada → `fera-vinculada.md`
+### A Fera Vinculada → **Livro II, Parte V** (`bestiario/05-a-fera-vinculada.md`)
+
+Domar mora no Bestiário, e não aqui, porque a fera é um bloco deste livro com
+três cortes — não uma peça nova do Livro I.
 
 | # | Capítulo | Estado |
 |---|---|---|
-| 64 | Que criatura pode ser domada | ✅ novo |
-| 65 | Os três passos da doma: Poupar, Provar, Selar | ✅ novo |
-| 66 | A ficha da fera | ✅ novo — deriva do bloco do Livro II |
-| 67 | A fera em combate | ✅ novo — ela gasta o turno do dono |
+| 22 | Que criatura pode ser domada | ✅ novo |
+| 23 | Poupar, Provar, Selar | ✅ novo |
+| 24 | A ficha da fera | ✅ novo — deriva do bloco do Livro II |
+| 25 | A fera em combate | ✅ novo — ela gasta o turno do dono |
+| 26 | Quando ela cai | ✅ novo |
 
 ---
 

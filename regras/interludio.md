@@ -184,16 +184,19 @@ Limites:
 
 **Sem mentor nem local adequado**, o teste tem Desvantagem.
 
-### 57.2 Criar ou melhorar um item
+### 57.2 Forjar
 
-Uma Ação de Interlúdio equivale a **um período de trabalho** do sistema de
-criação de itens (Parte VII): um Teste de Manufatura contra a CD da Classe
-desejada, concedendo 1 ponto de Progresso em caso de sucesso.
+Uma Ação de Interlúdio é **uma tentativa** da Forja (Parte VII): um teste de
+**Manufatura contra CD 10 + os pontos do item**, a mesma fórmula com que nasce
+uma habilidade.
 
-Vale para criar, melhorar de Classe, reparar, desmontar ou fabricar consumíveis.
+- **Sucesso:** 1 ponto de Progresso. O item fica pronto quando o Progresso iguala
+  os pontos do Grau — 2 para um Consagrado, 3 para um Heroico, 5 para um
+  Lendário, que portanto atravessa vários Interlúdios, o que é proposital.
+- **Falha:** a peça perde 1 de Integridade, e a próxima tentativa do mesmo
+  projeto tem Vantagem.
 
-Um item Aprimorado (2 de Progresso) leva 2 Ações. Um Magistral, 3. Um Heroico, 5
-— e portanto atravessa vários Interlúdios, o que é proposital.
+Vale também para subir de Grau, reparar, desmontar ou fabricar consumíveis.
 
 ### 57.3 Aprender uma Fórmula
 
