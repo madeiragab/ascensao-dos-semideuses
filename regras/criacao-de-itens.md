@@ -20,38 +20,45 @@ aprender.
 
 ---
 
-## 47. Os pontos de um item
+## 47. O que o Grau do item dá
 
-O Capítulo de Itens já traz os **Graus** e o nível mínimo de cada um. A forja só
-acrescenta uma coluna: **quantos pontos do motor** o objeto aguenta carregar.
+O Capítulo de Itens já traz os **Graus** e o nível mínimo de cada um. A Forja
+acrescenta o que eles fazem — e o Grau **vem de graça com o item**, sem gastar
+ponto nenhum. Os pontos são para os Aprimoramentos.
 
-| Grau | Nível mínimo | Pontos | Integridade | Cargas | Sintonia |
-|---|---|---|---|---|---|
-| **Mortal** | 1 | — | 1 | — | não |
-| **Consagrado** | 3 | 2 | 2 | proficiência | sim |
-| **Heroico** | 6 | 3 | 3 | proficiência | sim |
-| **Mítico** | 10 | 4 | 4 | proficiência | sim |
-| **Lendário** | 15 | 5 | 5 | proficiência | sim |
-| **Divino** | 18 | 6 | 6 | — | sim |
+| Grau | Nível | Arma | Ataque e dano | DEF | Pontos | Integridade | Cargas |
+|---|---|---|---|---|---|---|---|
+| **Mortal** | 1 | o dado da arma | — | — | — | 1 | — |
+| **Consagrado** | 3 | o dado da arma | +1 | +1 | 2 | 2 | proficiência |
+| **Heroico** | 6 | **+1 dado** | +1 | +1 | 3 | 3 | proficiência |
+| **Mítico** | 10 | **+1 dado** | +2 | +2 | 4 | 4 | proficiência |
+| **Lendário** | 15 | **+2 dados** | +2 | +3 | 5 | 5 | proficiência |
+| **Divino** | 18 | o Mestre decide | — | — | 6 | 6 | — |
 
-Os pontos são gastos **nas tabelas do Capítulo Sete**, e no Grau em que o item
-foi forjado — exatamente como uma habilidade. Um ponto de dano num item forjado
-no Grau 2 entrega 2d8, como entregaria numa habilidade.
+Uma espada longa Heroica é 2d8; um machado grande Lendário é 3d10. A coluna de
+DEF vale para armadura **ou** escudo, nunca os dois no mesmo bônus, e o mesmo
+bônus vindo de dois itens não se acumula.
+
+> **Por que o dado, e não só o número.** Medido em três mil combates por nível:
+> sem item que cresça, um trio de nível 20 leva **11,5 rodadas** para derrubar o
+> monstro do encontro justo e perde uma luta em cada três. Com o Grau do item, o
+> combate volta a durar **3 a 4 rodadas em toda a carreira**, e o monstro
+> continua acertando 50% a 55% das vezes em vez de 70%. Sem Grau, a arma do
+> nível 20 entrega o mesmo que a do nível 11.
+
+**Divino não se fabrica.** Um item Divino carrega uma lei ou um fragmento de
+deus: é concedido, herdado ou roubado, e o que ele faz é escrito pelo Mestre.
+Nenhum teste de Manufatura chega lá.
+
+### Os pontos, e o que eles compram
+
+Os pontos compram **Aprimoramentos** nas tabelas do Capítulo Sete, no Grau em que
+o item foi forjado — exatamente como uma habilidade. Um ponto de dano num item
+forjado no Grau 2 entrega 2d8, como entregaria numa habilidade.
 
 **Um item não tem duração.** Onde a habilidade escolheria instantânea, sustentada
 ou cena, o item paga o primeiro ponto de efeito com o próprio corpo: o objeto é a
 duração. Comece a contar do primeiro ponto de efeito, sem o ponto de duração.
-
-**Bônus numérico custa 1 ponto por +1, e para no +3.** Isso vale para ataque e
-dano de uma arma, DEF de armadura ou escudo, ou uma perícia fixa de ferramenta.
-Está medido em `sim/`: um item de +4 no nível 15 aumenta o dano do Furioso em
-57% — mais do que qualquer habilidade entrega pelo mesmo investimento. Do Mítico
-para cima o item compra **efeito**, não número. O mesmo bônus vindo de dois itens
-não se acumula, como o Capítulo de Itens já dizia.
-
-**Divino não se fabrica.** Seis pontos passam do Teto de Custo de qualquer
-Grau: um item Divino carrega uma lei ou um fragmento de deus, e é concedido,
-herdado ou roubado. Nenhum teste de Manufatura chega lá.
 
 ---
 
@@ -89,6 +96,10 @@ Cada **Ação de Interlúdio** dedicada é uma tentativa:
 É a mesma fórmula com que o livro já faz nascer uma habilidade — e é de
 propósito: forjar uma espada Heroica de 3 pontos é tão difícil quanto
 desenvolver uma habilidade de 3 pontos.
+
+**Os pontos do Grau contam mesmo que você não gaste nenhum.** Uma espada Heroica
+sem Aprimoramento algum continua sendo um projeto de 3 pontos: CD 13, 3 Ações de
+Interlúdio. O que se paga ali é o aço que aguenta o segundo dado, não o enfeite.
 
 **Em um sucesso**, o item ganha **1 ponto de Progresso**. Ele fica pronto quando
 o Progresso iguala os **pontos do Grau**: um Consagrado leva 2 Ações, um Heroico

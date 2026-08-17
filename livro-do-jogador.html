@@ -1112,6 +1112,16 @@ pre.bloco-codigo {
   <p>Em um <strong>20 natural</strong> - o dado mostrando 20, antes de somar nada - um ataque
   acerta e vira <em class="termo">Acerto Crítico</em>: você rola todos os dados de dano duas
   vezes. Em um <strong>1 natural</strong>, o ataque erra, não importa o bônus.</p>
+
+  <div class="destaque">
+    <span class="rotulo">O crítico de uma habilidade é diferente</span>
+    <p>Um <strong>Ataque de Habilidade</strong> crítico soma <strong>metade dos dados</strong>,
+    arredondado para baixo, em vez de dobrar. Uma habilidade junta o dia inteiro num dado só:
+    medido do nível 1 ao 20, dobrar os dados de uma habilidade no Teto de Custo apagava de
+    98% a 208% dos PV do monstro de um encontro justo — o crítico decidia a luta sozinho,
+    antes de a luta começar. Arma continua dobrando: é a vantagem de quem escolheu brigar de
+    perto. Uma <strong>Rolagem de Efeito</strong> nunca causa crítico.</p>
+  </div>
   <p>Num <strong>teste de perícia possível</strong>, um 20 natural não garante o impossível,
   mas acrescenta um benefício excepcional ao resultado: mais informação, menos tempo, melhor
   posição ou uma impressão duradoura. Um 1 natural usa o total normalmente e pode trazer uma
@@ -2325,45 +2335,52 @@ pre.bloco-codigo {
   <p>Quem sabe montar uma habilidade já sabe forjar. Não existe uma segunda matemática
   para aprender.</p>
 
-  <h4>Os pontos de um item</h4>
+  <h4>O que o Grau do item dá</h4>
 
-  <p>Os Graus e os níveis mínimos são os da tabela lá em cima. A Forja só acrescenta uma
-  coluna: <strong>quantos pontos do motor</strong> o objeto aguenta carregar.</p>
+  <p>O Grau não é enfeite: é <strong>a</strong> progressão do seu equipamento. Ele vem de
+  graça com o item, sem gastar ponto nenhum — os pontos são para os Aprimoramentos.</p>
 
   <div class="rolagem">
     <table>
-      <thead><tr><th>Grau</th><th class="num">Nível</th><th class="num">Pontos</th><th class="num">Integridade</th><th>Cargas</th></tr></thead>
+      <thead><tr><th>Grau</th><th class="num">Nível</th><th>Arma</th><th class="num">Ataque e dano</th><th class="num">DEF</th><th class="num">Pontos</th><th class="num">Integridade</th><th>Cargas</th></tr></thead>
       <tbody>
-        <tr><td><strong>Mortal</strong></td><td class="num">1</td><td class="num">—</td><td class="num">1</td><td>—</td></tr>
-        <tr><td><strong>Consagrado</strong></td><td class="num">3</td><td class="num">2</td><td class="num">2</td><td>proficiência</td></tr>
-        <tr><td><strong>Heroico</strong></td><td class="num">6</td><td class="num">3</td><td class="num">3</td><td>proficiência</td></tr>
-        <tr><td><strong>Mítico</strong></td><td class="num">10</td><td class="num">4</td><td class="num">4</td><td>proficiência</td></tr>
-        <tr><td><strong>Lendário</strong></td><td class="num">15</td><td class="num">5</td><td class="num">5</td><td>proficiência</td></tr>
-        <tr><td><strong>Divino</strong></td><td class="num">18</td><td class="num">6</td><td class="num">6</td><td>—</td></tr>
+        <tr><td><strong>Mortal</strong></td><td class="num">1</td><td>o dado da arma</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">1</td><td>—</td></tr>
+        <tr><td><strong>Consagrado</strong></td><td class="num">3</td><td>o dado da arma</td><td class="num">+1</td><td class="num">+1</td><td class="num">2</td><td class="num">2</td><td>proficiência</td></tr>
+        <tr><td><strong>Heroico</strong></td><td class="num">6</td><td><strong>+1 dado</strong></td><td class="num">+1</td><td class="num">+1</td><td class="num">3</td><td class="num">3</td><td>proficiência</td></tr>
+        <tr><td><strong>Mítico</strong></td><td class="num">10</td><td><strong>+1 dado</strong></td><td class="num">+2</td><td class="num">+2</td><td class="num">4</td><td class="num">4</td><td>proficiência</td></tr>
+        <tr><td><strong>Lendário</strong></td><td class="num">15</td><td><strong>+2 dados</strong></td><td class="num">+2</td><td class="num">+3</td><td class="num">5</td><td class="num">5</td><td>proficiência</td></tr>
+        <tr><td><strong>Divino</strong></td><td class="num">18</td><td>o Mestre decide</td><td class="num">—</td><td class="num">—</td><td class="num">6</td><td class="num">6</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p>Os pontos são gastos <strong>nas tabelas do Capítulo Sete</strong>, no Grau em que o
-  item foi forjado — igual a uma habilidade. Um ponto de dano num item forjado no Grau 2
-  entrega <span class="dado">2d8</span>, como entregaria numa habilidade.</p>
+  <p>Uma espada longa Heroica é <span class="dado">2d8</span>; um machado grande Lendário é
+  <span class="dado">3d10</span>. A coluna de <strong>DEF</strong> vale para armadura ou
+  escudo — nunca os dois somados no mesmo bônus.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Por que o dado, e não só o número</span>
+    <p>Medido em três mil combates por nível: <strong>sem item que cresça</strong>, um trio de
+    nível 20 leva <strong>11,5 rodadas</strong> para derrubar o monstro do encontro justo e
+    perde uma luta em cada três. <strong>Com o Grau do item</strong>, o combate volta a durar
+    <strong>3 a 4 rodadas em toda a carreira</strong>, e o monstro continua acertando 50% a
+    55% das vezes em vez de 70%. A arma do nível 20 sem Grau entrega o mesmo que a do nível
+    11 — é o Grau que a mantém viva.</p>
+  </div>
+
+  <p><strong>Divino não se fabrica.</strong> Um item Divino carrega uma lei ou um fragmento
+  de deus: é concedido, herdado ou roubado, e o que ele faz é escrito pelo Mestre. Nenhum
+  teste de Manufatura chega lá.</p>
+
+  <h4>Os pontos, e o que eles compram</h4>
+
+  <p>Os pontos da tabela compram <strong>Aprimoramentos</strong> nas tabelas do Capítulo
+  Sete, no Grau em que o item foi forjado — igual a uma habilidade. Um ponto de dano num item
+  forjado no Grau 2 entrega <span class="dado">2d8</span>, como entregaria numa habilidade.</p>
 
   <p><strong>Um item não tem duração.</strong> Onde a habilidade escolheria instantânea,
   sustentada ou cena, o objeto paga o primeiro ponto de efeito com o próprio corpo: ele
   <em>é</em> a duração. Conte a partir do primeiro ponto de efeito, sem o ponto de duração.</p>
-
-  <div class="destaque">
-    <span class="rotulo">Bônus numérico para no +3</span>
-    <p>Cada <strong>+1</strong> em ataque e dano de uma arma, na DEF de uma armadura ou numa
-    perícia fixa custa <strong>1 ponto</strong>, e o total nunca passa de <strong>+3</strong>.
-    Isso foi medido: um item de +4 no nível 15 aumenta o dano do Furioso em <strong>57%</strong>,
-    mais do que qualquer habilidade entrega pelo mesmo investimento. Do Mítico para cima o
-    item compra <strong>efeito</strong>, não número.</p>
-  </div>
-
-  <p><strong>Divino não se fabrica.</strong> Seis pontos passam do Teto de Custo de qualquer
-  Grau. Um item Divino carrega uma lei ou um fragmento de deus: é concedido, herdado ou
-  roubado. Nenhum teste de Manufatura chega lá.</p>
 
   <h4>Cargas</h4>
 
@@ -2400,6 +2417,10 @@ pre.bloco-codigo {
 
   <p>É a mesma fórmula com que uma habilidade nasce, e isso é proposital: forjar uma espada
   Heroica de 3 pontos é tão difícil quanto desenvolver uma habilidade de 3 pontos.</p>
+
+  <p><strong>Os pontos do Grau contam mesmo que você não gaste nenhum.</strong> Uma espada
+  Heroica sem Aprimoramento algum continua sendo um projeto de 3 pontos: CD 13, 3 Ações de
+  Interlúdio. Você está pagando pelo aço que aguenta o segundo dado, não pelos enfeites.</p>
 
   <ul>
     <li><strong>Sucesso:</strong> o item ganha <strong>1 ponto de Progresso</strong>. Fica

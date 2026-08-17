@@ -16,7 +16,8 @@ $testes = @(
     'condicoes.py',
     'equilibrio.py',
     'tecnicas.py',
-    'calibrar_kleos.py'
+    'calibrar_kleos.py',
+    'forja.py'
 )
 
 Write-Output 'regressão numérica:'

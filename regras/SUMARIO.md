@@ -183,20 +183,26 @@ que sem monstros não havia como calibrar nada.
 *(revisado em 16/08/2026, medindo o livro montado — as quatro dívidas antigas
 foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
 
-1. **O dano de arma não acompanha o PV dos monstros.** Medido do nível 1 ao 20:
-   o dano do trio sai de 15 para 35 (×2,3) enquanto o PV do monstro do encontro
-   justo sai de 36 para 280 (×7,8). Do nível 5 ao 20 o ataque com arma cresce
-   15%. O combate vai de 2 para 8 rodadas na versão crua, e de 2 para 4 com o
-   grupo jogando bem — e a conta só fecha porque o conjurador cobre o resto.
-   **É a dívida número um.**
-2. **O crítico apaga o encontro em qualquer nível.** Uma habilidade no Teto de
-   Custo, num 20 natural, faz de 98% a 208% dos PV do monstro do encontro justo,
-   em todos os dez níveis medidos. Dobrar os dados de uma habilidade que junta
-   o dia inteiro num dado só é forte demais.
-3. **A DEF do personagem estagna.** De 16 no nível 1 para 18 no nível 20,
-   enquanto o ataque do monstro vai de +3 a +11: a chance de ser acertado sobe
-   de 50% para 70%. Com a Forja no teto de +3 ela volta a 55% — o que torna o
-   item forjado obrigatório em vez de opcional.
-4. **A Escala de Kleos ainda é extrapolação acima do nível 1.** Foi calibrada só
-   no nível 1; os degraus 6 a 11 nunca foram medidos contra um grupo de nível
-   alto de verdade.
+1. ~~**O dano de arma não acompanha o PV dos monstros.**~~ ✅ Resolvido pelo
+   **Grau do item** (Parte VII, seção 47): o item dá dados de arma e DEF por
+   Grau, de graça. Sem ele, o trio de nível 20 levava 11,5 rodadas e perdia uma
+   luta em cada três; com ele, o combate dura de 2 a 4 rodadas do nível 3 ao 20.
+   Travado em `sim/forja.py`, que roda na regressão.
+2. ~~**O crítico apaga o encontro em qualquer nível.**~~ ✅ Um Ataque de
+   Habilidade crítico soma **metade dos dados** em vez de dobrar. Sai de 98%–208%
+   dos PV do monstro justo para 73%–156% — três quartos do que era.
+3. ~~**A DEF do personagem estagna.**~~ ✅ A coluna de DEF do Grau do item segura
+   o monstro entre 45% e 60% de acerto nos 20 níveis, no lugar dos 70% do nível
+   15 em diante.
+4. ~~**O platô de Kleos entre os níveis 5 e 9.**~~ ✅ Os valores estavam certos e
+   os **cortes** estavam errados: as faixas 1–4, 5–9, 10–14, 15–19 e 20 prendiam
+   cinco níveis no mesmo Kleos, e no nível 9 o monstro caía em 1,9 rodada. As
+   faixas passam a ser **as mesmas do Grau** — 1–4, 5–8, 9–12, 13–16, 17–20 —
+   sem mexer em nenhum valor. Nível 9 vai de 1,9 para 3,4 rodadas; 13 de 2,8
+   para 3,9; 17 de 2,9 para 3,9.
+
+**A dívida que sobrou, e ela é do simulador:** a Escala de Kleos acima do nível 1
+continua sendo extrapolação. O motor de combate não modela **Poderes,
+Arremetidas nem Recusas**, então o monstro medido é mais fraco que o monstro do
+livro — e todo número desta página herda essa margem. Modelar Poderes é o
+próximo passo do `sim/`, e até lá o Mestre continua sendo o juiz final.

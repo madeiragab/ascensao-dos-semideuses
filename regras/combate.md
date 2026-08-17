@@ -185,6 +185,13 @@ do alvo. Dano: **dado da arma + modificador do atributo utilizado**.
 **Acerto crítico (20 natural).** Todos os dados de dano do ataque são rolados
 duas vezes; modificadores fixos entram uma vez só.
 
+**O crítico de uma habilidade soma metade.** Um **Ataque de Habilidade** crítico
+acrescenta **metade dos dados**, arredondado para baixo, em vez de dobrar.
+Medido do nível 1 ao 20: dobrando, uma habilidade no Teto de Custo apagava de 98%
+a 208% dos PV do monstro de um encontro justo. A arma continua dobrando — é a
+vantagem de quem escolheu brigar de perto. Uma **Rolagem de Efeito** nunca causa
+crítico.
+
 **Falha crítica (1 natural).** O ataque erra. O Mestre pode acrescentar uma
 complicação narrativa leve, mas não deve punir o jogador com dano ou perda de
 equipamento automaticamente. Se a arma correr risco real, ela realiza um **Teste
