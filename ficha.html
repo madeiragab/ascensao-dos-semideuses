@@ -946,6 +946,21 @@ pre.bloco-codigo {
 }
 
 /* ---------- Barra de comandos ---------- */
+/* ---------- Abas: o herói e a fera ---------- */
+.abas { display: flex; gap: .4rem; margin: 1.2rem 0 0; border-bottom: 1px solid var(--borda); }
+.aba-botao {
+  font-family: var(--sans); font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .12em; padding: .6rem 1.1rem; cursor: pointer;
+  border: 1px solid var(--borda); border-bottom: none; border-radius: 3px 3px 0 0;
+  background: transparent; color: var(--texto-suave); margin-bottom: -1px;
+}
+.aba-botao:hover { color: var(--texto); }
+.aba-botao.ativa {
+  background: var(--papel); color: var(--acento);
+  border-color: var(--borda); border-bottom: 1px solid var(--papel);
+}
+.aba.oculta { display: none; }
+
 .comandos {
   position: sticky; top: 0; z-index: 40;
   display: flex; gap: .6rem; align-items: center; flex-wrap: wrap;
@@ -1279,7 +1294,16 @@ table.viva select { font-size: .72rem; }
       letra menor. Tudo acontece neste navegador.</span>
   </div>
 
+  <div class="abas" role="tablist" aria-label="Fichas">
+    <button type="button" class="aba-botao ativa" id="abaHeroiBotao" role="tab"
+            aria-selected="true" aria-controls="abaHeroi" onclick="trocarAba('heroi')">O Herói</button>
+    <button type="button" class="aba-botao" id="abaFeraBotao" role="tab"
+            aria-selected="false" aria-controls="abaFera" onclick="trocarAba('fera')">A Fera Vinculada</button>
+  </div>
+
   <form class="ficha-viva" id="folha" autocomplete="off">
+
+  <div class="aba" id="abaHeroi" role="tabpanel" aria-labelledby="abaHeroiBotao">
 
     <!-- ===== IDENTIDADE ===== -->
     <div class="bloco">
@@ -1521,27 +1545,6 @@ table.viva select { font-size: .72rem; }
       </div>
     </div>
 
-    <!-- ===== A FERA VINCULADA ===== -->
-    <div class="bloco">
-      <h3>A Fera Vinculada <small>— ocupa um dos três Vínculos</small></h3>
-      <div class="ajustes">
-        <div class="f"><label>Nome</label><input type="text" id="feraNome"></div>
-        <div class="f"><label>Criatura, no Livro II</label><input type="text" id="feraCriatura"></div>
-        <div class="f"><label>Kleos</label><input type="text" id="feraKleos" inputmode="numeric"></div>
-        <div class="f"><label>PV atual / máximo</label>
-          <div class="par"><input type="text" id="feraPvAtual"><span>/</span>
-          <input type="text" id="feraPvMax" placeholder="metade do bloco"></div></div>
-        <div class="f"><label>DEF</label><input type="text" id="feraDef" inputmode="numeric"></div>
-        <div class="f"><label>Ataque e dano</label><input type="text" id="feraAtaque"></div>
-        <div class="f"><label>Movimento</label><input type="text" id="feraMovimento"></div>
-      </div>
-      <h3 style="margin-top:1.1rem;">Traços, Fraqueza Mítica e o que ela faz sob comando</h3>
-      <textarea rows="4" id="feraNotas"
-        placeholder="Ação bônus: move e faz uma coisa simples. Ação: algo complexo. Sem comando ela não ataca."></textarea>
-      <p class="estado-regra">PV pela metade do bloco. Arremetidas, Recusas, Presença e Vontade do
-      Lugar não vêm junto. A 0 PV ela entra em Agonia, e a morte é definitiva.</p>
-    </div>
-
     <div class="bloco">
       <div class="duas-col">
         <div><h3>Aparência</h3><textarea rows="3" id="aparencia"></textarea></div>
@@ -1555,6 +1558,71 @@ table.viva select { font-size: .72rem; }
       <h3>Anotações</h3>
       <textarea rows="5" id="anotacoes"></textarea>
     </div>
+
+  </div><!-- /aba do herói -->
+
+  <!-- ===================== A FERA VINCULADA ===================== -->
+  <div class="aba oculta" id="abaFera" role="tabpanel" aria-labelledby="abaFeraBotao">
+
+    <div class="bloco">
+      <h3>A Fera Vinculada <small>— ocupa um dos três Vínculos do herói</small></h3>
+      <div class="ajustes">
+        <div class="f"><label>Nome</label><input type="text" id="feraNome"></div>
+        <div class="f"><label>Criatura, no Livro II</label><input type="text" id="feraCriatura"></div>
+        <div class="f"><label>Kleos</label><input type="text" id="feraKleos" inputmode="numeric"></div>
+        <div class="f"><label>Tamanho</label><input type="text" id="feraTamanho" placeholder="Médio, Grande…"></div>
+        <div class="f"><label>Domada com</label>
+          <select id="feraPericia">
+            <option value="">—</option>
+            <option>Sobrevivência</option>
+            <option>Intimidação</option>
+            <option>Persuasão</option>
+            <option>Mitologia</option>
+          </select></div>
+        <div class="f"><label>Selada no Interlúdio de</label><input type="text" id="feraSelo" placeholder="quando, e com que oferenda"></div>
+      </div>
+      <p class="estado-regra" id="estadoFera">Preencha o Kleos para conferir o teto da doma.</p>
+    </div>
+
+    <div class="bloco">
+      <h3>Números</h3>
+      <div class="ajustes">
+        <div class="f"><label>PV atual / máximo</label>
+          <div class="par"><input type="text" id="feraPvAtual"><span>/</span>
+          <input type="text" id="feraPvMax" placeholder="metade do bloco"></div></div>
+        <div class="f"><label>DEF</label><input type="text" id="feraDef" inputmode="numeric"></div>
+        <div class="f"><label>Movimento</label><input type="text" id="feraMovimento" placeholder="9 m"></div>
+        <div class="f"><label>Fortitude</label><input type="text" id="feraFortitude"></div>
+        <div class="f"><label>Reflexos</label><input type="text" id="feraReflexos"></div>
+        <div class="f"><label>Vontade</label><input type="text" id="feraVontade"></div>
+      </div>
+      <h3 style="margin-top:1.1rem;">Ataques</h3>
+      <textarea rows="3" id="feraAtaque"
+        placeholder="Chifrada +6 · 2d6+3 de dano perfurante · alcance 1,5 m"></textarea>
+      <p class="estado-regra">PV pela metade do bloco do Livro II. DEF, ataques, movimento,
+      sentidos e Traços vêm iguais. Arremetidas, Recusas, Presença e Vontade do Lugar não vêm.</p>
+    </div>
+
+    <div class="bloco">
+      <h3>Traços e Fraqueza Mítica</h3>
+      <textarea rows="4" id="feraTracos"
+        placeholder="A Fraqueza Mítica continua valendo — e agora é problema seu também."></textarea>
+      <h3 style="margin-top:1.1rem;">Sob comando</h3>
+      <textarea rows="4" id="feraNotas"
+        placeholder="Ação bônus: move e faz uma coisa simples — um ataque, agarrar, empurrar, farejar, buscar.
+Ação: algo complexo, uma ação especial do bloco ou a sequência inteira de ataques.
+Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></textarea>
+    </div>
+
+    <div class="bloco">
+      <h3>Quem ela é</h3>
+      <textarea rows="4" id="feraHistoria"
+        placeholder="Onde foi poupada, o que você prometeu, e por que ela ficou."></textarea>
+      <p class="estado-regra">A 0 PV ela entra em Agonia, com as regras de um personagem. A morte é
+      definitiva: o Vínculo volta livre no próximo Interlúdio, e o dono recebe 1 Ímpeto.</p>
+    </div>
+
+  </div><!-- /aba da fera -->
 
   </form>
 </section>
@@ -1618,7 +1686,7 @@ table.viva select { font-size: .72rem; }
       <div class="pdf-bloco span-12"><h2>Habilidades preparadas · inclua ativação e resolução</h2><div class="pdf-texto" id="pHabilidades"></div></div>
       <div class="pdf-bloco span-12"><h2>Equipamento</h2><div class="pdf-texto" id="pEquipamento"></div></div>
       <div class="pdf-bloco span-6"><h2>Itens forjados · Grau, pontos, Integridade, Cargas</h2><div class="pdf-texto" id="pItens"></div></div>
-      <div class="pdf-bloco span-6"><h2>A Fera Vinculada</h2><div class="pdf-texto" id="pFera"></div></div>
+      <div class="pdf-bloco span-6"><h2>A Fera Vinculada</h2><div class="pdf-texto" id="pFeraResumo"></div></div>
     </div>
     <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 2/3</p>
   </section>
@@ -1634,6 +1702,22 @@ table.viva select { font-size: .72rem; }
       <div class="pdf-bloco span-12"><h2>Anotações</h2><div class="pdf-texto" id="pAnotacoes"></div></div>
     </div>
     <p class="pdf-rodape">Ascensão dos Semideuses · Ficha 3/3</p>
+  </section>
+
+  <!-- Folha da fera: sai do PDF e da impressão quando não há fera. -->
+  <section class="pdf-pagina" id="pdfPaginaFera">
+    <header class="pdf-cabecalho">
+      <div><h1 id="pFeraNome">A Fera Vinculada</h1><p id="pFeraLinha">Ascensão dos Semideuses · Livro II, Parte V</p></div>
+    </header>
+    <div class="pdf-grade">
+      <div class="pdf-bloco span-12"><h2>Números</h2><div class="pdf-status" id="pFeraStatus"></div></div>
+      <div class="pdf-bloco span-12"><h2>Ataques</h2><div class="pdf-texto" id="pFeraAtaque"></div></div>
+      <div class="pdf-bloco span-6"><h2>Traços e Fraqueza Mítica</h2><div class="pdf-texto" id="pFeraTracos"></div></div>
+      <div class="pdf-bloco span-6"><h2>Sob comando</h2><div class="pdf-texto" id="pFeraNotas"></div></div>
+      <div class="pdf-bloco span-12"><h2>Quem ela é</h2><div class="pdf-texto" id="pFeraHistoria"></div></div>
+      <div class="pdf-bloco span-12"><h2>As regras que não cabem na memória</h2><div class="pdf-texto">Ação bônus comanda o simples; a sua ação comanda o complexo; sem comando ela não ataca. PV pela metade do bloco. A 0 PV entra em Agonia, e a morte é definitiva: o Vínculo volta livre no próximo Interlúdio e o dono recebe 1 Ímpeto.</div></div>
+    </div>
+    <p class="pdf-rodape">Ascensão dos Semideuses · A Fera Vinculada</p>
   </section>
 </main>
 
@@ -2613,6 +2697,9 @@ folha.addEventListener("input", function (e) {
   recalcular();
 });
 folha.addEventListener("change", recalcular);
+folha.addEventListener("input", function (e) {
+  if (e.target.id && e.target.id.indexOf("fera") === 0) avisarFera();
+});
 
 function alternarTrava() {
   var livre = document.getElementById("destravar").checked;
@@ -2677,6 +2764,74 @@ function valorCalc(chave) {
 }
 function porTexto(id, texto) {
   var el = document.getElementById(id); if (el) el.textContent = texto || "—";
+}
+
+/* ---------- As duas abas: o herói e a fera ---------- */
+function trocarAba(qual) {
+  [["heroi", "abaHeroi", "abaHeroiBotao"], ["fera", "abaFera", "abaFeraBotao"]]
+    .forEach(function (t) {
+      var ativa = t[0] === qual;
+      document.getElementById(t[1]).classList.toggle("oculta", !ativa);
+      var botao = document.getElementById(t[2]);
+      botao.classList.toggle("ativa", ativa);
+      botao.setAttribute("aria-selected", ativa ? "true" : "false");
+    });
+}
+
+/* A fera tem folha própria no PDF. Sem nome não existe fera, e a folha inteira
+   sai da impressão — ninguém quer uma página em branco no meio da ficha. */
+function prepararFera() {
+  var nome = document.getElementById("feraNome").value.trim();
+  var folhaFera = document.getElementById("pdfPaginaFera");
+
+  // Removida do DOM, e não escondida: uma folha de largura zero faz
+  // paginarImpressao desistir do resto da ficha. O molde a devolve na próxima
+  // preparação, então tirar aqui não custa nada.
+  if (!nome) {
+    if (folhaFera) folhaFera.remove();
+    porTexto("pFeraResumo", "");
+    return;
+  }
+
+  var criatura = valorCampo("feraCriatura"), kleos = valorCampo("feraKleos");
+  var pv = valorCampo("feraPvAtual") + "/" + valorCampo("feraPvMax");
+  porTexto("pFeraResumo", nome + "\n" + criatura + " · Kleos " + kleos +
+           " · PV " + pv + " · DEF " + valorCampo("feraDef"));
+
+  porTexto("pFeraNome", nome);
+  porTexto("pFeraLinha", criatura + " · Kleos " + kleos + " · " +
+           valorCampo("feraTamanho") + " · domada com " + valorCampo("feraPericia"));
+
+  var numeros = [
+    ["PV", pv], ["DEF", valorCampo("feraDef")], ["Movimento", valorCampo("feraMovimento")],
+    ["Fortitude", valorCampo("feraFortitude")], ["Reflexos", valorCampo("feraReflexos")],
+    ["Vontade", valorCampo("feraVontade")]
+  ];
+  document.getElementById("pFeraStatus").innerHTML = numeros.map(function (s) {
+    return '<div class="pdf-num"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
+  }).join("");
+
+  [["pFeraAtaque","feraAtaque"],["pFeraTracos","feraTracos"],
+   ["pFeraNotas","feraNotas"],["pFeraHistoria","feraHistoria"]]
+  .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
+}
+
+/* O teto da doma é o Kleos do encontro justo do grupo menos 2, e nunca acima
+   de 6. Aqui só o aviso: quem decide o Kleos do grupo é o Mestre. */
+function avisarFera() {
+  var el = document.getElementById("estadoFera");
+  if (!el) return;
+  var k = parseInt(document.getElementById("feraKleos").value, 10);
+  if (isNaN(k)) {
+    el.textContent = "Preencha o Kleos para conferir o teto da doma.";
+    return;
+  }
+  if (k > 6) {
+    el.textContent = "Kleos " + k + " está acima do teto: nada acima de Kleos 6 se doma.";
+  } else {
+    el.textContent = "Kleos " + k + " exige um grupo cujo encontro justo seja Kleos " +
+      (k + 2) + " ou mais. PV pela metade do bloco do Livro II.";
+  }
 }
 
 /* ---------- Paginação da folha de impressão ----------
@@ -2915,25 +3070,7 @@ function prepararImpressao() {
    ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
   .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
 
-  // A fera vira uma linha de status mais as notas. Sem nome, o bloco fica vazio.
-  var feraNome = document.getElementById("feraNome").value.trim();
-  if (!feraNome) {
-    porTexto("pFera", "");
-  } else {
-    var feraCampos = [
-      ["Criatura", "feraCriatura"], ["Kleos", "feraKleos"], ["DEF", "feraDef"],
-      ["Ataque", "feraAtaque"], ["Movimento", "feraMovimento"]
-    ].map(function (par) {
-      var v = document.getElementById(par[1]).value.trim();
-      return v ? par[0] + " " + v : "";
-    }).filter(Boolean);
-    var pvAtual = document.getElementById("feraPvAtual").value.trim();
-    var pvMax = document.getElementById("feraPvMax").value.trim();
-    if (pvMax || pvAtual) feraCampos.unshift("PV " + (pvAtual || "—") + "/" + (pvMax || "—"));
-    var feraNotas = document.getElementById("feraNotas").value.trim();
-    porTexto("pFera", feraNome + "\n" + feraCampos.join(" · ") +
-             (feraNotas ? "\n" + feraNotas : ""));
-  }
+  prepararFera();
 
   var textoHabilidades = valorCampo("habilidades");
   porTexto("pHabilidades", textoHabilidades);
