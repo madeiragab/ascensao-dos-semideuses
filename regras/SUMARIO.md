@@ -120,17 +120,17 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 45 | Materiais sobrenaturais | 🔴 citado como "será desenvolvido" |
 | 46 | Dinheiro e preços | 🔴 nada existe |
 
-### Parte VII — Itens e Criação (seções 33–51 atuais)
+### Parte VII — A Forja → `criacao-de-itens.md`
 
 | # | Capítulo | Estado |
 |---|---|---|
-| 47 | Categorias de itens | ✅ (fora do Doc) |
-| 48 | Classe de Qualidade | ✅ (fora do Doc) |
-| 49 | Kits de Criação | ✅ (fora do Doc) |
-| 50 | Teste de criação, progresso e complicações | ✅ (fora do Doc) |
-| 51 | Aprimoramentos | ✅ (fora do Doc) |
-| 52 | Integridade, quebra e reparos | ✅ (fora do Doc) |
-| 53 | Desmontar e aprender projetos | ✅ (fora do Doc) |
+| 47 | Classe de Qualidade | ✅ novo — a escala de 1 a 6 que o Guia já prometia |
+| 48 | Kits de Criação | ✅ novo |
+| 49 | As duas rolagens: matéria e sopro | ✅ novo |
+| 50 | Trincas — a falha é do item | ✅ novo |
+| 51 | Aprimoramentos | ✅ novo — comprados com os pontos do Capítulo Sete |
+| 52 | Materiais míticos | ✅ novo — liga a forja ao Livro II |
+| 53 | Integridade, reparo e desmonte | ✅ novo |
 
 ### Parte VIII — Entre Aventuras → `interludio.md`
 
@@ -151,6 +151,15 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 61 | Recompensas | 🟡 Livro II, seção 8 — falta economia de dracmas |
 | 62 | Tom, Névoa e o mundo mortal | 🔴 |
 | 63 | Progressão de nível e ganho de experiência | 🔴 |
+
+### A Fera Vinculada → `fera-vinculada.md`
+
+| # | Capítulo | Estado |
+|---|---|---|
+| 64 | Que criatura pode ser domada | ✅ novo |
+| 65 | Os três passos da doma: Poupar, Provar, Selar | ✅ novo |
+| 66 | A ficha da fera | ✅ novo — deriva do bloco do Livro II |
+| 67 | A fera em combate | ✅ novo — ela gasta o turno do dono |
 
 ---
 
