@@ -4,6 +4,23 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.16.3] - 2026-08-18
+
+### A Ficha do Herói imprime no couro dela
+
+- Desde a 0.15 os cinco livros imprimem com a paleta escura da tela, e a ficha
+  era a única folha branca da mesa. Agora a folha impressa usa o **couro escuro
+  e o ouro velho** da própria ficha: fundo `#16140F`, cabeçalhos em `#C9A94E`,
+  blocos em `#1F1C14`.
+- Vale para as duas abas — a do herói, com três páginas, e a da Fera Vinculada,
+  com uma — e para os dois caminhos, `Ctrl+P` e o botão de baixar. O
+  `html2canvas` recebeu a mesma cor de fundo, senão o PDF baixado sairia com
+  falhas brancas onde o desenho não cobre.
+- As cores da folha impressa são fixas, e não variáveis de tema: o `html2canvas`
+  resolve variável em cascata do jeito dele e às vezes devolve preto.
+- A folha impressa também passa a dizer **de que versão ela é**, no subtítulo da
+  primeira página. O número vem do mesmo lugar dos livros: o topo do CHANGELOG.
+
 ## [0.16.2] - 2026-08-18
 
 ### Os livros passam a dizer de que versão são

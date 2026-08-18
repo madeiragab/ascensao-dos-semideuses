@@ -429,6 +429,7 @@ def montar(template_nome: str, saida_nome: str, css: str,
            substituicoes: dict[str, str], descricao: str = "") -> None:
     s = (TEMPLATE / template_nome).read_text(encoding="utf-8")
     s = s.replace("{{CSS}}", css)
+    s = s.replace("{{VERSAO}}", versao_do_changelog()[0])
     for k, v in substituicoes.items():
         s = s.replace("{{" + k + "}}", v)
     faltando = re.findall(r"\{\{[A-Z_]+\}\}", s)
