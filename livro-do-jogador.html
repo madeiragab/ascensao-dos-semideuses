@@ -532,6 +532,15 @@ th {
 }
 td.num, th.num { text-align: right; }
 
+/* Tabelas de Parente Divino: quatro colunas, e as três primeiras são curtas.
+   Sem largura declarada o navegador dava 5% para "Bônus" e quebrava o próprio
+   cabeçalho no meio — "BÔN / US". Largura fixa resolve, e a coluna da passiva
+   fica com o que sobra, que é onde o texto realmente mora. */
+table.parentes { table-layout: fixed; }
+table.parentes th:nth-child(1), table.parentes td:nth-child(1) { width: 23%; }
+table.parentes th:nth-child(2), table.parentes td:nth-child(2) { width: 11%; }
+table.parentes th:nth-child(3), table.parentes td:nth-child(3) { width: 15%; }
+
 /* ============ CAIXA DE DADOS ============ */
 .rolador {
   background: #16100E;
@@ -1729,7 +1738,7 @@ pre.bloco-codigo {
   Elemental</em> — a cara que seus poderes têm — e uma habilidade passiva.</p>
 
   <div class="rolagem">
-    <table>
+    <table class="parentes">
       <thead><tr><th>Parente</th><th>Bônus</th><th>Afinidade</th><th>Passiva</th></tr></thead>
       <tbody>
         <tr><td><strong>Zeus</strong><br><span style="color:var(--texto-suave)">céus, trovão, justiça</span></td>
@@ -1769,6 +1778,43 @@ pre.bloco-codigo {
     </table>
   </div>
 
+  <h4>Os deuses menores</h4>
+
+  <p>O Olimpo não é só o salão dos doze. Deuses menores têm filhos, e por muito tempo esses
+  filhos não tinham lugar nenhum — hoje têm. <strong>Mecanicamente valem exatamente o
+  mesmo</strong> que um filho de Zeus: dois pontos num atributo, um em outro, uma Afinidade e
+  uma passiva pequena. O que muda é de quem você puxou, e o que o mundo espera de você por
+  isso.</p>
+
+  <div class="rolagem">
+    <table class="parentes">
+      <thead><tr><th>Parente</th><th>Bônus</th><th>Afinidade</th><th>Passiva</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hécate</strong><br><span style="color:var(--texto-suave)">magia, encruzilhadas, Névoa</span></td>
+            <td>+2 INT<br>+1 SAB</td><td>Psíquico ou Trevas</td>
+            <td><b>Olho da Névoa.</b> Você enxerga através de disfarce feito de Névoa. Uma vez por cena, ao tocar um objeto ou entrar num lugar, sabe se há magia ali e de que tipo.</td></tr>
+        <tr><td><strong>Íris</strong><br><span style="color:var(--texto-suave)">arco-íris, mensagens</span></td>
+            <td>+2 CAR<br>+1 SAB</td><td>Luz</td>
+            <td><b>Mensagem de Íris.</b> Vantagem para notar cor, padrão ou algo fora do lugar. Uma vez por cena, com água e luz do sol, você fala com alguém que já conheceu, a qualquer distância.</td></tr>
+        <tr><td><strong>Hipnos</strong><br><span style="color:var(--texto-suave)">sono, sonhos</span></td>
+            <td>+2 SAB<br>+1 CON</td><td>Psíquico</td>
+            <td><b>Sono Leve.</b> Você não pode ser Surpreendido enquanto dorme e acorda no ato. Uma vez por cena, fora de combate, uma criatura que possa te ouvir fica sonolenta: Desvantagem na próxima Percepção ou Intuição dela.</td></tr>
+        <tr><td><strong>Nêmesis</strong><br><span style="color:var(--texto-suave)">vingança, equilíbrio</span></td>
+            <td>+2 FOR<br>+1 DES</td><td>Físico</td>
+            <td><b>Dívida Cobrada.</b> Uma vez por combate, quando uma criatura te acerta, seu próximo ataque contra ela tem Vantagem. A conta não expira enquanto o combate durar.</td></tr>
+        <tr><td><strong>Nice</strong><br><span style="color:var(--texto-suave)">vitória, disputa</span></td>
+            <td>+2 DES<br>+1 FOR</td><td>Ar ou Físico</td>
+            <td><b>Instinto de Vitória.</b> Vantagem em Iniciativa. Uma vez por combate, refaça uma rolagem de ataque que errou por 2 ou menos.</td></tr>
+        <tr><td><strong>Hebe</strong><br><span style="color:var(--texto-suave)">juventude, vigor</span></td>
+            <td>+2 CON<br>+1 CAR</td><td>Natureza</td>
+            <td><b>Vigor Jovem.</b> Cada Tratamento que você recebe cura 2 PV a mais. Uma vez por dia, ao tocar alguém, remova um nível de Exausto dele.</td></tr>
+        <tr><td><strong>Tique</strong><br><span style="color:var(--texto-suave)">sorte, acaso</span></td>
+            <td>+2 CAR<br>+1 DES</td><td>Encanto</td>
+            <td><b>Virada da Sorte.</b> Uma vez por cena, refaça um d20 seu que tenha saído 5 ou menos — o segundo resultado vale, mesmo que seja pior.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="nota">
     <p><strong>E os outros olimpianos?</strong> <strong>Hera</strong> é a deusa do casamento e
     não tem filhos fora dele. <strong>Ártemis</strong> e <strong>Héstia</strong> fizeram voto
@@ -1777,7 +1823,7 @@ pre.bloco-codigo {
     <p>Se você quer alguém fora desta lista — um deus menor, um titã, um deus de outro
     panteão —, monte com o Mestre no mesmo formato: <strong>+2 num atributo, +1 em outro,
     uma Afinidade e uma passiva pequena</strong> que valha uma vez por cena ou por combate.
-    Olhe as nove acima como régua: nenhuma delas ganha luta sozinha.</p>
+    Olhe as dezoito acima como régua: nenhuma delas ganha luta sozinha.</p>
   </div>
 
   <h4>Atributo Divino</h4>
