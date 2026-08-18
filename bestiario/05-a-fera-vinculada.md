@@ -153,3 +153,31 @@ Morrendo:
 | **PV** | metade do bloco |
 | **Comando** | ação bônus para o simples, ação para o complexo |
 | **Morte** | definitiva, com 1 Ímpeto e Desvantagem para a mesma espécie no arco |
+
+---
+
+## 27. A fera dentro do motor
+
+Quando esta parte foi escrita, a fera tinha sido medida por cima: dano por turno
+e fração de PV. Agora ela entrou no combate simulado, atacando uma vez por rodada
+pela ação bônus do dono, contra um chefe completo com Sopro, Arremetidas e duas
+Recusas.
+
+| Trio | Kleos | Sem fera | Com fera | Ganho |
+|---|---|---|---|---|
+| nível 5 | 5 | 74% | 76% | +2% |
+| nível 9 | 7 | 69% | 72% | +3% |
+| nível 13 | 8 | 76% | 77% | +1% |
+| nível 17 | 9 | 84% | 85% | +2% |
+| nível 20 | 9 | 93% | 92% | −1% |
+
+**A fera soma pouco, e é isso que a mantém honesta.** Entre −1 e +3 pontos de
+vitória: ela não é um quarto personagem nem um multiplicador de dano. O que ela
+muda de verdade é o que nenhuma tabela mostra — um corpo a mais para o inimigo
+resolver, um faro que acha o que o grupo não acharia, e alguém para chorar
+quando morre.
+
+Se na sua mesa ela estiver decidindo combates, o problema não é a regra: é o
+Kleos dela. Confira a trava da [seção 22](#secao-22).
+
+Para reproduzir: `sim/completo.py`.

@@ -4,6 +4,53 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.15.1] - 2026-08-18
+
+O simulador termina de aprender o jogo, e a medição derruba uma tabela.
+
+### Mesas de quatro e cinco jogadores — a correção mais importante desta versão
+
+- O Kleos do Grupo era **multiplicação**: quatro heróis de nível 5 valiam 4 × 1¾
+  = Kleos 7. Medido, esse encontro é um massacre contra o grupo: **11% de
+  vitória**. Cinco heróis contra o Kleos 9 que a conta mandava: **0%**.
+- O motivo é a grossura da escala. A Tábua cresce 35% por degrau e um jogador a
+  mais soma bem menos que isso.
+- `kleos_do_grupo` deixa de multiplicar e passa a ser **tabela medida**. Regra
+  nova, em uma frase: **o quarto jogador quase não move o degrau, e o quinto
+  vale +1**.
+
+### A Magia da Névoa, medida pela primeira vez
+
+- `sim/nevoa.py`. O Grimório era o único sistema do projeto sem nenhum teste.
+- Uma Fórmula entrega de **64% a 95%** do que a habilidade do mesmo MP entrega —
+  nunca mais que isso. O que ela compra é ficção, não dano.
+- A Descrença cobra o resto: criatura mítica descrê em **65%** das tentativas.
+  Sobra 68% de uma criação Densa e 35% de uma Vestida. Contra mortal comum,
+  sobra tudo.
+- O Refluxo passa entre 40% e 50%: continua sendo desespero, não atalho.
+- A Fera de Névoa mudou a vitória do grupo em −2% a +3%. Ela vale pelo corpo e
+  pelo faro, não pelos 2d6.
+
+### Vontade do Lugar, Presença e a Fera Vinculada entram no motor
+
+- Vontade do Lugar tira de 1 a 4 pontos da vitória; Presença, de 0 a 4; as duas
+  juntas, de 2 a 4. São temperos, não paredes — e por isso continuam fora da
+  conta de Kleos.
+- A Fera Vinculada soma de −1 a +3 pontos. Ela não é um quarto personagem, e é
+  isso que a mantém honesta.
+
+### Papelada
+
+- O `SUMARIO.md` dizia que o Google Doc era a fonte oficial e que as seções
+  33–51 só existiam num link de conversa. As duas coisas eram falsas: a fonte é
+  o repositório.
+- `regras/v1-numeros.md` ganha o aviso de que está **aplicado e superado**, e que
+  onde ele diverge dos livros, os livros mandam.
+
+### Regressão
+
+- 15 arquivos, de `defesas_passivas.py` a `nevoa.py`.
+
 ## [0.15.0] - 2026-08-18
 
 Uma revisão do sistema inteiro, medida do nível 1 ao 20, e o simulador finalmente

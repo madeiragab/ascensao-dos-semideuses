@@ -136,6 +136,26 @@ def kleos_do_personagem(nivel: int) -> float:
     return 3.0
 
 
+# Livro II, seção 3 — Kleos do encontro justo por faixa de nível e tamanho de
+# mesa. É TABELA, e não multiplicação, porque multiplicar estava errado: medido
+# em completo.py, um grupo de quatro no nível 5 vencia 11% do encontro que a
+# conta linear chamava de justo, e um de cinco vencia 0%. O quarto jogador quase
+# não move o Kleos; o quinto vale +1. A escala sobe 35% por degrau e um jogador
+# a mais soma bem menos que isso.
+KLEOS_JUSTO = {
+    1: {3: 3, 4: 4, 5: 4},      # níveis 1–4
+    2: {3: 5, 4: 5, 5: 6},      # níveis 5–8
+    3: {3: 7, 4: 7, 5: 8},      # níveis 9–12
+    4: {3: 8, 4: 8, 5: 9},      # níveis 13–16
+    5: {3: 9, 4: 10, 5: 10},    # níveis 17–20
+}
+
+
 def kleos_do_grupo(nivel: int, quantos: int = 3) -> int:
-    """Kleos do encontro justo, arredondado — é o que o Mestre consulta."""
-    return min(11, max(1, round(kleos_do_personagem(nivel) * quantos)))
+    """Kleos do encontro justo — é o que o Mestre consulta."""
+    faixa = KLEOS_JUSTO[grau(nivel)]
+    if quantos in faixa:
+        return faixa[quantos]
+    # mesas fora de 3 a 5: cada jogador além do quinto soma meio degrau
+    base = faixa[5] if quantos > 5 else faixa[3]
+    return min(11, max(1, base + (quantos - 5) // 2 if quantos > 5 else base))

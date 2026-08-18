@@ -209,6 +209,45 @@ aquela mesma criação. Mas cada nova conjuração é uma nova criação.
 Ela não desfaz a Fórmula para os outros, não devolve o MP gasto, não interrompe
 a Concentração e não impede a mesma Fórmula de ser conjurada de novo.
 
+### Isto foi medido
+
+O Grimório foi o último sistema do projeto a passar por teste, e o resultado
+confirma o desenho — a Névoa é **rainha fora do combate e coadjuvante dentro
+dele**.
+
+**A Fórmula custa menos MP e entrega menos.** Contra a habilidade que o mesmo MP
+compraria no Grau do personagem:
+
+| Nível | Círculo | MP | Dano da Fórmula | Dano da habilidade | Razão |
+|---|---|---|---|---|---|
+| 1 | 1 | 2 | 6,3 | 6,6 | 95% |
+| 5 | 2 | 4 | 8,4 | 13,2 | 64% |
+| 10 | 3 | 6 | 13,7 | 21,5 | 64% |
+| 15 | 4 | 9 | 18,2 | 28,0 | 65% |
+
+Uma Fórmula nunca ficou melhor que a habilidade do mesmo preço. O que ela compra
+é alcance de ficção: disfarce, passagem, cidade inteira de bruma.
+
+**A Descrença cobra dois terços do resto.** Uma criatura mítica descrê em **65%**
+das tentativas, e a conta se mantém em todos os níveis, porque a CD de Névoa e a
+Investigação do monstro sobem juntas:
+
+| Densidade | O que sobra contra criatura mítica | Contra mortal comum |
+|---|---|---|
+| **Densa** | 68% | 100% |
+| **Vestida** | 35% | 100% |
+
+**O Refluxo continua sendo desespero.** Conjurar acima do próprio nível passa
+entre 40% e 50% das vezes, e a falha custa o MP inteiro, de 7 a 14 de dano e o
+turno seguinte.
+
+**A Fera de Névoa não se paga em dano.** Medida dentro de combate completo, ela
+mudou a taxa de vitória do grupo em **−2% a +3%** — ou seja, nada. Ela vale pelo
+corpo que ocupa o caminho, pelo faro e pelo que obriga o inimigo a resolver, não
+pelos 2d6.
+
+Para reproduzir: `sim/nevoa.py`.
+
 ---
 
 ## 39. As cinco Vias

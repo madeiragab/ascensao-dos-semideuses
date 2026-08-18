@@ -148,6 +148,7 @@ python defesas_passivas.py  # prova a equivalência exata das defesas de base 14
 python forja.py             # prova que o Grau do item segura os 20 níveis
 python criaturas.py         # mede Poderes de área e Arremetidas em Kleos
 python completo.py          # o jogo inteiro: habilidade, controle e Recusa
+python nevoa.py             # mede a Magia da Névoa: Fórmula, Descrença, Refluxo
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula

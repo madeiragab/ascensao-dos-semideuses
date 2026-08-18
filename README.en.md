@@ -152,6 +152,7 @@ python anteparo.py          # measures the Guardian's class ability
 python forja.py             # proves the item Grade carries all 20 levels
 python criaturas.py         # measures area Powers and Onslaughts in Kleos
 python completo.py          # the whole game: abilities, control and Refusals
+python nevoa.py             # Mist magic: Formulae, Disbelief, Backlash
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
