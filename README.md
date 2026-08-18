@@ -151,6 +151,7 @@ python completo.py          # o jogo inteiro: habilidade, controle e Recusa
 python nevoa.py             # mede a Magia da Névoa: Fórmula, Descrença, Refluxo
 python aliado.py            # quanto um Aliado pode ser sem virar um jogador
 python duelo.py             # semideus contra semideus, e a armadilha do controle
+python ficha.py             # confere a Ficha do Herói contra o simulador
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula

@@ -43,17 +43,7 @@
   --fundo: #EFEAF3;
 }
 
-/* falas de exemplo na mesa */
-.mesa {
-  border-left: 3px solid var(--bronze);
-  padding: .2rem 0 .2rem 1.1rem;
-  margin: 1.4rem 0;
-  font-size: .96rem;
-}
-.mesa p { margin: 0 0 .5rem; }
-.mesa p:last-child { margin-bottom: 0; }
-.mesa b { color: var(--acento); font-weight: 700; }
-.mesa em { color: var(--texto-suave); }
+/* A fala de mesa agora mora no CSS comum, em livro.css. */
 
 /* Impressão: o Guia sai no couro roxo escuro, igual à tela. */
 @media print {
@@ -1133,6 +1123,16 @@
   </div>
 
   <div class="ornamento">❖</div>
+
+  <div class="destaque">
+    <span class="rotulo">Sua primeira sessão, pronta</span>
+    <p>Se você nunca mestrou este sistema, não comece do zero: <strong>Água de Ferrugem</strong>
+    é uma aventura de estreia de três a quatro horas, para três a cinco semideuses de nível 1,
+    com todos os blocos de criatura prontos. Ela ensina, na ordem em que aparece, rolar contra
+    uma CD, a Névoa explicando o mundo mortal, um combate simples, uma Fraqueza Mítica, uma
+    Recusa acontecendo, e uma decisão final sem resposta certa. Está em
+    <span class="dado">regras/agua-de-ferrugem.md</span>, no repositório.</p>
+  </div>
 
   <h3>Fechar uma sessão</h3>
   <p>Reserve cinco minutos no fim. Pergunte três coisas:</p>

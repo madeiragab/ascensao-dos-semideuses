@@ -3,6 +3,8 @@
 > Consulta rápida da revisão de mesa: [`regras-universais.md`](regras-universais.md).
 >
 > Campanha começada antes de agosto de 2026: [`migracao-0.15.md`](migracao-0.15.md).
+>
+> Primeira sessão, pronta para rodar: [`agua-de-ferrugem.md`](agua-de-ferrugem.md).
 
 Estado de tudo que existe, o que está pronto e o que falta. Este arquivo é o
 índice de trabalho: quando um capítulo é escrito, ele muda de estado aqui.
@@ -23,7 +25,7 @@ daqui.
 | `template/*.html` | os cinco livros | **é a fonte** — o que é publicado sai daqui |
 | `regras/*.md` | Combate, Magia da Névoa, Interlúdio, Forja | texto de trabalho, sincronizado com os livros |
 | `bestiario/*.md` | o Livro II inteiro | montado direto pelo build |
-| `sim/*.py` | 15 arquivos de medição | roda inteiro por `test.ps1` |
+| `sim/*.py` | 18 arquivos de medição | roda inteiro por `test.ps1` |
 | Google Doc | seções 1–32 na numeração antiga | histórico |
 | `regras/v1-numeros.md` | a proposta de correção numérica de 2026-07 | **aplicada e superada** — mantida como registro do que mudou e por quê |
 
