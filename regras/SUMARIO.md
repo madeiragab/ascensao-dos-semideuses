@@ -124,13 +124,13 @@ vez só, agora, enquanto o livro ainda é pequeno.
 
 | # | Capítulo | Estado |
 |---|---|---|
-| 47 | Classe de Qualidade | ✅ novo — a escala de 1 a 6 que o Guia já prometia |
-| 48 | Kits de Criação | ✅ novo |
-| 49 | As duas rolagens: matéria e sopro | ✅ novo |
-| 50 | Trincas — a falha é do item | ✅ novo |
+| 47 | O que o Grau do item dá | ✅ novo — dado de arma e DEF por Grau, medido em `sim/forja.py` |
+| 48 | Cargas | ✅ novo — iguais à proficiência, como os Tratamentos |
+| 49 | Forjar: Manufatura contra CD 10 + pontos | ✅ novo — a mesma fórmula de criar habilidade |
+| 50 | Materiais míticos | ✅ novo — liga a forja ao Livro II |
 | 51 | Aprimoramentos | ✅ novo — comprados com os pontos do Capítulo Sete |
-| 52 | Materiais míticos | ✅ novo — liga a forja ao Livro II |
-| 53 | Integridade, reparo e desmonte | ✅ novo |
+| 52 | Melhorar, reparar, desmontar | ✅ novo |
+| 53 | Integridade em jogo | ✅ novo — a falha da forja marca a peça, não o ferreiro |
 
 ### Parte VIII — Entre Aventuras → `interludio.md`
 
@@ -189,8 +189,9 @@ foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
    luta em cada três; com ele, o combate dura de 2 a 4 rodadas do nível 3 ao 20.
    Travado em `sim/forja.py`, que roda na regressão.
 2. ~~**O crítico apaga o encontro em qualquer nível.**~~ ✅ Um Ataque de
-   Habilidade crítico soma **metade dos dados** em vez de dobrar. Sai de 98%–208%
-   dos PV do monstro justo para 73%–156% — três quartos do que era.
+   Habilidade crítico soma **dados iguais ao Grau** em vez de dobrar. Das quatro
+   regras medidas, é a que menos deixa o crítico decidir a luta: pior caso de
+   **83%** dos PV do monstro justo, contra 139% dobrando e 105% somando metade.
 3. ~~**A DEF do personagem estagna.**~~ ✅ A coluna de DEF do Grau do item segura
    o monstro entre 45% e 60% de acerto nos 20 níveis, no lugar dos 70% do nível
    15 em diante.
@@ -201,8 +202,14 @@ foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
    sem mexer em nenhum valor. Nível 9 vai de 1,9 para 3,4 rodadas; 13 de 2,8
    para 3,9; 17 de 2,9 para 3,9.
 
-**A dívida que sobrou, e ela é do simulador:** a Escala de Kleos acima do nível 1
-continua sendo extrapolação. O motor de combate não modela **Poderes,
-Arremetidas nem Recusas**, então o monstro medido é mais fraco que o monstro do
-livro — e todo número desta página herda essa margem. Modelar Poderes é o
-próximo passo do `sim/`, e até lá o Mestre continua sendo o juiz final.
+5. ~~**O simulador não modela Poderes nem Arremetidas.**~~ ✅ `sim/criaturas.py`
+   ensina o motor a usar **Poder de área com Recarga** e **Arremetidas**, e mede
+   o que elas valem: uma criatura completa dá o mesmo trabalho que uma crua **um
+   degrau acima** — o Livro II agora manda contar o chefe como Kleos +1. O Sopro
+   é o que derruba a vitória do grupo (100% → 76%); a Arremetida quase não muda
+   quem vence, mas leva os heróis de pé de 2,1 para 1,2.
+
+**A dívida que sobrou:** **Recusas** continuam fora da conta. Elas anulam uma
+Rolagem de Efeito, e os heróis do simulador só atacam — não existe Efeito para
+recusar. Medir Recusa exige antes ensinar o motor a usar controle do lado dos
+jogadores, e esse é o próximo passo do `sim/`.

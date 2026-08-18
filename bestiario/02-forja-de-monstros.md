@@ -10,16 +10,94 @@ podem ter o mesmo perfil de Kleos 3.
 
 ---
 
-## 9. As sete etapas
+## 9. O passo a passo
 
-1. Escolha o **Kleos**.
-2. Copie a linha da **Tábua de Kleos**.
-3. Escolha um **Arquétipo** e aplique as trocas.
-4. Reparta o **dano por rodada** entre os ataques.
-5. Gaste o **Orçamento** em Traços e Poderes.
-6. Adicione **Arremetidas**, **Recusas** e **Vontade do Lugar**, se o Kleos
-   permitir.
-7. Escreva a **Fraqueza Mítica**. Não é opcional.
+Dez decisões, em ordem. Cada passo diz **o que você escolhe** e **onde está a
+tabela**. Uma criatura fica pronta em dez minutos, e nenhuma delas precisa de
+conta na hora da mesa.
+
+### Passo 1 · O que ela é, em uma frase
+
+Antes de qualquer número. *"Um cão de bronze que caça pelo cheiro do medo."*
+A frase decide quase tudo que vem depois — se você não consegue escrevê-la, o
+monstro ainda não existe.
+
+### Passo 2 · O Kleos
+
+O degrau dela na escala, de 1 a 11. Se é o inimigo central de uma sessão, use o
+**Kleos do Grupo** ([seção 3](#secao-3)). Se é um capanga que aparece em bando,
+use três ou quatro degraus abaixo.
+
+### Passo 3 · A linha da Tábua
+
+Copie PV, DEF, ataque, dano por rodada, Efeito e as defesas passivas da
+[seção 10](#secao-10). **Não invente números fora da Tábua.** Tudo que a criatura
+tem de especial sai do Orçamento, não de um PV inflado.
+
+### Passo 4 · Tamanho, movimento e sentidos
+
+O que decide como ela ocupa a mesa. Nada aqui custa Orçamento.
+
+| Tamanho | Espaço | Movimento comum | Alcance natural |
+|---|---|---|---|
+| **Miúdo** | 0,75 m | 6 m | 1,5 m |
+| **Pequeno** | 1,5 m | 7,5 m | 1,5 m |
+| **Médio** | 1,5 m | 9 m | 1,5 m |
+| **Grande** | 3 m | 9 m | 3 m |
+| **Enorme** | 4,5 m | 12 m | 4,5 m |
+| **Colossal** | 6 m ou mais | 12 m | 6 m |
+
+Um deslocamento **especial** — voo, escavação, natação, escalada — é livre
+enquanto for o que a criatura *é*: uma harpia voa, uma serpente marinha nada.
+Voo em algo que não deveria voar é um **Traço**.
+
+| Sentido | O que faz |
+|---|---|
+| **Visão no escuro** | enxerga na escuridão até 18 m como se fosse penumbra |
+| **Faro** | Vantagem para rastrear e para achar criatura escondida a até 9 m |
+| **Sentido sísmico** | percebe qualquer coisa em contato com o chão, a até 18 m |
+| **Percepção às cegas** | não depende de visão; ignora Cego, invisibilidade e escuridão |
+| **Visão da Névoa** | enxerga através de disfarce da Névoa e ilusão |
+
+Dê **um** sentido especial de graça, e o segundo como Traço. Percepção às cegas
+e Visão da Névoa custam sempre um Traço.
+
+### Passo 5 · O Arquétipo
+
+Uma escolha só, na [seção 11](#secao-11). Ele troca números entre si sem mudar o
+Kleos: mais PV por menos DEF, mais velocidade por menos couro.
+
+### Passo 6 · Repartir o dano
+
+O dano por rodada da Tábua é um **total**, não o dano de um golpe. Reparta entre
+os ataques da criatura pela [seção 12](#secao-12). É aqui que se decide se ela
+morde uma vez forte ou três vezes rápido.
+
+### Passo 7 · Gastar o Orçamento
+
+Traços e Poderes, nas quantidades da tabela de Orçamento. **Traço** é passivo e
+está sempre ligado ([seção 13](#secao-13)); **Poder** é uma ação, com Recarga ou
+número de usos ([seção 14](#secao-14)).
+
+### Passo 8 · As peças de chefe
+
+Só se o Kleos permitir: **Arremetidas** a partir do 6 ([seção 15](#secao-15)),
+**Recusas** a partir do 5 ([seção 16](#secao-16)), **Vontade do Lugar** a partir
+do 8, **Presença** a partir do 9.
+
+> **Isto custa Kleos, e foi medido.** Uma criatura com Poder de área *e*
+> Arremetidas vale cerca de **+1 Kleos** em cima da linha crua da Tábua — conte
+> assim ao montar o encontro. Os números estão no fim da [seção 15](#secao-15).
+
+### Passo 9 · A Fraqueza Mítica
+
+Obrigatória, sem exceção ([seção 19](#secao-19)). Se você não consegue escrever
+como derrotá-la sem força bruta, ela não está pronta.
+
+### Passo 10 · Escrever a ficha
+
+Modelo de registro na [seção 20](#secao-20). Leia em voz alta: se você não
+consegue narrar o primeiro turno dela sem consultar nada, simplifique.
 
 ---
 
@@ -215,6 +293,32 @@ Custos típicos:
 Uma criatura **Atordoada, Paralisada ou Inconsciente não usa Arremetidas**. É
 assim que o controle continua valendo a pena contra chefes.
 
+### O que cada peça faz com a luta
+
+O motor de combate agora usa Poderes de área e Arremetidas, e não só o monstro
+cru. Trio com equipamento no Grau do nível, 1.500 combates por célula:
+
+| Trio | Kleos | Cru | Só Arremetidas | Só Sopro | As duas |
+|---|---|---|---|---|---|
+| nível 9 | 7 | 100% | 99% | 76% | **63%** |
+| nível 13 | 8 | 100% | 100% | 82% | **60%** |
+| nível 17 | 9 | 100% | 100% | 92% | **78%** |
+| nível 20 | 9 | 100% | 100% | 99% | **94%** |
+
+*(taxa de vitória do grupo)*
+
+Três leituras que mudam como se monta um chefe:
+
+1. **A criatura completa vale +1 Kleos.** Uma completa de Kleos 7 dá o mesmo trabalho que uma crua de Kleos 8, e isso se repetiu nos quatro cenários. Ao montar o encontro, **conte a criatura de chefe um degrau acima da linha dela**.
+2. **O Sopro é o que decide.** Sozinho, ele derruba a vitória do grupo de 100% para 76%. Dano em área rompe a lógica de concentrar tudo no Guardião.
+3. **Arremetida não mata o grupo, ela gasta o grupo.** A taxa de vitória quase não muda, mas os heróis de pé no fim caem de **2,1 para 1,2**. É desgaste, e é exatamente para isso que ela existe: o chefe sozinho deixa de agir uma vez enquanto o grupo age quatro.
+
+**Recusas continuam fora da conta.** Elas anulam uma Rolagem de Efeito, e os
+heróis do simulador só atacam — não há Efeito para recusar. Até que o motor saiba
+usar controle do lado dos jogadores, o valor da Recusa é julgamento do Mestre.
+
+Para reproduzir: `sim/criaturas.py`.
+
 ---
 
 ## 16. Recusas *(Kleos 5+)*
@@ -328,11 +432,9 @@ diferentes sobre o mesmo combate.
 2. Arquétipos trocam números, nunca os aumentam de graça.
 3. Nenhum Poder tira um personagem do combate por mais de uma rodada sem nova Rolagem de Efeito no fim do turno do alvo.
 4. Efeitos de derrota instantânea exigem aviso dentro da ficção.
-5. Arremetidas só existem a partir de Kleos 6, e param quando a criatura é
-   Atordoada.
+5. Arremetidas só existem a partir de Kleos 6, e param quando a criatura é Atordoada.
 6. Recusas são anunciadas em voz alta.
 7. Toda criatura tem uma Fraqueza Mítica descobrível.
-8. Monstros de Kleos 1–8 se dissolvem; de 9–10 são derrotados, não mortos; de 11
-   precisam de um Selo.
+8. Monstros de Kleos 1–8 se dissolvem; de 9–10 são derrotados, não mortos; de 11 precisam de um Selo.
 9. Inimigos 4 ou mais degraus abaixo do maior Kleos presente são cenário.
 10. Se o combate ficou justo mas chato, o problema não era o Kleos — era o mapa.
