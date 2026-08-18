@@ -63,13 +63,13 @@ o personagem muda de patamar quando o Grau dele muda.
 O **Kleos do Grupo** é a soma. Para não fazer conta com frações na mesa, consulte
 direto:
 
-| Nível | 3 heróis | 4 heróis | 5 heróis |
-|---|---|---|---|
-| 1–4 | 3 | 4 | 4 |
-| 5–8 | 5 | 5 | 6 |
-| 9–12 | 7 | 7 | 8 |
-| 13–16 | 8 | 8 | 9 |
-| 17–20 | 9 | 10 | 10 |
+| Nível | 3 heróis | 4 heróis | 5 heróis | 6 heróis |
+|---|---|---|---|---|
+| 1–4 | 3 | 4 | 4 | 4 |
+| 5–8 | 5 | 5 | 6 | 6 |
+| 9–12 | 7 | 7 | 8 | 8 |
+| 13–16 | 8 | 8 | 9 | 9 |
+| 17–20 | 9 | 10 | 10 | 10 |
 
 **Esta tabela não é a soma dos valores de cima, e é de propósito.** Somar
 funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.
@@ -96,10 +96,17 @@ e um jogador a mais soma bem menos que isso: ele traz um corpo e uma ação, mas
 não traz PV de monstro nem dano de monstro junto. Multiplicar heróis por Kleos
 supõe uma escala fina que a Tábua não tem.
 
-A tabela acima é a medida: **o quarto jogador raramente move o degrau, e o
-quinto vale +1**. Quando quiser apertar uma mesa grande sem subir um degrau
-inteiro, some criaturas menores pelas fórmulas da [seção 5](#secao-5) — é para
-isso que elas existem.
+A tabela acima é a medida: **o quarto jogador raramente move o degrau, o quinto
+vale +1, e o sexto não move nada**. Um sexto herói entra como folga, não como
+degrau: no nível 3 ele leva o grupo de 61% para 92% de vitória contra o mesmo
+Kleos, e no 17 para 94%.
+
+A única exceção está no topo: **seis heróis de nível 20 aguentam um Kleos 11**,
+com 78% de vitória. Só que Kleos 11 é Cataclisma, e Cataclisma não cai por dano —
+cai pelo Selo ([seção 7](#secao-7)). A conta permite; a ficção continua mandando.
+
+Quando quiser apertar uma mesa grande sem subir um degrau inteiro, some criaturas
+menores pelas fórmulas da [seção 5](#secao-5) — é para isso que elas existem.
 
 Para reproduzir: `sim/completo.py`.
 

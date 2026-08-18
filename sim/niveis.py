@@ -143,19 +143,29 @@ def kleos_do_personagem(nivel: int) -> float:
 # não move o Kleos; o quinto vale +1. A escala sobe 35% por degrau e um jogador
 # a mais soma bem menos que isso.
 KLEOS_JUSTO = {
-    1: {3: 3, 4: 4, 5: 4},      # níveis 1–4
-    2: {3: 5, 4: 5, 5: 6},      # níveis 5–8
-    3: {3: 7, 4: 7, 5: 8},      # níveis 9–12
-    4: {3: 8, 4: 8, 5: 9},      # níveis 13–16
-    5: {3: 9, 4: 10, 5: 10},    # níveis 17–20
+    1: {3: 3, 4: 4, 5: 4, 6: 4},      # níveis 1–4
+    2: {3: 5, 4: 5, 5: 6, 6: 6},      # níveis 5–8
+    3: {3: 7, 4: 7, 5: 8, 6: 8},      # níveis 9–12
+    4: {3: 8, 4: 8, 5: 9, 6: 9},      # níveis 13–16
+    5: {3: 9, 4: 10, 5: 10, 6: 10},   # níveis 17–20
 }
 
 
 def kleos_do_grupo(nivel: int, quantos: int = 3) -> int:
-    """Kleos do encontro justo — é o que o Mestre consulta."""
+    """Kleos do encontro justo — é o que o Mestre consulta.
+
+    Medido de 3 a 6 jogadores. O sexto jogador não move o degrau em nenhuma
+    faixa: no nível 3 ele leva o grupo de 61% para 92% de vitória contra o mesmo
+    Kleos, e no 17 para 94%. A única exceção é o topo — seis heróis de nível 20
+    aguentam um Kleos 11 a 78%, mas Kleos 11 é Cataclisma e cai pelo Selo, não
+    por dano.
+
+    Acima de seis, cada dois jogadores extras somam um degrau. Isso é
+    extrapolação: nunca foi medido, e mesa de sete é problema de outra ordem.
+    """
     faixa = KLEOS_JUSTO[grau(nivel)]
     if quantos in faixa:
         return faixa[quantos]
-    # mesas fora de 3 a 5: cada jogador além do quinto soma meio degrau
-    base = faixa[5] if quantos > 5 else faixa[3]
-    return min(11, max(1, base + (quantos - 5) // 2 if quantos > 5 else base))
+    if quantos < 3:
+        return max(1, faixa[3] - (3 - quantos))
+    return min(11, faixa[6] + (quantos - 6) // 2)

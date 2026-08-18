@@ -228,7 +228,8 @@ def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17,
 # Quem entra na mesa, por tamanho de grupo.
 MESA = {3: ("guardiao", "furioso", "oraculo"),
         4: ("guardiao", "furioso", "oraculo", "furioso"),
-        5: ("guardiao", "furioso", "oraculo", "furioso", "guardiao")}
+        5: ("guardiao", "furioso", "oraculo", "furioso", "guardiao"),
+        6: ("guardiao", "furioso", "oraculo", "furioso", "guardiao", "oraculo")}
 
 
 def montar_fera(nivel: int, kleos_grupo: int) -> Lutador:
