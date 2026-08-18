@@ -447,6 +447,13 @@ table.viva select { font-size: .72rem; }
               <option value="afrodite">Afrodite</option>
                           <option value="hermes">Hermes</option>
               <option value="dionisio">Dionísio</option>
+              <option value="hecate">Hécate</option>
+              <option value="iris">Íris</option>
+              <option value="hipnos">Hipnos</option>
+              <option value="nemesis">Nêmesis</option>
+              <option value="nice">Nice</option>
+              <option value="hebe">Hebe</option>
+              <option value="tique">Tique</option>
 </select></div>
           <div class="f"><label>Afinidade Elemental</label><select id="afinidade"><option value="">Escolha o Parente</option></select></div>
           <div class="f"><label>Atributo Divino</label>
@@ -899,7 +906,14 @@ var PARENTES = {
   demeter: { nome: "Deméter", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Natureza"], passiva: "Toque Verdejante: Vantagem para achar comida e cura diária igual à proficiência." },
   afrodite: { nome: "Afrodite", bonus: { carisma: 2, sabedoria: 1 }, afinidades: ["Encanto"], passiva: "Palavra Fácil: uma vez por cena, um mortal obedece uma ordem curta e razoável sem teste, fora de combate." },
   hermes: { nome: "Hermes", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Ar"], passiva: "Pé Ligeiro: +3 m de movimento, proficiência em Prestidigitação e, uma vez por cena, você acha um caminho." },
-  dionisio: { nome: "Dionísio", bonus: { carisma: 2, constituicao: 1 }, afinidades: ["Natureza", "Encanto"], passiva: "Delírio Leve: resistência a veneno e, uma vez por combate, ação bônus para dar Desvantagem na próxima rolagem de quem te ouvir." }
+  dionisio: { nome: "Dionísio", bonus: { carisma: 2, constituicao: 1 }, afinidades: ["Natureza", "Encanto"], passiva: "Delírio Leve: resistência a veneno e, uma vez por combate, ação bônus para dar Desvantagem na próxima rolagem de quem te ouvir." },
+  hecate: { nome: "Hécate", bonus: { inteligencia: 2, sabedoria: 1 }, afinidades: ["Psíquico", "Trevas"], passiva: "Olho da Névoa: enxerga através de disfarce de Névoa e, uma vez por cena, sente se há magia num objeto ou lugar." },
+  iris: { nome: "Íris", bonus: { carisma: 2, sabedoria: 1 }, afinidades: ["Luz"], passiva: "Mensagem de Íris: Vantagem para notar cor e padrão e, uma vez por cena, fala com um conhecido a qualquer distância com água e luz." },
+  hipnos: { nome: "Hipnos", bonus: { sabedoria: 2, constituicao: 1 }, afinidades: ["Psíquico"], passiva: "Sono Leve: não pode ser Surpreendido dormindo e, uma vez por cena fora de combate, deixa alguém sonolento com Desvantagem na próxima Percepção ou Intuição." },
+  nemesis: { nome: "Nêmesis", bonus: { forca: 2, destreza: 1 }, afinidades: ["Físico"], passiva: "Dívida Cobrada: uma vez por combate, quem te acertar dá Vantagem ao seu próximo ataque contra ele." },
+  nice: { nome: "Nice", bonus: { destreza: 2, forca: 1 }, afinidades: ["Ar", "Físico"], passiva: "Instinto de Vitória: Vantagem em Iniciativa e, uma vez por combate, refaz um ataque que errou por 2 ou menos." },
+  hebe: { nome: "Hebe", bonus: { constituicao: 2, carisma: 1 }, afinidades: ["Natureza"], passiva: "Vigor Jovem: cada Tratamento cura 2 PV a mais e, uma vez por dia, remove um nível de Exausto de alguém ao toque." },
+  tique: { nome: "Tique", bonus: { carisma: 2, destreza: 1 }, afinidades: ["Encanto"], passiva: "Virada da Sorte: uma vez por cena, refaz um d20 seu que saiu 5 ou menos — o segundo resultado vale." }
 };
 
 var PERICIAS_CLASSE = {

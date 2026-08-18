@@ -532,6 +532,15 @@ th {
 }
 td.num, th.num { text-align: right; }
 
+/* Tabelas de Parente Divino: quatro colunas, e as três primeiras são curtas.
+   Sem largura declarada o navegador dava 5% para "Bônus" e quebrava o próprio
+   cabeçalho no meio — "BÔN / US". Largura fixa resolve, e a coluna da passiva
+   fica com o que sobra, que é onde o texto realmente mora. */
+table.parentes { table-layout: fixed; }
+table.parentes th:nth-child(1), table.parentes td:nth-child(1) { width: 23%; }
+table.parentes th:nth-child(2), table.parentes td:nth-child(2) { width: 11%; }
+table.parentes th:nth-child(3), table.parentes td:nth-child(3) { width: 15%; }
+
 /* ============ CAIXA DE DADOS ============ */
 .rolador {
   background: #16100E;

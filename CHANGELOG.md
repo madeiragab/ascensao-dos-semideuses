@@ -4,6 +4,36 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.16.1] - 2026-08-18
+
+### Dezoito parentes divinos
+
+- Entram **Hermes** e **Dionísio**, que fecham os olimpianos com filhos, e sete
+  **deuses menores** que no cânone têm chalé e descendência: **Hécate, Íris,
+  Hipnos, Nêmesis, Nice, Hebe e Tique**.
+- Todos no mesmo molde, e é regra explícita no livro: **+2 num atributo, +1 em
+  outro, uma Afinidade e uma passiva pequena** — uma vantagem permanente miúda
+  mais um efeito de uma vez por cena, combate ou dia. Nenhum ganha luta sozinho,
+  e um filho de deus menor vale mecanicamente o mesmo que um filho de Zeus.
+- **Hera, Ártemis e Héstia** ficam de fora, e o livro passa a dizer por quê: a
+  deusa do casamento não tem filhos fora dele, e as outras duas fizeram voto de
+  castidade. Elas entram na campanha como aliadas, patronas ou problemas.
+- A nota abre a porta para parentes fora da lista, com a régua para montar um.
+- A Ficha do Herói acompanha: os dezoito no seletor, com bônus, Afinidade e
+  passiva automáticos.
+
+### Layout
+
+- **Estouro na tela, no Capítulo Onze.** O cartão "Montar uma habilidade" vazava
+  400 px numa coluna de 270: `.dado` tem `white-space: nowrap`, o que é certo no
+  corpo do texto — para `2d8` não virar "2d" numa linha e "8" na outra — e errado
+  num cartão estreito. O cartão passa a usar bloco de fórmula, e o CSS ganha a
+  regra de que dentro de cartão o dado quebra linha. Vale para todo cartão futuro.
+- **Tabelas de Parente com largura fixa.** Sem isso o navegador dava 5% à coluna
+  "Bônus" e quebrava o próprio cabeçalho no meio, "BÔN / US".
+- Conferido: os quatro livros impressos ficam inteiros dentro da mancha do
+  `@page`, e a página do Livro I não tem nenhum elemento vazando na tela.
+
 ## [0.16.0] - 2026-08-18
 
 Quatro coisas que faltavam e não eram balanceamento: uma rede embaixo da ficha,
