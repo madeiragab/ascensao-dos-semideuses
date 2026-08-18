@@ -376,7 +376,7 @@ table.viva select { font-size: .72rem; }
   </div>
 
   <div class="comandos">
-    <button class="acao" id="baixarPdfBtn" type="button" onclick="baixarPdf()">Baixar em PDF</button>
+    <button class="acao" id="baixarPdfBtn" type="button" onclick="baixarPdf()">Baixar o Herói em PDF</button>
     <button class="acao fantasma" id="importarPdfBtn" type="button"
             onclick="document.getElementById('arquivoPdf').click()">Importar PDF</button>
     <input type="file" id="arquivoPdf" accept="application/pdf,.pdf" hidden
@@ -1481,10 +1481,39 @@ function trocarAba(qual) {
       botao.classList.toggle("ativa", ativa);
       botao.setAttribute("aria-selected", ativa ? "true" : "false");
     });
+  // O botão diz o que vai sair, porque quem baixa é a aba aberta.
+  var baixar = document.getElementById("baixarPdfBtn");
+  if (baixar && !baixar.disabled) {
+    baixar.textContent = qual === "fera" ? "Baixar a Fera em PDF"
+                                         : "Baixar o Herói em PDF";
+  }
 }
 
-/* A fera tem folha própria no PDF. Sem nome não existe fera, e a folha inteira
-   sai da impressão — ninguém quer uma página em branco no meio da ficha. */
+/* Quem manda no que sai e a aba aberta: na aba do Heroi saem as folhas do
+   heroi, na aba da Fera sai so a folha dela. */
+function abaAberta() {
+  var fera = document.getElementById("abaFera");
+  return fera && !fera.classList.contains("oculta") ? "fera" : "heroi";
+}
+
+function recortarFolhasPelaAba() {
+  var impressao = document.getElementById("fichaImpressao");
+  var folhaFera = document.getElementById("pdfPaginaFera");
+  if (abaAberta() === "fera") {
+    // Sem fera preenchida a folha dela nem existe: cai de volta na do heroi.
+    if (folhaFera) {
+      Array.prototype.slice.call(impressao.querySelectorAll(".pdf-pagina"))
+        .forEach(function (folha) { if (folha !== folhaFera) folha.remove(); });
+    }
+  } else if (folhaFera) {
+    folhaFera.remove();
+  }
+  renumerarFolhas(impressao);
+}
+
+
+/* A fera tem folha própria no PDF. Sem nome não existe fera, e a folha
+   inteira sai da impressão — ninguém quer página em branco no meio. */
 function prepararFera() {
   var nome = document.getElementById("feraNome").value.trim();
   var folhaFera = document.getElementById("pdfPaginaFera");
@@ -1791,6 +1820,9 @@ function prepararImpressao() {
     " outros = DEF " + valorCalc("def");
   var equipamentoLivre = valorCampo("equipamento");
   porTexto("pEquipamento", linhaDefesa + (equipamentoLivre === "—" ? "" : "\n" + equipamentoLivre));
+
+  // A aba aberta decide quais folhas sobram no documento.
+  recortarFolhasPelaAba();
 }
 
 window.addEventListener("beforeprint", function () {
@@ -1810,11 +1842,14 @@ function esperarImagem(img) {
 }
 
 function nomeDoPdf() {
-  var nome = valorCampo("nome");
+  // O arquivo acompanha a aba: fera-ferrugem.pdf, ficha-sid-valentin.pdf.
+  var daFera = abaAberta() === "fera"
+    && !!document.getElementById("feraNome").value.trim();
+  var nome = daFera ? document.getElementById("feraNome").value : valorCampo("nome");
   if (nome === "—") nome = "heroi";
   nome = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-zA-Z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").toLowerCase();
-  return "ficha-" + (nome || "heroi") + ".pdf";
+  return (daFera ? "fera-" : "ficha-") + (nome || "heroi") + ".pdf";
 }
 
 /* ---------- PDF editável: início ---------- */
