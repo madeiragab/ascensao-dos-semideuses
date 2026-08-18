@@ -909,6 +909,12 @@ pre.bloco-codigo {
    bastante para estourar a mancha, por mais nowrap que ele seja. */
 .dado { max-width: 100%; overflow-wrap: anywhere; }
 
+/* Dentro de um cartão a coluna é estreita — uns 270 px — e um nowrap longo
+   vaza para fora da grade. Ali o dado quebra linha; o nowrap continua valendo
+   no corpo do texto, onde ele serve para 2d8 não virar "2d" numa linha e "8"
+   na outra. */
+.cartao .dado, .criatura .status .dado { white-space: normal; }
+
 @media print {
   pre.bloco-codigo {
     white-space: pre-wrap;
@@ -1753,8 +1759,25 @@ pre.bloco-codigo {
         <tr><td><strong>Afrodite</strong><br><span style="color:var(--texto-suave)">beleza, desejo, persuasão</span></td>
             <td>+2 CAR<br>+1 SAB</td><td>Encanto</td>
             <td><b>Palavra Fácil.</b> Uma vez por cena, uma ordem curta e razoável dita a um mortal é obedecida sem teste — e ele acha que foi ideia dele. Não funciona em combate, nem contra o interesse claro dele.</td></tr>
+        <tr><td><strong>Hermes</strong><br><span style="color:var(--texto-suave)">viajantes, mensagens, ladrões</span></td>
+            <td>+2 DES<br>+1 CAR</td><td>Ar</td>
+            <td><b>Pé Ligeiro.</b> +3 m de movimento e proficiência em Prestidigitação. Uma vez por cena, você acha um caminho: uma passagem, um atalho ou a saída de um lugar em que entrou.</td></tr>
+        <tr><td><strong>Dionísio</strong><br><span style="color:var(--texto-suave)">vinho, festa, loucura, teatro</span></td>
+            <td>+2 CAR<br>+1 CON</td><td>Natureza ou Encanto</td>
+            <td><b>Delírio Leve.</b> Resistência a veneno. Uma vez por combate, ação bônus: uma criatura que possa te ouvir faz a próxima rolagem dela com Desvantagem — ela viu, por um instante, algo que não estava lá.</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>E os outros olimpianos?</strong> <strong>Hera</strong> é a deusa do casamento e
+    não tem filhos fora dele. <strong>Ártemis</strong> e <strong>Héstia</strong> fizeram voto
+    de castidade — a caçadora e a guardiã da lareira não têm filhos, e ponto. As três
+    aparecem na sua campanha como aliadas, patronas ou problemas; nunca como parente.</p>
+    <p>Se você quer alguém fora desta lista — um deus menor, um titã, um deus de outro
+    panteão —, monte com o Mestre no mesmo formato: <strong>+2 num atributo, +1 em outro,
+    uma Afinidade e uma passiva pequena</strong> que valha uma vez por cena ou por combate.
+    Olhe as nove acima como régua: nenhuma delas ganha luta sozinha.</p>
   </div>
 
   <h4>Atributo Divino</h4>
@@ -4296,9 +4319,9 @@ pre.bloco-codigo {
     <div class="cartao">
       <h5>Montar uma habilidade</h5>
       <p class="etiqueta">o motor em duas linhas</p>
-      <p><span class="dado">pontos = duração + efeitos + alcance ± modificadores</span><br>
-      <span class="dado">custo = pontos × Grau</span><br>
-      A duração já traz o primeiro ponto de efeito. Teto: 5 pontos no Grau 1, 6 daí em
+      <p class="formula">pontos = duração + efeitos<br>+ alcance ± modificadores</p>
+      <p class="formula">custo = pontos × Grau</p>
+      <p>A duração já traz o primeiro ponto de efeito. Teto: 5 pontos no Grau 1, 6 daí em
       diante.</p>
     </div>
     <div class="cartao">
