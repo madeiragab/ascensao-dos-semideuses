@@ -4,6 +4,51 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.16.0] - 2026-08-18
+
+Quatro coisas que faltavam e não eram balanceamento: uma rede embaixo da ficha,
+uma cena mostrando o jogo acontecer, a página que fica no meio da mesa, e uma
+primeira sessão pronta para rodar.
+
+### A ficha passa a ser conferida contra o simulador *(`sim/ficha.py`)*
+
+- A Ficha do Herói calcula PV, SP, MP, proficiência, Grau e Teto em JavaScript; o
+  `niveis.py` calcula tudo outra vez em Python, e é sobre o Python que todo o
+  balanceamento foi medido. **Eram duas implementações da mesma regra e ninguém
+  tinha comparado as duas.**
+- O teste lê as constantes e as fórmulas direto do `template/ficha.html` e compara
+  nos vinte níveis, nas três classes.
+- **Achou na primeira execução:** os números batiam, mas a ficha explicava o Teto
+  de Custo com a fórmula antiga — "4 + metade do nível" —, de antes da reforma do
+  Grau. Valor certo, explicação errada ao lado. Corrigido, e o teste agora também
+  confere os textos de ajuda.
+
+### Livro do Jogador — Capítulo Onze: A mesa acontecendo
+
+- **Um exemplo de jogo**: uma cena inteira, dado a dado, com iniciativa, Ataque
+  Feroz, Efeito contra Reflexos, condição Preso, Anteparo, um crítico, e a Névoa
+  explicando o combate para uma senhora com sacola. Termina com um problema novo
+  em vez de um saque.
+- **A página do meio da mesa**: oito cartões de consulta rápida do jogador — o
+  turno, as ações, Vantagem e Desvantagem, as três rolagens, o que gasta o quê, o
+  motor de habilidade em duas linhas, a Agonia e o Ímpeto.
+- O bloco de diálogo `.mesa` saiu do Guia e foi para o CSS comum, usado pelos dois
+  livros.
+
+### Água de Ferrugem — aventura de estreia *(`regras/agua-de-ferrugem.md`)*
+
+- Três a quatro horas, três a cinco semideuses de nível 1, seis cenas, com todos
+  os blocos de criatura prontos.
+- Ensina na ordem em que aparece: rolar contra uma CD, a Névoa explicando o mundo
+  mortal, um combate simples, uma Fraqueza Mítica que evita a luta, um chefe com
+  **Recusa acontecendo na frente da mesa**, e um final de quatro saídas em que
+  nenhuma é limpa.
+- O Guia do Mestre aponta para ela.
+
+### Regressão
+
+- 18 arquivos.
+
 ## [0.15.3] - 2026-08-18
 
 Duas medições que faltavam: mesa de seis e semideus contra semideus.

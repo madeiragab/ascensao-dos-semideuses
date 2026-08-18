@@ -420,6 +420,20 @@ p.abre::first-letter {
 .nota strong { color: var(--bronze); }
 .nota p:last-child { margin-bottom: 0; }
 
+/* ============ FALA DE MESA ============ */
+/* Diálogo entre Mestre e jogadores: o exemplo de jogo do Livro I e as cenas
+   de exemplo do Guia usam o mesmo bloco. */
+.mesa {
+  border-left: 3px solid var(--bronze);
+  padding: .2rem 0 .2rem 1.1rem;
+  margin: 1.4rem 0;
+  font-size: .96rem;
+}
+.mesa p { margin: 0 0 .5rem; }
+.mesa p:last-child { margin-bottom: 0; }
+.mesa b { color: var(--acento); font-weight: 700; }
+.mesa em { color: var(--texto-suave); }
+
 /* ============ CARTÕES ============ */
 .grade {
   display: grid;
@@ -955,6 +969,8 @@ pre.bloco-codigo {
       <span class="sub">O que você ganha, do nível 1 ao 20</span></span></a></li>
     <li><a href="#cap10"><span class="alg">X</span><span><span class="tit">Uma ficha pronta</span>
       <span class="sub">As sete etapas aplicadas do começo ao fim</span></span></a></li>
+    <li><a href="#cap11"><span class="alg">XI</span><span><span class="tit">A mesa acontecendo</span>
+      <span class="sub">Uma cena inteira, dado a dado, e a folha de consulta rápida</span></span></a></li>
   </ol>
 </nav>
 
@@ -4142,6 +4158,171 @@ pre.bloco-codigo {
     <p><strong>Repare no que aconteceu.</strong> O Carisma 8 foi escolha: Cássia é péssima em
     conversar, e isso força o grupo a resolver conversas sem ela — o que gera cena. Uma ficha
     boa tem uma fraqueza que o jogador queria ter.</p>
+  </div>
+</section>
+
+<section class="capitulo" id="cap11">
+  <div class="abertura">
+    <span class="alg">Capítulo Onze</span>
+    <h2>A mesa acontecendo</h2>
+    <p>Uma cena inteira, dado a dado — e a página que fica no meio da mesa</p>
+  </div>
+
+  <p class="abre">Regra explicada é uma coisa; regra acontecendo é outra. O que vem abaixo é
+  uma cena curta, do jeito que ela soa numa mesa de verdade: o Mestre descreve, o jogador
+  responde, alguém rola, e a mesa segue. Nada aqui é regra nova — é tudo o que você já leu,
+  em movimento.</p>
+
+  <h3>A cena</h3>
+
+  <p>Três semideuses de nível 3 — <strong>Cássia</strong>, Guardiã filha de Ares;
+  <strong>Nero</strong>, Furioso filho de Netuno; <strong>Íris</strong>, Oráculo filha de
+  Atena — perseguem um cão do inferno até o estacionamento de um mercado, às três da tarde.</p>
+
+  <div class="mesa">
+    <p><b>Mestre:</b> O cão para entre dois carros. Do tamanho de uma moto, pelo grudado,
+    fumaça saindo da boca. Tem uma senhora com sacola a uns dez metros, e ela não está
+    correndo — para ela vocês estão parados perto de um cachorro grande. Iniciativa.</p>
+    <p><b>Nero:</b> 14 mais 2, dezesseis.</p>
+    <p><b>Íris:</b> Onze.</p>
+    <p><b>Cássia:</b> Sete. Ótimo.</p>
+    <p><b>Mestre:</b> Nero, Íris, cão, Cássia. Nero.</p>
+  </div>
+
+  <div class="mesa">
+    <p><b>Nero:</b> Antes de bater — a senhora vai ver a espada?</p>
+    <p><b>Mestre:</b> A Névoa cuida disso. Ela vai ver você com um taco de beisebol, ou com
+    nada nas mãos. O que ela vai ver é <em>três adolescentes cercando um cachorro</em>, e
+    isso já é ruim o suficiente.</p>
+    <p><b>Nero:</b> Então rápido. Ataque Feroz: com Vantagem. Dezoito e cinco… fico com
+    dezoito, mais 5, vinte e três.</p>
+    <p><b>Mestre:</b> DEF 13. Acerta.</p>
+    <p><b>Nero:</b> 1d10 mais 3… oito de dano. E lembra que o Feroz deixa o próximo ataque
+    contra mim com Vantagem também.</p>
+    <p><b>Mestre:</b> Lembro. O machado abre o flanco dele e ele grita — e o grito não é de
+    cachorro. A senhora deixa a sacola cair.</p>
+  </div>
+
+  <div class="mesa">
+    <p><b>Íris:</b> Eu queria prender ele. Tenho <em>Raízes da Névoa</em>: 2 pontos, Grau 1,
+    2 MP. Efeito contra Reflexos, Preso por uma rodada.</p>
+    <p><b>Mestre:</b> Reflexos dele é 15. Rola.</p>
+    <p><b>Íris:</b> Doze mais 5… dezessete. Passa.</p>
+    <p><b>Mestre:</b> As raízes sobem pelo asfalto e prendem as patas de trás. Ele fica
+    <strong>Preso</strong> — movimento zero, e ataques contra ele têm Vantagem. No fim do
+    turno dele você rola de novo para manter.</p>
+  </div>
+
+  <div class="mesa">
+    <p><b>Mestre:</b> O cão não consegue avançar, então morde quem está mais perto: Nero.
+    Ataque… quinze, contra DEF 13. E o Ataque Feroz do Nero me dá Vantagem, então rolo de
+    novo: dezenove. Acerta com folga. <span class="dado">2d6+2</span>… onze de dano.</p>
+    <p><b>Nero:</b> Onze? Eu tenho 24 PV. Treze agora.</p>
+    <p><b>Mestre:</b> Ele fecha a mandíbula no seu antebraço e sacode. Cássia, sua vez.</p>
+  </div>
+
+  <div class="mesa">
+    <p><b>Cássia:</b> Anteparo está ligado, né? Reduz o dano dos aliados perto de mim.</p>
+    <p><b>Mestre:</b> Uma vez por rodada, e você estava a três metros — pode reduzir 1. Nero,
+    catorze PV em vez de treze.</p>
+    <p><b>Cássia:</b> Boa. Aí eu ataco com Vantagem, porque ele está Preso. Vinte natural!</p>
+    <p><b>Mestre:</b> <strong>Crítico.</strong> Dobra os dados da arma.</p>
+    <p><b>Cássia:</b> <span class="dado">2d8</span> mais 3… quinze.</p>
+    <p><b>Mestre:</b> A espada entra embaixo da mandíbula e o cão desmancha em pó dourado no
+    meio do estacionamento. O pó cai devagar demais para ser normal.</p>
+    <p><em>Três rodadas. Nero levou onze de dano, Íris gastou 2 MP, e ninguém morreu.</em></p>
+  </div>
+
+  <div class="mesa">
+    <p><b>Mestre:</b> A senhora está de pé, a sacola no chão, laranjas rolando. Ela olha para
+    o Nero — que tem sangue no braço — e pergunta: <em>"Vocês estão bem? Eu chamo a
+    polícia?"</em></p>
+    <p><b>Nero:</b> Ah não.</p>
+    <p><b>Mestre:</b> E é isso que a Névoa faz. Ela não apagou vocês: deu a ela uma explicação
+    que cabe na cabeça dela. E a explicação que coube é que <em>três adolescentes brigaram
+    com um cachorro no estacionamento</em>.</p>
+  </div>
+
+  <div class="nota">
+    <p><strong>Repare no que aconteceu:</strong> nenhuma pausa para consultar livro. O Mestre
+    disse a DEF quando foi perguntado, disse a defesa passiva quando alguém foi usar Efeito, e
+    resolveu a Névoa narrando em vez de rolando. Três rodadas, dois recursos gastos, e a cena
+    terminou com um problema novo em vez de um saque.</p>
+  </div>
+
+  <div class="ornamento">❖</div>
+
+  <h3>A página do meio da mesa</h3>
+
+  <p>Imprima esta parte, ou deixe o livro aberto aqui. É tudo que um jogador consulta durante
+  uma sessão.</p>
+
+  <div class="grade">
+    <div class="cartao">
+      <h5>No seu turno</h5>
+      <p class="etiqueta">um de cada, e a ordem é sua</p>
+      <p><strong>Movimentação</strong> 9 m, divisível antes e depois da ação ·
+      <strong>Ação</strong> · <strong>Ação bônus</strong>, só se algo conceder ·
+      <strong>Interação simples</strong> sacar, abrir, pegar · <strong>uma fala</strong> ·
+      e a <strong>Reação</strong>, que acontece fora do seu turno.</p>
+    </div>
+    <div class="cartao">
+      <h5>Ações</h5>
+      <p class="etiqueta">as que aparecem toda sessão</p>
+      <p>Atacar · Correr · Desengajar · Esquivar · Ajudar · Esconder · Procurar ·
+      Preparar · Usar objeto · Estabilizar · usar Habilidade.</p>
+    </div>
+    <div class="cartao">
+      <h5>As duas palavras</h5>
+      <p class="etiqueta">substituem uma pilha de modificadores</p>
+      <p><strong>Vantagem:</strong> role dois d20 e use o maior. <strong>Desvantagem:</strong>
+      use o menor. Uma cancela a outra, e elas não se acumulam.</p>
+    </div>
+    <div class="cartao">
+      <h5>Quando rolar o quê</h5>
+      <p class="etiqueta">só existem três rolagens</p>
+      <p><strong>Teste</strong> contra uma CD · <strong>Ataque</strong> contra a DEF ·
+      <strong>Efeito</strong> contra Fortitude, Reflexos ou Vontade. Efeito nunca causa
+      crítico.</p>
+    </div>
+    <div class="cartao">
+      <h5>O que gasta o quê</h5>
+      <p class="etiqueta">e o que devolve</p>
+      <p><strong>SP</strong> técnicas e habilidades Físicas — volta inteiro num Descanso
+      Curto. <strong>MP</strong> habilidades Elementais e Médicas — só volta dormindo.
+      <strong>PV</strong> volta pela metade no Descanso Longo, e por inteiro só no
+      Interlúdio.</p>
+    </div>
+    <div class="cartao">
+      <h5>Montar uma habilidade</h5>
+      <p class="etiqueta">o motor em duas linhas</p>
+      <p><span class="dado">pontos = duração + efeitos + alcance ± modificadores</span><br>
+      <span class="dado">custo = pontos × Grau</span><br>
+      A duração já traz o primeiro ponto de efeito. Teto: 5 pontos no Grau 1, 6 daí em
+      diante.</p>
+    </div>
+    <div class="cartao">
+      <h5>Quando você cai</h5>
+      <p class="etiqueta">0 PV não é morte</p>
+      <p>Você fica <strong>Agonizante</strong> e rola no início de cada turno seu: 10 ou mais
+      é sucesso. Três sucessos, estabiliza; três falhas, morre. Um crítico contra você conta
+      como duas falhas. Recuperar 1 PV apaga a contagem.</p>
+    </div>
+    <div class="cartao">
+      <h5>Ímpeto</h5>
+      <p class="etiqueta">seu defeito rendendo</p>
+      <p>Aceitar uma Provocação da sua Húbris dá 1. Gaste para: Vantagem numa rolagem, somar
+      <span class="dado">1d6</span> depois de ver o resultado, recuperar 3 SP ou 3 MP, ou
+      transformar uma falha crítica em falha comum. Máximo 3, um por turno.</p>
+    </div>
+  </div>
+
+  <div class="destaque">
+    <span class="rotulo">As três coisas que a mesa mais esquece</span>
+    <p><strong>1.</strong> Recurso guardado é luta perdida — medido: o mesmo grupo vence 58%
+    das lutas batendo só com arma e 88% gastando MP e SP. <strong>2.</strong> Num duelo de um
+    contra um, controlar é armadilha: gaste a ação em dano. <strong>3.</strong> Ferimento
+    Grave impede Ressonância Elemental — quem está arrebentado não se cura no mar.</p>
   </div>
 </section>
 

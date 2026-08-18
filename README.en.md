@@ -168,6 +168,7 @@ python completo.py          # the whole game: abilities, control and Refusals
 python nevoa.py             # Mist magic: Formulae, Disbelief, Backlash
 python aliado.py            # how strong an Ally can be without becoming a player
 python duelo.py             # demigod vs demigod, and the control trap
+python ficha.py             # checks the character sheet against the simulator
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20
