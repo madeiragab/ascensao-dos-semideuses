@@ -451,6 +451,27 @@ def atualizar_estante(versao: str) -> None:
         p.write_text(novo, encoding="utf-8")
 
 
+def atualizar_readme(versao: str, data: str) -> None:
+    """Os dois README carregam a versão, e ela também não se escreve à mão.
+
+    Um número copiado em quatro lugares vira quatro números diferentes. Aqui só
+    existe um: o do topo do CHANGELOG.
+    """
+    d, mes, ano = data.split("-")[2], data.split("-")[1], data.split("-")[0]
+    carimbo = versao + " \u00b7 " + d + "/" + mes + "/" + ano + " \u00b7 [Changelog](CHANGELOG.md)"
+    for arquivo, rotulo in (("README.md", "Vers\u00e3o atual"),
+                            ("README.en.md", "Current version")):
+        alvo = RAIZ / arquivo
+        if not alvo.exists():
+            continue
+        texto = alvo.read_text(encoding="utf-8")
+        padrao = re.compile(r"(\*\*" + re.escape(rotulo) + r":\*\* )[^\n]*")
+        novo = padrao.sub(lambda m: m.group(1) + carimbo, texto, count=1)
+        if novo != texto:
+            alvo.write_text(novo, encoding="utf-8")
+
+
+
 def main() -> None:
     css = (TEMPLATE / "livro.css").read_text(encoding="utf-8")
     versao, data = versao_do_changelog()
@@ -506,6 +527,7 @@ def main() -> None:
     ))
 
     atualizar_estante(versao)
+    atualizar_readme(versao, data)
 
     montar("grimorio.html", "grimorio.html", css, {
         "CAPA": ler_b64("capa-grimorio"),

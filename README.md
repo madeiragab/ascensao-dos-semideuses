@@ -20,7 +20,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.14.2 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.16.2 · 18/08/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -182,7 +182,7 @@ mexer nos números:
 - **um Aliado montado como monstro morria em toda sessão** — 6% de sobrevivência no
   nível 9. Hoje ele usa a linha do Kleos do Grupo menos 2.
 
-### As quatro vezes em que o teste me contrariou
+### As sete vezes em que o teste me contrariou
 
 1. **O Ataque Pesado não tinha conserto numérico.** Eu ia trocar o −2/+5 por
    outro par de números. Varri sete variantes: nenhuma funciona enquanto o Ataque
@@ -201,6 +201,27 @@ mexer nos números:
    2¾ · 3 — um personagem de nível 20 vale menos de *três* vezes um de nível 1, não
    quatro. Um grupo de nível 15 seguindo a regra antiga seria mandado contra algo
    três degraus acima do que aguenta.
+5. **A conta de mesas grandes estava errada, e feio.** Kleos do Grupo era
+   multiplicação: quatro heróis de nível 5 valiam Kleos 7. Medido, esse encontro é
+   um massacre contra o grupo — **11% de vitória**; cinco heróis contra o Kleos 9
+   que a conta mandava vencem **0%**. A escala sobe 35% por degrau e um jogador a
+   mais soma bem menos que isso. Virou tabela medida: **o quarto jogador quase não
+   move o degrau, o quinto vale +1, e o sexto não move nada**.
+6. **O dano de arma não acompanhava o PV dos monstros.** Do nível 5 ao 20 o ataque
+   com arma crescia 15% enquanto o PV do encontro justo crescia 250%: um trio de
+   nível 20 levava **11,5 rodadas** e perdia uma luta em cada três. O conserto foi
+   dar **dados de arma** ao Grau do item — e o combate voltou a durar de 2 a 4
+   rodadas em toda a carreira.
+7. **Um Aliado montado como monstro morria toda sessão.** Construir NPC de combate
+   pelo Kleos que um herói "vale" dá **6% de sobrevivência no nível 9**. Ele agora
+   usa a linha do Kleos do Grupo menos 2, e sobrevive de 64% a 78% sem roubar o
+   dano dos jogadores.
+
+E uma que o **playtest de mesa** contrariou, sem simulador nenhum: eu havia medido
+a economia de MP dos marciais e descartado o problema com *"física paga SP"*. A
+mesa mostrou o furo — um filho de Netuno constrói água, não músculo, e das quatro
+habilidades que o jogador criou na ficção, três eram Elementais pagas em MP, com um
+pool de 8.
 
 ---
 
@@ -259,24 +280,32 @@ powershell -ExecutionPolicy Bypass -File test.ps1
 
 ## As dívidas do sistema
 
-O Livro do Jogador está completo para jogar do nível 1 ao 20. O que falta é
-refinamento:
+Os cinco livros estão completos para jogar do nível 1 ao 20, e o mapa do sistema
+não tem mais nenhuma linha vermelha. O que falta é de outra natureza:
 
-1. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
-   outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem,
-   que o motor não modela. Precisam de mesa, não de simulador.
-2. **Economia de dracmas em campanha.** Os preços e recompensas iniciais funcionam,
-   mas ainda falta medir inflação, manutenção e recompensas de arcos longos.
+1. **Playtest com mesa de verdade.** O único playtest completo foi solo, com dois
+   NPCs — e mesmo assim achou três coisas que dezoito arquivos de simulação não
+   tinham achado. Uma mesa com quatro pessoas discutindo tática vai achar outras.
+2. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
+   outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem.
+   Precisam de mesa, não de simulador.
+3. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
+   valem pelo que abrem de ficção, e nenhum motor de combate julga isso.
+4. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
+   fecham a conta de um item por arco; falta medir inflação e manutenção.
 
 ### Limites conhecidos do simulador
 
-- **Arremetidas e Recusas** não são modeladas, o que aumenta a margem de erro nos
-  degraus de Kleos 6 a 11 — as criaturas completas do Bestiário são mais perigosas
-  que a versão testada.
-- Condições **são** modeladas desde a calibragem do capítulo de Condições, mas só
-  três famílias: perder o turno, atacar com Desvantagem e sangramento por rodada.
-- Sem posicionamento nem distância: todos alcançam todos.
-- Ataques de oportunidade existem nas regras, mas não no simulador.
+- **Vontade do Lugar e Presença** entraram por aproximação: modeladas como
+  Desvantagem, e não como raiz, escuridão e chão que treme, cada uma com sua
+  defesa.
+- A Tábua de Kleos foi calibrada com um **trio**. Mesas de quatro a seis foram
+  medidas depois, mas fazem mais Rolagens de Efeito por rodada, o que empurra o
+  valor da Recusa para cima.
+- **Sem posicionamento nem distância**: todos alcançam todos. Ataques de
+  oportunidade existem nas regras e não no motor.
+- **O simulador joga sempre igual.** Ele não recua, não usa terreno, não negocia e
+  não foge. Jogador faz as quatro.
 
 ---
 

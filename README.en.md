@@ -23,7 +23,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The four times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.14.2 · [Changelog](CHANGELOG.md)
+**Current version:** 0.16.2 · 18/08/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -177,7 +177,7 @@ always better than that one". The **simulation** side runs thousands of complete
 fights with real dice, reaching what isolated math cannot: initiative order, target
 focus, resource spending, who drops first.
 
-### The four times the tests proved me wrong
+### The seven times the tests proved me wrong
 
 1. **Heavy Attack had no numerical fix.** I was going to swap −2/+5 for another
    pair. I swept seven variants: none works while Fierce Attack grants free
@@ -196,6 +196,25 @@ focus, resource spending, who drops first.
    character is worth less than *three* times a level-1 one, not four. A level-15
    party following the old rule would be sent against something three rungs above
    what it can survive.
+5. **The maths for large tables was badly wrong.** Party Kleos used to be
+   multiplication: four level-5 heroes were worth Kleos 7. Measured, that fight is
+   a slaughter against the party — **11% wins**; five heroes against the Kleos 9
+   the formula demanded win **0%**. The scale climbs 35% per rung and one more
+   player adds far less than that. It became a measured table: **the fourth player
+   barely moves the rung, the fifth is worth +1, and the sixth moves nothing**.
+6. **Weapon damage wasn't keeping up with monster HP.** From level 5 to 20 weapon
+   attacks grew 15% while the fair encounter's HP grew 250%: a level-20 trio needed
+   **11.5 rounds** and lost one fight in three. The fix was giving the item's Grade
+   **weapon dice** — combat is back to 2–4 rounds across the whole career.
+7. **An Ally built as a monster died every session.** Building a combat NPC on the
+   Kleos a hero "is worth" yields **6% survival at level 9**. It now uses the Party
+   Kleos minus 2 line, surviving 64% to 78% without stealing the players' damage.
+
+And one the **table playtest** proved wrong with no simulator at all: I had measured
+the martial classes' MP economy and dismissed the problem with *"physical abilities
+cost SP"*. The table showed the hole — a son of Neptune builds water, not muscle,
+and three of the four abilities the player invented in fiction were Elemental,
+paid in MP, on a pool of 8.
 
 ---
 
