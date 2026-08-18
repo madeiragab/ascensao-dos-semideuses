@@ -50,6 +50,25 @@ bônus vindo de dois itens não se acumula.
 deus: é concedido, herdado ou roubado, e o que ele faz é escrito pelo Mestre.
 Nenhum teste de Manufatura chega lá.
 
+### Itens que acordam
+
+Consciência é um Aprimoramento de **2 pontos**, e exige tamanho — ninguém acorda
+uma faca de cozinha. O **elo psíquico** é a conversa entre o item e quem está
+sintonizado com ele, sem voz e sem gesto.
+
+| Grau | Consciência | Elo psíquico |
+|---|---|---|
+| Mortal · Consagrado | não acorda; pode ter voz, mas não pensa | — |
+| **Heroico** | 2 pontos: nome, memória e opinião | 18 m |
+| **Mítico** | 2 pontos: conversa à distância e sente o entorno | 100 m |
+| **Lendário** | 2 pontos: alcança a cidade; sabe se você está vivo ou ferido | 1 km |
+| **Divino** | vem junto, não se compra | qualquer distância no mesmo plano |
+
+Fora do alcance sobra a **sensação**: você sabe que ele existe e se está inteiro,
+e nada mais. Um item Consciente **ocupa sintonia** — é uma relação, não uma
+ferramenta. E consciência não é obediência: a vontade dele nasce de como foi
+feito e de quem o fez.
+
 ### Os pontos, e o que eles compram
 
 Os pontos compram **Aprimoramentos** nas tabelas do Capítulo Sete, no Grau em que

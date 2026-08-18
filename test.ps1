@@ -20,7 +20,8 @@ $testes = @(
     'forja.py',
     'criaturas.py',
     'completo.py',
-    'nevoa.py'
+    'nevoa.py',
+    'aliado.py'
 )
 
 Write-Output 'regressão numérica:'

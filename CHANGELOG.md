@@ -4,6 +4,59 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.15.2] - 2026-08-18
+
+Conserto vindo da mesa. Um playtest solo do Liam Davis — Furioso de Netuno,
+Afinidade Água, do nível 1 ao 5 — apontou três coisas que nenhum simulador tinha
+achado, e uma quarta virou regra nova.
+
+### O marcial de afinidade elemental
+
+- A economia de MP dos marciais tinha sido medida e descartada com "física paga
+  SP". A mesa mostrou o furo: um filho de Netuno constrói água. Das quatro
+  habilidades criadas na ficção, três eram Elementais pagas em MP — e o
+  personagem tinha 8.
+- Medido: quatro conjurações pequenas por dia no nível 1, e **duas** no nível 20,
+  porque o preço do ponto cresce com o Grau e o MP do marcial não. No playtest o
+  Mestre precisou recustar uma habilidade de 5 para 2 MP para a cena caber.
+- O sistema já tinha as duas saídas e não as dizia para este caso: comprar o
+  ponto num **Grau mais baixo**, que custa 1 MP para sempre, e construir
+  **Híbridas**, que podem ser pagas inteiramente em SP.
+
+### O Aliado que luta *(regra nova, no Guia do Mestre)*
+
+- O Guia mandava construir todo NPC de combate pelo motor do Bestiário. Medido:
+  um aliado montado no Kleos que um herói "vale" sobrevive a **6% dos combates**
+  no nível 9. Ele não morre heroicamente, morre toda sessão.
+- Regra nova: o Aliado recorrente usa a linha da Tábua do **Kleos do Grupo menos
+  2**, inteira, e sobe junto quando o grupo muda de faixa. É a mesma trava da
+  Fera Vinculada.
+- Medido: sobrevive de 64% a 78% dos combates, responde por 6% a 9% do dano do
+  grupo e soma de 3 a 5 pontos de vitória. Um jogador fica de pé em 65% e
+  responde por um terço do dano — o Aliado aguenta como gente e bate como
+  coadjuvante.
+- Vem com passo a passo de cinco etapas e travado em `sim/aliado.py`.
+
+### Itens que acordam
+
+- Consciência vira um Aprimoramento de 2 pontos com Grau mínimo, e o **elo
+  psíquico** ganha alcance por Grau: 18 m no Heroico, 100 m no Mítico, 1 km no
+  Lendário, e qualquer distância no Divino. Fora do alcance sobra a sensação de
+  que o item existe e está inteiro.
+- Um item Consciente ocupa sintonia, e consciência não é obediência.
+
+### Húbris personalizada e escudo sem proficiência
+
+- A lista de Húbris vira explicitamente um cardápio: nome curto, uma frase do que
+  ela faz e duas situações de Provocação.
+- Escudo sem proficiência: você não soma o bônus de DEF e a mão continua ocupada.
+  Nada além disso. O livro fechava o caso da armadura e deixava o do escudo em
+  aberto.
+
+### Regressão
+
+- 16 arquivos, com `aliado.py` entrando.
+
 ## [0.15.1] - 2026-08-18
 
 O simulador termina de aprender o jogo, e a medição derruba uma tabela.
