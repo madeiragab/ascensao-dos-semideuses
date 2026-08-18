@@ -315,6 +315,32 @@ def converter(md: str) -> str:
 # Montagem
 # ===========================================================================
 
+def versao_do_changelog() -> tuple[str, str]:
+    """A versão publicada é a primeira linha `## [x.y.z] - data` do CHANGELOG.
+
+    O carimbo sai daqui e não de uma constante no código porque constante em
+    duplicata envelhece: quem lança uma versão mexe no CHANGELOG de qualquer
+    jeito, e o livro passa a acompanhar sozinho.
+    """
+    texto = (RAIZ / "CHANGELOG.md").read_text(encoding="utf-8")
+    m = re.search(r"^## \[(\d+\.\d+\.\d+)\] - (\d{4}-\d{2}-\d{2})", texto, re.M)
+    if not m:
+        raise SystemExit("CHANGELOG.md sem uma linha de versão no formato "
+                         "'## [x.y.z] - AAAA-MM-DD'.")
+    return m.group(1), m.group(2)
+
+
+def carimbar_versao(html: str, versao: str, data: str) -> str:
+    """Escreve a versão no fim do colofão do livro."""
+    d, m_, a = data.split("-")[2], data.split("-")[1], data.split("-")[0]
+    linha = (f'  <p class="versao-do-livro">Versão <strong>{versao}</strong> · '
+             f'{d}/{m_}/{a} · o histórico de cada número está no CHANGELOG do '
+             f'repositório.</p>\n')
+    if "</footer>" in html:
+        return html.replace("</footer>", linha + "</footer>", 1)
+    return html
+
+
 def ler_b64(nome: str) -> str:
     p = BUILD / f"{nome}.b64"
     if not p.exists():
@@ -409,14 +435,26 @@ def montar(template_nome: str, saida_nome: str, css: str,
     if faltando:
         raise SystemExit(f"{saida_nome}: marcadores não substituídos: {set(faltando)}")
     s = envelopar(s, descricao, saida_nome)
+    s = carimbar_versao(s, *versao_do_changelog())
     (RAIZ / saida_nome).write_text(s, encoding="utf-8")
     kb = round((RAIZ / saida_nome).stat().st_size / 1024)
     print(f"  {saida_nome:<26} {kb:>5} KB")
 
 
+def atualizar_estante(versao: str) -> None:
+    """A estante mostra a mesma versão dos livros, no rodapé."""
+    p = RAIZ / "index.html"
+    html = p.read_text(encoding="utf-8")
+    novo = re.sub(r"Ascensão dos Semideuses · [^·]*·",
+                  f"Ascensão dos Semideuses · versão {versao} ·", html, count=1)
+    if novo != html:
+        p.write_text(novo, encoding="utf-8")
+
+
 def main() -> None:
     css = (TEMPLATE / "livro.css").read_text(encoding="utf-8")
-    print("montando:")
+    versao, data = versao_do_changelog()
+    print(f"montando a versão {versao} ({data}):")
 
     # --- Livro do Jogador (escrito à mão no template)
     montar("livro-do-jogador.html", "livro-do-jogador.html", css, {
@@ -466,6 +504,8 @@ def main() -> None:
     }, descricao=(
         "Ficha do Herói preenchível: complete no navegador, adicione o retrato do personagem e baixe em PDF."
     ))
+
+    atualizar_estante(versao)
 
     montar("grimorio.html", "grimorio.html", css, {
         "CAPA": ler_b64("capa-grimorio"),
