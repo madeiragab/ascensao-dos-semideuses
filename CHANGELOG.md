@@ -4,6 +4,19 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.16.2] - 2026-08-18
+
+### Os livros passam a dizer de que versão são
+
+- Quem baixava um PDF não tinha como saber se estava com a 0.14 ou a 0.16 na
+  mão. Agora o colofão dos cinco livros termina com **Versão x.y.z · data**, e a
+  estante mostra a mesma no rodapé.
+- O número **sai do topo do CHANGELOG**, lido pelo `build_livros.py` a cada
+  montagem. Não existe constante duplicada no código: quem publica uma versão
+  mexe no CHANGELOG de qualquer jeito, e os livros passam a acompanhar sozinhos.
+- O build também anuncia a versão que está montando, para o erro aparecer antes
+  de virar arquivo publicado.
+
 ## [0.16.1] - 2026-08-18
 
 ### Dezoito parentes divinos

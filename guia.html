@@ -649,6 +649,17 @@ button.principal:hover { background: var(--brasa-viva); border-color: var(--bras
 }
 .colofao h3 { margin-top: 0; color: var(--texto); }
 
+/* O carimbo de versão, escrito pelo build a partir do CHANGELOG. Quem tem um
+   PDF na mão precisa saber de quando ele é. */
+.versao-do-livro {
+  margin-top: 1.6rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--borda);
+  font-family: var(--sans);
+  font-size: .72rem;
+  color: var(--texto-suave);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
@@ -2097,6 +2108,7 @@ pre.bloco-codigo {
   <p><strong>O que este livro não faz.</strong> Não te ensina a improvisar, a ler a mesa
   nem a saber quando calar a boca. Isso não cabe em regra: vem de mestrar, errar e
   mestrar de novo.</p>
+  <p class="versao-do-livro">Versão <strong>0.16.2</strong> · 18/08/2026 · o histórico de cada número está no CHANGELOG do repositório.</p>
 </footer>
 
 </div><!-- /mancha -->
