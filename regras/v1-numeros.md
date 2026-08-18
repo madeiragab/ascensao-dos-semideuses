@@ -1,5 +1,12 @@
 # Proposta v1 — correção dos números
 
+> **Este documento está aplicado e superado.** Ele é o registro de uma revisão de
+> julho de 2026, e as decisões dele já entraram nos livros: recursos das classes,
+> armaduras, Ataque Feroz e Sacrifício de Atributo. Onde ele diverge dos livros
+> publicados, **os livros mandam** — em especial o Sacrifício de Atributo, que
+> hoje custa −1 no atributo **e** −1 no recurso, e o motor de habilidades, que
+> passou a ser por Grau. Mantido porque explica *por que* cada número mudou.
+
 Cada mudança abaixo foi testada em `sim/`. Rode `python comparar.py` de dentro
 da pasta `sim/` para reproduzir todas as tabelas citadas.
 

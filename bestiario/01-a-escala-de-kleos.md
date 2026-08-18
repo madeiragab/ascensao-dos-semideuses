@@ -65,15 +65,43 @@ direto:
 
 | Nível | 3 heróis | 4 heróis | 5 heróis |
 |---|---|---|---|
-| 1–4 | 3 | 4 | 5 |
-| 5–8 | 5 | 7 | 9 |
-| 9–12 | 7 | 9 | 11 |
-| 13–16 | 8 | 11 | — |
-| 17–20 | 9 | 11 | — |
+| 1–4 | 3 | 4 | 4 |
+| 5–8 | 5 | 5 | 6 |
+| 9–12 | 7 | 7 | 8 |
+| 13–16 | 8 | 8 | 9 |
+| 17–20 | 9 | 10 | 10 |
+
+**Esta tabela não é a soma dos valores de cima, e é de propósito.** Somar
+funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.
 
 **Aliados contam.** Um deus que luta ao seu lado soma o Kleos dele. É por isso que
 existem alianças na mitologia — e é assim que um Cataclisma vira um problema
 resolvível.
+
+### O quarto jogador quase não muda o Kleos, e o quinto vale um degrau
+
+A primeira versão desta tabela multiplicava: quatro heróis de nível 5 valiam
+4 × 1¾ = 7. Medido com o motor jogando o jogo inteiro, esse encontro é um
+**massacre contra o grupo**:
+
+| Grupo | O que a conta linear mandava | Vitórias |
+|---|---|---|
+| 4 heróis de nível 5 | Kleos 7 | **11%** |
+| 5 heróis de nível 5 | Kleos 9 | **0%** |
+| 4 heróis de nível 9 | Kleos 9 | **6%** |
+| 5 heróis de nível 13 | Kleos 11 | **4%** |
+
+O motivo é a grossura da escala. A Tábua cresce cerca de **35% por degrau**,
+e um jogador a mais soma bem menos que isso: ele traz um corpo e uma ação, mas
+não traz PV de monstro nem dano de monstro junto. Multiplicar heróis por Kleos
+supõe uma escala fina que a Tábua não tem.
+
+A tabela acima é a medida: **o quarto jogador raramente move o degrau, e o
+quinto vale +1**. Quando quiser apertar uma mesa grande sem subir um degrau
+inteiro, some criaturas menores pelas fórmulas da [seção 5](#secao-5) — é para
+isso que elas existem.
+
+Para reproduzir: `sim/completo.py`.
 
 ### Estes números foram medidos, e a primeira versão estava errada
 

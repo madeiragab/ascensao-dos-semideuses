@@ -11,18 +11,19 @@ Estado de tudo que existe, o que está pronto e o que falta. Este arquivo é o
 
 ## Onde o material está hoje
 
+**A fonte é este repositório.** O Google Doc foi a origem do sistema e continua
+valendo como histórico, mas quem manda hoje são os `template/*.html`, que o
+`build.ps1` transforma nos cinco livros publicados. Nada de regra vive fora
+daqui.
+
 | Origem | Conteúdo | Situação |
 |---|---|---|
-| Google Doc | Seções 1–32 | é a fonte oficial |
-| Conversa do ChatGPT | Seções 33–51 (Itens e Criação) | **só existe no link, precisa entrar no Doc** |
-| `regras/v1-numeros.md` | Correções de balanceamento | proposta, aguardando sua decisão |
-| `regras/combate.md` | Parte III completa | novo |
-| `regras/magia-da-nevoa.md` | Parte V completa | novo |
-| `regras/interludio.md` | Parte VIII completa | novo |
-
-O primeiro trabalho de organização é **colar as seções 33–51 no Google Doc**.
-Enquanto elas viverem só num link de conversa, o livro está incompleto e nada
-garante que continuem existindo.
+| `template/*.html` | os cinco livros | **é a fonte** — o que é publicado sai daqui |
+| `regras/*.md` | Combate, Magia da Névoa, Interlúdio, Forja | texto de trabalho, sincronizado com os livros |
+| `bestiario/*.md` | o Livro II inteiro | montado direto pelo build |
+| `sim/*.py` | 15 arquivos de medição | roda inteiro por `test.ps1` |
+| Google Doc | seções 1–32 na numeração antiga | histórico |
+| `regras/v1-numeros.md` | a proposta de correção numérica de 2026-07 | **aplicada e superada** — mantida como registro do que mudou e por quê |
 
 ---
 

@@ -994,14 +994,29 @@ pre.bloco-codigo {
 <div class="rolagem"><table>
 <thead><tr><th>Nível</th><th>3 heróis</th><th>4 heróis</th><th>5 heróis</th></tr></thead>
 <tbody>
-<tr><td>1–4</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td>5–8</td><td>5</td><td>7</td><td>9</td></tr>
-<tr><td>9–12</td><td>7</td><td>9</td><td>11</td></tr>
-<tr><td>13–16</td><td>8</td><td>11</td><td>—</td></tr>
-<tr><td>17–20</td><td>9</td><td>11</td><td>—</td></tr>
+<tr><td>1–4</td><td>3</td><td>4</td><td>4</td></tr>
+<tr><td>5–8</td><td>5</td><td>5</td><td>6</td></tr>
+<tr><td>9–12</td><td>7</td><td>7</td><td>8</td></tr>
+<tr><td>13–16</td><td>8</td><td>8</td><td>9</td></tr>
+<tr><td>17–20</td><td>9</td><td>10</td><td>10</td></tr>
 </tbody>
 </table></div>
+<p><strong>Esta tabela não é a soma dos valores de cima, e é de propósito.</strong> Somar funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.</p>
 <p><strong>Aliados contam.</strong> Um deus que luta ao seu lado soma o Kleos dele. É por isso que existem alianças na mitologia — e é assim que um Cataclisma vira um problema resolvível.</p>
+<h3>O quarto jogador quase não muda o Kleos, e o quinto vale um degrau</h3>
+<p>A primeira versão desta tabela multiplicava: quatro heróis de nível 5 valiam 4 × 1¾ = 7. Medido com o motor jogando o jogo inteiro, esse encontro é um <strong>massacre contra o grupo</strong>:</p>
+<div class="rolagem"><table>
+<thead><tr><th>Grupo</th><th>O que a conta linear mandava</th><th>Vitórias</th></tr></thead>
+<tbody>
+<tr><td>4 heróis de nível 5</td><td>Kleos 7</td><td><strong>11%</strong></td></tr>
+<tr><td>5 heróis de nível 5</td><td>Kleos 9</td><td><strong>0%</strong></td></tr>
+<tr><td>4 heróis de nível 9</td><td>Kleos 9</td><td><strong>6%</strong></td></tr>
+<tr><td>5 heróis de nível 13</td><td>Kleos 11</td><td><strong>4%</strong></td></tr>
+</tbody>
+</table></div>
+<p>O motivo é a grossura da escala. A Tábua cresce cerca de <strong>35% por degrau</strong>, e um jogador a mais soma bem menos que isso: ele traz um corpo e uma ação, mas não traz PV de monstro nem dano de monstro junto. Multiplicar heróis por Kleos supõe uma escala fina que a Tábua não tem.</p>
+<p>A tabela acima é a medida: <strong>o quarto jogador raramente move o degrau, e o quinto vale +1</strong>. Quando quiser apertar uma mesa grande sem subir um degrau inteiro, some criaturas menores pelas fórmulas da <a href="#secao-5">seção 5</a> — é para isso que elas existem.</p>
+<p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <h3>Estes números foram medidos, e a primeira versão estava errada</h3>
 <p>A escala original dizia que um personagem valia 1, 2, 3 ou 4 de Kleos conforme a faixa de nível. Isso estava certo no nível 1 e errado em todo o resto. Com a progressão do Capítulo Nove implementada no simulador — e com a Oráculo usando o MP dela, não cutucando com uma lança —, o Kleos justo para um trio ficou assim:</p>
 <div class="rolagem"><table>
@@ -1399,6 +1414,19 @@ pre.bloco-codigo {
 <p>Uma aura, ativa desde o momento em que a criatura é vista.</p>
 <div class="destaque"><p>No começo do turno de cada criatura a até 18 m que possa vê-la, o monstro faz uma Rolagem de Efeito contra a <strong>Vontade</strong> do alvo. Em um acerto, ele fica <strong>Amedrontado</strong> por uma rodada. Depois de um erro, o alvo fica imune àquela Presença por 24 horas.</p></div>
 <p>Presença é o que faz um deus parecer um deus antes de rolar qualquer dano.</p>
+<h3>As duas, medidas</h3>
+<p>Ambas entraram no motor: a Vontade do Lugar agindo na contagem 20 contra os Reflexos de todo mundo, e a Presença testando contra a Vontade de cada herói no começo do turno dele, com imunidade depois do primeiro erro.</p>
+<div class="rolagem"><table>
+<thead><tr><th>Trio</th><th>Kleos</th><th>Nenhuma</th><th>+ Vontade do Lugar</th><th>+ Presença</th><th>As duas</th></tr></thead>
+<tbody>
+<tr><td>nível 13</td><td>8</td><td>75%</td><td>74%</td><td>74%</td><td><strong>71%</strong></td></tr>
+<tr><td>nível 17</td><td>9</td><td>83%</td><td>79%</td><td>82%</td><td><strong>79%</strong></td></tr>
+<tr><td>nível 20</td><td>9</td><td>91%</td><td>91%</td><td>92%</td><td><strong>89%</strong></td></tr>
+</tbody>
+</table></div>
+<p>Cada uma tira de 1 a 4 pontos da taxa de vitória, e as duas juntas de 2 a 4. São <strong>temperos, não paredes</strong> — nenhuma salva um chefe subdimensionado, e é por isso que continuam fora da conta de Kleos.</p>
+<p>O valor delas está em outro lugar: a Vontade do Lugar dá ao Mestre uma razão mecânica para o grupo querer arrastar o monstro para fora do covil, e a Presença faz o primeiro turno contra um deus doer antes do primeiro dado de dano. Se você quiser que o covil seja perigoso <em>de verdade</em>, o caminho não é somar efeitos de ambiente: é subir o Kleos.</p>
+<p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <div class="ornamento">❖</div>
 <h2 id="secao-19">19. Fraqueza Mítica <em>(obrigatória)</em></h2>
 <p><strong>Toda criatura deste livro tem uma fraqueza nomeada.</strong> Não é decoração: é o motivo de existir uma cena de investigação antes da cena de luta.</p>
@@ -2559,6 +2587,22 @@ O QUE ACONTECE AO MORRER
 <tr><td><strong>Morte</strong></td><td>definitiva, com 1 Ímpeto e Desvantagem para a mesma espécie no arco</td></tr>
 </tbody>
 </table></div>
+<div class="ornamento">❖</div>
+<h2 id="secao-27">27. A fera dentro do motor</h2>
+<p>Quando esta parte foi escrita, a fera tinha sido medida por cima: dano por turno e fração de PV. Agora ela entrou no combate simulado, atacando uma vez por rodada pela ação bônus do dono, contra um chefe completo com Sopro, Arremetidas e duas Recusas.</p>
+<div class="rolagem"><table>
+<thead><tr><th>Trio</th><th>Kleos</th><th>Sem fera</th><th>Com fera</th><th>Ganho</th></tr></thead>
+<tbody>
+<tr><td>nível 5</td><td>5</td><td>74%</td><td>76%</td><td>+2%</td></tr>
+<tr><td>nível 9</td><td>7</td><td>69%</td><td>72%</td><td>+3%</td></tr>
+<tr><td>nível 13</td><td>8</td><td>76%</td><td>77%</td><td>+1%</td></tr>
+<tr><td>nível 17</td><td>9</td><td>84%</td><td>85%</td><td>+2%</td></tr>
+<tr><td>nível 20</td><td>9</td><td>93%</td><td>92%</td><td>−1%</td></tr>
+</tbody>
+</table></div>
+<p><strong>A fera soma pouco, e é isso que a mantém honesta.</strong> Entre −1 e +3 pontos de vitória: ela não é um quarto personagem nem um multiplicador de dano. O que ela muda de verdade é o que nenhuma tabela mostra — um corpo a mais para o inimigo resolver, um faro que acha o que o grupo não acharia, e alguém para chorar quando morre.</p>
+<p>Se na sua mesa ela estiver decidindo combates, o problema não é a regra: é o Kleos dela. Confira a trava da <a href="#secao-22">seção 22</a>.</p>
+<p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 </section>
 
 <footer class="colofao">

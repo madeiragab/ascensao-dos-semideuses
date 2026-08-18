@@ -37,7 +37,8 @@ from combate import Lutador, rola, rola_d20
 from fichas import furioso_ares, guardiao_ares, oraculo_atena
 from forja import heroi
 from kleos import TABUA, monstro_padrao
-from niveis import custo_em_recurso, grau, personagem, teto_de_custo
+from niveis import (custo_em_recurso, grau, kleos_do_grupo, personagem,
+                    teto_de_custo)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
@@ -120,7 +121,19 @@ def rolagem_de_efeito(lut, alvo, defesa_passiva: int) -> bool:
 # O combate com tudo ligado
 # ---------------------------------------------------------------------------
 
-def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17):
+def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17,
+                  vontade_do_lugar=False, presenca=False):
+    """O laço completo.
+
+    vontade_do_lugar (Kleos 8+): na contagem 20 o ambiente age, com Efeito
+    contra os Reflexos de cada herói. Modelado como Desvantagem nos ataques do
+    alvo por uma rodada — é o efeito comum a raízes, escuridão e chão que treme.
+
+    presenca (Kleos 9+): no começo do turno de cada herói, Efeito contra a
+    Vontade dele; em um acerto fica Amedrontado por uma rodada, e depois de um
+    erro fica imune àquela Presença.
+    """
+
     todos = herois + [monstro]
     for c in todos:
         c.aliados = herois if c.lado == "herois" else [monstro]
@@ -129,9 +142,24 @@ def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17):
 
     for rodada in range(1, 41):
         restantes = arremetidas
+
+        # Contagem 20: o ambiente age antes de todo mundo.
+        if vontade_do_lugar and monstro.vivo:
+            for h in herois:
+                if h.vivo and rola_d20() + monstro.bonus_ataque >= 10 + h.prof:
+                    h.aplicar_condicao("cega", 1)
+
         for lutador in ordem:
             if not lutador.vivo:
                 continue
+
+            # Presença: uma vez por criatura, no começo do turno dela.
+            if (presenca and lutador.lado == "herois" and monstro.vivo
+                    and not getattr(lutador, "imune_presenca", False)):
+                if rola_d20() + monstro.bonus_ataque >= 10 + lutador.prof:
+                    lutador.aplicar_condicao("cega", 1)
+                else:
+                    lutador.imune_presenca = True
 
             # ---- o turno da criatura
             if lutador is monstro:
@@ -197,17 +225,47 @@ def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17):
             "recusas_gastas": monstro.recusas_gastas}
 
 
-def mede(nivel, k, recusas=0, com_habilidade=True, completo=True, n=N) -> dict:
+# Quem entra na mesa, por tamanho de grupo.
+MESA = {3: ("guardiao", "furioso", "oraculo"),
+        4: ("guardiao", "furioso", "oraculo", "furioso"),
+        5: ("guardiao", "furioso", "oraculo", "furioso", "guardiao")}
+
+
+def montar_fera(nivel: int, kleos_grupo: int) -> Lutador:
+    """A Fera Vinculada do Livro II: bloco de Kleos do grupo −2, PV pela metade.
+
+    Ela ataca uma vez por rodada, comandada pela ação bônus do dono — que é um
+    recurso que nenhum herói deste motor usava para outra coisa.
+    """
+    k = max(1, min(6, kleos_grupo - 2))
+    pv, defe, atk, dano, n_ataques = TABUA[k]
+    fera = Lutador(
+        nome="fera", lado="herois", pv_max=pv // 2, defesa=defe,
+        bonus_ataque=atk, dados_dano=[10], dano_fixo=round(dano / n_ataques - 5.5),
+        iniciativa_bonus=2, prof=2, regras="v1",
+    )
+    fera.usa_habilidade = False
+    fera.papel = "dano"
+    fera.recurso = "sp"
+    fera.controle_ativo = None
+    fera.custo_dano = fera.custo_controle = 10 ** 6
+    return fera
+
+
+def mede(nivel, k, recusas=0, com_habilidade=True, completo=True, n=N,
+         jogadores=3, com_fera=False, vontade=False, presenca=False) -> dict:
     fraca = DEFESAS[k][1]
     arr = (2 if k >= 8 else 1) if completo else 0
     sopro = TABUA[k][3] if completo else 0
     v = r = pe = rec = 0
     for _ in range(n):
         herois = [montar_heroi(c, nivel, com_habilidade)
-                  for c in ("guardiao", "furioso", "oraculo")]
+                  for c in MESA[jogadores]]
+        if com_fera:
+            herois.append(montar_fera(nivel, k))
         m = Lutador.de_monstro(monstro_padrao(k))
         m.recusas, m.recusas_gastas = recusas, 0
-        res = combate_total(herois, m, arr, sopro, fraca)
+        res = combate_total(herois, m, arr, sopro, fraca, vontade, presenca)
         v += res["vencedor"] == "herois"
         r += res["rodadas"]
         pe += res["de_pe"]
@@ -271,6 +329,63 @@ def main() -> None:
                           f"{res['vitoria']:.0%} de vitória, fora de 40% a 95%")
         if res["rodadas"] > 6.5:
             falhas.append(f"nível {nivel}: {res['rodadas']:.1f} rodadas, longo demais")
+
+    print("\n5. A FERA VINCULADA, DENTRO DO MOTOR")
+    print("   Bloco de Kleos do grupo menos 2, PV pela metade, atacando uma vez")
+    print("   por rodada pela ação bônus do dono. Chefe completo com 2 Recusas.")
+    print(f"{'nível':>6}{'Kleos':>7}{'sem fera':>10}{'com fera':>10}{'ganho':>8}"
+          f"{'de pé de 3':>12}{'rodadas':>9}")
+    print("-" * 62)
+    for nivel, k in CENARIOS:
+        sem = mede(nivel, k, recusas=2)
+        com = mede(nivel, k, recusas=2, com_fera=True)
+        print(f"{nivel:>6}{k:>7}{sem['vitoria']:>10.0%}{com['vitoria']:>10.0%}"
+              f"{com['vitoria'] - sem['vitoria']:>+8.0%}{com['de_pe']:>12.1f}"
+              f"{com['rodadas']:>9.1f}")
+        if com["vitoria"] - sem["vitoria"] > 0.25:
+            falhas.append(f"nível {nivel}: a fera soma {com['vitoria']-sem['vitoria']:+.0%} "
+                          f"— vale mais que um personagem inteiro")
+
+    print("\n6. MESAS DE QUATRO E CINCO")
+    print("   O Kleos do Grupo do Livro II promete o mesmo aperto em qualquer")
+    print("   tamanho de mesa. Chefe completo com 2 Recusas, em cada tamanho.")
+    print(f"{'nível':>6}{'3 jogadores':>26}{'4 jogadores':>26}{'5 jogadores':>26}")
+    print(f"{'':>6}{'Kleos':>8}{'vitória':>9}{'de pé':>9}"
+          f"{'Kleos':>8}{'vitória':>9}{'de pé':>9}"
+          f"{'Kleos':>8}{'vitória':>9}{'de pé':>9}")
+    print("-" * 84)
+    for nivel, _ in CENARIOS:
+        linha = f"{nivel:>6}"
+        for jogadores in (3, 4, 5):
+            kk = kleos_do_grupo(nivel, jogadores)
+            res = mede(nivel, kk, recusas=2, jogadores=jogadores)
+            linha += f"{kk:>8}{res['vitoria']:>9.0%}{res['de_pe']:>9.1f}"
+            # O teto é 0,98 e não 0,95 por causa de um limite conhecido do
+            # próprio livro: uma mesa cheia de nível 20 passa do degrau 9 e não
+            # tem para onde subir sem virar Cataclisma. Ver Livro II, "Acima de
+            # Kleos 9, a ficção manda".
+            if not 0.35 <= res["vitoria"] <= 0.98:
+                falhas.append(f"nível {nivel}, {jogadores} jogadores: "
+                              f"{res['vitoria']:.0%} de vitória")
+        print(linha)
+
+    print("\n7. VONTADE DO LUGAR E PRESENÇA")
+    print("   As duas peças de chefe que faltavam. Kleos 8+ e 9+, contra o trio.")
+    print(f"{'nível':>6}{'Kleos':>7}{'nenhuma':>10}{'+Vontade':>10}"
+          f"{'+Presença':>11}{'as duas':>10}{'no covil':>11}")
+    print("-" * 66)
+    for nivel, k in CENARIOS:
+        if k < 8:
+            continue
+        base = mede(nivel, k, recusas=2)
+        so_v = mede(nivel, k, recusas=2, vontade=True)
+        so_p = mede(nivel, k, recusas=2, presenca=True)
+        duas = mede(nivel, k, recusas=2, vontade=True, presenca=True)
+        print(f"{nivel:>6}{k:>7}{base['vitoria']:>10.0%}{so_v['vitoria']:>10.0%}"
+              f"{so_p['vitoria']:>11.0%}{duas['vitoria']:>10.0%}"
+              f"{duas['de_pe']:>11.1f}")
+        if duas["vitoria"] > base["vitoria"]:
+            falhas.append(f"nível {nivel}: covil deixou o chefe mais fraco")
 
     print()
     if falhas:

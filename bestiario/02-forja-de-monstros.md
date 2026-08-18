@@ -394,6 +394,30 @@ Uma aura, ativa desde o momento em que a criatura é vista.
 
 Presença é o que faz um deus parecer um deus antes de rolar qualquer dano.
 
+### As duas, medidas
+
+Ambas entraram no motor: a Vontade do Lugar agindo na contagem 20 contra os
+Reflexos de todo mundo, e a Presença testando contra a Vontade de cada herói no
+começo do turno dele, com imunidade depois do primeiro erro.
+
+| Trio | Kleos | Nenhuma | + Vontade do Lugar | + Presença | As duas |
+|---|---|---|---|---|---|
+| nível 13 | 8 | 75% | 74% | 74% | **71%** |
+| nível 17 | 9 | 83% | 79% | 82% | **79%** |
+| nível 20 | 9 | 91% | 91% | 92% | **89%** |
+
+Cada uma tira de 1 a 4 pontos da taxa de vitória, e as duas juntas de 2 a 4. São
+**temperos, não paredes** — nenhuma salva um chefe subdimensionado, e é por isso
+que continuam fora da conta de Kleos.
+
+O valor delas está em outro lugar: a Vontade do Lugar dá ao Mestre uma razão
+mecânica para o grupo querer arrastar o monstro para fora do covil, e a Presença
+faz o primeiro turno contra um deus doer antes do primeiro dado de dano. Se você
+quiser que o covil seja perigoso *de verdade*, o caminho não é somar efeitos de
+ambiente: é subir o Kleos.
+
+Para reproduzir: `sim/completo.py`.
+
 ---
 
 ## 19. Fraqueza Mítica *(obrigatória)*
