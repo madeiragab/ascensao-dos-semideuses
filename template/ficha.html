@@ -279,41 +279,46 @@ table.viva select { font-size: .72rem; }
 .duas-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.1rem; }
 
 /* ---------- Folha dedicada ao PDF ---------- */
+/* A folha impressa usa o couro escuro da ficha, o mesmo da tela: os livros
+   imprimem assim desde a 0.15, e a ficha ficava sendo a única folha branca da
+   mesa. As cores são fixas aqui, e não variáveis, porque esta folha também é
+   fotografada pelo html2canvas — que resolve variável em cascata de um jeito
+   próprio e às vezes devolve preto. */
 .ficha-impressao { display: none; }
 .ficha-impressao.gerando-pdf {
   display: block !important; position: fixed; left: -12000px; top: 0;
-  width: 210mm; background: #fff; pointer-events: none;
+  width: 210mm; background: #16140F; pointer-events: none;
 }
 .pdf-pagina {
-  box-sizing: border-box; background: #fff; color: #17140f;
+  box-sizing: border-box; background: #16140F; color: #E8E1CD;
   font-family: Georgia, serif; padding: 9mm; width: 210mm; min-height: 297mm;
 }
-.pdf-cabecalho { display: flex; align-items: center; gap: 5mm; border-bottom: 2px solid #8A6B1E; padding-bottom: 3mm; margin-bottom: 3mm; }
-.pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #1C1913; }
-.pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #6A6250; }
-.pdf-retrato { width: 29.1667mm; height: 35mm; border: 1px solid #6E5518; object-fit: cover; object-position: center; flex: none; }
+.pdf-cabecalho { display: flex; align-items: center; gap: 5mm; border-bottom: 2px solid #C9A94E; padding-bottom: 3mm; margin-bottom: 3mm; }
+.pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #F2ECD9; }
+.pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #9C9379; }
+.pdf-retrato { width: 29.1667mm; height: 35mm; border: 1px solid #C9A94E; object-fit: cover; object-position: center; flex: none; }
 .pdf-grade { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5mm; }
-.pdf-bloco { border: 1px solid #A99B78; padding: 2.5mm; break-inside: avoid; min-width: 0; }
-.pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #6E5518; margin: 0 0 2mm; }
-.pdf-campo { min-height: 5mm; border-bottom: .3pt solid #B8AD92; padding: 0 1mm 1mm; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8.5pt; }
-.pdf-campo b { font: 700 6pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; display: block; }
+.pdf-bloco { border: 1px solid #4C462E; padding: 2.5mm; break-inside: avoid; min-width: 0; background: #1F1C14; }
+.pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #C9A94E; margin: 0 0 2mm; }
+.pdf-campo { min-height: 5mm; border-bottom: .3pt solid #4C462E; padding: 0 1mm 1mm; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8.5pt; }
+.pdf-campo b { font: 700 6pt Arial, sans-serif; text-transform: uppercase; color: #9C9379; display: block; }
 .pdf-status { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2mm; }
-.pdf-num { border: 1px solid #A99B78; text-align: center; padding: 1.5mm; min-height: 11mm; }
-.pdf-num b { display: block; font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; }
-.pdf-num span { display: block; font: 700 12pt Arial, sans-serif; margin-top: 1mm; }
+.pdf-num { border: 1px solid #4C462E; text-align: center; padding: 1.5mm; min-height: 11mm; background: #16140F; }
+.pdf-num b { display: block; font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #9C9379; }
+.pdf-num span { display: block; font: 700 12pt Arial, sans-serif; margin-top: 1mm; color: #F2ECD9; }
 .pdf-tabela { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
-.pdf-tabela th { font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #6A6250; text-align: left; border-bottom: 1px solid #8A6B1E; padding: 1mm; }
-.pdf-tabela td { border-bottom: .3pt solid #C7BEA8; padding: 1mm; vertical-align: top; overflow-wrap: anywhere; }
+.pdf-tabela th { font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #9C9379; text-align: left; border-bottom: 1px solid #C9A94E; padding: 1mm; }
+.pdf-tabela td { border-bottom: .3pt solid #34301F; padding: 1mm; vertical-align: top; overflow-wrap: anywhere; }
 .pdf-texto { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8pt; line-height: 1.35; min-height: 18mm; }
-.pdf-rodape { font: 6pt Arial, sans-serif; color: #6A6250; text-align: right; margin-top: 2mm; }
+.pdf-rodape { font: 6pt Arial, sans-serif; color: #9C9379; text-align: right; margin-top: 2mm; }
 .span-3 { grid-column: span 3; } .span-4 { grid-column: span 4; }
 .span-5 { grid-column: span 5; } .span-6 { grid-column: span 6; }
 .span-7 { grid-column: span 7; } .span-8 { grid-column: span 8; }
 .span-12 { grid-column: span 12; }
 
 @media print {
-  @page { size: A4 portrait; margin: 0; }
-  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  @page { size: A4 portrait; margin: 0; background: #16140F; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #16140F !important; }
   .livro { display: none !important; }
   .ficha-impressao { display: block !important; }
   .pdf-pagina { break-after: page; page-break-after: always; }
@@ -758,7 +763,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
   <section class="pdf-pagina">
     <header class="pdf-cabecalho">
       <img class="pdf-retrato" id="printRetrato" alt="">
-      <div><h1 id="printNome">Herói sem nome</h1><p id="printSubtitulo">Ascensão dos Semideuses · Ficha do Herói</p></div>
+      <div><h1 id="printNome">Herói sem nome</h1><p id="printSubtitulo">Ascensão dos Semideuses · Ficha do Herói · v{{VERSAO}}</p></div>
     </header>
     <div class="pdf-grade">
       <div class="pdf-bloco span-12"><h2>Identidade</h2><div class="pdf-grade">
@@ -2144,7 +2149,7 @@ async function baixarPdf() {
       status.textContent = "Gerando página " + (i + 1) + " de " + paginas.length + "…";
       var pagina = paginas[i];
       var canvas = await window.html2canvas(pagina, {
-        scale: 2, backgroundColor: "#ffffff", logging: false,
+        scale: 2, backgroundColor: "#16140F", logging: false,
         useCORS: true, allowTaint: false, imageTimeout: 0,
         width: pagina.scrollWidth, height: pagina.scrollHeight,
         windowWidth: pagina.scrollWidth, windowHeight: pagina.scrollHeight,
