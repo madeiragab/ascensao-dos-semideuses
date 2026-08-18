@@ -85,9 +85,20 @@ seu **bônus de proficiência** — a mesma conta dos Tratamentos, pelo mesmo mo
 
 ## 49. Forjar
 
-Exige **proficiência em Manufatura** e um **Kit de Criação** adequado: forja para
-metal, bancada para mecanismo, ervanário para consumível, ateliê para pano e
-couro. Sem o Kit certo, o teste tem Desvantagem e o máximo é um item Mortal.
+Exige **proficiência em Manufatura** e o **Kit** adequado ao que está sendo
+feito — os mesmos da tabela de equipamento do Capítulo Quatro, sem ferramenta
+nova nenhuma:
+
+| O que você faz | Kit | Preço |
+|---|---|---|
+| Armas, armaduras, escudos, ferragem | Kit de Armeiro ou de Armaduras | 50 |
+| Roupa, couro, corda, instrumento | Kit de Artesão | 50 |
+| Mecanismo, engenhoca, eletrônico | Kit de Tecnologia | 75 |
+| Óleo, veneno, antídoto, consumível | Kit Alquímico | 100 |
+
+Sem o Kit certo, o teste tem Desvantagem e o máximo é um item Mortal. Um Kit
+ocupa espaço e não viaja escondido: forja é fogo, bigorna e barulho. Usar a
+oficina de outra pessoa funciona, e é uma boa razão para dever um favor.
 
 Cada **Ação de Interlúdio** dedicada é uma tentativa:
 

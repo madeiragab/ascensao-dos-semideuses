@@ -186,7 +186,8 @@ Limites:
 
 ### 57.2 Forjar
 
-Uma Ação de Interlúdio é **uma tentativa** da Forja (Parte VII): um teste de
+Uma Ação de Interlúdio é **uma tentativa** da Forja (Parte VII), com o Kit
+adequado ao que está sendo feito: um teste de
 **Manufatura contra CD 10 + os pontos do item**, a mesma fórmula com que nasce
 uma habilidade.
 

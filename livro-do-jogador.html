@@ -2202,6 +2202,55 @@ pre.bloco-codigo {
   acampamento, herdadas, tomadas de um monstro ou forjadas. Todo semideus começa com
   uma, escolhendo um dos três materiais em acordo com sua origem.</p>
 
+  <h4>Encantamentos</h4>
+
+  <p>O material diz <em>o que</em> a lâmina fere. O <strong>encantamento</strong> diz como
+  ela se comporta — e é dele que vêm os itens de que as histórias se lembram: a arma que
+  cabe no bolso, o boné que apaga quem o veste, a lança que volta sozinha.</p>
+
+  <p>Encantamento é um <strong>Aprimoramento</strong> da <a href="#cap4">Forja</a>: custa
+  pontos do Grau do item, e os que gastam <strong>Carga</strong> estão marcados. Os preços
+  abaixo valem quando o item é comprado pronto, e supõem o Grau mínimo indicado.</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>Encantamento</th><th class="num">Pontos</th><th class="num">Grau mín.</th><th>O que faz</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Forma Oculta</strong></td><td class="num">1</td><td>Consagrado</td>
+          <td>Fora de combate, o item vira um objeto banal — caneta, pulseira, isqueiro, chaveiro. Volta ao normal com a Interação Simples. Mortais não veem nada demais nele.</td><td class="num">120</td></tr>
+        <tr><td><strong>Retorno Vinculado</strong></td><td class="num">1</td><td>Consagrado</td>
+          <td>Interação Simples para chamar o item de volta à mão, até 18 m, se não estiver preso, selado ou na mão de outra criatura. Fora de combate, ele volta sozinho em 1 minuto.</td><td class="num">200</td></tr>
+        <tr><td><strong>Fome de Ícor</strong></td><td class="num">1</td><td>Consagrado</td>
+          <td>Contra criaturas de Kleos 5 ou mais, o item ignora Resistência a dano de material divino.</td><td class="num">250</td></tr>
+        <tr><td><strong>Passo Alado</strong></td><td class="num">1</td><td>Heroico</td>
+          <td>+3 m de movimento enquanto calçado. <strong>1 Carga:</strong> ignore terreno difícil por um turno.</td><td class="num">380</td></tr>
+        <tr><td><strong>Voz do Metal</strong></td><td class="num">1</td><td>Heroico</td>
+          <td>O item avisa. Você não pode ser Surpreendido por criatura mítica a até 18 m enquanto estiver consciente.</td><td class="num">400</td></tr>
+        <tr><td><strong>Véu da Névoa</strong></td><td class="num">2</td><td>Heroico</td>
+          <td><strong>1 Carga:</strong> ação para ficar <strong>Invisível</strong> por até 1 minuto. Termina se você atacar, conjurar ou usar habilidade. Vestimenta — boné, capuz, manto.</td><td class="num">600</td></tr>
+        <tr><td><strong>Mordida do Estige</strong></td><td class="num">2</td><td>Mítico</td>
+          <td>Criatura reduzida a 0 PV por este item <strong>não se remonta no Tártaro</strong> pelo tempo que a Regra da Moira definir. Contra criatura de Kleos 9+, apenas atrasa.</td><td class="num">900</td></tr>
+        <tr><td><strong>Sopro do Portador</strong></td><td class="num">2</td><td>Mítico</td>
+          <td><strong>1 Carga:</strong> a arma libera o elemento do seu Parente Divino num cone de 6 m, com Efeito contra Reflexos. Dano igual a um ponto de habilidade no seu Grau; metade em quem passar.</td><td class="num">1.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>Nenhum encantamento soma ataque ou dano.</strong> Número é assunto do Grau do
+    item — quem mexe na conta do combate é a tabela da Forja, e ela foi medida. Encantamento
+    muda o que o item <em>faz</em>, não o quanto ele bate. Um item pode carregar quantos
+    encantamentos os pontos do Grau dele pagarem.</p>
+  </div>
+
+  <div class="destaque">
+    <span class="rotulo">Encantar não é forjar do zero</span>
+    <p>Acrescentar um encantamento a um item que já existe é uma <strong>Ação de
+    Interlúdio</strong>, com <strong>Manufatura contra CD 10 + os pontos do item</strong>,
+    como qualquer trabalho de Forja — e a falha cobra 1 de Integridade da peça, como sempre.
+    O item precisa ter Grau e pontos livres para receber.</p>
+  </div>
+
   <div class="ornamento">❖</div>
 
   <h3>Carga</h3>
@@ -2407,9 +2456,24 @@ pre.bloco-codigo {
 
   <h4>Forjar</h4>
 
-  <p>Exige <strong>proficiência em Manufatura</strong> e um <strong>Kit de Criação</strong>
-  adequado: forja para metal, bancada para mecanismo, ervanário para consumível, ateliê para
-  pano e couro. Sem o Kit certo, o teste tem Desvantagem e o máximo é um item Mortal.</p>
+  <p>Exige <strong>proficiência em Manufatura</strong> e o <strong>Kit</strong> adequado ao
+  que está sendo feito — os mesmos da tabela de equipamento, sem ferramenta nova nenhuma:</p>
+
+  <div class="rolagem">
+    <table>
+      <thead><tr><th>O que você faz</th><th>Kit</th><th class="num">Preço</th></tr></thead>
+      <tbody>
+        <tr><td>Armas, armaduras, escudos, ferragem</td><td>Kit de Armeiro ou de Armaduras</td><td class="num">50</td></tr>
+        <tr><td>Roupa, couro, corda, instrumento</td><td>Kit de Artesão</td><td class="num">50</td></tr>
+        <tr><td>Mecanismo, engenhoca, eletrônico</td><td>Kit de Tecnologia</td><td class="num">75</td></tr>
+        <tr><td>Óleo, veneno, antídoto, consumível</td><td>Kit Alquímico</td><td class="num">100</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Sem o Kit certo, o teste tem <strong>Desvantagem</strong> e o máximo é um item Mortal.
+  Um Kit ocupa espaço e não viaja escondido: forja é fogo, bigorna e barulho. Usar a oficina
+  de outra pessoa funciona — e é uma boa razão para o grupo dever um favor a alguém.</p>
 
   <p>Cada <strong>Ação de Interlúdio</strong> dedicada é uma tentativa:</p>
 
@@ -3644,7 +3708,7 @@ pre.bloco-codigo {
     <div class="cartao"><h5>Treinar</h5><p>Três Ações no mesmo atributo e ele sobe
     <strong>+1</strong> — adiantado da sua cota do próximo nível. Precisa de um teste CD 15
     e, de preferência, de um mentor.</p></div>
-    <div class="cartao"><h5>Forjar</h5><p>Cada Ação é uma tentativa com um Kit de Criação:
+    <div class="cartao"><h5>Forjar</h5><p>Cada Ação é uma tentativa com o Kit adequado:
     <strong>Manufatura contra CD 10 + os pontos do item</strong>. Sucesso dá 1 Progresso;
     falha custa 1 de Integridade da peça e dá Vantagem na próxima. Ver
     <a href="#cap4">a Forja</a>.</p></div>

@@ -307,3 +307,34 @@ reputação, atenção divina.
 Nos Interlúdios (Livro I, Parte VIII), o Mestre pode conceder **uma Ação de
 Interlúdio extra** ao grupo que tenha derrubado algo de Kleos igual ou superior
 ao próprio Kleos do grupo.
+
+### O que se leva do corpo
+
+Monstro não carrega carteira. O que ele deixa é **matéria** — e é dela que sai a
+economia do Livro I: dracmas para comprar, material para forjar.
+
+| Kleos vencido | Dracmas para o grupo | Material |
+|---|---|---|
+| 1–2 | 1d6 | nada aproveitável |
+| 3–4 | 3d6 | um componente comum: couro, presa, glândula |
+| 5–6 | 5d10 | **material mítico** — serve para forjar item Mítico |
+| 7–8 | 10d10 | material mítico, e um pedaço com nome próprio |
+| 9–10 | 20d10 | **material lendário** — serve para forjar item Lendário |
+| 11 | não se saqueia um Cataclisma | o que sobrar é relíquia, e tem dono |
+
+**Isso é o total do grupo, não de cada um.** Divida como a mesa preferir.
+
+Os valores foram tirados de trás para frente, a partir dos preços do Capítulo de
+Itens: quatro encontros de Kleos 5 rendem cerca de **125 dracmas**, o bastante
+para um item **Consagrado**, que custa de 80 a 250 — exatamente o Grau que um
+grupo de nível 3 a 5 deveria estar comprando. Quatro encontros de Kleos 9 rendem
+cerca de 440 dracmas, contra os 300 a 700 de um **Heroico**.
+
+**Vender material mítico é possível e é burrice.** Um comprador paga metade do
+preço do item que aquele material forjaria. Quem vende a pele do leão compra uma
+espada; quem a guarda veste a pele.
+
+**Um monstro só rende uma vez.** Um bando de seis capangas de Kleos 1 não rende
+seis vezes 1d6 — rende o que a soma deles valia como encontro
+([seção 5](#secao-5)). O saque acompanha o **Kleos do encontro**, não a contagem
+de corpos.
