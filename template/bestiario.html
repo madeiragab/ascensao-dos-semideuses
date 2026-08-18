@@ -54,11 +54,17 @@
   validado em oito mil combates simulados contra o grupo de nível 1 do Livro do
   Jogador. As fórmulas de montagem de encontro erram no máximo 0,3 numa escala
   de onze.</p>
-  <p><strong>Onde a margem é maior.</strong> O simulador não modela Arremetidas,
-  Recusas nem Poderes — ele valida a Tábua na forma crua. Uma criatura completa é
-  mais perigosa que a versão testada, e por isso os degraus de 6 a 11 têm margem
-  de erro maior que os de 1 a 5. A escala também foi calibrada só no nível 1:
-  enquanto não existir progressão de nível, tudo acima disso é extrapolação.</p>
+  <p><strong>O simulador hoje joga o jogo inteiro.</strong> Poderes de área,
+  Arremetidas e Recusas entraram no motor, e os heróis deixaram de só bater com
+  arma: eles gastam MP e SP em habilidade e em controle, com Rolagem de Efeito
+  contra as defesas passivas da criatura. Com tudo ligado dos dois lados, o
+  encontro justo entrega de 68% a 93% de vitória, de 2,4 a 3,1 rodadas, com 1,7 a
+  2,6 heróis de pé. Ver <span class="dado">sim/criaturas.py</span> e
+  <span class="dado">sim/completo.py</span>.</p>
+  <p><strong>Onde a margem continua.</strong> Vontade do Lugar e Presença ainda
+  não são modeladas, e a Tábua foi calibrada com um trio: mesas de quatro ou cinco
+  jogadores fazem mais Rolagens de Efeito por rodada, o que muda o valor das
+  Recusas para cima.</p>
   <p><strong>Uma regra que a simulação reescreveu.</strong> A primeira versão da
   seção 5 dizia que muitos inimigos fracos valiam mais que a soma do Kleos.
   Valem menos — o grupo concentra fogo e cada morto para de causar dano para

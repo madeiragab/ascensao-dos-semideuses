@@ -97,10 +97,20 @@ defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo ami
 objetos e mãos, críticos de perícia, estabilização e Ímpeto. A consulta curta está
 em [`regras/regras-universais.md`](regras/regras-universais.md).
 
-**Itens têm nível.** Seis graus cobrem do equipamento Mortal à relíquia Divina;
-Sintonização limita quantos poderes permanentes ficam ativos. Além das armas e
-armaduras, o Livro do Jogador traz 21 utilitários, 12 curativos e 24 itens
-mágicos com preço em dracmas.
+**Itens têm Grau, e o Grau é a progressão do equipamento.** Seis degraus cobrem
+do Mortal à relíquia Divina, e cada um dá **dados de arma** e DEF — uma espada
+Heroica é `2d8`, um machado Lendário é `3d10`. Isso não é enfeite: medido em três
+mil combates por nível, um trio de nível 20 sem item que cresça leva 11,5 rodadas
+para derrubar o encontro justo e perde uma luta em cada três; com o Grau, o
+combate volta a durar de 2 a 4 rodadas em toda a carreira.
+
+**A Forja** é o motor do Capítulo Sete guardado dentro de um objeto: os mesmos
+pontos, as mesmas tabelas, pagos em **Cargas** em vez de MP. Uma Ação de
+Interlúdio é uma tentativa — Manufatura contra CD 10 + os pontos do item —, e a
+falha marca a peça, não o ferreiro. Do Mítico para cima o projeto exige material
+de criatura de Kleos 5 ou mais, o que amarra a forja ao Bestiário. Encantamentos
+cuidam do resto: a arma que vira caneta, a que volta sozinha para a mão, o véu
+que apaga quem o veste.
 
 **Catorze perícias**, não dezesseis: *Arcanismo* foi absorvida por Mitologia, porque
 num mundo em que toda magia é grega não existem dois corpos de conhecimento, e
@@ -135,6 +145,9 @@ python calibrar_kleos.py    # testa a escala de Kleos em todos os níveis
 python graus.py             # calibra os Graus de habilidade e a progressão
 python anteparo.py          # mede a habilidade de classe do Guardião
 python defesas_passivas.py  # prova a equivalência exata das defesas de base 14
+python forja.py             # prova que o Grau do item segura os 20 níveis
+python criaturas.py         # mede Poderes de área e Arremetidas em Kleos
+python completo.py          # o jogo inteiro: habilidade, controle e Recusa
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula

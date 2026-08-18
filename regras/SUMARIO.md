@@ -209,7 +209,16 @@ foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
    é o que derruba a vitória do grupo (100% → 76%); a Arremetida quase não muda
    quem vence, mas leva os heróis de pé de 2,1 para 1,2.
 
-**A dívida que sobrou:** **Recusas** continuam fora da conta. Elas anulam uma
-Rolagem de Efeito, e os heróis do simulador só atacam — não existe Efeito para
-recusar. Medir Recusa exige antes ensinar o motor a usar controle do lado dos
-jogadores, e esse é o próximo passo do `sim/`.
+6. ~~**Recusas nunca foram medidas.**~~ ✅ `sim/completo.py` ensina os heróis a
+   gastar recurso: habilidade de dano no Teto, controle por Rolagem de Efeito
+   contra a defesa passiva fraca, com nova rolagem no fim do turno do alvo. Com
+   isso a Recusa passou a ter o que negar. Medido: a primeira Recusa tira de 11
+   a 16 pontos da taxa de vitória do grupo, a segunda tira de 3 a 6, e a terceira
+   quase não muda nada — o Livro II passa a recomendar 1 Recusa no Kleos 5 a 7 e
+   2 a partir do 8.
+
+**Nenhuma peça do sistema ficou sem medição.** O motor joga o jogo inteiro:
+equipamento por Grau, habilidade, controle, Sopro, Arremetida e Recusa. Com tudo
+ligado dos dois lados, o encontro justo entrega de **68% a 93% de vitória**, de
+**2,4 a 3,1 rodadas**, com **1,7 a 2,6 heróis de pé** — que é exatamente o que a
+Regra da Moira promete.

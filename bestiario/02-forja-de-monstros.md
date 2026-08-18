@@ -333,6 +333,36 @@ a ficção justificar.
 **Sempre diga à mesa quando uma Recusa for gasta.** O jogador precisa entender que
 gastou o recurso dele em algo que funcionou e foi negado — senão parece trapaça.
 
+### Duas bastam, e a terceira quase não é usada
+
+A Recusa foi a última peça do sistema a ser medida, e por um motivo bobo: até o
+motor aprender a usar **controle do lado dos jogadores**, não existia Rolagem de
+Efeito para recusar. Agora existe — um Oráculo gastando MP em condição forte,
+contra a defesa passiva mais fraca da criatura, com nova rolagem no fim de cada
+turno dela.
+
+Taxa de vitória do grupo contra a criatura completa, 1.200 combates por célula:
+
+| Trio | Kleos | 0 Recusas | 1 | 2 | 3 | Recusas realmente gastas |
+|---|---|---|---|---|---|---|
+| nível 5 | 5 | 88% | 77% | 72% | 73% | 0,9 |
+| nível 9 | 7 | 87% | 71% | 70% | 67% | 1,0 |
+| nível 13 | 8 | 92% | 82% | 77% | 75% | 1,1 |
+| nível 17 | 9 | 97% | 90% | 84% | 79% | 1,4 |
+| nível 20 | 9 | 98% | 96% | 92% | 89% | 1,5 |
+
+Duas leituras:
+
+1. **A primeira Recusa é a que pesa.** Ela sozinha tira de 11 a 16 pontos da taxa de vitória. A segunda tira de 3 a 6. A terceira quase não muda nada.
+2. **A criatura raramente gasta mais que uma ou duas.** Mesmo com três disponíveis, a média gasta ficou entre 0,9 e 1,5 — o combate acaba antes.
+
+**Regra prática:** dê **1 Recusa** a um chefe de Kleos 5 a 7 e **2** a partir do
+Kleos 8. A terceira linha da tabela de Orçamento existe para criaturas que
+enfrentam grupos grandes, onde há mais Rolagens de Efeito por rodada; num trio,
+ela é enfeite.
+
+Para reproduzir: `sim/completo.py`.
+
 ---
 
 ## 17. Vontade do Lugar *(Kleos 8+, opcional)*
