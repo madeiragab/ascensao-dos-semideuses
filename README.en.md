@@ -32,7 +32,7 @@ contradicted intuition are documented below.
 | | Book | Contents |
 |---|---|---|
 | **I** | [Player's Book](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | How to play, character creation, combat, optional Demigod Fury, item catalogue, divine materials, and the ability engine |
-| **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, the monster-building engine, and 38 creatures |
+| **II** | [Bestiary](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | The Kleos Scale, a step-by-step creature builder, 38 creatures, loot by Kleos, and the Bound Beast |
 | **III** | [Grimoire](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | Mist Magic: learned spellcasting, with a Disbelief rule |
 | **IV** | [Game Master's Guide](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Running one-shots to long campaigns, NPCs, investigation, breaking objects, environmental hazards |
 | **V** | [Character Sheet](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Fillable, calculates lineage, advancement, and Grade, takes a portrait, and downloads or imports an editable A4 PDF |
@@ -120,6 +120,19 @@ erases whoever wears it.
 where all magic is Greek there aren't two bodies of knowledge — and *Animal Handling*
 folded into Survival.
 
+**Since the August 2026 review, the engine plays the whole game.** Heroes come in
+with gear at their level's Grade and spend MP and SP on damage and on control via
+Effect rolls; creatures come in with area Powers, Onslaughts, Refusals, Lair Will
+and Presence. With everything switched on, a fair encounter lands between 68% and
+93% wins, 2.4 to 3.1 rounds, with 1.7 to 2.6 of three heroes still standing.
+
+Five things measurement changed in the books: weapon damage was falling behind
+monster HP (the item's Grade now grants weapon dice); an ability critical erased
+the encounter (it now adds dice equal to its Grade instead of doubling); the Kleos
+scale had a five-level plateau (bands realigned to the Grade); the maths for large
+tables was wrong (a party of four was being sent against a fight it wins 11% of the
+time); and an Ally built as a monster died every session (6% survival at level 9).
+
 **Monsters are measured in Kleos** — the glory it costs to bring one down. Eleven
 named rungs: Rumour, Hearsay, Tale, Exploit, Deed, Song, Legend, Myth, Epic,
 Theomachy, Cataclysm. A creature of Kleos N is a fair and dangerous fight for N
@@ -153,6 +166,7 @@ python forja.py             # proves the item Grade carries all 20 levels
 python criaturas.py         # measures area Powers and Onslaughts in Kleos
 python completo.py          # the whole game: abilities, control and Refusals
 python nevoa.py             # Mist magic: Formulae, Disbelief, Backlash
+python aliado.py            # how strong an Ally can be without becoming a player
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20

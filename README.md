@@ -28,11 +28,11 @@ que os números contrariaram a intuição estão documentadas mais abaixo.
 
 | | Livro | Conteúdo |
 |---|---|---|
-| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação, combate, Fúria opcional, catálogo de itens, materiais divinos e motor de habilidades |
-| **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o motor de criação de monstros e 38 criaturas |
+| **I** | [Livro do Jogador](https://madeiragab.github.io/ascensao-dos-semideuses/livro-do-jogador.html) | Como jogar, criação, combate, Fúria opcional, catálogo de itens, materiais divinos, encantamentos, a Forja e o motor de habilidades |
+| **II** | [Bestiário](https://madeiragab.github.io/ascensao-dos-semideuses/bestiario.html) | A Escala de Kleos, o passo a passo de criação de criaturas, 38 delas prontas, o saque por Kleos e a Fera Vinculada |
 | **III** | [Grimório](https://madeiragab.github.io/ascensao-dos-semideuses/grimorio.html) | A Magia da Névoa: magia aprendida, com regra de Descrença |
-| **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, investigação, quebrar objetos e perigos de ambiente |
-| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, calcula linhagem, progressão e Grau, aceita retrato e baixa ou importa um PDF editável em folhas A4 |
+| **IV** | [Guia do Mestre](https://madeiragab.github.io/ascensao-dos-semideuses/guia.html) | Conduzir da one-shot à campanha, NPCs, o Aliado que luta, investigação, perigos, a Névoa e o mundo mortal |
+| **V** | [Ficha do Herói](https://madeiragab.github.io/ascensao-dos-semideuses/ficha.html) | Preenchível, com abas para o herói e para a Fera Vinculada; calcula linhagem, progressão e Grau, aceita retrato e baixa ou importa um PDF editável em folhas A4 |
 
 Os cinco livros têm sumários e referências clicáveis. Um pequeno tridente no
 canto inferior abre os outros tomos sem tirar o leitor da página atual.
@@ -149,6 +149,7 @@ python forja.py             # prova que o Grau do item segura os 20 níveis
 python criaturas.py         # mede Poderes de área e Arremetidas em Kleos
 python completo.py          # o jogo inteiro: habilidade, controle e Recusa
 python nevoa.py             # mede a Magia da Névoa: Fórmula, Descrença, Refluxo
+python aliado.py            # quanto um Aliado pode ser sem virar um jogador
 ```
 
 Ele mede de duas formas, e as duas importam. A **analítica** calcula
@@ -156,6 +157,28 @@ probabilidade exata do d20, sem sorte envolvida — serve para afirmações fech
 do tipo "esta técnica é sempre melhor que a outra". A **simulação** roda milhares
 de combates completos com rolagens de verdade, e alcança o que o cálculo isolado
 não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeiro.
+
+**Desde a revisão de agosto de 2026, o motor joga o jogo inteiro.** Os heróis
+entram com equipamento no Grau do nível, gastam MP e SP em habilidade de dano e
+em controle por Rolagem de Efeito; as criaturas entram com Poder de área,
+Arremetidas, Recusas, Vontade do Lugar e Presença. Com tudo ligado dos dois
+lados, o encontro justo entrega de 68% a 93% de vitória, de 2,4 a 3,1 rodadas,
+com 1,7 a 2,6 heróis de pé de três.
+
+Cinco coisas que a medição mudou no livro, e que valem como aviso a quem for
+mexer nos números:
+
+- **o dano de arma não acompanhava o PV dos monstros** — o Grau do item passou a
+  dar dados de arma, e o combate voltou a durar de 2 a 4 rodadas do nível 3 ao 20;
+- **o crítico de habilidade apagava o encontro** — passou a somar dados iguais ao
+  Grau em vez de dobrar tudo;
+- **a Escala de Kleos tinha um platô de cinco níveis** — as faixas foram alinhadas
+  às do Grau;
+- **a conta de mesas grandes estava errada** — multiplicar heróis por Kleos mandava
+  um grupo de quatro contra um encontro que ele vence 11% das vezes. Hoje é tabela
+  medida: o quarto jogador quase não move o degrau, e o quinto vale +1;
+- **um Aliado montado como monstro morria em toda sessão** — 6% de sobrevivência no
+  nível 9. Hoje ele usa a linha do Kleos do Grupo menos 2.
 
 ### As quatro vezes em que o teste me contrariou
 
@@ -197,6 +220,7 @@ template/               as cascas dos livros e a folha de estilo única
 
 regras/                 os capítulos em markdown, e o mapa do sistema
   regras-universais.md  consulta rápida nascida do primeiro playtest completo
+  migracao-0.15.md      o que ajustar numa campanha começada antes de agosto/2026
 bestiario/              o Livro II em markdown
 imagens/                capas originais e miniaturas geradas
 sim/                    o simulador
