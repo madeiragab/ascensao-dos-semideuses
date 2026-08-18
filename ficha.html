@@ -1049,7 +1049,7 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
 /* A moldura e o seletor de enquadramento andam juntos na primeira coluna. */
 .coluna-retrato { display: flex; flex-direction: column; }
 .retrato {
-  width: 7.5rem; height: 9rem;
+  width: 7.5rem; height: 9rem; max-width: 7.5rem; max-height: 9rem; flex: none;
   border: 2px solid var(--borda-forte);
   background: var(--superficie-2) center/cover no-repeat;
   display: grid; place-items: center; text-align: center;
@@ -1062,11 +1062,19 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
 }
 .retrato.tem-foto span { display: none; }
 .retrato img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: none; }
-/* Enquadramento do retrato. "Preencher" corta as bordas para encher a moldura;
-   "inteira" mostra a foto toda, com sobra nas laterais. Nenhum dos dois estica:
-   a proporção original manda nos dois casos, e a imagem guardada é sempre o
-   arquivo original, sem recorte nem recompressão. */
-.retrato.inteira img { object-fit: contain; background: var(--superficie-2); }
+/* Enquadramento do retrato.
+   "Acompanhar" é o padrão: a moldura toma a proporção da foto e encolhe até
+   caber na caixa máxima. Nada é cortado, nada é esticado e não sobra tarja —
+   a borda encosta na imagem. As medidas saem do JS, que sabe o tamanho real
+   do arquivo; a moldura vazia usa o retrato de sempre.
+   "Preencher" é a moldura fixa antiga, que corta para encher.
+   Em qualquer um dos dois a imagem guardada é o arquivo original, sem recorte
+   e sem recompressão. */
+.retrato.acompanha img { object-fit: contain; }
+/* As medidas que o JS calcula são as da foto, não as da moldura: a borda fica
+   por fora delas, senão ela come dois pixels de um lado e a proporção sai
+   torta de novo. */
+.retrato.acompanha, .pdf-retrato.acompanha { box-sizing: content-box; }
 .enquadramento {
   display: flex; align-items: center; gap: .35rem;
   margin-top: .4rem; font-family: var(--sans); font-size: .55rem;
@@ -1255,7 +1263,7 @@ table.viva select { font-size: .72rem; }
 .pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #F2ECD9; }
 .pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #9C9379; }
 .pdf-retrato { width: 29.1667mm; height: 35mm; border: 1px solid #C9A94E; object-fit: cover; object-position: center; flex: none; }
-.pdf-retrato.inteira { object-fit: contain; background: #1F1C14; }
+.pdf-retrato.acompanha { object-fit: contain; }
 .pdf-grade { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5mm; }
 .pdf-bloco { border: 1px solid #4C462E; padding: 2.5mm; break-inside: avoid; min-width: 0; background: #1F1C14; }
 .pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #C9A94E; margin: 0 0 2mm; }
@@ -1379,8 +1387,8 @@ table.viva select { font-size: .72rem; }
           </label>
           <label class="enquadramento">Enquadrar
             <select id="retratoAjuste" onchange="aplicarEnquadramento(true)">
-              <option value="preencher">preencher</option>
-              <option value="inteira">imagem inteira</option>
+              <option value="acompanhar">acompanhar a foto</option>
+              <option value="preencher">preencher a moldura</option>
             </select>
           </label>
         </div>
@@ -2847,29 +2855,53 @@ function retratoEmFormatoPermitido(fonte) {
 })();
 
 /* ---------- Enquadramento do retrato ----------
-   "Preencher" corta para encher a moldura, que é retrato. Numa foto deitada
-   isso come metade da imagem, e foi disso que a mesa reclamou. Então uma foto
-   mais larga que alta entra como "imagem inteira" sozinha — até alguém dizer o
-   contrário, e aí a escolha da pessoa manda. */
+   A moldura era um retângulo em pé de tamanho fixo. Toda foto que não fosse
+   exatamente 5x6 saía cortada ("preencher") ou com tarja ("imagem inteira"),
+   e um corpo inteiro perdia as pernas. Agora a moldura acompanha a foto: ela
+   toma a proporção do arquivo e encolhe até caber na caixa máxima, então a
+   borda encosta na imagem em qualquer proporção — deitada, em pé ou quadrada.
+   Nada é cortado e nada é esticado.
+
+   As duas caixas máximas: 120 x 144 px na tela, 29,1667 x 35 mm na folha. */
+var CAIXA_TELA = { l: 120, a: 144 };
+var CAIXA_FOLHA = { l: 29.1667, a: 35 };
+
+function medirDentroDaCaixa(imagem, caixa) {
+  // A caixa da folha é medida em milímetros e a da tela em pixels, então o
+  // fator é o mesmo cálculo nas duas: encosta no lado que aperta primeiro.
+  var fator = Math.min(caixa.l / imagem.naturalWidth, caixa.a / imagem.naturalHeight);
+  return { l: imagem.naturalWidth * fator, a: imagem.naturalHeight * fator };
+}
+
 function aplicarEnquadramento(manual) {
   var moldura = document.getElementById("retrato");
   var imagem = document.getElementById("retratoImg");
   var escolha = document.getElementById("retratoAjuste");
+  var impresso = document.getElementById("printRetrato");
   if (!moldura || !escolha) return;
   if (manual) imagem.dataset.escolhaManual = "1";
-  var inteira = escolha.value === "inteira";
-  moldura.classList.toggle("inteira", inteira);
-  var impresso = document.getElementById("printRetrato");
-  if (impresso) impresso.classList.toggle("inteira", inteira);
+  var acompanha = escolha.value === "acompanhar";
+  moldura.classList.toggle("acompanha", acompanha);
+  if (impresso) impresso.classList.toggle("acompanha", acompanha);
+
+  if (!acompanha || !imagem.naturalWidth || !moldura.classList.contains("tem-foto")) {
+    moldura.style.width = ""; moldura.style.height = "";
+    if (impresso) { impresso.style.width = ""; impresso.style.height = ""; }
+    return;
+  }
+  var tela = medirDentroDaCaixa(imagem, CAIXA_TELA);
+  moldura.style.width = tela.l.toFixed(1) + "px";
+  moldura.style.height = tela.a.toFixed(1) + "px";
+  if (impresso) {
+    var folha = medirDentroDaCaixa(imagem, CAIXA_FOLHA);
+    impresso.style.width = folha.l.toFixed(2) + "mm";
+    impresso.style.height = folha.a.toFixed(2) + "mm";
+  }
 }
 
 function retratoCarregado() {
   var imagem = document.getElementById("retratoImg");
-  var escolha = document.getElementById("retratoAjuste");
-  if (!imagem || !escolha || !imagem.naturalWidth) return;
-  if (!imagem.dataset.escolhaManual && imagem.naturalWidth > imagem.naturalHeight) {
-    escolha.value = "inteira";
-  }
+  if (!imagem || !document.getElementById("retratoAjuste") || !imagem.naturalWidth) return;
   aplicarEnquadramento(false);
 }
 
@@ -3140,8 +3172,7 @@ function prepararImpressao() {
   var img = document.getElementById("retratoImg"), destino = document.getElementById("printRetrato");
   if (img.getAttribute("src")) { destino.src = img.src; destino.style.visibility = "visible"; }
   else { destino.removeAttribute("src"); destino.style.visibility = "hidden"; }
-  destino.classList.toggle("inteira",
-    document.getElementById("retratoAjuste").value === "inteira");
+  aplicarEnquadramento(false);
 
   porTexto("pJogador", valorCampo("jogador"));
   porTexto("pClasseNivel", nomeSelecionado("classe") + " · nível " + valorCampo("nivel"));
@@ -3542,7 +3573,7 @@ async function baixarPdf() {
       status.textContent = "Gerando página " + (i + 1) + " de " + paginas.length + "…";
       var pagina = paginas[i];
       var canvas = await window.html2canvas(pagina, {
-        scale: 2, backgroundColor: "#16140F", logging: false,
+        scale: 3, backgroundColor: "#16140F", logging: false,
         useCORS: true, allowTaint: false, imageTimeout: 0,
         width: pagina.scrollWidth, height: pagina.scrollHeight,
         windowWidth: pagina.scrollWidth, windowHeight: pagina.scrollHeight,
@@ -3589,6 +3620,7 @@ function limparFicha() {
   });
   var r = document.getElementById("retrato");
   r.classList.remove("tem-foto");
+  r.style.width = ""; r.style.height = "";
   document.getElementById("retratoImg").removeAttribute("src");
   document.getElementById("arquivoRetrato").value = "";
   ultimoParente = null; ultimaClasse = null;
