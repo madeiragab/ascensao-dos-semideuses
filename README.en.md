@@ -106,6 +106,16 @@ relics, while Attunement limits active permanent powers. Beyond weapons and
 armor, the Player's Book now includes 21 utility items, 12 curatives and 24
 magic items, all priced in drachmas.
 
+**The item's Grade is the equipment's progression.** Each Grade grants weapon
+**dice** and DEF — a Heroic longsword is `2d8`, a Legendary greataxe `3d10`.
+Measured across three thousand fights per level: without growing gear, a
+level-20 trio needs 11.5 rounds to bring down its fair encounter and loses one
+fight in three; with the Grade, combat holds at 2 to 4 rounds for the whole
+career. **The Forge** is the ability engine kept inside an object — same points,
+same tables, paid in Charges instead of MP — and enchantments cover the rest: the
+blade that folds into a pen, the one that returns to your hand, the veil that
+erases whoever wears it.
+
 **Fourteen skills**, not sixteen: *Arcana* was absorbed into Mythology — in a world
 where all magic is Greek there aren't two bodies of knowledge — and *Animal Handling*
 folded into Survival.
@@ -139,6 +149,9 @@ python tecnicas.py          # measures all 36 class techniques, one by one
 python defesas_passivas.py  # proves exact base-14 probability equivalence
 python graus.py             # calibrates ability Grades and the progression
 python anteparo.py          # measures the Guardian's class ability
+python forja.py             # proves the item Grade carries all 20 levels
+python criaturas.py         # measures area Powers and Onslaughts in Kleos
+python completo.py          # the whole game: abilities, control and Refusals
 ```
 
 It measures two ways, and both matter. The **analytic** side computes exact d20

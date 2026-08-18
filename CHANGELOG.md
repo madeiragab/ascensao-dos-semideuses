@@ -4,6 +4,99 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.15.0] - 2026-08-18
+
+Uma revisão do sistema inteiro, medida do nível 1 ao 20, e o simulador finalmente
+jogando o jogo completo. Cinco dívidas estruturais foram encontradas e pagas.
+
+### O Grau do item vira a progressão do equipamento
+
+- A revisão mostrou que o **dano de arma não acompanhava o PV dos monstros**: do
+  nível 5 ao 20 o ataque com arma crescia 15% enquanto o PV do encontro justo
+  crescia 250%. Um trio de nível 20 levava **11,5 rodadas** e perdia uma luta em
+  cada três.
+- O Grau do item passa a dar **dados de arma** e DEF, de graça: Heroico soma um
+  dado, Lendário soma dois. Espada longa Heroica é `2d8`; machado grande
+  Lendário, `3d10`. Com isso o combate volta a durar **2 a 4 rodadas** do nível 3
+  ao 20, e o monstro acerta 45% a 60% em vez de 70%.
+- Sai a regra de que bônus numérico custava ponto e parava no +3: ela tratava a
+  escala do equipamento como inflação quando era o que segurava a carreira.
+
+### O crítico de habilidade soma o Grau
+
+- Dobrando os dados, uma habilidade no Teto de Custo apagava de 98% a 139% dos PV
+  do monstro do encontro justo, em todos os níveis medidos.
+- Quatro regras foram comparadas. Vence somar **dados iguais ao Grau**: pior caso
+  de 83% dos PV, e o acréscimo no nível 20 ainda é maior que uma rodada inteira
+  de machado. Arma continua dobrando.
+
+### A Escala de Kleos perde o platô
+
+- As faixas eram 1–4, 5–9, 10–14, 15–19 e 20 — cinco níveis presos no mesmo
+  Kleos. No nível 9 o monstro caía em 1,9 rodada contra 3 nos vizinhos.
+- As faixas passam a ser **as mesmas do Grau**: 1–4, 5–8, 9–12, 13–16, 17–20.
+  Nenhum valor mudou. Nível 9 vai para 3,4 rodadas; 13 para 3,9; 17 para 3,9.
+
+### A Forja (Parte VII)
+
+- O Interlúdio mandava criar itens por uma Parte VII que não existia, e o Guia
+  prometia Classe de Qualidade, Aprimoramentos e Integridade sem nenhuma escrita.
+- A Forja é o motor do Capítulo Sete dentro de um objeto: **Manufatura contra
+  CD 10 + os pontos do item**, Progresso por Ação de Interlúdio, e a falha
+  cobrando Integridade da peça — não do ferreiro.
+- **Cargas** iguais ao bônus de proficiência, pela mesma conta dos Tratamentos.
+- Item Mítico exige material de criatura de **Kleos 5 ou mais**; Lendário, de
+  Kleos 8 ou mais.
+- **Encantamentos**: oito, com custo em pontos e preço em dracmas — Forma Oculta,
+  Retorno Vinculado, Fome de Ícor, Passo Alado, Voz do Metal, Véu da Névoa,
+  Mordida do Estige e Sopro do Portador. Nenhum soma ataque ou dano.
+
+### Livro II — Bestiário
+
+- **A Fera Vinculada** (Parte V): Poupar, Provar e Selar. A fera é um bloco deste
+  livro com três cortes, ocupa um dos três Vínculos, gasta o turno do dono e
+  morre de verdade.
+- **A Forja de Monstros** vira um passo a passo de dez decisões. O Passo 4 é novo
+  e preenchia um buraco que ninguém tinha notado: **tamanho, espaço, movimento,
+  alcance natural e sentidos** não existiam em lugar nenhum do sistema.
+- **O que se leva do corpo**: dracmas e material por Kleos vencido, calculados a
+  partir dos preços do Capítulo de Itens.
+- **Poderes e Arremetidas entram na conta**: uma criatura completa vale **+1
+  Kleos** sobre a linha crua da Tábua. O Sopro é o que decide a luta; a
+  Arremetida não mata o grupo, gasta o grupo.
+- **Recusas**, medidas enfim: a primeira tira de 11 a 16 pontos da taxa de
+  vitória, a segunda de 3 a 6, a terceira quase nada. Recomendação nova: 1 Recusa
+  no Kleos 5 a 7, 2 a partir do 8.
+
+### Guia do Mestre
+
+- Capítulo novo: **A Névoa e o mundo mortal**, com o que o mortal vê, as três
+  regras de mesa e o tom da campanha.
+- Aviso medido: o mesmo grupo vence 58% a 62% batendo só com arma e 88% a 92%
+  gastando recurso.
+
+### Ficha do Herói
+
+- **Duas abas**: o Herói e a Fera Vinculada, cada uma com folha própria no PDF. A
+  folha da fera sai do documento quando não há fera.
+- Campo de **Itens forjados**, com Grau, dado, pontos, Integridade e Cargas.
+
+### Impressão
+
+- Os cinco livros passam a imprimir em A4 com a paleta escura que aparece na
+  tela, capa sangrando até a borda e tipografia de livro — a raiz encolhe para
+  9,5pt na impressão, o que faltava para os títulos obedecerem.
+
+### Simulador
+
+- `sim/forja.py`, `sim/criaturas.py` e `sim/completo.py` entram na regressão, que
+  passa a ter 14 arquivos.
+- O motor agora joga o jogo inteiro: equipamento por Grau, habilidade de dano,
+  controle por Rolagem de Efeito, Sopro, Arremetida e Recusa. Com tudo ligado dos
+  dois lados, o encontro justo entrega de 68% a 93% de vitória, de 2,4 a 3,1
+  rodadas, com 1,7 a 2,6 heróis de pé de três.
+- Continuam sem modelo: **Vontade do Lugar** e **Presença**.
+
 ## [0.14.2] - 2026-08-01
 
 ### Ficha do Herói

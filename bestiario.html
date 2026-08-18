@@ -1370,6 +1370,23 @@ pre.bloco-codigo {
 <div class="destaque"><p>Quando uma Rolagem de Efeito acerta uma defesa passiva da criatura, ela pode gastar uma <strong>Recusa</strong> para transformar o acerto em erro.</p></div>
 <p>Recusas representam o peso do mito: a Hidra recusa morrer, o deus recusa ser comandado. Elas recarregam no Descanso Longo, ou no início de um novo combate se a ficção justificar.</p>
 <p><strong>Sempre diga à mesa quando uma Recusa for gasta.</strong> O jogador precisa entender que gastou o recurso dele em algo que funcionou e foi negado — senão parece trapaça.</p>
+<h3>Duas bastam, e a terceira quase não é usada</h3>
+<p>A Recusa foi a última peça do sistema a ser medida, e por um motivo bobo: até o motor aprender a usar <strong>controle do lado dos jogadores</strong>, não existia Rolagem de Efeito para recusar. Agora existe — um Oráculo gastando MP em condição forte, contra a defesa passiva mais fraca da criatura, com nova rolagem no fim de cada turno dela.</p>
+<p>Taxa de vitória do grupo contra a criatura completa, 1.200 combates por célula:</p>
+<div class="rolagem"><table>
+<thead><tr><th>Trio</th><th>Kleos</th><th>0 Recusas</th><th>1</th><th>2</th><th>3</th><th>Recusas realmente gastas</th></tr></thead>
+<tbody>
+<tr><td>nível 5</td><td>5</td><td>88%</td><td>77%</td><td>72%</td><td>73%</td><td>0,9</td></tr>
+<tr><td>nível 9</td><td>7</td><td>87%</td><td>71%</td><td>70%</td><td>67%</td><td>1,0</td></tr>
+<tr><td>nível 13</td><td>8</td><td>92%</td><td>82%</td><td>77%</td><td>75%</td><td>1,1</td></tr>
+<tr><td>nível 17</td><td>9</td><td>97%</td><td>90%</td><td>84%</td><td>79%</td><td>1,4</td></tr>
+<tr><td>nível 20</td><td>9</td><td>98%</td><td>96%</td><td>92%</td><td>89%</td><td>1,5</td></tr>
+</tbody>
+</table></div>
+<p>Duas leituras:</p>
+<ol><li><strong>A primeira Recusa é a que pesa.</strong> Ela sozinha tira de 11 a 16 pontos da taxa de vitória. A segunda tira de 3 a 6. A terceira quase não muda nada.</li><li><strong>A criatura raramente gasta mais que uma ou duas.</strong> Mesmo com três disponíveis, a média gasta ficou entre 0,9 e 1,5 — o combate acaba antes.</li></ol>
+<p><strong>Regra prática:</strong> dê <strong>1 Recusa</strong> a um chefe de Kleos 5 a 7 e <strong>2</strong> a partir do Kleos 8. A terceira linha da tabela de Orçamento existe para criaturas que enfrentam grupos grandes, onde há mais Rolagens de Efeito por rodada; num trio, ela é enfeite.</p>
+<p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <div class="ornamento">❖</div>
 <h2 id="secao-17">17. Vontade do Lugar <em>(Kleos 8+, opcional)</em></h2>
 <p>Criaturas que vivem há séculos no mesmo lugar moldam o lugar.</p>
@@ -2550,11 +2567,17 @@ O QUE ACONTECE AO MORRER
   validado em oito mil combates simulados contra o grupo de nível 1 do Livro do
   Jogador. As fórmulas de montagem de encontro erram no máximo 0,3 numa escala
   de onze.</p>
-  <p><strong>Onde a margem é maior.</strong> O simulador não modela Arremetidas,
-  Recusas nem Poderes — ele valida a Tábua na forma crua. Uma criatura completa é
-  mais perigosa que a versão testada, e por isso os degraus de 6 a 11 têm margem
-  de erro maior que os de 1 a 5. A escala também foi calibrada só no nível 1:
-  enquanto não existir progressão de nível, tudo acima disso é extrapolação.</p>
+  <p><strong>O simulador hoje joga o jogo inteiro.</strong> Poderes de área,
+  Arremetidas e Recusas entraram no motor, e os heróis deixaram de só bater com
+  arma: eles gastam MP e SP em habilidade e em controle, com Rolagem de Efeito
+  contra as defesas passivas da criatura. Com tudo ligado dos dois lados, o
+  encontro justo entrega de 68% a 93% de vitória, de 2,4 a 3,1 rodadas, com 1,7 a
+  2,6 heróis de pé. Ver <span class="dado">sim/criaturas.py</span> e
+  <span class="dado">sim/completo.py</span>.</p>
+  <p><strong>Onde a margem continua.</strong> Vontade do Lugar e Presença ainda
+  não são modeladas, e a Tábua foi calibrada com um trio: mesas de quatro ou cinco
+  jogadores fazem mais Rolagens de Efeito por rodada, o que muda o valor das
+  Recusas para cima.</p>
   <p><strong>Uma regra que a simulação reescreveu.</strong> A primeira versão da
   seção 5 dizia que muitos inimigos fracos valiam mais que a soma do Kleos.
   Valem menos — o grupo concentra fogo e cada morto para de causar dano para
