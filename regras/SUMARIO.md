@@ -117,7 +117,7 @@ vez só, agora, enquanto o livro ainda é pequeno.
 | 42 | Armas e propriedades | ✅ |
 | 43 | Criação de armas | ✅ |
 | 44 | Armaduras e escudos | ✅ tabela completa, medida em `sim/equilibrio.py` |
-| 45 | Materiais sobrenaturais | 🔴 citado como "será desenvolvido" |
+| 45 | Materiais divinos e Encantamentos | ✅ os três materiais e oito encantamentos com preço em pontos |
 | 46 | Dinheiro e preços | ✅ óbolo, dracma, mina e talento, com o que se ganha por dia |
 
 ### Parte VII — A Forja → `criacao-de-itens.md`
@@ -148,9 +148,9 @@ vez só, agora, enquanto o livro ainda é pequeno.
 |---|---|---|
 | 59 | Bestiário | ✅ **virou o Livro II** — ver `bestiario/` |
 | 60 | Montagem de encontros | ✅ Livro II, seções 4 e 5 |
-| 61 | Recompensas | 🟡 Livro II, seção 8 — falta economia de dracmas |
-| 62 | Tom, Névoa e o mundo mortal | 🔴 |
-| 63 | Progressão de nível e ganho de experiência | 🔴 |
+| 61 | Recompensas | ✅ Livro II, seção 8 — dracmas e material por Kleos vencido |
+| 62 | Tom, Névoa e o mundo mortal | ✅ Guia do Mestre, Capítulo Dez |
+| 63 | Progressão de nível e ganho de experiência | ✅ Livro I, Capítulo Nove — o Mestre concede por Kleos, sem tabela de XP |
 
 ### A Fera Vinculada → **Livro II, Parte V** (`bestiario/05-a-fera-vinculada.md`)
 
