@@ -900,6 +900,12 @@ pre.bloco-codigo {
    bastante para estourar a mancha, por mais nowrap que ele seja. */
 .dado { max-width: 100%; overflow-wrap: anywhere; }
 
+/* Dentro de um cartão a coluna é estreita — uns 270 px — e um nowrap longo
+   vaza para fora da grade. Ali o dado quebra linha; o nowrap continua valendo
+   no corpo do texto, onde ele serve para 2d8 não virar "2d" numa linha e "8"
+   na outra. */
+.cartao .dado, .criatura .status .dado { white-space: normal; }
+
 @media print {
   pre.bloco-codigo {
     white-space: pre-wrap;

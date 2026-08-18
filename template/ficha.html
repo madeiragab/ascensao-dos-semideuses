@@ -445,7 +445,9 @@ table.viva select { font-size: .72rem; }
               <option value="hades">Hades</option><option value="atena">Atena</option><option value="ares">Ares</option>
               <option value="apolo">Apolo</option><option value="hefesto">Hefesto</option><option value="demeter">Deméter</option>
               <option value="afrodite">Afrodite</option>
-            </select></div>
+                          <option value="hermes">Hermes</option>
+              <option value="dionisio">Dionísio</option>
+</select></div>
           <div class="f"><label>Afinidade Elemental</label><select id="afinidade"><option value="">Escolha o Parente</option></select></div>
           <div class="f"><label>Atributo Divino</label>
             <select id="divino">
@@ -895,7 +897,9 @@ var PARENTES = {
   apolo: { nome: "Apolo", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Luz", "Som"], passiva: "Dom Artístico: instrumento proficiente e Vantagem em Percepção visual." },
   hefesto: { nome: "Hefesto", bonus: { inteligencia: 2, constituicao: 1 }, afinidades: ["Fogo", "Metal"], passiva: "Mãos de Ferreiro: proficiência em Manufatura e conserto de metal uma vez por dia." },
   demeter: { nome: "Deméter", bonus: { constituicao: 2, sabedoria: 1 }, afinidades: ["Natureza"], passiva: "Toque Verdejante: Vantagem para achar comida e cura diária igual à proficiência." },
-  afrodite: { nome: "Afrodite", bonus: { carisma: 2, sabedoria: 1 }, afinidades: ["Encanto"], passiva: "Palavra Fácil: uma vez por cena, um mortal obedece uma ordem curta e razoável sem teste, fora de combate." }
+  afrodite: { nome: "Afrodite", bonus: { carisma: 2, sabedoria: 1 }, afinidades: ["Encanto"], passiva: "Palavra Fácil: uma vez por cena, um mortal obedece uma ordem curta e razoável sem teste, fora de combate." },
+  hermes: { nome: "Hermes", bonus: { destreza: 2, carisma: 1 }, afinidades: ["Ar"], passiva: "Pé Ligeiro: +3 m de movimento, proficiência em Prestidigitação e, uma vez por cena, você acha um caminho." },
+  dionisio: { nome: "Dionísio", bonus: { carisma: 2, constituicao: 1 }, afinidades: ["Natureza", "Encanto"], passiva: "Delírio Leve: resistência a veneno e, uma vez por combate, ação bônus para dar Desvantagem na próxima rolagem de quem te ouvir." }
 };
 
 var PERICIAS_CLASSE = {
