@@ -11,7 +11,7 @@ Alvos verificados:
   - o combate dura de 2 a 4,5 rodadas do nível 3 ao 20;
   - o trio vence pelo menos 85% dos encontros justos;
   - o monstro acerta o Guardião entre 45% e 60%, sem derreter a DEF;
-  - o crítico de habilidade somando metade nunca chega ao dobro do que apagava.
+  - o crítico de habilidade nunca chega a 90% dos PV do monstro justo.
 
 Rodar de dentro da pasta sim/:
     python forja.py
@@ -116,20 +116,22 @@ def main() -> None:
         # armadura ainda não. O que não pode voltar é o 70% de antes do conserto.
         if not 0.45 <= p <= 0.60:
             falhas.append(f"nível {n}: o monstro acerta {p:.0%}, fora de 45% a 60%")
-
-    print("\nO crítico de habilidade, dobrando contra somando metade")
-    print(f"{'nível':>6}{'dados':>7}{'PV do monstro':>15}{'dobrando':>11}"
-          f"{'metade':>9}{'quanto sobrou':>15}")
-    print("-" * 64)
+    print("\nO crítico de habilidade: dobrando contra somar dados iguais ao Grau")
+    print(f"{'nível':>6}{'dados':>7}{'PV do monstro':>15}{'normal':>9}"
+          f"{'dobrando':>10}{'+Grau':>8}")
+    print("-" * 56)
     for n in NIVEIS:
-        dados = teto_de_custo(n) * grau(n)
+        g, dados = grau(n), teto_de_custo(n) * grau(n)
         pv = TABUA[kleos_do_grupo(n, 3)][0]
-        dobra, meio = dados * 9 + 3, dados * 6.75 + 3
-        print(f"{n:>6}{dados:>7}{pv:>15}{dobra/pv:>10.0%}{meio/pv:>9.0%}"
-              f"{meio/dobra:>15.0%}")
-        if meio >= dobra:
-            falhas.append(f"nível {n}: a metade não é menor que o dobro")
-
+        normal, dobra = dados * 4.5 + 3, dados * 9 + 3
+        com_grau = (dados + g) * 4.5 + 3
+        print(f"{n:>6}{dados:>7}{pv:>15}{normal/pv:>9.0%}"
+              f"{dobra/pv:>10.0%}{com_grau/pv:>8.0%}")
+        # Parte III, seção 21: o crítico de habilidade nunca pode, sozinho,
+        # apagar o monstro do encontro justo.
+        if com_grau / pv > 0.90:
+            falhas.append(f"nível {n}: o crítico de habilidade faz "
+                          f"{com_grau/pv:.0%} dos PV do monstro justo")
     print()
     if falhas:
         for f in falhas:
