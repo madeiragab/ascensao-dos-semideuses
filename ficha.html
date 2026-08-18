@@ -1046,6 +1046,8 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
 
 /* identidade com retrato */
 .identidade { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
+/* A moldura e o seletor de enquadramento andam juntos na primeira coluna. */
+.coluna-retrato { display: flex; flex-direction: column; }
 .retrato {
   width: 7.5rem; height: 9rem;
   border: 2px solid var(--borda-forte);
@@ -1060,6 +1062,21 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
 }
 .retrato.tem-foto span { display: none; }
 .retrato img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: none; }
+/* Enquadramento do retrato. "Preencher" corta as bordas para encher a moldura;
+   "inteira" mostra a foto toda, com sobra nas laterais. Nenhum dos dois estica:
+   a proporção original manda nos dois casos, e a imagem guardada é sempre o
+   arquivo original, sem recorte nem recompressão. */
+.retrato.inteira img { object-fit: contain; background: var(--superficie-2); }
+.enquadramento {
+  display: flex; align-items: center; gap: .35rem;
+  margin-top: .4rem; font-family: var(--sans); font-size: .55rem;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
+}
+.enquadramento select {
+  font-family: var(--sans); font-size: .6rem; padding: .1rem .2rem;
+  color: var(--texto); background: var(--papel);
+  border: 1px solid var(--borda); border-radius: 2px;
+}
 .retrato.tem-foto img { display: block; }
 .retrato:hover { border-color: var(--acento); }
 .linhas-id { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
@@ -1238,6 +1255,7 @@ table.viva select { font-size: .72rem; }
 .pdf-cabecalho h1 { font-size: 19pt; margin: 0; color: #F2ECD9; }
 .pdf-cabecalho p { font: 8pt Arial, sans-serif; margin: 1mm 0 0; color: #9C9379; }
 .pdf-retrato { width: 29.1667mm; height: 35mm; border: 1px solid #C9A94E; object-fit: cover; object-position: center; flex: none; }
+.pdf-retrato.inteira { object-fit: contain; background: #1F1C14; }
 .pdf-grade { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2.5mm; }
 .pdf-bloco { border: 1px solid #4C462E; padding: 2.5mm; break-inside: avoid; min-width: 0; background: #1F1C14; }
 .pdf-bloco h2 { font: 700 7.5pt Arial, sans-serif; text-transform: uppercase; letter-spacing: .12em; color: #C9A94E; margin: 0 0 2mm; }
@@ -1353,11 +1371,19 @@ table.viva select { font-size: .72rem; }
     <!-- ===== IDENTIDADE ===== -->
     <div class="bloco">
       <div class="identidade">
-        <label class="retrato" id="retrato" title="Escolher uma imagem do rosto">
-          <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="arquivoRetrato" hidden>
-          <img id="retratoImg" alt="Retrato do personagem">
-          <span>Clique para<br>escolher o<br>rosto</span>
-        </label>
+        <div class="coluna-retrato">
+          <label class="retrato" id="retrato" title="Escolher uma imagem do rosto">
+            <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="arquivoRetrato" hidden>
+            <img id="retratoImg" alt="Retrato do personagem">
+            <span>Clique para<br>escolher o<br>rosto</span>
+          </label>
+          <label class="enquadramento">Enquadrar
+            <select id="retratoAjuste" onchange="aplicarEnquadramento(true)">
+              <option value="preencher">preencher</option>
+              <option value="inteira">imagem inteira</option>
+            </select>
+          </label>
+        </div>
 
         <div class="linhas-id">
           <div class="f"><label>Personagem</label><input type="text" id="nome" name="nome"></div>
@@ -2807,7 +2833,9 @@ function retratoEmFormatoPermitido(fonte) {
         alert("Não foi possível ler esse retrato sem alterar a imagem.");
         return;
       }
-      document.getElementById("retratoImg").src = fonte;
+      var imagem = document.getElementById("retratoImg");
+      imagem.dataset.escolhaManual = "";     // foto nova, escolha nova
+      imagem.src = fonte;
       alvo.classList.add("tem-foto");
     };
     leitor.onerror = function () {
@@ -2817,6 +2845,33 @@ function retratoEmFormatoPermitido(fonte) {
     leitor.readAsDataURL(f);          // nunca sai do navegador
   });
 })();
+
+/* ---------- Enquadramento do retrato ----------
+   "Preencher" corta para encher a moldura, que é retrato. Numa foto deitada
+   isso come metade da imagem, e foi disso que a mesa reclamou. Então uma foto
+   mais larga que alta entra como "imagem inteira" sozinha — até alguém dizer o
+   contrário, e aí a escolha da pessoa manda. */
+function aplicarEnquadramento(manual) {
+  var moldura = document.getElementById("retrato");
+  var imagem = document.getElementById("retratoImg");
+  var escolha = document.getElementById("retratoAjuste");
+  if (!moldura || !escolha) return;
+  if (manual) imagem.dataset.escolhaManual = "1";
+  var inteira = escolha.value === "inteira";
+  moldura.classList.toggle("inteira", inteira);
+  var impresso = document.getElementById("printRetrato");
+  if (impresso) impresso.classList.toggle("inteira", inteira);
+}
+
+function retratoCarregado() {
+  var imagem = document.getElementById("retratoImg");
+  var escolha = document.getElementById("retratoAjuste");
+  if (!imagem || !escolha || !imagem.naturalWidth) return;
+  if (!imagem.dataset.escolhaManual && imagem.naturalWidth > imagem.naturalHeight) {
+    escolha.value = "inteira";
+  }
+  aplicarEnquadramento(false);
+}
 
 function valorCampo(id) {
   var el = document.getElementById(id);
@@ -3085,6 +3140,8 @@ function prepararImpressao() {
   var img = document.getElementById("retratoImg"), destino = document.getElementById("printRetrato");
   if (img.getAttribute("src")) { destino.src = img.src; destino.style.visibility = "visible"; }
   else { destino.removeAttribute("src"); destino.style.visibility = "hidden"; }
+  destino.classList.toggle("inteira",
+    document.getElementById("retratoAjuste").value === "inteira");
 
   porTexto("pJogador", valorCampo("jogador"));
   porTexto("pClasseNivel", nomeSelecionado("classe") + " · nível " + valorCampo("nivel"));
@@ -3537,6 +3594,9 @@ function limparFicha() {
   ultimoParente = null; ultimaClasse = null;
   recalcular();
 }
+
+document.getElementById("retratoImg").addEventListener("load", retratoCarregado);
+if (document.getElementById("retratoImg").complete) retratoCarregado();
 
 recalcular();
 </script>
