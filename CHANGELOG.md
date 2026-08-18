@@ -4,6 +4,40 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.15.3] - 2026-08-18
+
+Duas medições que faltavam: mesa de seis e semideus contra semideus.
+
+### Mesa de seis jogadores
+
+- A tabela de Kleos do Grupo agora vai até seis, medida. **O sexto jogador não
+  move o degrau em nenhuma faixa**: ele entra como folga, não como dificuldade.
+  No nível 3 leva o grupo de 61% para 92% de vitória contra o mesmo Kleos.
+- Exceção no topo: seis heróis de nível 20 aguentam um **Kleos 11** a 78%. Mas
+  Cataclisma não cai por dano, cai pelo Selo — a conta permite e a ficção manda.
+- Acima de seis continua extrapolação, e o código diz isso.
+
+### Semideus contra semideus *(`sim/duelo.py`)*
+
+O duelo nunca tinha sido medido, e é o combate que mais foge das contas do resto
+do livro: tudo que o sistema equilibra pressupõe grupo.
+
+- **O Guardião ganha o duelo**, de 54% a 77%. DEF e PV valem mais quando não há
+  ninguém dividindo os golpes. Fica registrado como aviso no Guia, não corrigido:
+  quem montar arena ou torneio precisa saber antes de prometer justiça.
+- **Controle em 1x1 é armadilha.** A mesma dupla, mudando só o que o Oráculo faz
+  com a ação: controlando vence de 0% a 3%; gastando o mesmo MP em dano, de 44% a
+  57%. É a terceira vez que a medição diz isso, agora em todos os níveis e com o
+  arsenal completo.
+- **Começar ajuda e não decide:** quem vence a iniciativa leva 56% a 58%. O duelo
+  dura de 4 rodadas no nível 1 a 8 no nível 20.
+- O Guia ganha o capítulo *Semideus contra semideus*, com a instrução de avisar a
+  mesa sobre a armadilha do controle **antes** do duelo.
+
+### Regressão
+
+- 17 arquivos.
+
 ## [0.15.2] - 2026-08-18
 
 Conserto vindo da mesa. Um playtest solo do Liam Davis — Furioso de Netuno,

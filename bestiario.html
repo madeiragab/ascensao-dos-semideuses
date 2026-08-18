@@ -992,13 +992,13 @@ pre.bloco-codigo {
 <p>As faixas são <strong>as mesmas faixas de Grau</strong> do Livro I, e isso não é coincidência: o personagem muda de patamar quando o Grau dele muda.</p>
 <p>O <strong>Kleos do Grupo</strong> é a soma. Para não fazer conta com frações na mesa, consulte direto:</p>
 <div class="rolagem"><table>
-<thead><tr><th>Nível</th><th>3 heróis</th><th>4 heróis</th><th>5 heróis</th></tr></thead>
+<thead><tr><th>Nível</th><th>3 heróis</th><th>4 heróis</th><th>5 heróis</th><th>6 heróis</th></tr></thead>
 <tbody>
-<tr><td>1–4</td><td>3</td><td>4</td><td>4</td></tr>
-<tr><td>5–8</td><td>5</td><td>5</td><td>6</td></tr>
-<tr><td>9–12</td><td>7</td><td>7</td><td>8</td></tr>
-<tr><td>13–16</td><td>8</td><td>8</td><td>9</td></tr>
-<tr><td>17–20</td><td>9</td><td>10</td><td>10</td></tr>
+<tr><td>1–4</td><td>3</td><td>4</td><td>4</td><td>4</td></tr>
+<tr><td>5–8</td><td>5</td><td>5</td><td>6</td><td>6</td></tr>
+<tr><td>9–12</td><td>7</td><td>7</td><td>8</td><td>8</td></tr>
+<tr><td>13–16</td><td>8</td><td>8</td><td>9</td><td>9</td></tr>
+<tr><td>17–20</td><td>9</td><td>10</td><td>10</td><td>10</td></tr>
 </tbody>
 </table></div>
 <p><strong>Esta tabela não é a soma dos valores de cima, e é de propósito.</strong> Somar funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.</p>
@@ -1015,7 +1015,9 @@ pre.bloco-codigo {
 </tbody>
 </table></div>
 <p>O motivo é a grossura da escala. A Tábua cresce cerca de <strong>35% por degrau</strong>, e um jogador a mais soma bem menos que isso: ele traz um corpo e uma ação, mas não traz PV de monstro nem dano de monstro junto. Multiplicar heróis por Kleos supõe uma escala fina que a Tábua não tem.</p>
-<p>A tabela acima é a medida: <strong>o quarto jogador raramente move o degrau, e o quinto vale +1</strong>. Quando quiser apertar uma mesa grande sem subir um degrau inteiro, some criaturas menores pelas fórmulas da <a href="#secao-5">seção 5</a> — é para isso que elas existem.</p>
+<p>A tabela acima é a medida: <strong>o quarto jogador raramente move o degrau, o quinto vale +1, e o sexto não move nada</strong>. Um sexto herói entra como folga, não como degrau: no nível 3 ele leva o grupo de 61% para 92% de vitória contra o mesmo Kleos, e no 17 para 94%.</p>
+<p>A única exceção está no topo: <strong>seis heróis de nível 20 aguentam um Kleos 11</strong>, com 78% de vitória. Só que Kleos 11 é Cataclisma, e Cataclisma não cai por dano — cai pelo Selo (<a href="#secao-7">seção 7</a>). A conta permite; a ficção continua mandando.</p>
+<p>Quando quiser apertar uma mesa grande sem subir um degrau inteiro, some criaturas menores pelas fórmulas da <a href="#secao-5">seção 5</a> — é para isso que elas existem.</p>
 <p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <h3>Estes números foram medidos, e a primeira versão estava errada</h3>
 <p>A escala original dizia que um personagem valia 1, 2, 3 ou 4 de Kleos conforme a faixa de nível. Isso estava certo no nível 1 e errado em todo o resto. Com a progressão do Capítulo Nove implementada no simulador — e com a Oráculo usando o MP dela, não cutucando com uma lança —, o Kleos justo para um trio ficou assim:</p>
