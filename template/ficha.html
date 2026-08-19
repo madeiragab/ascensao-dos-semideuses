@@ -133,6 +133,10 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
   margin-top: .4rem; font-family: var(--sans); font-size: .55rem;
   text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
 }
+.grade-tecnicas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .4rem .8rem; }
+.grade-tecnicas label { display: flex; flex-direction: column; gap: .15rem; font-family: var(--sans); font-size: .55rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); }
+.grade-tecnicas select { font-size: .8rem; }
+.grade-tecnicas select:disabled { opacity: .45; }
 .enquadramento input[type="range"] { flex: 1; min-width: 0; accent-color: var(--acento); }
 .enquadramento button {
   font-family: var(--sans); font-size: .55rem; padding: .1rem .3rem; cursor: pointer;
@@ -644,7 +648,10 @@ table.viva select { font-size: .72rem; }
           </table>
 
           <h3 style="margin-top:1.1rem;">Técnicas de classe</h3>
-          <textarea rows="5" id="tecnicas"></textarea>
+          <div class="grade-tecnicas" id="grade-tecnicas"></div>
+          <p class="estado-regra" id="estadoTecnicas">Escolha a classe.</p>
+          <p class="legenda-calc" id="efeitosTecnicas"></p>
+          <textarea rows="2" id="tecnicas" placeholder="Anotações sobre as técnicas"></textarea>
 
           <h3 style="margin-top:1.1rem;">Condições ativas</h3>
           <textarea rows="2" id="condicoes"></textarea>
@@ -915,6 +922,125 @@ function habilidadeDaClasse(chave, prof, sab) {
   var c = CLASSES[chave];
   return c && c.habilidade ? c.habilidade(prof, sab) : null;
 }
+
+/* As 36 técnicas, copiadas do Livro do Jogador pelo build e não à mão: o
+   Tier 1 sai dos cartões de classe do Capítulo Três e os Tiers 2 e 3 do
+   Capítulo Nove. Nomes e textos são os do livro, palavra por palavra. */
+var TECNICAS = {
+  guardiao: [
+    { t: 1, n: "Escudo Vínculo", d: "Ao ser atingido, use sua reação e 2 SP para somar sua proficiência à DEF contra aquele ataque — e possivelmente transformá-lo em erro." },
+    { t: 1, n: "Interceptar", d: "Use sua reação para receber no seu lugar o dano de um ataque que atingiria um aliado adjacente." },
+    { t: 1, n: "Postura Desafiadora", d: "Gaste 2 SP para marcar um inimigo. Ele ataca qualquer alvo que não seja você com Desvantagem, até o fim do seu próximo turno." },
+    { t: 1, n: "Pé Firme", d: "Rolagens de Efeito para te empurrar, puxar ou derrubar têm Desvantagem — e qualquer deslocamento forçado contra você é reduzido à metade." },
+    { t: 1, n: "Vigor do Sobrevivente", d: "Seus PV máximos aumentam em um valor igual ao seu nível. Simples e sempre ligado." },
+    { t: 2, n: "Fôlego de Ferro", d: "Uma vez por combate, ação bônus e 3 SP: recupere PV iguais ao seu nível. Segurar a linha custa sangue, não fôlego." },
+    { t: 2, n: "Muro de Escudos", d: "Aliados adjacentes a você recebem +1 DEF. Exige que você esteja empunhando um escudo." },
+    { t: 2, n: "Represália", d: "Quando você usa Interceptar, quem desferiu o golpe sofre dano igual ao seu modificador de Força mais seu nível." },
+    { t: 3, n: "Bastião", d: "Enquanto estiver acima de metade dos PV, cada golpe que você recebe é reduzido em um valor igual ao seu bônus de proficiência." },
+    { t: 3, n: "Juramento do Portão", d: "Escolha um aliado no início do combate. Enquanto ele estiver a até 3 metros de você, nenhum golpe isolado pode reduzi-lo abaixo de 1 PV." },
+    { t: 3, n: "Provocação Ampla", d: "Postura Desafiadora passa a marcar dois inimigos, um por vez, gastando 2 SP em cada." },
+    { t: 3, n: "Segunda Muralha", d: "Uma vez por rodada, você pode usar Interceptar sem gastar sua reação." },
+  ],
+  furioso: [
+    { t: 1, n: "Ataque Pesado", d: "Antes de um ataque corpo a corpo, gaste 1 SP: −2 na rolagem e, se acertar, some mais um dado de dano da arma. Não pode ser combinado com Ataque Feroz." },
+    { t: 1, n: "Casca Grossa", d: "Enquanto estiver com metade dos PV ou menos, você recebe +2 DEF. Quanto pior fica, mais difícil é te acertar." },
+    { t: 1, n: "Grito de Batalha", d: "Ação e 2 SP. Faça uma Rolagem de Efeito com seu Atributo Divino contra a Vontade de cada inimigo a até 3 metros; quem for atingido fica Amedrontado por uma rodada." },
+    { t: 1, n: "Investida Imprudente", d: "Depois de correr 6 metros em linha reta até o alvo, gaste 2 SP e ataque: se acertar, ele é empurrado 3 metros e fica Caído. O acerto resolve todo o pacote." },
+    { t: 1, n: "Sede de Sangue", d: "Ao reduzir um inimigo a 0 PV, recupere 1d4 SP. Recompensa quem termina o serviço." },
+    { t: 2, n: "Fúria Crescente", d: "A cada rodada de combate seu dano aumenta em +1, até +3. Vale para o primeiro ataque de cada turno, e zera quando o combate acaba." },
+    { t: 2, n: "Golpe Duplo", d: "Uma vez por combate, ação bônus e 2 SP: mais um ataque corpo a corpo, com −2 na rolagem e sem somar o modificador de atributo ao dano." },
+    { t: 2, n: "Rasgo", d: "Quando acerta com Ataque Pesado, o alvo fica Sangrando 1." },
+    { t: 2, n: "Sem Recuo", d: "Você é imune a Amedrontado e a Aterrorizado. Nada te faz sair de uma briga." },
+    { t: 3, n: "Coração de Ares", d: "Seus ataques são Acerto Crítico em 19 e 20 naturais." },
+    { t: 3, n: "Fúria Cega", d: "Uma vez por combate, ataque todas as criaturas ao seu alcance, uma vez cada. Você fica Desprevenido até seu próximo turno." },
+    { t: 3, n: "Massacre", d: "Quando você reduz um inimigo a 0 PV, faça mais um ataque de graça contra outro alvo ao alcance. Não faz nada contra um chefe sozinho, e é devastadora contra um bando." },
+  ],
+  oraculo: [
+    { t: 1, n: "Bênção da Coragem", d: "Ação, toque, 2 MP: até o fim da próxima rodada o aliado fica imune a Amedrontado e soma 1d4 às rolagens de ataque." },
+    { t: 1, n: "Mão Firme", d: "Seus Tratamentos curam +2 PV, e você pode aplicá-los com uma ação bônus em vez de uma ação." },
+    { t: 1, n: "Palavra Curativa", d: "Ação bônus e 2 MP: um aliado visível a até 18 metros recupera 1d6 + SAB PV. Não gasta Tratamentos." },
+    { t: 1, n: "Presságio", d: "Fora de combate, um ritual de dez minutos e 3 MP: o Mestre te dá uma visão curta e enigmática sobre um plano que vocês estão fazendo." },
+    { t: 1, n: "Visão do Infortúnio", d: "Ação e 1 MP: faça uma Rolagem de Efeito com seu Atributo Divino contra a Vontade de um inimigo visível. Se atingir, ele tem Desvantagem na próxima rolagem de ataque." },
+    { t: 2, n: "Cura em Cadeia", d: "Por +1 MP, Palavra Curativa atinge um segundo alvo." },
+    { t: 2, n: "Escudo do Destino", d: "Reação e 2 MP: force a fonte a repetir uma Rolagem de Efeito que acabou de atingir um aliado que você veja. O segundo resultado vale." },
+    { t: 2, n: "Fio Cortado", d: "Reação e 3 MP: force um inimigo a rerrolar um Acerto Crítico. O segundo resultado vale." },
+    { t: 2, n: "Voz Serena", d: "Ação bônus e 2 MP: remova Amedrontado ou Confuso de um aliado que possa te ouvir." },
+    { t: 3, n: "Fonte Profunda", d: "Fonte de Mana passa a devolver o dobro de MP, e pode ser usada como ação bônus." },
+    { t: 3, n: "Olho do Futuro", d: "Uma vez por combate, você age duas vezes na mesma rodada — turno completo, imediatamente depois do seu." },
+    { t: 3, n: "Rede do Destino", d: "Uma vez por combate, com uma ação: todos os aliados que você veja têm Vantagem até o fim da próxima rodada." },
+  ],
+};
+
+/* O que cada técnica muda em número. A ficha não pode adivinhar as que
+   dependem da cena — "uma vez por combate", "quando você usa Interceptar" --,
+   mas pode somar sozinha as que estão sempre ligadas, e pode calcular o
+   número das outras em vez de deixar a pessoa fazer a conta na mesa.
+
+   pv/def somam direto no total. nota devolve a frase já com o valor. */
+var EFEITO_TECNICA = {
+  "Vigor do Sobrevivente": {
+    pv: function (c) { return c.nivel; },
+    nota: function (c) { return "Vigor do Sobrevivente: +" + c.nivel + " PV máximos, já somados."; }
+  },
+  "Casca Grossa": {
+    def: function (c) { return c.metadeOuMenos ? 2 : 0; },
+    nota: function (c) {
+      // Sem PV atual preenchido a ficha não sabe se está ligada, e dizer que
+      // está seria chute. Nesse caso ela só enuncia a condição.
+      if (!c.pvConhecido) return "Casca Grossa: +2 DEF quando estiver com metade dos PV ou menos.";
+      return "Casca Grossa: +2 DEF com metade dos PV ou menos — " +
+        (c.metadeOuMenos ? "ativa agora, já somada." : "inativa, acima da metade.");
+    }
+  },
+  "Bastião": {
+    nota: function (c) {
+      var base = "Bastião: acima da metade dos PV, cada golpe recebido perde " + c.prof + " de dano";
+      if (!c.pvConhecido) return base + ".";
+      return base + (c.metadeOuMenos ? " — inativo agora." : " — ativo agora.");
+    }
+  },
+  "Represália": {
+    nota: function (c) {
+      return "Represália: quem acerta o golpe que você Interceptou sofre " +
+        (c.mFor === null ? "FOR + " + c.nivel : String(c.mFor + c.nivel)) + " de dano.";
+    }
+  },
+  "Fôlego de Ferro": {
+    nota: function (c) { return "Fôlego de Ferro: recupera " + c.nivel + " PV, uma vez por combate."; }
+  },
+  "Escudo Vínculo": {
+    nota: function (c) { return "Escudo Vínculo: reação e 2 SP para somar +" + c.prof + " à DEF contra um ataque."; }
+  },
+  "Muro de Escudos": {
+    nota: function () { return "Muro de Escudos: aliados adjacentes recebem +1 DEF — o bônus é deles, não seu."; }
+  },
+  "Mão Firme": {
+    nota: function (c) { return "Mão Firme: seus " + c.prof + " Tratamentos curam 1d6 + CON + 2, com ação bônus."; }
+  },
+  "Grito de Batalha": {
+    nota: function (c) {
+      return "Grito de Batalha: Rolagem de Efeito " +
+        (c.habilidade === null ? "com o bônus de habilidade" : "1d20 " + c.habilidade) + " contra a Vontade.";
+    }
+  },
+  "Visão do Infortúnio": {
+    nota: function (c) {
+      return "Visão do Infortúnio: Rolagem de Efeito " +
+        (c.habilidade === null ? "com o bônus de habilidade" : "1d20 " + c.habilidade) + " contra a Vontade.";
+    }
+  },
+  "Palavra Curativa": {
+    nota: function (c) { return "Palavra Curativa: cura 1d6" + (c.mSab === null ? " + SAB" : " " + sinal(c.mSab)) + " PV por 2 MP."; }
+  },
+  "Coração de Ares": {
+    nota: function () { return "Coração de Ares: seus ataques são crítico em 19 e 20 naturais."; }
+  },
+  "Sem Recuo": {
+    nota: function () { return "Sem Recuo: imune a Amedrontado e Aterrorizado."; }
+  }
+};
+
+var NIVEL_DO_TIER = { 1: 1, 2: 6, 3: 12 };
 
 var NOME_CLASSE = { guardiao: "Guardião", furioso: "Furioso", oraculo: "Oráculo" };
 
@@ -1237,12 +1363,80 @@ function sincronizarParente() {
 }
 function sincronizarClasse() {
   var chave = document.getElementById("classe").value;
-  if (chave === ultimaClasse) return;
-  ultimaClasse = chave;
-  ["periciaClasse1", "periciaClasse2"].forEach(function (id) {
-    var sel = document.getElementById(id);
-    preencherOpcoes(sel, PERICIAS_CLASSE[chave] || [], sel.value);
+  if (chave !== ultimaClasse) {
+    ultimaClasse = chave;
+    ["periciaClasse1", "periciaClasse2"].forEach(function (id) {
+      var sel = document.getElementById(id);
+      preencherOpcoes(sel, PERICIAS_CLASSE[chave] || [], sel.value);
+    });
+  }
+  // Fora do guarda acima de propósito: as vagas de técnica mudam com o nível
+  // também, não só com a classe.
+  montarSelectsTecnicas();
+}
+
+/* ---------- Técnicas de classe ----------
+   Sete vagas, abertas nos níveis 1, 3, 6, 9, 12, 15 e 18 — as mesmas de
+   NIVEIS_TECNICA. Cada vaga só oferece os Tiers já liberados (2 no nível 6,
+   3 no nível 12) e a lista é a da classe escolhida. Repetir a mesma técnica
+   não faz nada, então a ficha avisa. */
+function montarSelectsTecnicas() {
+  var grade = document.getElementById("grade-tecnicas");
+  if (!grade) return;
+  var classe = document.getElementById("classe").value;
+  var nivel = Math.max(1, Math.min(20, num(document.getElementById("nivel").value) || 1));
+  var lista = TECNICAS[classe] || [];
+
+  if (!grade.children.length) {
+    for (var i = 1; i <= NIVEIS_TECNICA.length; i++) {
+      var rotulo = document.createElement("label");
+      rotulo.innerHTML = "Nível " + NIVEIS_TECNICA[i - 1] +
+        '<select id="tecnica' + i + '"></select>';
+      grade.appendChild(rotulo);
+    }
+    grade.addEventListener("change", recalcular);
+  }
+
+  NIVEIS_TECNICA.forEach(function (nivelDaVaga, i) {
+    var sel = document.getElementById("tecnica" + (i + 1));
+    var aberta = nivel >= nivelDaVaga;
+    var opcoes = lista.filter(function (t) { return nivel >= NIVEL_DO_TIER[t.t]; })
+      .map(function (t) { return { valor: t.n, texto: "T" + t.t + " · " + t.n }; });
+    var escolhida = sel.value;
+    sel.innerHTML = "";
+    var vazia = document.createElement("option");
+    vazia.value = ""; vazia.textContent = aberta ? "— escolher —" : "— trancada —";
+    sel.appendChild(vazia);
+    opcoes.forEach(function (o) {
+      var op = document.createElement("option");
+      op.value = o.valor; op.textContent = o.texto;
+      sel.appendChild(op);
+    });
+    sel.value = opcoes.some(function (o) { return o.valor === escolhida; }) ? escolhida : "";
+    sel.disabled = !aberta;
   });
+}
+
+function tecnicasEscolhidas() {
+  return NIVEIS_TECNICA.map(function (n, i) {
+    var sel = document.getElementById("tecnica" + (i + 1));
+    return sel && !sel.disabled ? sel.value : "";
+  }).filter(function (v) { return v; });
+}
+
+/* Soma o que é sempre ligado e calcula o número do que não é. Roda duas vezes
+   por recálculo: a primeira para saber o PV máximo, a segunda já sabendo se o
+   personagem está com metade dos PV ou menos — Casca Grossa depende disso. */
+function efeitosDasTecnicas(nomes, contexto) {
+  var total = { pv: 0, def: 0, notas: [] };
+  nomes.forEach(function (nome) {
+    var e = EFEITO_TECNICA[nome];
+    if (!e) return;
+    if (e.pv) total.pv += e.pv(contexto);
+    if (e.def) total.def += e.def(contexto);
+    if (e.nota) total.notas.push(e.nota(contexto));
+  });
+  return total;
 }
 
 function recalcularV2() {
@@ -1311,9 +1505,6 @@ function recalcularV2() {
   var mFor = mod("forca"), mDes = mod("destreza"), mCon = mod("constituicao");
   var mSab = mod("sabedoria"), mDiv = divino ? mod(divino) : null;
 
-  var defesa = dadosDefesa(mDes);
-  escreve("def", defesa.total === null ? null : String(defesa.total), defesa.formula);
-
   var bonusBriga = conceitoChave === "problematico" && mFor !== null ? mFor : 0;
   var ajusteInit = valorId("ajusteIniciativa");
   escreve("iniciativa", mDes === null ? null : sinal(mDes + bonusBriga + ajusteInit),
@@ -1325,15 +1516,46 @@ function recalcularV2() {
   atualizarGrau(nivel);
   escreve("habilidade", mDiv === null ? null : sinal(mDiv + prof), "Atributo Divino + proficiência");
 
+  var escolhidasTec = tecnicasEscolhidas();
+  var ctxTec = {
+    nivel: nivel, prof: prof, mFor: mFor, mSab: mSab,
+    habilidade: mDiv === null ? null : sinal(mDiv + prof),
+    metadeOuMenos: false, pvConhecido: false
+  };
+  var tec = efeitosDasTecnicas(escolhidasTec, ctxTec);
+
   var c = CLASSES[classe];
+  var pvMaximo = null;
   if (!c || mCon === null) {
     escreve("pv", null, "Escolha classe e Constituição"); escreve("sp", null, "Escolha classe e Constituição");
   } else {
     var ferida = document.getElementById("ferimentoGrave").checked ? nivel : 0;
-    escreve("pv", String(c.pv + mCon + (nivel - 1) * (c.pvN + mCon) + valorId("ajustePv") - ferida),
-      "Classe e nível + CON por nível + ajustes" + (ferida ? " - Ferimento Grave" : ""));
+    pvMaximo = c.pv + mCon + (nivel - 1) * (c.pvN + mCon) + tec.pv + valorId("ajustePv") - ferida;
+    escreve("pv", String(pvMaximo),
+      "Classe e nível + CON por nível" + (tec.pv ? " + técnicas" : "") + " + ajustes" +
+      (ferida ? " - Ferimento Grave" : ""));
     escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp")), "Classe e nível + CON inicial + ajustes");
   }
+
+  // segunda passada: agora dá para saber se Casca Grossa e Bastião estão ligados
+  var pvAtual = num(document.getElementById("pvAtual").value);
+  ctxTec.pvConhecido = pvMaximo !== null && pvAtual !== null;
+  ctxTec.metadeOuMenos = ctxTec.pvConhecido && pvAtual <= pvMaximo / 2;
+  tec = efeitosDasTecnicas(escolhidasTec, ctxTec);
+
+  var defesa = dadosDefesa(mDes);
+  escreve("def", defesa.total === null ? null : String(defesa.total + tec.def),
+    defesa.formula + (tec.def ? " + " + tec.def + " de técnica" : ""));
+
+  var vagas = NIVEIS_TECNICA.filter(function (n) { return n <= nivel; }).length;
+  var repetidas = escolhidasTec.filter(function (v, i, a) { return a.indexOf(v) !== i; });
+  var estadoTec = document.getElementById("estadoTecnicas");
+  estadoTec.className = "estado-regra " +
+    (escolhidasTec.length === vagas && !repetidas.length ? "ok" : "erro");
+  estadoTec.textContent = !classe ? "Escolha a classe." :
+    escolhidasTec.length + " de " + vagas + (vagas === 1 ? " técnica escolhida" : " técnicas escolhidas") +
+    (repetidas.length ? " — repetida: " + repetidas.join(", ") + ". Repetir não soma nada." : ".");
+  document.getElementById("efeitosTecnicas").textContent = tec.notas.join(" ");
   escreve("mp", !c || mDiv === null ? null : String(c.mp + mDiv + (nivel - 1) * c.mpN + valorId("ajusteMp")),
     "Classe e nível + Atributo Divino + ajustes");
 
@@ -1960,6 +2182,14 @@ function prepararImpressao() {
    ["pVinculos","vinculos"],["pDescoberta","descoberta"],["pHistoria","historia"],["pAnotacoes","anotacoes"]]
   .forEach(function (par) { porTexto(par[0], valorCampo(par[1])); });
 
+  // As técnicas viraram escolha, não texto livre: a folha imprime o que foi
+  // escolhido, o efeito já calculado e só então as anotações.
+  var listaTec = tecnicasEscolhidas();
+  var anotacoes = valorCampo("tecnicas");
+  var efeitos = document.getElementById("efeitosTecnicas").textContent;
+  porTexto("pTecnicas", [listaTec.join(" · "), efeitos, anotacoes]
+    .filter(function (parte) { return parte && parte !== "—"; }).join("\n\n") || "—");
+
   prepararFera();
 
   var textoHabilidades = valorCampo("habilidades");
@@ -2178,7 +2408,10 @@ function restaurarPacoteFicha(pacote) {
 
   ultimoParente = null; ultimaClasse = null;
   var pares = listarCamposFicha();
-  ["classe", "parente"].forEach(function (id) {
+  // O nível entra junto com a classe: é ele que diz quantas vagas de técnica
+  // abrem e quais Tiers existem. Aplicado depois, como era, uma técnica de
+  // Tier 3 não tinha opção onde pousar e sumia na importação.
+  ["classe", "parente", "nivel"].forEach(function (id) {
     var par = pares.find(function (item) { return item.el.id === id; });
     if (par) aplicarRegistroCampo(par.el, registros[par.chave]);
   });

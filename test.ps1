@@ -23,7 +23,8 @@ $testes = @(
     'nevoa.py',
     'aliado.py',
     'duelo.py',
-    'ficha.py'
+    'ficha.py',
+    'tecnicas_ficha.py'
 )
 
 Write-Output 'regressão numérica:'
