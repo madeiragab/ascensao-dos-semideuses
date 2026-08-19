@@ -127,13 +127,43 @@ def main() -> None:
             falhas.append(f"o texto do campo '{chave}' diz {atual!r}, "
                           f"mas a regra é {esperado_txt!r}")
 
+    # ---- Exausto: a ficha tem botões e soma sozinha, e a conta é do livro
+    print()
+    print("Exausto — livro × ficha:")
+    livro = (FICHA.parent / "livro-do-jogador.html").read_text(encoding="utf-8")
+    tabela = re.search(r"Três níveis, e cada um soma ao anterior.*?</table>", livro, re.S)
+    niveis_livro = re.findall(r'<td class="num">(\d)</td><td>(.*?)</td>',
+                              tabela.group(0) if tabela else "")
+    print(f"  níveis na tabela do livro: {len(niveis_livro)}")
+    if len(niveis_livro) != 3:
+        falhas.append(f"a tabela de Exausto do livro tem {len(niveis_livro)} níveis; a ficha assume 3")
+
+    caixas = len(re.findall(r'data-exausto="\d"', html))
+    print(f"  caixas na ficha: {caixas}")
+    if caixas != len(niveis_livro):
+        falhas.append(f"a ficha tem {caixas} caixas de Exausto para {len(niveis_livro)} níveis no livro")
+
+    # em que nível cada corte entra: o livro diz movimento no 2 e PV no 3
+    por_nivel = {int(n): texto.lower() for n, texto in niveis_livro}
+    corte_mov = next((n for n, t in sorted(por_nivel.items()) if "movimenta" in t and "metade" in t), None)
+    corte_pv = next((n for n, t in sorted(por_nivel.items()) if "pv máximos" in t and "metade" in t), None)
+    na_ficha_mov = int(re.search(r"if \(exausto >= (\d)\) passos = passos / 2", html).group(1))
+    na_ficha_pv = int(re.search(r"if \(exausto >= (\d)\) pvMaximo = Math.floor", html).group(1))
+    print(f"  movimento pela metade: livro nível {corte_mov}, ficha nível {na_ficha_mov}")
+    print(f"  PV pela metade:        livro nível {corte_pv}, ficha nível {na_ficha_pv}")
+    if corte_mov != na_ficha_mov:
+        falhas.append(f"a ficha corta o movimento no Exausto {na_ficha_mov}; o livro diz {corte_mov}")
+    if corte_pv != na_ficha_pv:
+        falhas.append(f"a ficha corta os PV no Exausto {na_ficha_pv}; o livro diz {corte_pv}")
+
     print()
     if falhas:
         for f in falhas:
             print("FALHOU:", f)
         raise SystemExit(1)
     print("A ficha e o simulador concordam nos vinte níveis, nas três classes,")
-    print("em PV, SP, MP, proficiência, Grau e Teto de Custo.")
+    print("em PV, SP, MP, proficiência, Grau e Teto de Custo — e os cortes de")
+    print("Exausto entram nos mesmos níveis que o livro manda.")
 
 
 if __name__ == "__main__":
