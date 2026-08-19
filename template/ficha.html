@@ -597,6 +597,16 @@ table.viva select { font-size: .72rem; }
         </span>
         <small>3 sucessos estabilizam · 3 falhas matam</small>
       </div>
+      <div class="agonia" aria-label="Marcador de Exausto">
+        <strong>Exausto</strong>
+        <span class="agonia-grupo"><b>Níveis</b>
+          <input type="checkbox" data-exausto="1" aria-label="Exausto nível 1">
+          <input type="checkbox" data-exausto="2" aria-label="Exausto nível 2">
+          <input type="checkbox" data-exausto="3" aria-label="Exausto nível 3">
+        </span>
+        <small>Descanso Longo tira um nível · Interlúdio tira todos</small>
+      </div>
+      <p class="legenda-calc" id="efeitosExausto"></p>
       <h3 style="margin-top:1rem;">Ajustes mecânicos <small>- itens e técnicas que a ficha não pode escolher por você</small></h3>
       <div class="ajustes">
         <div class="f"><label>Outros ajustes de DEF</label><input type="text" id="ajusteDef" value="0"></div>
@@ -1417,6 +1427,36 @@ function montarSelectsTecnicas() {
   });
 }
 
+/* ---------- Exausto ----------
+   Três níveis que somam, do Capítulo de Condições: 1 é Desvantagem em perícias,
+   2 corta a movimentação pela metade e 3 corta os PV máximos pela metade, além
+   de dar Desvantagem nos ataques e Vantagem a quem rola contra você.
+
+   As caixas são cumulativas de propósito: não existe estar no nível 3 sem estar
+   no 1 e no 2, então marcar a terceira marca as anteriores e desmarcar a
+   primeira desmarca as de cima. O que dá para somar, a ficha soma: metade do
+   movimento e metade dos PV máximos entram nos campos calculados. */
+function nivelDeExausto() {
+  return document.querySelectorAll("[data-exausto]:checked").length;
+}
+
+function ajustarCaixasDeExausto(clicada) {
+  var nivel = Number(clicada.dataset.exausto);
+  document.querySelectorAll("[data-exausto]").forEach(function (cx) {
+    var n = Number(cx.dataset.exausto);
+    if (clicada.checked) { if (n < nivel) cx.checked = true; }
+    else if (n > nivel) cx.checked = false;
+  });
+}
+
+function efeitosDeExausto(nivel) {
+  if (!nivel) return "";
+  var partes = ["Exausto " + nivel + ": Desvantagem em testes de perícia"];
+  if (nivel >= 2) partes.push("movimentação pela metade, já aplicada");
+  if (nivel >= 3) partes.push("PV máximos pela metade, já aplicados; Desvantagem em ataques e Vantagem para quem rola contra suas defesas");
+  return partes.join(" · ") + ".";
+}
+
 function tecnicasEscolhidas() {
   return NIVEIS_TECNICA.map(function (n, i) {
     var sel = document.getElementById("tecnica" + (i + 1));
@@ -1509,7 +1549,11 @@ function recalcularV2() {
   var ajusteInit = valorId("ajusteIniciativa");
   escreve("iniciativa", mDes === null ? null : sinal(mDes + bonusBriga + ajusteInit),
     "DES" + (conceitoChave === "problematico" ? " + FOR (Instinto de Briga)" : "") + " + ajustes");
-  escreve("movimento", (9 + valorId("ajusteMovimento")) + " m", "9 m + ajustes");
+  var exausto = nivelDeExausto();
+  var passos = 9 + valorId("ajusteMovimento");
+  if (exausto >= 2) passos = passos / 2;
+  escreve("movimento", String(passos).replace(".", ",") + " m",
+    "9 m + ajustes" + (exausto >= 2 ? ", pela metade por Exausto 2" : ""));
 
   var memoria = mDiv === null ? null : Math.max(1, Math.min(6, 2 + mDiv));
   escreve("memoria", memoria === null ? null : String(memoria), "2 + Atributo Divino, entre 1 e 6");
@@ -1531,9 +1575,13 @@ function recalcularV2() {
   } else {
     var ferida = document.getElementById("ferimentoGrave").checked ? nivel : 0;
     pvMaximo = c.pv + mCon + (nivel - 1) * (c.pvN + mCon) + tec.pv + valorId("ajustePv") - ferida;
+    // Exausto 3 corta pela metade o máximo que sobrou, depois do Ferimento
+    // Grave e de tudo o mais: é o último a se aplicar porque incide sobre o
+    // máximo atual, não sobre o da classe.
+    if (exausto >= 3) pvMaximo = Math.floor(pvMaximo / 2);
     escreve("pv", String(pvMaximo),
       "Classe e nível + CON por nível" + (tec.pv ? " + técnicas" : "") + " + ajustes" +
-      (ferida ? " - Ferimento Grave" : ""));
+      (ferida ? " - Ferimento Grave" : "") + (exausto >= 3 ? ", pela metade por Exausto 3" : ""));
     escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp")), "Classe e nível + CON inicial + ajustes");
   }
 
@@ -1556,6 +1604,7 @@ function recalcularV2() {
     escolhidasTec.length + " de " + vagas + (vagas === 1 ? " técnica escolhida" : " técnicas escolhidas") +
     (repetidas.length ? " — repetida: " + repetidas.join(", ") + ". Repetir não soma nada." : ".");
   document.getElementById("efeitosTecnicas").textContent = tec.notas.join(" ");
+  document.getElementById("efeitosExausto").textContent = efeitosDeExausto(exausto);
   escreve("mp", !c || mDiv === null ? null : String(c.mp + mDiv + (nivel - 1) * c.mpN + valorId("ajusteMp")),
     "Classe e nível + Atributo Divino + ajustes");
 
@@ -1675,7 +1724,12 @@ folha.addEventListener("input", function (e) {
   }
   recalcular();
 });
-folha.addEventListener("change", recalcular);
+folha.addEventListener("change", function (e) {
+  // As caixas de Exausto se ajustam entre si antes de a ficha recalcular:
+  // não existe nível 3 sem 1 e 2.
+  if (e.target && e.target.dataset && e.target.dataset.exausto) ajustarCaixasDeExausto(e.target);
+  recalcular();
+});
 folha.addEventListener("input", function (e) {
   if (e.target.id && e.target.id.indexOf("fera") === 0) avisarFera();
 });
@@ -2123,7 +2177,8 @@ function prepararImpressao() {
     ["Grau", valorCalc("grau")], ["Teto de Custo", valorCalc("teto")],
     ["Bônus de Habilidade", valorCalc("habilidade")],
     ["Percepção passiva", valorCalc("passiva")], ["Ânimo", valorCampo("animo")],
-    ["Agonia · sucessos", sucessosMorte + "/3"], ["Agonia · falhas", falhasMorte + "/3"]
+    ["Agonia · sucessos", sucessosMorte + "/3"], ["Agonia · falhas", falhasMorte + "/3"],
+    ["Exausto", nivelDeExausto() + "/3"]
   ];
   document.getElementById("pStatus").innerHTML = status.map(function (s) {
     return '<div class="pdf-num"><b>' + s[0] + '</b><span>' + s[1] + '</span></div>';
