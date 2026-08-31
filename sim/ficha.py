@@ -182,6 +182,59 @@ def main() -> None:
     if not botoes_pericia or not botoes_ataque:
         falhas.append("o rolador sumiu de perícias ou de ataques")
 
+    # ---- passivas: o sacrifício é a única troca permanente do Livro I, e a
+    # ficha aplica as duas metades dela sozinha. Se o livro mudar o preço, ou
+    # a lista de efeitos, a ficha precisa acusar aqui e não na mesa.
+    print()
+    print("Passivas e Sacrifício de Atributo — livro × ficha:")
+
+    efeitos_livro = [
+        "+1 DEF", "+1,5 m de movimento", "+1 em uma perícia",
+        "enxergar no escuro comum", "respirar num meio hostil",
+        "resistência a um perigo ambiental", "Vantagem numa categoria estreita",
+    ]
+    faltando_livro = [e for e in efeitos_livro if e.lower() not in texto_livro.lower()]
+    print(f"  efeitos que o livro permite: {len(efeitos_livro) - len(faltando_livro)}"
+          f" de {len(efeitos_livro)} encontrados no texto")
+    if faltando_livro:
+        falhas.append("o livro não lista mais estes efeitos de passiva, "
+                      f"mas a ficha oferece: {', '.join(faltando_livro)}")
+
+    na_ficha = re.search(r"var EFEITO_PASSIVA = \{(.*?)\n\};", html, re.S)
+    if not na_ficha:
+        falhas.append("a tabela EFEITO_PASSIVA sumiu da ficha")
+    else:
+        oferecidos = re.findall(r'nome: "([^"]+)"', na_ficha.group(1))
+        print(f"  efeitos que a ficha oferece: {len(oferecidos)}")
+        if len(oferecidos) != len(efeitos_livro):
+            falhas.append(f"a ficha oferece {len(oferecidos)} efeitos de passiva "
+                          f"e o livro permite {len(efeitos_livro)}")
+
+    # As duas metades do preço, e o piso. As três estão escritas no livro.
+    metades = [
+        ("−1 no atributo", "−1 ponto no valor de Inteligência", "- sacrificio"),
+        ("−1 no recurso que ele alimenta", "−1 no máximo do recurso", "- sacPassivas.inteligencia"),
+        ("piso 8", "Nenhum atributo desce abaixo de 8", "Math.max(8,"),
+        ("ocupa Memória", "ocupa um espaço de Memória", "espaço de Memória"),
+    ]
+    for nome, no_livro, no_codigo in metades:
+        ok_livro = no_livro.lower() in texto_livro.lower()
+        ok_ficha = no_codigo in html
+        print(f"  {nome}: livro {'sim' if ok_livro else 'NÃO'} · ficha {'sim' if ok_ficha else 'NÃO'}")
+        if not ok_livro:
+            falhas.append(f"o livro não diz mais {no_livro!r}, e a ficha ainda aplica")
+        if not ok_ficha:
+            falhas.append(f"a ficha não aplica a regra {nome!r} das passivas")
+
+    linhas = re.search(r"var PASSIVAS_LINHAS = (\d+);", html)
+    if not linhas:
+        falhas.append("PASSIVAS_LINHAS sumiu da ficha")
+    elif int(linhas.group(1)) != 6:
+        falhas.append(f"a ficha abre {linhas.group(1)} linhas de passiva; "
+                      "a Memória vai até 6 e cada passiva ocupa um espaço")
+    else:
+        print(f"  linhas de passiva na ficha: {linhas.group(1)}, igual ao teto da Memória")
+
     print()
     if falhas:
         for f in falhas:

@@ -1232,6 +1232,15 @@ input.calc:read-only { border-bottom-style: dotted; }
 .escolhas-pericia .f label { font-size: .5rem; }
 .ajustes { display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: .5rem .8rem; }
 
+/* ---------- passivas ----------
+   Três escolhas por linha, e é delas que sai o desconto no atributo: o
+   sacrifício nunca é digitado à mão. */
+.passiva-linha {
+  display: grid; gap: .4rem .7rem; margin-bottom: .55rem;
+  grid-template-columns: minmax(7rem, 1.3fr) minmax(9rem, 1.5fr) minmax(7rem, 1fr);
+}
+@media (max-width: 42rem) { .passiva-linha { grid-template-columns: 1fr; } }
+
 .grade-num { display: grid; grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr)); gap: .5rem; }
 .num-cx { border: 1px solid var(--borda-forte); padding: .35rem .5rem .45rem; }
 .num-cx > span {
@@ -1666,6 +1675,17 @@ table.viva select { font-size: .72rem; }
         pode comprar em qualquer Grau abaixo do seu, pelo preço daquele Grau.</p>
     </div>
 
+    <!-- ===== PASSIVAS ===== -->
+    <div class="bloco">
+      <h3>Habilidades passivas <small>— sempre ligadas; o preço sai do corpo</small></h3>
+      <p class="legenda-calc">Cada passiva preparada custa <b>−1 ponto</b> em Inteligência ou
+        em Constituição <b>e −1</b> no máximo do recurso que aquele atributo alimenta — MP se
+        foi Inteligência, SP se foi Constituição. Ocupa um espaço de Memória. Nenhum atributo
+        desce abaixo de 8, e abandonar a passiva num Interlúdio devolve o ponto e o recurso.</p>
+      <div id="passivasLista"></div>
+      <p class="estado-regra" id="estadoPassivas">Nenhuma passiva preparada.</p>
+    </div>
+
     <!-- ===== EQUIPAMENTO E LAÇOS ===== -->
     <div class="bloco">
       <div class="duas-col">
@@ -1826,6 +1846,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
       <div class="pdf-bloco span-6"><h2>Técnicas de classe</h2><div class="pdf-texto" id="pTecnicas"></div></div>
       <div class="pdf-bloco span-6"><h2>Condições ativas</h2><div class="pdf-texto" id="pCondicoes"></div></div>
       <div class="pdf-bloco span-12"><h2>Habilidades preparadas · inclua ativação e resolução</h2><div class="pdf-texto" id="pHabilidades"></div></div>
+      <div class="pdf-bloco span-12"><h2>Habilidades passivas · efeito e sacrifício</h2><div class="pdf-texto" id="pPassivas"></div></div>
       <div class="pdf-bloco span-12"><h2>Equipamento</h2><div class="pdf-texto" id="pEquipamento"></div></div>
       <div class="pdf-bloco span-6"><h2>Itens forjados · Grau, pontos, Integridade, Cargas</h2><div class="pdf-texto" id="pItens"></div></div>
       <div class="pdf-bloco span-6"><h2>A Fera Vinculada</h2><div class="pdf-texto" id="pFeraResumo"></div></div>
@@ -2515,6 +2536,132 @@ var POR_CLASSE = {
 var NIVEIS_TECNICA  = [1, 3, 6, 9, 12, 15, 18];
 var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
 
+/* ---------- passivas e o Sacrifício de Atributo ----------
+   Uma passiva fica sempre ligada: não custa MP nem SP para usar, não pede
+   ação e não pode ser desligada. É por isso que ela cobra do corpo — −1 no
+   valor de Inteligência ou de Constituição E −1 no máximo do recurso que
+   aquele atributo alimenta. As duas coisas juntas, para que o custo nunca
+   seja zero quando o ponto perdido não muda o modificador.
+
+   A lista de efeitos é fechada de propósito: uma passiva é um ponto, e um
+   ponto só. Nada que cause dano, cure, some às suas rolagens de ataque ou de
+   dano, dê Vantagem em ataque ou aplique condição entra aqui.
+
+   Seis linhas porque a Memória vai no máximo até seis, e cada passiva ocupa
+   um espaço. */
+var PASSIVAS_LINHAS = 6;
+
+var EFEITO_PASSIVA = {
+  def:       { nome: "+1 DEF",                            alimenta: "destreza" },
+  movimento: { nome: "+1,5 m de movimento",               alimenta: null },
+  pericia:   { nome: "+1 em uma perícia",                 alimenta: null },
+  escuridao: { nome: "Enxerga na escuridão comum",        alimenta: null },
+  respirar:  { nome: "Respira num meio hostil",           alimenta: null },
+  ambiental: { nome: "Resistência a um perigo ambiental", alimenta: null },
+  vantagem:  { nome: "Vantagem numa categoria estreita",  alimenta: null }
+};
+
+/* O atributo sacrificado não pode ser o que a passiva melhora, nem alimentar
+   o mesmo valor que ela melhora — uma passiva de DEF não se paga com
+   Destreza. Nenhum dos dois sacrifícios possíveis alimenta DEF, então hoje
+   isto nunca dispara; fica escrito porque a regra existe e a lista de
+   efeitos pode crescer. */
+function sacrificioProibido(efeito, atributo) {
+  var e = EFEITO_PASSIVA[efeito];
+  return !!(e && e.alimenta && e.alimenta === atributo);
+}
+
+function passivasPreparadas() {
+  var lista = [];
+  for (var i = 1; i <= PASSIVAS_LINHAS; i++) {
+    var selEfeito = document.getElementById("passiva" + i + "Efeito");
+    var selSac = document.getElementById("passiva" + i + "Sac");
+    var efeito = selEfeito ? selEfeito.value : "";
+    var sacrificio = selSac ? selSac.value : "";
+    if (!efeito) continue;
+    var nomeEl = document.getElementById("passiva" + i + "Nome");
+    var digitado = nomeEl ? nomeEl.value.trim() : "";
+    lista.push({
+      indice: i,
+      nome: digitado || EFEITO_PASSIVA[efeito].nome,
+      efeito: efeito,
+      rotulo: EFEITO_PASSIVA[efeito].nome,
+      sacrificio: sacrificio
+    });
+  }
+  return lista;
+}
+
+/* Quantos pontos cada atributo perde. É isto que a coluna de atributos
+   subtrai e o que tira 1 do MP ou do SP máximo. */
+function sacrificioDePassivas(lista) {
+  var conta = { inteligencia: 0, constituicao: 0 };
+  lista.forEach(function (p) {
+    if (conta[p.sacrificio] !== undefined) conta[p.sacrificio] += 1;
+  });
+  return conta;
+}
+
+function relatarPassivas(lista, memoria, abaixoDoPiso) {
+  var estado = document.getElementById("estadoPassivas");
+  if (!estado) return;
+
+  if (!lista.length) {
+    estado.className = "estado-regra";
+    estado.textContent = "Nenhuma passiva preparada.";
+    return;
+  }
+
+  var problemas = [];
+
+  var semSacrificio = lista.filter(function (p) { return !p.sacrificio; });
+  if (semSacrificio.length) {
+    problemas.push("Escolha o atributo sacrificado de: " +
+      semSacrificio.map(function (p) { return p.nome; }).join(", ") + ".");
+  }
+
+  var proibidas = lista.filter(function (p) {
+    return p.sacrificio && sacrificioProibido(p.efeito, p.sacrificio);
+  });
+  if (proibidas.length) {
+    problemas.push("O atributo sacrificado não pode alimentar o valor que a passiva melhora: " +
+      proibidas.map(function (p) { return p.nome; }).join(", ") + ".");
+  }
+
+  // Passivas com o mesmo efeito não se acumulam: duas fontes de +1 DEF
+  // continuam sendo +1 DEF, e a segunda só cobra o preço sem entregar nada.
+  var vistos = [], repetidas = [];
+  lista.forEach(function (p) {
+    if (vistos.indexOf(p.efeito) >= 0) {
+      if (repetidas.indexOf(p.rotulo) < 0) repetidas.push(p.rotulo);
+    } else { vistos.push(p.efeito); }
+  });
+  if (repetidas.length) {
+    problemas.push("Efeito repetido, e passivas iguais não se acumulam: " + repetidas.join(", ") + ".");
+  }
+
+  if (abaixoDoPiso && abaixoDoPiso.length) {
+    problemas.push("O sacrifício derruba " + abaixoDoPiso.join(" e ") +
+      " abaixo de 8, que é o piso — abandone uma passiva.");
+  }
+
+  var temMemoria = memoria !== null && memoria !== undefined;
+  if (temMemoria && lista.length > memoria) {
+    problemas.push("Cada passiva ocupa um espaço, e não há " + lista.length + " para ocupar.");
+  }
+
+  var resumo = lista.length + (lista.length === 1 ? " passiva preparada" : " passivas preparadas");
+  if (temMemoria) {
+    resumo += ", ocupando " + lista.length + " de " + memoria +
+      (memoria === 1 ? " espaço de Memória" : " espaços de Memória");
+  }
+
+  estado.className = "estado-regra " + (problemas.length ? "erro" : "ok");
+  estado.textContent = resumo + ". " + (problemas.length
+    ? problemas.join(" ")
+    : "O resto da Memória fica para as habilidades preparadas.");
+}
+
 /* ---------- monta as listas repetitivas ---------- */
 (function montar() {
   var ul = document.getElementById("listaPericias");
@@ -2527,6 +2674,28 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
       botaoD20("per-" + p[0], p[0]);
     ul.appendChild(li);
   });
+
+  var caixaPassivas = document.getElementById("passivasLista");
+  for (var i = 1; i <= PASSIVAS_LINHAS; i++) {
+    var opcoes = '<option value="">—</option>';
+    Object.keys(EFEITO_PASSIVA).forEach(function (ch) {
+      opcoes += '<option value="' + ch + '">' + EFEITO_PASSIVA[ch].nome + '</option>';
+    });
+    var linha = document.createElement("div");
+    linha.className = "passiva-linha";
+    linha.innerHTML =
+      '<div class="f"><label>Nome</label>' +
+        '<input type="text" id="passiva' + i + 'Nome" placeholder="Pele de Pedra"></div>' +
+      '<div class="f"><label>Efeito</label>' +
+        '<select id="passiva' + i + 'Efeito">' + opcoes + '</select></div>' +
+      '<div class="f"><label>Sacrifício</label>' +
+        '<select id="passiva' + i + 'Sac">' +
+          '<option value="">—</option>' +
+          '<option value="inteligencia">Inteligência · −1 MP</option>' +
+          '<option value="constituicao">Constituição · −1 SP</option>' +
+        '</select></div>';
+    caixaPassivas.appendChild(linha);
+  }
 
   ["periciaClasse1", "periciaClasse2", "periciaLivre1", "periciaLivre2", "periciaBonus"].forEach(function (id) {
     document.getElementById(id).innerHTML = '<option value="">-</option>';
@@ -3020,22 +3189,33 @@ function recalcularV2() {
     ? NOME_CLASSE[classe] + " · " + habClasse
     : "Escolha a classe para ver a habilidade dela.";
 
+  var passivas = passivasPreparadas();
+  var sacPassivas = sacrificioDePassivas(passivas);
+
   var gastos = 0, excessoTeto = 0;
   var bases = [];
+  var abaixoDoPiso = [];
   Object.keys(SIGLA).forEach(function (a) {
     var baseEl = document.querySelector('[data-base="' + a + '"]');
     var aumentoEl = document.querySelector('[data-aumento="' + a + '"]');
     var base = baseEl ? num(baseEl.value) : null;
     var aumento = aumentoEl ? Math.max(0, num(aumentoEl.value) || 0) : 0;
     var linhagem = parente && parente.bonus[a] ? parente.bonus[a] : 0;
+    var sacrificio = sacPassivas[a] || 0;
     gastos += aumento;
     if (base !== null) bases.push(base);
     var out = document.querySelector('[data-linhagem="' + a + '"]');
     if (out) out.textContent = sinal(linhagem);
-    var bruto = base === null ? null : base + aumento + linhagem;
+    var bruto = base === null ? null : base + aumento + linhagem - sacrificio;
     if (bruto !== null && bruto > 20) excessoTeto += bruto - 20;
-    escreve("atr-" + a, bruto === null ? null : String(Math.min(20, bruto)),
-      "Base " + (base === null ? "?" : base) + " + Divino " + linhagem + " + Nível " + aumento);
+    // O piso é 8: uma passiva que derrubaria o atributo abaixo disso não pode
+    // ser preparada. A ficha segura o valor em 8 e acusa na linha de estado,
+    // em vez de mostrar um número que a regra não permite.
+    if (bruto !== null && bruto < 8) abaixoDoPiso.push(SIGLA[a]);
+    var mostrado = bruto === null ? null : Math.max(8, Math.min(20, bruto));
+    escreve("atr-" + a, mostrado === null ? null : String(mostrado),
+      "Base " + (base === null ? "?" : base) + " + Divino " + linhagem + " + Nível " + aumento +
+      (sacrificio ? " − " + sacrificio + " de passiva" : ""));
   });
 
   var adiantado = document.getElementById("pontoAdiantado").checked ? 1 : 0;
@@ -3097,7 +3277,9 @@ function recalcularV2() {
     escreve("pv", String(pvMaximo),
       "Classe e nível + CON por nível" + (tec.pv ? " + técnicas" : "") + " + ajustes" +
       (ferida ? " - Ferimento Grave" : "") + (exausto >= 3 ? ", pela metade por Exausto 3" : ""));
-    escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp")), "Classe e nível + CON inicial + ajustes");
+    escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp") - sacPassivas.constituicao),
+      "Classe e nível + CON inicial + ajustes" +
+      (sacPassivas.constituicao ? " − " + sacPassivas.constituicao + " de passiva" : ""));
   }
 
   // segunda passada: agora dá para saber se Casca Grossa e Bastião estão ligados
@@ -3120,8 +3302,12 @@ function recalcularV2() {
     (repetidas.length ? " — repetida: " + repetidas.join(", ") + ". Repetir não soma nada." : ".");
   document.getElementById("efeitosTecnicas").textContent = tec.notas.join(" ");
   document.getElementById("efeitosExausto").textContent = efeitosDeExausto(exausto);
-  escreve("mp", !c || mDiv === null ? null : String(c.mp + mDiv + (nivel - 1) * c.mpN + valorId("ajusteMp")),
-    "Classe e nível + Atributo Divino + ajustes");
+  escreve("mp", !c || mDiv === null ? null
+      : String(c.mp + mDiv + (nivel - 1) * c.mpN + valorId("ajusteMp") - sacPassivas.inteligencia),
+    "Classe e nível + Atributo Divino + ajustes" +
+    (sacPassivas.inteligencia ? " − " + sacPassivas.inteligencia + " de passiva" : ""));
+
+  relatarPassivas(passivas, memoria, abaixoDoPiso);
 
   var profRes = nivel >= 10 ? ["fortitude", "reflexos", "vontade"] : (RESISTENCIAS_CLASSE[classe] || []);
   [["fortitude", "constituicao", "ajusteFortitude"], ["reflexos", "destreza", "ajusteReflexos"], ["vontade", "sabedoria", "ajusteVontade"]].forEach(function (r) {
@@ -3764,6 +3950,15 @@ function prepararImpressao() {
 
   var textoHabilidades = valorCampo("habilidades");
   porTexto("pHabilidades", textoHabilidades);
+
+  // A passiva impressa carrega o sacrifício junto: sem ele a linha não conta
+  // a verdade, porque é o sacrifício que explica o atributo mais baixo na
+  // primeira página.
+  porTexto("pPassivas", passivasPreparadas().map(function (p) {
+    return p.nome + " — " + p.rotulo + " · sacrifício: " +
+      (p.sacrificio ? SIGLA[p.sacrificio] + " −1, e −1 de " +
+        (p.sacrificio === "inteligencia" ? "MP" : "SP") : "por escolher");
+  }).join("\n") || "—");
 
   var nomeArmadura = document.getElementById("armadura").value.trim() || "Sem armadura";
   var baseArmadura = num(document.getElementById("armaduraBase").value);
