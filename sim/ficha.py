@@ -279,6 +279,56 @@ def main() -> None:
     else:
         print("  condições de grau Destino: fora do construtor, como o livro manda")
 
+    # ---- combinações: "Ataque ou Efeito, nunca os dois". É a regra que decide
+    # quais efeitos cabem na mesma habilidade, e a que o construtor precisa
+    # espelhar exatamente — nem mais restritiva, nem menos.
+    print()
+    print("Combinações de efeito — o limite que vale sempre:")
+
+    for frase in ["Ataque ou Efeito, nunca os dois",
+                  "O alvo não faz uma segunda rolagem",
+                  "efeitos secundários fracos, como empurrar ou derrubar, sem uma segunda rolagem",
+                  "Condições médias e fortes sempre obrigam a habilidade a usar Efeito",
+                  "Alvo único usa Ataque de Habilidade",
+                  "Área usa Rolagem de Efeito contra Reflexos"]:
+        if frase.lower() not in texto_livro.lower():
+            falhas.append(f"o livro não diz mais {frase!r}, e o construtor ainda trava por ela")
+    print("  frases da regra conferidas no livro: 6")
+
+    # O que cada linha exige, lido da própria tabela do construtor.
+    linhas_exige = {}
+    for bloco in re.finditer(r"(\w+):\s*\{ nome: \"([^\"]+)\"(.*?)(?=\n  \w+: \{ nome|\n\};)",
+                             tabela.group(1) if tabela else "", re.S):
+        chave, nome, corpo = bloco.group(1), bloco.group(2), bloco.group(3)
+        m = re.search(r'exige:\s*"(\w+)"', corpo)
+        linhas_exige[chave] = (
+            m.group(1) if m else None,
+            (re.search(r'defesa:\s*"(\w+)"', corpo) or [None, None])[1],
+            "acompanha: true" in corpo,
+        )
+
+    esperado = {
+        # linha            resolução   defesa       pega carona
+        "dano_unico":     ("ataque",   None,        False),
+        "dano_area":      ("efeito",   "Reflexos",  False),
+        "cond_media":     ("efeito",   None,        False),
+        "cond_forte":     ("efeito",   None,        False),
+        "empurrar":       ("efeito",   "Fortitude", True),
+        "cond_fraca":     ("efeito",   None,        True),
+        "dano_continuo":  (None,       None,        False),
+        "pv_temp":        (None,       None,        False),
+    }
+    for chave, alvo in esperado.items():
+        atual = linhas_exige.get(chave)
+        marca = "ok" if atual == alvo else "ERRADO"
+        print(f"  {chave:<15} exige {str(atual[0]):<7} defesa {str(atual[1]):<10} "
+              f"carona {str(atual[2]):<5} — {marca}")
+        if atual != alvo:
+            falhas.append(f"a linha {chave} do construtor declara {atual}; o livro pede {alvo}")
+
+    if "function resolucaoExigida" not in html:
+        falhas.append("resolucaoExigida sumiu: o construtor voltou a aceitar duas rolagens")
+
     # ---- o construtor de itens contra a tabela do Grau, na Parte VII
     print()
     print("Construtor de itens — tabela do Grau, livro × ficha:")

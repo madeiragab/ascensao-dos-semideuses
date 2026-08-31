@@ -4573,16 +4573,27 @@ var HB_AREA = {
 
 /* Uma entrada por linha das tabelas de "O que cada ponto compra". `pontos`
    recebe a quantidade escolhida e devolve o custo em pontos; `texto` recebe o
-   Grau e a quantidade e devolve o que a habilidade faz. */
+   Grau e a quantidade e devolve o que a habilidade faz.
+
+   `exige` é o que separa as combinações legais das ilegais. Um dos três
+   limites que valem sempre: "Ataque ou Efeito, nunca os dois. Você rola
+   contra a DEF ou contra uma defesa passiva. O alvo não faz uma segunda
+   rolagem." Então dano em alvo único (Ataque) e dano em área (Efeito contra
+   Reflexos) não cabem na mesma habilidade — cada um pede a sua rolagem.
+
+   `acompanha` marca os efeitos secundários fracos que o livro deixa pegar
+   carona: "o acerto aplica o dano e também seus efeitos secundários fracos,
+   como empurrar ou derrubar, sem uma segunda rolagem". Sozinhos eles pedem a
+   própria resolução; junto de um efeito que já rola, não pedem nada. */
 var HB_EFEITOS = {
   dano_unico: { nome: "Dano — alvo único", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d8 de dano"; },
-    res: "ataque", mod: true },
+    exige: "ataque", mod: true },
   dano_area: { nome: "Dano — em área", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d6 de dano em área, metade se errar"; },
-    res: "efeito", defesa: "Reflexos", mod: true, exigeArea: true },
+    exige: "efeito", defesa: "Reflexos", mod: true, exigeArea: true },
   dano_continuo: { nome: "Dano — contínuo", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d6 no fim do turno do alvo, sem nova defesa"; },
@@ -4603,8 +4614,11 @@ var HB_EFEITOS = {
     texto: function (g, q) { return "+" + (3 * g * q) + " m de movimento"; } },
   empurrar: { nome: "Empurrar ou puxar", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
+    // Empurrar e derrubar são os efeitos secundários fracos que o livro cita:
+    // sozinhos pedem Efeito contra Fortitude, mas pegam carona no acerto de
+    // outro efeito sem uma segunda rolagem.
     texto: function (g, q) { return "empurra ou puxa " + (3 * g * q) + " m"; },
-    res: "efeito", defesa: "Fortitude" },
+    exige: "efeito", defesa: "Fortitude", acompanha: true },
   teleporte: { nome: "Teleporte", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "teleporte de " + (9 * g) + " m para um lugar visível"; } },
@@ -4614,15 +4628,15 @@ var HB_EFEITOS = {
   cond_fraca: { nome: "Condição fraca", qtdMax: 1, rotulo: "—",
     pontos: function () { return 1; },
     texto: function (g) { return "condição fraca em " + g + (g === 1 ? " alvo" : " alvos"); },
-    res: "efeito" },
+    exige: "efeito", acompanha: true },
   cond_media: { nome: "Condição média", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "condição média em " + g + (g === 1 ? " alvo" : " alvos"); },
-    res: "efeito", exigeEfeito: true },
+    exige: "efeito" },
   cond_forte: { nome: "Condição forte", qtdMax: 1, rotulo: "—",
     pontos: function () { return 4; },
     texto: function (g) { return "condição forte em " + g + (g === 1 ? " alvo" : " alvos"); },
-    res: "efeito", exigeEfeito: true },
+    exige: "efeito" },
   resistencia: { nome: "Resistência a um tipo de dano", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "resistência a um tipo de dano, " + g + (g === 1 ? " alvo" : " alvos"); } },
@@ -4684,7 +4698,9 @@ function montarConstrutorHabilidade() {
 
   document.getElementById("hbMods").innerHTML =
     HB_MODS_MAIS.map(function (m, i) {
-      return '<label><input type="checkbox" data-hbmod="+1" id="hbMais' + i + '"> +1 · ' + m + "</label>";
+      // A seletiva ganha id próprio: é o único +1 que depende de haver área.
+      var id = m === "área seletiva" ? "hbSeletiva" : "hbMais" + i;
+      return '<label><input type="checkbox" data-hbmod="+1" id="' + id + '"> +1 · ' + m + "</label>";
     }).join("") +
     HB_MODS_MENOS.map(function (m, i) {
       return '<label><input type="checkbox" data-hbmod="-1" id="hbMenos' + i + '"> −1 · ' + m + "</label>";
@@ -4692,6 +4708,51 @@ function montarConstrutorHabilidade() {
 
   document.getElementById("modalHabilidade").addEventListener("input", calcularHabilidade);
   document.getElementById("modalHabilidade").addEventListener("change", calcularHabilidade);
+}
+
+/* "Ataque ou Efeito, nunca os dois." Cada efeito escolhido pode exigir uma
+   resolução; se dois exigirem coisas diferentes, a habilidade não existe —
+   ela precisaria de duas rolagens, e o alvo não faz uma segunda.
+
+   Os efeitos marcados com `acompanha` são os secundários fracos: pegam
+   carona no acerto de outro efeito sem cobrar rolagem própria. Só quando
+   ficam sozinhos é que impõem a resolução deles.
+
+   Devolve o que a habilidade é obrigada a usar, e o que estiver em conflito. */
+function resolucaoExigida(escolhidos) {
+  var erros = [];
+  var duros = escolhidos.filter(function (o) { return o.def.exige && !o.def.acompanha; });
+  var caronas = escolhidos.filter(function (o) { return o.def.exige && o.def.acompanha; });
+  var mandam = duros.length ? duros : caronas;
+  if (!mandam.length) return { tipo: "", defesa: "", erros: erros, motivo: "" };
+
+  var tipos = [], defesas = [];
+  mandam.forEach(function (o) {
+    if (tipos.indexOf(o.def.exige) < 0) tipos.push(o.def.exige);
+    if (o.def.defesa && defesas.indexOf(o.def.defesa) < 0) defesas.push(o.def.defesa);
+  });
+
+  var nomes = mandam.map(function (o) { return o.def.nome; })
+    .filter(function (n, i, todos) { return todos.indexOf(n) === i; });
+  if (tipos.length > 1) {
+    erros.push("Ataque ou Efeito, nunca os dois: " + nomes.join(" e ") +
+      " pedem rolagens diferentes, e o alvo não faz uma segunda. Escolha um dos dois.");
+  } else if (defesas.length > 1) {
+    erros.push(nomes.join(" e ") + " resolvem contra defesas passivas diferentes (" +
+      defesas.join(" e ") + "), e a habilidade só rola uma vez. Escolha um dos dois.");
+  }
+
+  // Em conflito não há resolução a impor: o seletor volta a ser do jogador
+  // enquanto ele não desfizer a combinação.
+  if (erros.length) return { tipo: "", defesa: "", erros: erros, motivo: "" };
+
+  var tipo = tipos[0];
+  return {
+    tipo: tipo, defesa: defesas.length === 1 ? defesas[0] : "", erros: erros,
+    motivo: nomes.join(" e ") + (nomes.length === 1 ? " exige " : " exigem ") +
+      (tipo === "ataque" ? "Ataque de Habilidade contra DEF"
+        : "Rolagem de Efeito" + (defesas.length === 1 ? " contra " + defesas[0] : ""))
+  };
 }
 
 /* Uma passiva não tem duração, alcance, ativação nem resolução: está sempre
@@ -4745,8 +4806,8 @@ function lerConstrutorHabilidade() {
   var fixos = 0;
   if (areaChave === "dobrada") escalados += 2;
 
-  var efeitos = [], usaArea = false, resolucaoSugerida = "", defesaSugerida = "";
-  var somaMod = false, exigeEfeito = false, pontosEfeitos = 0;
+  var efeitos = [], usaArea = false, escolhidos = [], repetidos = [];
+  var somaMod = false, pontosEfeitos = 0;
   for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
     var chave = v("hbEfeito" + i);
     if (!chave) continue;
@@ -4758,12 +4819,24 @@ function lerConstrutorHabilidade() {
     efeitos.push(e.texto(grau, qtd));
     if (e.mod) somaMod = true;
     if (e.exigeArea) usaArea = true;
-    if (e.exigeEfeito) exigeEfeito = true;
-    if (e.res && !resolucaoSugerida) { resolucaoSugerida = e.res; defesaSugerida = e.defesa || ""; }
+    if (escolhidos.some(function (o) { return o.chave === chave; })) {
+      if (repetidos.indexOf(e.nome) < 0) repetidos.push(e.nome);
+    }
+    escolhidos.push({ chave: chave, def: e });
     if (e.soMedica && fonte !== "medica") {
       erros.push("Curar PV é trabalho da Fonte Médica: habilidades elementais não curam.");
     }
   }
+  // Comprar a mesma linha duas vezes é legal — os pontos somam igual. Só
+  // deixa a habilidade escrita em dobro, então avisa sem travar.
+  var avisos = [];
+  if (repetidos.length) {
+    avisos.push("A mesma linha aparece duas vezes: " + repetidos.join(", ") +
+      ". Os pontos somam igual, mas cabe numa linha só.");
+  }
+
+  var exigido = resolucaoExigida(escolhidos);
+  erros = erros.concat(exigido.erros);
 
   // A duração já vem com um ponto de efeito incluído: o primeiro ponto
   // comprado é o que ela pagou.
@@ -4789,17 +4862,15 @@ function lerConstrutorHabilidade() {
   if (!efeitos.length) erros.push("Escolha pelo menos um efeito.");
   if (usaArea && !areaChave) erros.push("Dano em área precisa de uma forma de área.");
 
-  var resolucao = v("hbResolucao");
-  if (exigeEfeito && resolucao !== "efeito") {
-    erros.push("Condição média ou forte sempre exige Rolagem de Efeito contra uma defesa passiva.");
+  if (!usaArea && areaChave && document.getElementById("hbSeletiva") &&
+      document.getElementById("hbSeletiva").checked) {
+    erros.push("Área seletiva sem área para tornar seletiva.");
   }
-  if (!resolucao && resolucaoSugerida) {
-    erros.push("Escolha a resolução: este efeito pede " +
-      (resolucaoSugerida === "ataque" ? "Ataque de Habilidade contra DEF" : "Rolagem de Efeito") + ".");
-  }
-  if (defesaSugerida && resolucao === "efeito" && v("hbDefesa") !== defesaSugerida) {
-    erros.push("Este efeito resolve contra " + defesaSugerida + ".");
-  }
+
+  // A resolução não é escolha livre quando algum efeito a determina: o
+  // construtor a impõe, e o seletor fica travado mostrando o porquê.
+  var resolucao = exigido.tipo || v("hbResolucao");
+  var defesa = exigido.defesa || v("hbDefesa");
 
   var recurso = fonte === "fisica" ? "SP" : "MP";
   var pagamento = fonte === "hibrida"
@@ -4822,12 +4893,13 @@ function lerConstrutorHabilidade() {
     partes.push(efeitos.join(" + ") + (somaMod && bonus !== "—" ? " + mod, uma vez só" : ""));
   }
   if (resolucao === "ataque") partes.push("Ataque de Habilidade " + bonus + " contra DEF");
-  if (resolucao === "efeito") partes.push("Rolagem de Efeito " + bonus + " contra " + v("hbDefesa"));
+  if (resolucao === "efeito") partes.push("Rolagem de Efeito " + bonus + " contra " + defesa);
   partes.push(assinatura ? "Assinatura, fora da Memória" : "1 Memória");
 
   return {
     linha: (nome || "Habilidade sem nome") + " — " + partes.join(" · "),
-    pontos: pontos, custo: custo, teto: teto, erros: erros
+    pontos: pontos, custo: custo, teto: teto, erros: erros, avisos: avisos,
+    resolucao: resolucao, defesa: defesa, imposta: exigido
   };
 }
 
@@ -4855,11 +4927,33 @@ function calcularHabilidade() {
   }
 
   var r = lerConstrutorHabilidade();
+
+  // Quando um efeito determina a resolução, o seletor mostra e trava: não
+  // adianta oferecer escolha onde a regra já decidiu.
+  if (!passiva) {
+    var selRes = document.getElementById("hbResolucao");
+    var selDef = document.getElementById("hbDefesa");
+    var imposta = r.imposta || { tipo: "", defesa: "" };
+    // Deixar de impor tem de devolver o campo em branco, não com a escolha
+    // que a regra tinha feito na passada anterior.
+    if (!imposta.tipo && selRes.dataset.imposta === "1") selRes.value = "";
+    if (!imposta.defesa && selDef.dataset.imposta === "1") selDef.value = "Fortitude";
+    selRes.dataset.imposta = imposta.tipo ? "1" : "";
+    selDef.dataset.imposta = imposta.defesa ? "1" : "";
+    selRes.disabled = !!imposta.tipo;
+    if (imposta.tipo) selRes.value = imposta.tipo;
+    selDef.disabled = !!imposta.defesa || r.resolucao !== "efeito";
+    if (imposta.defesa) selDef.value = imposta.defesa;
+  }
+
   document.getElementById("hbSaida").textContent = r.linha;
   var estado = document.getElementById("hbEstado");
+  var avisos = r.avisos || [];
   estado.className = "estado-regra " + (r.erros.length ? "erro" : "ok");
   estado.textContent = r.erros.length ? r.erros.join(" ")
-    : (r.resumo || r.pontos + " de " + r.teto + " pontos do Teto. A conta fecha.");
+    : ((r.resumo || r.pontos + " de " + r.teto + " pontos do Teto. A conta fecha." +
+        (r.imposta && r.imposta.motivo ? " " + r.imposta.motivo + "." : "")) +
+       (avisos.length ? " " + avisos.join(" ") : ""));
   document.getElementById("hbAdicionar").disabled = r.erros.length > 0;
 }
 
@@ -4876,7 +4970,9 @@ function limparConstrutorHabilidade() {
   document.getElementById("hbAtivacao").value = "acao";
   document.getElementById("hbArea").value = "";
   document.getElementById("hbResolucao").value = "";
+  document.getElementById("hbResolucao").disabled = false;
   document.getElementById("hbDefesa").value = "Fortitude";
+  document.getElementById("hbDefesa").disabled = false;
   document.getElementById("hbAssinatura").value = "";
   document.getElementById("hbPassivaEfeito").value = "";
   document.getElementById("hbPassivaSac").value = "";
