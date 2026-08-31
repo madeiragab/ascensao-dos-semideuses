@@ -349,6 +349,24 @@ def main() -> None:
     if "function resolucaoExigida" not in html:
         falhas.append("resolucaoExigida sumiu: o construtor voltou a aceitar duas rolagens")
 
+    # O catálogo esconde o incompatível antes do erro: cada linha precisa de
+    # família e ícone, senão ela não aparece em cartão nenhum.
+    faltando = []
+    for bloco in re.finditer(r'\n  (\w+): \{ nome: "([^"]+)"([^\n]*)',
+                             tabela.group(1) if tabela else ""):
+        if 'familia: "' not in bloco.group(3) or 'icone: "' not in bloco.group(3):
+            faltando.append(bloco.group(1))
+    print(f"  linhas com família e ícone: {15 - len(faltando)} de 15")
+    if faltando:
+        falhas.append("sem família ou ícone no catálogo, então somem da grade: "
+                      + ", ".join(faltando))
+
+    icones = set(re.findall(r'icone: "(\w+)"', tabela.group(1) if tabela else ""))
+    definidos = set(re.findall(r"\n  (\w+): svgIcone\(", html))
+    orfaos = sorted(icones - definidos)
+    if orfaos:
+        falhas.append(f"ícones usados e não desenhados: {', '.join(orfaos)}")
+
     # ---- o construtor de itens contra a tabela do Grau, na Parte VII
     print()
     print("Construtor de itens — tabela do Grau, livro × ficha:")
