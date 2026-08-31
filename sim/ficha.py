@@ -279,6 +279,56 @@ def main() -> None:
     else:
         print("  condições de grau Destino: fora do construtor, como o livro manda")
 
+    # ---- o construtor de itens contra a tabela do Grau, na Parte VII
+    print()
+    print("Construtor de itens — tabela do Grau, livro × ficha:")
+
+    no_livro = re.findall(
+        r"(Mortal|Consagrado|Heroico|Mítico|Lendário|Divino)\s+(\d+)\s+"
+        r"(?:o dado da arma|\+\d+ dados?|o Mestre decide)\s+(—|\+\d+)\s+(—|\+\d+)\s+"
+        r"(—|\d+)\s+(\d+)", texto_livro)
+    print(f"  linhas encontradas no livro: {len(no_livro)}")
+    if len(no_livro) != 6:
+        falhas.append(f"a tabela de Graus do item tem {len(no_livro)} linhas no livro; a ficha assume 6")
+
+    na_ficha = {
+        m[0]: m[1:] for m in re.findall(
+            r'nome:\s*"([^"]+)",\s*nivel:\s*(\d+),\s*dados:\s*(\d+|null),\s*'
+            r"ataque:\s*(\d+|null),\s*def:\s*(\d+|null),\s*pontos:\s*(\d+)", html)
+    }
+    for nome, nivel, ataque, defe, pontos, integridade in no_livro:
+        if nome not in na_ficha:
+            falhas.append(f"o Grau de item {nome!r} sumiu da ficha")
+            continue
+        f_nivel, _f_dados, f_ataque, f_def, f_pontos = na_ficha[nome]
+        esperado = (nivel, "0" if ataque == "—" else ataque.lstrip("+"),
+                    "0" if defe == "—" else defe.lstrip("+"),
+                    "0" if pontos == "—" else pontos)
+        atual = (f_nivel, f_ataque, f_def, f_pontos)
+        marca = "ok" if atual == esperado else "ERRADO"
+        print(f"  {nome:<12} nível {f_nivel:>2} · ataque +{f_ataque} · DEF +{f_def} · "
+              f"{f_pontos} pontos — {marca}")
+        if atual != esperado:
+            falhas.append(f"o Grau {nome} na ficha é {atual}; o livro diz {esperado}")
+
+    regras_item = [
+        ("item não tem duração", "Conte a partir do primeiro ponto de efeito, sem o ponto de duração",
+         "sem ponto de duração e sem o ponto grátis"),
+        ("sempre ligado custa o dobro", "custa o dobro dos pontos e não usa Cargas",
+         "(ligado ? 2 : 1)"),
+        ("Cargas iguais à proficiência", "o número delas é o seu bônus de proficiência",
+         'g.cargas ? "0/" + prof'),
+        ("Divino não se fabrica", "Divino não se fabrica", "Divino não se fabrica"),
+    ]
+    for nome, no_texto, no_codigo in regras_item:
+        ok_livro = no_texto.lower() in texto_livro.lower()
+        ok_ficha = no_codigo in html
+        print(f"  {nome}: livro {'sim' if ok_livro else 'NÃO'} · ficha {'sim' if ok_ficha else 'NÃO'}")
+        if not ok_livro:
+            falhas.append(f"o livro não diz mais {no_texto!r}, e o construtor de itens ainda aplica")
+        if not ok_ficha:
+            falhas.append(f"o construtor de itens não aplica {nome!r}")
+
     print()
     if falhas:
         for f in falhas:

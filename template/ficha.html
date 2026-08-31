@@ -343,6 +343,11 @@ button.mini:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
    alcance, ativação nem resolução — ela está sempre ligada. */
 .modal-caixa[data-tipo="ativa"] .hb-so-passiva,
 .modal-caixa[data-tipo="passiva"] .hb-so-ativa { display: none; }
+.modal-caixa:not([data-tipo="arma"]) .it-so-arma { display: none; }
+.modal-aprimoramento { display: grid; grid-template-columns: 1fr 5.5rem 9rem; gap: .5rem .8rem; margin-bottom: .4rem; }
+@media (max-width: 42rem) {
+  .modal-efeito, .modal-aprimoramento { grid-template-columns: 1fr; }
+}
 @media print { .modal-fundo, .linha-acoes { display: none !important; } }
 
 
@@ -1001,6 +1006,59 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
       <button type="button" class="mini" onclick="fecharModal('modalHabilidade')">cancelar</button>
       <button type="button" class="mini" id="hbAdicionar"
               onclick="adicionarHabilidade()">Adicionar à ficha</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-fundo" id="modalItem" role="dialog" aria-modal="true"
+     aria-labelledby="tituloModalItem">
+  <div class="modal-caixa" id="caixaItem" data-tipo="arma">
+    <div class="modal-topo">
+      <h3 id="tituloModalItem">Novo item forjado</h3>
+      <button type="button" class="mini" onclick="fecharModal('modalItem')">fechar</button>
+    </div>
+    <p class="legenda-calc">O Grau vem de graça com o item — os pontos são para os
+      Aprimoramentos, comprados nas tabelas do Capítulo Sete, no Grau em que o item foi
+      forjado. Um item não tem duração: ele é a duração, então conte a partir do primeiro
+      ponto de efeito. As Cargas são do item e voltam num Descanso Longo.</p>
+
+    <h4>Identidade</h4>
+    <div class="modal-grade">
+      <div class="f"><label>Nome</label><input type="text" id="itNome" placeholder="Vórtex"></div>
+      <div class="f"><label>Tipo</label>
+        <select id="itTipo">
+          <option value="arma">Arma</option>
+          <option value="armadura">Armadura</option>
+          <option value="escudo">Escudo</option>
+          <option value="outro">Outro objeto</option>
+        </select></div>
+      <div class="f"><label>Grau</label><select id="itGrau"></select></div>
+      <div class="f it-so-arma"><label>Dado base da arma</label>
+        <select id="itDado">
+          <option value="1d4">1d4</option><option value="1d6">1d6</option>
+          <option value="1d8" selected>1d8</option><option value="1d10">1d10</option>
+          <option value="1d12">1d12</option><option value="2d6">2d6</option>
+        </select></div>
+    </div>
+
+    <h4>Aprimoramentos <small>— pagos com os pontos do Grau</small></h4>
+    <div id="itAprimoramentos"></div>
+    <p class="legenda-calc">Um efeito <b>sempre ligado</b> — bônus fixo, resistência, um
+      sentido — custa o dobro dos pontos e não usa Cargas.</p>
+
+    <h4>Aprimoramentos narrativos <small>— 0 pontos, sem efeito mecânico</small></h4>
+    <div class="f">
+      <input type="text" id="itNarrativo"
+             placeholder="Fala com o dono, muda de forma, reconhece a mão que o forjou…">
+    </div>
+
+    <h4>Resultado</h4>
+    <div class="modal-saida" id="itSaida">—</div>
+    <p class="estado-regra" id="itEstado">Preencha o item.</p>
+
+    <div class="modal-rodape">
+      <button type="button" class="mini" onclick="fecharModal('modalItem')">cancelar</button>
+      <button type="button" class="mini" id="itAdicionar" onclick="adicionarItem()">Adicionar à ficha</button>
     </div>
   </div>
 </div>
@@ -3516,6 +3574,183 @@ function adicionarHabilidade() {
   fecharModal("modalHabilidade");
 }
 
+/* ---------- construtor de itens ----------
+   A Forja não é um sistema novo: é o motor do Capítulo Sete guardado dentro
+   de um objeto. Os mesmos pontos, as mesmas tabelas, o mesmo teto — muda só
+   onde a habilidade mora e o que ela gasta. O Grau vem de graça com o item;
+   os pontos são para os Aprimoramentos.
+
+   Duas diferenças que o construtor precisa respeitar: um item não tem
+   duração, então a conta começa no primeiro ponto de efeito, sem ponto de
+   duração e sem ponto grátis; e um efeito sempre ligado custa o dobro dos
+   pontos e não usa Cargas. */
+var IT_GRAUS = {
+  mortal:     { nome: "Mortal",     nivel: 1,  dados: 0, ataque: 0, def: 0, pontos: 0, integridade: 1, cargas: false },
+  consagrado: { nome: "Consagrado", nivel: 3,  dados: 0, ataque: 1, def: 1, pontos: 2, integridade: 2, cargas: true },
+  heroico:    { nome: "Heroico",    nivel: 6,  dados: 1, ataque: 1, def: 1, pontos: 3, integridade: 3, cargas: true },
+  mitico:     { nome: "Mítico",     nivel: 10, dados: 1, ataque: 2, def: 2, pontos: 4, integridade: 4, cargas: true },
+  lendario:   { nome: "Lendário",   nivel: 15, dados: 2, ataque: 2, def: 3, pontos: 5, integridade: 5, cargas: true },
+  // "o Mestre decide" no dado; as colunas de ataque e DEF do Divino são
+  // travessão, ou seja, bônus nenhum vindo da tabela.
+  divino:     { nome: "Divino",     nivel: 18, dados: null, ataque: 0, def: 0, pontos: 6, integridade: 6, cargas: false }
+};
+
+var IT_LINHAS = 3;
+
+function montarConstrutorItem() {
+  document.getElementById("itGrau").innerHTML = Object.keys(IT_GRAUS).map(function (ch) {
+    return '<option value="' + ch + '">' + IT_GRAUS[ch].nome +
+      " · nível " + IT_GRAUS[ch].nivel + " · " + IT_GRAUS[ch].pontos + " pontos</option>";
+  }).join("");
+
+  var caixa = document.getElementById("itAprimoramentos");
+  var opcoes = '<option value="">—</option>' + Object.keys(HB_EFEITOS).map(function (ch) {
+    return '<option value="' + ch + '">' + HB_EFEITOS[ch].nome + "</option>";
+  }).join("");
+  for (var i = 1; i <= IT_LINHAS; i++) {
+    var linha = document.createElement("div");
+    linha.className = "modal-aprimoramento";
+    linha.innerHTML =
+      '<div class="f"><label>Aprimoramento ' + i + '</label>' +
+        '<select id="itEfeito' + i + '">' + opcoes + "</select></div>" +
+      '<div class="f"><label>quanto</label>' +
+        '<input type="number" id="itQtd' + i + '" min="1" value="1"></div>' +
+      '<div class="modal-marcas"><label><input type="checkbox" id="itLigado' + i + '">' +
+        " sempre ligado · dobro</label></div>";
+    caixa.appendChild(linha);
+  }
+
+  document.getElementById("modalItem").addEventListener("input", calcularItem);
+  document.getElementById("modalItem").addEventListener("change", calcularItem);
+}
+
+function dadoComGrau(base, mais) {
+  var partes = /^(\d+)d(\d+)$/.exec(base);
+  if (!partes || mais === null) return base;
+  return (parseInt(partes[1], 10) + mais) + "d" + partes[2];
+}
+
+function lerConstrutorItem() {
+  var v = function (id) { return document.getElementById(id).value; };
+  var g = IT_GRAUS[v("itGrau")];
+  var tipo = v("itTipo");
+  var nivel = num(document.getElementById("nivel").value) || 1;
+  var prof = 2 + Math.floor((nivel - 1) / 4);
+  var erros = [];
+
+  if (nivel < g.nivel) {
+    erros.push("Um item " + g.nome + " pede nível " + g.nivel + ", e o herói está no " + nivel + ".");
+  }
+  if (v("itGrau") === "divino") {
+    erros.push("Divino não se fabrica: é concedido, herdado ou roubado, e o Mestre escreve o que ele faz.");
+  }
+
+  var gastos = 0, aprimoramentos = [];
+  for (var i = 1; i <= IT_LINHAS; i++) {
+    var chave = v("itEfeito" + i);
+    if (!chave) continue;
+    var e = HB_EFEITOS[chave];
+    var qtd = Math.max(1, Math.min(e.qtdMax, parseInt(v("itQtd" + i), 10) || 1));
+    var ligado = document.getElementById("itLigado" + i).checked;
+    // Um item não tem duração: conte a partir do primeiro ponto de efeito,
+    // sem ponto de duração e sem o ponto grátis que a duração pagaria.
+    var p = e.pontos(qtd) * (ligado ? 2 : 1);
+    gastos += p;
+    aprimoramentos.push(e.texto(g.dados === null ? 1 : grauDoItem(v("itGrau")), qtd) +
+      " (" + p + (p === 1 ? " ponto" : " pontos") +
+      (ligado ? ", sempre ligado, sem Carga" : ", 1 Carga") + ")");
+  }
+  if (gastos > g.pontos) {
+    erros.push("São " + gastos + " pontos de Aprimoramento para os " + g.pontos + " que o Grau " + g.nome + " dá.");
+  }
+
+  var cabeca = [g.nome];
+  if (tipo === "arma") {
+    cabeca.push("arma " + dadoComGrau(v("itDado"), g.dados) +
+      (g.ataque ? ", ataque e dano +" + g.ataque : ""));
+  } else if (tipo === "armadura" || tipo === "escudo") {
+    cabeca.push(tipo === "armadura" ? "armadura" : "escudo");
+    if (g.def) cabeca.push("+" + g.def + " DEF");
+  } else {
+    cabeca.push("objeto");
+  }
+  cabeca.push(gastos + " de " + g.pontos + " pontos");
+  cabeca.push("Integridade " + g.integridade + "/" + g.integridade);
+  cabeca.push("Cargas " + (g.cargas ? "0/" + prof : "—"));
+
+  var linhas = [(document.getElementById("itNome").value.trim() || "Item sem nome") +
+    " — " + cabeca.join(" · ")];
+  aprimoramentos.forEach(function (a) { linhas.push("  Aprimoramento: " + a); });
+
+  var narrativo = document.getElementById("itNarrativo").value.trim();
+  if (narrativo) linhas.push("  Narrativo: " + narrativo + " (0 pontos, sem efeito mecânico)");
+
+  var aviso = "";
+  if (tipo === "armadura" || tipo === "escudo") {
+    aviso = "A coluna de DEF vale para armadura ou escudo, nunca os dois somados no mesmo bônus.";
+  }
+
+  return {
+    linha: linhas.join("\n"), erros: erros, gastos: gastos, pontos: g.pontos,
+    resumo: gastos + " de " + g.pontos + " pontos gastos. " + aviso
+  };
+}
+
+/* O item é forjado num Grau próprio, e é nele que os Aprimoramentos entregam
+   — igual a uma habilidade. O Grau do item vira o número da tabela. */
+function grauDoItem(chave) {
+  var ordem = ["mortal", "consagrado", "heroico", "mitico", "lendario", "divino"];
+  return Math.max(1, Math.min(5, ordem.indexOf(chave)));
+}
+
+function calcularItem() {
+  document.getElementById("caixaItem").dataset.tipo = document.getElementById("itTipo").value;
+  for (var i = 1; i <= IT_LINHAS; i++) {
+    var chave = document.getElementById("itEfeito" + i).value;
+    var e = chave ? HB_EFEITOS[chave] : null;
+    var campo = document.getElementById("itQtd" + i);
+    campo.disabled = !e || e.qtdMax === 1;
+    campo.max = e ? e.qtdMax : 1;
+    if (e && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
+  }
+  var r = lerConstrutorItem();
+  document.getElementById("itSaida").textContent = r.linha;
+  var estado = document.getElementById("itEstado");
+  estado.className = "estado-regra " + (r.erros.length ? "erro" : "ok");
+  estado.textContent = r.erros.length ? r.erros.join(" ") : r.resumo;
+  document.getElementById("itAdicionar").disabled = r.erros.length > 0;
+}
+
+function abrirConstrutorItem() {
+  document.getElementById("itNome").value = "";
+  document.getElementById("itNarrativo").value = "";
+  document.getElementById("itTipo").value = "arma";
+  document.getElementById("itDado").value = "1d8";
+  for (var i = 1; i <= IT_LINHAS; i++) {
+    document.getElementById("itEfeito" + i).value = "";
+    document.getElementById("itQtd" + i).value = "1";
+    document.getElementById("itLigado" + i).checked = false;
+  }
+  // Começa no Grau mais alto que o nível do herói alcança e que ainda se forja.
+  var nivel = num(document.getElementById("nivel").value) || 1;
+  var possiveis = Object.keys(IT_GRAUS).filter(function (ch) {
+    return ch !== "divino" && IT_GRAUS[ch].nivel <= nivel;
+  });
+  document.getElementById("itGrau").value = possiveis[possiveis.length - 1] || "mortal";
+  abrirModal("modalItem");
+  calcularItem();
+  document.getElementById("itNome").focus();
+}
+
+function adicionarItem() {
+  var r = lerConstrutorItem();
+  if (r.erros.length) return;
+  var campo = document.getElementById("itens");
+  campo.value = (campo.value.trim() ? campo.value.replace(/\s*$/, "") + "\n" : "") + r.linha;
+  campo.dispatchEvent(new Event("input", { bubbles: true }));
+  fecharModal("modalItem");
+}
+
 /* ---------- as caixas por cima ---------- */
 function abrirModal(id) {
   document.getElementById(id).classList.add("aberto");
@@ -3534,6 +3769,7 @@ document.querySelectorAll(".modal-fundo").forEach(function (m) {
 });
 
 montarConstrutorHabilidade();
+montarConstrutorItem();
 
 document.getElementById("retratoImg").addEventListener("load", retratoCarregado);
 if (document.getElementById("retratoImg").complete) retratoCarregado();
