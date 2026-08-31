@@ -1266,7 +1266,7 @@ button.mini:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
   margin: .95rem 0 .35rem; padding-bottom: .2rem; border-bottom: 1px solid var(--borda);
 }
 .modal-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
-.modal-efeito { display: grid; grid-template-columns: 1fr 5.5rem; gap: .5rem .8rem; margin-bottom: .4rem; }
+.modal-efeito { display: grid; grid-template-columns: 1fr 5rem 7.5rem; gap: .5rem .8rem; margin-bottom: .4rem; }
 .modal-marcas { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .1rem .8rem; }
 .modal-marcas label {
   display: flex; gap: .35rem; align-items: baseline;
@@ -1887,7 +1887,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
           <option value="medica">Médica · paga MP</option>
         </select></div>
       <div class="f hb-so-ativa"><label>Descritor</label><input type="text" id="hbDescritor" placeholder="Água, sombra, aço…"></div>
-      <div class="f hb-so-ativa"><label>Grau da compra</label><select id="hbGrau"></select></div>
+      <div class="f hb-so-ativa"><label>Grau base</label><select id="hbGrau"></select></div>
     </div>
 
     <div class="hb-so-passiva">
@@ -4692,7 +4692,9 @@ function montarConstrutorHabilidade() {
       '<div class="f"><label>Efeito ' + i + '</label>' +
         '<select id="hbEfeito' + i + '">' + opcoes + "</select></div>" +
       '<div class="f"><label id="hbQtdRotulo' + i + '">quanto</label>' +
-        '<input type="number" id="hbQtd' + i + '" min="1" value="1"></div>';
+        '<input type="number" id="hbQtd' + i + '" min="1" value="1"></div>' +
+      '<div class="f"><label>no Grau</label>' +
+        '<select id="hbGrauEfeito' + i + '"></select></div>';
     caixa.appendChild(linha);
   }
 
@@ -4802,21 +4804,34 @@ function lerConstrutorHabilidade() {
 
   // pontos que o Grau multiplica, e os que não — terreno difícil é o único
   // que o livro congela em 1.
-  var escalados = duracao.pontos + alcance.pontos + ativacao.pontos;
-  var fixos = 0;
-  if (areaChave === "dobrada") escalados += 2;
+  // Estruturais: duração, alcance, ativação, área dobrada e modificadores.
+  // Vão todos no Grau base — é o que o exemplo fechado do livro faz quando
+  // multiplica os 4 pontos da Lança de Sombra, o do alcance incluído, por 3.
+  var estruturais = duracao.pontos + alcance.pontos + ativacao.pontos;
+  if (areaChave === "dobrada") estruturais += 2;
 
+  // Cada linha de efeito é comprada no Grau dela: "você pode comprar um ponto
+  // em qualquer Grau até o seu". É o que mantém baratas as coisas que não
+  // precisam crescer — abrir caminho, ganhar um metro, dar Vantagem — enquanto
+  // o dano vai no Grau cheio. O Grau base cobre o resto: duração, alcance,
+  // ativação e modificadores.
   var efeitos = [], usaArea = false, escolhidos = [], repetidos = [];
-  var somaMod = false, pontosEfeitos = 0;
+  var somaMod = false, pontosEfeitos = 0, custoEfeitos = 0, maiorGrauEfeito = 0;
+  var grausUsados = [];
   for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
     var chave = v("hbEfeito" + i);
     if (!chave) continue;
     var e = HB_EFEITOS[chave];
     var qtd = Math.max(1, Math.min(e.qtdMax, parseInt(v("hbQtd" + i), 10) || 1));
+    // Terreno difícil não cresce, então nunca é comprado acima do Grau 1.
+    var gLinha = e.naoCresce ? 1
+      : Math.max(1, Math.min(grau, parseInt(v("hbGrauEfeito" + i), 10) || grau));
     var p = e.pontos(qtd);
     pontosEfeitos += p;
-    if (e.naoCresce) { fixos += p; } else { escalados += p; }
-    efeitos.push(e.texto(grau, qtd));
+    custoEfeitos += p * gLinha;
+    if (gLinha > maiorGrauEfeito) maiorGrauEfeito = gLinha;
+    if (grausUsados.indexOf(gLinha) < 0) grausUsados.push(gLinha);
+    efeitos.push(e.texto(gLinha, qtd) + (gLinha !== grau ? " (Grau " + gLinha + ")" : ""));
     if (e.mod) somaMod = true;
     if (e.exigeArea) usaArea = true;
     if (escolhidos.some(function (o) { return o.chave === chave; })) {
@@ -4838,20 +4853,18 @@ function lerConstrutorHabilidade() {
   var exigido = resolucaoExigida(escolhidos);
   erros = erros.concat(exigido.erros);
 
-  // A duração já vem com um ponto de efeito incluído: o primeiro ponto
-  // comprado é o que ela pagou.
-  var gratis = Math.min(1, pontosEfeitos);
-  if (escalados >= duracao.pontos + gratis) { escalados -= gratis; }
-  else { fixos = Math.max(0, fixos - gratis); }
-
   var mais = document.querySelectorAll('#hbMods [data-hbmod="+1"]:checked').length;
   var menos = document.querySelectorAll('#hbMods [data-hbmod="-1"]:checked').length;
-  escalados += mais - menos;
+  estruturais += mais - menos;
+  if (estruturais < 0) estruturais = 0;
 
-  var pontos = Math.max(1, escalados + fixos);
-  if (escalados < 0) { fixos = Math.max(0, fixos + escalados); escalados = 0; }
-
-  var custo = Math.max(1, escalados * grau + fixos);
+  // A duração já vem com um ponto de efeito incluído. Ele abate o ponto mais
+  // caro que foi comprado — a duração paga um ponto de efeito, e qual deles
+  // é escolha de quem monta. O efeito continua inteiro: o que o ponto grátis
+  // tira é o preço, não o dado.
+  var gratis = pontosEfeitos ? 1 : 0;
+  var pontos = Math.max(1, estruturais + pontosEfeitos - gratis);
+  var custo = Math.max(1, estruturais * grau + custoEfeitos - gratis * maiorGrauEfeito);
   var assinatura = v("hbAssinatura") === "sim";
   if (assinatura) custo = Math.max(1, custo - 1);
 
@@ -4911,7 +4924,9 @@ function calcularHabilidade() {
       "O preço sai do corpo: −1 no atributo escolhido e −1 no máximo do recurso que ele " +
       "alimenta. Ocupa um espaço de Memória."
     : "PONTOS = duração + efeitos adicionais + alcance + modificadores. A duração já traz " +
-      "um ponto de efeito incluído. CUSTO em MP ou SP = pontos × Grau.";
+      "um ponto de efeito incluído. CUSTO em MP ou SP = pontos × Grau do ponto — cada efeito " +
+      "pode ser comprado num Grau menor que o seu, e o Grau base cobre duração, alcance, " +
+      "ativação e modificadores.";
 
   // O rótulo da quantidade muda com o efeito: nem toda linha compra "pontos".
   if (!passiva) {
@@ -4923,6 +4938,10 @@ function calcularHabilidade() {
       campo.disabled = !e || e.qtdMax === 1;
       campo.max = e ? e.qtdMax : 1;
       if (e && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
+      // Terreno difícil vale 1 em qualquer Grau: não há Grau a escolher.
+      var selG = document.getElementById("hbGrauEfeito" + i);
+      selG.disabled = !e || !!e.naoCresce;
+      if (e && e.naoCresce) selG.value = "1";
     }
   }
 
@@ -4976,9 +4995,12 @@ function limparConstrutorHabilidade() {
   document.getElementById("hbAssinatura").value = "";
   document.getElementById("hbPassivaEfeito").value = "";
   document.getElementById("hbPassivaSac").value = "";
+  var grauCheio = valorCalc("grau");
   for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
     document.getElementById("hbEfeito" + i).value = "";
     document.getElementById("hbQtd" + i).value = "1";
+    var selG = document.getElementById("hbGrauEfeito" + i);
+    if (selG.options.length) selG.value = grauCheio;
   }
   document.querySelectorAll("#hbMods input:checked").forEach(function (c) { c.checked = false; });
 }
@@ -4992,6 +5014,15 @@ function abrirConstrutorHabilidade() {
     sel.add(new Option("Grau " + g + " · ponto custa " + g, String(g)));
   }
   sel.value = String(grauAtual);
+
+  // Cada linha de efeito pode ser comprada num Grau menor que o seu. Começam
+  // todas no Grau cheio; baixar é escolha de quem monta.
+  for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
+    var selLinha = document.getElementById("hbGrauEfeito" + i);
+    selLinha.innerHTML = "";
+    for (var gl = 1; gl <= grauAtual; gl++) selLinha.add(new Option("Grau " + gl, String(gl)));
+    selLinha.value = String(grauAtual);
+  }
   abrirModal("modalHabilidade");
   calcularHabilidade();
   document.getElementById("hbNome").focus();
