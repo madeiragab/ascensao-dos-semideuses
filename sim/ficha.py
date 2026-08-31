@@ -233,22 +233,42 @@ def main() -> None:
     print("Construtor de habilidades — exemplos do livro:")
 
     exemplos = [
-        # (nome, duração, alcance, ativação, pontos de efeito, Grau, pontos, custo)
-        ("Passo das Trevas", 1, 0, 1, 1, 1, 2, 2),
-        ("Lança de Sombra, Grau 1", 1, 1, 0, 3, 1, 4, 4),
-        ("Lança de Sombra, Grau 3", 1, 1, 0, 3, 3, 4, 12),
-        # e o que a campanha produziu: DEF +2 é 1 ponto mais 2 pelo dobro
-        ("Manto do Oceano", 2, 0, 1, 3, 1, 5, 5),
+        # nome, duração, alcance, ativação, Grau base,
+        # linhas de efeito como (pontos, Grau do ponto), pontos, custo
+        ("Passo das Trevas", 1, 0, 1, 1, [(1, 1)], 2, 2),
+        ("Lança de Sombra, Grau 1", 1, 1, 0, 1, [(3, 1)], 4, 4),
+        ("Lança de Sombra, Grau 3", 1, 1, 0, 3, [(3, 3)], 4, 12),
+        # o que a campanha produziu: DEF +2 é 1 ponto mais 2 pelo dobro
+        ("Manto do Oceano", 2, 0, 1, 1, [(3, 1)], 5, 5),
+        # e a mistura que o livro recomenda: o dano no Grau cheio e o metro
+        # de movimento comprado no Grau 1, que é onde ele não precisa crescer
+        ("Dano G3 + movimento G1", 1, 0, 0, 3, [(3, 3), (1, 1)], 4, 10),
     ]
-    for nome, dur, alc, ativ, efeitos, g, pontos_ok, custo_ok in exemplos:
-        # a duração já traz um ponto de efeito incluído
-        pontos = max(1, dur + max(0, efeitos - 1) + alc + ativ)
-        custo = max(1, pontos * g)
+    for nome, dur, alc, ativ, base, linhas, pontos_ok, custo_ok in exemplos:
+        estruturais = dur + alc + ativ
+        pts_efeito = sum(p for p, _ in linhas)
+        # a duração já traz um ponto de efeito incluído, e ele abate o ponto
+        # mais caro comprado
+        gratis = 1 if pts_efeito else 0
+        maior = max((g for _, g in linhas), default=0)
+        pontos = max(1, estruturais + pts_efeito - gratis)
+        custo = max(1, estruturais * base + sum(p * g for p, g in linhas) - gratis * maior)
         marca = "ok" if (pontos, custo) == (pontos_ok, custo_ok) else "ERRADO"
         print(f"  {nome:<24} {pontos} pontos · {custo} de recurso — {marca}")
         if (pontos, custo) != (pontos_ok, custo_ok):
             falhas.append(f"a conta de {nome} dá {pontos} pontos e {custo} de recurso; "
                           f"o livro diz {pontos_ok} e {custo_ok}")
+
+    # O Grau é por ponto, não por habilidade: a ficha precisa oferecer a
+    # escolha em cada linha de efeito, senão ela é mais restritiva que o livro.
+    if "hbGrauEfeito" not in html:
+        falhas.append("a ficha voltou a ter um Grau só para a habilidade inteira; "
+                      "o livro compra um ponto em qualquer Grau até o seu")
+    for frase in ["CUSTO em MP ou SP = pontos × Grau do ponto",
+                  "Você pode comprar um ponto em qualquer Grau até o seu"]:
+        if frase.lower() not in texto_livro.lower():
+            falhas.append(f"o livro não diz mais {frase!r}, e o construtor compra por ponto")
+    print("  Grau por ponto: oferecido em cada linha de efeito")
 
     formulas = [
         ("PONTOS", "PONTOS = duração + efeitos adicionais + alcance + modificadores"),
