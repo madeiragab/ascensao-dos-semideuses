@@ -48,6 +48,12 @@ derrubar o encontro justo e perde uma luta em cada três.
 **O que fazer:** refaça a linha dos aliados. Num grupo de Kleos 5, um Aliado sai
 de PV 11 para **PV 36, DEF 14**.
 
+**Cuidado com o número duas vezes.** Esse Kleos do Grupo − 2 é a linha com que
+você **monta** o aliado, não o que ele **contribui** para o orçamento do
+encontro. O aliado recorrente já está contado na tabela do Kleos do Grupo — ele
+é um dos "heróis" daquela coluna. Somar o Kleos dele por cima é contar o mesmo
+personagem duas vezes, e o resultado é um encontro na faixa Derrota.
+
 **Por quê:** medido, o desenho antigo sobrevivia a 6% dos combates no nível 9. O
 novo sobrevive a 64%–78% sem roubar o dano dos jogadores.
 

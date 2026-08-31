@@ -74,9 +74,22 @@ direto:
 **Esta tabela não é a soma dos valores de cima, e é de propósito.** Somar
 funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.
 
-**Aliados contam.** Um deus que luta ao seu lado soma o Kleos dele. É por isso que
-existem alianças na mitologia — e é assim que um Cataclisma vira um problema
-resolvível.
+**Aliados eventuais contam.** Um deus que aparece numa cena e luta ao seu lado
+soma o Kleos dele. É por isso que existem alianças na mitologia — e é assim que
+um Cataclisma vira um problema resolvível.
+
+**Aliados recorrentes não somam, e isso não é esquecimento.** O NPC que anda com
+o grupo toda sessão já está contado na linha da tabela: onde você lê "3 heróis",
+leia "três personagens em campo", sejam eles jogadores ou aliados fixos. O
+Kleos do Grupo − 2 do Guia do Mestre é a linha com que você **monta** a ficha
+desse aliado — quão duro ele é — e não o que ele **contribui** para o orçamento
+do encontro.
+
+> **Onde isso dá errado.** Um herói de nível 9 com dois aliados recorrentes: a
+> tabela diz Kleos do Grupo **7**. Somando os aliados como se fossem eventuais,
+> ele seria 2¼ + 5 + 5 = **12**, e o Mestre montaria um encontro cinco degraus
+> acima do que o grupo aguenta. Cinco degraus é a faixa **Derrota** com folga:
+> não é um combate, é uma cena de morte. Use a tabela, não a soma.
 
 ### O quarto jogador quase não muda o Kleos, e o quinto vale um degrau
 
