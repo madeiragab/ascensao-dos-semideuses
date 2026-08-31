@@ -325,6 +325,76 @@ button.mini:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset
   margin: .95rem 0 .35rem; padding-bottom: .2rem; border-bottom: 1px solid var(--borda);
 }
 .modal-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .5rem .8rem; }
+/* ---------- catálogo de efeitos ----------
+   Um cartão por linha das tabelas do Capítulo Sete. Clicar soma o efeito à
+   habilidade; o que não puder conviver com o que já foi escolhido some da
+   grade, porque a regra é "Ataque ou Efeito, nunca os dois". */
+.cat-grupo { margin-bottom: .7rem; }
+.cat-grupo:last-child { margin-bottom: 0; }
+.cat-titulo {
+  font-family: var(--sans); font-size: .52rem; text-transform: uppercase;
+  letter-spacing: .14em; color: var(--texto-suave); margin-bottom: .3rem;
+}
+.cat-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: .35rem; }
+.cat-card {
+  display: flex; align-items: center; gap: .45rem; width: 100%; text-align: left;
+  font-family: var(--sans); font-size: .7rem; line-height: 1.25; color: var(--texto);
+  padding: .4rem .5rem; cursor: pointer;
+  background: var(--papel); border: 1px solid var(--borda); border-radius: 3px;
+  text-transform: none; letter-spacing: 0;
+}
+.cat-card:hover:not(:disabled) { border-color: var(--acento); color: var(--acento); background: var(--acento-fraco); }
+.cat-card:focus-visible { outline: 2px solid var(--bronze-luz); outline-offset: 1px; }
+.cat-card:disabled { opacity: .38; cursor: default; }
+.cat-card.escolhido { border-color: var(--acento); background: var(--acento-fraco); }
+.cat-card svg { flex: none; width: 1rem; height: 1rem; }
+.cat-card .cat-preco { margin-left: auto; font-size: .58rem; color: var(--texto-suave); font-variant-numeric: tabular-nums; }
+.cat-card.escolhido .cat-preco { color: var(--acento); }
+
+/* linha de um efeito já escolhido */
+.efeito-linha {
+  display: grid; align-items: end; gap: .4rem .7rem; margin-top: .45rem;
+  grid-template-columns: 1.4rem minmax(6rem, 1fr) 4.6rem 6.6rem 1.7rem;
+  padding: .45rem .5rem; background: var(--superficie-2); border: 1px solid var(--borda);
+}
+.efeito-linha > .efeito-icone { color: var(--acento); padding-bottom: .25rem; }
+.efeito-linha > .efeito-icone svg { width: 1.05rem; height: 1.05rem; display: block; }
+.efeito-nome { font-family: var(--sans); font-size: .72rem; padding-bottom: .2rem; }
+.efeito-entrega {
+  grid-column: 2 / -1; font-family: var(--mono); font-size: .64rem;
+  color: var(--texto-suave); margin-top: -.15rem;
+}
+.efeito-fixo {
+  font-family: var(--mono); font-size: .78rem; color: var(--texto);
+  border-bottom: 1px solid var(--borda); padding: .18rem .1rem;
+}
+.efeito-remove {
+  font-family: var(--sans); font-size: .8rem; line-height: 1; padding: .25rem 0;
+  color: var(--texto-suave); background: none; border: 1px solid var(--borda); border-radius: 2px;
+  cursor: pointer; text-transform: none;
+}
+.efeito-remove:hover { border-color: #A44A3F; color: #A44A3F; }
+@media (max-width: 42rem) {
+  .efeito-linha { grid-template-columns: 1.4rem 1fr 1.7rem; }
+  .efeito-entrega { grid-column: 1 / -1; }
+}
+
+.modal-nota, .modal-vazio {
+  font-family: var(--sans); font-size: .65rem; color: var(--texto-suave);
+  margin: .45rem 0 0;
+}
+.modal-vazio { font-style: italic; }
+
+/* painel de números do resultado */
+.painel-numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr)); gap: .4rem; margin-bottom: .5rem; }
+.painel-num { border: 1px solid var(--borda-forte); padding: .35rem .55rem .45rem; background: var(--papel); }
+.painel-num > span {
+  display: block; font-family: var(--sans); font-size: .5rem; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--texto-suave);
+}
+.painel-num > b { font-family: var(--mono); font-size: 1.25rem; font-weight: 700; line-height: 1.25; }
+.painel-num.estourou > b { color: #A44A3F; }
+
 .modal-efeito { display: grid; grid-template-columns: 1fr 5rem 7.5rem; gap: .5rem .8rem; margin-bottom: .4rem; }
 .modal-marcas { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: .1rem .8rem; }
 .modal-marcas label {
@@ -970,8 +1040,11 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
         <div class="f"><label>Área</label><select id="hbArea"></select></div>
       </div>
 
-      <h4>Efeitos</h4>
+      <h4>Efeitos <small>— clique para somar à habilidade</small></h4>
+      <div id="hbCatalogo"></div>
+      <p class="modal-nota" id="hbEscondidos" hidden></p>
       <div id="hbEfeitos"></div>
+      <p class="modal-vazio" id="hbSemEfeito">Nenhum efeito ainda. Escolha um acima.</p>
 
       <h4>Modificadores</h4>
       <div class="modal-marcas" id="hbMods"></div>
@@ -999,6 +1072,11 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
     </div>
 
     <h4>Resultado</h4>
+    <div class="painel-numeros" id="hbPainel">
+      <div class="painel-num" id="hbCaixaPontos"><span>Pontos · Teto</span><b id="hbPontos">—</b></div>
+      <div class="painel-num"><span>Custo</span><b id="hbCusto">—</b></div>
+      <div class="painel-num"><span>Sustentar</span><b id="hbSustentar">—</b></div>
+    </div>
     <div class="modal-saida" id="hbSaida">—</div>
     <p class="estado-regra" id="hbEstado">Preencha a habilidade.</p>
 
@@ -1041,8 +1119,11 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
         </select></div>
     </div>
 
-    <h4>Aprimoramentos <small>— pagos com os pontos do Grau</small></h4>
+    <h4>Aprimoramentos <small>— clique para gastar os pontos do Grau</small></h4>
+    <div id="itCatalogo"></div>
+    <p class="modal-nota" id="itNota" hidden></p>
     <div id="itAprimoramentos"></div>
+    <p class="modal-vazio" id="itSemEfeito">Nenhum Aprimoramento ainda. O item já vale pelo Grau.</p>
     <p class="legenda-calc">Um efeito <b>sempre ligado</b> — bônus fixo, resistência, um
       sentido — custa o dobro dos pontos e não usa Cargas.</p>
 
@@ -1418,7 +1499,7 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
    abandona a passiva num Interlúdio. */
 var EFEITO_PASSIVA = {
   def:       { nome: "+1 DEF",                            alimenta: "destreza" },
-  movimento: { nome: "+1,5 m de movimento",               alimenta: null },
+  movimento: { nome: "+1,5 m de movimento",              alimenta: null },
   pericia:   { nome: "+1 em uma perícia",                 alimenta: null },
   escuridao: { nome: "Enxerga na escuridão comum",        alimenta: null },
   respirar:  { nome: "Respira num meio hostil",           alimenta: null },
@@ -3202,6 +3283,41 @@ function limparFicha() {
    O construtor não guarda estado: monta a linha, escreve no campo de texto e
    fecha. O que a ficha salva é o texto, editável como sempre foi. */
 
+/* Ícones do catálogo. Traço em currentColor, 24×24, sem preenchimento: o
+   cartão inteiro muda de cor no hover e o ícone acompanha sozinho. */
+function svgIcone(miolo) {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + miolo + "</svg>";
+}
+var ICONES = {
+  // lâmina apontada: dano em um alvo
+  dano: svgIcone('<path d="M4 20 15 9M13 3h8v8M21 3l-6 6"/><path d="M3 21l2-1 1-2"/>'),
+  // estilhaços saindo de um centro: dano em área
+  area: svgIcone('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>'),
+  // chama baixa: dano que volta no fim do turno
+  continuo: svgIcone('<path d="M12 22c4 0 6-3 6-6 0-5-6-6-6-14 0 0-6 4-6 10 0 5 2 10 6 10z"/><path d="M12 22c1.7 0 2.6-1.4 2.6-3 0-2.3-2.6-3-2.6-6.4"/>'),
+  // coração: PV temporários
+  vida: svgIcone('<path d="M12 20s-7-4.4-7-9.4A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.6c0 5-7 9.4-7 9.4z"/>'),
+  // cruz de tratamento: cura
+  cura: svgIcone('<path d="M12 5v14M5 12h14"/><rect x="3" y="3" width="18" height="18" rx="3"/>'),
+  // escudo: DEF
+  escudo: svgIcone('<path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/>'),
+  // seta longa: movimento
+  movimento: svgIcone('<path d="M4 12h14M13 7l5 5-5 5"/>'),
+  // duas setas opostas: empurrar ou puxar
+  empurrar: svgIcone('<path d="M9 7 4 12l5 5M15 7l5 5-5 5M4 12h5M15 12h5M12 5v14"/>'),
+  // portal: teleporte
+  teleporte: svgIcone('<ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M12 3c5 0 9 4 9 9M12 21c-5 0-9-4-9-9"/>'),
+  // d20: Vantagem ou Desvantagem
+  dado: svgIcone('<path d="M12 3l8 5v8l-8 5-8-5V8l8-5z"/><path d="M12 3v18M4 8l8 5 8-5"/>'),
+  // elos: condição
+  corrente: svgIcone('<rect x="3" y="9" width="8" height="6" rx="3"/><rect x="13" y="9" width="8" height="6" rx="3"/><path d="M11 12h2"/>'),
+  // escudo cortado: resistência a um tipo de dano
+  resistencia: svgIcone('<path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M8 15l8-7"/>'),
+  // pegadas: ignorar terreno difícil
+  terreno: svgIcone('<path d="M7 4c1.6 0 2.5 1.4 2.5 3.4S8.6 12 7 12s-2.5-1.4-2.5-3.4S5.4 4 7 4z"/><path d="M6 14h2.5v3.5a1.3 1.3 0 0 1-2.5 0z"/><path d="M17 8c1.6 0 2.5 1.4 2.5 3.4S18.6 16 17 16s-2.5-1.4-2.5-3.4S15.4 8 17 8z"/><path d="M16 18h2.5v2.2a1.3 1.3 0 0 1-2.5 0z"/>')
+};
+
 var NOME_FONTE = {
   elemental: "Elemental", fisica: "Física", hibrida: "Híbrida", medica: "Médica"
 };
@@ -3250,61 +3366,61 @@ var HB_AREA = {
    como empurrar ou derrubar, sem uma segunda rolagem". Sozinhos eles pedem a
    própria resolução; junto de um efeito que já rola, não pedem nada. */
 var HB_EFEITOS = {
-  dano_unico: { nome: "Dano — alvo único", qtdMax: 6, rotulo: "pontos",
+  dano_unico: { nome: "Dano — alvo único", familia: "Dano", icone: "dano", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d8 de dano"; },
     exige: "ataque", mod: true },
-  dano_area: { nome: "Dano — em área", qtdMax: 6, rotulo: "pontos",
+  dano_area: { nome: "Dano — em área", familia: "Dano", icone: "area", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d6 de dano em área, metade se errar"; },
     exige: "efeito", defesa: "Reflexos", mod: true, exigeArea: true },
-  dano_continuo: { nome: "Dano — contínuo", qtdMax: 6, rotulo: "pontos",
+  dano_continuo: { nome: "Dano — contínuo", familia: "Dano", icone: "continuo", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d6 no fim do turno do alvo, sem nova defesa"; },
     mod: true },
-  pv_temp: { nome: "PV temporários", qtdMax: 6, rotulo: "pontos",
+  pv_temp: { nome: "PV temporários", familia: "Vida e proteção", icone: "vida", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d8 de PV temporários"; }, mod: true },
-  cura: { nome: "Cura — só Fonte Médica", qtdMax: 6, rotulo: "pontos",
+  cura: { nome: "Cura — só Fonte Médica", familia: "Vida e proteção", icone: "cura", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d8 de cura"; }, mod: true, soMedica: true },
-  def: { nome: "DEF", qtdMax: 2, rotulo: "+DEF",
+  def: { nome: "DEF", familia: "Vida e proteção", icone: "escudo", qtdMax: 2, rotulo: "+DEF",
     // O Grau alto espalha o bônus por mais gente, nunca aumenta o número. O
     // segundo ponto sobre o mesmo alvo custa o dobro, e +2 é o máximo.
     pontos: function (q) { return q === 2 ? 3 : 1; },
     texto: function (g, q) { return "+" + q + " DEF para " + g + (g === 1 ? " alvo" : " alvos"); } },
-  movimento: { nome: "Movimento", qtdMax: 4, rotulo: "pontos",
+  movimento: { nome: "Movimento", familia: "Movimento", icone: "movimento", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return "+" + (3 * g * q) + " m de movimento"; } },
-  empurrar: { nome: "Empurrar ou puxar", qtdMax: 4, rotulo: "pontos",
+  empurrar: { nome: "Empurrar ou puxar", familia: "Movimento", icone: "empurrar", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
     // Empurrar e derrubar são os efeitos secundários fracos que o livro cita:
     // sozinhos pedem Efeito contra Fortitude, mas pegam carona no acerto de
     // outro efeito sem uma segunda rolagem.
     texto: function (g, q) { return "empurra ou puxa " + (3 * g * q) + " m"; },
     exige: "efeito", defesa: "Fortitude", acompanha: true },
-  teleporte: { nome: "Teleporte", qtdMax: 1, rotulo: "—",
+  teleporte: { nome: "Teleporte", familia: "Movimento", icone: "teleporte", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "teleporte de " + (9 * g) + " m para um lugar visível"; } },
-  vantagem: { nome: "Vantagem ou Desvantagem", qtdMax: 1, rotulo: "—",
+  vantagem: { nome: "Vantagem ou Desvantagem", familia: "Controle", icone: "dado", qtdMax: 1, rotulo: "—",
     pontos: function () { return 1; },
     texto: function (g) { return "Vantagem ou Desvantagem em uma rolagem, " + g + (g === 1 ? " alvo" : " alvos"); } },
-  cond_fraca: { nome: "Condição fraca", qtdMax: 1, rotulo: "—",
+  cond_fraca: { nome: "Condição fraca", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 1; },
     texto: function (g) { return "condição fraca em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito", acompanha: true },
-  cond_media: { nome: "Condição média", qtdMax: 1, rotulo: "—",
+  cond_media: { nome: "Condição média", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "condição média em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito" },
-  cond_forte: { nome: "Condição forte", qtdMax: 1, rotulo: "—",
+  cond_forte: { nome: "Condição forte", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 4; },
     texto: function (g) { return "condição forte em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito" },
-  resistencia: { nome: "Resistência a um tipo de dano", qtdMax: 1, rotulo: "—",
+  resistencia: { nome: "Resistência a um tipo de dano", familia: "Utilidade", icone: "resistencia", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
     texto: function (g) { return "resistência a um tipo de dano, " + g + (g === 1 ? " alvo" : " alvos"); } },
-  terreno: { nome: "Ignorar terreno difícil", qtdMax: 1, rotulo: "—",
+  terreno: { nome: "Ignorar terreno difícil", familia: "Utilidade", icone: "terreno", qtdMax: 1, rotulo: "—",
     // Não há o que crescer nisto: custa 1 ponto em qualquer Grau, e é por
     // isso que o ponto dele nunca é multiplicado.
     pontos: function () { return 1; },
@@ -3345,22 +3461,7 @@ function montarConstrutorHabilidade() {
     return '<option value="' + ch + '">' + HB_AREA[ch].nome + "</option>";
   }).join("") + '<option value="dobrada">A forma escolhida, dobrada · +2</option>';
 
-  var caixa = document.getElementById("hbEfeitos");
-  var opcoes = '<option value="">—</option>' + Object.keys(HB_EFEITOS).map(function (ch) {
-    return '<option value="' + ch + '">' + HB_EFEITOS[ch].nome + "</option>";
-  }).join("");
-  for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
-    var linha = document.createElement("div");
-    linha.className = "modal-efeito";
-    linha.innerHTML =
-      '<div class="f"><label>Efeito ' + i + '</label>' +
-        '<select id="hbEfeito' + i + '">' + opcoes + "</select></div>" +
-      '<div class="f"><label id="hbQtdRotulo' + i + '">quanto</label>' +
-        '<input type="number" id="hbQtd' + i + '" min="1" value="1"></div>' +
-      '<div class="f"><label>no Grau</label>' +
-        '<select id="hbGrauEfeito' + i + '"></select></div>';
-    caixa.appendChild(linha);
-  }
+  montarCatalogo();
 
   document.getElementById("hbMods").innerHTML =
     HB_MODS_MAIS.map(function (m, i) {
@@ -3372,8 +3473,149 @@ function montarConstrutorHabilidade() {
       return '<label><input type="checkbox" data-hbmod="-1" id="hbMenos' + i + '"> −1 · ' + m + "</label>";
     }).join("");
 
+  document.getElementById("hbEfeitos").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("[data-tirar]");
+    if (botao) removerEfeito(parseInt(botao.dataset.tirar, 10));
+  });
+
   document.getElementById("modalHabilidade").addEventListener("input", calcularHabilidade);
   document.getElementById("modalHabilidade").addEventListener("change", calcularHabilidade);
+}
+
+/* ---------- o catálogo ----------
+   Os efeitos deixaram de ser quatro selects idênticos e viraram uma grade de
+   cartões agrupada por família. Clicar soma; o cartão do que já está na
+   habilidade fica marcado, e some da grade o que não puder conviver com o que
+   já foi escolhido. É a mesma regra de `resolucaoExigida`, só que mostrada
+   antes do erro em vez de depois. */
+var FAMILIAS = ["Dano", "Vida e proteção", "Movimento", "Controle", "Utilidade"];
+
+function montarCatalogo() {
+  document.getElementById("hbCatalogo").innerHTML = FAMILIAS.map(function (fam) {
+    var cartoes = Object.keys(HB_EFEITOS).filter(function (ch) {
+      return HB_EFEITOS[ch].familia === fam;
+    }).map(function (ch) {
+      var e = HB_EFEITOS[ch];
+      return '<button type="button" class="cat-card" data-efeito="' + ch + '">' +
+        ICONES[e.icone] + "<span>" + e.nome.replace(/ — /, " · ") + "</span>" +
+        '<span class="cat-preco"></span></button>';
+    }).join("");
+    return '<div class="cat-grupo"><div class="cat-titulo">' + fam + "</div>" +
+      '<div class="cat-grade">' + cartoes + "</div></div>";
+  }).join("");
+
+  document.getElementById("hbCatalogo").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("[data-efeito]");
+    if (!botao || botao.disabled) return;
+    adicionarEfeito(botao.dataset.efeito);
+  });
+}
+
+/* O que está na habilidade agora, lido das próprias linhas. */
+function efeitosNaHabilidade() {
+  var lista = [];
+  for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
+    var el = document.getElementById("hbEfeito" + i);
+    if (!el || !el.value) continue;
+    lista.push({
+      chave: el.value,
+      qtd: parseInt((document.getElementById("hbQtd" + i) || {}).value, 10) || 1,
+      grau: parseInt((document.getElementById("hbGrauEfeito" + i) || {}).value, 10) || 0
+    });
+  }
+  return lista;
+}
+
+function desenharEfeitos(lista) {
+  var grauAtual = parseInt(valorCalc("grau"), 10) || 1;
+  document.getElementById("hbEfeitos").innerHTML = lista.map(function (item, n) {
+    var i = n + 1, e = HB_EFEITOS[item.chave];
+    var graus = "";
+    for (var g = 1; g <= grauAtual; g++) {
+      graus += '<option value="' + g + '"' +
+        (g === (item.grau || grauAtual) ? " selected" : "") + ">Grau " + g + "</option>";
+    }
+    return '<div class="efeito-linha">' +
+      '<span class="efeito-icone">' + ICONES[e.icone] + "</span>" +
+      '<span class="efeito-nome">' + e.nome + "</span>" +
+      '<input type="hidden" id="hbEfeito' + i + '" value="' + item.chave + '">' +
+      // Efeito de preço fixo não tem quantidade a escolher: em vez de um
+      // campo morto, mostra quanto ele custa.
+      (e.qtdMax === 1
+        ? '<div class="f"><label>custa</label><span class="efeito-fixo">' +
+            e.pontos(1) + (e.pontos(1) === 1 ? " ponto" : " pontos") + "</span>" +
+            '<input type="hidden" id="hbQtd' + i + '" value="1"></div>'
+        : '<div class="f"><label id="hbQtdRotulo' + i + '">' + e.rotulo + "</label>" +
+            '<input type="number" id="hbQtd' + i + '" min="1" max="' + e.qtdMax +
+            '" value="' + Math.min(item.qtd, e.qtdMax) + '"></div>') +
+      '<div class="f"><label>no Grau</label>' +
+        '<select id="hbGrauEfeito' + i + '">' + graus + "</select></div>" +
+      '<button type="button" class="efeito-remove" title="Tirar este efeito" ' +
+        'aria-label="Tirar ' + e.nome + '" data-tirar="' + i + '">×</button>' +
+      '<span class="efeito-entrega" id="hbEntrega' + i + '"></span>' +
+      "</div>";
+  }).join("");
+  document.getElementById("hbSemEfeito").hidden = lista.length > 0;
+}
+
+function adicionarEfeito(chave) {
+  var lista = efeitosNaHabilidade();
+  if (lista.length >= HB_LINHAS_EFEITO) return;
+  // Clicar de novo no que já está escolhido não duplica a linha: leva o foco
+  // para a quantidade, que é onde se compra mais pontos daquele efeito.
+  var jaTem = lista.findIndex(function (o) { return o.chave === chave; });
+  if (jaTem >= 0) {
+    var campo = document.getElementById("hbQtd" + (jaTem + 1));
+    if (campo && !campo.disabled) { campo.focus(); campo.select(); }
+    return;
+  }
+  lista.push({ chave: chave, qtd: 1, grau: 0 });
+  desenharEfeitos(lista);
+  calcularHabilidade();
+}
+
+function removerEfeito(i) {
+  var lista = efeitosNaHabilidade();
+  lista.splice(i - 1, 1);
+  desenharEfeitos(lista);
+  calcularHabilidade();
+}
+
+/* Marca o que está escolhido e esconde o que brigaria com ele. Um cartão
+   some quando somá-lo obrigaria a habilidade a rolar duas vezes. */
+function atualizarCatalogo() {
+  var lista = efeitosNaHabilidade();
+  var atuais = lista.map(function (o) { return { chave: o.chave, def: HB_EFEITOS[o.chave] }; });
+  var cheio = lista.length >= HB_LINHAS_EFEITO;
+  var escondidos = [];
+
+  document.querySelectorAll("#hbCatalogo [data-efeito]").forEach(function (botao) {
+    var chave = botao.dataset.efeito;
+    var e = HB_EFEITOS[chave];
+    var escolhido = lista.some(function (o) { return o.chave === chave; });
+    botao.classList.toggle("escolhido", escolhido);
+
+    var briga = !escolhido &&
+      resolucaoExigida(atuais.concat([{ chave: chave, def: e }])).erros.length > 0;
+    botao.hidden = briga;
+    if (briga) escondidos.push(e.nome);
+    botao.disabled = !escolhido && !briga && cheio;
+
+    var preco = botao.querySelector(".cat-preco");
+    preco.textContent = escolhido ? "✓" : e.pontos(1) + (e.pontos(1) === 1 ? " pt" : " pts");
+  });
+
+  var nota = document.getElementById("hbEscondidos");
+  if (escondidos.length) {
+    nota.hidden = false;
+    nota.textContent = "Fora da grade agora, porque pediriam uma segunda rolagem: " +
+      escondidos.join(", ") + ". Tire o efeito que resolve de outro jeito e eles voltam.";
+  } else if (cheio) {
+    nota.hidden = false;
+    nota.textContent = "As " + HB_LINHAS_EFEITO + " linhas de efeito estão ocupadas.";
+  } else {
+    nota.hidden = true;
+  }
 }
 
 /* "Ataque ou Efeito, nunca os dois." Cada efeito escolhido pode exigir uma
@@ -3457,7 +3699,9 @@ function lerConstrutorPassiva() {
 function lerConstrutorHabilidade() {
   if (document.getElementById("hbTipo").value === "passiva") return lerConstrutorPassiva();
 
-  var v = function (id) { return document.getElementById(id).value; };
+  // As linhas de efeito são criadas e destruídas conforme se escolhe no
+  // catálogo, então nem todo id existe em toda passada.
+  var v = function (id) { var el = document.getElementById(id); return el ? el.value : ""; };
   var grau = parseInt(v("hbGrau"), 10) || 1;
   var fonte = v("hbFonte");
   var duracao = HB_DURACAO[v("hbDuracao")];
@@ -3576,7 +3820,9 @@ function lerConstrutorHabilidade() {
   return {
     linha: (nome || "Habilidade sem nome") + " — " + partes.join(" · "),
     pontos: pontos, custo: custo, teto: teto, erros: erros, avisos: avisos,
-    resolucao: resolucao, defesa: defesa, imposta: exigido
+    resolucao: resolucao, defesa: defesa, imposta: exigido,
+    entregas: efeitos, sustentar: sustentar,
+    recurso: fonte === "hibrida" ? "MP+SP" : recurso
   };
 }
 
@@ -3592,21 +3838,20 @@ function calcularHabilidade() {
       "pode ser comprado num Grau menor que o seu, e o Grau base cobre duração, alcance, " +
       "ativação e modificadores.";
 
-  // O rótulo da quantidade muda com o efeito: nem toda linha compra "pontos".
+  // Cada linha ajusta os próprios controles ao efeito que carrega.
   if (!passiva) {
     for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
-      var chave = document.getElementById("hbEfeito" + i).value;
-      var e = chave ? HB_EFEITOS[chave] : null;
+      var el = document.getElementById("hbEfeito" + i);
+      if (!el) continue;
+      var e = HB_EFEITOS[el.value];
       var campo = document.getElementById("hbQtd" + i);
-      document.getElementById("hbQtdRotulo" + i).textContent = e ? e.rotulo : "quanto";
-      campo.disabled = !e || e.qtdMax === 1;
-      campo.max = e ? e.qtdMax : 1;
-      if (e && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
+      if (e.qtdMax > 1 && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
       // Terreno difícil vale 1 em qualquer Grau: não há Grau a escolher.
       var selG = document.getElementById("hbGrauEfeito" + i);
-      selG.disabled = !e || !!e.naoCresce;
-      if (e && e.naoCresce) selG.value = "1";
+      selG.disabled = !!e.naoCresce;
+      if (e.naoCresce) selG.value = "1";
     }
+    atualizarCatalogo();
   }
 
   var r = lerConstrutorHabilidade();
@@ -3627,6 +3872,23 @@ function calcularHabilidade() {
     if (imposta.tipo) selRes.value = imposta.tipo;
     selDef.disabled = !!imposta.defesa || r.resolucao !== "efeito";
     if (imposta.defesa) selDef.value = imposta.defesa;
+  }
+
+  // Preview por linha: o que aquele efeito entrega, no Grau em que foi comprado.
+  (r.entregas || []).forEach(function (texto, n) {
+    var alvo = document.getElementById("hbEntrega" + (n + 1));
+    if (alvo) alvo.textContent = texto;
+  });
+
+  var painel = document.getElementById("hbPainel");
+  if (passiva) {
+    painel.hidden = true;
+  } else {
+    painel.hidden = false;
+    document.getElementById("hbPontos").textContent = r.pontos + " / " + r.teto;
+    document.getElementById("hbCusto").textContent = r.custo + " " + (r.recurso || "");
+    document.getElementById("hbSustentar").textContent = r.sustentar ? r.sustentar + "/rodada" : "—";
+    document.getElementById("hbCaixaPontos").classList.toggle("estourou", r.pontos > r.teto);
   }
 
   document.getElementById("hbSaida").textContent = r.linha;
@@ -3659,13 +3921,7 @@ function limparConstrutorHabilidade() {
   document.getElementById("hbAssinatura").value = "";
   document.getElementById("hbPassivaEfeito").value = "";
   document.getElementById("hbPassivaSac").value = "";
-  var grauCheio = valorCalc("grau");
-  for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
-    document.getElementById("hbEfeito" + i).value = "";
-    document.getElementById("hbQtd" + i).value = "1";
-    var selG = document.getElementById("hbGrauEfeito" + i);
-    if (selG.options.length) selG.value = grauCheio;
-  }
+  desenharEfeitos([]);
   document.querySelectorAll("#hbMods input:checked").forEach(function (c) { c.checked = false; });
 }
 
@@ -3679,14 +3935,6 @@ function abrirConstrutorHabilidade() {
   }
   sel.value = String(grauAtual);
 
-  // Cada linha de efeito pode ser comprada num Grau menor que o seu. Começam
-  // todas no Grau cheio; baixar é escolha de quem monta.
-  for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
-    var selLinha = document.getElementById("hbGrauEfeito" + i);
-    selLinha.innerHTML = "";
-    for (var gl = 1; gl <= grauAtual; gl++) selLinha.add(new Option("Grau " + gl, String(gl)));
-    selLinha.value = String(grauAtual);
-  }
   abrirModal("modalHabilidade");
   calcularHabilidade();
   document.getElementById("hbNome").focus();
@@ -3730,25 +3978,127 @@ function montarConstrutorItem() {
       " · nível " + IT_GRAUS[ch].nivel + " · " + IT_GRAUS[ch].pontos + " pontos</option>";
   }).join("");
 
-  var caixa = document.getElementById("itAprimoramentos");
-  var opcoes = '<option value="">—</option>' + Object.keys(HB_EFEITOS).map(function (ch) {
-    return '<option value="' + ch + '">' + HB_EFEITOS[ch].nome + "</option>";
+  document.getElementById("itCatalogo").innerHTML = FAMILIAS.map(function (fam) {
+    var cartoes = Object.keys(HB_EFEITOS).filter(function (ch) {
+      return HB_EFEITOS[ch].familia === fam;
+    }).map(function (ch) {
+      var e = HB_EFEITOS[ch];
+      return '<button type="button" class="cat-card" data-aprimoramento="' + ch + '">' +
+        ICONES[e.icone] + "<span>" + e.nome.replace(/ — /, " · ") + "</span>" +
+        '<span class="cat-preco"></span></button>';
+    }).join("");
+    return '<div class="cat-grupo"><div class="cat-titulo">' + fam + "</div>" +
+      '<div class="cat-grade">' + cartoes + "</div></div>";
   }).join("");
-  for (var i = 1; i <= IT_LINHAS; i++) {
-    var linha = document.createElement("div");
-    linha.className = "modal-aprimoramento";
-    linha.innerHTML =
-      '<div class="f"><label>Aprimoramento ' + i + '</label>' +
-        '<select id="itEfeito' + i + '">' + opcoes + "</select></div>" +
-      '<div class="f"><label>quanto</label>' +
-        '<input type="number" id="itQtd' + i + '" min="1" value="1"></div>' +
-      '<div class="modal-marcas"><label><input type="checkbox" id="itLigado' + i + '">' +
-        " sempre ligado · dobro</label></div>";
-    caixa.appendChild(linha);
-  }
+
+  document.getElementById("itCatalogo").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("[data-aprimoramento]");
+    if (!botao || botao.disabled) return;
+    adicionarAprimoramento(botao.dataset.aprimoramento);
+  });
+
+  document.getElementById("itAprimoramentos").addEventListener("click", function (ev) {
+    var botao = ev.target.closest("[data-tirar-apr]");
+    if (botao) removerAprimoramento(parseInt(botao.dataset.tirarApr, 10));
+  });
 
   document.getElementById("modalItem").addEventListener("input", calcularItem);
   document.getElementById("modalItem").addEventListener("change", calcularItem);
+}
+
+/* Os Aprimoramentos do item usam as mesmas tabelas e o mesmo catálogo das
+   habilidades. A diferença é o que limita: aqui não há resolução a bater, há
+   orçamento — os pontos que o Grau do item dá. O cartão que não cabe no que
+   sobrou fica apagado em vez de sumir, porque subir o Grau do item o traz de
+   volta e isso precisa ficar visível. */
+function aprimoramentosNoItem() {
+  var lista = [];
+  for (var i = 1; i <= IT_LINHAS; i++) {
+    var el = document.getElementById("itEfeito" + i);
+    if (!el || !el.value) continue;
+    lista.push({
+      chave: el.value,
+      qtd: parseInt((document.getElementById("itQtd" + i) || {}).value, 10) || 1,
+      ligado: !!(document.getElementById("itLigado" + i) || {}).checked
+    });
+  }
+  return lista;
+}
+
+function desenharAprimoramentos(lista) {
+  document.getElementById("itAprimoramentos").innerHTML = lista.map(function (item, n) {
+    var i = n + 1, e = HB_EFEITOS[item.chave];
+    return '<div class="efeito-linha">' +
+      '<span class="efeito-icone">' + ICONES[e.icone] + "</span>" +
+      '<span class="efeito-nome">' + e.nome + "</span>" +
+      '<input type="hidden" id="itEfeito' + i + '" value="' + item.chave + '">' +
+      (e.qtdMax === 1
+        ? '<div class="f"><label>custa</label><span class="efeito-fixo">' +
+            e.pontos(1) + (e.pontos(1) === 1 ? " ponto" : " pontos") + "</span>" +
+            '<input type="hidden" id="itQtd' + i + '" value="1"></div>'
+        : '<div class="f"><label>' + e.rotulo + "</label>" +
+            '<input type="number" id="itQtd' + i + '" min="1" max="' + e.qtdMax +
+            '" value="' + Math.min(item.qtd, e.qtdMax) + '"></div>') +
+      '<div class="modal-marcas"><label><input type="checkbox" id="itLigado' + i + '"' +
+        (item.ligado ? " checked" : "") + "> sempre ligado · dobro</label></div>" +
+      '<button type="button" class="efeito-remove" title="Tirar este Aprimoramento" ' +
+        'aria-label="Tirar ' + e.nome + '" data-tirar-apr="' + i + '">×</button>' +
+      '<span class="efeito-entrega" id="itEntrega' + i + '"></span>' +
+      "</div>";
+  }).join("");
+  document.getElementById("itSemEfeito").hidden = lista.length > 0;
+}
+
+function adicionarAprimoramento(chave) {
+  var lista = aprimoramentosNoItem();
+  if (lista.length >= IT_LINHAS) return;
+  var jaTem = lista.findIndex(function (o) { return o.chave === chave; });
+  if (jaTem >= 0) {
+    var campo = document.getElementById("itQtd" + (jaTem + 1));
+    if (campo && campo.type === "number") { campo.focus(); campo.select(); }
+    return;
+  }
+  lista.push({ chave: chave, qtd: 1, ligado: false });
+  desenharAprimoramentos(lista);
+  calcularItem();
+}
+
+function removerAprimoramento(i) {
+  var lista = aprimoramentosNoItem();
+  lista.splice(i - 1, 1);
+  desenharAprimoramentos(lista);
+  calcularItem();
+}
+
+function atualizarCatalogoItem(gastos, orcamento) {
+  var lista = aprimoramentosNoItem();
+  var cheio = lista.length >= IT_LINHAS;
+  var sobra = orcamento - gastos;
+
+  document.querySelectorAll("#itCatalogo [data-aprimoramento]").forEach(function (botao) {
+    var chave = botao.dataset.aprimoramento;
+    var e = HB_EFEITOS[chave];
+    var escolhido = lista.some(function (o) { return o.chave === chave; });
+    botao.classList.toggle("escolhido", escolhido);
+    botao.disabled = !escolhido && (cheio || e.pontos(1) > sobra);
+    var preco = botao.querySelector(".cat-preco");
+    preco.textContent = escolhido ? "✓" : e.pontos(1) + (e.pontos(1) === 1 ? " pt" : " pts");
+  });
+
+  var nota = document.getElementById("itNota");
+  if (cheio) {
+    nota.hidden = false;
+    nota.textContent = "As " + IT_LINHAS + " linhas de Aprimoramento estão ocupadas.";
+  } else if (sobra <= 0 && orcamento > 0) {
+    nota.hidden = false;
+    nota.textContent = "Os " + orcamento + " pontos do Grau acabaram. Suba o Grau do item " +
+      "ou tire um Aprimoramento.";
+  } else if (orcamento === 0) {
+    nota.hidden = false;
+    nota.textContent = "Um item Mortal não tem pontos de Aprimoramento — ele é só o objeto bem feito.";
+  } else {
+    nota.hidden = true;
+  }
 }
 
 function dadoComGrau(base, mais) {
@@ -3758,7 +4108,8 @@ function dadoComGrau(base, mais) {
 }
 
 function lerConstrutorItem() {
-  var v = function (id) { return document.getElementById(id).value; };
+  // As linhas de Aprimoramento nascem e morrem com o catálogo.
+  var v = function (id) { var el = document.getElementById(id); return el ? el.value : ""; };
   var g = IT_GRAUS[v("itGrau")];
   var tipo = v("itTipo");
   var nivel = num(document.getElementById("nivel").value) || 1;
@@ -3778,7 +4129,7 @@ function lerConstrutorItem() {
     if (!chave) continue;
     var e = HB_EFEITOS[chave];
     var qtd = Math.max(1, Math.min(e.qtdMax, parseInt(v("itQtd" + i), 10) || 1));
-    var ligado = document.getElementById("itLigado" + i).checked;
+    var ligado = !!(document.getElementById("itLigado" + i) || {}).checked;
     // Um item não tem duração: conte a partir do primeiro ponto de efeito,
     // sem ponto de duração e sem o ponto grátis que a duração pagaria.
     var p = e.pontos(qtd) * (ligado ? 2 : 1);
@@ -3819,6 +4170,7 @@ function lerConstrutorItem() {
 
   return {
     linha: linhas.join("\n"), erros: erros, gastos: gastos, pontos: g.pontos,
+    entregas: aprimoramentos,
     resumo: gastos + " de " + g.pontos + " pontos gastos. " + aviso
   };
 }
@@ -3833,14 +4185,20 @@ function grauDoItem(chave) {
 function calcularItem() {
   document.getElementById("caixaItem").dataset.tipo = document.getElementById("itTipo").value;
   for (var i = 1; i <= IT_LINHAS; i++) {
-    var chave = document.getElementById("itEfeito" + i).value;
-    var e = chave ? HB_EFEITOS[chave] : null;
+    var el = document.getElementById("itEfeito" + i);
+    if (!el) continue;
+    var e = HB_EFEITOS[el.value];
     var campo = document.getElementById("itQtd" + i);
-    campo.disabled = !e || e.qtdMax === 1;
-    campo.max = e ? e.qtdMax : 1;
-    if (e && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
+    if (e.qtdMax > 1 && parseInt(campo.value, 10) > e.qtdMax) campo.value = e.qtdMax;
   }
   var r = lerConstrutorItem();
+  atualizarCatalogoItem(r.gastos, r.pontos);
+
+  (r.entregas || []).forEach(function (texto, n) {
+    var alvo = document.getElementById("itEntrega" + (n + 1));
+    if (alvo) alvo.textContent = texto;
+  });
+
   document.getElementById("itSaida").textContent = r.linha;
   var estado = document.getElementById("itEstado");
   estado.className = "estado-regra " + (r.erros.length ? "erro" : "ok");
@@ -3853,11 +4211,7 @@ function abrirConstrutorItem() {
   document.getElementById("itNarrativo").value = "";
   document.getElementById("itTipo").value = "arma";
   document.getElementById("itDado").value = "1d8";
-  for (var i = 1; i <= IT_LINHAS; i++) {
-    document.getElementById("itEfeito" + i).value = "";
-    document.getElementById("itQtd" + i).value = "1";
-    document.getElementById("itLigado" + i).checked = false;
-  }
+  desenharAprimoramentos([]);
   // Começa no Grau mais alto que o nível do herói alcança e que ainda se forja.
   var nivel = num(document.getElementById("nivel").value) || 1;
   var possiveis = Object.keys(IT_GRAUS).filter(function (ch) {
