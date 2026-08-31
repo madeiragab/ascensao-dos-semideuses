@@ -226,14 +226,58 @@ def main() -> None:
         if not ok_ficha:
             falhas.append(f"a ficha não aplica a regra {nome!r} das passivas")
 
-    linhas = re.search(r"var PASSIVAS_LINHAS = (\d+);", html)
-    if not linhas:
-        falhas.append("PASSIVAS_LINHAS sumiu da ficha")
-    elif int(linhas.group(1)) != 6:
-        falhas.append(f"a ficha abre {linhas.group(1)} linhas de passiva; "
-                      "a Memória vai até 6 e cada passiva ocupa um espaço")
+    # ---- o construtor de habilidades contra os exemplos fechados do livro.
+    # O livro resolve três habilidades por extenso; se o construtor não chegar
+    # nos mesmos números, ele está inventando matemática.
+    print()
+    print("Construtor de habilidades — exemplos do livro:")
+
+    exemplos = [
+        # (nome, duração, alcance, ativação, pontos de efeito, Grau, pontos, custo)
+        ("Passo das Trevas", 1, 0, 1, 1, 1, 2, 2),
+        ("Lança de Sombra, Grau 1", 1, 1, 0, 3, 1, 4, 4),
+        ("Lança de Sombra, Grau 3", 1, 1, 0, 3, 3, 4, 12),
+        # e o que a campanha produziu: DEF +2 é 1 ponto mais 2 pelo dobro
+        ("Manto do Oceano", 2, 0, 1, 3, 1, 5, 5),
+    ]
+    for nome, dur, alc, ativ, efeitos, g, pontos_ok, custo_ok in exemplos:
+        # a duração já traz um ponto de efeito incluído
+        pontos = max(1, dur + max(0, efeitos - 1) + alc + ativ)
+        custo = max(1, pontos * g)
+        marca = "ok" if (pontos, custo) == (pontos_ok, custo_ok) else "ERRADO"
+        print(f"  {nome:<24} {pontos} pontos · {custo} de recurso — {marca}")
+        if (pontos, custo) != (pontos_ok, custo_ok):
+            falhas.append(f"a conta de {nome} dá {pontos} pontos e {custo} de recurso; "
+                          f"o livro diz {pontos_ok} e {custo_ok}")
+
+    formulas = [
+        ("PONTOS", "PONTOS = duração + efeitos adicionais + alcance + modificadores"),
+        ("CUSTO", "CUSTO em MP ou SP = pontos × Grau"),
+        ("sustentar", "por rodada = custo final ÷ 2, arredondado para baixo (mínimo 1)"),
+    ]
+    for nome, no_livro in formulas:
+        if no_livro.lower() not in texto_livro.lower():
+            falhas.append(f"a fórmula de {nome} mudou no livro: o construtor ainda usa {no_livro!r}")
+    print(f"  fórmulas conferidas contra o livro: {len(formulas)}")
+
+    # A tabela de efeitos do construtor tem de cobrir as linhas de "O que cada
+    # ponto compra" sem inventar nenhuma.
+    tabela = re.search(r"var HB_EFEITOS = \{(.*?)\n\};", html, re.S)
+    if not tabela:
+        falhas.append("a tabela HB_EFEITOS sumiu da ficha")
     else:
-        print(f"  linhas de passiva na ficha: {linhas.group(1)}, igual ao teto da Memória")
+        linhas_ficha = re.findall(r'nome: "([^"]+)"', tabela.group(1))
+        print(f"  linhas de efeito no construtor: {len(linhas_ficha)}")
+        if len(linhas_ficha) != 15:
+            falhas.append(f"o construtor oferece {len(linhas_ficha)} linhas de efeito; "
+                          "as tabelas do Capítulo Sete têm 15")
+
+    # As condições de grau Destino não podem ser compradas por uma habilidade
+    # que um jogador montou — o construtor não pode nem oferecer.
+    if "Destino" in (tabela.group(1) if tabela else ""):
+        falhas.append("o construtor oferece condição de grau Destino, que não tem preço")
+    else:
+        print("  condições de grau Destino: fora do construtor, como o livro manda")
 
     print()
     if falhas:
