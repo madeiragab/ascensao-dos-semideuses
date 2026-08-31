@@ -1074,6 +1074,47 @@ button.acao:disabled { cursor: wait; opacity: .58; filter: none; }
   margin-top: .4rem; font-family: var(--sans); font-size: .55rem;
   text-transform: uppercase; letter-spacing: .1em; color: var(--texto-suave);
 }
+/* ---------- Rolador ----------
+   Um d20 do lado de cada perícia e de cada ataque. A ficha já sabe o bônus:
+   o botão só junta o dado ao número que está no campo calculado ao lado, e
+   mostra a conta inteira, não só o total — quem rola precisa poder conferir.
+   Nada disso vai para a folha impressa. */
+.d20 {
+  flex: none; width: 1.35rem; height: 1.35rem; padding: 0; margin: 0;
+  display: inline-grid; place-items: center; cursor: pointer;
+  background: none; border: 1px solid var(--borda); border-radius: 3px;
+  color: var(--texto-suave); line-height: 0;
+}
+.d20:hover { border-color: var(--acento); color: var(--acento); background: var(--superficie-2); }
+.d20 svg { width: .95rem; height: .95rem; display: block; }
+.rolagem-popup {
+  position: absolute; z-index: 40; min-width: 15rem; max-width: 21rem;
+  padding: .7rem .8rem; background: var(--superficie-2);
+  border: 1px solid var(--acento); border-radius: 3px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.55);
+  font-family: var(--sans); font-size: .72rem; color: var(--texto);
+}
+.rolagem-popup .titulo {
+  font-size: .6rem; text-transform: uppercase; letter-spacing: .12em;
+  color: var(--texto-suave); margin-bottom: .25rem;
+}
+.rolagem-popup .total { font-family: var(--mono); font-size: 2rem; font-weight: 700; line-height: 1; }
+.rolagem-popup .total.critico { color: #86D693; }
+.rolagem-popup .total.falha { color: #E8632C; }
+.rolagem-popup .conta { color: var(--texto-suave); margin-top: .25rem; }
+.rolagem-popup .conta b { color: var(--texto); }
+.rolagem-popup .veredito { margin-top: .35rem; }
+.rolagem-popup .acoes { display: flex; gap: .3rem; flex-wrap: wrap; margin-top: .55rem; }
+.rolagem-popup .acoes button {
+  font-family: var(--sans); font-size: .6rem; padding: .2rem .45rem; cursor: pointer;
+  color: var(--texto-suave); background: var(--papel);
+  border: 1px solid var(--borda); border-radius: 2px;
+}
+.rolagem-popup .acoes button:hover { border-color: var(--acento); color: var(--acento); }
+@media print { .d20, .rolagem-popup { display: none !important; } }
+
+.cel-ataque { display: flex; align-items: center; gap: .25rem; }
+.cel-ataque input { min-width: 0; }
 .grade-tecnicas { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .4rem .8rem; }
 .grade-tecnicas label { display: flex; flex-direction: column; gap: .15rem; font-family: var(--sans); font-size: .55rem; text-transform: uppercase; letter-spacing: .08em; color: var(--texto-suave); }
 .grade-tecnicas select { font-size: .8rem; }
@@ -2482,7 +2523,8 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
     li.innerHTML =
       '<input type="checkbox" data-prof="per-' + p[1] + '-' + p[0] + '" disabled>' +
       '<span class="nome">' + p[0] + ' <small>' + SIGLA[p[1]] + '</small></span>' +
-      '<input type="text" class="calc" data-calc="per-' + p[0] + '" readonly>';
+      '<input type="text" class="calc" data-calc="per-' + p[0] + '" readonly>' +
+      botaoD20("per-" + p[0], p[0]);
     ul.appendChild(li);
   });
 
@@ -2508,7 +2550,8 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
         '<option value="carisma">CAR</option>' +
       '</select></td>' +
       '<td><input type="text" data-atk-ajuste="' + i + '" value="0"></td>' +
-      '<td><input type="text" class="calc" data-calc="atk-' + i + '" readonly></td>' +
+      '<td class="cel-ataque"><input type="text" class="calc" data-calc="atk-' + i + '" readonly>' +
+        botaoD20("atk-" + i, "Ataque", "dano-" + i) + '</td>' +
       '<td><input type="text" data-dado="' + i + '" placeholder="1d6"></td>' +
       '<td><select data-dano-mod="' + i + '"><option value="1">sim</option><option value="0">não</option></select></td>' +
       '<td><input type="text" class="calc" data-calc="dano-' + i + '" readonly></td>' +
@@ -2516,6 +2559,142 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
     tb.appendChild(tr);
   }
 })();
+
+/* ---------- Rolador de d20 ----------
+   O bônus não é digitado de novo aqui: ele é lido do campo calculado ao lado
+   do botão, o mesmo que a ficha já mantém. Assim o dado nunca discorda da
+   ficha, e mudar a regra em um lugar muda nos dois.
+
+   O que o livro manda e está implementado: 20 natural em ataque é Acerto
+   Crítico e dobra os dados da arma; 1 natural erra, não importa o bônus;
+   perícia não tem crítico, mas um 20 natural rende um benefício excepcional.
+   Vantagem e Desvantagem rolam dois dados e ficam com o maior ou o menor. */
+function botaoD20(refCalc, rotulo, refDano) {
+  return '<button type="button" class="d20" data-rolar="' + refCalc + '"' +
+    ' data-rotulo="' + rotulo + '"' + (refDano ? ' data-dano="' + refDano + '"' : "") +
+    ' title="Rolar 1d20 + bônus" aria-label="Rolar ' + rotulo + '">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" ' +
+    'stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M12 2 22 8v8l-10 6L2 16V8Z"/><path d="m12 2 5 8-5 12-5-12Z"/>' +
+    '<path d="m2 8 10 2 10-2"/></svg></button>';
+}
+
+function d(faces) {
+  // Math.random basta para uma ficha, mas quando o navegador oferece o gerador
+  // criptográfico não há motivo para usar o pior dos dois.
+  if (window.crypto && window.crypto.getRandomValues) {
+    var v = new Uint32Array(1);
+    window.crypto.getRandomValues(v);
+    return (v[0] % faces) + 1;
+  }
+  return Math.floor(Math.random() * faces) + 1;
+}
+
+function rolarD20(modo) {
+  var a = d(20);
+  if (modo === "normal") return { nat: a, dados: [a] };
+  var b = d(20);
+  return { nat: modo === "vantagem" ? Math.max(a, b) : Math.min(a, b), dados: [a, b] };
+}
+
+/* "2d6+3", "1d8 −1", "1d10" — devolve os dados rolados e o total. Em crítico
+   os dados são rolados duas vezes, que é a regra da arma. */
+function rolarDano(texto, critico) {
+  var achado = /(\d*)\s*d\s*(\d+)\s*([+\u2212-]\s*\d+)?/i.exec(texto || "");
+  if (!achado) return null;
+  var quantos = (parseInt(achado[1], 10) || 1) * (critico ? 2 : 1);
+  var faces = parseInt(achado[2], 10);
+  var fixo = achado[3] ? parseInt(achado[3].replace(/[\s\u2212]/g, function (c) { return c === "\u2212" ? "-" : ""; }), 10) : 0;
+  var dados = [];
+  for (var i = 0; i < quantos; i++) dados.push(d(faces));
+  var soma = dados.reduce(function (a, b) { return a + b; }, 0);
+  return { dados: dados, faces: faces, fixo: fixo, total: soma + fixo, quantos: quantos };
+}
+
+var popupDeRolagem = null;
+
+function fecharRolagem() {
+  if (popupDeRolagem) { popupDeRolagem.remove(); popupDeRolagem = null; }
+}
+
+function mostrarRolagem(botao, modo) {
+  var refCalc = botao.dataset.rolar;
+  var rotulo = botao.dataset.rotulo;
+  var campo = document.querySelector('[data-calc="' + refCalc + '"]');
+  var bonus = campo ? num(campo.value) : null;
+  fecharRolagem();
+
+  var caixa = document.createElement("div");
+  caixa.className = "rolagem-popup";
+  caixa.setAttribute("role", "status");
+
+  if (bonus === null) {
+    caixa.innerHTML = '<div class="titulo">' + rotulo + '</div>' +
+      "<div>Preencha os atributos primeiro: a ficha ainda não tem esse bônus.</div>";
+  } else {
+    var r = rolarD20(modo);
+    var eAtaque = !!botao.dataset.dano;
+    var total = r.nat + bonus;
+    var classe = r.nat === 20 ? " critico" : (r.nat === 1 ? " falha" : "");
+    var conta = "1d20 (" + r.dados.join(" e ") + ") " + sinal(bonus) + " = " + total;
+    var veredito = "";
+    if (eAtaque && r.nat === 20) veredito = "20 natural: Acerto Crítico. Os dados da arma são rolados duas vezes.";
+    else if (eAtaque && r.nat === 1) veredito = "1 natural: erra, não importa o bônus.";
+    else if (!eAtaque && r.nat === 20) veredito = "20 natural: sucesso com um benefício excepcional — mais informação, menos tempo, melhor posição.";
+    else if (!eAtaque && r.nat === 1) veredito = "1 natural: o total vale como saiu, e a cena pode trazer uma complicação.";
+
+    var danoHtml = "";
+    if (eAtaque && r.nat !== 1) {
+      var campoDano = document.querySelector('[data-calc="' + botao.dataset.dano + '"]');
+      var dano = rolarDano(campoDano && campoDano.value, r.nat === 20);
+      if (dano) {
+        danoHtml = '<div class="conta">Dano: <b>' + dano.total + '</b> — ' +
+          dano.quantos + "d" + dano.faces + " (" + dano.dados.join(" + ") + ")" +
+          (dano.fixo ? " " + sinal(dano.fixo) : "") + "</div>";
+      }
+    }
+
+    caixa.innerHTML = '<div class="titulo">' + rotulo +
+      (modo === "vantagem" ? " · com Vantagem" : modo === "desvantagem" ? " · com Desvantagem" : "") +
+      '</div><div class="total' + classe + '">' + total + "</div>" +
+      '<div class="conta">' + conta + "</div>" + danoHtml +
+      (veredito ? '<div class="veredito">' + veredito + "</div>" : "") +
+      '<div class="acoes">' +
+        '<button type="button" data-modo="normal">rolar de novo</button>' +
+        '<button type="button" data-modo="vantagem">Vantagem</button>' +
+        '<button type="button" data-modo="desvantagem">Desvantagem</button>' +
+        '<button type="button" data-modo="fechar">fechar</button>' +
+      "</div>";
+  }
+
+  document.body.appendChild(caixa);
+  var alvo = botao.getBoundingClientRect();
+  var largura = caixa.offsetWidth;
+  var esquerda = Math.min(alvo.left + window.scrollX,
+                          window.scrollX + document.documentElement.clientWidth - largura - 8);
+  caixa.style.left = Math.max(window.scrollX + 8, esquerda) + "px";
+  caixa.style.top = (alvo.bottom + window.scrollY + 6) + "px";
+
+  caixa.addEventListener("click", function (e) {
+    var acao = e.target.dataset && e.target.dataset.modo;
+    if (!acao) return;
+    if (acao === "fechar") fecharRolagem();
+    else mostrarRolagem(botao, acao);
+  });
+  popupDeRolagem = caixa;
+}
+
+document.addEventListener("click", function (e) {
+  var botao = e.target.closest ? e.target.closest(".d20") : null;
+  if (botao) {
+    e.preventDefault();
+    // Shift rola com Vantagem e Alt com Desvantagem, para quem já sabe o que quer.
+    mostrarRolagem(botao, e.shiftKey ? "vantagem" : e.altKey ? "desvantagem" : "normal");
+    return;
+  }
+  if (popupDeRolagem && !popupDeRolagem.contains(e.target)) fecharRolagem();
+});
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") fecharRolagem(); });
 
 /* ---------- leitura ---------- */
 function num(v) {

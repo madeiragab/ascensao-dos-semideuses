@@ -156,6 +156,32 @@ def main() -> None:
     if corte_pv != na_ficha_pv:
         falhas.append(f"a ficha corta os PV no Exausto {na_ficha_pv}; o livro diz {corte_pv}")
 
+    # ---- o rolador: o que a ficha diz ao rolar precisa ser o que o livro manda
+    print()
+    print("Rolador de d20 — ficha × livro:")
+    texto_livro = re.sub(r"<[^>]*>", " ", livro)
+    texto_livro = " ".join(texto_livro.split())
+    regras = [
+        ("crítico dobra os dados da arma", "rola todos os dados de dano duas vezes",
+         "critico ? 2 : 1"),
+        ("1 natural erra", "o ataque erra, não importa o bônus",
+         "1 natural: erra"),
+    ]
+    for nome, no_livro, na_ficha in regras:
+        ok_livro = no_livro in texto_livro
+        ok_ficha = na_ficha in html
+        print(f"  {nome}: livro {'sim' if ok_livro else 'NÃO'} · ficha {'sim' if ok_ficha else 'NÃO'}")
+        if not ok_livro:
+            falhas.append(f"o livro não diz mais {no_livro!r}; o rolador da ficha ainda aplica essa regra")
+        if not ok_ficha:
+            falhas.append(f"o rolador da ficha não aplica {nome!r}")
+
+    botoes_pericia = html.count('botaoD20("per-"')
+    botoes_ataque = html.count('botaoD20("atk-"')
+    print(f"  botões: {botoes_pericia} na lista de perícias, {botoes_ataque} na de ataques")
+    if not botoes_pericia or not botoes_ataque:
+        falhas.append("o rolador sumiu de perícias ou de ataques")
+
     print()
     if falhas:
         for f in falhas:
