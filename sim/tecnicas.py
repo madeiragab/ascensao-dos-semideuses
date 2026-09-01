@@ -39,7 +39,7 @@ TECNICAS = [
     ("Represália",          "guardiao", "dano de volta ao interceptar"),
     ("Provocação Ampla",    "guardiao", "marca dois inimigos"),
     ("Fôlego de Ferro",     "guardiao", "recupera SP uma vez por combate"),
-    ("Bastião",             "guardiao", "−proficiência em cada golpe recebido"),
+    ("Bastião",             "guardiao", "−proficiência no primeiro golpe da rodada"),
     ("Segunda Muralha",     "guardiao", "Interceptar de graça uma vez por rodada"),
     ("Juramento do Portão", "guardiao", "o jurado não cai por um golpe só"),
     # ---- Furioso
@@ -103,6 +103,21 @@ def medir(tecnicas, classe, cenario, n=N):
     return v / n
 
 
+# Dívida conhecida. Quando este teste passou a falhar, quatro técnicas já
+# estavam fora da faixa — não são regressão, são débito que ninguém tinha visto
+# porque o arquivo só imprimia o aviso e saía com sucesso. Elas não bloqueiam a
+# regressão, mas aparecem em todo run até serem ajustadas.
+#
+# Tirar nome daqui é o objetivo. Acrescentar exige decisão de design, não é
+# jeito de fazer o teste passar.
+DIVIDA_CONHECIDA = {
+    "Escudo Vínculo",     # bando +12,1%
+    "Interceptar",        # bando +11,2%
+    "Rede do Destino",    # bando +13,0%
+    "Olho do Futuro",     # chefe +11,3% · bando +12,8%
+}
+
+
 def veredito(dc, db):
     melhor = max(dc, db)
     if melhor >= 0.10:
@@ -128,6 +143,7 @@ def main():
     print("-" * 78)
 
     nao_medidas = []
+    fortes_demais = []
     for nome, classe, oquemede in TECNICAS:
         if oquemede is None:
             nao_medidas.append((nome, classe))
@@ -139,14 +155,45 @@ def main():
         conjunto = pre + [nome]
         dc = medir(conjunto, classe, cenario_chefe) - bc
         db = medir(conjunto, classe, cenario_bando) - bb
+        v = veredito(dc, db)
+        if v == "FORTE DEMAIS":
+            fortes_demais.append((nome, classe, dc, db))
         print(f"{nome:<22} {classe:<9} {dc:>+7.1%} {db:>+7.1%}  "
-              f"{veredito(dc, db)}  · {oquemede}")
+              f"{v}  · {oquemede}")
 
     print("\n" + "-" * 78)
     print("NÃO MEDIDAS — o motor não representa o efeito, e dizer que são fracas")
     print("seria mentira. Precisam de mesa, não de simulador:")
     for nome, classe in nao_medidas:
         print(f"  {nome:<22} {classe}")
+
+    # Ate 0.16.3 este arquivo imprimia "FORTE DEMAIS" e saia com sucesso, entao
+    # a regressao ficava verde com tecnicas fora da faixa e ninguem lia o aviso.
+    # Bastiao (+10,7%) e Provocacao Ampla (+25,1%) passaram meses assim.
+    print()
+    print("-" * 78)
+    novas = [t for t in fortes_demais if t[0] not in DIVIDA_CONHECIDA]
+    antigas = [t for t in fortes_demais if t[0] in DIVIDA_CONHECIDA]
+
+    if antigas:
+        print("DÍVIDA CONHECIDA — fora da faixa desde antes deste teste falhar:")
+        for nome, classe, dc, db in antigas:
+            print(f"  {nome:<22} {classe:<9} chefe {dc:+.1%} · bando {db:+.1%}")
+        print("  (não bloqueiam a regressão; esperam decisão de design)")
+
+    if novas:
+        print()
+        print("FORA DA FAIXA — acima de 10 pontos a técnica vira escolha obrigatória:")
+        for nome, classe, dc, db in novas:
+            print(f"  {nome:<22} {classe:<9} chefe {dc:+.1%} · bando {db:+.1%}")
+        raise SystemExit(1)
+
+    curadas = sorted(DIVIDA_CONHECIDA - {t[0] for t in fortes_demais})
+    if curadas:
+        print()
+        print("Saíram da faixa e podem sair da DIVIDA_CONHECIDA: " + ", ".join(curadas))
+    if not antigas and not novas:
+        print("Nenhuma técnica passa de 10 pontos de vitória em nenhum dos dois cenários.")
 
 
 if __name__ == "__main__":

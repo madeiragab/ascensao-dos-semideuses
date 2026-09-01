@@ -20,7 +20,7 @@ O que separa este projeto de um documento de regras é a combinação de
 registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
 que os números contrariaram a intuição estão documentadas mais abaixo.
 
-**Versão atual:** 0.16.3 · 18/08/2026 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.17.0 · 31/08/2026 · [Changelog](CHANGELOG.md)
 
 ---
 

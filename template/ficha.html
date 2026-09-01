@@ -207,6 +207,7 @@ input:focus, textarea:focus, select:focus {
   background: var(--acento-fraco);
 }
 textarea { border: 1px solid var(--borda-forte); resize: vertical; line-height: 1.7; }
+#habilidades, #itens { font-family: var(--mono); font-size: .78rem; line-height: 1.5; }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button { opacity: .35; }
 
@@ -506,6 +507,9 @@ table.viva select { font-size: .72rem; }
 .pdf-tabela th { font: 700 5.5pt Arial, sans-serif; text-transform: uppercase; color: #9C9379; text-align: left; border-bottom: 1px solid #C9A94E; padding: 1mm; }
 .pdf-tabela td { border-bottom: .3pt solid #34301F; padding: 1mm; vertical-align: top; overflow-wrap: anywhere; }
 .pdf-texto { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8pt; line-height: 1.35; min-height: 18mm; }
+/* Habilidades e itens saem do construtor como bloco alinhado por espaços.
+   Só alinha em monoespaçada — na serifa as colunas dançam. */
+#pHabilidades, #pItens { font-family: "Cascadia Mono", Consolas, ui-monospace, monospace; font-size: 7pt; }
 .pdf-rodape { font: 6pt Arial, sans-serif; color: #9C9379; text-align: right; margin-top: 2mm; }
 .span-3 { grid-column: span 3; } .span-4 { grid-column: span 4; }
 .span-5 { grid-column: span 5; } .span-6 { grid-column: span 6; }
@@ -1073,7 +1077,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
 
     <h4>Resultado</h4>
     <div class="painel-numeros" id="hbPainel">
-      <div class="painel-num" id="hbCaixaPontos"><span>Pontos · Teto</span><b id="hbPontos">—</b></div>
+      <div class="painel-num" id="hbCaixaPontos"><span>Tamanho · Teto</span><b id="hbPontos">—</b></div>
       <div class="painel-num"><span>Custo</span><b id="hbCusto">—</b></div>
       <div class="painel-num"><span>Sustentar</span><b id="hbSustentar">—</b></div>
     </div>
@@ -1288,9 +1292,9 @@ var TECNICAS = {
     { t: 2, n: "Fôlego de Ferro", d: "Uma vez por combate, ação bônus e 3 SP: recupere PV iguais ao seu nível. Segurar a linha custa sangue, não fôlego." },
     { t: 2, n: "Muro de Escudos", d: "Aliados adjacentes a você recebem +1 DEF. Exige que você esteja empunhando um escudo." },
     { t: 2, n: "Represália", d: "Quando você usa Interceptar, quem desferiu o golpe sofre dano igual ao seu modificador de Força mais seu nível." },
-    { t: 3, n: "Bastião", d: "Enquanto estiver acima de metade dos PV, cada golpe que você recebe é reduzido em um valor igual ao seu bônus de proficiência." },
+    { t: 3, n: "Bastião", d: "Enquanto estiver acima de metade dos PV, o primeiro golpe que você recebe a cada rodada é reduzido em um valor igual ao seu bônus de proficiência." },
     { t: 3, n: "Juramento do Portão", d: "Escolha um aliado no início do combate. Enquanto ele estiver a até 3 metros de você, nenhum golpe isolado pode reduzi-lo abaixo de 1 PV." },
-    { t: 3, n: "Provocação Ampla", d: "Postura Desafiadora passa a marcar dois inimigos, um por vez, gastando 2 SP em cada." },
+    { t: 3, n: "Provocação Ampla", d: "Postura Desafiadora passa a marcar dois inimigos, um por vez, gastando 2 SP em cada. A segunda marca dura até o fim do seu próximo turno." },
     { t: 3, n: "Segunda Muralha", d: "Uma vez por rodada, você pode usar Interceptar sem gastar sua reação." },
   ],
   furioso: [
@@ -1499,7 +1503,7 @@ var NIVEIS_ATRIBUTO = [4, 8, 12, 16, 19];
    abandona a passiva num Interlúdio. */
 var EFEITO_PASSIVA = {
   def:       { nome: "+1 DEF",                            alimenta: "destreza" },
-  movimento: { nome: "+1,5 m de movimento",              alimenta: null },
+  movimento: { nome: "+1,5 m de movimento", saida: "Movimento",              alimenta: null },
   pericia:   { nome: "+1 em uma perícia",                 alimenta: null },
   escuridao: { nome: "Enxerga na escuridão comum",        alimenta: null },
   respirar:  { nome: "Respira num meio hostil",           alimenta: null },
@@ -1525,16 +1529,20 @@ var RE_SACRIFICIO = /sacrif[ií]cio:\s*(INT|CON)\s*[−–-]\s*1/i;
 function passivasPreparadas() {
   var campo = document.getElementById("habilidades");
   if (!campo) return [];
-  return campo.value.split("\n").reduce(function (lista, texto) {
-    if (!/(^|[^a-zA-ZÀ-ÿ])[Pp]assiva([^a-zA-ZÀ-ÿ]|$)/.test(texto)) return lista;
+  // Um bloco por habilidade, separados por linha em branco. O título diz que é
+  // passiva e o sacrifício vem algumas linhas abaixo, então a leitura tem de
+  // ser por bloco — linha a linha, os dois nunca se encontram.
+  return campo.value.split(/\n\s*\n/).reduce(function (lista, bloco) {
+    if (!/(^|[^a-zA-ZÀ-ÿ])[Pp]assiva([^a-zA-ZÀ-ÿ]|$)/.test(bloco)) return lista;
 
-    var achado = texto.match(RE_SACRIFICIO);
+    var achado = bloco.match(RE_SACRIFICIO);
     var efeito = Object.keys(EFEITO_PASSIVA).find(function (ch) {
-      return texto.indexOf(EFEITO_PASSIVA[ch].nome) >= 0;
+      return bloco.indexOf(EFEITO_PASSIVA[ch].nome) >= 0;
     }) || "";
 
+    var titulo = bloco.split("\n")[0] || bloco;
     lista.push({
-      nome: (texto.split("—")[0] || texto).trim() || "Passiva sem nome",
+      nome: (titulo.split("—")[0] || titulo).trim() || "Passiva sem nome",
       efeito: efeito,
       rotulo: efeito ? EFEITO_PASSIVA[efeito].nome : "efeito não reconhecido",
       sacrificio: achado ? SIGLA_ATRIBUTO[achado[1].toUpperCase()] : ""
@@ -2209,7 +2217,7 @@ function recalcularV2() {
       "Classe e nível + CON por nível" + (tec.pv ? " + técnicas" : "") + " + ajustes" +
       (ferida ? " - Ferimento Grave" : "") + (exausto >= 3 ? ", pela metade por Exausto 3" : ""));
     escreve("sp", String(c.sp + mCon + (nivel - 1) * c.spN + valorId("ajusteSp") - sacPassivas.constituicao),
-      "Classe e nível + CON inicial + ajustes" +
+      "Classe e nível + CON atual + ajustes" +
       (sacPassivas.constituicao ? " − " + sacPassivas.constituicao + " de passiva" : ""));
   }
 
@@ -3366,65 +3374,65 @@ var HB_AREA = {
    como empurrar ou derrubar, sem uma segunda rolagem". Sozinhos eles pedem a
    própria resolução; junto de um efeito que já rola, não pedem nada. */
 var HB_EFEITOS = {
-  dano_unico: { nome: "Dano — alvo único", familia: "Dano", icone: "dano", qtdMax: 6, rotulo: "pontos",
+  dano_unico: { nome: "Dano — alvo único", saida: "Dano", familia: "Dano", icone: "dano", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
-    texto: function (g, q) { return (g * q) + "d8 de dano"; },
+    texto: function (g, q) { return (g * q) + "d8 em um alvo"; },
     exige: "ataque", mod: true },
-  dano_area: { nome: "Dano — em área", familia: "Dano", icone: "area", qtdMax: 6, rotulo: "pontos",
+  dano_area: { nome: "Dano — em área", saida: "Dano", familia: "Dano", icone: "area", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
-    texto: function (g, q) { return (g * q) + "d6 de dano em área, metade se errar"; },
+    texto: function (g, q) { return (g * q) + "d6 em área, metade se errar"; },
     exige: "efeito", defesa: "Reflexos", mod: true, exigeArea: true },
-  dano_continuo: { nome: "Dano — contínuo", familia: "Dano", icone: "continuo", qtdMax: 6, rotulo: "pontos",
+  dano_continuo: { nome: "Dano — contínuo", saida: "Dano contínuo", familia: "Dano", icone: "continuo", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d6 no fim do turno do alvo, sem nova defesa"; },
     mod: true },
-  pv_temp: { nome: "PV temporários", familia: "Vida e proteção", icone: "vida", qtdMax: 6, rotulo: "pontos",
+  pv_temp: { nome: "PV temporários", saida: "PV temporários", familia: "Vida e proteção", icone: "vida", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
-    texto: function (g, q) { return (g * q) + "d8 de PV temporários"; }, mod: true },
-  cura: { nome: "Cura — só Fonte Médica", familia: "Vida e proteção", icone: "cura", qtdMax: 6, rotulo: "pontos",
+    texto: function (g, q) { return (g * q) + "d8"; }, mod: true },
+  cura: { nome: "Cura — só Fonte Médica", saida: "Cura", familia: "Vida e proteção", icone: "cura", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
-    texto: function (g, q) { return (g * q) + "d8 de cura"; }, mod: true, soMedica: true },
-  def: { nome: "DEF", familia: "Vida e proteção", icone: "escudo", qtdMax: 2, rotulo: "+DEF",
+    texto: function (g, q) { return (g * q) + "d8"; }, mod: true, soMedica: true },
+  def: { nome: "DEF", saida: "Defesa", familia: "Vida e proteção", icone: "escudo", qtdMax: 2, rotulo: "+DEF",
     // O Grau alto espalha o bônus por mais gente, nunca aumenta o número. O
     // segundo ponto sobre o mesmo alvo custa o dobro, e +2 é o máximo.
     pontos: function (q) { return q === 2 ? 3 : 1; },
     texto: function (g, q) { return "+" + q + " DEF para " + g + (g === 1 ? " alvo" : " alvos"); } },
   movimento: { nome: "Movimento", familia: "Movimento", icone: "movimento", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
-    texto: function (g, q) { return "+" + (3 * g * q) + " m de movimento"; } },
-  empurrar: { nome: "Empurrar ou puxar", familia: "Movimento", icone: "empurrar", qtdMax: 4, rotulo: "pontos",
+    texto: function (g, q) { return "+" + (3 * g * q) + " m"; } },
+  empurrar: { nome: "Empurrar ou puxar", saida: "Deslocamento", familia: "Movimento", icone: "empurrar", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
     // Empurrar e derrubar são os efeitos secundários fracos que o livro cita:
     // sozinhos pedem Efeito contra Fortitude, mas pegam carona no acerto de
     // outro efeito sem uma segunda rolagem.
     texto: function (g, q) { return "empurra ou puxa " + (3 * g * q) + " m"; },
     exige: "efeito", defesa: "Fortitude", acompanha: true },
-  teleporte: { nome: "Teleporte", familia: "Movimento", icone: "teleporte", qtdMax: 1, rotulo: "—",
+  teleporte: { nome: "Teleporte", saida: "Teleporte", familia: "Movimento", icone: "teleporte", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
-    texto: function (g) { return "teleporte de " + (9 * g) + " m para um lugar visível"; } },
-  vantagem: { nome: "Vantagem ou Desvantagem", familia: "Controle", icone: "dado", qtdMax: 1, rotulo: "—",
+    texto: function (g) { return (9 * g) + " m para um lugar visível"; } },
+  vantagem: { nome: "Vantagem ou Desvantagem", saida: "Vantagem", familia: "Controle", icone: "dado", qtdMax: 1, rotulo: "—",
     pontos: function () { return 1; },
     texto: function (g) { return "Vantagem ou Desvantagem em uma rolagem, " + g + (g === 1 ? " alvo" : " alvos"); } },
-  cond_fraca: { nome: "Condição fraca", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
+  cond_fraca: { nome: "Condição fraca", saida: "Condição", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 1; },
-    texto: function (g) { return "condição fraca em " + g + (g === 1 ? " alvo" : " alvos"); },
+    texto: function (g) { return "fraca, em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito", acompanha: true },
-  cond_media: { nome: "Condição média", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
+  cond_media: { nome: "Condição média", saida: "Condição", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
-    texto: function (g) { return "condição média em " + g + (g === 1 ? " alvo" : " alvos"); },
+    texto: function (g) { return "média, em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito" },
-  cond_forte: { nome: "Condição forte", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
+  cond_forte: { nome: "Condição forte", saida: "Condição", familia: "Controle", icone: "corrente", qtdMax: 1, rotulo: "—",
     pontos: function () { return 4; },
-    texto: function (g) { return "condição forte em " + g + (g === 1 ? " alvo" : " alvos"); },
+    texto: function (g) { return "forte, em " + g + (g === 1 ? " alvo" : " alvos"); },
     exige: "efeito" },
-  resistencia: { nome: "Resistência a um tipo de dano", familia: "Utilidade", icone: "resistencia", qtdMax: 1, rotulo: "—",
+  resistencia: { nome: "Resistência a um tipo de dano", saida: "Resistência", familia: "Utilidade", icone: "resistencia", qtdMax: 1, rotulo: "—",
     pontos: function () { return 2; },
-    texto: function (g) { return "resistência a um tipo de dano, " + g + (g === 1 ? " alvo" : " alvos"); } },
-  terreno: { nome: "Ignorar terreno difícil", familia: "Utilidade", icone: "terreno", qtdMax: 1, rotulo: "—",
+    texto: function (g) { return "a um tipo de dano, " + g + (g === 1 ? " alvo" : " alvos"); } },
+  terreno: { nome: "Ignorar terreno difícil", saida: "Terreno", familia: "Utilidade", icone: "terreno", qtdMax: 1, rotulo: "—",
     // Não há o que crescer nisto: custa 1 ponto em qualquer Grau, e é por
     // isso que o ponto dele nunca é multiplicado.
     pontos: function () { return 1; },
-    texto: function () { return "ignora terreno difícil por uma rodada"; },
+    texto: function () { return "ignora o difícil por uma rodada"; },
     naoCresce: true }
 };
 
@@ -3663,6 +3671,28 @@ function resolucaoExigida(escolhidos) {
   };
 }
 
+/* ---------- o bloco de saída ----------
+   Título, uma linha de como se joga, uma régua, e os números um por linha
+   rotulada. A linha corrida separada por pontos cabia numa habilidade de dois
+   campos e virava ilegível em qualquer coisa maior — e pior ainda impressa,
+   onde ela quebrava no meio de uma conta.
+
+   Continua sendo texto puro: o campo segue editável e é ele que vai para o PDF. */
+var REGUA = "──────────────────────────────";
+
+function montarBloco(titulo, subtitulo, campos) {
+  var largura = campos.reduce(function (m, c) { return Math.max(m, c[0].length); }, 0);
+  var linhas = [titulo];
+  if (subtitulo) linhas.push(subtitulo);
+  linhas.push(REGUA);
+  campos.forEach(function (c) {
+    var rotulo = c[0] + ":";
+    while (rotulo.length < largura + 2) rotulo += " ";
+    linhas.push(rotulo + c[1]);
+  });
+  return linhas.join("\n");
+}
+
 /* Uma passiva não tem duração, alcance, ativação nem resolução: está sempre
    ligada e não gasta recurso para usar. Toda a conta dela é o sacrifício, e
    ele vai escrito na linha para que a ficha possa lê-lo de volta. */
@@ -3682,14 +3712,18 @@ function lerConstrutorPassiva() {
 
   var rotulo = chave ? EFEITO_PASSIVA[chave].nome : "—";
   var recurso = sacrificio === "inteligencia" ? "MP" : "SP";
-  var partes = ["Passiva", rotulo + (detalhe ? " (" + detalhe + ")" : "")];
-  if (sacrificio) {
-    partes.push("sacrifício: " + SIGLA[sacrificio] + " −1 e −1 de " + recurso);
-  }
-  partes.push("1 Memória");
+
+  // O sacrifício precisa sair legível na linha: é dele que a ficha lê de volta
+  // quanto descer no atributo e no recurso.
+  var ficha = [["Efeito", rotulo + (detalhe ? " — " + detalhe : "")]];
+  ficha.push(["Sacrifício", sacrificio
+    ? SIGLA[sacrificio] + " −1 e −1 de " + recurso
+    : "por escolher"]);
+  ficha.push(["Custo em uso", "nenhum — está sempre ligada"]);
+  ficha.push(["Memória", "1 espaço"]);
 
   return {
-    linha: (nome || rotulo) + " — " + partes.join(" · "),
+    linha: montarBloco((nome || rotulo) + " — Passiva", "", ficha),
     pontos: 1, custo: 0, teto: 1, erros: erros,
     resumo: "Uma passiva é um ponto, e um ponto só. Não custa MP nem SP para usar."
   };
@@ -3723,7 +3757,7 @@ function lerConstrutorHabilidade() {
   // precisam crescer — abrir caminho, ganhar um metro, dar Vantagem — enquanto
   // o dano vai no Grau cheio. O Grau base cobre o resto: duração, alcance,
   // ativação e modificadores.
-  var efeitos = [], usaArea = false, escolhidos = [], repetidos = [];
+  var efeitos = [], campos = [], usaArea = false, escolhidos = [], repetidos = [];
   var somaMod = false, pontosEfeitos = 0, custoEfeitos = 0, maiorGrauEfeito = 0;
   var grausUsados = [];
   for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
@@ -3739,7 +3773,9 @@ function lerConstrutorHabilidade() {
     custoEfeitos += p * gLinha;
     if (gLinha > maiorGrauEfeito) maiorGrauEfeito = gLinha;
     if (grausUsados.indexOf(gLinha) < 0) grausUsados.push(gLinha);
-    efeitos.push(e.texto(gLinha, qtd) + (gLinha !== grau ? " (Grau " + gLinha + ")" : ""));
+    var entrega = e.texto(gLinha, qtd) + (gLinha !== grau ? " (Grau " + gLinha + ")" : "");
+    efeitos.push(entrega);
+    campos.push({ rotulo: e.saida, texto: entrega });
     if (e.mod) somaMod = true;
     if (e.exigeArea) usaArea = true;
     if (escolhidos.some(function (o) { return o.chave === chave; })) {
@@ -3761,18 +3797,45 @@ function lerConstrutorHabilidade() {
   var exigido = resolucaoExigida(escolhidos);
   erros = erros.concat(exigido.erros);
 
-  var mais = document.querySelectorAll('#hbMods [data-hbmod="+1"]:checked').length;
-  var menos = document.querySelectorAll('#hbMods [data-hbmod="-1"]:checked').length;
-  estruturais += mais - menos;
-  if (estruturais < 0) estruturais = 0;
+  var marcados = function (sinal) {
+    return Array.prototype.map.call(
+      document.querySelectorAll('#hbMods [data-hbmod="' + sinal + '"]:checked'),
+      function (c) { return c.parentNode.textContent.replace(/^\s*[+−-]1\s*·\s*/, "").trim(); });
+  };
+  var nomesMais = marcados("+1"), nomesMenos = marcados("-1");
+  var mais = nomesMais.length;
+  var menos = nomesMenos.length;
+  estruturais += mais;
 
   // A duração já vem com um ponto de efeito incluído. Ele abate o ponto mais
   // caro que foi comprado — a duração paga um ponto de efeito, e qual deles
   // é escolha de quem monta. O efeito continua inteiro: o que o ponto grátis
   // tira é o preço, não o dado.
   var gratis = pontosEfeitos ? 1 : 0;
+
+  // O TAMANHO é o que o Teto mede: duração, efeitos, alcance e os +1. Os −1
+  // ficam de fora dele de propósito — eles baixam o preço, não encolhem a
+  // habilidade. Sem isso, três limitações fariam onze pontos de efeito caberem
+  // num Teto de seis.
   var pontos = Math.max(1, estruturais + pontosEfeitos - gratis);
-  var custo = Math.max(1, estruturais * grau + custoEfeitos - gratis * maiorGrauEfeito);
+
+  var bruto = Math.max(1, estruturais * grau + custoEfeitos - gratis * maiorGrauEfeito);
+  // Cada −1 desconta um ponto do preço, cobrado no Grau base. O piso é em
+  // PONTOS, não em recurso: os −1 nunca tiram mais do que metade do tamanho.
+  // Uma de tamanho 6 não desce de 3; uma de tamanho 3 não desce de 2.
+  var descontoMaximo = Math.floor(pontos / 2);
+  var desconto = Math.min(menos, descontoMaximo);
+  var custo = Math.max(1, bruto - desconto * grau);
+  var pisouNoPiso = menos > descontoMaximo;
+
+  if (pisouNoPiso) {
+    avisos.push("O piso segurou o custo: os −1 nunca tiram mais que metade do tamanho, e " +
+      "esta já desceu de " + pontos + " para " + (pontos - descontoMaximo) + " pontos. " +
+      (menos - descontoMaximo === 1
+        ? "A última limitação não baixou nada."
+        : "As últimas " + (menos - descontoMaximo) + " limitações não baixaram nada."));
+  }
+
   var assinatura = v("hbAssinatura") === "sim";
   if (assinatura) custo = Math.max(1, custo - 1);
 
@@ -3794,31 +3857,51 @@ function lerConstrutorHabilidade() {
   var defesa = exigido.defesa || v("hbDefesa");
 
   var recurso = fonte === "fisica" ? "SP" : "MP";
+  // Híbrida paga pelo menos 1 de cada: o SP volta inteiro num Descanso Curto e
+  // o MP só volta dormindo, então uma Híbrida paga só em SP tiraria a
+  // habilidade cara do orçamento do dia e aposentaria a Elemental pura.
+  if (fonte === "hibrida" && custo < 2) {
+    erros.push("Uma habilidade de custo 1 não pode ser Híbrida: ela paga pelo menos 1 de MP " +
+      "e 1 de SP, e não há como dividir 1. Escolha uma Fonte pura.");
+  }
   var pagamento = fonte === "hibrida"
-    ? custo + " dividido entre MP e SP"
+    ? custo + " dividido entre MP e SP, no mínimo 1 de cada"
     : custo + " " + recurso;
 
   var bonus = valorCalc("habilidade");
-  var partes = [];
   var nome = document.getElementById("hbNome").value.trim();
   var descritor = document.getElementById("hbDescritor").value.trim();
-  partes.push(NOME_FONTE[fonte] + (descritor ? "/" + descritor : ""));
-  partes.push(ativacao.texto);
-  partes.push(alcance.texto);
-  if (areaChave && areaChave !== "dobrada") partes.push(HB_AREA[areaChave].texto);
-  if (areaChave === "dobrada") partes.push("área dobrada");
-  partes.push(duracao.texto);
-  partes.push(pontos + (pontos === 1 ? " ponto" : " pontos") + ", " + pagamento +
-    (sustentar ? " · sustentar " + sustentar + "/rodada" : ""));
-  if (efeitos.length) {
-    partes.push(efeitos.join(" + ") + (somaMod && bonus !== "—" ? " + mod, uma vez só" : ""));
+
+  // Como a habilidade é jogada, numa linha só: fonte, ação, alcance, forma e
+  // duração. É o que o Mestre precisa ler antes de a rolagem começar.
+  var comoJoga = [ativacao.texto, alcance.texto];
+  if (areaChave && areaChave !== "dobrada") comoJoga.push(HB_AREA[areaChave].texto);
+  if (areaChave === "dobrada") comoJoga.push("área dobrada");
+  comoJoga.push(duracao.texto);
+
+  // E os números, um por linha rotulada — a linha corrida com tudo junto era
+  // ilegível na mesa e pior ainda impressa.
+  var ficha = [];
+  ficha.push(["Custo", pagamento + (sustentar ? ", sustentar " + sustentar + "/rodada" : "")]);
+  var somaOMod = { "Dano": 1, "Dano contínuo": 1, "Cura": 1, "PV temporários": 1 };
+  campos.forEach(function (c) {
+    ficha.push([c.rotulo, c.texto +
+      (somaOMod[c.rotulo] && somaMod && bonus !== "—" ? " · + mod uma vez só" : "")]);
+  });
+  if (resolucao === "ataque") ficha.push(["Resolução", "Ataque de Habilidade " + bonus + " contra DEF"]);
+  if (resolucao === "efeito") ficha.push(["Resolução", "Rolagem de Efeito " + bonus + " contra " + defesa]);
+  if (nomesMais.length) ficha.push(["Conveniências", nomesMais.join(" · ") + " (+" + nomesMais.length + ")"]);
+  if (nomesMenos.length) {
+    ficha.push(["Limitações", nomesMenos.join(" · ") +
+      (pisouNoPiso ? " — as últimas não baixaram o custo, o piso segurou" : "")]);
   }
-  if (resolucao === "ataque") partes.push("Ataque de Habilidade " + bonus + " contra DEF");
-  if (resolucao === "efeito") partes.push("Rolagem de Efeito " + bonus + " contra " + defesa);
-  partes.push(assinatura ? "Assinatura, fora da Memória" : "1 Memória");
+  ficha.push(["Tamanho", pontos + " de " + teto + " pontos, Grau " + grau]);
+  ficha.push(["Memória", assinatura ? "não ocupa — é sua Assinatura" : "1 espaço"]);
 
   return {
-    linha: (nome || "Habilidade sem nome") + " — " + partes.join(" · "),
+    linha: montarBloco((nome || "Habilidade sem nome") +
+      (descritor ? " — " + NOME_FONTE[fonte] + "/" + descritor : " — " + NOME_FONTE[fonte]),
+      comoJoga.join(" · ").replace(/^./, function (c) { return c.toUpperCase(); }), ficha),
     pontos: pontos, custo: custo, teto: teto, erros: erros, avisos: avisos,
     resolucao: resolucao, defesa: defesa, imposta: exigido,
     entregas: efeitos, sustentar: sustentar,
@@ -3833,10 +3916,11 @@ function calcularHabilidade() {
     ? "Uma passiva fica sempre ligada, não custa MP nem SP para usar e não pede ação. " +
       "O preço sai do corpo: −1 no atributo escolhido e −1 no máximo do recurso que ele " +
       "alimenta. Ocupa um espaço de Memória."
-    : "PONTOS = duração + efeitos adicionais + alcance + modificadores. A duração já traz " +
-      "um ponto de efeito incluído. CUSTO em MP ou SP = pontos × Grau do ponto — cada efeito " +
-      "pode ser comprado num Grau menor que o seu, e o Grau base cobre duração, alcance, " +
-      "ativação e modificadores.";
+    : "TAMANHO = duração + efeitos + alcance + os modificadores que aumentam. É o tamanho " +
+      "que o Teto de Custo limita. CUSTO = tamanho × Grau do ponto, menos os −1 — e nunca " +
+      "abaixo da metade do tamanho. A duração já traz um ponto de efeito incluído, cada " +
+      "efeito pode ser comprado num Grau menor que o seu, e o Grau base cobre duração, " +
+      "alcance, ativação e modificadores.";
 
   // Cada linha ajusta os próprios controles ao efeito que carrega.
   if (!passiva) {
@@ -3896,7 +3980,7 @@ function calcularHabilidade() {
   var avisos = r.avisos || [];
   estado.className = "estado-regra " + (r.erros.length ? "erro" : "ok");
   estado.textContent = r.erros.length ? r.erros.join(" ")
-    : ((r.resumo || r.pontos + " de " + r.teto + " pontos do Teto. A conta fecha." +
+    : ((r.resumo || r.pontos + " de " + r.teto + " pontos de tamanho, dentro do Teto. A conta fecha." +
         (r.imposta && r.imposta.motivo ? " " + r.imposta.motivo + "." : "")) +
        (avisos.length ? " " + avisos.join(" ") : ""));
   document.getElementById("hbAdicionar").disabled = r.erros.length > 0;
@@ -3944,7 +4028,9 @@ function adicionarHabilidade() {
   var r = lerConstrutorHabilidade();
   if (r.erros.length) return;
   var campo = document.getElementById("habilidades");
-  campo.value = (campo.value.trim() ? campo.value.replace(/\s*$/, "") + "\n" : "") + r.linha;
+  // Linha em branco entre blocos: é o que separa um do outro, e é por ela
+  // que a ficha volta a ler as passivas.
+  campo.value = (campo.value.trim() ? campo.value.replace(/\s*$/, "") + "\n\n" : "") + r.linha;
   campo.dispatchEvent(new Event("input", { bubbles: true }));
   fecharModal("modalHabilidade");
 }
@@ -4142,26 +4228,24 @@ function lerConstrutorItem() {
     erros.push("São " + gastos + " pontos de Aprimoramento para os " + g.pontos + " que o Grau " + g.nome + " dá.");
   }
 
-  var cabeca = [g.nome];
-  if (tipo === "arma") {
-    cabeca.push("arma " + dadoComGrau(v("itDado"), g.dados) +
-      (g.ataque ? ", ataque e dano +" + g.ataque : ""));
-  } else if (tipo === "armadura" || tipo === "escudo") {
-    cabeca.push(tipo === "armadura" ? "armadura" : "escudo");
-    if (g.def) cabeca.push("+" + g.def + " DEF");
-  } else {
-    cabeca.push("objeto");
-  }
-  cabeca.push(gastos + " de " + g.pontos + " pontos");
-  cabeca.push("Integridade " + g.integridade + "/" + g.integridade);
-  cabeca.push("Cargas " + (g.cargas ? "0/" + prof : "—"));
+  var especie = tipo === "arma" ? "arma"
+    : tipo === "armadura" ? "armadura"
+    : tipo === "escudo" ? "escudo" : "objeto";
 
-  var linhas = [(document.getElementById("itNome").value.trim() || "Item sem nome") +
-    " — " + cabeca.join(" · ")];
-  aprimoramentos.forEach(function (a) { linhas.push("  Aprimoramento: " + a); });
+  var ficha = [];
+  if (tipo === "arma") {
+    ficha.push(["Dado", dadoComGrau(v("itDado"), g.dados) +
+      (g.ataque ? " · ataque e dano +" + g.ataque : "")]);
+  } else if ((tipo === "armadura" || tipo === "escudo") && g.def) {
+    ficha.push(["DEF", "+" + g.def]);
+  }
+  ficha.push(["Pontos", gastos + " de " + g.pontos]);
+  ficha.push(["Integridade", g.integridade + "/" + g.integridade]);
+  ficha.push(["Cargas", g.cargas ? "0/" + prof : "não usa"]);
+  aprimoramentos.forEach(function (a) { ficha.push(["Aprimoramento", a]); });
 
   var narrativo = document.getElementById("itNarrativo").value.trim();
-  if (narrativo) linhas.push("  Narrativo: " + narrativo + " (0 pontos, sem efeito mecânico)");
+  if (narrativo) ficha.push(["Narrativo", narrativo + " — 0 pontos, sem efeito mecânico"]);
 
   var aviso = "";
   if (tipo === "armadura" || tipo === "escudo") {
@@ -4169,7 +4253,9 @@ function lerConstrutorItem() {
   }
 
   return {
-    linha: linhas.join("\n"), erros: erros, gastos: gastos, pontos: g.pontos,
+    linha: montarBloco((document.getElementById("itNome").value.trim() || "Item sem nome") +
+      " — " + g.nome + ", " + especie, "", ficha),
+    erros: erros, gastos: gastos, pontos: g.pontos,
     entregas: aprimoramentos,
     resumo: gastos + " de " + g.pontos + " pontos gastos. " + aviso
   };
@@ -4227,7 +4313,9 @@ function adicionarItem() {
   var r = lerConstrutorItem();
   if (r.erros.length) return;
   var campo = document.getElementById("itens");
-  campo.value = (campo.value.trim() ? campo.value.replace(/\s*$/, "") + "\n" : "") + r.linha;
+  // Linha em branco entre blocos: é o que separa um do outro, e é por ela
+  // que a ficha volta a ler as passivas.
+  campo.value = (campo.value.trim() ? campo.value.replace(/\s*$/, "") + "\n\n" : "") + r.linha;
   campo.dispatchEvent(new Event("input", { bubbles: true }));
   fecharModal("modalItem");
 }

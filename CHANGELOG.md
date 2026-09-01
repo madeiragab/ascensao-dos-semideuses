@@ -4,6 +4,100 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.17.0] - 2026-08-31
+
+Tudo nesta versão saiu de um playtest de campanha longa — Jessica Rondo,
+Guardiã de Afrodite, dos níveis 2 ao 6 nos logs e projetada até o 12. As
+mudanças de regra vêm dos furos que a mesa encontrou jogando.
+
+### A Híbrida passa a pagar os dois recursos
+
+- Uma habilidade Híbrida divide o custo como quiser, mas **pelo menos 1 de cada**
+  — nunca mais "4 de um só". Habilidade de custo 1 não pode ser Híbrida.
+- **Por quê:** o SP volta inteiro num Descanso Curto de uma hora, sem limite por
+  dia, e o MP só volta dormindo. Uma Híbrida paga só em SP tirava toda habilidade
+  cara do orçamento do dia. Medido na ficha do playtest — Guardiã 12, MP 21,
+  SP 58, habilidade no Teto custando 18: **1 uso por dia** em MP contra **3 por
+  hora de descanso** em SP. A Fonte Elemental pura tinha deixado de ter razão de
+  existir para Guardião e Furioso.
+
+### O Teto mede o tamanho; os −1 medem o preço
+
+- O **tamanho** de uma habilidade é duração + efeitos + alcance + os
+  modificadores que aumentam. É o tamanho que não pode passar do Teto de Custo.
+- Os **−1** entram depois e reduzem só o que se paga em MP ou SP. E têm piso:
+  **nunca tiram mais que metade do tamanho**.
+- **Por quê:** os −1 entravam na mesma soma do Teto, então encolhiam a habilidade
+  no papel. Dava para entregar onze pontos de efeito dentro de um Teto de seis, e
+  cinco limitações compravam uma habilidade de teto por 1 de recurso.
+- A **Tempestade Nebulosa** do playtest — 6 pontos de dano em área, três
+  limitações reais — continua custando exatamente 9. A regra valida o que a mesa
+  produziu e fecha só o passo seguinte.
+
+### O recálculo retroativo tinha esquecido o SP
+
+- Agora: "recalcule os **PV e o SP** como se ela sempre tivesse sido aquela". E o
+  texto diz explicitamente que o Atributo Divino entra no MP **uma vez só**, na
+  base da classe.
+- **Por quê:** a frase antiga citava PV, Atributo Divino e MP, e nunca o SP — mas
+  o SP também tem CON dentro. Nos logs dá para ver o erro nascer: no nível 4 a
+  Constituição subiu, o PV foi recalculado e o SP não. O −1 atravessou oito
+  níveis e chegou na ficha de nível 12.
+
+### Duas técnicas de Tier 3 saíram da faixa
+
+- **Bastião** reduz o **primeiro golpe de cada rodada**, não todos. Medido:
+  +10,7% de vitória contra bando antes, **+4,7%** agora.
+- **Provocação Ampla** mantém as duas marcas, mas a segunda **dura até o fim do
+  próximo turno** e precisa ser renovada. Medido: +25,1% antes, **+6,9%** agora.
+- O limite declarado em `sim/tecnicas.py` sempre foi 10 pontos. As duas passavam
+  havia meses porque o teste imprimia o aviso e saía com sucesso.
+
+### Quatro esclarecimentos que a mesa pediu
+
+- **Crítico de habilidade** soma dados iguais ao **Grau em que a habilidade foi
+  comprada**, não ao Grau do personagem. Sem isso, comprar barato dobrava o valor
+  relativo do crítico.
+- **"Zera seu movimento"** vale **até o início do seu próximo turno**.
+- **Ferimento Grave não acumula** — o que a nova fonte faz é reiniciar a contagem.
+- **Alvo adicional em condição não custa ponto**, e agora o livro diz isso com o
+  número: a mesma condição custa 2 no Grau 1 para 1 alvo e 10 no Grau 5 para 5.
+  Mesmo preço por alvo.
+
+### Duas fronteiras declaradas
+
+- **O motor não compra efeito de escala narrativa.** Expulsar uma entidade, selar
+  uma passagem, virar uma multidão: resolve por teste de atributo contra CD do
+  Mestre. É a mesma fronteira das condições de grau Destino.
+- **Armadura sem proficiência** bloqueia habilidades de Fonte Física **e
+  Híbrida** — a Híbrida tem corpo dentro dela. Elemental pura e Médica continuam
+  funcionando. E a penalidade é **Desvantagem**, não desconto no número: o livro
+  agora diz isso onde a dúvida aparece.
+
+### O construtor escreve em bloco, não em linha corrida
+
+- Cada habilidade e cada item saem agora como **título, régua e campos
+  rotulados** — Custo, Dano, Resolução, Limitações, Tamanho, Memória —, um por
+  linha e alinhados. Os campos de habilidades e itens ficaram monoespaçados,
+  na tela e na folha impressa, que é o que faz o alinhamento existir.
+- **Por quê:** a linha corrida separada por pontos cabia numa habilidade de dois
+  campos e virava ilegível em qualquer coisa maior. "6 pontos, 9 dividido entre
+  MP e SP" no meio de uma frase de sete segmentos não se lê na mesa, e impresso
+  quebrava no meio de uma conta.
+- As **limitações escolhidas aparecem pelo nome**, em vez de sumirem dentro do
+  número — e a linha diz quando o piso segurou o custo.
+
+### A ficha acompanha
+
+- O construtor de habilidades aplica as regras novas: exige os dois recursos numa
+  Híbrida, mede o Teto pelo tamanho e trava o piso dos −1, avisando quando ele
+  segura o custo.
+- `sim/tecnicas.py` passa a **falhar** quando uma técnica sai da faixa, com uma
+  lista de dívida conhecida para as quatro que já estavam fora antes desta versão
+  — Escudo Vínculo, Interceptar, Rede do Destino e Olho do Futuro.
+- `sim/ficha.py` confere as seis correções contra o texto do livro e refaz as
+  contas do piso.
+
 ## [0.16.3] - 2026-08-18
 
 ### A Ficha do Herói imprime no couro dela
