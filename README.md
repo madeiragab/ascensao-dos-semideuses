@@ -17,8 +17,9 @@ no mundo moderno em uma base d20.
 
 O que separa este projeto de um documento de regras é a combinação de
 **simulação e playtest de mesa**: números são medidos, decisões improvisadas são
-registradas, e a regra só fecha depois de sobreviver aos dois. As quatro vezes em
-que os números contrariaram a intuição estão documentadas mais abaixo.
+registradas, e a regra só fecha depois de sobreviver aos dois. As vezes em que os
+números contrariaram a intuição estão documentadas mais abaixo — e também as que
+só apareceram jogando, porque as duas listas não se sobrepõem.
 
 **Versão atual:** 0.17.0 · 31/08/2026 · [Changelog](CHANGELOG.md)
 
@@ -73,12 +74,19 @@ pelas emoções de cada personagem — com poder grande, agência combinada e pr
 com pontos, e só depois converte pontos em recurso:
 
 ```
-PONTOS  = duração + efeitos adicionais + alcance + modificadores
-CUSTO   = pontos × Grau do ponto
+TAMANHO = duração + efeitos + alcance + modificadores que aumentam
+CUSTO   = tamanho × Grau do ponto, menos os −1
+PISO    = os −1 nunca tiram mais que metade do tamanho
 ```
 
 A duração já inclui o primeiro ponto de efeito: instantânea 1, sustentada 2, cena
 4. Sustentar custa metade do custo final por rodada.
+
+**O Teto de Custo limita o tamanho, não o preço.** É a separação que impede uma
+pilha de limitações de encolher a habilidade no papel: os `−1` baixam o que se
+paga em MP ou SP, e nunca o que ela entrega. Uma Fonte **Híbrida** paga pelo
+menos 1 de cada recurso — nunca só em SP, porque o SP volta inteiro num Descanso
+Curto e o MP só volta dormindo.
 
 **A progressão é o Grau**, e ele é a faixa de nível — 1 nos níveis 1–4 até 5 nos
 17–20. Cada tabela de efeito tem uma linha por Grau: um ponto de dano em alvo
@@ -173,7 +181,7 @@ mexer nos números:
 - **o dano de arma não acompanhava o PV dos monstros** — o Grau do item passou a
   dar dados de arma, e o combate voltou a durar de 2 a 4 rodadas do nível 3 ao 20;
 - **o crítico de habilidade apagava o encontro** — passou a somar dados iguais ao
-  Grau em vez de dobrar tudo;
+  Grau em que a habilidade foi comprada, em vez de dobrar tudo;
 - **a Escala de Kleos tinha um platô de cinco níveis** — as faixas foram alinhadas
   às do Grau;
 - **a conta de mesas grandes estava errada** — multiplicar heróis por Kleos mandava
@@ -181,6 +189,29 @@ mexer nos números:
   medida: o quarto jogador quase não move o degrau, e o quinto vale +1;
 - **um Aliado montado como monstro morria em toda sessão** — 6% de sobrevivência no
   nível 9. Hoje ele usa a linha do Kleos do Grupo menos 2.
+
+### E cinco que só a mesa achou
+
+A 0.17.0 saiu de um playtest de campanha longa, e vale como aviso do contrário:
+o simulador mede o que ele sabe modelar, e **nada disso ele saberia**.
+
+- **A Fonte Elemental tinha ficado sem função** para Guardião e Furioso. Uma
+  Híbrida podia ser paga só em SP, o SP volta inteiro num Descanso Curto de uma
+  hora e o MP só volta dormindo — então a habilidade cara custava uma hora de
+  descanso. Hoje a Híbrida paga pelo menos 1 de cada.
+- **Os `−1` encolhiam a habilidade no papel.** Eles entravam na mesma soma do
+  Teto, e três limitações punham onze pontos de efeito dentro de um Teto de seis.
+  Hoje o Teto mede o tamanho e os `−1` medem só o preço, com piso na metade.
+- **O recálculo retroativo esquecia o SP.** A frase citava PV, Atributo Divino e
+  MP — e o SP também tem Constituição dentro. Dá para ver o erro nascer nos logs
+  da campanha, no nível 4, e atravessar oito níveis até a ficha do 12.
+- **Duas técnicas de Tier 3 estavam fora da faixa** havia meses: Bastião a +10,7%
+  de vitória contra bando e Provocação Ampla a +25,1%. O `tecnicas.py` media as
+  duas e **imprimia o aviso saindo com sucesso**, então a regressão ficava verde.
+  Hoje ele falha.
+- **O motor não dizia onde termina.** Ordem verbal que expulsa uma entidade de um
+  corpo não é dano, nem condição, nem Rolagem de Efeito. Continua fora do motor,
+  mas agora o livro diz isso em vez de deixar o Mestre descobrir sozinho.
 
 ### As sete vezes em que o teste me contrariou
 
@@ -283,15 +314,20 @@ powershell -ExecutionPolicy Bypass -File test.ps1
 Os cinco livros estão completos para jogar do nível 1 ao 20, e o mapa do sistema
 não tem mais nenhuma linha vermelha. O que falta é de outra natureza:
 
-1. **Playtest com mesa de verdade.** O único playtest completo foi solo, com dois
-   NPCs — e mesmo assim achou três coisas que dezoito arquivos de simulação não
-   tinham achado. Uma mesa com quatro pessoas discutindo tática vai achar outras.
-2. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
+1. **Playtest com mesa de verdade.** Os dois playtests completos foram solo, com
+   NPCs — e acharam, juntos, oito coisas que dezoito arquivos de simulação não
+   tinham achado, quase todas na fronteira entre duas regras que sozinhas estavam
+   certas. Uma mesa com quatro pessoas discutindo tática vai achar outras.
+2. **Quatro técnicas na dívida conhecida.** Escudo Vínculo, Interceptar, Rede do
+   Destino e Olho do Futuro medem entre +11% e +13% de vitória contra bando,
+   acima do limite de 10. Estão listadas em `sim/tecnicas.py`, não bloqueiam a
+   regressão e aparecem em todo run até serem decididas.
+3. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
    outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem.
    Precisam de mesa, não de simulador.
-3. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
+4. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
    valem pelo que abrem de ficção, e nenhum motor de combate julga isso.
-4. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
+5. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
    fecham a conta de um item por arco; falta medir inflação e manutenção.
 
 ### Limites conhecidos do simulador

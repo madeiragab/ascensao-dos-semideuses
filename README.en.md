@@ -20,7 +20,7 @@ on a d20 foundation.
 
 What separates this project from a pile of house rules is the combination of
 **simulation and table playtesting**: numbers are measured, improvised rulings are
-recorded, and rules only close after surviving both. The four times the numbers
+recorded, and rules only close after surviving both. The times the numbers
 contradicted intuition are documented below.
 
 **Current version:** 0.17.0 · 31/08/2026 · [Changelog](CHANGELOG.md)
@@ -77,12 +77,19 @@ consequences keep that power from becoming an every-fight transformation.
 with points, and only then convert points into a resource:
 
 ```
-POINTS = duration + extra effects + range + modifiers
-COST   = points × the Grade of the point
+SIZE  = duration + effects + range + modifiers that add
+COST  = size × the Grade of the point, minus the −1s
+FLOOR = the −1s never take away more than half the size
 ```
 
 Duration already includes the first point of effect: instantaneous 1, sustained 2,
 scene 4. Sustaining costs half the final cost per round.
+
+**The Cost Ceiling caps the size, not the price.** That separation is what stops a
+pile of limitations from shrinking an ability on paper: the `−1`s reduce what you
+pay in MP or SP, never what it delivers. A **Hybrid** source pays at least 1 of
+each resource — never SP alone, because SP comes back in full on a Short Rest and
+MP only comes back by sleeping.
 
 **Progression is the Grade**, and the Grade is simply the level band — 1 at levels
 1–4 up to 5 at 17–20. Every effect table has one row per Grade: a point of
@@ -128,10 +135,27 @@ and Presence. With everything switched on, a fair encounter lands between 68% an
 
 Five things measurement changed in the books: weapon damage was falling behind
 monster HP (the item's Grade now grants weapon dice); an ability critical erased
-the encounter (it now adds dice equal to its Grade instead of doubling); the Kleos
+the encounter (it now adds dice equal to the Grade it was bought at, instead of
+doubling); the Kleos
 scale had a five-level plateau (bands realigned to the Grade); the maths for large
 tables was wrong (a party of four was being sent against a fight it wins 11% of the
 time); and an Ally built as a monster died every session (6% survival at level 9).
+
+**And five things only the table found.** Version 0.17.0 came out of a long
+campaign playtest, and it cuts the other way: a simulator measures what it knows
+how to model, and it would have found none of these. A Hybrid ability could be
+paid entirely in SP, and SP comes back in full on a one-hour Short Rest while MP
+only returns by sleeping — so the expensive ability cost an hour of rest, and the
+pure Elemental source had quietly lost its reason to exist for two of the three
+classes. The `−1` modifiers were counted inside the Cost Ceiling, so three
+limitations fit eleven points of effect into a ceiling of six. The retroactive
+recalculation named HP, the Divine Attribute and MP but never SP, which also has
+Constitution inside it — the resulting off-by-one is visible in the campaign logs
+at level 4 and survived eight levels. Two Tier 3 techniques had been out of range
+for months because `tecnicas.py` printed the warning and exited successfully. And
+the engine never said where it stops: a spoken command that drives an entity out
+of a host body is neither damage nor condition nor Effect Roll, and the book now
+says so instead of leaving each GM to work it out.
 
 **Monsters are measured in Kleos** — the glory it costs to bring one down. Eleven
 named rungs: Rumour, Hearsay, Tale, Exploit, Deed, Song, Legend, Myth, Epic,
@@ -275,10 +299,14 @@ powershell -ExecutionPolicy Bypass -File test.ps1
 The Player's Book is complete enough to play from level 1 to 20. What's left is
 refinement:
 
-1. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
+1. **Four techniques in the known-debt list.** Shield Bond, Intercept, Net of Fate
+   and Eye of the Future measure between +11% and +13% win rate against a mob,
+   over the declared limit of 10. They are listed in `sim/tecnicas.py`, do not
+   block the regression, and print on every run until they are decided.
+2. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
    the rest depend on positioning, forced movement, fear or rerolls, which the
    engine does not model. They need a table, not a simulator.
-2. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
+3. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
    upkeep and rewards across long campaign arcs still need measurement.
 
 ### Known limits of the simulator
