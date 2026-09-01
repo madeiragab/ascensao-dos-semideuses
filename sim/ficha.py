@@ -361,6 +361,82 @@ def main() -> None:
         falhas.append("sem família ou ícone no catálogo, então somem da grade: "
                       + ", ".join(faltando))
 
+    # ---- as regras que saíram do playtest de 0.16.3
+    print()
+    print("Correções do playtest — livro × ficha:")
+
+    correcoes = [
+        ("Híbrida paga 1 de cada recurso",
+         "pelo menos 1 saia de cada um",
+         'fonte === "hibrida" && custo < 2'),
+        ("Teto mede o tamanho, não o custo",
+         "Esse total é o <strong>tamanho</strong> da habilidade, e é ele que não pode passar",
+         "estruturais += mais;"),
+        ("piso: os −1 não tiram mais que metade",
+         "nunca levam o custo abaixo da",
+         "var descontoMaximo = Math.floor(pontos / 2);"),
+        ("recálculo retroativo cobre o SP",
+         "recalcule os <strong>PV e o SP</strong>",
+         "CON atual"),
+        ("crítico usa o Grau de compra",
+         "soma dados iguais ao Grau em\n    que a habilidade foi comprada",
+         None),
+        ("Bastião: primeiro golpe da rodada",
+         "o primeiro golpe que você recebe a cada rodada",
+         "o primeiro golpe que você recebe a cada rodada"),
+    ]
+    for nome, no_livro, no_codigo in correcoes:
+        ok_livro = " ".join(no_livro.split()).lower() in " ".join(livro.split()).lower()
+        ok_ficha = no_codigo is None or no_codigo in html
+        print(f"  {nome}: livro {'sim' if ok_livro else 'NÃO'} · "
+              f"ficha {'sim' if no_codigo is None else ('sim' if ok_ficha else 'NÃO')}")
+        if not ok_livro:
+            falhas.append(f"o livro perdeu a correção {nome!r}")
+        if not ok_ficha:
+            falhas.append(f"a ficha não aplica {nome!r}")
+
+    # O piso e o Teto refeitos na mão, contra os casos que saíram da mesa.
+    def conta(tamanho, grau, menos):
+        desconto = min(menos, tamanho // 2)
+        return max(1, tamanho * grau - desconto * grau)
+
+    casos = [
+        # (nome, tamanho, Grau, nº de −1, custo esperado)
+        ("Tempestade Nebulosa, 3 limitações", 6, 3, 3, 9),
+        ("a mesma sem limitação", 6, 3, 0, 18),
+        ("a mesma com 6 limitações", 6, 3, 6, 9),
+        ("tamanho 3 com 2 limitações", 3, 3, 2, 6),
+    ]
+    for nome, tam, g, menos, esperado in casos:
+        obtido = conta(tam, g, menos)
+        marca = "ok" if obtido == esperado else "ERRADO"
+        print(f"  {nome:<34} custo {obtido:>2} — {marca}")
+        if obtido != esperado:
+            falhas.append(f"o piso dá {obtido} em {nome!r}; deveria dar {esperado}")
+
+    # O construtor escreve um BLOCO por habilidade — título, régua e campos
+    # rotulados —, separados por linha em branco. A passiva guarda o sacrifício
+    # numas linhas abaixo do título, então quem lê de volta precisa ler o bloco
+    # inteiro: linha a linha, "Passiva" e "Sacrifício:" nunca se encontram, e o
+    # atributo deixa de descer sem ninguém perceber.
+    print()
+    print("Bloco de saída — formato e leitura de volta:")
+    formato = [
+        ("régua entre título e campos", "var REGUA ="),
+        ("campos rotulados e alinhados", "function montarBloco("),
+        ("linha em branco entre blocos", 'campo.value.replace(/\\s*$/, "") + "\\n\\n"'),
+        ("passiva lida por bloco", "campo.value.split(/\\n\\s*\\n/)"),
+    ]
+    for nome, marca in formato:
+        ok = marca in html
+        print(f"  {nome}: {'sim' if ok else 'NÃO'}")
+        if not ok:
+            falhas.append(f"o bloco de saída perdeu {nome!r}")
+
+    if 'campo.value.split("\\n").reduce' in html:
+        falhas.append("passivasPreparadas voltou a ler linha a linha; "
+                      "o sacrifício mora em outra linha do bloco e para de ser lido")
+
     icones = set(re.findall(r'icone: "(\w+)"', tabela.group(1) if tabela else ""))
     definidos = set(re.findall(r"\n  (\w+): svgIcone\(", html))
     orfaos = sorted(icones - definidos)

@@ -227,7 +227,7 @@ def t5_tecnicas() -> None:
         ("Fúria Crescente",  "furioso",  "+1/rodada até +3, no 1º ataque do turno"),
         ("Golpe Duplo",      "furioso",  "1×/combate, sem modificador no dano"),
         ("Casca Grossa",     "furioso",  "+2 DEF abaixo de metade dos PV"),
-        ("Bastião",          "guardiao", "−proficiência em cada golpe recebido"),
+        ("Bastião",          "guardiao", "−proficiência no primeiro golpe da rodada"),
         ("Casca Grossa",     "guardiao", "+2 DEF abaixo de metade dos PV"),
     ]
     for tec, classe, obs in testes:

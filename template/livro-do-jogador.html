@@ -214,8 +214,10 @@
 
   <div class="destaque">
     <span class="rotulo">O crítico de uma habilidade é diferente</span>
-    <p>Um <strong>Ataque de Habilidade</strong> crítico <strong>soma dados iguais ao seu
-    Grau</strong> — 1 dado no Grau 1, 5 no Grau 5 — em vez de dobrar tudo.</p>
+    <p>Um <strong>Ataque de Habilidade</strong> crítico <strong>soma dados iguais ao Grau em
+    que a habilidade foi comprada</strong> — 1 dado no Grau 1, 5 no Grau 5 — em vez de dobrar
+    tudo. É o Grau da habilidade, não o seu: uma comprada no Grau 1 soma 1 dado mesmo que você
+    já esteja no Grau 5. Do contrário, comprar barato dobraria o valor do crítico.</p>
     <p>Uma habilidade junta o dia inteiro num dado só. Medido do nível 1 ao 20: dobrando, uma
     habilidade no Teto de Custo apagava de <strong>98% a 139%</strong> dos PV do monstro de um
     encontro justo, e decidia a luta antes de ela começar. Somando o Grau, o pior caso cai
@@ -1190,7 +1192,11 @@
   <div class="nota">
     <p><strong>Usar armadura sem proficiência</strong> custa caro: Desvantagem em todo
     teste e ataque que use Força ou Destreza; Rolagens de Efeito contra seus Reflexos têm Vantagem; e você não consegue
-    usar habilidades de Fonte Física.</p>
+    usar habilidades de Fonte Física <strong>nem Híbrida</strong> — a Híbrida tem corpo dentro
+    dela, e o corpo é o que a armadura está atrapalhando. A Fonte Elemental pura e a Médica
+    continuam funcionando.</p>
+    <p>A penalidade é <strong>Desvantagem</strong>, não um desconto no número. Não subtraia
+    nada do bônus de ataque: role dois dados e fique com o pior.</p>
     <p><strong>Escudo sem proficiência</strong> é mais simples, e vale dizer porque a dúvida
     aparece na mesa: você <strong>não soma o bônus de DEF dele</strong>, e a mão continua
     ocupada. Nada além disso — o escudo não atrapalha, só não ajuda. Se ele for um item
@@ -2134,6 +2140,9 @@
   tratamento: PV máximos reduzidos em um valor igual ao seu nível, e você não recebe
   Ressonância Elemental. A atividade de <strong>Convalescer</strong> num Interlúdio
   também remove.</p>
+  <p><strong>Ferimento Grave não acumula.</strong> Quem já o carrega e ganha outro — por cair
+  de novo, por uma Ruptura, por um item — continua com um só. O que muda é o relógio: a nova
+  fonte reinicia a contagem, e o Descanso Longo que já estava a caminho não vale mais.</p>
 
   <h4>Abalado</h4>
   <p>A versão mental do Ferimento Grave. Depois de uma cena de horror verdadeiro, a
@@ -2299,8 +2308,19 @@
   </div>
 
   <p>Uma habilidade <strong>Híbrida</strong> divide o custo final entre os dois recursos como
-  você quiser, desde que a soma feche. Uma de custo 4 pode sair como 2 MP e 2 SP, 3 MP e
-  1 SP, ou 4 de um só — o que combinar com a descrição.</p>
+  você quiser, desde que a soma feche e <strong>pelo menos 1 saia de cada um</strong>. Uma de
+  custo 4 pode sair como 2 MP e 2 SP, 3 MP e 1 SP, ou 1 MP e 3 SP — mas nunca 4 de um só.
+  Uma habilidade de custo 1 não pode ser Híbrida: não há como dividir.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Por que a Híbrida sempre custa MP</span>
+    <p>Porque o SP volta inteiro num Descanso Curto e o MP só volta dormindo. Se a Híbrida
+    pudesse ser paga só em SP, toda habilidade cara viraria recurso de encontro em vez de
+    recurso de dia — e a Fonte Elemental pura perderia a razão de existir para o Guardião e
+    o Furioso. <strong>1 de MP é o pedágio</strong>: pequeno o bastante para a Híbrida
+    continuar sendo a mão do marcial elemental, grande o bastante para ela contar no fim
+    do dia.</p>
+  </div>
 
   <h4>As duas formas de resolver</h4>
   <div class="destaque">
@@ -2571,6 +2591,10 @@
   custa 1 ponto, média 2, forte 4, como sempre. Cada alvo recebe a sua própria Rolagem de
   Efeito. <strong>Resistência a um tipo de dano</strong> custa 2 pontos e cobre um alvo a mais
   por Grau.</p>
+  <p><strong>Alvo adicional não custa ponto</strong>, e vale dizer porque a dúvida aparece na
+  mesa. O preço já subiu sozinho: a mesma condição média custa 2 de recurso no Grau 1, para
+  1 alvo, e 10 no Grau 5, para 5. É o mesmo preço por alvo nos dois — o Grau cobra por
+  alcançar mais gente, só não cobra duas vezes.</p>
 
   <div class="destaque">
     <span class="rotulo">O modificador entra uma vez</span>
@@ -2629,6 +2653,32 @@
   <h3>Modificadores de custo</h3>
   <p>Depois de somar tudo, ajuste. O custo nunca fica abaixo de 1.</p>
 
+  <div class="destaque">
+    <span class="rotulo">O Teto mede o tamanho, os −1 medem o preço</span>
+    <p>Some duração, efeitos, alcance e os modificadores que <strong>aumentam</strong>. Esse
+    total é o <strong>tamanho</strong> da habilidade, e é ele que não pode passar do Teto de
+    Custo.</p>
+    <p>Só então aplique os <strong>−1</strong>. Eles reduzem o que você paga em MP ou SP —
+    <strong>não</strong> reduzem o tamanho. Uma habilidade de 6 pontos com três limitações
+    continua sendo uma habilidade de 6 pontos: ela só sai mais barata.</p>
+    <p class="formula">Os −1 nunca levam o custo abaixo da <strong>metade do tamanho</strong>,
+    arredondada para cima</p>
+    <p>Uma de tamanho 6 não desce de 3, por mais limitações que carregue. Uma de tamanho 3
+    não desce de 2. E o mínimo absoluto continua sendo 1.</p>
+  </div>
+
+  <div class="nota">
+    <p><strong>Por que as duas regras.</strong> Sem o piso, cinco limitações compram uma
+    habilidade de teto por 1 de recurso — e a limitação deixa de ser uma escolha difícil para
+    virar uma lista de conferência. Sem o Teto medido antes dos descontos, os −1 encolhem a
+    habilidade <em>no papel</em>: dá para entregar onze pontos de efeito dentro de um Teto de
+    seis, e o Teto para de segurar o que foi feito para segurar.</p>
+    <p>Juntas, as duas mantêm intacta a habilidade honesta. <strong>Tempestade Nebulosa</strong>
+    — 6 pontos de dano em área, três limitações reais — tem tamanho 6, cabe no Teto do Grau 3
+    e custa 3 pontos, ou 9 de recurso. Exatamente o que já custava. O que muda é o passo
+    seguinte, que não existe mais.</p>
+  </div>
+
   <div class="grade">
     <div class="cartao">
       <h5>Custa +1</h5>
@@ -2642,7 +2692,7 @@
       <p class="etiqueta">A limitação tem que ser real</p>
       <p>Só <strong>uma vez por combate</strong> · exige as duas mãos livres · causa
       <span class="dado">1d6</span> em você · te deixa <strong>Caído</strong> · zera seu
-      movimento no turno · exige um componente raro · exige preparação de minutos ·
+      movimento até o início do seu próximo turno · exige um componente raro · exige preparação de minutos ·
       só funciona sob uma condição difícil.</p>
     </div>
   </div>
@@ -2741,6 +2791,11 @@
     instante em que aquilo der uma vantagem de regra, virou habilidade e tem custo.</li>
     <li><strong>Ataque ou Efeito, nunca os dois.</strong> Você rola contra a DEF ou contra
     uma defesa passiva. O alvo não faz uma segunda rolagem.</li>
+    <li><strong>O motor não compra efeito de escala narrativa.</strong> Expulsar uma entidade
+    de um corpo, selar uma passagem, virar uma multidão, desfazer um pacto: nada disso tem
+    preço em pontos, porque nada disso cabe nas tabelas. Resolve por teste de atributo contra
+    uma CD do Mestre, ou não resolve. É a mesma fronteira das condições de grau Destino, que
+    também não se compram.</li>
   </ul>
 
   <h4>Manifestação Menor de Afinidade</h4>
@@ -3027,8 +3082,14 @@
       </tbody>
     </table>
   </div>
-  <p>Se a Constituição subir, recalcule os PV como se ela sempre tivesse sido aquela
-  — ganhe o valor retroativo de uma vez. O mesmo vale para o Atributo Divino e o MP.</p>
+  <p>Se a Constituição subir, recalcule os <strong>PV e o SP</strong> como se ela sempre
+  tivesse sido aquela — ganhe o valor retroativo de uma vez. A Constituição entra nos dois:
+  nos PV a cada nível, no SP uma vez só, na base da classe.</p>
+  <p>O <strong>Atributo Divino</strong> funciona diferente, e vale saber por quê. Ele entra no
+  MP <strong>uma única vez</strong>, também na base — o que cresce por nível é um número fixo
+  da classe. Subir o Atributo Divino dá a diferença do modificador, e nada mais: de CAR 16
+  para CAR 18 o modificador vai de +3 para +4, e o MP máximo sobe <strong>1</strong>, em
+  qualquer nível.</p>
 
   <div class="nota">
     <p><strong>As três classes ganham o mesmo total por nível.</strong> Muda só onde
@@ -3060,12 +3121,14 @@
   <h4>Guardião · Tier 3 <small>— a partir do nível 12</small></h4>
   <div class="grade">
     <div class="cartao"><h5>Bastião</h5><p>Enquanto estiver acima de metade dos PV,
-    cada golpe que você recebe é reduzido em um valor igual ao seu
-    <strong>bônus de proficiência</strong>.</p></div>
+    <strong>o primeiro golpe que você recebe a cada rodada</strong> é reduzido em um valor
+    igual ao seu <strong>bônus de proficiência</strong>.</p></div>
     <div class="cartao"><h5>Segunda Muralha</h5><p>Uma vez por rodada, você pode usar
     <strong>Interceptar sem gastar sua reação</strong>.</p></div>
     <div class="cartao"><h5>Provocação Ampla</h5><p>Postura Desafiadora passa a
-    marcar <strong>dois</strong> inimigos, um por vez, gastando 2 SP em cada.</p></div>
+    marcar <strong>dois</strong> inimigos, um por vez, gastando 2 SP em cada. A segunda marca
+    dura <strong>até o fim do seu próximo turno</strong> — manter as duas de pé exige
+    renovar.</p></div>
     <div class="cartao"><h5>Juramento do Portão</h5><p>Escolha um aliado no início do
     combate. Enquanto ele estiver a até 3 metros de você, <strong>nenhum golpe
     isolado pode reduzi-lo abaixo de 1 PV</strong>.</p></div>
@@ -3432,11 +3495,13 @@
     </div>
     <div class="cartao">
       <h5>Montar uma habilidade</h5>
-      <p class="etiqueta">o motor em duas linhas</p>
-      <p class="formula">pontos = duração + efeitos<br>+ alcance ± modificadores</p>
-      <p class="formula">custo = pontos × Grau</p>
-      <p>A duração já traz o primeiro ponto de efeito. Teto: 5 pontos no Grau 1, 6 daí em
-      diante.</p>
+      <p class="etiqueta">o motor em três linhas</p>
+      <p class="formula">tamanho = duração + efeitos<br>+ alcance + modificadores +1</p>
+      <p class="formula">custo = (tamanho − modificadores −1) × Grau</p>
+      <p class="formula">piso: metade do tamanho, para cima</p>
+      <p>A duração já traz o primeiro ponto de efeito. O <strong>tamanho</strong> é o que não
+      passa do Teto: 5 pontos no Grau 1, 6 daí em diante. Os −1 baratearam o custo, não o
+      tamanho. Híbrida paga pelo menos 1 de cada recurso.</p>
     </div>
     <div class="cartao">
       <h5>Quando você cai</h5>

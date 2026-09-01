@@ -96,6 +96,7 @@ class Lutador:
         self.golpe_duplo_usado = False
         self.muralha_usada = False       # Segunda Muralha
         self.anteparo_usado = False      # Anteparo, habilidade do Guardião
+        self.bastiao_usado = False       # Bastião: o primeiro golpe da rodada
         self.furia_cega_usada = False
         self.olho_usado = False
         self.rede_usada = False
@@ -166,10 +167,14 @@ class Lutador:
     # -- ações -------------------------------------------------------------
     def sofrer(self, dano: int) -> None:
         """Reduções pessoais. Quem chama de fora deve usar receber()."""
-        # Bastião: reduz cada golpe em um valor igual à proficiência, enquanto
-        # acima de metade dos PV. Metade do dano rendia +13,4% de vitória.
-        if "Bastião" in self.tecnicas and self.pv > self.pv_max / 2:
+        # Bastião: reduz o PRIMEIRO golpe de cada rodada em um valor igual à
+        # proficiência, enquanto acima de metade dos PV. Valia para todo golpe
+        # até 0.16.3, e medido assim rendia +10,7% de vitória contra bando —
+        # acima do limite de 10 pontos que torna uma técnica obrigatória.
+        if ("Bastião" in self.tecnicas and self.pv > self.pv_max / 2
+                and not self.bastiao_usado):
             dano = max(0, dano - self.prof)
+            self.bastiao_usado = True
         antes = self.pv
         self.pv = max(0, self.pv - dano)
         # Juramento do Portão: o aliado jurado não cai por um golpe só.
@@ -306,6 +311,7 @@ class Lutador:
     def _agir(self, aliados: list["Lutador"], inimigos: list["Lutador"]) -> None:
         self.reacao_disponivel = True
         self.anteparo_usado = False
+        self.bastiao_usado = False
         self.ataques_com_vantagem_contra_mim = 0   # a marca do Feroz expira aqui
         self.furia_gasta = False
         if "Fúria Crescente" in self.tecnicas:
@@ -335,7 +341,14 @@ class Lutador:
         if self.classe == "guardiao" and self.sp >= 2:
             quantos = (2 if "Provocação Ampla" in self.tecnicas
                        else 1 if "Postura Desafiadora" in self.tecnicas else 0)
-            marcados = 0
+            # A segunda marca da Provocação Ampla dura até o fim do próximo
+            # turno do Guardião: solta agora, e ele paga 2 SP de novo se quiser
+            # mantê-la. Valia para sempre até 0.16.3, e por isso a técnica
+            # media +25,1% de vitória contra bando.
+            minhas = [i for i in inimigos if i.vivo and i.marcado_por is self]
+            for extra in minhas[1:]:
+                extra.marcado_por = None
+            marcados = min(len(minhas), 1)
             for m in [i for i in inimigos if i.vivo]:
                 if marcados >= quantos or self.sp < 2:
                     break
