@@ -4,6 +4,49 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.17.1] - 2026-09-07
+
+As duas mudanças saíram do playtest da one-shot **Antes Que Eu Esqueça** —
+Florence Widow, Guardiã de Afrodite no nível 1, mesa de um jogador só. O clímax
+foi resolvido em duas rodadas, e só virou combate de verdade porque o Mestre
+improvisou uma segunda criatura na hora. Nenhuma ficha de criatura, PV ou linha
+da Tábua de Kleos mudou aqui.
+
+### A mesa solo ganha um piso de Kleos
+
+- O Guia mandava usar, contra um herói sozinho, uma criatura de Kleos **inferior
+  ao Kleos do grupo**. Numa mesa de um jogador essa conta bate no chão: o Kleos
+  do grupo é 1, e não existe degrau abaixo de 1.
+- Agora, para o **clímax** de uma mesa solo, conte o herói como **Kleos 2**. As
+  escaramuças do caminho continuam no Kleos 1.
+- **Por quê:** um chefe de Kleos 1 tem **11 PV** na Tábua. Contra um Guardião de
+  nível 1 que acerta com +4 e causa 1d10+2, isso é uma morte em dois golpes — e
+  um crítico resolve antes de o monstro agir duas vezes. A instrução antiga não
+  tinha para onde apontar, e o resultado na mesa foi um clímax que acabou antes
+  de existir.
+- O degrau extra vem com três ressalvas, porque não é de graça: o arquétipo
+  importa mais aqui do que em qualquer outro lugar — o Kleos 2 causa 9 de dano
+  por rodada contra um herói com menos de 20 PV, então um Bruto mata em duas
+  rodadas e Conjurador, Sombra ou Veloz trocam esse dano por pressão; o degrau
+  vai num chefe e não em dois inimigos somados, porque sozinho ninguém cobre a
+  segunda frente; e a rota de fuga continua obrigatória.
+
+### O Efeito mira a defesa fraca do alvo, não a da criatura
+
+- A seção 10 da Forja de Monstros descrevia as duas defesas passivas fortes e a
+  fraca **da criatura**. Faltava o outro lado da mesa: contra o que os Poderes
+  dela devem rolar. O texto novo pede pelo menos um Poder contra a defesa
+  passiva mais baixa de quem vai enfrentá-la.
+- **Por quê:** uma Rolagem de Efeito vale o que valer a defesa que ela escolheu
+  atacar. Um Efeito **+4 contra Vontade 18** acerta **35%** das vezes; o mesmo
+  +4 contra **Reflexos 13** acerta **60%**. No playtest, os dois Poderes do
+  monstro miravam justamente a defesa mais alta da personagem, e ele passou o
+  combate errando. A mesa lê isso como monstro fraco, não como monstro mal
+  apontado.
+- O aviso é maior para o **Conjurador**, que gasta o turno inteiro em Rolagem de
+  Efeito e não tem ataque contra DEF para compensar a rodada perdida. O
+  arquétipo ganhou um item dizendo isso.
+
 ## [0.17.0] - 2026-08-31
 
 Tudo nesta versão saiu de um playtest de campanha longa — Jessica Rondo,
