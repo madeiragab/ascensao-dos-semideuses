@@ -21,7 +21,7 @@ registradas, e a regra só fecha depois de sobreviver aos dois. As vezes em que 
 números contrariaram a intuição estão documentadas mais abaixo — e também as que
 só apareceram jogando, porque as duas listas não se sobrepõem.
 
-**Versão atual:** 0.17.0 · 31/08/2026 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.17.1 · 07/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
