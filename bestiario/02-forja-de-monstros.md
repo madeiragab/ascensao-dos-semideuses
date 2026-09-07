@@ -120,6 +120,19 @@ consegue narrar o primeiro turno dela sem consultar nada, simplifique.
 Cada criatura tem **duas defesas passivas fortes** e **uma fraca**. Escolha conforme
 a natureza dela: um autômato é forte em Fortitude e Vontade e fraco em Reflexos.
 
+**E aponte os Poderes dela para a defesa fraca do alvo, não para a dela.** As três
+linhas acima dizem o que a criatura resiste; na hora de escrever os Poderes, o que
+decide é o outro lado da mesa. Uma Rolagem de Efeito vale o que valer a defesa que ela
+escolheu atacar: um Efeito +4 contra Vontade 18 acerta 35% das vezes, e o mesmo +4
+contra Reflexos 13 acerta 60%. Uma criatura cujos Poderes miram todos a defesa mais
+alta do grupo passa o combate errando — e a mesa lê isso como monstro fraco, não como
+monstro mal apontado.
+
+O cuidado é maior com o **Conjurador**, que gasta o turno inteiro em Rolagem de Efeito
+e não tem ataque contra DEF para compensar a rodada perdida. Antes de fechar a ficha,
+olhe as três defesas passivas de quem vai enfrentá-la e garanta pelo menos um Poder
+contra a mais baixa.
+
 ### Orçamento por Kleos
 
 | Kleos | Ataques na ação | Traços | Poderes | Arremetidas | Recusas |
@@ -169,6 +182,7 @@ Bate pouco, muda o campo. *Esfinge, Hécate, Circe.*
 - **−40% do dano por rodada**
 - Ganha **+2 Poderes** e **+1 em Efeito**
 - Costuma usar Efeito contra defesas passivas em vez de atacar a DEF
+- Pelo menos um Poder deve mirar a **defesa passiva mais fraca do alvo** ([seção 10](#secao-10))
 
 ### Sombra
 Existe menos do que parece. *Espectro, espírito do nevoeiro, aparição.*
