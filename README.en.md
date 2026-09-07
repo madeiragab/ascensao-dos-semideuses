@@ -23,7 +23,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.17.0 · 31/08/2026 · [Changelog](CHANGELOG.md)
+**Current version:** 0.17.1 · 07/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
