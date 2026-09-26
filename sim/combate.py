@@ -223,11 +223,14 @@ class Lutador:
         if piso and self.pv == piso:
             self.pisos.remove(piso)
             self.quebrar_fase()
-        # Juramento do Portão: o aliado jurado não cai por um golpe só.
+        # Juramento do Portão: o aliado jurado não cai por um golpe só — e o
+        # que passaria de 1 PV, quem jurou sofre. Sem esse preço a técnica
+        # media +13,2 contra o chefe em Fases; com ele, +8,9.
         if self.pv == 0 and antes > 1:
             for a in self.aliados:
                 if a.vivo and a is not self and a.protegido is self:
                     self.pv = 1
+                    a.sofrer(dano - (antes - 1))
                     break
 
     def quebrar_fase(self) -> None:
@@ -246,11 +249,21 @@ class Lutador:
                 guardiao.muralha_usada = True
             else:
                 guardiao.reacao_disponivel = False
+            # Interceptar: o Guardião assume dois terços do golpe e o aliado
+            # ainda sofre o terço que sobra. Assumia o golpe inteiro até a
+            # 0.18.0 e media +11,5 contra o chefe; assim, +9,6.
+            terco = dano // 3
+            assume = dano - terco
             # Ascensão do Guardião reduz à metade o que ele assume no lugar
-            recebe = dano // 2 if "Muralha" in guardiao.tecnicas else dano
+            recebe = assume // 2 if "Muralha" in guardiao.tecnicas else assume
             guardiao.sofrer(recebe)
+            if terco:
+                self.sofrer(terco)
+            # Represália: dano igual à proficiência. Era Força + nível no
+            # livro (e Força + proficiência no motor), e media +12,4 contra o
+            # chefe em Fases; com a proficiência, +1,5.
             if "Represália" in guardiao.tecnicas and atacante is not None:
-                atacante.sofrer(guardiao.prof + max(0, guardiao.dano_fixo))
+                atacante.sofrer(guardiao.prof)
             return
         escora = self._quem_ampara()
         if escora is not None:
@@ -287,7 +300,11 @@ class Lutador:
         return None
 
     def defesa_efetiva(self, total_do_ataque: int) -> int:
-        """Aplica Escudo Vínculo: reação, 2 SP, +proficiência na DEF.
+        """Aplica Escudo Vínculo: reação, 2 SP, +2 na DEF.
+
+        Era +proficiência até a 0.18.0, e media +10,8 contra o chefe e +12,1
+        contra o bando — acima do limite de 10 que torna uma técnica
+        obrigatória. Com +2, +7,1 e +6,0.
 
         Só é gasto quando faria diferença — o Guardião vê a rolagem antes de
         decidir, o que é generoso mas evita desperdício e mede o teto da técnica.
@@ -299,11 +316,11 @@ class Lutador:
             "Escudo Vínculo" in self.tecnicas
             and self.reacao_disponivel
             and self.sp >= 2
-            and base <= total_do_ataque < base + self.prof
+            and base <= total_do_ataque < base + 2
         ):
             self.sp -= 2
             self.reacao_disponivel = False
-            return base + self.prof
+            return base + 2
         return base
 
     def atacar(
@@ -376,6 +393,11 @@ class Lutador:
             self.resolver_fim_de_turno()
             return
 
+        # Olho do Futuro: este turno já foi gasto na rodada passada.
+        if getattr(self, "turno_emprestado", False):
+            self.turno_emprestado = False
+            return
+
         alvos = [i for i in inimigos if i.vivo]
         if not alvos:
             return
@@ -428,6 +450,19 @@ class Lutador:
             self.atacar(alvo, vantagem=alvo.consumir_vantagem())
 
     def _turno_furioso(self, alvo: "Lutador", inimigos=None) -> None:
+        # Fúria Cega: uma vez por combate, COM A AÇÃO, um ataque com
+        # Desvantagem em cada inimigo ao alcance. Até a 0.18.0 vinha por cima
+        # da ação de Ataque, em até três inimigos, e media +12,7 contra o
+        # bando; no lugar da ação, +7,6. Contra um chefe sozinho não se usa.
+        vivos = [i for i in (inimigos or []) if i.vivo]
+        if ("Fúria Cega" in self.tecnicas and not self.furia_cega_usada
+                and len(vivos) >= 2):
+            self.furia_cega_usada = True
+            for i in vivos:
+                self.atacar(i, desvantagem=True)
+            self.ataques_com_vantagem_contra_mim = 99
+            self._golpe_duplo(inimigos)
+            return
         pv_antes = alvo.pv
         if self.regras == "v0":
             self._feroz_e_pesado_juntos(alvo)
@@ -460,16 +495,9 @@ class Lutador:
             if sobra:
                 self.atacar(min(sobra, key=lambda x: x.pv))
 
-        # Fúria Cega: uma vez por combate, um ataque em cada inimigo ao alcance.
-        if ("Fúria Cega" in self.tecnicas and not self.furia_cega_usada
-                and len([i for i in (inimigos or []) if i.vivo]) >= 2):
-            self.furia_cega_usada = True
-            # um ataque em cada inimigo, mas todos com Desvantagem: é um golpe
-            # largo e descontrolado, não cinco ataques limpos.
-            for i in [x for x in (inimigos or []) if x.vivo][:3]:
-                self.atacar(i, desvantagem=True)
-            self.ataques_com_vantagem_contra_mim = 99
+        self._golpe_duplo(inimigos)
 
+    def _golpe_duplo(self, inimigos) -> None:
         # Golpe Duplo: ação bônus, 2 SP, −2 na rolagem
         if ("Golpe Duplo" in self.tecnicas and self.sp >= 2
                 and not self.golpe_duplo_usado):
@@ -545,7 +573,9 @@ class Lutador:
                 if a.vivo and a is not self:
                     a.ataques_com_vantagem_contra_mim = 0
                     a.bencao = 0
-                    a.condicoes["favor"] = 2
+                    # Vantagem até o fim do próximo turno de cada um. Eram
+                    # duas rodadas até a 0.18.0: +11,7 e +13,0; agora +4,9 e +7,5.
+                    a.condicoes["favor"] = 1
             # o motor lê "favor" como Vantagem no próximo ataque
         # --- Bênção da Coragem: +1d4 no ataque de um aliado por uma rodada
         if "Bênção da Coragem" in self.tecnicas and self.mp >= 2:
@@ -562,9 +592,20 @@ class Lutador:
                 self.mp -= 1
                 alvo_v.aplicar_condicao("cega", 1)
         # --- Olho do Futuro: um turno inteiro a mais, uma vez por combate
+        # O turno a mais é emprestado do futuro: sai o da próxima rodada, e
+        # nele nenhuma habilidade passa de metade do Teto. Era um turno de
+        # graça até a 0.18.0, e media +17,9 contra o chefe; assim, +9,8.
         if ("Olho do Futuro" in self.tecnicas and not self.olho_usado):
             self.olho_usado = True
-            self._turno_oraculo_base(aliados, alvos)
+            teto = getattr(self, "teto", None)
+            if teto is not None:
+                self.teto = max(1, teto // 2)
+            try:
+                self._turno_oraculo_base(aliados, alvos)
+            finally:
+                if teto is not None:
+                    self.teto = teto
+            self.turno_emprestado = True
         return self._turno_oraculo_base(aliados, alvos)
 
     def _turno_oraculo_base(self, aliados: list["Lutador"], alvos: list["Lutador"]) -> None:

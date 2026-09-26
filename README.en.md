@@ -314,17 +314,13 @@ powershell -ExecutionPolicy Bypass -File test.ps1
 The Player's Book is complete enough to play from level 1 to 20. What's left is
 refinement:
 
-1. **Six techniques in the known-debt list.** Shield Bond, Intercept, Net of Fate
-   and Eye of the Future measure between +11% and +18% win rate, over the declared
-   limit of 10. Retaliation (Represália) and Oath of the Gate (Juramento do Portão) joined in 0.18.0: against a boss in
-   Phases the fight runs longer, and keeping an ally standing became worth +12% and
-   +13%. They are listed in `sim/tecnicas.py`, do not block the regression, and
-   print on every run until they are decided. The same holds for one duel,
-   Guardian vs Oracle at level 5 (81%), in `sim/duelo.py`.
-2. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
+1. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
    the rest depend on positioning, forced movement, fear or rerolls, which the
-   engine does not model. They need a table, not a simulator.
-3. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
+   engine does not model. They need a table, not a simulator. The known-debt list,
+   which held the measured techniques above the limit, **is empty since 0.18.0** —
+   the six that lived there were adjusted, and the Guardian vs Oracle duel is back
+   in range.
+2. **Long-form drachma economy.** Initial prices and rewards work, but inflation,
    upkeep and rewards across long campaign arcs still need measurement.
 
 ### Known limits of the simulator

@@ -63,9 +63,11 @@ habilidade disser o contrário.
   estabilizar automaticamente uma criatura Agonizante adjacente. Isso não cura
   PV; sem gastar Tratamento, ainda existe a ação de Intuição CD 10.
 
-**Cura por MP não gasta Tratamentos.** A Palavra Curativa do Oráculo e qualquer
-habilidade médica paga em MP ficam fora desse limite — é o que torna um curandeiro
-no grupo diferente de um kit de primeiros socorros.
+**Cura por MP não gasta Tratamentos.** A Palavra Curativa do Oráculo fica fora
+desse limite — é o que torna um curandeiro no grupo diferente de um kit de
+primeiros socorros. Uma habilidade **Médica**, que paga em SP, gasta um
+Tratamento a cada uso que cura PV: sem isso o SP, que volta inteiro num Descanso
+Curto, virava cura sem fim.
 
 ### 54.5 Recuperação total
 

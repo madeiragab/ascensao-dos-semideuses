@@ -333,19 +333,15 @@ não tem mais nenhuma linha vermelha. O que falta é de outra natureza:
    NPCs — e acharam, juntos, oito coisas que dezoito arquivos de simulação não
    tinham achado, quase todas na fronteira entre duas regras que sozinhas estavam
    certas. Uma mesa com quatro pessoas discutindo tática vai achar outras.
-2. **Seis técnicas na dívida conhecida.** Escudo Vínculo, Interceptar, Rede do
-   Destino e Olho do Futuro medem entre +11% e +18% de vitória, acima do limite de
-   10. Represália e Juramento do Portão entraram na 0.18.0: contra um chefe em
-   Fases a luta dura mais, e segurar aliado de pé passou a render +12% e +13%.
-   Estão listadas em `sim/tecnicas.py`, não bloqueiam a regressão e aparecem em
-   todo run até serem decididas. O mesmo vale para um duelo, Guardião contra
-   Oráculo no nível 5 (81%), em `sim/duelo.py`.
-3. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
+2. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
    outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem.
-   Precisam de mesa, não de simulador.
-4. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
+   Precisam de mesa, não de simulador. A lista de dívida conhecida, que guardava
+   as técnicas medidas acima do limite, **está vazia desde a 0.18.0** — as seis
+   que moravam lá foram ajustadas, e o duelo Guardião x Oráculo voltou para a
+   faixa.
+3. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
    valem pelo que abrem de ficção, e nenhum motor de combate julga isso.
-5. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
+4. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
    fecham a conta de um item por arco; falta medir inflação e manutenção.
 
 ### Limites conhecidos do simulador

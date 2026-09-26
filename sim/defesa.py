@@ -33,6 +33,7 @@ Rodar de dentro da pasta sim/:
     python defesa.py
 """
 
+import pathlib
 import random
 import sys
 
@@ -238,7 +239,8 @@ def main() -> None:
             falhas.append(f"{jogadores} jogador(es): a Defesa com ação mede "
                           f"{media['acao']:+.1%} — o aviso do livro ficou errado")
 
-    livro = open("../template/livro-do-jogador.html", encoding="utf-8").read()
+    raiz = pathlib.Path(__file__).resolve().parent.parent
+    livro = (raiz / "template" / "livro-do-jogador.html").read_text(encoding="utf-8")
     for frase in ("+2 DEF para 1 alvo", "Monte a Defesa como reação",
                   "até o início do seu próximo turno"):
         if frase not in livro:

@@ -6,10 +6,16 @@ revisão.
 
 ## [0.18.0] - 2026-09-26
 
-As três mudanças saíram de uma campanha solo longa — David Davis, Guardião de
-Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As três queixas do
+As três mudanças grandes saíram de uma campanha solo longa — David Davis, Guardião
+de Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As três queixas do
 jogador foram medidas antes de virar regra, e o simulador confirmou as três. Uma
 delas escondia um erro do próprio simulador.
+
+E a versão fecha a conta que ficou aberta: **nenhuma dívida conhecida** sobra no
+simulador. As seis técnicas que mediam acima de 10 pontos foram ajustadas, o duelo
+Guardião x Oráculo voltou para a faixa, a Fonte Médica parou de divergir entre
+livro e ficha, e o conversor do Bestiário parou de partir fichas de criatura ao
+meio.
 
 ### O chefe tem Fases
 
@@ -33,9 +39,9 @@ delas escondia um erro do próprio simulador.
 - **Só o chefe, e isso foi medido.** Com Fase em toda criatura, cinco de Kleos 4
   derrubavam o grupo de nível 12 para **21%** de vitória, contra 69%. O golpe grande
   apagando lacaio é o prêmio de quem o montou.
-- **Três Fases por duelista foi medido e piora**: a Oráculo, que depende de dois
+- **Três Fases por duelista foi medido e piora**: a Oráculo, que depende de poucos
   golpes grandes por dia, fica sem como virar. Com duas, o espelho do Furioso cai
-  de **77%** para quem começa para **64% a 71%**.
+  de **77%** para quem começa para **63% a 71%**.
 
 ### A tabela de Kleos do Grupo, de um a seis jogadores
 
@@ -120,8 +126,71 @@ delas escondia um erro do próprio simulador.
   bater. Por isso a Defesa nova é reativa — e as Fases, que alongam a luta, fazem
   ela render mais, sobretudo na mesa solo.
 
+### Seis técnicas saem da dívida — e a Fúria Cega entra na linha
+
+O limite do `tecnicas.py` é 10 pontos de vitória: acima disso a técnica vira
+escolha obrigatória. Seis moravam acima dele, na lista de dívida conhecida — quatro
+de antes, e duas que as Fases empurraram para lá, porque a luta mais longa faz
+segurar um aliado de pé valer mais. Cada uma foi ajustada e medida (chefe / bando,
+nível 12):
+
+| Técnica | Era | Agora | Antes | Depois |
+|---|---|---|---|---|
+| **Escudo Vínculo** | + proficiência na DEF | **+2** na DEF | +10,8 / +12,1 | +7,1 / +6,0 |
+| **Interceptar** | recebe o golpe inteiro | recebe **dois terços**; o aliado sofre o terço que sobra | +11,5 / +11,2 | +9,6 / +6,9 |
+| **Represália** | Força + nível de dano | dano igual à **proficiência** | +12,4 / +6,8 | +1,5 / +2,7 |
+| **Juramento do Portão** | o jurado fica em 1 PV | fica em 1 PV, e **quem jurou sofre o excesso** | +13,2 / +5,9 | +8,9 / +5,7 |
+| **Rede do Destino** | Vantagem até o fim da próxima rodada | Vantagem **até o fim do próximo turno de cada um** | +11,7 / +13,0 | +4,9 / +7,5 |
+| **Olho do Futuro** | um turno completo a mais | o turno é **emprestado**: você não age na próxima rodada, e nele nada passa de **metade do Teto** | +17,9 / +12,8 | +9,8 / +8,7 |
+
+- A **Fúria Cega** não morava na dívida, mas passou da linha quando o Interceptar
+  mudou o grupo de referência (bando **+12,7**). Ela passa a **gastar a ação**:
+  um ataque em cada criatura ao alcance, **todos com Desvantagem** — antes vinha
+  por cima da ação de Ataque. Agora **+7,6** contra o bando; contra um chefe
+  sozinho, nada, como antes.
+- Represália mede baixo (+1,5 / +2,7) e fica assim de propósito: ela é o
+  complemento do Interceptar, não um segundo motor de dano.
+- Textos trocados no Capítulo Três (Tier 1) e no Capítulo Nove (Tiers 2 e 3) do
+  Livro do Jogador, e palavra por palavra na lista de técnicas do construtor. As
+  notas automáticas da ficha acompanham: Represália mostra a proficiência, Escudo
+  Vínculo mostra +2.
+
+### A Fonte Médica paga SP e gasta Tratamento
+
+- A tabela de Fontes do Livro I dizia que a Médica paga **SP**; a página de consulta
+  rápida e o construtor diziam **MP**. Vale a tabela: **a Médica paga SP**.
+- E, paga em SP, **cada uso que cura PV gasta um Tratamento**. Sem isso o SP, que
+  volta inteiro num Descanso Curto, virava cura sem fim — a regra de Tratamentos
+  existe justamente para limitar isso. A cura paga em MP (Palavra Curativa)
+  continua fora do limite.
+- O construtor oferece "Médica · paga SP e gasta Tratamento ao curar" e escreve
+  "e 1 Tratamento" no custo de uma habilidade Médica que cura. `regras/interludio.md`
+  diz o mesmo.
+
+### O duelista paga o Grau que basta
+
+- O duelo **Guardião contra Oráculo no nível 5** vencia **81%**, acima do limite de
+  80% do `duelo.py`, e estava na dívida. A causa era o simulador jogando mal: com
+  Fases, o excesso se perde, e o duelista pagava sempre o Grau cheio — dois golpes
+  de Grau 2 numa Fase que o Grau 1 já quebrava.
+- Com o Grau gravado desta versão, a habilidade pode ser paga no Grau dela **ou
+  abaixo**. O duelista do simulador passou a pagar **o menor Grau cujo golpe médio
+  quebra a Fase** do outro. O mesmo duelo cai para **73%**, e todo par fica entre
+  **38% e 75%**.
+- O Guia do Mestre ganhou o aviso ("o duelista paga o Grau que basta") e a tabela
+  do duelo foi medida de novo. O Livro do Jogador já dizia que contra o chefe "às
+  vezes vale pagar um Grau menor"; agora diz que no duelo isso pesa ainda mais.
+- O grupo contra o chefe **continua** medido pagando o Grau cheio, de propósito: a
+  calibração inteira da Tábua foi feita assim, e o grupo que economiza Grau só
+  ganha folga.
+
 ### Correções
 
+- **O Bestiário partia fichas de criatura ao meio.** O conversor de markdown
+  (`build_livros.py`) lia só a primeira linha de cada item de lista; a
+  continuação indentada virava parágrafo solto fora da lista. Isso cortava a
+  maioria dos Traços e Ações das fichas publicadas. Agora a linha indentada é do
+  item de cima, em lista com marcador e numerada.
 - A nota do marcial elemental ainda dizia que uma Híbrida ligada ao golpe podia ser
   paga **inteiramente em SP**, contra a regra da 0.17.0. Agora diz "quase toda em SP,
   com o mínimo de 1 MP". O Mestre dos logs tropeçou nessa contradição duas vezes.
@@ -149,15 +218,20 @@ delas escondia um erro do próprio simulador.
   com a de um herói da mesma luta, em vez de um piso fixo de 50%; `graus.py` aceita
   +1 DEF permanente até 10 pontos (8,3 no nível 20, contra 5,8 antes das Fases);
   `completo.py` aceita 100% na mesa de cinco do nível 20, o topo conhecido da escala.
-- Dívida nova, que espera decisão de design: **Represália** (+12,4) e **Juramento
-  do Portão** (+13,2) contra o chefe em Fases, em `tecnicas.py`; e o duelo
-  **Guardião contra Oráculo no nível 5** (81%), em `duelo.py`.
+- **A dívida conhecida está vazia**: `DIVIDA_CONHECIDA` em `tecnicas.py` e
+  `DIVIDA_DUELO` em `duelo.py` não têm mais nome. A lista e o mecanismo ficam, para
+  a próxima que passar da linha ser anotada à vista e não escondida.
+- `duelo.py` ganhou `grau_que_basta()`: com Fases, o duelista paga o menor Grau
+  que quebra a Fase do outro.
+- `sim/defesa.py` lê o livro a partir da própria pasta, e roda de qualquer
+  diretório — o `test.ps1` da CI roda da raiz.
 - `sim/defesa.py` mede a Defesa reativa, a Desvantagem reativa e a Defesa com ação,
   de 1 a 4 jogadores, e **falha** se a reativa sair de −1 a +10 pontos, se se
   afastar mais de 4 da Desvantagem, ou se a versão com ação deixar de ser pior que
   atacar — o aviso do livro dependeria disso.
 - `sim/ficha.py` confere o Grau gravado, o Teto pelo Grau da habilidade, a CD nova,
-  a Assinatura e a Defesa de +2, no livro e no construtor.
+  a Assinatura e a Defesa de +2, no livro e no construtor; e que a Fonte Médica
+  paga o mesmo recurso na tabela, na consulta rápida e na ficha.
 
 ## [0.17.1] - 2026-09-07
 
