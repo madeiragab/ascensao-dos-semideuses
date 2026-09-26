@@ -133,7 +133,7 @@ folded into Survival.
 with gear at their level's Grade and spend MP and SP on damage and on control via
 Effect rolls; creatures come in with area Powers, Onslaughts, Refusals, Lair Will
 and Presence. With everything switched on and the boss in Phases, a fair encounter
-lands between 60% and 89% wins, 2.7 to 3.7 rounds, with 1.4 to 2.4 of three heroes
+lands between 53% and 90% wins, 2.7 to 3.7 rounds, with 1.2 to 2.5 of three heroes
 still standing.
 
 Six things measurement changed in the books: the boss fell to a single blow (an

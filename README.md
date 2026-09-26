@@ -176,8 +176,8 @@ não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeir
 entram com equipamento no Grau do nível, gastam MP e SP em habilidade de dano e
 em controle por Rolagem de Efeito; as criaturas entram com Poder de área,
 Arremetidas, Recusas, Vontade do Lugar e Presença. Com tudo ligado dos dois
-lados e o chefe em Fases, o encontro justo entrega de 60% a 89% de vitória, de 2,7
-a 3,7 rodadas, com 1,4 a 2,4 heróis de pé de três.
+lados e o chefe em Fases, o encontro justo entrega de 53% a 90% de vitória, de 2,7
+a 3,7 rodadas, com 1,2 a 2,5 heróis de pé de três.
 
 Seis coisas que a medição mudou no livro, e que valem como aviso a quem for
 mexer nos números:
