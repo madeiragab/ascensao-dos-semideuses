@@ -1015,7 +1015,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
           <option value="elemental">Elemental · paga MP</option>
           <option value="fisica">Física · paga SP</option>
           <option value="hibrida">Híbrida · divide MP e SP</option>
-          <option value="medica">Médica · paga MP</option>
+          <option value="medica">Médica · paga SP e gasta Tratamento ao curar</option>
         </select></div>
       <div class="f hb-so-ativa"><label>Descritor</label><input type="text" id="hbDescritor" placeholder="Água, sombra, aço…"></div>
       <div class="f hb-so-ativa"><label>Grau da habilidade</label><select id="hbGrau"></select></div>
@@ -1285,16 +1285,16 @@ function habilidadeDaClasse(chave, prof, sab) {
    Capítulo Nove. Nomes e textos são os do livro, palavra por palavra. */
 var TECNICAS = {
   guardiao: [
-    { t: 1, n: "Escudo Vínculo", d: "Ao ser atingido, use sua reação e 2 SP para somar sua proficiência à DEF contra aquele ataque — e possivelmente transformá-lo em erro." },
-    { t: 1, n: "Interceptar", d: "Use sua reação para receber no seu lugar o dano de um ataque que atingiria um aliado adjacente." },
+    { t: 1, n: "Escudo Vínculo", d: "Ao ser atingido, use sua reação e 2 SP para somar +2 à DEF contra aquele ataque — e possivelmente transformá-lo em erro." },
+    { t: 1, n: "Interceptar", d: "Use sua reação para receber no seu lugar dois terços do dano de um ataque que atingiria um aliado adjacente. Ele ainda sofre o terço que sobra, arredondado para baixo." },
     { t: 1, n: "Postura Desafiadora", d: "Gaste 2 SP para marcar um inimigo. Ele ataca qualquer alvo que não seja você com Desvantagem, até o fim do seu próximo turno." },
     { t: 1, n: "Pé Firme", d: "Rolagens de Efeito para te empurrar, puxar ou derrubar têm Desvantagem — e qualquer deslocamento forçado contra você é reduzido à metade." },
     { t: 1, n: "Vigor do Sobrevivente", d: "Seus PV máximos aumentam em um valor igual ao seu nível. Simples e sempre ligado." },
     { t: 2, n: "Fôlego de Ferro", d: "Uma vez por combate, ação bônus e 3 SP: recupere PV iguais ao seu nível. Segurar a linha custa sangue, não fôlego." },
     { t: 2, n: "Muro de Escudos", d: "Aliados adjacentes a você recebem +1 DEF. Exige que você esteja empunhando um escudo." },
-    { t: 2, n: "Represália", d: "Quando você usa Interceptar, quem desferiu o golpe sofre dano igual ao seu modificador de Força mais seu nível." },
+    { t: 2, n: "Represália", d: "Quando você usa Interceptar, quem desferiu o golpe sofre dano igual ao seu bônus de proficiência." },
     { t: 3, n: "Bastião", d: "Enquanto estiver acima de metade dos PV, o primeiro golpe que você recebe a cada rodada é reduzido em um valor igual ao seu bônus de proficiência." },
-    { t: 3, n: "Juramento do Portão", d: "Escolha um aliado no início do combate. Enquanto ele estiver a até 3 metros de você, nenhum golpe isolado pode reduzi-lo abaixo de 1 PV." },
+    { t: 3, n: "Juramento do Portão", d: "Escolha um aliado no início do combate. Enquanto ele estiver a até 3 metros de você, nenhum golpe isolado pode reduzi-lo abaixo de 1 PV — e o dano que passaria disso, quem sofre é você." },
     { t: 3, n: "Provocação Ampla", d: "Postura Desafiadora passa a marcar dois inimigos, um por vez, gastando 2 SP em cada. A segunda marca dura até o fim do seu próximo turno." },
     { t: 3, n: "Segunda Muralha", d: "Uma vez por rodada, você pode usar Interceptar sem gastar sua reação." },
   ],
@@ -1309,7 +1309,7 @@ var TECNICAS = {
     { t: 2, n: "Rasgo", d: "Quando acerta com Ataque Pesado, o alvo fica Sangrando 1." },
     { t: 2, n: "Sem Recuo", d: "Você é imune a Amedrontado e a Aterrorizado. Nada te faz sair de uma briga." },
     { t: 3, n: "Coração de Ares", d: "Seus ataques são Acerto Crítico em 19 e 20 naturais." },
-    { t: 3, n: "Fúria Cega", d: "Uma vez por combate, ataque todas as criaturas ao seu alcance, uma vez cada. Você fica Desprevenido até seu próximo turno." },
+    { t: 3, n: "Fúria Cega", d: "Uma vez por combate, com sua ação, ataque todas as criaturas ao seu alcance, uma vez cada, com Desvantagem. Você fica Desprevenido até seu próximo turno." },
     { t: 3, n: "Massacre", d: "Quando você reduz um inimigo a 0 PV, faça mais um ataque de graça contra outro alvo ao alcance. Não faz nada contra um chefe sozinho, e é devastadora contra um bando." },
   ],
   oraculo: [
@@ -1323,8 +1323,8 @@ var TECNICAS = {
     { t: 2, n: "Fio Cortado", d: "Reação e 3 MP: force um inimigo a rerrolar um Acerto Crítico. O segundo resultado vale." },
     { t: 2, n: "Voz Serena", d: "Ação bônus e 2 MP: remova Amedrontado ou Confuso de um aliado que possa te ouvir." },
     { t: 3, n: "Fonte Profunda", d: "Fonte de Mana passa a devolver o dobro de MP, e pode ser usada como ação bônus." },
-    { t: 3, n: "Olho do Futuro", d: "Uma vez por combate, você age duas vezes na mesma rodada — turno completo, imediatamente depois do seu." },
-    { t: 3, n: "Rede do Destino", d: "Uma vez por combate, com uma ação: todos os aliados que você veja têm Vantagem até o fim da próxima rodada." },
+    { t: 3, n: "Olho do Futuro", d: "Uma vez por combate, você age duas vezes na mesma rodada — um turno a mais, imediatamente depois do seu. É um turno emprestado do futuro: você não age na próxima rodada, e nele nenhuma habilidade passa de metade do seu Teto." },
+    { t: 3, n: "Rede do Destino", d: "Uma vez por combate, com uma ação: todos os aliados que você veja têm Vantagem nos ataques até o fim do próximo turno de cada um." },
   ],
 };
 
@@ -1358,15 +1358,14 @@ var EFEITO_TECNICA = {
   },
   "Represália": {
     nota: function (c) {
-      return "Represália: quem acerta o golpe que você Interceptou sofre " +
-        (c.mFor === null ? "FOR + " + c.nivel : String(c.mFor + c.nivel)) + " de dano.";
+      return "Represália: quem acerta o golpe que você Interceptou sofre " + c.prof + " de dano.";
     }
   },
   "Fôlego de Ferro": {
     nota: function (c) { return "Fôlego de Ferro: recupera " + c.nivel + " PV, uma vez por combate."; }
   },
   "Escudo Vínculo": {
-    nota: function (c) { return "Escudo Vínculo: reação e 2 SP para somar +" + c.prof + " à DEF contra um ataque."; }
+    nota: function (c) { return "Escudo Vínculo: reação e 2 SP para somar +2 à DEF contra um ataque."; }
   },
   "Muro de Escudos": {
     nota: function () { return "Muro de Escudos: aliados adjacentes recebem +1 DEF — o bônus é deles, não seu."; }
@@ -3887,7 +3886,10 @@ function lerConstrutorHabilidade() {
   var resolucao = exigido.tipo || v("hbResolucao");
   var defesa = exigido.defesa || v("hbDefesa");
 
-  var recurso = fonte === "fisica" ? "SP" : "MP";
+  // Física e Médica pagam SP; Elemental paga MP. A Médica ainda gasta um
+  // Tratamento a cada uso que cura — sem isso o SP, que volta inteiro num
+  // Descanso Curto, virava cura sem fim.
+  var recurso = (fonte === "fisica" || fonte === "medica") ? "SP" : "MP";
   // Híbrida paga pelo menos 1 de cada: o SP volta inteiro num Descanso Curto e
   // o MP só volta dormindo, então uma Híbrida paga só em SP tiraria a
   // habilidade cara do orçamento do dia e aposentaria a Elemental pura.
@@ -3913,7 +3915,9 @@ function lerConstrutorHabilidade() {
   // E os números, um por linha rotulada — a linha corrida com tudo junto era
   // ilegível na mesa e pior ainda impressa.
   var ficha = [];
-  ficha.push(["Custo", pagamento + (sustentar ? ", sustentar " + sustentar + "/rodada" : "")]);
+  var curaMedica = fonte === "medica" && escolhidos.some(function (o) { return o.chave === "cura"; });
+  ficha.push(["Custo", pagamento + (sustentar ? ", sustentar " + sustentar + "/rodada" : "") +
+    (curaMedica ? " e 1 Tratamento" : "")]);
   var somaOMod = { "Dano": 1, "Dano contínuo": 1, "Cura": 1, "PV temporários": 1 };
   campos.forEach(function (c) {
     ficha.push([c.rotulo, c.texto +

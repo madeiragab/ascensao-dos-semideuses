@@ -98,6 +98,22 @@ def tabela(linhas: list[str]) -> str:
             + "</thead>\n<tbody>\n" + corpo + "\n</tbody>\n</table></div>")
 
 
+def continuacao_de_item(linhas: list[str], i: int) -> tuple[list[str], int]:
+    """As linhas indentadas logo abaixo de um item de lista são dele.
+
+    Para numa linha vazia, numa linha sem recuo, ou num novo item."""
+    resto = []
+    while i < len(linhas):
+        bruta = linhas[i]
+        n = bruta.strip()
+        if (not n or not bruta[:1] in (" ", "\t")
+                or n.startswith(("- ", "* ")) or re.match(r"^\d+\.\s", n)):
+            break
+        resto.append(n)
+        i += 1
+    return resto, i
+
+
 def converter(md: str) -> str:
     """Markdown → HTML, com tratamento especial das fichas de criatura."""
     linhas = md.split("\n")
@@ -271,18 +287,25 @@ def converter(md: str) -> str:
             continue
 
         # ---- listas
+        #
+        # Um item pode continuar nas linhas de baixo, indentadas. Até a 0.18.0
+        # o conversor lia só a primeira linha, e a continuação virava parágrafo
+        # solto fora da lista — o que partia ao meio a maioria dos Traços e
+        # Ações das fichas de criatura publicadas.
         if cru.startswith(("- ", "* ")):
             itens = []
             while i < len(linhas) and linhas[i].strip().startswith(("- ", "* ")):
-                itens.append(f"<li>{inline(linhas[i].strip()[2:])}</li>")
-                i += 1
+                texto = linhas[i].strip()[2:]
+                resto, i = continuacao_de_item(linhas, i + 1)
+                itens.append(f"<li>{inline(' '.join([texto] + resto))}</li>")
             saida.append("<ul>" + "".join(itens) + "</ul>")
             continue
         if re.match(r"^\d+\.\s", cru):
             itens = []
             while i < len(linhas) and re.match(r"^\d+\.\s", linhas[i].strip()):
-                itens.append(f"<li>{inline(re.sub(r'^\d+\.\s*', '', linhas[i].strip()))}</li>")
-                i += 1
+                texto = re.sub(r'^\d+\.\s*', '', linhas[i].strip())
+                resto, i = continuacao_de_item(linhas, i + 1)
+                itens.append(f"<li>{inline(' '.join([texto] + resto))}</li>")
             saida.append("<ol>" + "".join(itens) + "</ol>")
             continue
 

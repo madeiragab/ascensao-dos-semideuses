@@ -31,12 +31,12 @@ NIVEL = 12
 TECNICAS = [
     # ---- Guardião
     ("Postura Desafiadora", "guardiao", "marca: o inimigo ataca com Desvantagem"),
-    ("Escudo Vínculo",      "guardiao", "reação, 2 SP, +proficiência na DEF"),
+    ("Escudo Vínculo",      "guardiao", "reação, 2 SP, +2 na DEF"),
     ("Vigor do Sobrevivente","guardiao", "PV máximos +nível"),
-    ("Interceptar",         "guardiao", "assume o golpe que derrubaria um aliado"),
+    ("Interceptar",         "guardiao", "assume 2/3 do golpe que derrubaria um aliado"),
     ("Pé Firme",            "guardiao", None),
     ("Muro de Escudos",     "guardiao", "+1 DEF nos aliados"),
-    ("Represália",          "guardiao", "dano de volta ao interceptar"),
+    ("Represália",          "guardiao", "proficiência de dano de volta ao interceptar"),
     ("Provocação Ampla",    "guardiao", "marca dois inimigos"),
     ("Fôlego de Ferro",     "guardiao", "recupera SP uma vez por combate"),
     ("Bastião",             "guardiao", "−proficiência no primeiro golpe da rodada"),
@@ -53,7 +53,7 @@ TECNICAS = [
     ("Sem Recuo",           "furioso",  None),
     ("Rasgo",               "furioso",  "Sangrando 1 no Ataque Pesado"),
     ("Massacre",            "furioso",  "ataque livre a cada abate"),
-    ("Fúria Cega",          "furioso",  "1×/combate, um ataque em cada inimigo"),
+    ("Fúria Cega",          "furioso",  "1×/combate, com a ação, um ataque com Desv. em cada"),
     ("Coração de Ares",     "furioso",  "crítico em 19 e 20"),
     # ---- Oráculo
     ("Palavra Curativa",    "oraculo",  "cura 1d6+SAB como ação bônus"),
@@ -67,7 +67,7 @@ TECNICAS = [
     ("Fio Cortado",         "oraculo",  None),
     ("Rede do Destino",     "oraculo",  "1×/combate, Vantagem para todo o grupo"),
     ("Fonte Profunda",      "oraculo",  None),
-    ("Olho do Futuro",      "oraculo",  "1×/combate, um turno inteiro a mais"),
+    ("Olho do Futuro",      "oraculo",  "1×/combate, turno emprestado, meio Teto"),
 ]
 
 
@@ -110,21 +110,20 @@ def medir(tecnicas, classe, cenario, n=N):
 #
 # Tirar nome daqui é o objetivo. Acrescentar exige decisão de design, não é
 # jeito de fazer o teste passar.
-DIVIDA_CONHECIDA = {
-    "Escudo Vínculo",     # bando +12,1%
-    "Interceptar",        # bando +11,2%
-    "Rede do Destino",    # bando +13,0%
-    "Olho do Futuro",     # chefe +11,3% · bando +12,8%
-    # Entraram na 0.18.0, com as Fases, e esperam decisão de design. O chefe
-    # deste teste é um Kleos 8, que agora tem quatro Fases: a referência sem
-    # técnica caiu de 72,9% para 49,9%, e perto de 50% toda técnica pesa mais.
-    # As duas que passaram da linha são defensivas — Represália ia de +5,3 para
-    # +12,4 contra o chefe, Juramento do Portão de +6,5 para +13,2 —, porque
-    # a luta ficou mais longa e segurar um aliado de pé passou a valer mais.
-    # Contra o bando nada mudou: bando não tem Fase.
-    "Represália",         # chefe +12,4%
-    "Juramento do Portão",  # chefe +13,2%
-}
+DIVIDA_CONHECIDA: set[str] = set()
+# Zerada na 0.18.0. As seis que moravam aqui foram ajustadas e medidas
+# (chefe/bando, nível 12, antes → depois):
+#   Escudo Vínculo       +2 na DEF em vez de +proficiência    +10,8/+12,1 → +7,1/+6,0
+#   Interceptar          o aliado ainda sofre um terço          +11,5/+11,2 → +9,6/+6,9
+#   Represália           dano igual à proficiência               +12,4/+6,8 → +1,5/+2,7
+#   Juramento do Portão  o excesso vai para quem jurou           +13,2/+5,9 → +8,9/+5,7
+#   Rede do Destino      Vantagem só no próximo turno de cada    +11,7/+13,0 → +4,9/+7,5
+#   Olho do Futuro       o turno é emprestado da próxima rodada,
+#                        e nele nada passa de meio Teto          +17,9/+12,8 → +9,8/+8,7
+# Represália e Juramento tinham entrado aqui na própria 0.18.0, quando as Fases
+# alongaram a luta contra o chefe. E a Fúria Cega, que não morava aqui, passou
+# da linha com o Interceptar novo (bando +12,7): agora ela gasta a ação — um
+# ataque com Desvantagem em cada inimigo — e mede +7,6.
 
 
 def veredito(dc, db):

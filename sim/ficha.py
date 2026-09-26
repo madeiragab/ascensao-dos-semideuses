@@ -307,6 +307,22 @@ def main() -> None:
             falhas.append("a CD de desenvolver mudou no Grau 1")
     print("  CD no Grau 1: a de sempre, 10 + pontos · no Grau 3, 6 pontos: CD 18")
 
+    # ---- 0.18: cada Fonte paga o recurso que a tabela de Fontes do livro diz.
+    # A Médica pagava SP na tabela, MP na página de consulta e MP na ficha.
+    fontes_livro = dict(re.findall(
+        r"<tr><td><strong>(Elemental|Física|Híbrida|Médica)</strong></td><td>([^<]+)</td>", livro))
+    esperado_fontes = {"Elemental": "MP", "Física": "SP", "Híbrida": "MP + SP", "Médica": "SP"}
+    if fontes_livro != esperado_fontes:
+        falhas.append(f"a tabela de Fontes do livro mudou: {fontes_livro}")
+    for trecho, onde in (
+            ('(fonte === "fisica" || fonte === "medica") ? "SP" : "MP"', html),
+            ('Médica · paga SP', html),
+            ("habilidades Físicas e Médicas", texto_livro),
+            ("cada cura gasta um Tratamento", texto_livro)):
+        if trecho not in onde:
+            falhas.append(f"a Fonte Médica voltou a divergir: falta {trecho!r}")
+    print("  Fontes: o recurso de cada uma bate entre a tabela, a consulta e a ficha")
+
     # ---- 0.18: a Defesa dá +2 por ponto e o livro manda montá-la como reação.
     defesa = re.search(r'\n  def: \{(.*?)\n  movimento:', html, re.S)
     if not defesa or "qtdMax: 1" not in defesa.group(1) or '"+2 DEF para "' not in defesa.group(1):
