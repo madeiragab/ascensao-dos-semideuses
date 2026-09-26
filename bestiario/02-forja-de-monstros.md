@@ -156,7 +156,7 @@ do chefe do encontro justo num golpe só, e o trio vencia de **80% a 97%** das v
 em cerca de **duas rodadas**. A luta acabava antes de existir, e o Mestre que queria
 um clímax precisava inventar na hora uma regeneração, uma imunidade, uma segunda
 criatura. Com Fases, o mesmo golpe tira no máximo um terço do chefe (um quarto do
-Kleos 8 em diante), o trio vence de **56% a 83%** e a luta dura de **2,6 a 3,6
+Kleos 8 em diante), o trio vence de **56% a 79%** e a luta dura de **2,6 a 3,6
 rodadas**. O dano da Tábua não mudou: o número de Fases segura a duração da luta, e
 a Tábua segura a vitória. Para reproduzir: `sim/fases.py`.
 
@@ -347,18 +347,18 @@ célula:
 
 | Trio | Kleos | Cru | Só Arremetidas | Só Sopro | As duas |
 |---|---|---|---|---|---|
-| nível 9 | 7 | 100% | 98% | 65% | **53%** |
-| nível 13 | 8 | 100% | 98% | 73% | **44%** |
-| nível 17 | 9 | 100% | 100% | 86% | **61%** |
-| nível 20 | 9 | 100% | 100% | 95% | **86%** |
+| nível 9 | 7 | 100% | 97% | 64% | **48%** |
+| nível 13 | 8 | 100% | 96% | 73% | **39%** |
+| nível 17 | 9 | 100% | 99% | 85% | **52%** |
+| nível 20 | 9 | 100% | 100% | 96% | **81%** |
 
 *(taxa de vitória do grupo)*
 
 Três leituras que mudam como se monta um chefe:
 
 1. **A criatura completa vale +1 Kleos.** Uma completa de Kleos 7 dá o mesmo trabalho que uma crua de Kleos 8, e isso se repetiu nos quatro cenários. Ao montar o encontro, **conte a criatura de chefe um degrau acima da linha dela**.
-2. **O Sopro é o que decide.** Sozinho, ele derruba a vitória do grupo de 100% para 65%. Dano em área rompe a lógica de concentrar tudo no Guardião.
-3. **Arremetida não mata o grupo, ela gasta o grupo.** A taxa de vitória quase não muda, mas os heróis de pé no fim caem de **2,0 para 1,0**. É desgaste, e é exatamente para isso que ela existe: o chefe sozinho deixa de agir uma vez enquanto o grupo age quatro.
+2. **O Sopro é o que decide.** Sozinho, ele derruba a vitória do grupo de 100% para 64%. Dano em área rompe a lógica de concentrar tudo no Guardião.
+3. **Arremetida não mata o grupo, ela gasta o grupo.** A taxa de vitória quase não muda, mas os heróis de pé no fim caem de **2,0 para 0,9**. É desgaste, e é exatamente para isso que ela existe: o chefe sozinho deixa de agir uma vez enquanto o grupo age quatro.
 
 **Recusas continuam fora da conta.** Elas anulam uma Rolagem de Efeito, e os
 heróis do simulador só atacam — não há Efeito para recusar. Até que o motor saiba
@@ -393,15 +393,15 @@ célula:
 
 | Trio | Kleos | 0 Recusas | 1 | 2 | 3 | Recusas realmente gastas |
 |---|---|---|---|---|---|---|
-| nível 5 | 5 | 76% | 64% | 61% | 58% | 1,0 |
-| nível 9 | 7 | 84% | 74% | 73% | 69% | 1,0 |
-| nível 13 | 8 | 77% | 67% | 59% | 56% | 1,3 |
-| nível 17 | 9 | 90% | 84% | 77% | 70% | 1,7 |
-| nível 20 | 9 | 97% | 94% | 91% | 87% | 1,8 |
+| nível 5 | 5 | 74% | 63% | 60% | 59% | 1,0 |
+| nível 9 | 7 | 83% | 74% | 70% | 68% | 1,0 |
+| nível 13 | 8 | 74% | 61% | 55% | 53% | 1,4 |
+| nível 17 | 9 | 86% | 78% | 71% | 66% | 1,7 |
+| nível 20 | 9 | 96% | 92% | 91% | 88% | 1,8 |
 
 Duas leituras:
 
-1. **A primeira Recusa é a que pesa.** Ela sozinha tira até 12 pontos da taxa de vitória. A segunda e a terceira tiram de 1 a 8 cada — mais do que tiravam antes das Fases, porque a luta mais longa dá mais Rolagens de Efeito para recusar.
+1. **A primeira Recusa é a que pesa.** Ela sozinha tira até 13 pontos da taxa de vitória. A segunda e a terceira tiram de 1 a 7 cada — mais do que tiravam antes das Fases, porque a luta mais longa dá mais Rolagens de Efeito para recusar.
 2. **A criatura raramente gasta mais que uma ou duas.** Mesmo com três disponíveis, a média gasta ficou entre 1,0 e 1,8 — o combate acaba antes.
 
 **Regra prática:** dê **1 Recusa** a um chefe de Kleos 5 a 7 e **2** a partir do
@@ -450,11 +450,11 @@ começo do turno dele, com imunidade depois do primeiro erro.
 
 | Trio | Kleos | Nenhuma | + Vontade do Lugar | + Presença | As duas |
 |---|---|---|---|---|---|
-| nível 13 | 8 | 59% | 53% | 56% | **53%** |
-| nível 17 | 9 | 74% | 68% | 70% | **69%** |
-| nível 20 | 9 | 90% | 87% | 89% | **87%** |
+| nível 13 | 8 | 56% | 51% | 53% | **49%** |
+| nível 17 | 9 | 70% | 62% | 64% | **63%** |
+| nível 20 | 9 | 90% | 86% | 87% | **86%** |
 
-Cada uma tira de 1 a 6 pontos da taxa de vitória, e as duas juntas de 3 a 6. São
+Cada uma tira de 3 a 8 pontos da taxa de vitória, e as duas juntas de 4 a 7. São
 **temperos, não paredes** — nenhuma salva um chefe subdimensionado, e é por isso
 que continuam fora da conta de Kleos.
 

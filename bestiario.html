@@ -1306,7 +1306,7 @@ pre.bloco-codigo {
 </tbody>
 </table></div>
 <ul><li><strong>Só o chefe tem Fases:</strong> a criatura que luta sozinha, ou a de Kleos mais alto num chefe com lacaios. Bando e lacaio não têm — morrem no golpe grande, e é para isso que ele existe.</li><li><strong>Os pisos vêm na ficha.</strong> O PV se divide em partes iguais: o Cérbero, 155 PV e três Fases, tem pisos em 103 e 51. Cada criatura deste livro traz os dela ao lado do PV.</li><li><strong>Fase quebrada não volta.</strong> Cura, Regeneração e dreno devolvem PV, nunca Fase. Uma criatura curada acima de um piso já quebrado não ganha a Fase de novo.</li><li><strong>Ao quebrar uma Fase, a criatura muda.</strong> Ela se livra de toda condição que a afete, e o Mestre mostra o que mudou: um Poder que ela ainda não tinha usado, o terreno que desaba, a forma que ela assume. É a "segunda forma" que todo Mestre improvisava para segurar um chefe, agora escrita.</li></ul>
-<p><strong>Por que existe.</strong> Uma habilidade no Teto de Custo tirava de <strong>50% a 74%</strong> do PV do chefe do encontro justo num golpe só, e o trio vencia de <strong>80% a 97%</strong> das vezes em cerca de <strong>duas rodadas</strong>. A luta acabava antes de existir, e o Mestre que queria um clímax precisava inventar na hora uma regeneração, uma imunidade, uma segunda criatura. Com Fases, o mesmo golpe tira no máximo um terço do chefe (um quarto do Kleos 8 em diante), o trio vence de <strong>56% a 83%</strong> e a luta dura de <strong>2,6 a 3,6 rodadas</strong>. O dano da Tábua não mudou: o número de Fases segura a duração da luta, e a Tábua segura a vitória. Para reproduzir: <span class="dado">sim/fases.py</span>.</p>
+<p><strong>Por que existe.</strong> Uma habilidade no Teto de Custo tirava de <strong>50% a 74%</strong> do PV do chefe do encontro justo num golpe só, e o trio vencia de <strong>80% a 97%</strong> das vezes em cerca de <strong>duas rodadas</strong>. A luta acabava antes de existir, e o Mestre que queria um clímax precisava inventar na hora uma regeneração, uma imunidade, uma segunda criatura. Com Fases, o mesmo golpe tira no máximo um terço do chefe (um quarto do Kleos 8 em diante), o trio vence de <strong>56% a 79%</strong> e a luta dura de <strong>2,6 a 3,6 rodadas</strong>. O dano da Tábua não mudou: o número de Fases segura a duração da luta, e a Tábua segura a vitória. Para reproduzir: <span class="dado">sim/fases.py</span>.</p>
 <div class="destaque"><p><strong>Não é para capanga.</strong> Pôr Fase em todo mundo transforma um bando em muro: cinco criaturas de Kleos 4 com três Fases cada derrubavam um grupo de nível 12 para <strong>21%</strong> de vitória. O golpe grande apagando um lacaio é o prêmio de quem o montou. O chefe é que precisa aguentar.</p></div>
 <h3>Orçamento por Kleos</h3>
 <div class="rolagem"><table>
@@ -1423,15 +1423,15 @@ pre.bloco-codigo {
 <div class="rolagem"><table>
 <thead><tr><th>Trio</th><th>Kleos</th><th>Cru</th><th>Só Arremetidas</th><th>Só Sopro</th><th>As duas</th></tr></thead>
 <tbody>
-<tr><td>nível 9</td><td>7</td><td>100%</td><td>98%</td><td>65%</td><td><strong>53%</strong></td></tr>
-<tr><td>nível 13</td><td>8</td><td>100%</td><td>98%</td><td>73%</td><td><strong>44%</strong></td></tr>
-<tr><td>nível 17</td><td>9</td><td>100%</td><td>100%</td><td>86%</td><td><strong>61%</strong></td></tr>
-<tr><td>nível 20</td><td>9</td><td>100%</td><td>100%</td><td>95%</td><td><strong>86%</strong></td></tr>
+<tr><td>nível 9</td><td>7</td><td>100%</td><td>97%</td><td>64%</td><td><strong>48%</strong></td></tr>
+<tr><td>nível 13</td><td>8</td><td>100%</td><td>96%</td><td>73%</td><td><strong>39%</strong></td></tr>
+<tr><td>nível 17</td><td>9</td><td>100%</td><td>99%</td><td>85%</td><td><strong>52%</strong></td></tr>
+<tr><td>nível 20</td><td>9</td><td>100%</td><td>100%</td><td>96%</td><td><strong>81%</strong></td></tr>
 </tbody>
 </table></div>
 <p><em>(taxa de vitória do grupo)</em></p>
 <p>Três leituras que mudam como se monta um chefe:</p>
-<ol><li><strong>A criatura completa vale +1 Kleos.</strong> Uma completa de Kleos 7 dá o mesmo trabalho que uma crua de Kleos 8, e isso se repetiu nos quatro cenários. Ao montar o encontro, <strong>conte a criatura de chefe um degrau acima da linha dela</strong>.</li><li><strong>O Sopro é o que decide.</strong> Sozinho, ele derruba a vitória do grupo de 100% para 65%. Dano em área rompe a lógica de concentrar tudo no Guardião.</li><li><strong>Arremetida não mata o grupo, ela gasta o grupo.</strong> A taxa de vitória quase não muda, mas os heróis de pé no fim caem de <strong>2,0 para 1,0</strong>. É desgaste, e é exatamente para isso que ela existe: o chefe sozinho deixa de agir uma vez enquanto o grupo age quatro.</li></ol>
+<ol><li><strong>A criatura completa vale +1 Kleos.</strong> Uma completa de Kleos 7 dá o mesmo trabalho que uma crua de Kleos 8, e isso se repetiu nos quatro cenários. Ao montar o encontro, <strong>conte a criatura de chefe um degrau acima da linha dela</strong>.</li><li><strong>O Sopro é o que decide.</strong> Sozinho, ele derruba a vitória do grupo de 100% para 64%. Dano em área rompe a lógica de concentrar tudo no Guardião.</li><li><strong>Arremetida não mata o grupo, ela gasta o grupo.</strong> A taxa de vitória quase não muda, mas os heróis de pé no fim caem de <strong>2,0 para 0,9</strong>. É desgaste, e é exatamente para isso que ela existe: o chefe sozinho deixa de agir uma vez enquanto o grupo age quatro.</li></ol>
 <p><strong>Recusas continuam fora da conta.</strong> Elas anulam uma Rolagem de Efeito, e os heróis do simulador só atacam — não há Efeito para recusar. Até que o motor saiba usar controle do lado dos jogadores, o valor da Recusa é julgamento do Mestre.</p>
 <p>Para reproduzir: <span class="dado">sim/criaturas.py</span>.</p>
 <div class="ornamento">❖</div>
@@ -1445,15 +1445,15 @@ pre.bloco-codigo {
 <div class="rolagem"><table>
 <thead><tr><th>Trio</th><th>Kleos</th><th>0 Recusas</th><th>1</th><th>2</th><th>3</th><th>Recusas realmente gastas</th></tr></thead>
 <tbody>
-<tr><td>nível 5</td><td>5</td><td>76%</td><td>64%</td><td>61%</td><td>58%</td><td>1,0</td></tr>
-<tr><td>nível 9</td><td>7</td><td>84%</td><td>74%</td><td>73%</td><td>69%</td><td>1,0</td></tr>
-<tr><td>nível 13</td><td>8</td><td>77%</td><td>67%</td><td>59%</td><td>56%</td><td>1,3</td></tr>
-<tr><td>nível 17</td><td>9</td><td>90%</td><td>84%</td><td>77%</td><td>70%</td><td>1,7</td></tr>
-<tr><td>nível 20</td><td>9</td><td>97%</td><td>94%</td><td>91%</td><td>87%</td><td>1,8</td></tr>
+<tr><td>nível 5</td><td>5</td><td>74%</td><td>63%</td><td>60%</td><td>59%</td><td>1,0</td></tr>
+<tr><td>nível 9</td><td>7</td><td>83%</td><td>74%</td><td>70%</td><td>68%</td><td>1,0</td></tr>
+<tr><td>nível 13</td><td>8</td><td>74%</td><td>61%</td><td>55%</td><td>53%</td><td>1,4</td></tr>
+<tr><td>nível 17</td><td>9</td><td>86%</td><td>78%</td><td>71%</td><td>66%</td><td>1,7</td></tr>
+<tr><td>nível 20</td><td>9</td><td>96%</td><td>92%</td><td>91%</td><td>88%</td><td>1,8</td></tr>
 </tbody>
 </table></div>
 <p>Duas leituras:</p>
-<ol><li><strong>A primeira Recusa é a que pesa.</strong> Ela sozinha tira até 12 pontos da taxa de vitória. A segunda e a terceira tiram de 1 a 8 cada — mais do que tiravam antes das Fases, porque a luta mais longa dá mais Rolagens de Efeito para recusar.</li><li><strong>A criatura raramente gasta mais que uma ou duas.</strong> Mesmo com três disponíveis, a média gasta ficou entre 1,0 e 1,8 — o combate acaba antes.</li></ol>
+<ol><li><strong>A primeira Recusa é a que pesa.</strong> Ela sozinha tira até 13 pontos da taxa de vitória. A segunda e a terceira tiram de 1 a 7 cada — mais do que tiravam antes das Fases, porque a luta mais longa dá mais Rolagens de Efeito para recusar.</li><li><strong>A criatura raramente gasta mais que uma ou duas.</strong> Mesmo com três disponíveis, a média gasta ficou entre 1,0 e 1,8 — o combate acaba antes.</li></ol>
 <p><strong>Regra prática:</strong> dê <strong>1 Recusa</strong> a um chefe de Kleos 5 a 7 e <strong>2</strong> a partir do Kleos 8. A terceira linha da tabela de Orçamento existe para criaturas que enfrentam grupos grandes, onde há mais Rolagens de Efeito por rodada; num trio, ela é enfeite.</p>
 <p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <div class="ornamento">❖</div>
@@ -1473,12 +1473,12 @@ pre.bloco-codigo {
 <div class="rolagem"><table>
 <thead><tr><th>Trio</th><th>Kleos</th><th>Nenhuma</th><th>+ Vontade do Lugar</th><th>+ Presença</th><th>As duas</th></tr></thead>
 <tbody>
-<tr><td>nível 13</td><td>8</td><td>59%</td><td>53%</td><td>56%</td><td><strong>53%</strong></td></tr>
-<tr><td>nível 17</td><td>9</td><td>74%</td><td>68%</td><td>70%</td><td><strong>69%</strong></td></tr>
-<tr><td>nível 20</td><td>9</td><td>90%</td><td>87%</td><td>89%</td><td><strong>87%</strong></td></tr>
+<tr><td>nível 13</td><td>8</td><td>56%</td><td>51%</td><td>53%</td><td><strong>49%</strong></td></tr>
+<tr><td>nível 17</td><td>9</td><td>70%</td><td>62%</td><td>64%</td><td><strong>63%</strong></td></tr>
+<tr><td>nível 20</td><td>9</td><td>90%</td><td>86%</td><td>87%</td><td><strong>86%</strong></td></tr>
 </tbody>
 </table></div>
-<p>Cada uma tira de 1 a 6 pontos da taxa de vitória, e as duas juntas de 3 a 6. São <strong>temperos, não paredes</strong> — nenhuma salva um chefe subdimensionado, e é por isso que continuam fora da conta de Kleos.</p>
+<p>Cada uma tira de 3 a 8 pontos da taxa de vitória, e as duas juntas de 4 a 7. São <strong>temperos, não paredes</strong> — nenhuma salva um chefe subdimensionado, e é por isso que continuam fora da conta de Kleos.</p>
 <p>O valor delas está em outro lugar: a Vontade do Lugar dá ao Mestre uma razão mecânica para o grupo querer arrastar o monstro para fora do covil, e a Presença faz o primeiro turno contra um deus doer antes do primeiro dado de dano. Se você quiser que o covil seja perigoso <em>de verdade</em>, o caminho não é somar efeitos de ambiente: é subir o Kleos.</p>
 <p>Para reproduzir: <span class="dado">sim/completo.py</span>.</p>
 <div class="ornamento">❖</div>

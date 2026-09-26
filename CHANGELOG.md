@@ -35,7 +35,7 @@ meio.
   20" —, e o único chefe que aguentou foi o Ouroboros, porque o Mestre inventou na
   hora que ele desfazia o dano. Medido: uma habilidade no Teto tirava de **50% a
   74%** do PV do chefe do encontro justo, e o trio vencia de **80% a 97%** das vezes
-  em **1,8 a 2,1 rodadas**. Com Fases, **56% a 83%** em **2,6 a 3,6 rodadas**.
+  em **1,8 a 2,1 rodadas**. Com Fases, **56% a 79%** em **2,6 a 3,6 rodadas**.
 - **Só o chefe, e isso foi medido.** Com Fase em toda criatura, cinco de Kleos 4
   derrubavam o grupo de nível 12 para **21%** de vitória, contra 69%. O golpe grande
   apagando lacaio é o prêmio de quem o montou.
@@ -59,7 +59,7 @@ meio.
 - A coluna de **um herói** é o chefe de uma mesa solo. Substitui a regra da 0.17.1
   ("conte o herói como Kleos 2 no clímax"), que continua valendo no nível 1.
 - Medido na média das duas pontas de cada faixa, de um a quatro jogadores: o
-  encontro justo vence de **54% a 94%**. Mesas de quatro terminam mais cedo (2,1 a
+  encontro justo vence de **54% a 90%**. Mesas de quatro terminam mais cedo (2,1 a
   2,7 rodadas) — mais gente quebra Fase mais depressa. Uma Fase extra para mesa
   grande foi medida e rende só +0,4 rodada; ficou de fora.
 

@@ -232,6 +232,6 @@ foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
 
 **Nenhuma peça do sistema ficou sem medição.** O motor joga o jogo inteiro:
 equipamento por Grau, habilidade, controle, Sopro, Arremetida, Recusa e Fases. Com
-tudo ligado dos dois lados, o encontro justo entrega de **60% a 89% de vitória**,
-de **2,7 a 3,7 rodadas**, com **1,4 a 2,4 heróis de pé** — que é o que a Regra da
+tudo ligado dos dois lados, o encontro justo entrega de **53% a 90% de vitória**,
+de **2,7 a 3,7 rodadas**, com **1,2 a 2,5 heróis de pé** — que é o que a Regra da
 Moira promete.
