@@ -831,6 +831,7 @@ table.viva select { font-size: .72rem; }
               <th>Dado</th><th>+mod?</th><th>Dano</th><th>Propriedades</th></tr></thead>
             <tbody id="linhasAtaque"></tbody>
           </table>
+          <p class="legenda-calc" id="linhaPunho">Punho: escolha o nível e os atributos.</p>
 
           <h3 style="margin-top:1.1rem;">Técnicas de classe</h3>
           <div class="grade-tecnicas" id="grade-tecnicas"></div>
@@ -2111,6 +2112,33 @@ function efeitosDasTecnicas(nomes, contexto) {
   return total;
 }
 
+/* O punho (Livro do Jogador, Capítulo Cinco, "Briga"): a linha do Grau do
+   item que o nível alcança, com o d4 no lugar do dado da arma. Fineza: vale o
+   maior entre FOR e DES. Conferido contra sim/briga.py por sim/ficha.py. */
+var PUNHO = [[1, 1, 0], [3, 1, 1], [6, 2, 1], [10, 2, 2], [15, 3, 2]];
+
+function punhoDoNivel(nivel) {
+  var linha = PUNHO[0];
+  PUNHO.forEach(function (l) { if (nivel >= l[0]) linha = l; });
+  return { dados: linha[1], bonus: linha[2] };
+}
+
+function textoDoPunho(nivel, prof) {
+  var p = punhoDoNivel(nivel);
+  var mFor = mod("forca"), mDes = mod("destreza");
+  var dado = p.dados + "d4";
+  if (mFor === null && mDes === null) {
+    return "Punho: " + dado + (p.bonus ? " " + sinal(p.bonus) : "") +
+      " + FOR ou DES. Crítico: dados duas vezes e um Encaixe.";
+  }
+  var m = Math.max(mFor === null ? -99 : mFor, mDes === null ? -99 : mDes);
+  var qual = (mFor !== null && mFor >= (mDes === null ? -99 : mDes)) ? "FOR" : "DES";
+  return "Punho (" + qual + "): ataque " + sinal(m + prof + p.bonus) + " · dano " + dado +
+    (m + p.bonus !== 0 ? sinal(m + p.bonus) : "") + " · crítico " + (2 * p.dados) + "d4" +
+    (m + p.bonus !== 0 ? sinal(m + p.bonus) : "") + " e um Encaixe (Caído, Sem Ar ou Empurrão)" +
+    " · Bloquear com a reação.";
+}
+
 function recalcularV2() {
   var nivel = num(document.getElementById("nivel").value) || 1;
   nivel = Math.max(1, Math.min(20, nivel));
@@ -2297,6 +2325,7 @@ function recalcularV2() {
     var somaMod = document.querySelector('[data-dano-mod="' + i + '"]').value === "1";
     escreve("dano-" + i, !dado ? null : dado + (somaMod && m !== null && m !== 0 ? sinal(m) : ""), "Dado da arma" + (somaMod ? " + atributo" : " sem atributo"));
   });
+  document.getElementById("linhaPunho").textContent = textoDoPunho(nivel, prof);
 
   atualizarGanhos(nivel, classe, mCon, mDiv);
 }
@@ -2874,6 +2903,16 @@ function prepararImpressao() {
   document.getElementById("pPericias").innerHTML = linhasPer.join("");
 
   var ataques = [];
+  (function () {
+    var nv = Math.max(1, Math.min(20, num(document.getElementById("nivel").value) || 1));
+    var p = punhoDoNivel(nv), pr = 2 + Math.floor((nv - 1) / 4);
+    var mFor = mod("forca"), mDes = mod("destreza");
+    if (mFor === null && mDes === null) return;
+    var m = Math.max(mFor === null ? -99 : mFor, mDes === null ? -99 : mDes);
+    ataques.push("<tr><td>Punho</td><td>FOR/DES</td><td>" + sinal(m + pr + p.bonus) + "</td><td>" +
+      p.dados + "d4" + (m + p.bonus !== 0 ? sinal(m + p.bonus) : "") +
+      "</td><td>Fineza · crítico encaixa · nocauteia</td></tr>");
+  })();
   document.querySelectorAll("[data-atk]").forEach(function (sel) {
     var i = sel.dataset.atk, arma = document.querySelector('[data-arma="' + i + '"]').value.trim();
     if (!arma) return;

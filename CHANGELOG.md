@@ -4,6 +4,73 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.19.0] - 2026-09-26
+
+### Briga — a luta sem arma
+
+Saiu do mesmo log da 0.18.0. Na arena do acampamento, numa briga combinada "sem
+arma, sem poder", o David (Guardião de nível 10, 98 PV) tirou **20 natural** num
+soco — e a regra não tinha resposta. O soco era **1 + FOR**, sem dado; com Força +0,
+1 de dano, e "o crítico dobra dados, mas o soco não tem dado para dobrar". O Mestre
+inventou na hora que o dano dobrava, e o crítico virou 2. Um semideus de nível 10
+socava igual a um de nível 1, para sempre.
+
+- **O punho tem dado.** Ataque desarmado: **1d4 + FOR ou DES** (Fineza), dano de
+  concussão, e todo mundo é proficiente. Ele cresce com o nível pela **mesma tabela
+  do Grau do item**, com o d4 no lugar do dado da arma: 1d4 no nível 1, +1 no 3,
+  **2d4 +1** no 6, **2d4 +2** no 10, **3d4 +2** no 15. Entrega de **62% a 76%** do
+  dano de uma arma do mesmo nível — continua sendo o plano B.
+- **O crítico desarmado rola os dados duas vezes**, como qualquer arma, **e
+  encaixa**: escolha **Caído**, **Sem Ar** (Desprevenido até o início do seu
+  próximo turno) ou **Empurrão** (1,5 m, e você ocupa o espaço). O Encaixe não é
+  Rolagem de Efeito: não pede rolagem, e Recusa não anula. "A arma dobra mais; o
+  punho encaixa."
+- **Bloquear** (reação): contra um ataque desarmado que te acertaria, com uma mão
+  livre, role 1d20 + o seu ataque desarmado; igualou ou passou o total, bloqueou.
+  Crítico não se bloqueia. **Por quê:** sem guarda a briga entre iguais era uma
+  corrida — os dois acertam quase todo soco, e quem começa chega primeiro. Medido,
+  entre dois Furiosos do mesmo nível, quem vencia a iniciativa ganhava **até 90%**
+  das brigas. Com o Bloquear, de **53% a 70%**.
+- **Nocaute.** Um ataque desarmado que leva a 0 PV pode nocautear: Inconsciente e
+  Estabilizado, sem Agonia, acorda com 1 PV em dez minutos. Com arma corpo a corpo,
+  bata de lado ou com o cabo: rola o dano do punho, e pode nocautear.
+- **Manobras de briga** num lugar só: Agarrar, Derrubar ou Empurrar, **Desarmar** e
+  **Imobilizar**, todas em Atletismo contra Atletismo ou Acrobacia. Sem arma nas
+  mãos, uma manobra pode tomar o lugar de um dos ataques da ação de Atacar.
+- **Briga combinada**: os termos se combinam antes — **primeira queda**, **até a
+  metade** (de 2 a 6 rodadas em qualquer nível) ou **até o nocaute** (de 4 a 11).
+  "Sem arma, sem poder" tira habilidade, Poder e item com Carga; **técnica de
+  classe vale**, mesmo a que gasta SP.
+- A cena do log, refeita: o David de Força +0 levava **8,7 rodadas** para nocautear
+  o valentão de Kleos 1; agora, **1,4**. O Livro do Jogador conta a cena num quadro
+  de mesa.
+
+### Desprevenido ganha definição
+
+- A condição aparecia como exemplo de condição fraca e na Fúria Cega ("você fica
+  Desprevenido"), mas nunca tinha sido definida. Agora está no Capítulo Seis e na
+  tabela de consulta: **ataques contra você têm Vantagem**.
+
+### Outras mudanças
+
+- Arma improvisada passa a **1d6 + FOR**, sem proficiência: com o punho em 1d4 e
+  proficiente, a garrafa não podia valer menos que a mão.
+- O construtor da ficha escreve a linha do **Punho** sozinho — ataque, dano,
+  crítico e o lembrete do Encaixe e do Bloquear — e a folha impressa traz o Punho
+  como primeiro ataque.
+- O Guia do Mestre ganhou "E quando é briga de mão", com os termos e três
+  conselhos.
+
+### Simulador
+
+- `sim/briga.py` mede o punho contra a arma em cada nível, a briga combinada entre
+  semideuses do mesmo nível (regra antiga, punho sem guarda e regra nova, até a
+  metade e até o nocaute), a cena do log e o crítico desarmado, e confere a tabela
+  do punho no Livro do Jogador e na ficha contra o motor. **Falha** se o punho sair
+  de 50% a 80% da arma, se a briga até a metade passar de 6 rodadas, se quem
+  começa vencer mais de 75% no espelho, ou se um nível 10 levar mais de duas
+  rodadas para nocautear um Kleos 1.
+
 ## [0.18.0] - 2026-09-26
 
 As três mudanças grandes saíram de uma campanha solo longa — David Davis, Guardião
