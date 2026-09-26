@@ -1800,8 +1800,9 @@ table.viva select { font-size: .72rem; }
       <p class="estado-regra" id="estadoGrau">Defina o nível para calcular o Grau.</p>
       <p class="estado-regra" id="estadoPassivas">Nenhuma passiva preparada.</p>
       <p class="legenda-calc"><b>Custo:</b> some os pontos primeiro; o gasto em MP ou SP é
-        pontos × Grau do ponto. Um ponto do seu Grau compra o valor da linha dele — e você
-        pode comprar em qualquer Grau abaixo do seu, pelo preço daquele Grau.</p>
+        pontos × Grau do ponto. Cada habilidade tem o <b>Grau dela</b>, gravado quando nasce:
+        paga no Grau dela ou em qualquer Grau abaixo, nunca acima. Subir o Grau de uma
+        habilidade pede aprimorá-la num Interlúdio — só a Assinatura sobe sozinha.</p>
       <p class="legenda-calc"><b>Passivas</b> entram nesta mesma lista. O sacrifício sai
         escrito na linha — <i>sacrifício: INT −1</i> ou <i>CON −1</i> — e é dali que a ficha
         desce o atributo e o recurso. Reescrever essa parte da linha desliga o desconto.</p>
@@ -1924,7 +1925,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
   exigiria carregar uma biblioteca de fora, e esta página é feita para funcionar
   sozinha. A impressão do navegador faz melhor: texto de verdade, acentos certos, e
   você escolhe o tamanho do papel.</p>
-  <p class="versao-do-livro">Versão <strong>0.17.1</strong> · 07/09/2026 · o histórico de cada número está no CHANGELOG do repositório.</p>
+  <p class="versao-do-livro">Versão <strong>0.18.0</strong> · 26/09/2026 · o histórico de cada número está no CHANGELOG do repositório.</p>
 </footer>
 
 </div><!-- /mancha -->
@@ -1961,7 +1962,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
           <option value="medica">Médica · paga MP</option>
         </select></div>
       <div class="f hb-so-ativa"><label>Descritor</label><input type="text" id="hbDescritor" placeholder="Água, sombra, aço…"></div>
-      <div class="f hb-so-ativa"><label>Grau base</label><select id="hbGrau"></select></div>
+      <div class="f hb-so-ativa"><label>Grau da habilidade</label><select id="hbGrau"></select></div>
     </div>
 
     <div class="hb-so-passiva">
@@ -2099,7 +2100,7 @@ Sem comando ela não ataca: acompanha, se defende, usa a própria reação."></t
   <section class="pdf-pagina">
     <header class="pdf-cabecalho">
       <div class="pdf-moldura" id="printMoldura"><img class="pdf-retrato" id="printRetrato" alt=""></div>
-      <div><h1 id="printNome">Herói sem nome</h1><p id="printSubtitulo">Ascensão dos Semideuses · Ficha do Herói · v0.17.1</p></div>
+      <div><h1 id="printNome">Herói sem nome</h1><p id="printSubtitulo">Ascensão dos Semideuses · Ficha do Herói · v0.18.0</p></div>
     </header>
     <div class="pdf-grade">
       <div class="pdf-bloco span-12"><h2>Identidade</h2><div class="pdf-grade">
@@ -3189,6 +3190,14 @@ function tetoDoGrau(grau) {
   return grau === 1 ? 5 : 6;
 }
 
+/* Desenvolver ou aprimorar uma habilidade: CD 10 + pontos + 1 por Grau acima
+   do primeiro. No Grau 1 é a CD de sempre. Até a 0.17 era "CD 10 + o custo" —
+   e o custo, no Grau 3, é o triplo: desenvolver no Grau alto era mais difícil
+   e não entregava nada que pagar alto uma habilidade do Grau 1 não entregasse. */
+function cdDeDesenvolver(pontos, grau) {
+  return 10 + pontos + (grau - 1);
+}
+
 /* O Grau não é escolha: é a faixa de nível. Ele decide o preço do ponto e o
    que o ponto entrega — as duas coisas na mesma proporção, para o dano por MP
    não mudar. */
@@ -3209,7 +3218,8 @@ function atualizarGrau(nivel) {
   estado.className = "estado-regra ok";
   estado.textContent = "Grau " + grau + " · níveis " + faixas[grau - 1] +
     " · cada ponto custa " + grau + " e compra " + dados[grau - 1] +
-    " em alvo único · teto de " + tetoDoGrau(grau) + " pontos.";
+    " em alvo único · teto de " + tetoDoGrau(grau) + " pontos. Habilidades novas nascem " +
+    "até o Grau " + grau + "; as antigas ficam no Grau delas até serem aprimoradas.";
 }
 
 /* ---------- o cálculo ---------- */
@@ -4728,11 +4738,14 @@ var HB_EFEITOS = {
   cura: { nome: "Cura — só Fonte Médica", saida: "Cura", familia: "Vida e proteção", icone: "cura", qtdMax: 6, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return (g * q) + "d8"; }, mod: true, soMedica: true },
-  def: { nome: "DEF", saida: "Defesa", familia: "Vida e proteção", icone: "escudo", qtdMax: 2, rotulo: "+DEF",
-    // O Grau alto espalha o bônus por mais gente, nunca aumenta o número. O
-    // segundo ponto sobre o mesmo alvo custa o dobro, e +2 é o máximo.
-    pontos: function (q) { return q === 2 ? 3 : 1; },
-    texto: function (g, q) { return "+" + q + " DEF para " + g + (g === 1 ? " alvo" : " alvos"); } },
+  def: { nome: "DEF", saida: "Defesa", familia: "Vida e proteção", icone: "escudo", qtdMax: 1, rotulo: "—",
+    // Um ponto dá os +2 de uma vez, e +2 é o máximo. O Grau alto espalha o
+    // bônus por mais gente, nunca aumenta o número. Até a 0.17 era +1 por
+    // ponto e o segundo custava o dobro — e medido, gastar a ação nisso tirava
+    // até 31 pontos de vitória. Instantânea, vale até o próximo turno de quem
+    // usou; é como reação que ela presta. Ver sim/defesa.py.
+    pontos: function () { return 1; },
+    texto: function (g) { return "+2 DEF para " + g + (g === 1 ? " alvo" : " alvos"); } },
   movimento: { nome: "Movimento", familia: "Movimento", icone: "movimento", qtdMax: 4, rotulo: "pontos",
     pontos: function (q) { return q; },
     texto: function (g, q) { return "+" + (3 * g * q) + " m"; } },
@@ -4820,6 +4833,21 @@ function montarConstrutorHabilidade() {
   document.getElementById("hbEfeitos").addEventListener("click", function (ev) {
     var botao = ev.target.closest("[data-tirar]");
     if (botao) removerEfeito(parseInt(botao.dataset.tirar, 10));
+  });
+
+  // Subir o Grau da habilidade leva junto as linhas que estavam no teto dela:
+  // quem montou o dano no Grau cheio quer continuar no Grau cheio. As linhas
+  // compradas de propósito num Grau menor ficam onde estão.
+  var selGrau = document.getElementById("hbGrau");
+  selGrau.addEventListener("focus", function () { selGrau.dataset.antes = selGrau.value; });
+  selGrau.addEventListener("change", function () {
+    var antes = selGrau.dataset.antes, agora = selGrau.value;
+    for (var i = 1; i <= HB_LINHAS_EFEITO; i++) {
+      var linha = document.getElementById("hbGrauEfeito" + i);
+      if (linha && !linha.disabled && linha.value === antes &&
+          parseInt(agora, 10) > parseInt(antes, 10)) linha.value = agora;
+    }
+    selGrau.dataset.antes = agora;
   });
 
   document.getElementById("modalHabilidade").addEventListener("input", calcularHabilidade);
@@ -5083,16 +5111,16 @@ function lerConstrutorHabilidade() {
   // pontos que o Grau multiplica, e os que não — terreno difícil é o único
   // que o livro congela em 1.
   // Estruturais: duração, alcance, ativação, área dobrada e modificadores.
-  // Vão todos no Grau base — é o que o exemplo fechado do livro faz quando
-  // multiplica os 4 pontos da Lança de Sombra, o do alcance incluído, por 3.
+  // Vão todos no Grau da habilidade — é o que o exemplo fechado do livro faz
+  // quando multiplica os 4 pontos da Lança de Sombra, o do alcance incluído, por 3.
   var estruturais = duracao.pontos + alcance.pontos + ativacao.pontos;
   if (areaChave === "dobrada") estruturais += 2;
 
-  // Cada linha de efeito é comprada no Grau dela: "você pode comprar um ponto
-  // em qualquer Grau até o seu". É o que mantém baratas as coisas que não
-  // precisam crescer — abrir caminho, ganhar um metro, dar Vantagem — enquanto
-  // o dano vai no Grau cheio. O Grau base cobre o resto: duração, alcance,
-  // ativação e modificadores.
+  // Cada linha de efeito é comprada no Grau dela, até o Grau da habilidade:
+  // "cada ponto pode ser pago no Grau dela ou em qualquer Grau abaixo". É o que
+  // mantém baratas as coisas que não precisam crescer — abrir caminho, ganhar
+  // um metro, dar Vantagem — enquanto o dano vai no Grau cheio. O Grau da
+  // habilidade cobre o resto: duração, alcance, ativação e modificadores.
   var efeitos = [], campos = [], usaArea = false, escolhidos = [], repetidos = [];
   var somaMod = false, pontosEfeitos = 0, custoEfeitos = 0, maiorGrauEfeito = 0;
   var grausUsados = [];
@@ -5156,7 +5184,7 @@ function lerConstrutorHabilidade() {
   var pontos = Math.max(1, estruturais + pontosEfeitos - gratis);
 
   var bruto = Math.max(1, estruturais * grau + custoEfeitos - gratis * maiorGrauEfeito);
-  // Cada −1 desconta um ponto do preço, cobrado no Grau base. O piso é em
+  // Cada −1 desconta um ponto do preço, cobrado no Grau da habilidade. O piso é em
   // PONTOS, não em recurso: os −1 nunca tiram mais do que metade do tamanho.
   // Uma de tamanho 6 não desce de 3; uma de tamanho 3 não desce de 2.
   var descontoMaximo = Math.floor(pontos / 2);
@@ -5177,8 +5205,11 @@ function lerConstrutorHabilidade() {
 
   var sustentar = v("hbDuracao") === "sustentada" ? Math.max(1, Math.floor(custo / 2)) : 0;
 
-  var teto = parseInt(valorCalc("teto"), 10) || 5;
-  if (pontos > teto) erros.push("São " + pontos + " pontos para um Teto de Custo de " + teto + ".");
+  // O Teto é o do Grau da HABILIDADE, não o do personagem: uma de Grau 1
+  // continua cabendo em 5 pontos mesmo na ficha de alguém de nível 12.
+  var teto = tetoDoGrau(grau);
+  if (pontos > teto) erros.push("São " + pontos + " pontos para um Teto de Custo de " + teto +
+    (grau === 1 ? ", que é o do Grau 1." : "."));
   if (!efeitos.length) erros.push("Escolha pelo menos um efeito.");
   if (usaArea && !areaChave) erros.push("Dano em área precisa de uma forma de área.");
 
@@ -5232,6 +5263,13 @@ function lerConstrutorHabilidade() {
       (pisouNoPiso ? " — as últimas não baixaram o custo, o piso segurou" : "")]);
   }
   ficha.push(["Tamanho", pontos + " de " + teto + " pontos, Grau " + grau]);
+  // O Grau fica gravado: é o teto do que ela paga. Subir pede aprimorar num
+  // Interlúdio, com o mesmo teste de desenvolver — menos a Assinatura, que
+  // sobe sozinha a cada Grau novo do personagem.
+  var cd = cdDeDesenvolver(Math.max(1, pontos - desconto), grau);
+  ficha.push(["Grau", "paga no " + grau + (grau > 1 ? " ou abaixo" : "") +
+    (assinatura ? " · Assinatura: sobe sozinha com o seu Grau"
+                : " · subir pede aprimorar") + " · desenvolver CD " + cd]);
   ficha.push(["Memória", assinatura ? "não ocupa — é sua Assinatura" : "1 espaço"]);
 
   return {
@@ -5255,8 +5293,9 @@ function calcularHabilidade() {
     : "TAMANHO = duração + efeitos + alcance + os modificadores que aumentam. É o tamanho " +
       "que o Teto de Custo limita. CUSTO = tamanho × Grau do ponto, menos os −1 — e nunca " +
       "abaixo da metade do tamanho. A duração já traz um ponto de efeito incluído, cada " +
-      "efeito pode ser comprado num Grau menor que o seu, e o Grau base cobre duração, " +
-      "alcance, ativação e modificadores.";
+      "efeito pode ser comprado num Grau menor que o da habilidade, e o Grau da habilidade " +
+      "cobre duração, alcance, ativação e modificadores. Ele fica gravado: é o teto do que " +
+      "ela paga até ser aprimorada.";
 
   // Cada linha ajusta os próprios controles ao efeito que carrega.
   if (!passiva) {
@@ -5270,6 +5309,12 @@ function calcularHabilidade() {
       var selG = document.getElementById("hbGrauEfeito" + i);
       selG.disabled = !!e.naoCresce;
       if (e.naoCresce) selG.value = "1";
+      // Nenhuma linha passa do Grau da habilidade: é o teto do que ela paga.
+      var grauHab = parseInt(document.getElementById("hbGrau").value, 10) || 1;
+      Array.prototype.forEach.call(selG.options, function (op) {
+        op.disabled = parseInt(op.value, 10) > grauHab;
+      });
+      if (parseInt(selG.value, 10) > grauHab) selG.value = String(grauHab);
     }
     atualizarCatalogo();
   }
@@ -5354,6 +5399,7 @@ function abrirConstrutorHabilidade() {
     sel.add(new Option("Grau " + g + " · ponto custa " + g, String(g)));
   }
   sel.value = String(grauAtual);
+  sel.dataset.antes = sel.value;
 
   abrirModal("modalHabilidade");
   calcularHabilidade();

@@ -21,7 +21,7 @@ registradas, e a regra só fecha depois de sobreviver aos dois. As vezes em que 
 números contrariaram a intuição estão documentadas mais abaixo — e também as que
 só apareceram jogando, porque as duas listas não se sobrepõem.
 
-**Versão atual:** 0.17.1 · 07/09/2026 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.18.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -93,12 +93,14 @@ Curto e o MP só volta dormindo.
 único compra de `1d8` a `5d8`, um de área de `1d6` a `5d6`, um de movimento de
 +3 m a +15 m. O ponto do Grau G custa G, de modo que o **dano por MP fica
 constante**: o Grau muda quanto cabe numa ação, não quanto o recurso rende.
-Condições e Vantagem não engordam com o Grau — alcançam mais criaturas. Defesa
-não engorda nunca: +2 continua sendo o máximo, porque medido no nível 20 cada
-ponto de DEF vale quase sete pontos de vitória.
+Condições, Vantagem e Defesa não engordam com o Grau — alcançam mais criaturas.
+Um ponto de Defesa dá +2 DEF de uma vez, e +2 continua sendo o máximo.
 
-Uma habilidade escrita no nível 1 não precisa ser reconstruída: ela continua na
-ficha e passa a ser paga no Grau novo, entregando mais.
+**Cada habilidade tem o Grau dela**, gravado quando nasce. Ela paga no Grau dela
+ou abaixo, nunca acima; para subir, é aprimorada numa Ação de Interlúdio. Só a
+Habilidade Assinatura sobe sozinha com o personagem. É o que faz desenvolver uma
+técnica no Grau novo valer alguma coisa: até a 0.17, criá-la no Grau 2 era
+exatamente o mesmo que criá-la no Grau 1 e pagar no 2.
 
 **As regras universais** fecham as situações que costumavam depender do Mestre:
 defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
@@ -159,6 +161,7 @@ python completo.py          # o jogo inteiro: habilidade, controle e Recusa
 python nevoa.py             # mede a Magia da Névoa: Fórmula, Descrença, Refluxo
 python aliado.py            # quanto um Aliado pode ser sem virar um jogador
 python duelo.py             # semideus contra semideus, e a armadilha do controle
+python defesa.py            # mede a habilidade de +DEF, de 1 a 4 jogadores
 python ficha.py             # confere a Ficha do Herói contra o simulador
 ```
 
