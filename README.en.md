@@ -23,7 +23,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.17.1 · 07/09/2026 · [Changelog](CHANGELOG.md)
+**Current version:** 0.18.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -96,12 +96,14 @@ MP only comes back by sleeping.
 single-target damage buys `1d8` to `5d8`, an area point `1d6` to `5d6`, a movement
 point +3 m to +15 m. A point of Grade G costs G, so **damage per MP stays flat**:
 the Grade changes how much fits into one action, not how far the resource goes.
-Conditions and Advantage don't grow with Grade — they reach more creatures.
-Defence never grows: +2 remains the cap, because measured at level 20 each point
-of DEF is worth almost seven points of win rate.
+Conditions, Advantage and Defence don't grow with Grade — they reach more
+creatures. A point of Defence grants +2 DEF at once, and +2 remains the cap.
 
-An ability written at level 1 never has to be rebuilt: it stays on the sheet and
-is simply paid for at the new Grade, delivering more.
+**Every ability has its own Grade**, recorded when it is created. It pays at its
+Grade or lower, never higher; to go up, it is improved with an Interlude Action.
+Only the Signature Ability rises on its own with the character. That is what makes
+developing a technique at a new Grade worth anything: up to 0.17, creating it at
+Grade 2 was exactly the same as creating it at Grade 1 and paying at Grade 2.
 
 **Universal table rules** now cover the former edge cases: passive defenses, combined effects,
 activation, Minor Affinity Manifestations, friendly fire, carrying allies, hands
@@ -192,6 +194,7 @@ python completo.py          # the whole game: abilities, control and Refusals
 python nevoa.py             # Mist magic: Formulae, Disbelief, Backlash
 python aliado.py            # how strong an Ally can be without becoming a player
 python duelo.py             # demigod vs demigod, and the control trap
+python defesa.py            # measures the +DEF ability, from 1 to 4 players
 python ficha.py             # checks the character sheet against the simulator
 ```
 

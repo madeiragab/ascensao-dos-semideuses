@@ -4,6 +4,88 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.18.0] - 2026-09-26
+
+As duas mudanças saíram de uma campanha solo longa — David Davis, Guardião de
+Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As duas queixas do
+jogador foram medidas antes de virar regra, e o simulador confirmou as duas.
+
+### O Grau fica gravado na habilidade
+
+- Toda habilidade tem o **Grau dela**, escolhido quando ela nasce (qualquer um até
+  o do personagem). Na hora de usar, cada ponto é pago **no Grau dela ou abaixo**,
+  nunca acima. O Teto que vale é o do Grau da habilidade.
+- Para subir, a habilidade é **aprimorada**: uma Ação de Interlúdio, o mesmo teste
+  de desenvolver, contra a CD da versão nova. Pode ser remontada dentro do Teto
+  novo.
+- A **Habilidade Assinatura sobe sozinha**, sem Ação nem teste, a cada Grau novo.
+  Habilidade que nasce na criação do personagem nasce no Grau dele, sem teste.
+- A CD de desenvolver ou aprimorar passa a ser **10 + pontos + 1 por Grau acima do
+  primeiro**. No Grau 1 é a mesma de antes.
+- **Por quê:** a regra dizia "você pode comprar um ponto em qualquer Grau até o
+  seu", sem dizer de quem era o Grau, e a habilidade do nível 1 passava a ser paga
+  no Grau novo sozinha. Desenvolver no Grau 2 era exatamente o mesmo que
+  desenvolver no Grau 1 e pagar no 2 — e mais difícil, porque a CD era "10 + o
+  custo", e o custo no Grau 3 é o triplo. Nos logs, o Grau virou um botão girado
+  na hora do golpe: "Rouge g1 no ifrit", "Rouge g2", "Impacto g3". O próprio jogador
+  quis que cada Grau fosse uma técnica nova — o Rouge que vira Bleu, Blank e Noir —,
+  e a regra não dava motivo mecânico nenhum para isso.
+- A calibração não muda: o simulador sempre mediu cada herói com uma habilidade no
+  Grau do nível, e é exatamente o que a Assinatura garante.
+- O **Limiar de Grau** do Guia passa a ser respondido pela habilidade, paga naquele
+  Grau — mais um motivo para o Grau da habilidade importar.
+
+### A Defesa dá +2 por ponto, e se monta como reação
+
+- Um ponto de Defesa dá **+2 DEF de uma vez**, para tantos alvos quanto o Grau.
+  **+2 continua sendo o máximo** que habilidades dão, e duas fontes não somam.
+- Instantânea, a Defesa vale **até o início do seu próximo turno**. O livro passa a
+  mandar montá-la como **reação** — 2 pontos no Grau 1.
+- A passiva de DEF continua +1: passiva entrega metade do ponto ativo, como o
+  movimento (+3 m ativo, +1,5 m passivo).
+- **Por quê:** o jogador trocou a primeira habilidade defensiva por PV temporários
+  no minuto em que ela nasceu ("defesa é horrível"), e no nível 17 repetiu: "tem que
+  ser de desvantagem, defesa é uma merda". Medido: a regra antiga (+1 DEF
+  sustentada, com a ação) tirava de **9 a 31 pontos** de vitória do trio e da mesa
+  solo. Com a regra nova, de um a quatro jogadores, o Guardião pagando em SP:
+
+  | | mesa solo | 2 | 3 | 4 |
+  |---|---|---|---|---|
+  | +2 DEF com ação (regra nova, mal usada) | −21,7 | −4,4 | −12,2 | −7,6 |
+  | **+2 DEF como reação** | **+4,7** | **+1,1** | **+2,5** | **+1,4** |
+  | Desvantagem como reação (a régua da mesa) | +5,7 | +1,8 | +3,6 | +2,6 |
+
+  Médias em pontos de vitória, níveis 3 a 17. O teto também foi medido: **+4 DEF de
+  graça** no grupo inteiro, a luta toda, vale de +2 a +15. DEF vale pouco num combate
+  de duas ou três rodadas, e qualquer coisa que custe a ação perde para bater. Por
+  isso a Defesa nova é reativa, e o livro diz isso com os números.
+
+### Correções
+
+- A nota do marcial elemental ainda dizia que uma Híbrida ligada ao golpe podia ser
+  paga **inteiramente em SP**, contra a regra da 0.17.0. Agora diz "quase toda em SP,
+  com o mínimo de 1 MP". O Mestre dos logs tropeçou nessa contradição duas vezes.
+- O crítico de habilidade soma dados iguais ao Grau **em que a habilidade foi
+  paga** — a palavra "comprada" passou a ser ambígua com o Grau gravado.
+
+### A ficha acompanha
+
+- O construtor chama o seletor de **Grau da habilidade**, mede o Teto por ele,
+  impede que uma linha de efeito passe dele e escreve na saída o Grau, se ela sobe
+  sozinha (Assinatura) e a **CD de desenvolver**.
+- Subir o Grau da habilidade leva junto as linhas de efeito que estavam no teto
+  dela.
+- A Defesa sai como um ponto só, **+2 DEF**.
+
+### Simulador
+
+- `sim/defesa.py` mede a Defesa reativa, a Desvantagem reativa e a Defesa com ação,
+  de 1 a 4 jogadores, e **falha** se a reativa sair de −1 a +10 pontos, se se
+  afastar mais de 4 da Desvantagem, ou se a versão com ação deixar de ser pior que
+  atacar — o aviso do livro dependeria disso.
+- `sim/ficha.py` confere o Grau gravado, o Teto pelo Grau da habilidade, a CD nova,
+  a Assinatura e a Defesa de +2, no livro e no construtor.
+
 ## [0.17.1] - 2026-09-07
 
 As duas mudanças saíram do playtest da one-shot **Antes Que Eu Esqueça** —

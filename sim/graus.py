@@ -179,8 +179,9 @@ def varredura_de_defesa(n=1000):
         print(f"{nivel:<8}" + "".join(f"{t:>8.0%}" for t in taxas)
               + f"{por_ponto:>+12.1%}")
     print()
-    print("Cada ponto de DEF vale alguns pontos de vitória e nunca sai de moda —")
-    print("por isso a tabela mantém teto de acúmulo e cobra o segundo dobrado.")
+    print("DEF permanente no grupo inteiro vale alguns pontos de vitória e nunca")
+    print("sai de moda — por isso +2 continua sendo o máximo que habilidades dão.")
+    print("A Defesa de habilidade é outra conta, com ação e recurso: ver defesa.py.")
     return saltos
 
 
