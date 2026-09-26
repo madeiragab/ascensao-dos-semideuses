@@ -132,10 +132,13 @@ folded into Survival.
 **Since the August 2026 review, the engine plays the whole game.** Heroes come in
 with gear at their level's Grade and spend MP and SP on damage and on control via
 Effect rolls; creatures come in with area Powers, Onslaughts, Refusals, Lair Will
-and Presence. With everything switched on, a fair encounter lands between 68% and
-93% wins, 2.4 to 3.1 rounds, with 1.7 to 2.6 of three heroes still standing.
+and Presence. With everything switched on and the boss in Phases, a fair encounter
+lands between 60% and 89% wins, 2.7 to 3.7 rounds, with 1.4 to 2.4 of three heroes
+still standing.
 
-Five things measurement changed in the books: weapon damage was falling behind
+Six things measurement changed in the books: the boss fell to a single blow (an
+ability at the Cost Ceiling took 50% to 74% of the fair encounter's HP; the boss now
+has **Phases**, and the blow that breaks one stops there); weapon damage was falling behind
 monster HP (the item's Grade now grants weapon dice); an ability critical erased
 the encounter (it now adds dice equal to the Grade it was bought at, instead of
 doubling); the Kleos
@@ -195,6 +198,7 @@ python nevoa.py             # Mist magic: Formulae, Disbelief, Backlash
 python aliado.py            # how strong an Ally can be without becoming a player
 python duelo.py             # demigod vs demigod, and the control trap
 python defesa.py            # measures the +DEF ability, from 1 to 4 players
+python fases.py             # boss Phases and Party Kleos from 1 to 4 players
 python ficha.py             # checks the character sheet against the simulator
 ```
 
@@ -204,7 +208,7 @@ always better than that one". The **simulation** side runs thousands of complete
 fights with real dice, reaching what isolated math cannot: initiative order, target
 focus, resource spending, who drops first.
 
-### The seven times the tests proved me wrong
+### The eight times the tests proved me wrong
 
 1. **Heavy Attack had no numerical fix.** I was going to swap −2/+5 for another
    pair. I swept seven variants: none works while Fierce Attack grants free
@@ -227,15 +231,23 @@ focus, resource spending, who drops first.
    multiplication: four level-5 heroes were worth Kleos 7. Measured, that fight is
    a slaughter against the party — **11% wins**; five heroes against the Kleos 9
    the formula demanded win **0%**. The scale climbs 35% per rung and one more
-   player adds far less than that. It became a measured table: **the fourth player
-   barely moves the rung, the fifth is worth +1, and the sixth moves nothing**.
+   player adds far less than that. It became a measured table — redone in 0.18.0
+   with Phases, from one to six players: **a pair holds the trio's rung, the fourth
+   player is worth +1 from level 5 on, and the sixth moves nothing**.
 6. **Weapon damage wasn't keeping up with monster HP.** From level 5 to 20 weapon
    attacks grew 15% while the fair encounter's HP grew 250%: a level-20 trio needed
    **11.5 rounds** and lost one fight in three. The fix was giving the item's Grade
    **weapon dice** — combat is back to 2–4 rounds across the whole career.
 7. **An Ally built as a monster died every session.** Building a combat NPC on the
    Kleos a hero "is worth" yields **6% survival at level 9**. It now uses the Party
-   Kleos minus 2 line, surviving 64% to 78% without stealing the players' damage.
+   Kleos minus 2 line, surviving about as often as a hero in the same fight without
+   stealing the players' damage.
+8. **The simulator got the martials' big blow wrong — too low.** It rolled the
+   Guardian's and the Berserker's Physical ability with the Divine Attribute (+1)
+   instead of Strength (+5): 45% to hit instead of 70%. Fixed, the fair encounter I
+   thought lasted 2.6 rounds lasted **1.8**, at 96% wins — exactly what the table
+   was complaining about. That error hid for months that the boss fell to one blow.
+   The combat fix was Phases; the simulator fix was one line.
 
 And one the **table playtest** proved wrong with no simulator at all: I had measured
 the martial classes' MP economy and dismissed the problem with *"physical abilities
@@ -302,10 +314,13 @@ powershell -ExecutionPolicy Bypass -File test.ps1
 The Player's Book is complete enough to play from level 1 to 20. What's left is
 refinement:
 
-1. **Four techniques in the known-debt list.** Shield Bond, Intercept, Net of Fate
-   and Eye of the Future measure between +11% and +13% win rate against a mob,
-   over the declared limit of 10. They are listed in `sim/tecnicas.py`, do not
-   block the regression, and print on every run until they are decided.
+1. **Six techniques in the known-debt list.** Shield Bond, Intercept, Net of Fate
+   and Eye of the Future measure between +11% and +18% win rate, over the declared
+   limit of 10. Retaliation (Represália) and Oath of the Gate (Juramento do Portão) joined in 0.18.0: against a boss in
+   Phases the fight runs longer, and keeping an ally standing became worth +12% and
+   +13%. They are listed in `sim/tecnicas.py`, do not block the regression, and
+   print on every run until they are decided. The same holds for one duel,
+   Guardian vs Oracle at level 5 (81%), in `sim/duelo.py`.
 2. **Ten techniques the simulator cannot represent.** 26 of the 36 were measured;
    the rest depend on positioning, forced movement, fear or rerolls, which the
    engine does not model. They need a table, not a simulator.

@@ -67,9 +67,8 @@ def fortitude(nivel: int) -> int:
 
 
 def encontro(nivel: int, jogadores: int) -> int:
-    """O encontro justo do Livro II; mesa solo mede o clímax, com o piso de +1."""
-    k = kleos_do_grupo(nivel, jogadores)
-    return min(11, k + 1) if jogadores == 1 else k
+    """O encontro justo do Livro II; numa mesa solo, o chefe dela."""
+    return kleos_do_grupo(nivel, jogadores)
 
 
 def luta(nivel: int, jogadores: int, variante: str) -> bool:

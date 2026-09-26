@@ -17,7 +17,7 @@ quantidade de ações antes de fazer qualquer coisa memorável.
 
 ### QUIMERA — Kleos 6 (Canção)
 *Monstruosidade, grande · padrão*
-**PV** 115 · **DEF** 17 · **Movimento** 12 m, **Voo** 15 m
+**PV** 115 *(pisos de Fase: 76 / 38)* · **DEF** 17 · **Movimento** 12 m, **Voo** 15 m
 **Ataque** +8 · **Efeito** +8
 **Fortitude** 22 · **Reflexos** 17 · **Vontade** 17
 **Imune** a fogo
@@ -54,7 +54,7 @@ Chumbo é barato. Descobrir isso é um teste de **Mitologia CD 16**.
 
 ### HIDRA DE LERNA — Kleos 6 (Canção)
 *Monstruosidade, enorme · Bruto*
-**PV** 150 · **DEF** 15 · **Movimento** 9 m, **Natação** 9 m
+**PV** 150 *(pisos de Fase: 100 / 50)* · **DEF** 15 · **Movimento** 9 m, **Natação** 9 m
 **Ataque** +8 · **Efeito** +8
 **Fortitude** 22 · **Reflexos** 17 · **Vontade** 17
 
@@ -93,7 +93,7 @@ banhada nele fere até um deus. Foi assim que Héracles morreu.
 
 ### TALOS MENOR — Kleos 6 (Canção)
 *Autômato, enorme · Blindado / Colosso*
-**PV** 130 · **DEF** 19 · **Movimento** 12 m
+**PV** 130 *(pisos de Fase: 86 / 43)* · **DEF** 19 · **Movimento** 12 m
 **Ataque** +8 · **Efeito** +8
 **Fortitude** 22 · **Reflexos** 17 · **Vontade** 22
 **Imune** a veneno, doença, exaustão, sangramento e efeitos mentais
@@ -136,7 +136,7 @@ Heroico, se alguém conseguir transportar uma perna de bronze de quatro metros.
 
 ### CÉRBERO — Kleos 7 (Lenda)
 *Monstruosidade, enorme · padrão*
-**PV** 155 · **DEF** 17 · **Movimento** 15 m
+**PV** 155 *(pisos de Fase: 103 / 51)* · **DEF** 17 · **Movimento** 15 m
 **Ataque** +9 · **Efeito** +9
 **Fortitude** 23 · **Reflexos** 23 · **Vontade** 17
 
@@ -176,7 +176,7 @@ Cérbero é imortal enquanto o Mundo Inferior existir.
 
 ### ESCILA — Kleos 7 (Lenda)
 *Monstruosidade, gargantuesca · Colosso*
-**PV** 232 · **DEF** 15 · **Movimento** 0 (presa ao rochedo)
+**PV** 232 *(pisos de Fase: 154 / 77)* · **DEF** 15 · **Movimento** 0 (presa ao rochedo)
 **Ataque** +9 · **Efeito** +9
 **Fortitude** 23 · **Reflexos** 17 · **Vontade** 17
 
@@ -212,7 +212,7 @@ estreito fica navegável para sempre, e isso é notícia no mundo inteiro.
 
 ### DRAGÃO DE CÓLQUIDA — Kleos 7 (Lenda)
 *Dragão, enorme · Blindado*
-**PV** 116 · **DEF** 19 · **Movimento** 12 m
+**PV** 116 *(pisos de Fase: 77 / 38)* · **DEF** 19 · **Movimento** 12 m
 **Ataque** +9 · **Efeito** +9
 **Fortitude** 23 · **Reflexos** 17 · **Vontade** 23
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno
@@ -258,7 +258,7 @@ souber usar.
 
 ### LADÃO, O DRAGÃO DAS HESPÉRIDES — Kleos 8 (Mito)
 *Dragão, gargantuesco · Colosso*
-**PV** 315 · **DEF** 16 · **Movimento** 9 m, **Escalada** 9 m
+**PV** 315 *(pisos de Fase: 236 / 157 / 78)* · **DEF** 16 · **Movimento** 9 m, **Escalada** 9 m
 **Ataque** +10 · **Efeito** +10
 **Fortitude** 24 · **Reflexos** 18 · **Vontade** 24
 
@@ -301,7 +301,7 @@ mundo fica sabendo de quem foi a culpa.
 
 ### CARÍBDIS — Kleos 8 (Mito)
 *Monstruosidade, gargantuesca · Colosso*
-**PV** 315 · **DEF** 16 · **Movimento** 0 (é uma boca no mar)
+**PV** 315 *(pisos de Fase: 236 / 157 / 78)* · **DEF** 16 · **Movimento** 0 (é uma boca no mar)
 **Ataque** +10 · **Efeito** +10
 **Fortitude** 24 · **Reflexos** 14 · **Vontade** 18
 **Imune** a todas as manobras e a dano perfurante
@@ -337,7 +337,7 @@ que o grupo descubra isso.
 
 ### MENÉCIO, TITÃ MENOR — Kleos 8 (Mito)
 *Titã, enorme · Bruto*
-**PV** 273 · **DEF** 17 · **Movimento** 12 m
+**PV** 273 *(pisos de Fase: 204 / 136 / 68)* · **DEF** 17 · **Movimento** 12 m
 **Ataque** +10 · **Efeito** +10
 **Fortitude** 24 · **Reflexos** 18 · **Vontade** 24
 **Resistência** a dano físico de armas não divinas
@@ -382,7 +382,7 @@ o nome de quem o derrubou.
 
 ### POLIBOTES, GIGANTE NASCIDO DA TERRA — Kleos 9 (Epopeia)
 *Gigante, gargantuesco · Bruto / Colosso*
-**PV** 364 · **DEF** 18 · **Movimento** 12 m
+**PV** 364 *(pisos de Fase: 273 / 182 / 91)* · **DEF** 18 · **Movimento** 12 m
 **Ataque** +11 · **Efeito** +11
 **Fortitude** 25 · **Reflexos** 18 · **Vontade** 25
 **Presença** (Efeito contra Vontade)
@@ -426,7 +426,7 @@ suspensa — desliga o **Filho da Terra**.
 
 ### HIPERIÃO, TITÃ DA LUZ — Kleos 9 (Epopeia)
 *Titã, enorme · Conjurador*
-**PV** 280 · **DEF** 19 · **Movimento** 12 m
+**PV** 280 *(pisos de Fase: 210 / 140 / 70)* · **DEF** 19 · **Movimento** 12 m
 **Ataque** +11 · **Efeito** +11
 **Fortitude** 25 · **Reflexos** 25 · **Vontade** 25
 **Imune** a fogo e a dano de luz · **Presença** (Efeito contra Vontade)
@@ -469,7 +469,7 @@ morrem — são **contidos**, e o recipiente vira responsabilidade de alguém.
 Serve para deuses de rio, ventos, ninfas antigas, deuses de cidade, Éolo,
 Aquelôo, Ceto. Escolha um **domínio** e todo o resto sai dele.
 
-**PV** 280 · **DEF** 19 · **Movimento** conforme o domínio
+**PV** 280 *(pisos de Fase: 210 / 140 / 70)* · **DEF** 19 · **Movimento** conforme o domínio
 **Ataque** +11 · **Efeito** +11
 **Fortitude** 25 · **Reflexos** 25 · **Vontade** 25
 **Imune** ao próprio elemento · **Presença** (Efeito contra Vontade)
@@ -513,7 +513,7 @@ lutar** — e um grupo que descubra o preço nunca precisa rolar iniciativa.
 
 ### ARES, DEUS DA GUERRA — Kleos 10 (Teomaquia)
 *Divindade Olímpica · Bruto*
-**PV** 370 · **DEF** 20 · **Movimento** 15 m
+**PV** 370 *(pisos de Fase: 277 / 185 / 92)* · **DEF** 20 · **Movimento** 15 m
 **Ataque** +13 · **Efeito** +13
 **Fortitude** 27 · **Reflexos** 27 · **Vontade** 19
 **Presença** (Efeito contra Vontade) · **Imune** a Amedrontado
@@ -557,7 +557,7 @@ real, o Mestre a escreve, e ela dura a campanha inteira.
 
 ### HÉCATE NAS ENCRUZILHADAS — Kleos 10 (Teomaquia)
 *Divindade, três formas · Conjuradora*
-**PV** 370 · **DEF** 20 · **Movimento** 12 m
+**PV** 370 *(pisos de Fase: 277 / 185 / 92)* · **DEF** 20 · **Movimento** 12 m
 **Ataque** +13 · **Efeito** +13
 **Fortitude** 27 · **Reflexos** 27 · **Vontade** 27
 **Presença** (Efeito contra Vontade)
@@ -610,7 +610,7 @@ por causa dela.
 
 ### HADES, SENHOR DO MUNDO INFERIOR — Kleos 10 (Teomaquia)
 *Divindade Olímpica · padrão*
-**PV** 370 · **DEF** 20 · **Movimento** 12 m
+**PV** 370 *(pisos de Fase: 277 / 185 / 92)* · **DEF** 20 · **Movimento** 12 m
 **Ataque** +13 · **Efeito** +13
 **Fortitude** 27 · **Reflexos** 19 · **Vontade** 27
 **Presença** (Efeito contra Vontade) · **Imune** a dano necrótico e a efeitos de morte
@@ -675,7 +675,7 @@ passa a cobrar.
 
 ### TIFÃO, O PAI DOS MONSTROS — Kleos 11 (Cataclisma)
 *Primordial, gargantuesco · Colosso*
-**PV** 500 · **DEF** 21 · **Movimento** 18 m, **Voo** 24 m
+**PV** 500 *(pisos de Fase: 375 / 250 / 125)* · **DEF** 21 · **Movimento** 18 m, **Voo** 24 m
 **Ataque** +15 · **Efeito** +15
 **Fortitude** 29 · **Reflexos** 20 · **Vontade** 29
 **Presença** (Efeito contra Vontade, alcance 100 m) · **Imune** a fogo, veneno e a todas
@@ -728,7 +728,7 @@ aconteceu, e é melhor assim. A montanha fuma pelos próximos três mil anos.
 
 ### CRONOS RECONSTITUÍDO — Kleos 11 (Cataclisma)
 *Titã Primordial, enorme · Conjurador*
-**PV** 500 · **DEF** 21 · **Movimento** 12 m
+**PV** 500 *(pisos de Fase: 375 / 250 / 125)* · **DEF** 21 · **Movimento** 12 m
 **Ataque** +15 · **Efeito** +15
 **Fortitude** 29 · **Reflexos** 29 · **Vontade** 29
 **Presença** (Efeito contra Vontade) · **Imune** a efeitos que manipulem tempo
@@ -772,7 +772,7 @@ séculos para se juntar de novo. O hospedeiro pode sobreviver. Depende da escolh
 
 ### GAIA DESPERTA — Kleos 11 (Cataclisma)
 *Primordial, gargantuesca · Colosso*
-**PV** 500 · **DEF** 21 · **Movimento** — (ela **é** o chão)
+**PV** 500 *(pisos de Fase: 375 / 250 / 125)* · **DEF** 21 · **Movimento** — (ela **é** o chão)
 **Ataque** +15 · **Efeito** +15
 **Fortitude** 29 · **Reflexos** 14 · **Vontade** 29
 **Presença** (Efeito contra Vontade, alcance 1 km) · **Imune** a todas as manobras, a

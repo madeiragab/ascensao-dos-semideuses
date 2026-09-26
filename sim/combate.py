@@ -49,6 +49,34 @@ def anteparo_valor(guardiao) -> int:
     return max(1, guardiao.prof // 2)
 
 
+# ---------------------------------------------------------------------------
+# Fases — Livro II, Parte II. O PV de uma criatura de Kleos 2 ou mais vem em
+# blocos iguais, e o golpe que quebra um bloco não atravessa para o próximo:
+# o excesso se perde. É o que impede uma habilidade no Teto de apagar o chefe
+# inteiro de uma vez — ela tirava de 50% a 74% do PV do encontro justo.
+# ---------------------------------------------------------------------------
+
+# Interruptores de medição. Desligados, o motor joga como antes da 0.18.0.
+FASES_ATIVAS = True
+QUEBRA_LIMPA_CONDICOES = True
+
+
+def fases_do_kleos(kleos: int) -> int:
+    """Kleos 1: nenhuma · 2: duas Fases · 3 a 7: três · 8 ou mais: quatro.
+
+    Medido em sim/fases.py: com o golpe grande dos marciais rolado no atributo
+    certo, o grupo quebra cerca de uma Fase por rodada. O número de Fases é o
+    que segura a duração da luta; o dano da Tábua, que não mudou, segura a
+    vitória."""
+    if kleos <= 1:
+        return 1
+    if kleos == 2:
+        return 2
+    if kleos <= 7:
+        return 3
+    return 4
+
+
 @dataclass
 class Lutador:
     """Estado mutável de um participante do combate."""
@@ -74,9 +102,14 @@ class Lutador:
     # Interruptores para testes A/B
     usar_feroz: bool = True
     usar_pesado: bool = True
+    fases: int = 1                # Fases da criatura: ver fases_do_kleos()
 
     def __post_init__(self):
         self.pv = self.pv_max
+        # Os pisos das Fases, do mais alto para o mais baixo. Com três Fases e
+        # 155 PV: 103 e 51. Chegar a um piso quebra a Fase de cima.
+        self.pisos = [self.pv_max * i // self.fases for i in range(self.fases - 1, 0, -1)]
+        self.fases_quebradas = 0
         self.sp = self.sp_max
         self.mp = self.mp_max
         self.reacao_disponivel = True
@@ -156,12 +189,17 @@ class Lutador:
             self.bencao -= 1
 
     @classmethod
-    def de_monstro(cls, m: Monstro, sufixo: str = "") -> "Lutador":
+    def de_monstro(cls, m: Monstro, sufixo: str = "", chefe: bool = True) -> "Lutador":
+        """Só o chefe do encontro tem Fases: a criatura que luta sozinha, ou a
+        de Kleos mais alto num chefe com lacaios. Bando e lacaio morrem no golpe
+        grande, e é para morrer — com Fase em todo mundo, cinco criaturas de
+        Kleos 4 derrubavam o grupo de nível 12 para 21% de vitória."""
         return cls(
             nome=m.nome + sufixo, lado="monstros", pv_max=m.pv_max, defesa=m.defesa,
             bonus_ataque=m.bonus_ataque, dados_dano=list(m.dados_dano),
             dano_fixo=m.dano_fixo, iniciativa_bonus=m.iniciativa_bonus,
             ataques_por_turno=m.ataques_por_turno,
+            fases=fases_do_kleos(m.kleos) if FASES_ATIVAS and chefe else 1,
         )
 
     # -- ações -------------------------------------------------------------
@@ -175,14 +213,30 @@ class Lutador:
                 and not self.bastiao_usado):
             dano = max(0, dano - self.prof)
             self.bastiao_usado = True
+        # Fases: o dano para no piso da Fase em que a criatura está. Um piso
+        # já quebrado sai da lista — cura não devolve Fase.
+        piso = next((p for p in self.pisos if p < self.pv), 0)
+        if piso and self.pv - dano < piso:
+            dano = self.pv - piso
         antes = self.pv
         self.pv = max(0, self.pv - dano)
+        if piso and self.pv == piso:
+            self.pisos.remove(piso)
+            self.quebrar_fase()
         # Juramento do Portão: o aliado jurado não cai por um golpe só.
         if self.pv == 0 and antes > 1:
             for a in self.aliados:
                 if a.vivo and a is not self and a.protegido is self:
                     self.pv = 1
                     break
+
+    def quebrar_fase(self) -> None:
+        """A criatura muda. No motor, o que muda é o que o livro garante: ela
+        se livra de toda condição que a afete. O resto — um Poder novo, um
+        terreno que vira — é ficção do Mestre e não entra na conta."""
+        self.fases_quebradas += 1
+        if QUEBRA_LIMPA_CONDICOES:
+            self.condicoes.clear()
 
     def receber(self, dano: int, atacante=None) -> None:
         """Passa pelas reações de aliados antes de doer em mim."""

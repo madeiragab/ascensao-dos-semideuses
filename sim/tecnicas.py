@@ -76,7 +76,7 @@ def cenario_chefe():
 
 
 def cenario_bando():
-    return [Lutador.de_monstro(monstro(4), f" {i}") for i in range(1, 6)]
+    return [Lutador.de_monstro(monstro(4), f" {i}", chefe=False) for i in range(1, 6)]
 
 
 # Técnicas que só funcionam junto de outra. Medidas como o par inteiro contra
@@ -115,6 +115,15 @@ DIVIDA_CONHECIDA = {
     "Interceptar",        # bando +11,2%
     "Rede do Destino",    # bando +13,0%
     "Olho do Futuro",     # chefe +11,3% · bando +12,8%
+    # Entraram na 0.18.0, com as Fases, e esperam decisão de design. O chefe
+    # deste teste é um Kleos 8, que agora tem quatro Fases: a referência sem
+    # técnica caiu de 72,9% para 49,9%, e perto de 50% toda técnica pesa mais.
+    # As duas que passaram da linha são defensivas — Represália ia de +5,3 para
+    # +12,4 contra o chefe, Juramento do Portão de +6,5 para +13,2 —, porque
+    # a luta ficou mais longa e segurar um aliado de pé passou a valer mais.
+    # Contra o bando nada mudou: bando não tem Fase.
+    "Represália",         # chefe +12,4%
+    "Juramento do Portão",  # chefe +13,2%
 }
 
 
