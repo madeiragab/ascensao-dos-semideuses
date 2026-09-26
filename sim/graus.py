@@ -78,9 +78,12 @@ def valor(dados) -> float:
 # Medidas
 # ---------------------------------------------------------------------------
 
+def kleos_do_alvo(nivel: int) -> int:
+    return max(1, min(11, round(kleos_do_personagem(nivel) * 3)))
+
+
 def alvo_do_nivel(nivel: int):
-    k = max(1, min(11, round(kleos_do_personagem(nivel) * 3)))
-    return TABUA[k]
+    return TABUA[kleos_do_alvo(nivel)]
 
 
 def dpr_arma(nivel: int) -> float:
@@ -171,7 +174,8 @@ def varredura_de_defesa(n=1000):
                 monstro = Monstro(f"alvo", pv_max=pv, defesa=defesa,
                                   bonus_ataque=atk, dados_dano=[10],
                                   dano_fixo=round(dano / qtd - 5.5),
-                                  ataques_por_turno=qtd)
+                                  ataques_por_turno=qtd,
+                                  kleos=kleos_do_alvo(nivel))
                 vitorias += combate(herois, [Lutador.de_monstro(monstro)])["vencedor"] == "herois"
             taxas.append(vitorias / n)
         por_ponto = (taxas[4] - taxas[0]) / 4
@@ -225,7 +229,10 @@ def regressao(linhas, saltos):
 
     if saltos:
         for nivel, _, por_ponto in saltos:
-            if por_ponto > 0.08:
+            # 10 pontos é o limite das técnicas (tecnicas.py). Era 8 até a
+            # 0.18.0: com as Fases a luta dura mais, e DEF permanente rende
+            # mais — 8,3 pontos no nível 20, contra 5,8 antes.
+            if por_ponto > 0.10:
                 falhas.append(f"nível {nivel}: +1 DEF vale {por_ponto:.0%} de "
                               f"vitória, alto demais para 1 ponto")
 

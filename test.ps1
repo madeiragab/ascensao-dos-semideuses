@@ -24,6 +24,7 @@ $testes = @(
     'aliado.py',
     'duelo.py',
     'defesa.py',
+    'fases.py',
     'ficha.py',
     'tecnicas_ficha.py'
 )

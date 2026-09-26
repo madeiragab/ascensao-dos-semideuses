@@ -118,9 +118,16 @@ def main() -> None:
             if nome == "parceiro":
                 # O alvo, em três números: sobrevive como gente, bate como
                 # coadjuvante, e não decide a luta.
-                if r["aliado_vivo"] < 0.50:
+                # "Sobrevive como gente" quer dizer como um herói da mesma
+                # luta: no máximo 10 pontos abaixo da taxa dos três. Era um
+                # piso fixo de 50% até a 0.18.0; com as Fases a luta dura uma
+                # rodada a mais, e no nível 5 os próprios heróis passaram a
+                # ficar de pé 53% das vezes.
+                herois = r["de_pe"] / 3
+                if r["aliado_vivo"] < min(0.50, herois - 0.10):
                     falhas.append(f"nível {nivel}: o Aliado sobrevive só "
-                                  f"{r['aliado_vivo']:.0%} — morre fácil demais")
+                                  f"{r['aliado_vivo']:.0%}, contra {herois:.0%} de "
+                                  f"cada herói — morre fácil demais")
                 if r["fatia"] > 0.20:
                     falhas.append(f"nível {nivel}: o Aliado tira {r['fatia']:.0%} "
                                   f"do dano do grupo — está virando jogador")
@@ -129,7 +136,7 @@ def main() -> None:
                                   f"{r['vitoria']-base['vitoria']:+.0%} de vitória")
         print()
 
-    print("Leitura: 'hoje' morre em toda luta — 6% de sobrevivência no nível 9.")
+    print("Leitura: 'hoje' morre em toda luta — quase nunca sobrevive no nível 9.")
     print("'couro' vira tanque de monstro. 'parceiro', a linha do Kleos do grupo")
     print("menos 2, sobrevive como gente e bate como coadjuvante: é a regra nova.")
 

@@ -6,9 +6,67 @@ revisão.
 
 ## [0.18.0] - 2026-09-26
 
-As duas mudanças saíram de uma campanha solo longa — David Davis, Guardião de
-Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As duas queixas do
-jogador foram medidas antes de virar regra, e o simulador confirmou as duas.
+As três mudanças saíram de uma campanha solo longa — David Davis, Guardião de
+Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As três queixas do
+jogador foram medidas antes de virar regra, e o simulador confirmou as três. Uma
+delas escondia um erro do próprio simulador.
+
+### O chefe tem Fases
+
+- O **chefe** do encontro — a criatura que luta sozinha, ou a de Kleos mais alto
+  num chefe com lacaios — tem o PV dividido em **Fases** iguais: duas no Kleos 2,
+  três do 3 ao 7, quatro do 8 em diante. Bando e lacaio não têm.
+- **O golpe que quebra uma Fase para no piso dela: o excesso se perde.** Nenhum
+  golpe tira duas Fases. **Fase quebrada não volta** com cura nem Regeneração.
+- Ao quebrar uma Fase, a criatura **se livra de toda condição** que a afete, e o
+  Mestre mostra o que mudou. Os pisos de cada criatura do Bestiário vêm na ficha,
+  ao lado do PV.
+- **Num duelo entre semideuses, cada um tem duas Fases.**
+- O **dano da Tábua de Kleos não mudou.** O número de Fases segura a duração da
+  luta; a Tábua segura a vitória.
+- **Por quê:** "o sistema depende de status e cenas pras lutas durarem mais". Nos
+  logs, quase todo combate acabava num golpe — "Rouge G2, 20", "Impacto Zero G5,
+  20" —, e o único chefe que aguentou foi o Ouroboros, porque o Mestre inventou na
+  hora que ele desfazia o dano. Medido: uma habilidade no Teto tirava de **50% a
+  74%** do PV do chefe do encontro justo, e o trio vencia de **80% a 97%** das vezes
+  em **1,8 a 2,1 rodadas**. Com Fases, **56% a 83%** em **2,6 a 3,6 rodadas**.
+- **Só o chefe, e isso foi medido.** Com Fase em toda criatura, cinco de Kleos 4
+  derrubavam o grupo de nível 12 para **21%** de vitória, contra 69%. O golpe grande
+  apagando lacaio é o prêmio de quem o montou.
+- **Três Fases por duelista foi medido e piora**: a Oráculo, que depende de dois
+  golpes grandes por dia, fica sem como virar. Com duas, o espelho do Furioso cai
+  de **77%** para quem começa para **64% a 71%**.
+
+### A tabela de Kleos do Grupo, de um a seis jogadores
+
+| Nível | 1 herói | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| 1–4 | 2 | 3 | 3 | 3 | 4 | 4 |
+| 5–8 | 3 | 5 | 5 | 6 | 7 | 7 |
+| 9–12 | 5 | 7 | 7 | 8 | 8 | 8 |
+| 13–16 | 6 | 8 | 8 | 9 | 10 | 10 |
+| 17–20 | 7 | 9 | 9 | 10 | 10 | 10 |
+
+- O **trio não mudou**. A dupla aguenta o degrau do trio, o quarto jogador vale +1
+  do nível 5 em diante. Sem o golpe que apagava o chefe, cada jogador a mais passou
+  a contar.
+- A coluna de **um herói** é o chefe de uma mesa solo. Substitui a regra da 0.17.1
+  ("conte o herói como Kleos 2 no clímax"), que continua valendo no nível 1.
+- Medido na média das duas pontas de cada faixa, de um a quatro jogadores: o
+  encontro justo vence de **54% a 94%**. Mesas de quatro terminam mais cedo (2,1 a
+  2,7 rodadas) — mais gente quebra Fase mais depressa. Uma Fase extra para mesa
+  grande foi medida e rende só +0,4 rodada; ficou de fora.
+
+### O simulador rolava o golpe dos marciais no atributo errado
+
+- `sim/completo.py` rolava o golpe Físico do Guardião e do Furioso com o Atributo
+  Divino (Sabedoria +1). O Livro I paga habilidade Física com **Força ou
+  Destreza** (+5). Acertava 45% em vez de 70%.
+- Corrigido, o encontro justo "de 2,4 a 3,1 rodadas" do README durava **1,8** —
+  era o que a mesa dizia, e o simulador não via. Foi o erro que escondeu por meses
+  que o chefe caía num golpe.
+- Tudo que usa esses heróis foi medido de novo: `completo.py`, `defesa.py`,
+  `aliado.py`, `nevoa.py`, `duelo.py`.
 
 ### O Grau fica gravado na habilidade
 
@@ -47,18 +105,20 @@ jogador foram medidas antes de virar regra, e o simulador confirmou as duas.
   no minuto em que ela nasceu ("defesa é horrível"), e no nível 17 repetiu: "tem que
   ser de desvantagem, defesa é uma merda". Medido: a regra antiga (+1 DEF
   sustentada, com a ação) tirava de **9 a 31 pontos** de vitória do trio e da mesa
-  solo. Com a regra nova, de um a quatro jogadores, o Guardião pagando em SP:
+  solo. Com a regra nova e as Fases, de um a quatro jogadores, o Guardião pagando
+  em SP:
 
   | | mesa solo | 2 | 3 | 4 |
   |---|---|---|---|---|
-  | +2 DEF com ação (regra nova, mal usada) | −21,7 | −4,4 | −12,2 | −7,6 |
-  | **+2 DEF como reação** | **+4,7** | **+1,1** | **+2,5** | **+1,4** |
-  | Desvantagem como reação (a régua da mesa) | +5,7 | +1,8 | +3,6 | +2,6 |
+  | +2 DEF com ação (regra nova, mal usada) | −21,0 | −18,4 | −16,2 | −13,7 |
+  | **+2 DEF como reação** | **+8,2** | **+3,8** | **+3,2** | **+0,6** |
+  | Desvantagem como reação (a régua da mesa) | +10,4 | +3,9 | +4,7 | +2,4 |
 
-  Médias em pontos de vitória, níveis 3 a 17. O teto também foi medido: **+4 DEF de
-  graça** no grupo inteiro, a luta toda, vale de +2 a +15. DEF vale pouco num combate
-  de duas ou três rodadas, e qualquer coisa que custe a ação perde para bater. Por
-  isso a Defesa nova é reativa, e o livro diz isso com os números.
+  Médias em pontos de vitória, níveis 3 a 17. O teto também foi medido, antes das
+  Fases: **+4 DEF de graça** no grupo inteiro, a luta toda, valia de +2 a +15. DEF
+  vale pouco numa luta de duas rodadas, e qualquer coisa que custe a ação perde para
+  bater. Por isso a Defesa nova é reativa — e as Fases, que alongam a luta, fazem
+  ela render mais, sobretudo na mesa solo.
 
 ### Correções
 
@@ -79,6 +139,19 @@ jogador foram medidas antes de virar regra, e o simulador confirmou as duas.
 
 ### Simulador
 
+- `sim/fases.py` mede o golpe no Teto contra o chefe com e sem Fases, a duração da
+  luta do trio em cada faixa e o encontro justo de um a quatro jogadores, e confere
+  a tabela de Fases e a de Kleos do Grupo do Bestiário contra o motor.
+- O motor (`combate.py`) ganhou Fases: `fases_do_kleos()`, os pisos, o excesso que se
+  perde, a Fase que não volta e as condições que caem na quebra. `Lutador.de_monstro`
+  só dá Fase ao chefe; bandos e lacaios são montados com `chefe=False`.
+- Limites que mudaram, e por quê: `aliado.py` compara a sobrevivência do Aliado
+  com a de um herói da mesma luta, em vez de um piso fixo de 50%; `graus.py` aceita
+  +1 DEF permanente até 10 pontos (8,3 no nível 20, contra 5,8 antes das Fases);
+  `completo.py` aceita 100% na mesa de cinco do nível 20, o topo conhecido da escala.
+- Dívida nova, que espera decisão de design: **Represália** (+12,4) e **Juramento
+  do Portão** (+13,2) contra o chefe em Fases, em `tecnicas.py`; e o duelo
+  **Guardião contra Oráculo no nível 5** (81%), em `duelo.py`.
 - `sim/defesa.py` mede a Defesa reativa, a Desvantagem reativa e a Defesa com ação,
   de 1 a 4 jogadores, e **falha** se a reativa sair de −1 a +10 pontos, se se
   afastar mais de 4 da Desvantagem, ou se a versão com ação deixar de ser pior que

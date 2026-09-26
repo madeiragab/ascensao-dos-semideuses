@@ -150,6 +150,9 @@ class Monstro:
     iniciativa_bonus: int = 1
     ataques_por_turno: int = 1
     bonus_reflexos: int = 1
+    # O degrau da criatura. É ele que decide quantas Fases ela tem (Livro II,
+    # Parte II). Zero quer dizer régua de teste sem Kleos, e régua não tem Fase.
+    kleos: int = 0
 
 
 def bestiario() -> dict[str, Monstro]:

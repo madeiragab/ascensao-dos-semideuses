@@ -58,7 +58,7 @@ BANDOS = {1: (4, 1), 5: (6, 2), 10: (6, 3), 15: (8, 3), 20: (8, 4)}
 
 def cenario_bando(nivel: int):
     qtd, k = BANDOS[nivel]
-    return [Lutador.de_monstro(monstro(k), f" {i}") for i in range(qtd)]
+    return [Lutador.de_monstro(monstro(k), f" {i}", chefe=False) for i in range(qtd)]
 
 
 def medir(nivel: int, cenario, ligado: bool) -> float:

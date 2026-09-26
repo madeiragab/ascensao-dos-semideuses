@@ -166,7 +166,7 @@ Sucesso abre a Cena 6 sem luta.
 
 *Ninfa, média · Conjuradora. Uma mulher feita de água parada.*
 
-**PV 30 · DEF 14 · Movimento 9 m, e nada na água**
+**PV 30 (três Fases: pisos em 20 e 10) · DEF 14 · Movimento 9 m, e nada na água**
 **Ataque +5 · Efeito +5**
 **Fortitude 19 · Reflexos 15 · Vontade 19**
 
@@ -191,6 +191,11 @@ propósito: o grupo precisa ver uma acontecer para entender a regra.*
 abrir o cano, quebrar a comporta, criar um caminho de descida — a enfraquece: até
 o fim do próximo turno ela tem Desvantagem em tudo e não usa o Puxão. Um teste de
 **Manufatura CD 13** encontra a comporta. **Mitologia CD 13** entende por quê.
+
+**Fases.** Ela é a chefe da sessão, então tem três ([Livro II, seção 10](bestiario.html#secao-10)).
+Quando a primeira quebrar, anuncie — e mostre a mudança: a água em volta dela
+sobe até os tornozelos de todo mundo, e ela se livra de qualquer condição que a
+prendia. O golpe que quebrou a Fase para ali; o resto se perde.
 
 **Ao chegar a 0 PV.** Ela não morre: desaba numa poça e a poça continua falando,
 mais baixo. Matar de verdade exige um segundo ato deliberado, e a mesa vai ter
@@ -236,7 +241,8 @@ primeira lição de progressão.
 ## Se a mesa for de quatro ou cinco
 
 O encontro justo muda pouco ([Livro II, seção 3](bestiario.html#secao-3)): com
-quatro ou cinco jogadores de nível 1, o Kleos justo continua sendo **4**. Some
+quatro jogadores de nível 1, o Kleos justo continua sendo **3**, o mesmo do trio;
+com cinco, sobe para **4**. Some
 **um Cão de Sarjeta** na Cena 3 e **um segundo Puxão** para Fonte — ela passa a
 ter Recarga 4–6 em vez de 5–6.
 

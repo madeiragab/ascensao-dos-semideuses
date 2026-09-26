@@ -111,7 +111,7 @@ de cada corvo. Em um acerto, aquele corvo foge imediatamente.
 
 ### HARPIA CARNICEIRA — Kleos 2 (Boato)
 *Monstruosidade, média · Veloz*
-**PV** 17 · **DEF** 14 · **Voo** 15 m
+**PV** 17 *(pisos de Fase: 8)* · **DEF** 14 · **Voo** 15 m
 **Ataque** +4 · **Efeito** +4
 **Fortitude** 15 · **Reflexos** 18 · **Vontade** 18
 
@@ -136,7 +136,7 @@ por uma rodada inteira, sem teste. Foi assim que os Boréadas salvaram Fineu.
 
 ### DRACENA LANCEIRA — Kleos 2 (Boato)
 *Monstruosidade, média · Blindada*
-**PV** 17 · **DEF** 15 (escudo) · **Movimento** 9 m
+**PV** 17 *(pisos de Fase: 8)* · **DEF** 15 (escudo) · **Movimento** 9 m
 **Ataque** +4 · **Efeito** +4
 **Fortitude** 18 · **Reflexos** 15 · **Vontade** 15
 
@@ -158,7 +158,7 @@ Separar a formação delas é metade da luta.
 
 ### ESPÍRITO DO NEVOEIRO — Kleos 2 (Boato)
 *Espírito, médio · Sombra*
-**PV** 18 · **DEF** 14 · **Flutuação** 9 m
+**PV** 18 *(pisos de Fase: 9)* · **DEF** 14 · **Flutuação** 9 m
 **Ataque** +4 · **Efeito** +4
 **Fortitude** 15 · **Reflexos** 15 · **Vontade** 18
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno e doença
@@ -182,7 +182,7 @@ Vento forte o dissipa completamente em uma rodada.
 
 ### LOBO DE LICAÃO — Kleos 2 (Boato)
 *Licantropo, médio · Bruto*
-**PV** 29 · **DEF** 12 · **Movimento** 12 m
+**PV** 29 *(pisos de Fase: 14)* · **DEF** 12 · **Movimento** 12 m
 **Ataque** +4 · **Efeito** +4
 **Fortitude** 18 · **Reflexos** 15 · **Vontade** 15
 
@@ -213,7 +213,7 @@ vezes, com quase dois heróis no chão.*
 
 ### AUTÔMATO HOPLITA — Kleos 3 (Conto)
 *Autômato, médio · Blindado*
-**PV** 27 · **DEF** 16 · **Movimento** 9 m
+**PV** 27 *(pisos de Fase: 18 / 9)* · **DEF** 16 · **Movimento** 9 m
 **Ataque** +5 · **Efeito** +5
 **Fortitude** 19 · **Reflexos** 15 · **Vontade** 19
 **Imune** a veneno, doença, exaustão e efeitos mentais
@@ -242,7 +242,7 @@ Aprimorado.
 
 ### EMPUSA — Kleos 3 (Conto)
 *Monstruosidade, média · Veloz*
-**PV** 27 · **DEF** 15 · **Movimento** 12 m
+**PV** 27 *(pisos de Fase: 18 / 9)* · **DEF** 15 · **Movimento** 12 m
 **Ataque** +5 · **Efeito** +5
 **Fortitude** 15 · **Reflexos** 19 · **Vontade** 19
 
@@ -271,7 +271,7 @@ Encanto até a próxima noite.
 
 ### CÃO DO INFERNO — Kleos 3 (Conto)
 *Monstruosidade, grande · Veloz*
-**PV** 27 · **DEF** 15 · **Movimento** 15 m
+**PV** 27 *(pisos de Fase: 18 / 9)* · **DEF** 15 · **Movimento** 15 m
 **Ataque** +5 · **Efeito** +5
 **Fortitude** 19 · **Reflexos** 19 · **Vontade** 15
 
@@ -325,7 +325,7 @@ Carisma** contra a Vontade de cada ave; some a proficiência se for treinado em
 
 ### MINOTAURO — Kleos 4 (Façanha)
 *Monstruosidade, grande · Bruto*
-**PV** 72 · **DEF** 14 · **Movimento** 12 m
+**PV** 72 *(pisos de Fase: 48 / 24)* · **DEF** 14 · **Movimento** 12 m
 **Ataque** +6 · **Efeito** +6
 **Fortitude** 20 · **Reflexos** 16 · **Vontade** 16
 
@@ -354,7 +354,7 @@ sofrendo 2d6. Colunas, árvores e esquinas são armas contra ele.
 
 ### GÓRGONA MENOR — Kleos 4 (Façanha)
 *Monstruosidade, média · padrão*
-**PV** 55 · **DEF** 15 · **Movimento** 9 m
+**PV** 55 *(pisos de Fase: 36 / 18)* · **DEF** 15 · **Movimento** 9 m
 **Ataque** +6 · **Efeito** +6
 **Fortitude** 20 · **Reflexos** 20 · **Vontade** 16
 
@@ -381,7 +381,7 @@ um lado, veneno do outro, e o Mestre não diz qual é qual.
 
 ### CICLOPE PASTOR — Kleos 4 (Façanha)
 *Gigante, grande · Bruto*
-**PV** 72 · **DEF** 14 · **Movimento** 9 m
+**PV** 72 *(pisos de Fase: 48 / 24)* · **DEF** 14 · **Movimento** 9 m
 **Ataque** +6 · **Efeito** +6
 **Fortitude** 20 · **Reflexos** 16 · **Vontade** 16
 
@@ -407,7 +407,7 @@ primeiro: uma refeição **Grandiosa** compartilhada pode encerrar a hostilidade
 
 ### BASILISCO — Kleos 4 (Façanha)
 *Monstruosidade, pequeno · Blindado / Conjurador*
-**PV** 41 · **DEF** 17 · **Movimento** 9 m
+**PV** 41 *(pisos de Fase: 27 / 13)* · **DEF** 17 · **Movimento** 9 m
 **Ataque** +6 · **Efeito** +6
 **Fortitude** 20 · **Reflexos** 16 · **Vontade** 20
 **Imune** a veneno
@@ -443,7 +443,7 @@ desfaz a petrificação.
 
 ### MEDUSA — Kleos 5 (Feito)
 *Monstruosidade, média · Conjuradora*
-**PV** 80 · **DEF** 16 · **Movimento** 9 m
+**PV** 80 *(pisos de Fase: 53 / 26)* · **DEF** 16 · **Movimento** 9 m
 **Ataque** +7 · **Efeito** +7
 **Fortitude** 21 · **Reflexos** 21 · **Vontade** 16
 
@@ -484,7 +484,7 @@ aventura inteira.
 
 ### LEÃO DE NEMÉIA — Kleos 5 (Feito)
 *Monstruosidade, grande · Bruto*
-**PV** 104 · **DEF** 14 · **Movimento** 15 m
+**PV** 104 *(pisos de Fase: 69 / 34)* · **DEF** 14 · **Movimento** 15 m
 **Ataque** +7 · **Efeito** +7
 **Fortitude** 21 · **Reflexos** 21 · **Vontade** 16
 
@@ -514,7 +514,7 @@ normalmente exige as próprias garras da criatura.
 
 ### ESFINGE — Kleos 5 (Feito)
 *Monstruosidade, grande · Conjuradora*
-**PV** 80 · **DEF** 16 · **Voo** 12 m
+**PV** 80 *(pisos de Fase: 53 / 26)* · **DEF** 16 · **Voo** 12 m
 **Ataque** +7 · **Efeito** +7
 **Fortitude** 21 · **Reflexos** 16 · **Vontade** 21
 
@@ -549,7 +549,7 @@ Uma esfinge derrotada por enigma se atira do penhasco. É o que elas fazem.
 
 ### VENTI TEMPESTUOSO — Kleos 5 (Feito)
 *Espírito, grande · Sombra / Veloz*
-**PV** 64 · **DEF** 17 · **Voo** 24 m
+**PV** 64 *(pisos de Fase: 42 / 21)* · **DEF** 17 · **Voo** 24 m
 **Ataque** +7 · **Efeito** +7
 **Fortitude** 16 · **Reflexos** 21 · **Vontade** 21
 **Resistência** a dano físico de armas não divinas · **Imune** a veneno, doença,
