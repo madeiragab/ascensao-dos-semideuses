@@ -4,6 +4,235 @@ Todas as mudanças relevantes de **Ascensão dos Semideuses** serão registradas
 neste arquivo. O projeto está em beta e usa versionamento semântico a partir desta
 revisão.
 
+## [0.18.0] - 2026-09-26
+
+As três mudanças grandes saíram de uma campanha solo longa — David Davis, Guardião
+de Hefesto com Afinidade Fogo, do nível 1 ao 17 em dois logs. As três queixas do
+jogador foram medidas antes de virar regra, e o simulador confirmou as três. Uma
+delas escondia um erro do próprio simulador.
+
+E a versão fecha a conta que ficou aberta: **nenhuma dívida conhecida** sobra no
+simulador. As seis técnicas que mediam acima de 10 pontos foram ajustadas, o duelo
+Guardião x Oráculo voltou para a faixa, a Fonte Médica parou de divergir entre
+livro e ficha, e o conversor do Bestiário parou de partir fichas de criatura ao
+meio.
+
+### O chefe tem Fases
+
+- O **chefe** do encontro — a criatura que luta sozinha, ou a de Kleos mais alto
+  num chefe com lacaios — tem o PV dividido em **Fases** iguais: duas no Kleos 2,
+  três do 3 ao 7, quatro do 8 em diante. Bando e lacaio não têm.
+- **O golpe que quebra uma Fase para no piso dela: o excesso se perde.** Nenhum
+  golpe tira duas Fases. **Fase quebrada não volta** com cura nem Regeneração.
+- Ao quebrar uma Fase, a criatura **se livra de toda condição** que a afete, e o
+  Mestre mostra o que mudou. Os pisos de cada criatura do Bestiário vêm na ficha,
+  ao lado do PV.
+- **Num duelo entre semideuses, cada um tem duas Fases.**
+- O **dano da Tábua de Kleos não mudou.** O número de Fases segura a duração da
+  luta; a Tábua segura a vitória.
+- **Por quê:** "o sistema depende de status e cenas pras lutas durarem mais". Nos
+  logs, quase todo combate acabava num golpe — "Rouge G2, 20", "Impacto Zero G5,
+  20" —, e o único chefe que aguentou foi o Ouroboros, porque o Mestre inventou na
+  hora que ele desfazia o dano. Medido: uma habilidade no Teto tirava de **50% a
+  74%** do PV do chefe do encontro justo, e o trio vencia de **80% a 97%** das vezes
+  em **1,8 a 2,1 rodadas**. Com Fases, **56% a 79%** em **2,6 a 3,6 rodadas**.
+- **Só o chefe, e isso foi medido.** Com Fase em toda criatura, cinco de Kleos 4
+  derrubavam o grupo de nível 12 para **21%** de vitória, contra 69%. O golpe grande
+  apagando lacaio é o prêmio de quem o montou.
+- **Três Fases por duelista foi medido e piora**: a Oráculo, que depende de poucos
+  golpes grandes por dia, fica sem como virar. Com duas, o espelho do Furioso cai
+  de **77%** para quem começa para **63% a 71%**.
+
+### A tabela de Kleos do Grupo, de um a seis jogadores
+
+| Nível | 1 herói | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|
+| 1–4 | 2 | 3 | 3 | 3 | 4 | 4 |
+| 5–8 | 3 | 5 | 5 | 6 | 7 | 7 |
+| 9–12 | 5 | 7 | 7 | 8 | 8 | 8 |
+| 13–16 | 6 | 8 | 8 | 9 | 10 | 10 |
+| 17–20 | 7 | 9 | 9 | 10 | 10 | 10 |
+
+- O **trio não mudou**. A dupla aguenta o degrau do trio, o quarto jogador vale +1
+  do nível 5 em diante. Sem o golpe que apagava o chefe, cada jogador a mais passou
+  a contar.
+- A coluna de **um herói** é o chefe de uma mesa solo. Substitui a regra da 0.17.1
+  ("conte o herói como Kleos 2 no clímax"), que continua valendo no nível 1.
+- Medido na média das duas pontas de cada faixa, de um a quatro jogadores: o
+  encontro justo vence de **54% a 90%**. Mesas de quatro terminam mais cedo (2,1 a
+  2,7 rodadas) — mais gente quebra Fase mais depressa. Uma Fase extra para mesa
+  grande foi medida e rende só +0,4 rodada; ficou de fora.
+
+### O simulador rolava o golpe dos marciais no atributo errado
+
+- `sim/completo.py` rolava o golpe Físico do Guardião e do Furioso com o Atributo
+  Divino (Sabedoria +1). O Livro I paga habilidade Física com **Força ou
+  Destreza** (+5). Acertava 45% em vez de 70%.
+- Corrigido, o encontro justo "de 2,4 a 3,1 rodadas" do README durava **1,8** —
+  era o que a mesa dizia, e o simulador não via. Foi o erro que escondeu por meses
+  que o chefe caía num golpe.
+- Tudo que usa esses heróis foi medido de novo: `completo.py`, `defesa.py`,
+  `aliado.py`, `nevoa.py`, `duelo.py`.
+
+### O Grau fica gravado na habilidade
+
+- Toda habilidade tem o **Grau dela**, escolhido quando ela nasce (qualquer um até
+  o do personagem). Na hora de usar, cada ponto é pago **no Grau dela ou abaixo**,
+  nunca acima. O Teto que vale é o do Grau da habilidade.
+- Para subir, a habilidade é **aprimorada**: uma Ação de Interlúdio, o mesmo teste
+  de desenvolver, contra a CD da versão nova. Pode ser remontada dentro do Teto
+  novo.
+- A **Habilidade Assinatura sobe sozinha**, sem Ação nem teste, a cada Grau novo.
+  Habilidade que nasce na criação do personagem nasce no Grau dele, sem teste.
+- A CD de desenvolver ou aprimorar passa a ser **10 + pontos + 1 por Grau acima do
+  primeiro**. No Grau 1 é a mesma de antes.
+- **Por quê:** a regra dizia "você pode comprar um ponto em qualquer Grau até o
+  seu", sem dizer de quem era o Grau, e a habilidade do nível 1 passava a ser paga
+  no Grau novo sozinha. Desenvolver no Grau 2 era exatamente o mesmo que
+  desenvolver no Grau 1 e pagar no 2 — e mais difícil, porque a CD era "10 + o
+  custo", e o custo no Grau 3 é o triplo. Nos logs, o Grau virou um botão girado
+  na hora do golpe: "Rouge g1 no ifrit", "Rouge g2", "Impacto g3". O próprio jogador
+  quis que cada Grau fosse uma técnica nova — o Rouge que vira Bleu, Blank e Noir —,
+  e a regra não dava motivo mecânico nenhum para isso.
+- A calibração não muda: o simulador sempre mediu cada herói com uma habilidade no
+  Grau do nível, e é exatamente o que a Assinatura garante.
+- O **Limiar de Grau** do Guia passa a ser respondido pela habilidade, paga naquele
+  Grau — mais um motivo para o Grau da habilidade importar.
+
+### A Defesa dá +2 por ponto, e se monta como reação
+
+- Um ponto de Defesa dá **+2 DEF de uma vez**, para tantos alvos quanto o Grau.
+  **+2 continua sendo o máximo** que habilidades dão, e duas fontes não somam.
+- Instantânea, a Defesa vale **até o início do seu próximo turno**. O livro passa a
+  mandar montá-la como **reação** — 2 pontos no Grau 1.
+- A passiva de DEF continua +1: passiva entrega metade do ponto ativo, como o
+  movimento (+3 m ativo, +1,5 m passivo).
+- **Por quê:** o jogador trocou a primeira habilidade defensiva por PV temporários
+  no minuto em que ela nasceu ("defesa é horrível"), e no nível 17 repetiu: "tem que
+  ser de desvantagem, defesa é uma merda". Medido: a regra antiga (+1 DEF
+  sustentada, com a ação) tirava de **9 a 31 pontos** de vitória do trio e da mesa
+  solo. Com a regra nova e as Fases, de um a quatro jogadores, o Guardião pagando
+  em SP:
+
+  | | mesa solo | 2 | 3 | 4 |
+  |---|---|---|---|---|
+  | +2 DEF com ação (regra nova, mal usada) | −21,0 | −18,4 | −16,2 | −13,7 |
+  | **+2 DEF como reação** | **+8,2** | **+3,8** | **+3,2** | **+0,6** |
+  | Desvantagem como reação (a régua da mesa) | +10,4 | +3,9 | +4,7 | +2,4 |
+
+  Médias em pontos de vitória, níveis 3 a 17. O teto também foi medido, antes das
+  Fases: **+4 DEF de graça** no grupo inteiro, a luta toda, valia de +2 a +15. DEF
+  vale pouco numa luta de duas rodadas, e qualquer coisa que custe a ação perde para
+  bater. Por isso a Defesa nova é reativa — e as Fases, que alongam a luta, fazem
+  ela render mais, sobretudo na mesa solo.
+
+### Seis técnicas saem da dívida — e a Fúria Cega entra na linha
+
+O limite do `tecnicas.py` é 10 pontos de vitória: acima disso a técnica vira
+escolha obrigatória. Seis moravam acima dele, na lista de dívida conhecida — quatro
+de antes, e duas que as Fases empurraram para lá, porque a luta mais longa faz
+segurar um aliado de pé valer mais. Cada uma foi ajustada e medida (chefe / bando,
+nível 12):
+
+| Técnica | Era | Agora | Antes | Depois |
+|---|---|---|---|---|
+| **Escudo Vínculo** | + proficiência na DEF | **+2** na DEF | +10,8 / +12,1 | +7,1 / +6,0 |
+| **Interceptar** | recebe o golpe inteiro | recebe **dois terços**; o aliado sofre o terço que sobra | +11,5 / +11,2 | +9,6 / +6,9 |
+| **Represália** | Força + nível de dano | dano igual à **proficiência** | +12,4 / +6,8 | +1,5 / +2,7 |
+| **Juramento do Portão** | o jurado fica em 1 PV | fica em 1 PV, e **quem jurou sofre o excesso** | +13,2 / +5,9 | +8,9 / +5,7 |
+| **Rede do Destino** | Vantagem até o fim da próxima rodada | Vantagem **até o fim do próximo turno de cada um** | +11,7 / +13,0 | +4,9 / +7,5 |
+| **Olho do Futuro** | um turno completo a mais | o turno é **emprestado**: você não age na próxima rodada, e nele nada passa de **metade do Teto** | +17,9 / +12,8 | +9,8 / +8,7 |
+
+- A **Fúria Cega** não morava na dívida, mas passou da linha quando o Interceptar
+  mudou o grupo de referência (bando **+12,7**). Ela passa a **gastar a ação**:
+  um ataque em cada criatura ao alcance, **todos com Desvantagem** — antes vinha
+  por cima da ação de Ataque. Agora **+7,6** contra o bando; contra um chefe
+  sozinho, nada, como antes.
+- Represália mede baixo (+1,5 / +2,7) e fica assim de propósito: ela é o
+  complemento do Interceptar, não um segundo motor de dano.
+- Textos trocados no Capítulo Três (Tier 1) e no Capítulo Nove (Tiers 2 e 3) do
+  Livro do Jogador, e palavra por palavra na lista de técnicas do construtor. As
+  notas automáticas da ficha acompanham: Represália mostra a proficiência, Escudo
+  Vínculo mostra +2.
+
+### A Fonte Médica paga SP e gasta Tratamento
+
+- A tabela de Fontes do Livro I dizia que a Médica paga **SP**; a página de consulta
+  rápida e o construtor diziam **MP**. Vale a tabela: **a Médica paga SP**.
+- E, paga em SP, **cada uso que cura PV gasta um Tratamento**. Sem isso o SP, que
+  volta inteiro num Descanso Curto, virava cura sem fim — a regra de Tratamentos
+  existe justamente para limitar isso. A cura paga em MP (Palavra Curativa)
+  continua fora do limite.
+- O construtor oferece "Médica · paga SP e gasta Tratamento ao curar" e escreve
+  "e 1 Tratamento" no custo de uma habilidade Médica que cura. `regras/interludio.md`
+  diz o mesmo.
+
+### O duelista paga o Grau que basta
+
+- O duelo **Guardião contra Oráculo no nível 5** vencia **81%**, acima do limite de
+  80% do `duelo.py`, e estava na dívida. A causa era o simulador jogando mal: com
+  Fases, o excesso se perde, e o duelista pagava sempre o Grau cheio — dois golpes
+  de Grau 2 numa Fase que o Grau 1 já quebrava.
+- Com o Grau gravado desta versão, a habilidade pode ser paga no Grau dela **ou
+  abaixo**. O duelista do simulador passou a pagar **o menor Grau cujo golpe médio
+  quebra a Fase** do outro. O mesmo duelo cai para **73%**, e todo par fica entre
+  **38% e 75%**.
+- O Guia do Mestre ganhou o aviso ("o duelista paga o Grau que basta") e a tabela
+  do duelo foi medida de novo. O Livro do Jogador já dizia que contra o chefe "às
+  vezes vale pagar um Grau menor"; agora diz que no duelo isso pesa ainda mais.
+- O grupo contra o chefe **continua** medido pagando o Grau cheio, de propósito: a
+  calibração inteira da Tábua foi feita assim, e o grupo que economiza Grau só
+  ganha folga.
+
+### Correções
+
+- **O Bestiário partia fichas de criatura ao meio.** O conversor de markdown
+  (`build_livros.py`) lia só a primeira linha de cada item de lista; a
+  continuação indentada virava parágrafo solto fora da lista. Isso cortava a
+  maioria dos Traços e Ações das fichas publicadas. Agora a linha indentada é do
+  item de cima, em lista com marcador e numerada.
+- A nota do marcial elemental ainda dizia que uma Híbrida ligada ao golpe podia ser
+  paga **inteiramente em SP**, contra a regra da 0.17.0. Agora diz "quase toda em SP,
+  com o mínimo de 1 MP". O Mestre dos logs tropeçou nessa contradição duas vezes.
+- O crítico de habilidade soma dados iguais ao Grau **em que a habilidade foi
+  paga** — a palavra "comprada" passou a ser ambígua com o Grau gravado.
+
+### A ficha acompanha
+
+- O construtor chama o seletor de **Grau da habilidade**, mede o Teto por ele,
+  impede que uma linha de efeito passe dele e escreve na saída o Grau, se ela sobe
+  sozinha (Assinatura) e a **CD de desenvolver**.
+- Subir o Grau da habilidade leva junto as linhas de efeito que estavam no teto
+  dela.
+- A Defesa sai como um ponto só, **+2 DEF**.
+
+### Simulador
+
+- `sim/fases.py` mede o golpe no Teto contra o chefe com e sem Fases, a duração da
+  luta do trio em cada faixa e o encontro justo de um a quatro jogadores, e confere
+  a tabela de Fases e a de Kleos do Grupo do Bestiário contra o motor.
+- O motor (`combate.py`) ganhou Fases: `fases_do_kleos()`, os pisos, o excesso que se
+  perde, a Fase que não volta e as condições que caem na quebra. `Lutador.de_monstro`
+  só dá Fase ao chefe; bandos e lacaios são montados com `chefe=False`.
+- Limites que mudaram, e por quê: `aliado.py` compara a sobrevivência do Aliado
+  com a de um herói da mesma luta, em vez de um piso fixo de 50%; `graus.py` aceita
+  +1 DEF permanente até 10 pontos (8,3 no nível 20, contra 5,8 antes das Fases);
+  `completo.py` aceita 100% na mesa de cinco do nível 20, o topo conhecido da escala.
+- **A dívida conhecida está vazia**: `DIVIDA_CONHECIDA` em `tecnicas.py` e
+  `DIVIDA_DUELO` em `duelo.py` não têm mais nome. A lista e o mecanismo ficam, para
+  a próxima que passar da linha ser anotada à vista e não escondida.
+- `duelo.py` ganhou `grau_que_basta()`: com Fases, o duelista paga o menor Grau
+  que quebra a Fase do outro.
+- `sim/defesa.py` lê o livro a partir da própria pasta, e roda de qualquer
+  diretório — o `test.ps1` da CI roda da raiz.
+- `sim/defesa.py` mede a Defesa reativa, a Desvantagem reativa e a Defesa com ação,
+  de 1 a 4 jogadores, e **falha** se a reativa sair de −1 a +10 pontos, se se
+  afastar mais de 4 da Desvantagem, ou se a versão com ação deixar de ser pior que
+  atacar — o aviso do livro dependeria disso.
+- `sim/ficha.py` confere o Grau gravado, o Teto pelo Grau da habilidade, a CD nova,
+  a Assinatura e a Defesa de +2, no livro e no construtor; e que a Fonte Médica
+  paga o mesmo recurso na tabela, na consulta rápida e na ficha.
+
 ## [0.17.1] - 2026-09-07
 
 As duas mudanças saíram do playtest da one-shot **Antes Que Eu Esqueça** —

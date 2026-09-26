@@ -14,7 +14,8 @@ O motor proposto:
       dano em área ............. 1d6
       PV temporários ........... 1d8
       +3 m de movimento ........ 1 ponto
-      +1 DEF ................... 1 ponto (o segundo custa 2)
+      +2 DEF ................... 1 ponto (e +2 é o máximo; até a 0.17 era +1
+                                 por ponto e o segundo custava 2)
       Vantagem em uma rolagem .. 1 ponto
       condição fraca ........... 1 ponto
       condição média ........... 2 pontos
@@ -215,7 +216,7 @@ def teste_exemplos_montados() -> None:
         ("Raízes Agarradoras",    2, "sustentada",  "medio",  0, "condição média: Preso"),
         ("Couraça de Pedra",      2, "cena",        "pessoal", 0, "2d8 + 3 PV temporários"),
         ("Passo do Vento",        1, "instantanea", "pessoal", 0, "+3 m de movimento"),
-        ("Escudo de Água",        3, "sustentada",  "pessoal", 0, "+2 DEF"),
+        ("Escudo de Água",        1, "instantanea", "pessoal", 1, "+2 DEF, reação"),
         ("Golpe Trovejante",      3, "instantanea", "curto",  0, "2d8 + 3 e condição fraca"),
     ]
 

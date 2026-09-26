@@ -52,7 +52,7 @@ def monstro_padrao(k: int) -> Monstro:
     fixo = round(dano / n - 5.5)   # aproxima a média por ataque com 1d10 + fixo
     return Monstro(
         f"Kleos {k}", pv_max=pv, defesa=defesa, bonus_ataque=atk,
-        dados_dano=[10], dano_fixo=fixo, ataques_por_turno=n,
+        dados_dano=[10], dano_fixo=fixo, ataques_por_turno=n, kleos=k,
     )
 
 
@@ -121,12 +121,20 @@ def _kleos_efetivo(taxa: float, base: dict[int, float]) -> float:
 
 
 def _montar(*pares):
-    """Monta um encontro a partir de pares (kleos, quantidade)."""
+    """Monta um encontro a partir de pares (kleos, quantidade).
+
+    Só o chefe tem Fases: a criatura única de Kleos mais alto, quando existe.
+    Um bando de iguais não tem chefe."""
+    maior = max(k for k, _ in pares)
+    chefe_unico = sum(n for k, n in pares if k == maior) == 1
+
     def f():
         saida = []
         for k, n in pares:
             for i in range(n):
-                saida.append(Lutador.de_monstro(monstro_padrao(k), f" {k}-{i}"))
+                saida.append(Lutador.de_monstro(
+                    monstro_padrao(k), f" {k}-{i}",
+                    chefe=chefe_unico and k == maior))
         return saida
     return f
 

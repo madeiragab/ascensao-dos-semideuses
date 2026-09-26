@@ -39,7 +39,7 @@ def monstro(k: int, tabua=None) -> Monstro:
     pv, defesa, atk, dano, n = (tabua or TABUA)[k]
     fixo = round(dano / n - 5.5)
     return Monstro(f"Kleos {k}", pv_max=pv, defesa=defesa, bonus_ataque=atk,
-                   dados_dano=[10], dano_fixo=fixo, ataques_por_turno=n)
+                   dados_dano=[10], dano_fixo=fixo, ataques_por_turno=n, kleos=k)
 
 
 class OraculoQueJoga(Lutador):

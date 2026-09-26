@@ -222,8 +222,16 @@ foram todas pagas: Bestiário, progressão de nível, armaduras e economia.)*
    quase não muda nada — o Livro II passa a recomendar 1 Recusa no Kleos 5 a 7 e
    2 a partir do 8.
 
+7. ~~**O chefe cai num golpe só.**~~ ✅ *(0.18.0)* Uma habilidade no Teto tirava
+   de 50% a 74% do PV do chefe do encontro justo, e a luta acabava em cerca de
+   duas rodadas — escondido por meses porque o simulador rolava o golpe dos
+   marciais com o atributo errado. O **chefe tem Fases** (Livro II, seção 10):
+   duas no Kleos 2, três do 3 ao 7, quatro do 8 em diante; o golpe que quebra uma
+   não atravessa. A tabela de Kleos do Grupo foi refeita de um a seis jogadores.
+   Travado em `sim/fases.py`.
+
 **Nenhuma peça do sistema ficou sem medição.** O motor joga o jogo inteiro:
-equipamento por Grau, habilidade, controle, Sopro, Arremetida e Recusa. Com tudo
-ligado dos dois lados, o encontro justo entrega de **68% a 93% de vitória**, de
-**2,4 a 3,1 rodadas**, com **1,7 a 2,6 heróis de pé** — que é exatamente o que a
-Regra da Moira promete.
+equipamento por Grau, habilidade, controle, Sopro, Arremetida, Recusa e Fases. Com
+tudo ligado dos dois lados, o encontro justo entrega de **53% a 90% de vitória**,
+de **2,7 a 3,7 rodadas**, com **1,2 a 2,5 heróis de pé** — que é o que a Regra da
+Moira promete.

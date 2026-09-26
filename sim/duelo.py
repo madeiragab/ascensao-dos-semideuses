@@ -59,6 +59,18 @@ def defesa_passiva(classe: str, nivel: int) -> int:
     return 10 + f.mods[atr]
 
 
+# Guia do Mestre, "Semideus contra semideus": num duelo, cada um tem duas
+# Fases. Entrou na 0.18.0, junto com as Fases do chefe. Com o golpe dos
+# marciais rolado no atributo certo, o espelho do Furioso dava 77% para quem
+# começava — o primeiro golpe grande decidia o duelo. Com duas Fases, 63% a 71%.
+FASES_NO_DUELO = 2
+
+# E, com Fases, o duelista paga o Grau que basta para quebrar a Fase do outro
+# (ver grau_que_basta). Pagando sempre o Grau cheio, o Guardião vencia a
+# Oráculo 81% das vezes no nível 5, fora da faixa; pagando o que basta, 73%.
+PAGA_O_GRAU_QUE_BASTA = True
+
+
 def duelista(classe: str, nivel: int, lado: str, com_habilidade=True,
              com_controle=True) -> Lutador:
     lut = montar_heroi(classe, nivel, com_habilidade)
@@ -66,7 +78,39 @@ def duelista(classe: str, nivel: int, lado: str, com_habilidade=True,
     lut.nome = classe
     if not com_controle:
         lut.papel = "dano"
+    lut.fases = FASES_NO_DUELO
+    lut.pisos = [lut.pv_max * i // lut.fases for i in range(lut.fases - 1, 0, -1)]
     return lut
+
+
+def grau_que_basta(lut: Lutador, alvo: Lutador) -> int:
+    """O menor Grau cujo golpe médio quebra a Fase em que o alvo está.
+
+    Com Fases o excesso se perde, e a habilidade paga no próprio Grau ou
+    abaixo: quem conhece a regra não gasta Grau 2 numa Fase que o Grau 1 já
+    quebra. Pagar sempre o Grau cheio era o duelista que joga mal — e quem
+    pagava mais caro por isso era a Oráculo, com dois golpes grandes por dia.
+    """
+    piso = next((p for p in alvo.pisos if p < alvo.pv), 0)
+    falta = alvo.pv - piso
+    for g in range(1, lut.grau_hab + 1):
+        if lut.teto * g * 4.5 + lut.divino >= falta:
+            return g
+    return lut.grau_hab
+
+
+def golpe_no_grau_que_basta(lut: Lutador, alvo: Lutador) -> bool:
+    g = grau_que_basta(lut, alvo) if PAGA_O_GRAU_QUE_BASTA else lut.grau_hab
+    custo = lut.teto * g
+    if recurso_de(lut) < custo:
+        return False
+    gastar(lut, custo)
+    cheio, lut.grau_hab = lut.grau_hab, g
+    try:
+        golpe_de_habilidade(lut, alvo)
+    finally:
+        lut.grau_hab = cheio
+    return True
 
 
 def duelo(a: Lutador, b: Lutador, fraca_a: int, fraca_b: int, max_rodadas=30):
@@ -95,11 +139,8 @@ def duelo(a: Lutador, b: Lutador, fraca_a: int, fraca_b: int, max_rodadas=30):
                         if rolagem_de_efeito(lut, alvo, fraca_do_alvo):
                             alvo.aplicar_condicao("perde_turno", 1)
                         agiu = True
-                    elif (lut.papel == "dano"
-                          and recurso_de(lut) >= lut.custo_dano):
-                        gastar(lut, lut.custo_dano)
-                        golpe_de_habilidade(lut, alvo)
-                        agiu = True
+                    elif lut.papel == "dano":
+                        agiu = golpe_no_grau_que_basta(lut, alvo)
                 if not agiu:
                     lut.turno([lut], [alvo])
 
@@ -125,9 +166,16 @@ def mede(c1: str, c2: str, nivel: int, n=N, **kw) -> dict:
             "iniciativa": iniciativa / n}
 
 
+# Dívida conhecida, com teto: não bloqueia a regressão até 85%, e aparece em
+# todo run até ser decidida. Zerada na 0.18.0: o Guardião x Oráculo do nível 5
+# (81%) morava aqui até o duelista pagar o Grau que basta.
+DIVIDA_DUELO: set[tuple[int, str, str]] = set()
+
+
 def main() -> None:
     random.seed(20260818)
     falhas = []
+    divida = []
 
     print("1. O ESPELHO — a mesma classe contra si mesma")
     print("   Aqui 'vitória' é de quem começou. Longe de 50% significa que a")
@@ -160,6 +208,9 @@ def main() -> None:
         print(f"{nivel:>6}{vals[0]:>21.0%}{vals[1]:>21.0%}{vals[2]:>20.0%}")
         for (c1, c2), v in zip(itertools.combinations(CLASSES, 2), vals):
             if not 0.20 <= v <= 0.80:
+                if (nivel, c1, c2) in DIVIDA_DUELO and v <= 0.85:
+                    divida.append(f"nível {nivel}: {c1} x {c2} deu {v:.0%}")
+                    continue
                 falhas.append(f"nível {nivel}: {c1} x {c2} deu {v:.0%} — "
                               f"o duelo está decidido antes de rolar")
 
@@ -194,6 +245,11 @@ def main() -> None:
                           f"dos duelos")
 
     print()
+    if divida:
+        print("DÍVIDA CONHECIDA — fora da faixa, abaixo do teto de 85%:")
+        for d in divida:
+            print("  ", d)
+        print()
     if falhas:
         for f in falhas:
             print("FALHOU:", f)
