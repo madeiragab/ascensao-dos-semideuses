@@ -1050,8 +1050,8 @@ pre.bloco-codigo {
       <h5>Combate</h5>
       <p class="etiqueta">Rápido e perigoso</p>
       <p>Quando começa a briga, o jogo passa a contar em <em class="termo">rodadas</em> e
-      <em class="termo">turnos</em>, para que todo mundo tenha vez. Um combate típico dura
-      três ou quatro rodadas. Ele é curto porque é letal.</p>
+      <em class="termo">turnos</em>, para que todo mundo tenha vez. Uma luta contra um chefe
+      dura umas três rodadas, quatro nos níveis altos. Ela é curta porque é letal.</p>
     </div>
     <div class="cartao">
       <h5>Interlúdio</h5>
@@ -1158,9 +1158,9 @@ pre.bloco-codigo {
   <div class="destaque">
     <span class="rotulo">O crítico de uma habilidade é diferente</span>
     <p>Um <strong>Ataque de Habilidade</strong> crítico <strong>soma dados iguais ao Grau em
-    que a habilidade foi comprada</strong> — 1 dado no Grau 1, 5 no Grau 5 — em vez de dobrar
-    tudo. É o Grau da habilidade, não o seu: uma comprada no Grau 1 soma 1 dado mesmo que você
-    já esteja no Grau 5. Do contrário, comprar barato dobraria o valor do crítico.</p>
+    que a habilidade foi paga</strong> — 1 dado no Grau 1, 5 no Grau 5 — em vez de dobrar
+    tudo. É o Grau daquele uso, não o seu: uma paga no Grau 1 soma 1 dado mesmo que você
+    já esteja no Grau 5. Do contrário, pagar barato dobraria o valor do crítico.</p>
     <p>Uma habilidade junta o dia inteiro num dado só. Medido do nível 1 ao 20: dobrando, uma
     habilidade no Teto de Custo apagava de <strong>98% a 139%</strong> dos PV do monstro de um
     encontro justo, e decidia a luta antes de ela começar. Somando o Grau, o pior caso cai
@@ -1553,12 +1553,13 @@ pre.bloco-codigo {
       marcar um inimigo. Ele ataca qualquer alvo que não seja você com Desvantagem, até o
       fim do seu próximo turno.</p></div>
       <div class="cartao"><h5>Escudo Vínculo</h5><p>Ao ser atingido, use sua reação e
-      <strong>2 SP</strong> para somar sua proficiência à DEF contra aquele ataque — e
+      <strong>2 SP</strong> para somar <strong>+2</strong> à DEF contra aquele ataque — e
       possivelmente transformá-lo em erro.</p></div>
       <div class="cartao"><h5>Vigor do Sobrevivente</h5><p>Seus PV máximos aumentam em um
       valor igual ao seu nível. Simples e sempre ligado.</p></div>
-      <div class="cartao"><h5>Interceptar</h5><p>Use sua reação para receber no seu lugar o
-      dano de um ataque que atingiria um aliado adjacente.</p></div>
+      <div class="cartao"><h5>Interceptar</h5><p>Use sua reação para receber no seu lugar
+      <strong>dois terços</strong> do dano de um ataque que atingiria um aliado adjacente. Ele
+      ainda sofre o terço que sobra, arredondado para baixo.</p></div>
       <div class="cartao"><h5>Pé Firme</h5><p>Rolagens de Efeito para te empurrar,
       puxar ou derrubar têm <strong>Desvantagem</strong> — e qualquer deslocamento forçado contra você é reduzido
       <strong>à metade</strong>.</p></div>
@@ -2526,8 +2527,9 @@ pre.bloco-codigo {
       <tbody>
         <tr><td><strong>Onde mora</strong></td><td>na sua Memória</td><td>no objeto</td></tr>
         <tr><td><strong>Quem paga</strong></td><td>você, em MP ou SP</td><td>o objeto, em <strong>Cargas</strong></td></tr>
-        <tr><td><strong>Como nasce</strong></td><td>Ação de Interlúdio, CD 10 + custo</td><td>Ação de Interlúdio, CD 10 + pontos</td></tr>
-        <tr><td><strong>Teto</strong></td><td>Teto de Custo do seu Grau</td><td>pontos do Grau do item</td></tr>
+        <tr><td><strong>Como nasce</strong></td><td>Ação de Interlúdio, CD 10 + pontos, +1 por Grau acima do primeiro</td><td>Ação de Interlúdio, CD 10 + pontos</td></tr>
+        <tr><td><strong>Como sobe de Grau</strong></td><td>aprimorando, com o mesmo teste</td><td>reforjando, com o mesmo teste</td></tr>
+        <tr><td><strong>Teto</strong></td><td>Teto de Custo do Grau da habilidade</td><td>pontos do Grau do item</td></tr>
       </tbody>
     </table>
   </div>
@@ -2711,7 +2713,8 @@ pre.bloco-codigo {
 
   <p class="abre">Quando a briga começa, todo mundo rola <span class="dado">1d20 + DES</span> —
   a <em class="termo">Iniciativa</em> — e age nessa ordem. Uma volta completa é uma
-  <strong>rodada</strong>. Um combate típico dura três ou quatro.</p>
+  <strong>rodada</strong>. Uma luta contra um chefe dura umas três rodadas — quatro nos
+  níveis altos —, e uma escaramuça, menos.</p>
 
   <h3>O que você faz no seu turno</h3>
   <div class="rolagem">
@@ -2791,6 +2794,21 @@ pre.bloco-codigo {
   <p>No mapa, uma criatura entra na área quando o centro do espaço dela estiver dentro. Sem
   mapa, o Mestre anuncia quem será atingido <strong>antes</strong> do gasto e da rolagem, para
   o jogador poder mudar de posição ou escolher outra ação.</p>
+
+  <h3>O chefe tem Fases</h3>
+  <p>O monstro que é o centro da luta — o que luta sozinho, ou o maior de um chefe com
+  lacaios — tem o PV dividido em <em class="termo">Fases</em>: duas no Kleos 2, três do 3
+  ao 7, quatro do 8 em diante. <strong>O golpe que quebra uma Fase para no piso dela, e o
+  excesso se perde.</strong> Nenhum golpe tira duas Fases de uma vez, e cura não devolve Fase
+  quebrada. Ao quebrar uma, a criatura se livra das condições que a afetavam e muda de
+  postura.</p>
+  <p>Isso muda como se gasta o golpe grande. Contra o chefe, a habilidade no Teto rende no
+  máximo uma Fase — às vezes vale pagar um Grau menor e guardar o resto para a próxima.
+  Contra bando e lacaio, que não têm Fase, ela continua apagando o que acertar. O Mestre
+  diz quantas Fases o chefe tem quando a primeira quebra.</p>
+  <p>Num duelo entre semideuses, cada um tem duas Fases, uma para cada metade dos PV. Ali
+  pagar o Grau que basta pesa ainda mais: não há grupo para aproveitar o que você guardou,
+  só o seu próximo golpe.</p>
 
   <h3>Condições</h3>
   <p>Combate impõe condições o tempo todo: Caído, Amedrontado, Preso, Atordoado.
@@ -3245,9 +3263,19 @@ pre.bloco-codigo {
         <tr><td><strong>Híbrida</strong></td><td>MP + SP</td><td>qualquer um dos dois</td>
             <td>As duas juntas: a espada coberta de sombra, a investida em chamas</td></tr>
         <tr><td><strong>Médica</strong></td><td>SP</td><td>Inteligência ou Sabedoria</td>
-            <td>Tratamento real, com kit e materiais. A <em>única</em> que cura PV</td></tr>
+            <td>Tratamento real, com kit e materiais. A <em>única</em> que cura PV — e cada cura gasta um Tratamento</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>Por que a cura Médica gasta Tratamento.</strong> O SP volta inteiro num
+    Descanso Curto de uma hora. Cura paga só em SP seria cura sem fim: uma hora de
+    descanso e o grupo volta inteiro, e os PV que só voltam pela metade dormindo deixam de
+    pesar. É o mesmo furo que a Híbrida tinha até a 0.17. Por isso a habilidade Médica
+    paga em SP <strong>e</strong> gasta um <a href="#cap8">Tratamento</a> a cada uso que
+    devolve PV — é a mão treinada com o kit, fazendo melhor o que o Tratamento já faz. Uma
+    Médica que não cura, só estabiliza ou remove veneno, não gasta Tratamento.</p>
   </div>
 
   <p>Uma habilidade <strong>Híbrida</strong> divide o custo final entre os dois recursos como
@@ -3393,7 +3421,9 @@ pre.bloco-codigo {
   <h3>O Grau</h3>
 
   <p>Seu <strong>Grau</strong> é a faixa de nível em que você está. Ele não é escolha e não
-  se compra: chega junto com o nível, e é ele que diz <em>quanto</em> um ponto compra.</p>
+  se compra: chega junto com o nível, e diz até onde as suas habilidades podem chegar. Cada
+  habilidade tem o <strong>Grau dela</strong>, gravado quando ela nasce — e é ele que diz
+  <em>quanto</em> um ponto dela compra.</p>
 
   <div class="rolagem">
     <table>
@@ -3411,14 +3441,31 @@ pre.bloco-codigo {
   <p>Duas colunas importam e vale entender a diferença. O <strong>Teto de Custo</strong> conta
   <em>pontos</em>: é o tamanho máximo de uma habilidade, e ele quase não cresce. O que cresce é
   o <strong>preço do ponto</strong> — e junto com ele o que o ponto entrega. Um ponto do Grau 3
-  custa 3 de MP e compra três vezes o que comprava no Grau 1.</p>
+  custa 3 de MP e compra três vezes o que comprava no Grau 1. O Teto que vale é o do Grau da
+  habilidade: uma habilidade de Grau 1 tem no máximo 5 pontos, mesmo na ficha de alguém de
+  nível 12.</p>
 
   <div class="destaque">
-    <span class="rotulo">A regra que faz o resto funcionar</span>
-    <p>Você pode comprar um ponto em <strong>qualquer Grau até o seu</strong>. Nada obriga a
-    usar o Grau máximo: um ponto de Grau 1 continua custando 1 e comprando o de sempre. Isso
-    mantém baratas as coisas que não precisam crescer — abrir caminho, ganhar um metro, dar
-    Vantagem a alguém — e deixa o Grau alto para onde ele faz falta.</p>
+    <span class="rotulo">O Grau é da habilidade, e ela nasce nele</span>
+    <p>Quando você desenvolve uma habilidade, escolhe o Grau dela — qualquer um até o seu. Esse
+    é o <strong>Grau da habilidade</strong>, e ele fica gravado na ficha.</p>
+    <p>Na hora de usar, cada ponto pode ser pago <strong>no Grau dela ou em qualquer Grau
+    abaixo</strong>. Uma habilidade de Grau 3 sai no Grau 1, barata, quando não precisa de
+    mais; e as coisas que não precisam crescer — abrir caminho, ganhar um metro, dar Vantagem
+    a alguém — continuam custando 1. O que ela não faz é passar do próprio Grau. Para isso,
+    ela precisa ser <strong>aprimorada</strong>.</p>
+  </div>
+
+  <div class="nota">
+    <p><strong>Por que o Grau fica gravado.</strong> Até a versão 0.17 a regra dizia "você
+    pode comprar um ponto em qualquer Grau até o seu", sem dizer de quem era o Grau — e a
+    habilidade escrita no nível 1 passava a ser paga no Grau novo sozinha. O resultado,
+    visto na mesa: desenvolver uma habilidade no Grau 2 era exatamente a mesma coisa que
+    desenvolvê-la no Grau 1 e pagar no Grau 2. Pior, era mais difícil, porque o teste
+    usava o custo. O Grau novo não era conquista: era um botão girado na hora do golpe.</p>
+    <p>Agora uma habilidade que nasce no Grau 3 é uma técnica nova, e a do Grau 1 continua
+    sendo a de antes até você treiná-la. O fogo que era vermelho no Grau 1 e fica azul no
+    Grau 2 passa a ser uma coisa que o personagem aprendeu, e não uma que ele recebeu.</p>
   </div>
 
   <div class="nota">
@@ -3431,21 +3478,37 @@ pre.bloco-codigo {
     <p>Duas saídas, e as duas já estão nas regras acima:</p>
     <ul>
       <li><strong>Pague o Grau que você aguenta.</strong> A habilidade que você usa toda luta
-      pode continuar comprada no Grau 1, custando o mesmo 1 MP por ponto para sempre. Ela
-      entrega menos, e é isso que a mantém acessível.</li>
+      pode continuar paga no Grau 1, custando o mesmo 1 MP por ponto para sempre — mesmo
+      depois de aprimorada. Ela entrega menos, e é isso que a mantém acessível.</li>
       <li><strong>Construa Híbridas.</strong> Água <em>mais</em> arma é Fonte Híbrida, e uma
-      Híbrida ligada ao seu golpe pode ser paga inteiramente em <strong>SP</strong> — o
-      recurso que você tem de sobra. É assim que o elemento entra em todo turno sem secar
-      sua reserva.</li>
+      Híbrida ligada ao seu golpe pode ser paga quase toda em <strong>SP</strong> — o
+      recurso que você tem de sobra —, com o mínimo de <strong>1 MP</strong> que toda
+      Híbrida paga. É assim que o elemento entra em todo turno sem secar sua reserva.</li>
     </ul>
     <p>Guarde as Elementais puras, pagas no seu Grau cheio, para os momentos que merecem.
     Elas são o canhão; a Híbrida é a mão.</p>
   </div>
 
-  <p>Suas habilidades antigas não ficam para trás nem precisam ser reconstruídas. A habilidade
-  escrita no nível 1 continua na ficha; quando você chega ao Grau 2, cada ponto dela pode ser
-  pago no Grau novo e passa a entregar o dobro. Você paga mais e recebe mais, sempre na mesma
-  proporção.</p>
+  <h4>Aprimorar, e a Assinatura que sobe sozinha</h4>
+
+  <p>Suas habilidades antigas não somem quando você sobe de Grau. A habilidade escrita no
+  nível 1 continua na ficha, no Grau 1, custando o mesmo e entregando o mesmo. Para ela
+  acompanhar você, <strong>aprimore</strong>: uma Ação de Interlúdio, o mesmo teste de
+  desenvolver, contra a CD da versão nova. No sucesso ela passa para o Grau que você
+  escolheu, até o seu, e pode ser remontada dentro do Teto novo — o conceito fica, os
+  números mudam. Na falha, ela continua como estava, e a próxima tentativa tem Vantagem.</p>
+
+  <div class="destaque">
+    <span class="rotulo">Desenvolver ou aprimorar</span>
+    <p class="formula">CD 10 + pontos da habilidade + 1 por Grau acima do primeiro</p>
+    <p>Os pontos são os do custo, depois dos −1. No Grau 1 a CD é a de sempre; uma de
+    6 pontos no Grau 3 pede CD 18.</p>
+  </div>
+
+  <p>A exceção é a sua <strong>Habilidade Assinatura</strong>: ela sobe junto com você, sem
+  Ação nem teste, cada vez que você chega a um Grau novo. É o golpe pelo qual as pessoas te
+  reconhecem, e ele cresce com o nome. E uma habilidade que nasce na criação do personagem,
+  em qualquer nível, nasce no Grau dele, sem teste.</p>
 
   <div class="ornamento">❖</div>
 
@@ -3483,20 +3546,35 @@ pre.bloco-codigo {
     <table>
       <thead><tr><th class="num">Grau</th><th>PV temporários</th><th>Cura <em>(só Fonte Médica)</em></th><th>Defesa</th></tr></thead>
       <tbody>
-        <tr><td class="num">1</td><td><span class="dado">1d8</span></td><td><span class="dado">1d8</span></td><td>+1 DEF para 1 alvo</td></tr>
-        <tr><td class="num">2</td><td><span class="dado">2d8</span></td><td><span class="dado">2d8</span></td><td>+1 DEF para 2 alvos</td></tr>
-        <tr><td class="num">3</td><td><span class="dado">3d8</span></td><td><span class="dado">3d8</span></td><td>+1 DEF para 3 alvos</td></tr>
-        <tr><td class="num">4</td><td><span class="dado">4d8</span></td><td><span class="dado">4d8</span></td><td>+1 DEF para 4 alvos</td></tr>
-        <tr><td class="num">5</td><td><span class="dado">5d8</span></td><td><span class="dado">5d8</span></td><td>+1 DEF para 5 alvos</td></tr>
+        <tr><td class="num">1</td><td><span class="dado">1d8</span></td><td><span class="dado">1d8</span></td><td>+2 DEF para 1 alvo</td></tr>
+        <tr><td class="num">2</td><td><span class="dado">2d8</span></td><td><span class="dado">2d8</span></td><td>+2 DEF para 2 alvos</td></tr>
+        <tr><td class="num">3</td><td><span class="dado">3d8</span></td><td><span class="dado">3d8</span></td><td>+2 DEF para 3 alvos</td></tr>
+        <tr><td class="num">4</td><td><span class="dado">4d8</span></td><td><span class="dado">4d8</span></td><td>+2 DEF para 4 alvos</td></tr>
+        <tr><td class="num">5</td><td><span class="dado">5d8</span></td><td><span class="dado">5d8</span></td><td>+2 DEF para 5 alvos</td></tr>
       </tbody>
     </table>
   </div>
   <div class="nota">
-    <p><strong>Defesa é a única coisa que não engorda.</strong> O Grau alto espalha o bônus por
-    mais gente, nunca aumenta o número. O segundo ponto de DEF sobre o mesmo alvo continua
-    custando o dobro, e <strong>+2 continua sendo o máximo</strong>. Isso não é capricho: medido
-    no nível 20, cada ponto de DEF vale quase sete pontos de vitória num combate justo — mais
-    que qualquer outra linha destas tabelas por ponto gasto.</p>
+    <p><strong>Defesa não engorda: alcança mais gente.</strong> Um ponto dá os +2 de uma vez,
+    e <strong>+2 continua sendo o máximo</strong> que habilidades dão — duas fontes não somam.
+    O Grau alto espalha o bônus por mais gente, nunca aumenta o número. Instantânea, a Defesa
+    vale <strong>até o início do seu próximo turno</strong>; sustentada, enquanto você
+    sustentar.</p>
+  </div>
+
+  <div class="destaque">
+    <span class="rotulo">Monte a Defesa como reação</span>
+    <p>O gatilho <em>"quando um ataque for declarado contra você ou um aliado a até 6 metros"</em>
+    põe a Defesa no ar antes da rolagem, e ela segura <strong>todos</strong> os ataques contra
+    o alvo até o seu próximo turno. Instantânea, reação, +2 DEF: <strong>2 pontos</strong> no
+    Grau 1.</p>
+    <p>Comprada com a sua ação, ela quase sempre perde para atacar. Um combate aqui dura duas
+    ou três rodadas, e o turno gasto se protegendo é um terço do seu dano. Medido de um a
+    quatro jogadores: a Defesa que gasta a ação <strong>tira até 23 pontos</strong> de
+    vitória — 21 em média na mesa solo; a mesma Defesa como reação <strong>soma de 1 a 8
+    em média</strong>, perto do que soma impor Desvantagem ao golpe, que até aqui era a única
+    defesa que prestava. Quanto mais longa a luta, mais ela rende: é na mesa solo, contra
+    um chefe em Fases, que ela vale mais.</p>
   </div>
 
   <h4>Movimento e deslocamento</h4>
@@ -3553,7 +3631,9 @@ pre.bloco-codigo {
     <p>No <strong>Grau 1</strong> ela custa 4 MP e causa <span class="dado">3d8 + mod</span>.
     No <strong>Grau 3</strong>, os mesmos 4 pontos custam 12 MP e causam
     <span class="dado">9d8 + mod</span>. No <strong>Grau 5</strong>, 20 MP e
-    <span class="dado">15d8 + mod</span>. A ficha não muda: muda o que você pode pagar por ela.</p>
+    <span class="dado">15d8 + mod</span>. Desenvolvida no Grau 5, ela sai em qualquer uma das
+    três, e você escolhe na hora quanto quer pagar. Desenvolvida no Grau 1, sai só na
+    primeira até ser aprimorada.</p>
   </div>
 
   <h4>Os graus de condição</h4>
@@ -3678,7 +3758,8 @@ pre.bloco-codigo {
       <h5>Pode</h5>
       <p>Um efeito fraco, do tamanho de <strong>um ponto</strong>: +1 DEF · +1,5 m de
       movimento · +1 em uma perícia · enxergar no escuro comum · respirar num meio hostil ·
-      resistência a um perigo ambiental · Vantagem numa categoria estreita de teste.</p>
+      resistência a um perigo ambiental · Vantagem numa categoria estreita de teste. DEF e
+      movimento entram pela metade do ponto ativo, porque ficam ligados para sempre.</p>
     </div>
     <div class="cartao">
       <h5>Não pode</h5>
@@ -3780,8 +3861,8 @@ pre.bloco-codigo {
             <td>Instantânea</td><td>Curto</td><td class="num">3</td><td class="num">—</td></tr>
         <tr><td><strong>Raízes Agarradoras</strong></td><td>Preso (condição média)</td>
             <td>Sustentada</td><td>Médio</td><td class="num">4</td><td class="num">2</td></tr>
-        <tr><td><strong>Escudo de Água</strong></td><td>+2 DEF</td>
-            <td>Sustentada</td><td>Pessoal</td><td class="num">4</td><td class="num">2</td></tr>
+        <tr><td><strong>Escudo de Água</strong></td><td>+2 DEF até seu próximo turno, reação quando você for atacado</td>
+            <td>Instantânea</td><td>Pessoal</td><td class="num">2</td><td class="num">—</td></tr>
         <tr><td><strong>Lança de Gelo</strong></td><td><span class="dado">3d8</span> + mod, alvo único</td>
             <td>Instantânea</td><td>Longo</td><td class="num">5</td><td class="num">—</td></tr>
         <tr><td><strong>Couraça de Pedra</strong></td><td><span class="dado">2d8</span> + mod em PV temporários</td>
@@ -3826,7 +3907,7 @@ pre.bloco-codigo {
       Efeitos e pontos:<br>
       Modificadores de custo:<br>
       <strong>Total em pontos:</strong><br>
-      Grau em que costuma pagar:<br>
+      <strong>Grau da habilidade:</strong> o máximo que ela paga; subir pede aprimorar<br>
       <strong>Custo em MP ou SP:</strong> pontos × Grau<br>
       Sustentar por rodada:<br>
       Rolagem: Ataque de Habilidade <em>ou</em> Efeito contra Fortitude · Reflexos · Vontade<br>
@@ -3848,6 +3929,8 @@ pre.bloco-codigo {
     <li><b>Modificadores</b> Ajuste com os +1 e os −1 que forem honestos.</li>
     <li><b>Some os pontos</b> E só então multiplique pelo Grau para achar o custo em
     recurso. Confira o custo de sustentar, se houver.</li>
+    <li><b>Grave o Grau</b> O Grau em que ela nasce, até o seu. É o teto do que ela paga
+    até ser aprimorada.</li>
     <li><b>Descreva</b> Dê nome e diga como fica quando acontece.</li>
     <li><b>Aprove</b> Leve ao Mestre. Ele pode pedir mudança, e é para isso que ele existe.</li>
   </ol>
@@ -3890,7 +3973,9 @@ pre.bloco-codigo {
   <strong>1 Tratamento e 2 SP</strong> para estabilizar automaticamente uma criatura
   Agonizante adjacente. Sem gastar Tratamento, ainda é possível usar Intuição CD 10.</p>
   <p>Cura paga em <strong>MP</strong> não gasta Tratamento. É por isso que ter um Oráculo no
-  grupo é diferente de ter uma caixa de curativos.</p>
+  grupo é diferente de ter uma caixa de curativos. A cura de uma habilidade
+  <strong>Médica</strong>, paga em SP, gasta um Tratamento a cada uso: ela é o Tratamento
+  feito por quem estudou para isso.</p>
 
   <h3>Refeições</h3>
   <p>Ninguém precisa anotar rações. Mas parar para comer bem é uma decisão com efeito, e
@@ -3931,10 +4016,12 @@ pre.bloco-codigo {
     falha custa 1 de Integridade da peça e dá Vantagem na próxima. Ver
     <a href="#cap4">a Forja</a>.</p></div>
     <div class="cartao"><h5>Desenvolver uma habilidade</h5><p>Uma Ação para projetar e
-    treinar uma habilidade nova pelo motor do <a href="#cap7">Capítulo Sete</a>. Teste de <strong>Mitologia</strong>
+    treinar uma habilidade nova pelo motor do <a href="#cap7">Capítulo Sete</a>, ou para
+    <strong>aprimorar</strong> uma que você já tem até o seu Grau. Teste de <strong>Mitologia</strong>
     (elemental), <strong>Atletismo</strong> (física) ou <strong>Manufatura</strong>
-    (médica) contra <strong>CD 10 + o custo</strong> dela. Em uma falha, você entende onde
-    errou e tenta de novo no próximo Interlúdio.</p></div>
+    (médica) contra <strong>CD 10 + os pontos dela + 1 por Grau acima do primeiro</strong>.
+    Em uma falha, você entende onde errou e tenta de novo no próximo Interlúdio, com
+    Vantagem.</p></div>
     <div class="cartao"><h5>Convalescer</h5><p>Remove um Ferimento Grave, uma doença ou um
     veneno persistente. Alguém pode gastar a Ação dele para te dar Vantagem.</p></div>
     <div class="cartao"><h5>Pesquisar</h5><p>Investigação ou Mitologia para descobrir um fato
@@ -4053,8 +4140,7 @@ pre.bloco-codigo {
     <div class="cartao"><h5>Muro de Escudos</h5><p>Aliados adjacentes a você recebem
     <strong>+1 DEF</strong>. Exige que você esteja empunhando um escudo.</p></div>
     <div class="cartao"><h5>Represália</h5><p>Quando você usa Interceptar, quem
-    desferiu o golpe sofre dano igual ao seu <strong>modificador de Força</strong>
-    mais seu nível.</p></div>
+    desferiu o golpe sofre dano igual ao seu <strong>bônus de proficiência</strong>.</p></div>
     
     <div class="cartao"><h5>Fôlego de Ferro</h5><p>Uma vez por combate, ação
     bônus e <strong>3 SP</strong>: recupere <strong>PV iguais ao seu nível</strong>.
@@ -4074,7 +4160,8 @@ pre.bloco-codigo {
     renovar.</p></div>
     <div class="cartao"><h5>Juramento do Portão</h5><p>Escolha um aliado no início do
     combate. Enquanto ele estiver a até 3 metros de você, <strong>nenhum golpe
-    isolado pode reduzi-lo abaixo de 1 PV</strong>.</p></div>
+    isolado pode reduzi-lo abaixo de 1 PV</strong> — e o dano que passaria disso,
+    quem sofre é você.</p></div>
   </div>
 
   <h4>Furioso · Tier 2 <small>— a partir do nível 6</small></h4>
@@ -4097,9 +4184,9 @@ pre.bloco-codigo {
     <div class="cartao"><h5>Massacre</h5><p>Quando você reduz um inimigo a 0 PV, faça
     <strong>mais um ataque de graça</strong> contra outro alvo ao alcance.
     <em>Não faz nada contra um chefe sozinho, e é devastadora contra um bando.</em></p></div>
-    <div class="cartao"><h5>Fúria Cega</h5><p>Uma vez por combate, ataque
-    <strong>todas</strong> as criaturas ao seu alcance, uma vez cada. Você fica
-    Desprevenido até seu próximo turno.</p></div>
+    <div class="cartao"><h5>Fúria Cega</h5><p>Uma vez por combate, <strong>com sua
+    ação</strong>, ataque <strong>todas</strong> as criaturas ao seu alcance, uma vez cada,
+    com <strong>Desvantagem</strong>. Você fica Desprevenido até seu próximo turno.</p></div>
     <div class="cartao"><h5>Coração de Ares</h5><p>Seus ataques são <strong>Acerto
     Crítico em 19 e 20</strong> naturais.</p></div>
   </div>
@@ -4121,13 +4208,15 @@ pre.bloco-codigo {
   <h4>Oráculo · Tier 3 <small>— a partir do nível 12</small></h4>
   <div class="grade">
     <div class="cartao"><h5>Rede do Destino</h5><p>Uma vez por combate, com uma ação:
-    todos os aliados que você veja têm <strong>Vantagem</strong> até o fim da próxima
-    rodada.</p></div>
+    todos os aliados que você veja têm <strong>Vantagem</strong> nos ataques até o fim
+    do próximo turno de cada um.</p></div>
     <div class="cartao"><h5>Fonte Profunda</h5><p>Fonte de Mana passa a devolver o
     <strong>dobro</strong> de MP, e pode ser usada como ação bônus.</p></div>
     <div class="cartao"><h5>Olho do Futuro</h5><p>Uma vez por combate, você
-    <strong>age duas vezes</strong> na mesma rodada — turno completo, imediatamente
-    depois do seu.</p></div>
+    <strong>age duas vezes</strong> na mesma rodada — um turno a mais, imediatamente
+    depois do seu. É um turno <strong>emprestado do futuro</strong>: você não age na
+    próxima rodada, e nele nenhuma habilidade passa de <strong>metade do seu
+    Teto</strong>.</p></div>
   </div>
 
   <div class="ornamento">❖</div>
@@ -4136,8 +4225,9 @@ pre.bloco-codigo {
 
   <h4>Habilidade Assinatura</h4>
   <p>Escolha uma habilidade que você conhece. Ela passa a custar <strong>1 a
-  menos</strong> (mínimo 1) e <strong>não ocupa espaço de Memória</strong>. É o golpe
-  pelo qual as pessoas te reconhecem. No nível 13 você escolhe uma segunda.</p>
+  menos</strong> (mínimo 1), <strong>não ocupa espaço de Memória</strong> e <strong>sobe
+  de Grau junto com você</strong>, sem Ação nem teste, a cada Grau novo. É o golpe pelo qual
+  as pessoas te reconhecem. No nível 13 você escolhe uma segunda.</p>
 
   <h4>Ataque Extra</h4>
   <p>Ao usar a ação Atacar, você faz <strong>dois</strong> ataques em vez de um. É o
@@ -4196,9 +4286,12 @@ pre.bloco-codigo {
     Grau 3 · 9 a 12 &nbsp;·&nbsp; Grau 4 · 13 a 16 &nbsp;·&nbsp; Grau 5 · 17 a 20</p>
     <p class="formula">teto de custo = 5 pontos no Grau 1, 6 pontos daí em diante</p>
   </div>
-  <p>Subir de Grau é o maior salto de poder que uma habilidade recebe, e ele não custa
-  escolha nenhuma: chega com o nível. Cada ponto passa a comprar mais e a custar mais,
-  na mesma proporção — o <a href="#cap7">Capítulo Sete</a> tem a tabela de cada efeito.</p>
+  <p>Subir de Grau abre o maior salto de poder que uma habilidade recebe — mas o salto não
+  chega sozinho. O nível te dá o Grau; cada habilidade precisa ser <strong>aprimorada</strong>
+  para usá-lo, com uma Ação de Interlúdio. A Assinatura é a única que sobe junto. Desenvolver
+  uma habilidade nova já no Grau novo é o outro caminho, e é por isso que ele vale: ela nasce
+  no alto. Cada ponto do Grau novo compra mais e custa mais, na mesma proporção — o
+  <a href="#cap7">Capítulo Sete</a> tem a tabela de cada efeito.</p>
   <p>O teto quase não cresce, e é de propósito. Ele conta <strong>pontos</strong>, não MP:
   é o que impede um personagem de guardar recurso a vida toda para montar uma habilidade
   que resolve a campanha sozinha. Quem cresce é o ponto.</p>
@@ -4431,8 +4524,8 @@ pre.bloco-codigo {
     <div class="cartao">
       <h5>O que gasta o quê</h5>
       <p class="etiqueta">e o que devolve</p>
-      <p><strong>SP</strong> técnicas e habilidades Físicas — volta inteiro num Descanso
-      Curto. <strong>MP</strong> habilidades Elementais e Médicas — só volta dormindo.
+      <p><strong>SP</strong> técnicas e habilidades Físicas e Médicas — volta inteiro num
+      Descanso Curto. <strong>MP</strong> habilidades Elementais — só volta dormindo.
       <strong>PV</strong> volta pela metade no Descanso Longo, e por inteiro só no
       Interlúdio.</p>
     </div>
@@ -4490,7 +4583,7 @@ pre.bloco-codigo {
   Escala de Kleos, o motor de criação de monstros e 38 criaturas. O
   <a href="grimorio.html"><em>Grimório</em></a> traz a Magia da Névoa. E a <a href="ficha.html"><em>Ficha do Herói</em></a> é um livro
   só dela: preenche na tela, aceita o retrato do personagem e sai em PDF.</p>
-  <p class="versao-do-livro">Versão <strong>0.17.1</strong> · 07/09/2026 · o histórico de cada número está no CHANGELOG do repositório.</p>
+  <p class="versao-do-livro">Versão <strong>0.18.0</strong> · 26/09/2026 · o histórico de cada número está no CHANGELOG do repositório.</p>
 </footer>
 
 </div><!-- /mancha -->

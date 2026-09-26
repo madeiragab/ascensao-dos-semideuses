@@ -63,16 +63,25 @@ o personagem muda de patamar quando o Grau dele muda.
 O **Kleos do Grupo** é a soma. Para não fazer conta com frações na mesa, consulte
 direto:
 
-| Nível | 3 heróis | 4 heróis | 5 heróis | 6 heróis |
-|---|---|---|---|---|
-| 1–4 | 3 | 4 | 4 | 4 |
-| 5–8 | 5 | 5 | 6 | 6 |
-| 9–12 | 7 | 7 | 8 | 8 |
-| 13–16 | 8 | 8 | 9 | 9 |
-| 17–20 | 9 | 10 | 10 | 10 |
+| Nível | 1 herói | 2 heróis | 3 heróis | 4 heróis | 5 heróis | 6 heróis |
+|---|---|---|---|---|---|---|
+| 1–4 | 2 | 3 | 3 | 3 | 4 | 4 |
+| 5–8 | 3 | 5 | 5 | 6 | 7 | 7 |
+| 9–12 | 5 | 7 | 7 | 8 | 8 | 8 |
+| 13–16 | 6 | 8 | 8 | 9 | 10 | 10 |
+| 17–20 | 7 | 9 | 9 | 10 | 10 | 10 |
 
 **Esta tabela não é a soma dos valores de cima, e é de propósito.** Somar
 funcionava para um trio e quebrava para mesas maiores — ver logo abaixo.
+
+**Com um herói só, o número é o do chefe.** A coluna de um herói é o clímax de
+uma mesa solo; as escaramuças do caminho ficam dois ou três degraus abaixo. O Guia
+do Mestre tem o resto do que muda quando não há ninguém para cobrir a segunda
+frente.
+
+**A tabela conta com as Fases** ([seção 10](#secao-10)). Foi medida com o chefe de
+cada encontro dividido em Fases, de um a cinco jogadores. Sem elas o mesmo degrau
+cai em cerca de duas rodadas.
 
 **Aliados eventuais contam.** Um deus que aparece numa cena e luta ao seu lado
 soma o Kleos dele. É por isso que existem alianças na mitologia — e é assim que
@@ -91,7 +100,7 @@ do encontro.
 > acima do que o grupo aguenta. Cinco degraus é a faixa **Derrota** com folga:
 > não é um combate, é uma cena de morte. Use a tabela, não a soma.
 
-### O quarto jogador quase não muda o Kleos, e o quinto vale um degrau
+### A mesa grande não se multiplica
 
 A primeira versão desta tabela multiplicava: quatro heróis de nível 5 valiam
 4 × 1¾ = 7. Medido com o motor jogando o jogo inteiro, esse encontro é um
@@ -109,13 +118,16 @@ e um jogador a mais soma bem menos que isso: ele traz um corpo e uma ação, mas
 não traz PV de monstro nem dano de monstro junto. Multiplicar heróis por Kleos
 supõe uma escala fina que a Tábua não tem.
 
-A tabela acima é a medida: **o quarto jogador raramente move o degrau, o quinto
-vale +1, e o sexto não move nada**. Um sexto herói entra como folga, não como
-degrau: no nível 3 ele leva o grupo de 61% para 92% de vitória contra o mesmo
-Kleos, e no 17 para 94%.
+A tabela acima é a medida, refeita com as Fases na versão 0.18.0: **a dupla
+aguenta o degrau do trio, o quarto jogador vale +1 do nível 5 em diante, o quinto
+vale +1 nos níveis 1–8 e 13–16, e o sexto não move nada.** Sem o golpe que
+apagava o chefe inteiro, cada par de mãos a mais passou a contar — mas bem menos
+que um degrau cheio.
 
-A única exceção está no topo: **seis heróis de nível 20 aguentam um Kleos 11**,
-com 78% de vitória. Só que Kleos 11 é Cataclisma, e Cataclisma não cai por dano —
+Duas coisas a saber sobre mesas grandes. **A luta acaba mais cedo**: com quatro
+jogadores o chefe cai em 2,1 a 2,7 rodadas, contra 2,6 a 3,6 do trio, porque mais
+gente quebra Fase mais depressa. E **no topo não há para onde subir**: uma mesa
+cheia de nível 20 passa do Kleos 10, e o 11 é Cataclisma, que não cai por dano —
 cai pelo Selo ([seção 7](#secao-7)). A conta permite; a ficção continua mandando.
 
 Quando quiser apertar uma mesa grande sem subir um degrau inteiro, some criaturas
@@ -158,12 +170,13 @@ Alinhar os cortes às faixas de Grau resolve sem tocar em nenhum valor:
 | 13 | 2,8 | **3,9** |
 | 17 | 2,9 | **3,9** |
 
-Para reproduzir: `sim/forja.py`.
+Medido antes das Fases, com o grupo lutando só de arma. Para reproduzir:
+`sim/forja.py`.
 
 ### Onde a escala fica grossa
 
-Nos degraus altos, um passo de Kleos é um salto grande demais. Um trio de nível 5
-vence um Kleos 5 em 95% das vezes e um Kleos 6 em 34% — não existe nada no meio.
+Nos degraus altos, um passo de Kleos é um salto grande demais. Um trio de nível 7
+vence um Kleos 5 em 88% das vezes e um Kleos 6 em 55% — não existe nada no meio.
 Isso acontece porque a Tábua cresce cerca de 35% por degrau enquanto o grupo
 cresce cerca de 10% por nível.
 
@@ -192,15 +205,16 @@ Compare a **soma do Kleos de todos os inimigos** com o **Kleos do Grupo**.
 
 ### Isso foi medido, não estimado
 
-O trio de nível 1 do Livro I (Kleos 3), em 8.000 combates simulados por linha:
+O trio de nível 1 do Livro I (Kleos 3), em 8.000 combates simulados por linha,
+com o chefe em Fases:
 
 | Kleos do inimigo | Vitórias | Rodadas | Heróis de pé no fim |
 |---|---|---|---|
-| 1 | 100,0% | 1,30 | 2,97 de 3 |
-| 2 | 99,5% | 2,08 | 2,59 |
-| **3 (justo)** | **82,2%** | **3,54** | **1,58** |
-| 4 (brutal) | 23,8% | 4,74 | 0,35 |
-| 5 (derrota) | 0,4% | 3,65 | 0,01 |
+| 1 | 100,0% | 1,31 | 2,98 de 3 |
+| 2 | 99,5% | 2,54 | 2,56 |
+| **3 (justo)** | **73,5%** | **4,30** | **1,37** |
+| 4 (brutal) | 17,0% | 5,06 | 0,25 |
+| 5 (derrota) | 0,2% | 3,79 | 0,00 |
 
 E um semideus **sozinho** contra um Kleos 1: Guardião vence 95%, Furioso 90%,
 Oráculo 64%.
@@ -253,17 +267,20 @@ morrem antes de agir e não mudam nada. São cenário.
 
 ### As duas fórmulas contra a simulação
 
-8.000 combates por linha, trio de nível 1:
+8.000 combates por linha, trio de nível 1. Só o chefe tem Fases: num bando de
+iguais, ninguém; num chefe com lacaios, só ele.
 
 | Encontro | Previsto | Vitórias | Kleos efetivo medido |
 |---|---|---|---|
-| 3 × Kleos 1 | 2,2 | 96,2% | **2,2** |
-| 4 × Kleos 1 | 3,0 | 78,0% | **3,1** |
-| 2 × Kleos 2 | 3,0 | 79,8% | **3,0** |
-| 2 × Kleos 3 | 4,5 | 4,8% | **4,8** |
-| 1 × K2 + 3 × K1 | 3,5 | 47,4% | **3,6** |
-| 1 × K3 + 2 × K1 | 4,0 | 25,3% | **4,0** |
-| 1 × K3 + 4 × K1 | 5,0 | 1,5% | **5,0** |
+| 3 × Kleos 1 | 2,2 | 96,9% | **2,1** |
+| 4 × Kleos 1 | 3,0 | 80,6% | **2,7** |
+| 2 × Kleos 2 | 3,0 | 82,8% | **2,6** |
+| 2 × Kleos 3 | 4,5 | 5,9% | **4,7** |
+| 1 × K2 + 3 × K1 | 3,5 | 48,2% | **3,4** |
+| 1 × K3 + 2 × K1 | 4,0 | 20,4% | **3,9** |
+| 1 × K3 + 4 × K1 | 5,0 | 1,5% | **4,9** |
+
+O erro máximo é de 0,4 degrau, numa escala de onze.
 
 Para reproduzir: `sim/kleos.py`.
 

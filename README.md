@@ -21,7 +21,7 @@ registradas, e a regra só fecha depois de sobreviver aos dois. As vezes em que 
 números contrariaram a intuição estão documentadas mais abaixo — e também as que
 só apareceram jogando, porque as duas listas não se sobrepõem.
 
-**Versão atual:** 0.17.1 · 07/09/2026 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.18.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -93,12 +93,14 @@ Curto e o MP só volta dormindo.
 único compra de `1d8` a `5d8`, um de área de `1d6` a `5d6`, um de movimento de
 +3 m a +15 m. O ponto do Grau G custa G, de modo que o **dano por MP fica
 constante**: o Grau muda quanto cabe numa ação, não quanto o recurso rende.
-Condições e Vantagem não engordam com o Grau — alcançam mais criaturas. Defesa
-não engorda nunca: +2 continua sendo o máximo, porque medido no nível 20 cada
-ponto de DEF vale quase sete pontos de vitória.
+Condições, Vantagem e Defesa não engordam com o Grau — alcançam mais criaturas.
+Um ponto de Defesa dá +2 DEF de uma vez, e +2 continua sendo o máximo.
 
-Uma habilidade escrita no nível 1 não precisa ser reconstruída: ela continua na
-ficha e passa a ser paga no Grau novo, entregando mais.
+**Cada habilidade tem o Grau dela**, gravado quando nasce. Ela paga no Grau dela
+ou abaixo, nunca acima; para subir, é aprimorada numa Ação de Interlúdio. Só a
+Habilidade Assinatura sobe sozinha com o personagem. É o que faz desenvolver uma
+técnica no Grau novo valer alguma coisa: até a 0.17, criá-la no Grau 2 era
+exatamente o mesmo que criá-la no Grau 1 e pagar no 2.
 
 **As regras universais** fecham as situações que costumavam depender do Mestre:
 defesas passivas, efeitos combinados, ativação, Manifestação Menor, fogo amigo, carregar aliados,
@@ -159,6 +161,8 @@ python completo.py          # o jogo inteiro: habilidade, controle e Recusa
 python nevoa.py             # mede a Magia da Névoa: Fórmula, Descrença, Refluxo
 python aliado.py            # quanto um Aliado pode ser sem virar um jogador
 python duelo.py             # semideus contra semideus, e a armadilha do controle
+python defesa.py            # mede a habilidade de +DEF, de 1 a 4 jogadores
+python fases.py             # as Fases do chefe e o Kleos do Grupo de 1 a 4
 python ficha.py             # confere a Ficha do Herói contra o simulador
 ```
 
@@ -172,10 +176,10 @@ não vê: ordem de iniciativa, foco de alvo, gasto de recursos, quem cai primeir
 entram com equipamento no Grau do nível, gastam MP e SP em habilidade de dano e
 em controle por Rolagem de Efeito; as criaturas entram com Poder de área,
 Arremetidas, Recusas, Vontade do Lugar e Presença. Com tudo ligado dos dois
-lados, o encontro justo entrega de 68% a 93% de vitória, de 2,4 a 3,1 rodadas,
-com 1,7 a 2,6 heróis de pé de três.
+lados e o chefe em Fases, o encontro justo entrega de 53% a 90% de vitória, de 2,7
+a 3,7 rodadas, com 1,2 a 2,5 heróis de pé de três.
 
-Cinco coisas que a medição mudou no livro, e que valem como aviso a quem for
+Seis coisas que a medição mudou no livro, e que valem como aviso a quem for
 mexer nos números:
 
 - **o dano de arma não acompanhava o PV dos monstros** — o Grau do item passou a
@@ -186,9 +190,12 @@ mexer nos números:
   às do Grau;
 - **a conta de mesas grandes estava errada** — multiplicar heróis por Kleos mandava
   um grupo de quatro contra um encontro que ele vence 11% das vezes. Hoje é tabela
-  medida: o quarto jogador quase não move o degrau, e o quinto vale +1;
+  medida, de um a seis jogadores;
 - **um Aliado montado como monstro morria em toda sessão** — 6% de sobrevivência no
-  nível 9. Hoje ele usa a linha do Kleos do Grupo menos 2.
+  nível 9. Hoje ele usa a linha do Kleos do Grupo menos 2;
+- **o chefe caía num golpe só** — uma habilidade no Teto tirava de 50% a 74% do PV
+  do encontro justo, e o trio vencia em cerca de duas rodadas. Hoje o chefe tem
+  **Fases**, e o golpe que quebra uma não atravessa para a próxima.
 
 ### E cinco que só a mesa achou
 
@@ -213,7 +220,7 @@ o simulador mede o que ele sabe modelar, e **nada disso ele saberia**.
   corpo não é dano, nem condição, nem Rolagem de Efeito. Continua fora do motor,
   mas agora o livro diz isso em vez de deixar o Mestre descobrir sozinho.
 
-### As sete vezes em que o teste me contrariou
+### As oito vezes em que o teste me contrariou
 
 1. **O Ataque Pesado não tinha conserto numérico.** Eu ia trocar o −2/+5 por
    outro par de números. Varri sete variantes: nenhuma funciona enquanto o Ataque
@@ -236,8 +243,9 @@ o simulador mede o que ele sabe modelar, e **nada disso ele saberia**.
    multiplicação: quatro heróis de nível 5 valiam Kleos 7. Medido, esse encontro é
    um massacre contra o grupo — **11% de vitória**; cinco heróis contra o Kleos 9
    que a conta mandava vencem **0%**. A escala sobe 35% por degrau e um jogador a
-   mais soma bem menos que isso. Virou tabela medida: **o quarto jogador quase não
-   move o degrau, o quinto vale +1, e o sexto não move nada**.
+   mais soma bem menos que isso. Virou tabela medida — refeita na 0.18.0 com as
+   Fases, de um a seis jogadores: **a dupla aguenta o degrau do trio, o quarto
+   jogador vale +1 do nível 5 em diante, e o sexto não move nada**.
 6. **O dano de arma não acompanhava o PV dos monstros.** Do nível 5 ao 20 o ataque
    com arma crescia 15% enquanto o PV do encontro justo crescia 250%: um trio de
    nível 20 levava **11,5 rodadas** e perdia uma luta em cada três. O conserto foi
@@ -245,8 +253,15 @@ o simulador mede o que ele sabe modelar, e **nada disso ele saberia**.
    rodadas em toda a carreira.
 7. **Um Aliado montado como monstro morria toda sessão.** Construir NPC de combate
    pelo Kleos que um herói "vale" dá **6% de sobrevivência no nível 9**. Ele agora
-   usa a linha do Kleos do Grupo menos 2, e sobrevive de 64% a 78% sem roubar o
-   dano dos jogadores.
+   usa a linha do Kleos do Grupo menos 2, e sobrevive tanto quanto um herói da
+   mesma luta sem roubar o dano dos jogadores.
+8. **O simulador errava o golpe dos marciais, e para menos.** Rolava o golpe
+   Físico do Guardião e do Furioso com o Atributo Divino (+1), e não com Força
+   (+5): acertava 45% em vez de 70%. Corrigido, o encontro justo que eu achava
+   durar 2,6 rodadas durava **1,8**, com 96% de vitória — exatamente o que a mesa
+   reclamava, "Impacto Zero G5, 20" e acabou. Foi o erro que escondeu por meses que o
+   chefe caía num golpe só. O conserto do combate foram as Fases; o do simulador,
+   uma linha.
 
 E uma que o **playtest de mesa** contrariou, sem simulador nenhum: eu havia medido
 a economia de MP dos marciais e descartado o problema com *"física paga SP"*. A
@@ -318,16 +333,15 @@ não tem mais nenhuma linha vermelha. O que falta é de outra natureza:
    NPCs — e acharam, juntos, oito coisas que dezoito arquivos de simulação não
    tinham achado, quase todas na fronteira entre duas regras que sozinhas estavam
    certas. Uma mesa com quatro pessoas discutindo tática vai achar outras.
-2. **Quatro técnicas na dívida conhecida.** Escudo Vínculo, Interceptar, Rede do
-   Destino e Olho do Futuro medem entre +11% e +13% de vitória contra bando,
-   acima do limite de 10. Estão listadas em `sim/tecnicas.py`, não bloqueiam a
-   regressão e aparecem em todo run até serem decididas.
-3. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
+2. **Dez técnicas que o simulador não representa.** Das 36, 26 foram medidas; as
    outras dependem de posicionamento, deslocamento forçado, medo ou rerrolagem.
-   Precisam de mesa, não de simulador.
-4. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
+   Precisam de mesa, não de simulador. A lista de dívida conhecida, que guardava
+   as técnicas medidas acima do limite, **está vazia desde a 0.18.0** — as seis
+   que moravam lá foram ajustadas, e o duelo Guardião x Oráculo voltou para a
+   faixa.
+3. **Metade do Grimório é imensurável.** Porta Falsa, Cidade de Bruma e Outra Pele
    valem pelo que abrem de ficção, e nenhum motor de combate julga isso.
-5. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
+4. **Economia de dracmas em arco longo.** Preços e recompensas por Kleos existem e
    fecham a conta de um item por arco; falta medir inflação e manutenção.
 
 ### Limites conhecidos do simulador

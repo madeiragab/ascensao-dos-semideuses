@@ -253,7 +253,8 @@ def t5_tecnicas() -> None:
         v = 0
         for _ in range(N):
             g = montar_grupo(12, [tec] if tec else None, "furioso")()
-            alvos = [Lutador.de_monstro(monstro(4), f" {i}") for i in range(1, 6)]
+            alvos = [Lutador.de_monstro(monstro(4), f" {i}", chefe=False)
+                     for i in range(1, 6)]
             v += combate(g, alvos)["vencedor"] == "herois"
         return v / N
 

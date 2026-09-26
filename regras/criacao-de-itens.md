@@ -12,8 +12,9 @@ só onde a habilidade mora e o que ela gasta para funcionar:
 |---|---|---|
 | **Onde mora** | na sua Memória | no objeto |
 | **Quem paga** | você, em MP ou SP | o objeto, em **Cargas** |
-| **Quando nasce** | uma Ação de Interlúdio, teste contra **CD 10 + custo** | uma Ação de Interlúdio, teste contra **CD 10 + pontos** |
-| **Teto** | Teto de Custo do seu Grau | pontos do **Grau do item** |
+| **Quando nasce** | uma Ação de Interlúdio, teste contra **CD 10 + pontos, +1 por Grau acima do primeiro** | uma Ação de Interlúdio, teste contra **CD 10 + pontos** |
+| **Grau** | gravado quando nasce; sobe **aprimorando** | gravado quando nasce; sobe **reforjando** |
+| **Teto** | Teto de Custo do **Grau da habilidade** | pontos do **Grau do item** |
 
 Quem sabe montar uma habilidade já sabe forjar. Não há segunda matemática para
 aprender.

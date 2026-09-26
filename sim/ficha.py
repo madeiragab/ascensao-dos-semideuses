@@ -238,8 +238,12 @@ def main() -> None:
         ("Passo das Trevas", 1, 0, 1, 1, [(1, 1)], 2, 2),
         ("Lança de Sombra, Grau 1", 1, 1, 0, 1, [(3, 1)], 4, 4),
         ("Lança de Sombra, Grau 3", 1, 1, 0, 3, [(3, 3)], 4, 12),
-        # o que a campanha produziu: DEF +2 é 1 ponto mais 2 pelo dobro
-        ("Manto do Oceano", 2, 0, 1, 1, [(3, 1)], 5, 5),
+        # o que a campanha produziu: DEF +2 sustentada, em ação bônus. Até a
+        # 0.17 era 1 ponto mais 2 pelo dobro, e custava 5; desde a 0.18 um
+        # ponto dá os +2 de uma vez, e ela custa 3
+        ("Manto do Oceano", 2, 0, 1, 1, [(1, 1)], 3, 3),
+        # e a Defesa como o livro manda montar: reação, instantânea, +2 DEF
+        ("Escudo de Água", 1, 0, 1, 1, [(1, 1)], 2, 2),
         # e a mistura que o livro recomenda: o dano no Grau cheio e o metro
         # de movimento comprado no Grau 1, que é onde ele não precisa crescer
         ("Dano G3 + movimento G1", 1, 0, 0, 3, [(3, 3), (1, 1)], 4, 10),
@@ -259,16 +263,74 @@ def main() -> None:
             falhas.append(f"a conta de {nome} dá {pontos} pontos e {custo} de recurso; "
                           f"o livro diz {pontos_ok} e {custo_ok}")
 
-    # O Grau é por ponto, não por habilidade: a ficha precisa oferecer a
+    # O Grau é por ponto, até o Grau da habilidade: a ficha precisa oferecer a
     # escolha em cada linha de efeito, senão ela é mais restritiva que o livro.
     if "hbGrauEfeito" not in html:
         falhas.append("a ficha voltou a ter um Grau só para a habilidade inteira; "
-                      "o livro compra um ponto em qualquer Grau até o seu")
+                      "o livro paga cada ponto no Grau dela ou abaixo")
     for frase in ["CUSTO em MP ou SP = pontos × Grau do ponto",
-                  "Você pode comprar um ponto em qualquer Grau até o seu"]:
+                  "cada ponto pode ser pago no Grau dela ou em qualquer Grau abaixo"]:
         if frase.lower() not in texto_livro.lower():
             falhas.append(f"o livro não diz mais {frase!r}, e o construtor compra por ponto")
-    print("  Grau por ponto: oferecido em cada linha de efeito")
+    print("  Grau por ponto: oferecido em cada linha de efeito, até o Grau da habilidade")
+
+    # ---- 0.18: o Grau fica gravado na habilidade. Antes, desenvolver no Grau 2
+    # era idêntico a desenvolver no Grau 1 e pagar no 2 — e mais difícil, porque
+    # a CD usava o custo. Livro e construtor precisam dizer a mesma coisa.
+    print()
+    print("O Grau da habilidade — livro × ficha:")
+    grau_gravado = [
+        ("o Grau é da habilidade", "O Grau é da habilidade, e ela nasce nele",
+         '<label>Grau da habilidade</label>'),
+        ("nunca passa do próprio Grau", "O que ela não faz é passar do próprio Grau",
+         "op.disabled = parseInt(op.value, 10) > grauHab"),
+        ("o Teto é o do Grau da habilidade", "O Teto que vale é o do Grau da habilidade",
+         "var teto = tetoDoGrau(grau);"),
+        ("aprimorar sobe o Grau", "o mesmo teste de desenvolver, contra a CD da versão nova",
+         "subir pede aprimorar"),
+        ("a Assinatura sobe sozinha", "sobe de Grau junto com você",
+         "Assinatura: sobe sozinha com o seu Grau"),
+        ("CD de desenvolver", "CD 10 + pontos da habilidade + 1 por Grau acima do primeiro",
+         "return 10 + pontos + (grau - 1);"),
+    ]
+    for nome, no_livro, no_codigo in grau_gravado:
+        ok_livro = no_livro.lower() in texto_livro.lower()
+        ok_ficha = no_codigo in html
+        print(f"  {nome}: livro {'sim' if ok_livro else 'NÃO'} · ficha {'sim' if ok_ficha else 'NÃO'}")
+        if not ok_livro:
+            falhas.append(f"o livro não diz mais {no_livro!r}")
+        if not ok_ficha:
+            falhas.append(f"a ficha não aplica {nome!r}")
+    # No Grau 1 a CD nova tem de ser a de sempre: 10 + os pontos.
+    for pontos in range(1, 6):
+        if 10 + pontos + (1 - 1) != 10 + pontos:
+            falhas.append("a CD de desenvolver mudou no Grau 1")
+    print("  CD no Grau 1: a de sempre, 10 + pontos · no Grau 3, 6 pontos: CD 18")
+
+    # ---- 0.18: cada Fonte paga o recurso que a tabela de Fontes do livro diz.
+    # A Médica pagava SP na tabela, MP na página de consulta e MP na ficha.
+    fontes_livro = dict(re.findall(
+        r"<tr><td><strong>(Elemental|Física|Híbrida|Médica)</strong></td><td>([^<]+)</td>", livro))
+    esperado_fontes = {"Elemental": "MP", "Física": "SP", "Híbrida": "MP + SP", "Médica": "SP"}
+    if fontes_livro != esperado_fontes:
+        falhas.append(f"a tabela de Fontes do livro mudou: {fontes_livro}")
+    for trecho, onde in (
+            ('(fonte === "fisica" || fonte === "medica") ? "SP" : "MP"', html),
+            ('Médica · paga SP', html),
+            ("habilidades Físicas e Médicas", texto_livro),
+            ("cada cura gasta um Tratamento", texto_livro)):
+        if trecho not in onde:
+            falhas.append(f"a Fonte Médica voltou a divergir: falta {trecho!r}")
+    print("  Fontes: o recurso de cada uma bate entre a tabela, a consulta e a ficha")
+
+    # ---- 0.18: a Defesa dá +2 por ponto e o livro manda montá-la como reação.
+    defesa = re.search(r'\n  def: \{(.*?)\n  movimento:', html, re.S)
+    if not defesa or "qtdMax: 1" not in defesa.group(1) or '"+2 DEF para "' not in defesa.group(1):
+        falhas.append("o construtor não dá mais +2 DEF por ponto, como o livro")
+    for frase in ("+2 DEF para 1 alvo", "Monte a Defesa como reação"):
+        if frase.lower() not in texto_livro.lower():
+            falhas.append(f"o livro não diz mais {frase!r}")
+    print("  Defesa: +2 DEF por ponto no livro e no construtor")
 
     formulas = [
         ("PONTOS", "PONTOS = duração + efeitos adicionais + alcance + modificadores"),
@@ -378,8 +440,8 @@ def main() -> None:
         ("recálculo retroativo cobre o SP",
          "recalcule os <strong>PV e o SP</strong>",
          "CON atual"),
-        ("crítico usa o Grau de compra",
-         "soma dados iguais ao Grau em\n    que a habilidade foi comprada",
+        ("crítico usa o Grau pago",
+         "soma dados iguais ao Grau em\n    que a habilidade foi paga",
          None),
         ("Bastião: primeiro golpe da rodada",
          "o primeiro golpe que você recebe a cada rodada",

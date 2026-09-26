@@ -58,12 +58,14 @@ seção 6 trata disso de frente.
 
 ## Como montar um encontro
 
-1. Some o **Kleos do Grupo**: cada personagem vale 1 (níveis 1–4), 2 (5–9),
-   3 (10–14) ou 4 (15–20). Aliados contam.
+1. Consulte o **Kleos do Grupo** na tabela da seção 3, pelo nível e pelo número
+   de heróis — de um a seis. Com um herói só, o número é o do chefe solo.
 2. Monte os inimigos e calcule o **Kleos do encontro**:
    - **Bando** (criaturas de Kleos parecido): soma × **3/4**
    - **Chefe com lacaios**: Kleos do chefe + **metade** da soma dos lacaios
-3. Compare:
+3. **O chefe tem Fases** (seção 10): duas no Kleos 2, três do 3 ao 7, quatro do 8
+   em diante. O golpe que quebra uma Fase não atravessa para a próxima.
+4. Compare:
 
 | Kleos do encontro | O que acontece |
 |---|---|
@@ -83,17 +85,17 @@ trio de nível 1 do Livro I.
 cd ../sim && python kleos.py
 ```
 
-Trio de nível 1 (Kleos do Grupo = 3), 8.000 combates por linha:
+Trio de nível 1 (Kleos do Grupo = 3), chefe em Fases, 8.000 combates por linha:
 
 | Kleos do inimigo | Vitórias | Heróis de pé |
 |---|---|---|
-| 1 · Rumor | 100,0% | 2,97 de 3 |
-| 2 · Boato | 99,5% | 2,59 |
-| **3 · Conto (justo)** | **82,2%** | **1,58** |
-| 4 · Façanha (brutal) | 23,8% | 0,35 |
-| 5 · Feito (derrota) | 0,4% | 0,01 |
+| 1 · Rumor | 100,0% | 2,98 de 3 |
+| 2 · Boato | 99,5% | 2,56 |
+| **3 · Conto (justo)** | **73,5%** | **1,37** |
+| 4 · Façanha (brutal) | 17,0% | 0,25 |
+| 5 · Feito (derrota) | 0,2% | 0,00 |
 
-E as fórmulas de encontro erram no máximo **0,3** numa escala de 11.
+E as fórmulas de encontro erram no máximo **0,4** numa escala de 11.
 
 > A primeira versão da seção 5 dizia que muitos inimigos fracos valiam **mais**
 > que a soma. A simulação mostrou o contrário — o grupo concentra fogo e cada

@@ -63,7 +63,13 @@ def montar_heroi(classe: str, nivel: int, com_habilidade: bool) -> Lutador:
     """O herói da Forja, mais a habilidade que a classe dele levaria."""
     lut = heroi(classe, nivel, True)
     f = personagem(BASE[classe](), nivel)
-    lut.divino = f.mods["inteligencia" if classe == "oraculo" else "sabedoria"]
+    # O atributo da habilidade. A Oráculo conjura Elemental, com o Atributo
+    # Divino; os marciais gastam SP num golpe de Fonte Física, que o Livro I
+    # paga com Força ou Destreza. Até a 0.18.0 o motor rolava o golpe deles
+    # com a Sabedoria (+1), acertando 45% em vez de 70% — e ninguém via,
+    # porque o golpe no Teto apagava metade do chefe mesmo acertando pouco.
+    # Com as Fases, que cortam o excesso, o erro passou a decidir o teste.
+    lut.divino = f.mods["inteligencia" if classe == "oraculo" else "forca"]
     lut.bonus_efeito = lut.divino + f.prof
     lut.grau_hab = grau(nivel)
     lut.teto = teto_de_custo(nivel)
@@ -226,7 +232,9 @@ def combate_total(herois, monstro, arremetidas=0, sopro=0, defesa_fraca=17,
 
 
 # Quem entra na mesa, por tamanho de grupo.
-MESA = {3: ("guardiao", "furioso", "oraculo"),
+MESA = {1: ("guardiao",),
+        2: ("guardiao", "furioso"),
+        3: ("guardiao", "furioso", "oraculo"),
         4: ("guardiao", "furioso", "oraculo", "furioso"),
         5: ("guardiao", "furioso", "oraculo", "furioso", "guardiao"),
         6: ("guardiao", "furioso", "oraculo", "furioso", "guardiao", "oraculo")}
@@ -347,17 +355,17 @@ def main() -> None:
             falhas.append(f"nível {nivel}: a fera soma {com['vitoria']-sem['vitoria']:+.0%} "
                           f"— vale mais que um personagem inteiro")
 
-    print("\n6. MESAS DE QUATRO E CINCO")
+    print("\n6. MESAS DE UM A CINCO")
     print("   O Kleos do Grupo do Livro II promete o mesmo aperto em qualquer")
-    print("   tamanho de mesa. Chefe completo com 2 Recusas, em cada tamanho.")
-    print(f"{'nível':>6}{'3 jogadores':>26}{'4 jogadores':>26}{'5 jogadores':>26}")
-    print(f"{'':>6}{'Kleos':>8}{'vitória':>9}{'de pé':>9}"
-          f"{'Kleos':>8}{'vitória':>9}{'de pé':>9}"
-          f"{'Kleos':>8}{'vitória':>9}{'de pé':>9}")
-    print("-" * 84)
+    print("   tamanho de mesa. Chefe completo com 2 Recusas, em cada tamanho;")
+    print("   com um jogador, o chefe de uma mesa solo.")
+    print(f"{'nível':>6}" + "".join(f"{f'{j} jogador' + ('es' if j > 1 else ''):>26}"
+                                    for j in (1, 2, 3, 4, 5)))
+    print(f"{'':>6}" + f"{'Kleos':>8}{'vitória':>9}{'de pé':>9}" * 5)
+    print("-" * 136)
     for nivel, _ in CENARIOS:
         linha = f"{nivel:>6}"
-        for jogadores in (3, 4, 5):
+        for jogadores in (1, 2, 3, 4, 5):
             kk = kleos_do_grupo(nivel, jogadores)
             res = mede(nivel, kk, recusas=2, jogadores=jogadores)
             linha += f"{kk:>8}{res['vitoria']:>9.0%}{res['de_pe']:>9.1f}"
@@ -365,7 +373,10 @@ def main() -> None:
             # próprio livro: uma mesa cheia de nível 20 passa do degrau 9 e não
             # tem para onde subir sem virar Cataclisma. Ver Livro II, "Acima de
             # Kleos 9, a ficção manda".
-            if not 0.35 <= res["vitoria"] <= 0.98:
+            # Com cinco no nível 20 o limite é 1,0: o Kleos 10 é o último
+            # degrau antes do Cataclisma, e a mesa cheia passa dele.
+            teto = 1.0 if (jogadores >= 5 and nivel == 20) else 0.98
+            if not 0.35 <= res["vitoria"] <= teto:
                 falhas.append(f"nível {nivel}, {jogadores} jogadores: "
                               f"{res['vitoria']:.0%} de vitória")
         print(linha)
