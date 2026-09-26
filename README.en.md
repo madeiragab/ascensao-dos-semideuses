@@ -23,7 +23,7 @@ What separates this project from a pile of house rules is the combination of
 recorded, and rules only close after surviving both. The times the numbers
 contradicted intuition are documented below.
 
-**Current version:** 0.18.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
+**Current version:** 0.19.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -199,6 +199,7 @@ python aliado.py            # how strong an Ally can be without becoming a playe
 python duelo.py             # demigod vs demigod, and the control trap
 python defesa.py            # measures the +DEF ability, from 1 to 4 players
 python fases.py             # boss Phases and Party Kleos from 1 to 4 players
+python briga.py             # unarmed fighting: fist, crits, Block and knockout
 python ficha.py             # checks the character sheet against the simulator
 ```
 
