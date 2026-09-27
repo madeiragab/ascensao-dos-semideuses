@@ -21,7 +21,7 @@ registradas, e a regra só fecha depois de sobreviver aos dois. As vezes em que 
 números contrariaram a intuição estão documentadas mais abaixo — e também as que
 só apareceram jogando, porque as duas listas não se sobrepõem.
 
-**Versão atual:** 0.18.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
+**Versão atual:** 0.19.0 · 26/09/2026 · [Changelog](CHANGELOG.md)
 
 ---
 
@@ -163,6 +163,7 @@ python aliado.py            # quanto um Aliado pode ser sem virar um jogador
 python duelo.py             # semideus contra semideus, e a armadilha do controle
 python defesa.py            # mede a habilidade de +DEF, de 1 a 4 jogadores
 python fases.py             # as Fases do chefe e o Kleos do Grupo de 1 a 4
+python briga.py             # a luta sem arma: punho, crítico, Bloquear e nocaute
 python ficha.py             # confere a Ficha do Herói contra o simulador
 ```
 
